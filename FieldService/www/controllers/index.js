@@ -60,6 +60,8 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                 $scope.chinaFlag = true;
                 $translate.use('fr').then(function () {
                     console.log('french Used');
+                    $('#calendar').fullCalendar('destroy');
+                    $rootScope.eventInit("fr");
                 });
 
                 break;
