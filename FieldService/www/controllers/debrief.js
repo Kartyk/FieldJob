@@ -420,21 +420,21 @@
 
                 var serialIn, serialOut, serialNo;
 
-                if (item.Serial_In != undefined) {
+                if (item.Serial_In != undefined && item.Serial_In != "") {
 
                     var serialIn = item.Serial_In.split(",");
 
                     serialIn = item.Serial_In.split(",");
                 }
 
-                if (item.Serial_In != undefined) {
+                if (item.Serial_Out != undefined && item.Serial_Out != "") {
 
                     var serialOut = item.Serial_Out.split(",");
 
                     serialOut = item.Serial_Out.split(",");
                 }
 
-                if (item.Serial_In != undefined) {
+                if (item.Serial_Number != undefined && item.Serial_Number != "") {
 
                     var serialNo = item.Serial_Number.split(",");
 
@@ -445,13 +445,13 @@
 
                 if (serialNo != undefined && serialNo.length > 0) {
 
-                    angular.forEach(serialNo, function (serail) {
+                    angular.forEach(serialNo, function (serial) {
 
                         var serialTypeObject = {};
 
                         serialTypeObject.in = "";
                         serialTypeObject.out = "";
-                        serialTypeObject.number = serail;
+                        serialTypeObject.number = serial;
 
                         if (serialTypeObject.number != "")
                             item.Serial_Type.push(serialTypeObject);
@@ -462,11 +462,11 @@
 
                     var index = 0;
 
-                    angular.forEach(serialIn, function (serail) {
+                    angular.forEach(serialIn, function (serial) {
 
                         var serialTypeObject = {};
 
-                        serialTypeObject.in = serail;
+                        serialTypeObject.in = serial;
                         serialTypeObject.out = serialOut[index];
                         serialTypeObject.number = "";
 
@@ -2364,7 +2364,7 @@
     }
 
     $scope.reviewSummary = function () {
-        //var promise = generatePDF();
+        var promise = generatePDF();
         $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Customer Signature"
     )
 
