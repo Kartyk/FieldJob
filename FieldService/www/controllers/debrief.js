@@ -2107,7 +2107,7 @@
 
                                         $rootScope.apicall = false;
 
-                                        $state.go($state.current, {}, {reload: true});
+                                        
                                     });
                                 });
                             }
@@ -2364,7 +2364,7 @@
     }
 
     $scope.reviewSummary = function () {
-        var promise = generatePDF();
+       // var promise = generatePDF();
         $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Customer Signature"
     )
 
@@ -3252,7 +3252,7 @@
                 var j = 0, xTimeField = 25, yTimeField = yAttachField + rectAttachHeight + 20, rectTimeWidth = 660,
                     rectTimeHeight = 23 * $scope.summary.timeArray.length, yTimeFieldName = yTimeField + 20,
                     yTimeFieldValue = yTimeField;
-                var timeWidth = (660 / ($scope.timeArray[0].timeDefault.timeCode.values.length + 7)) ;
+                var timeWidth = (660 / ($scope.timeArray[0].timeDefault.timeCode.values.length + 6)) ;
 
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
@@ -3282,9 +3282,11 @@
                     // doc1.text(xTimeField + 315, yTimeFieldName, 'OT2')
                     // doc1.text(xTimeField + 355, yTimeFieldName, 'OT3')
                 });
-                doc1.text(xTimeField + (timeWidth * i), yTimeFieldName, $filter('translate')('Duration'))
-                doc1.text(xTimeField + (timeWidth * (++i)), yTimeFieldName, $filter('translate')('Item'))
-                doc1.text(xTimeField + (timeWidth * (++i)), yTimeFieldName, $filter('translate')('Description'))
+
+                doc1.text(xTimeField+(timeWidth*i), yTimeFieldName, 'Duration')
+                doc1.text(xTimeField+(timeWidth * (++i)), yTimeFieldName, 'Item')
+                //doc1.text(xTimeField+(timeWidth * (++i)), yTimeFieldName, 'Description')
+
                 doc1.rect(20, yTimeField + 5, rectTimeWidth, rectTimeHeight+10)
                 while (j < $scope.summary.timeArray.length) {
 
@@ -3361,10 +3363,12 @@
                         i++;
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
-                    if ($scope.summary.timeArray[j - 1].Comments)
-                        doc1.text(xTimeField + (timeWidth * (++i)), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Comments))
-                    else
-                        i++;
+
+                    //if ($scope.summary.timeArray[j - 1].Comments)
+                    //    doc1.text(xTimeField + (timeWidth * (++i)), yTimeFieldValue, $scope.summary.timeArray[j - 1].Comments)
+                    //else
+                    //    i++;
+
                 }
                 var k = 0, xExpenseField = 25, yExpenseField = yTimeField + rectTimeHeight + 25, rectExpenseWidth = 660,
                     rectExpenseHeight = 22 * $scope.summary.expenseArray.length, yExpenseFieldName = yExpenseField + 25,
