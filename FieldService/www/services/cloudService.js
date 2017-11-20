@@ -1274,12 +1274,24 @@
 
                     console.log("ACTIVATE RESOURCE " + JSON.stringify(response));
 
-                    var updateStatus =
+                    var updateStatus
+                       
+                    if (isAccept)
+                    {
+                        updateStatus =
                         {
                             "activityId": activateId,
-                            "XA_TASK_STATUS": "8"
+                                "XA_TASK_STATUS": "8"
                         }
-
+                    }
+                    else
+                    {
+                        updateStatus =
+                        {
+                            "activityId": activateId,
+                                "XA_TASK_STATUS": "3"
+                        }
+                    }
                     ofscService.updateStatus(updateStatus, function (response) {
 
                         var activityDetails =

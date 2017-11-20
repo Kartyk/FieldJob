@@ -208,10 +208,10 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
             constantService.onDeviceReady();
 
             $state.go('login');
-        }
-        else {
-            $state.go('login');
 
+        } else {
+
+            $state.go('login');
         }
     }
 
@@ -252,24 +252,37 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 console.log("SYNC ACCEPT");
 
-                deferAccept.resolve("Accept");
+                if (response.length > 0) {
 
-                angular.forEach(response, function (item) {
+                    var i = 0;
 
-                    var deferred = $q.defer();
+                    angular.forEach(response, function (item) {
 
-                    valueService.acceptTask(item.Task_Number, function (result) {
+                        var deferred = $q.defer();
 
-                        cloudService.OfscActions(item.Activity_Id, true, function (response) {
+                        valueService.acceptTask(item.Task_Number, function (result) {
 
-                            $rootScope.showAccept = false;
+                            cloudService.OfscActions(item.Activity_Id, true, function (res) {
 
-                            deferred.resolve("success");
+                                $rootScope.showAccept = false;
+
+                                deferred.resolve("success");
+
+                                if ((response.length - 1) == i) {
+                                    deferAccept.resolve("Accept");
+                                }
+
+                                i++;
+                            });
                         });
+
+                        promises.push(deferred.promise);
                     });
 
-                    promises.push(deferred.promise);
-                });
+                } else {
+
+                    deferAccept.resolve("Accept");
+                }
             });
 
             promises.push(deferAccept.promise);
@@ -280,25 +293,39 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 console.log("SYNC SUBMIT");
 
-                deferSubmit.resolve("Submit");
+                if (response.length > 0) {
 
-                angular.forEach(response, function (item) {
+                    var j = 0;
 
-                    var deferred = $q.defer();
+                    angular.forEach(response, function (item) {
 
-                    valueService.submitDebrief(item, item.Task_Number, function (result) {
+                        var deferred = $q.defer();
 
-                        cloudService.OfscActions(item.Activity_Id, false, function (res) {
+                        valueService.submitDebrief(item, item.Task_Number, function (result) {
 
+                            console.log("SUBMIT DEBRIEF");
+
+                            cloudService.OfscActions(item.Activity_Id, false, function (res) {
+
+                                deferred.resolve("success");
+
+                                console.log("DEBRIEF SUCCESS");
+
+                                if ((response.length - 1) == j) {
+                                    deferSubmit.resolve("Submit");
+                                }
+
+                                j++;
+                            });
                         });
 
-                        deferred.resolve("success");
-
-                        console.log("DEBRIEF SUCCESS");
+                        promises.push(deferred.promise);
                     });
 
-                    promises.push(deferred.promise);
-                });
+                } else {
+
+                    deferSubmit.resolve("Submit");
+                }
             });
 
             promises.push(deferSubmit.promise);

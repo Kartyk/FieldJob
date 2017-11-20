@@ -989,7 +989,7 @@
                                                                 var reader = new FileReader();
 
                                                                 reader.onloadend = function () {
-
+                                                                  
                                                                     reportObject = {
                                                                         "Data": this.result.split(",")[1],
                                                                         "FileName": "Report_" + taskId + ".pdf",
@@ -1014,6 +1014,8 @@
                                                             var reportAttachmentUploadJSON;
 
                                                             if (reportObject != undefined) {
+
+                                                                attachmentJSONData.push(reportObject);
 
                                                                 reportAttachmentUploadJSON = {
                                                                     "attachment": reportObject
@@ -1082,12 +1084,7 @@
 
                                                                                             console.log("Uploaded Attachment " + JSON.stringify(response));
 
-                                                                                            if (reportAttachmentUploadJSON != undefined && reportAttachmentUploadJSON.attachment != undefined) {
-
-                                                                                                cloudService.createAttachment(reportAttachmentUploadJSON, function (response) {
-
-                                                                                                });
-                                                                                            }
+                                                                                            
 
                                                                                             cloudService.updateAcceptTask(formData, function (response) {
 
