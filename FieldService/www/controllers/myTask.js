@@ -10,17 +10,17 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
 
         var mycal, myFieldJob, localeused;
 
-        if (lang == 'ch') {
+        if (lang == 'ch' ) {
 
             mycal = $filter('translate')("My Calendar");// "我的日历"
             localeused = "zh-cn";
             myFieldJob = $filter('translate')("My Field Job");// "我的田野工作";
 
-        } else if (lang == 'en') {
+        } else if (lang == 'fr') {
 
-            mycal = "My Calendar";
-            localeused = "en";
-            myFieldJob = "My Field Job";
+            mycal = $filter('translate')("My Calendar");
+            localeused = "fr";
+            myFieldJob = $filter('translate')("My Field Job");
 
         } else {
 

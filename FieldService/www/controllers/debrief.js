@@ -3068,7 +3068,7 @@
                 doc1.setFontType('bold')
                 doc1.text(250, 35, $filter('translate')('Field Service Summary Report'))
                 if ($scope.summary.taskObject.Task_Number.toString())
-                    doc1.text(300, 50, 'Field Job# ' + $filter('translate')($scope.summary.taskObject.Task_Number))
+                    doc1.text(300, 50, $filter('translate')('Field Job# ') + $scope.summary.taskObject.Task_Number)
                 doc1.setFontSize(20)
                 doc1.setFontType('normal')
                 doc1.text(500, 20, $filter('translate')('Emerson Process Management'))

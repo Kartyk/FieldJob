@@ -199,9 +199,9 @@
                                          ng-disabled="chinaFlag" ng-class="!chinaFlag ? 'selected':'unselected'"/>
                                 </div>
                                 <div class="language-labels">
-                                    <label>English</label>
-                                    <label>Chinese</label>
-                                    <label>French</label>
+                                    <label ng-class="!usFlag ? 'selected':'unselected'">English</label>
+                                    <label ng-class="!franceFlag ? 'selected':'unselected'">French</label>
+                                    <label ng-class="!chinaFlag ? 'selected':'unselected'">Chinese</label>
                                 </div>
                             </div>
                         </li>
