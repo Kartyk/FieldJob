@@ -925,7 +925,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
         cloudService.getFileIds(function (response) {
 
-            if (response.Attachments_Info != undefined && response.Attachments_Info.length > 0) {
+            if (response != null && response != undefined && response.Attachments_Info != undefined && response.Attachments_Info.length > 0) {
 
                 angular.forEach(response.Attachments_Info, function (taskArray, value) {
 

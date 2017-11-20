@@ -1084,7 +1084,15 @@
 
                                                                                             console.log("Uploaded Attachment " + JSON.stringify(response));
 
-                                                                                            
+                                                                                            //if (reportAttachmentUploadJSON != undefined && reportAttachmentUploadJSON.attachment != undefined) {
+
+                                                                                            //    console.log(JSON.stringify(reportAttachmentUploadJSON));
+
+                                                                                            //    cloudService.createAttachment(reportAttachmentUploadJSON, function (response) {
+
+                                                                                            //        console.log("Uploaded FSR Attachment " + JSON.stringify(response));
+                                                                                            //    });
+                                                                                            //}
 
                                                                                             cloudService.updateAcceptTask(formData, function (response) {
 

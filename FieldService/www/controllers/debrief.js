@@ -3259,7 +3259,7 @@
                 doc1.text(xTimeField, yTimeField, $filter('translate')('Time'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xTimeField, yTimeFieldName, $filter('translate')('Date')
+                doc1.text(xTimeField, yTimeFieldName, $filter('translate')('Date'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 doc1.text(xTimeField + timeWidth, yTimeFieldName, $filter('translate')('Charge'+'\n'+'Type'))
