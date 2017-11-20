@@ -120,9 +120,10 @@
                 </div> -->
                 <div class="flex-60 smmary-report-confirm">
                     <label translate="I confirm that I have read, understand and agreed to all terms"></label>
+                    <div ng-show="summary.engineer.signature=='' || summary.engineer.signature==undefined"> <label style="font-weight:normal;color:red">Please enter engineer signature</label></div>
                 </div>
                 <div class="flex-20">
-                    <button class="summary-report-donebtn" ng-click="custsignature = accept();customerSubmit()" style="float:right;" ng-disabled="isSubmitted || $root.completedTask || $root.Engsignature=='' || $root.Engsignature==undefined " translate="Submit"></button>
+                    <button class="summary-report-donebtn" ng-click="custsignature = accept();customerSubmit()" style="float:right;" ng-disabled="isSubmitted || $root.completedTask || summary.engineer.signature=='' || summary.engineer.signature==undefined " translate="Submit"></button>
                 </div>
             </div>
         </div>
