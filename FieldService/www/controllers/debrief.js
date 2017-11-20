@@ -3066,33 +3066,33 @@
                 doc1.addImage(imgData, 'JPEG', 75, 15, 100, 40, 'emelogo', 'FAST')
                 doc1.setFontSize(40)
                 doc1.setFontType('bold')
-                doc1.text(250, 35, 'Field Service Summary Report')
+                doc1.text(250, 35, $filter('translate')('Field Service Summary Report'))
                 if ($scope.summary.taskObject.Task_Number.toString())
-                    doc1.text(300, 50, 'Field Job# ' + $scope.summary.taskObject.Task_Number)
+                    doc1.text(300, 50, 'Field Job# ' + $filter('translate')($scope.summary.taskObject.Task_Number))
                 doc1.setFontSize(20)
                 doc1.setFontType('normal')
-                doc1.text(500, 20, 'Emerson Process Management')
-                doc1.text(500, 28, '(UNITED KINGDOM)')
-                doc1.text(500, 36, 'Leicester')
-                doc1.text(500, 44, 'United Kingdom')
-                doc1.text(500, 52, 'Tel')
-                doc1.text(500, 60, 'Fax: +44(0)122 2892896')
+                doc1.text(500, 20, $filter('translate')('Emerson Process Management'))
+                doc1.text(500, 28, $filter('translate')('(UNITED KINGDOM)'))
+                doc1.text(500, 36, $filter('translate')('Leicester'))
+                doc1.text(500, 44, $filter('translate')('United Kingdom'))
+                doc1.text(500, 52, $filter('translate')('Tel'))
+                doc1.text(500, 60, $filter('translate')('Fax: +44(0)122 2892896'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(25, 80, 'Customer Call Details')
+                doc1.text(25, 80, $filter('translate')('Customer Call Details'))
 
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(25, 100, 'Customer Name')
+                doc1.text(25, 100, $filter('translate')('Customer Name'))
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
                 if ($scope.summary.taskObject.Customer_Name)
-                    doc1.text(25, 110, $scope.summary.taskObject.Customer_Name)
+                    doc1.text(25, 110, $filter('translate')($scope.summary.taskObject.Customer_Name))
                 // console.log($scope.summary.taskObject.times[0].Start_Date.split(" ")[0]  | date : 'dd/MM/yyyy')
                 //
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(180, 100, 'Start Date')
+                doc1.text(180, 100, $filter('translate')('Start Date'))
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
                 var start = moment.utc($scope.summary.taskObject.times[0].Start_Date).utcOffset(constantService.getTimeZone()).format("DD/MM/YYYY")
@@ -3100,7 +3100,7 @@
                     doc1.text(180, 110, start)
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(345, 100, 'End Date')
+                doc1.text(345, 100, $filter('translate')('End Date'))
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
                 var enddate = " ";
@@ -3110,7 +3110,7 @@
                 doc1.text(345, 110, enddate);
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(510, 100, 'Duration')
+                doc1.text(510, 100, $filter('translate')('Duration'))
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
                 console.log($scope.summary.taskObject.times[0].Duration)
@@ -3118,67 +3118,67 @@
                     doc1.text(510, 110, $scope.summary.taskObject.times[0].Duration)
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(25, 125, 'Service Request')
+                doc1.text(25, 125, $filter('translate')('Service Request'))
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
                 if ($scope.summary.taskObject.Service_Request)
                     doc1.text(25, 135, $scope.summary.taskObject.Service_Request)
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(180, 125, 'Field Job Request')
+                doc1.text(180, 125, $filter('translate')('Field Job Request'))
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
                 if ($scope.summary.taskObject.Task_Number.toString())
                     doc1.text(180, 135, $scope.summary.taskObject.Task_Number.toString())
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(345, 125, 'Job Description')
+                doc1.text(345, 125, $filter('translate')('Job Description'))
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
                 if ($scope.summary.taskObject.Job_Description)
                     doc1.text(345, 135, $scope.summary.taskObject.Job_Description)
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(25, 150, 'Product Line')
+                doc1.text(25, 150, $filter('translate')('Product Line'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(180, 150, 'System ID/Serial #')
+                doc1.text(180, 150, $filter('translate')('System ID/Serial #'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(345, 150, 'Tag #')
+                doc1.text(345, 150, $filter('translate')('Tag #'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(510, 150, 'Original PO#')
+                doc1.text(510, 150, $filter('translate')('Original PO#'))
                 var ibyvalue = 160;
                 angular.forEach($scope.summary.taskObject.InstallBase, function (key) {
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if (key.Product_Line)
-                        doc1.text(25, ibyvalue, key.Product_Line)
+                        doc1.text(25, ibyvalue, $filter('translate')(key.Product_Line))
                     else
-                        doc1.text(25, ibyvalue, 'NO VALUE')
+                        doc1.text(25, ibyvalue, $filter('translate')('NO VALUE'))
 
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if (key.Serial_Number)
-                        doc1.text(180, ibyvalue, key.Serial_Number)
+                        doc1.text(180, ibyvalue, $filter('translate')(key.Serial_Number))
                     else
-                        doc1.text(180, ibyvalue, 'NO VALUE')
+                        doc1.text(180, ibyvalue, $filter('translate')('NO VALUE'))
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if (key.TagNumber)
-                        doc1.text(345, ibyvalue, key.TagNumber)
+                        doc1.text(345, ibyvalue, $filter('translate')(key.TagNumber))
                     else
-                        doc1.text(345, ibyvalue, 'NO VALUE')
+                        doc1.text(345, ibyvalue, $filter('translate')('NO VALUE'))
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if (key.Original_PO_Number)
-                        doc1.text(510, ibyvalue, key.Original_PO_Number)
+                        doc1.text(510, ibyvalue, $filter('translate')(key.Original_PO_Number))
                     else
-                        doc1.text(510, ibyvalue, 'NO VALUE')
+                        doc1.text(510, ibyvalue, $filter('translate')('NO VALUE'))
                     ibyvalue = ibyvalue + 10;
                 })
                 var customerRectHeight = ibyvalue - 85;
@@ -3192,13 +3192,13 @@
                     yNotesField2, yNotesField1_val, yNotesField2_val;
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xNotesField1, yNotesField1, 'Note Type')
+                doc1.text(xNotesField1, yNotesField1, $filter('translate')('Note Type'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xNotesField2, yNotesField1, 'Note Description')
+                doc1.text(xNotesField2, yNotesField1, $filter('translate')('Note Description'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xNotesField, yNotesField, 'Notes')
+                doc1.text(xNotesField, yNotesField, $filter('translate')('Notes'))
                 // doc1.rect(20, yNotesField+10, rectNotesWidth, rectNotesHeight)
                 while (i < $scope.summary.notesArray.length) {
                     xNotesField1 = xNotesField;
@@ -3209,12 +3209,12 @@
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.notesArray[i - 1].Note_Type)
-                        doc1.text(xNotesField1, yNotesField1_val, $scope.summary.notesArray[i - 1].Note_Type)
+                        doc1.text(xNotesField1, yNotesField1_val, $filter('translate')($scope.summary.notesArray[i - 1].Note_Type))
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.notesArray[i - 1].Notes)
-                        doc1.text(xNotesField2, yNotesField1_val, $scope.summary.notesArray[i - 1].Notes)
+                        doc1.text(xNotesField2, yNotesField1_val, $filter('translate')($scope.summary.notesArray[i - 1].Notes))
                 }
                 rectNotesHeight = yNotesField1_val - yNotesField ;
                 doc1.rect(20, yNotesField + 5, rectNotesWidth, rectNotesHeight+5)
@@ -3224,7 +3224,7 @@
                     rectAttachHeight = 70, xAttachField1 = 25;
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xAttachField, yAttachField, 'Attachments')
+                doc1.text(xAttachField, yAttachField, $filter('translate')('Attachments'))
                 doc1.rect(20, yAttachField + 5, rectAttachWidth, rectAttachHeight)
                 angular.forEach($scope.files, function (file, value) {
                     // setTimeout(function () {
@@ -3256,35 +3256,35 @@
 
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xTimeField, yTimeField, 'Time')
+                doc1.text(xTimeField, yTimeField, $filter('translate')('Time'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xTimeField, yTimeFieldName, 'Date')
+                doc1.text(xTimeField, yTimeFieldName, $filter('translate')('Date')
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xTimeField+timeWidth, yTimeFieldName, 'Charge'+'\n'+'Type')
+                doc1.text(xTimeField + timeWidth, yTimeFieldName, $filter('translate')('Charge'+'\n'+'Type'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xTimeField+(timeWidth * 2), yTimeFieldName, 'Charge\nMethod')
+                doc1.text(xTimeField + (timeWidth * 2), yTimeFieldName, $filter('translate')('Charge\nMethod'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xTimeField+(timeWidth * 3), yTimeFieldName, 'Work\nType')
-                //  doc1.text(xTimeField + 235, yTimeFieldName, 'Standard')
+                doc1.text(xTimeField + (timeWidth * 3), yTimeFieldName, $filter('translate')('Work\nType'))
+                //  doc1.text(xTimeField + 235, yTimeFieldName, $filter('translate')('Standard'))
                 var xTimeField1 = xTimeField + 195;
                 var i = 4
                 angular.forEach($scope.timeArray[0].timeDefault.timeCode.values, function (timecodeKey, value) {
                     xTimeField1 = xTimeField1 + 40;
                     doc1.setFontSize(22)
                     doc1.setFontType('bold')
-                    doc1.text(xTimeField+(timeWidth * i), yTimeFieldName, timecodeKey.Overtimeshiftcode)
+                    doc1.text(xTimeField + (timeWidth * i), yTimeFieldName, $filter('translate')(timecodeKey.Overtimeshiftcode))
                     i++;
                     // doc1.text(xTimeField + 275, yTimeFieldName, 'OT1')
                     // doc1.text(xTimeField + 315, yTimeFieldName, 'OT2')
                     // doc1.text(xTimeField + 355, yTimeFieldName, 'OT3')
                 });
-                doc1.text(xTimeField+(timeWidth*i), yTimeFieldName, 'Duration')
-                doc1.text(xTimeField+(timeWidth * (++i)), yTimeFieldName, 'Item')
-                doc1.text(xTimeField+(timeWidth * (++i)), yTimeFieldName, 'Description')
+                doc1.text(xTimeField + (timeWidth * i), yTimeFieldName, $filter('translate')('Duration'))
+                doc1.text(xTimeField + (timeWidth * (++i)), yTimeFieldName, $filter('translate')('Item'))
+                doc1.text(xTimeField + (timeWidth * (++i)), yTimeFieldName, $filter('translate')('Description'))
                 doc1.rect(20, yTimeField + 5, rectTimeWidth, rectTimeHeight+10)
                 while (j < $scope.summary.timeArray.length) {
 
@@ -3300,19 +3300,19 @@
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.timeArray[j - 1].Charge_Type)
-                        doc1.text(xTimeField + timeWidth, yTimeFieldValue, $scope.summary.timeArray[j - 1].Charge_Type)
+                        doc1.text(xTimeField + timeWidth, yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Charge_Type))
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.timeArray[j - 1].Charge_Method)
-                        doc1.text(xTimeField + (timeWidth * 2), yTimeFieldValue, $scope.summary.timeArray[j - 1].Charge_Method)
+                        doc1.text(xTimeField + (timeWidth * 2), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Charge_Method))
 
                     doc1.setFontSize(22)
 
                     doc1.setFontType('normal');
 
                     if ($scope.summary.timeArray[j - 1].Work_Type)
-                        doc1.text(xTimeField + (timeWidth * 3), yTimeFieldValue, $scope.summary.timeArray[j - 1].Work_Type)
+                        doc1.text(xTimeField + (timeWidth * 3), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Work_Type))
                     var a = 2;
                     i = 4;
                     angular.forEach($scope.timeArray[0].timeDefault.timeCode.values, function (timecodeKey, value) {
@@ -3323,13 +3323,13 @@
 
                             if ($scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode] != undefined) {
 
-                                //  doc1.text(xTimeField + 235, yTimeFieldName, timecodeKey.Overtimeshiftcode)
+                                //  doc1.text(xTimeField + 235, yTimeFieldName, $filter('translate')(timecodeKey.Overtimeshiftcode)
                                 // xTimeField1=xTimeField1 +40;
                                 // doc1.text(xTimeField1, yTimeFieldName, timecodeKey.Overtimeshiftcode)
                                 // xTimeField1=xTimeField1-40*a;
                                 doc1.setFontSize(22)
                                 doc1.setFontType('normal')
-                                doc1.text(xTimeField + (timeWidth * i), yTimeFieldValue, $scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode].toString());
+                                doc1.text(xTimeField + (timeWidth * i), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode].toString()));
                                 a--;
                                 i++;
 
@@ -3340,9 +3340,9 @@
                         });
                     });
                     // doc1.text(xTimeField + 235, yTimeFieldName, 'Standard')
-                    // doc1.text(xTimeField + 235, yTimeFieldValue, $scope.summary.timeArray[j-1].Shift_Code)
+                    // doc1.text(xTimeField + 235, yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j-1].Shift_Code)
                     // doc1.text(xTimeField + 275, yTimeFieldName, 'OT1')
-                    // doc1.text(xTimeField + 275, yTimeFieldValue, $scope.summary.timeArray[j-1].Time_Code)
+                    // doc1.text(xTimeField + 275, yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j-1].Time_Code)
                     // doc1.text(xTimeField + 315, yTimeFieldName, 'OT2')
                     // doc1.text(xTimeField + 315, yTimeFieldValue, $scope.summary.timeArray[j-1].Time_Code)
                     // doc1.text(xTimeField + 355, yTimeFieldName, 'OT3')
@@ -3351,18 +3351,18 @@
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.timeArray[j - 1].Duration)
-                        doc1.text(xTimeField + (timeWidth * i), yTimeFieldValue, $scope.summary.timeArray[j - 1].Duration.toString())
+                        doc1.text(xTimeField + (timeWidth * i), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Duration.toString()))
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.timeArray[j - 1].Item && $scope.summary.timeArray[j - 1].Item != "")
-                        doc1.text(xTimeField + (timeWidth * (++i)), yTimeFieldValue, $scope.summary.timeArray[j - 1].Item.split('-')[0] + '\n-' + $scope.summary.timeArray[j - 1].Item.split('-')[1])
+                        doc1.text(xTimeField + (timeWidth * (++i)), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Item.split('-')[0] + '\n-' + $scope.summary.timeArray[j - 1].Item.split('-')[1]))
                     else
                         i++;
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.timeArray[j - 1].Comments)
-                        doc1.text(xTimeField + (timeWidth * (++i)), yTimeFieldValue, $scope.summary.timeArray[j - 1].Comments)
+                        doc1.text(xTimeField + (timeWidth * (++i)), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Comments))
                     else
                         i++;
                 }
@@ -3371,20 +3371,20 @@
                     yExpenseFieldValue;
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xExpenseField, yExpenseField + 5, 'Expenses')
+                doc1.text(xExpenseField, yExpenseField + 5, $filter('translate')('Expenses'))
                 // doc1.rect(20, yExpenseField + 10, rectExpenseWidth, rectExpenseHeight)
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xExpenseField, yExpenseFieldName, 'Date')
+                doc1.text(xExpenseField, yExpenseFieldName, $filter('translate')('Date'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xExpenseField + 140, yExpenseFieldName, 'Expense type')
+                doc1.text(xExpenseField + 140, yExpenseFieldName, $filter('translate')('Expense type'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xExpenseField + 305, yExpenseFieldName, 'Charge Method')
+                doc1.text(xExpenseField + 305, yExpenseFieldName, $filter('translate')('Charge Method'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xExpenseField + 470, yExpenseFieldName, 'Justification')
+                doc1.text(xExpenseField + 470, yExpenseFieldName, $filter('translate')('Justification'))
                 // yExpenseFieldValue = yExpenseFieldName + 10;
                 while (k < $scope.summary.expenseArray.length) {
                     // yExpenseFieldName =  ;
@@ -3399,17 +3399,17 @@
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.expenseArray[k - 1].Expense_Type)
-                        doc1.text(xExpenseField + 140, yExpenseFieldValue, $scope.summary.expenseArray[k - 1].Expense_Type)
+                        doc1.text(xExpenseField + 140, yExpenseFieldValue, $filter('translate')($scope.summary.expenseArray[k - 1].Expense_Type))
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.expenseArray[k - 1].Charge_Method)
-                        doc1.text(xExpenseField + 305, yExpenseFieldValue, $scope.summary.expenseArray[k - 1].Charge_Method)
+                        doc1.text(xExpenseField + 305, yExpenseFieldValue, $filter('translate')($scope.summary.expenseArray[k - 1].Charge_Method))
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.expenseArray[k - 1].Justification)
-                        doc1.text(xExpenseField + 470, yExpenseFieldValue, $scope.summary.expenseArray[k - 1].Justification)
+                        doc1.text(xExpenseField + 470, yExpenseFieldValue, $filter('translate')($scope.summary.expenseArray[k - 1].Justification))
                 }
                 rectExpenseHeight = yExpenseFieldValue - yExpenseFieldName + 25;
                 doc1.rect(20, yExpenseField + 10, rectExpenseWidth, rectExpenseHeight);
@@ -3420,28 +3420,28 @@
 
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xMaterialField, yMaterialField + 5, 'Materials')
+                doc1.text(xMaterialField, yMaterialField + 5, $filter('translate')('Materials'))
                 // doc1.rect(20, yMaterialField + 10, rectMaterialWidth, rectMaterialHeight)
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(25, yMaterialFieldName, 'Charge type')
+                doc1.text(25, yMaterialFieldName, $filter('translate')('Charge type'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(106, yMaterialFieldName, 'Quantity')
+                doc1.text(106, yMaterialFieldName, $filter('translate')('Quantity'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(202, yMaterialFieldName, 'Serial#')
+                doc1.text(202, yMaterialFieldName, $filter('translate')('Serial#'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(298, yMaterialFieldName, 'Serial In#')
+                doc1.text(298, yMaterialFieldName, $filter('translate')('Serial In#'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(394, yMaterialFieldName, 'Serial Out#')
+                doc1.text(394, yMaterialFieldName, $filter('translate')('Serial Out#'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(490, yMaterialFieldName, 'Item Name')
+                doc1.text(490, yMaterialFieldName, $filter('translate')('Item Name'))
                 doc1.text(586, yMaterialFieldName, 'Description')
                 yMaterialFieldValue = yMaterialFieldName + 10;
 
@@ -3455,7 +3455,7 @@
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.materialArray[l - 1].Charge_Type)
-                        doc1.text(25, yMaterialFieldValue, $scope.summary.materialArray[l - 1].Charge_Type)
+                        doc1.text(25, yMaterialFieldValue, $filter('translate')($scope.summary.materialArray[l - 1].Charge_Type))
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
@@ -3481,12 +3481,12 @@
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.materialArray[l - 1].ItemName)
-                        doc1.text(490, yMaterialFieldValue, $scope.summary.materialArray[l - 1].ItemName)
+                        doc1.text(490, yMaterialFieldValue, $filter('translate')($scope.summary.materialArray[l - 1].ItemName))
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.materialArray[l - 1].Description)
-                        doc1.text(586, yMaterialFieldValue, $scope.summary.materialArray[l - 1].Description)
+                        doc1.text(586, yMaterialFieldValue, $filter('translate')($scope.summary.materialArray[l - 1].Description))
                     // doc1.text(460, yMaterialFieldName, 'Comments')
                     // doc1.text(460, yMaterialFieldValue, $scope.summary.materialArray[l-1].Charge_Type)
                     yMaterialFieldValue = yMaterialFieldValue + 10 * $scope.summary.materialArray[l - 1].Product_Quantity;
@@ -3500,10 +3500,10 @@
 
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xSignField, ySignField + 5, 'Signature')
+                doc1.text(xSignField, ySignField + 5, $filter('translate')('Signature'))
                 doc1.rect(20, ySignField + 10, rectSignWidth, rectSignHeight)
-                doc1.text(50, ySignField + 25, 'ENGINEER NAME')
-                doc1.text(250, ySignField + 25, 'CUSTOMER NAME')
+                doc1.text(50, ySignField + 25, $filter('translate')('ENGINEER NAME'))
+                doc1.text(250, ySignField + 25, $filter('translate')('CUSTOMER NAME'))
                 doc1.text(50, ySignField + 35, $scope.engineerName);
 
                 if ($scope.summary.engineer != undefined && $scope.summary.engineer.signature)
