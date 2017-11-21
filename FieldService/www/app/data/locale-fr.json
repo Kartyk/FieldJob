@@ -203,7 +203,13 @@
   "Accept": "Acceptez",
   "Back": "Retour",
   "Field Service": "Service sur site",
-  "Item Description": "Description d'article"
+  "Item Description": "Description d'article",
+  "Travel- Standard": "Voyage - Standard",
+  "Travel- Overtime": "Voyage - Heures supplémentaires",
+  "Travel- Double Time": "Voyage - Temps double",
+  "Labor- Standard": "Main d'œuvre - Standard",
+  "Labor- Overtime": "Main d'œuvre - Heures supplémentaires",
+  "Labor- Double Time": "Main d'œuvre - Temps double"
 
 
 }

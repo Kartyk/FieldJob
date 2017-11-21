@@ -1604,7 +1604,7 @@
                         subTotalArray.push(subtotalObject);
                     }
 
-                    var timeObject = $scope.getTimenewObj(key.Work_Type.Value, $filter("date")(key.Date, "dd-MM-yyyy "), key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration);
+                    var timeObject = $scope.getTimenewObj(key.Work_Type.Value, $filter("date")(key.Date, "dd-MM-yyyy "), key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration, key.Time_Code, key.Shift_Code);
 
                     timeObject.Duration = key.Duration;
 
@@ -1696,7 +1696,7 @@
         });
     }
 
-    $scope.getTimenewObj = function (worktype, date, chargetype, chargemethod, item, desc, commets, duration) {
+    $scope.getTimenewObj = function (worktype, date, chargetype, chargemethod, item, desc, commets, duration,timecode,shiftcode) {
 
         var timeObj =
             {
@@ -1709,7 +1709,9 @@
                 "Comments": commets,
                 "Duration": duration,
                 "mins": 0,
-                "hours": 0
+                "hours": 0,
+                "Time_Code": timecode,
+                "Shift_Code": shiftcode
             }
 
         return timeObj;
