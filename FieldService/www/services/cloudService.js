@@ -20,6 +20,7 @@
         service.getInternalList = getInternalList;
         service.getInstallBaseList = getInstallBaseList;
         service.getSRNotesList = getSRNotesList;
+        service.getSRAttachmentList = getSRAttachmentList;
         service.getContactList = getContactList;
         service.getNoteList = getNoteList;
         service.getProjectList = getProjectList;
@@ -228,6 +229,10 @@
             }).error(function (error) {
 
                 console.log("Internal Error " + JSON.stringify(error));
+
+                var response = [];
+
+                callback(response);
             });
         }
 
@@ -301,6 +306,48 @@
             }).error(function (error) {
 
                 console.log("SR Notes Error " + JSON.stringify(error));
+            });
+        }
+
+        function getSRAttachmentList(srNumberArray, callback) {
+
+            console.log("SR NUMBER " + JSON.stringify({ "SRID": srNumberArray }));
+
+            $http({
+
+                method: 'POST',
+                url: url + 'Fetch_SRAttachments/SR_Attachment',
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getTaskBackId()
+                },
+                data: {"SRID": srNumberArray}
+
+            }).success(function (response) {
+
+                console.log("SR Attachment Response " + JSON.stringify(response));
+
+                $rootScope.apicall = true;
+
+                var attachmentArray = [];
+
+                angular.forEach(response.Attachment_by_SRs, function (item) {
+
+                    angular.forEach(item.AttachmentbySR, function (object) {
+
+                        attachmentArray.push(object);
+                    });
+                });
+
+                localService.insertSRAttachmentList(attachmentArray, function (result) {
+
+                    callback("success");
+                });
+
+            }).error(function (error) {
+
+                console.log("SR Attachment Error " + JSON.stringify(error));
             });
         }
 

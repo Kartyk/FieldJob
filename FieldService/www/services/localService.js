@@ -30,7 +30,8 @@
         service.insertTaskList = insertTaskList;
         service.insertInternalList = insertInternalList;
         service.insertSRNotesList = insertSRNotesList;
-        service.insertInstallBaseList = insertInstallBaseList;      
+        service.insertSRAttachmentList = insertSRAttachmentList;
+        service.insertInstallBaseList = insertInstallBaseList;
         service.insertContactList = insertContactList;
         service.insertNoteList = insertNoteList;
         service.insertAttachmentList = insertAttachmentList;
@@ -93,6 +94,7 @@
         service.getTaskList = getTaskList;
         service.getInternalList = getInternalList;
         service.getSRNotesList = getSRNotesList;
+        service.getSRNotesListFull = getSRNotesListFull;
         service.getInstallBaseList = getInstallBaseList;
         service.getContactList = getContactList;
         service.getNoteList = getNoteList;
@@ -611,6 +613,137 @@
             }, function (error) {
 
                  //console.log("SRNOTES INSERT TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function insertSRAttachmentList(response, callback) {
+
+            var responseList = response;
+
+            var promises = [];
+
+            for (var i = 0; i < responseList.length; i++) {
+
+                (function (i) {
+
+                    var deferred = $q.defer();
+
+                    db.transaction(function (transaction) {
+
+                        var sqlSelect = "SELECT * FROM SRAttachment WHERE SRID = " + responseList[i].SRID;
+
+                        //console.log("SRATTACHMENT  ====> " + sqlSelect);
+
+                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+
+                            var rowLength = res.rows.length;
+
+                            //console.log("SRATTACHMENT LENGTH ====> " + rowLength);
+
+                            if (rowLength > 0) {
+
+                                updateSRAttachment(responseList[i], deferred);
+
+                            } else {
+
+                                insertSRAttachment(responseList[i], deferred);
+                            }
+
+                        }, function (tx, error) {
+
+                            //console.log("SRATTACHMENT SELECT ERROR: " + error.message);
+                        });
+
+                    }, function (error) {
+
+                        //console.log("SRATTACHMENT SELECT TRANSACTION ERROR: " + error.message);
+                    });
+
+                    //console.log("SRATTACHMENT OBJECT =====> " + JSON.stringify(responseList));
+
+                    promises.push(deferred.promise);
+
+                })(i);
+            }
+
+            $q.all(promises).then(
+                function (response) {
+                    callback("SUCCESS");
+                },
+
+                function (error) {
+                    callback("ERROR");
+                }
+            );
+        };
+
+        function updateSRAttachment(responseList, defer) {
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlUpdate = "UPDATE SRAttachment SET Reference_Number = ?, File_Attachment_ID = ?, Date_Created = ?, Content_Type = ?, User_File_Name = ?, Date_Last_Updated = ? WHERE SRID = ?";
+
+                insertValues.push(responseList.Reference_Number);
+                insertValues.push(responseList.File_Attachment_ID);
+                insertValues.push(responseList.Date_Created);
+                insertValues.push(responseList.Content_Type);
+                insertValues.push(responseList.User_File_Name);
+                insertValues.push(responseList.Date_Last_Updated);
+                insertValues.push(responseList.SRID);
+
+                //console.log("SRATTACHMENT UPDATE VALUES =====> " + insertValues);
+
+                transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
+
+                    defer.resolve(res);
+
+                    //console.log("SRATTACHMENT ROW AFFECTED: " + res.rowsAffected);
+
+                }, function (tx, error) {
+
+                    //console.log("SRATTACHMENT UPDATE ERROR: " + error.message);
+                });
+
+            }, function (error) {
+
+                //console.log("SRATTACHMENT UPDATE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function insertSRAttachment(responseList, defer) {
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlInsert = "INSERT INTO SRAttachment VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+                insertValues.push(responseList.SRID);
+                insertValues.push(responseList.Reference_Number);
+                insertValues.push(responseList.File_Attachment_ID);
+                insertValues.push(responseList.Date_Created);
+                insertValues.push(responseList.Content_Type);
+                insertValues.push(responseList.User_File_Name);
+                insertValues.push(responseList.Date_Last_Updated);
+
+                //console.log("SRATTACHMENT INSERT VALUES =====> " + insertValues);
+
+                transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
+
+                    defer.resolve(res);
+
+                    //console.log("SRATTACHMENT INSERT ID: " + res.insertId);
+
+                }, function (tx, error) {
+
+                    //console.log("SRATTACHMENT INSERT ERROR: " + error.message);
+                });
+
+            }, function (error) {
+
+                //console.log("SRATTACHMENT INSERT TRANSACTION ERROR: " + error.message);
             });
         };
 
@@ -3801,6 +3934,40 @@
             return db.transaction(function (transaction) {
 
                 transaction.executeSql("SELECT * FROM SRNotes WHERE Service_Request = ? ", [taskId], function (tx, res) {
+
+                    var rowLength = res.rows.length;
+
+                    for (var i = 0; i < rowLength; i++) {
+
+                        value.push(res.rows.item(i));
+                    }
+
+                    // console.log("GET SRNOTES DB ==========> " + JSON.stringify(value));
+
+                    callback(value);
+
+                }, function (tx, error) {
+
+                    // console.log("GET SRNOTES SELECT ERROR: " + error.message);
+
+                    callback(value);
+                });
+
+            }, function (error) {
+
+                // console.log("GET SRNOTES TRANSACTION ERROR: " + error.message);
+
+                callback(value);
+            });
+        };
+
+        function getSRNotesListFull(callback) {
+
+            var value = [];
+
+            return db.transaction(function (transaction) {
+
+                transaction.executeSql("SELECT * FROM SRNotes", [], function (tx, res) {
 
                     var rowLength = res.rows.length;
 

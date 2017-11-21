@@ -129,7 +129,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
         $rootScope.columnclass = "col-sm-11";
         if (valueService.getDebriefChanged()) {
             $mdDialog.show({
-                locals: { dataToPass: item }, 
+                locals: {dataToPass: item},
                 controller: DialogController,
                 templateUrl: "app/views/Dialog.html",
                 parent: angular.element(document.body),
@@ -138,7 +138,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
             }).then(function (selected) {
 
-               // $scope.status = "You said the information was '" + selected + "'.";
+                // $scope.status = "You said the information was '" + selected + "'.";
 
             }, function () {
 
@@ -149,26 +149,25 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
             sideNavigation(item)
         }
     }
+
     function DialogController($scope, $mdDialog, dataToPass) {
 
-        $scope.saveData = function ()
-        {
+        $scope.saveData = function () {
             $rootScope.saveValues()
             sideNavigation(dataToPass);
             $mdDialog.hide();
             $rootScope.showDebrief = false;
-            
+
         }
-        $scope.cancel = function ()
-        {
+        $scope.cancel = function () {
             sideNavigation(dataToPass);
             $mdDialog.hide();
             valueService.setDebriefChanged(false);
             $rootScope.showDebrief = false;
         }
     }
-    function sideNavigation(item)
-    {
+
+    function sideNavigation(item) {
         switch (item.name) {
 
             case "MyCalendar":
@@ -223,6 +222,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                 break;
         }
     }
+
     $scope.menuToggle = function () {
 
         if ($rootScope.closed == true) {
@@ -578,6 +578,80 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                         promiseArray.push(deferNoteType.promise);
 
+                        var srNumberArray = [];
+
+                        angular.forEach(constantService.getTaskList(), function (item) {
+
+                            if (item.Service_Request != undefined) {
+
+                                if (srNumberArray.indexOf(item.Service_Request) === -1) {
+
+                                    srNumberArray.push(item.Service_Request);
+                                }
+                            }
+                        });
+
+                        if (srNumberArray.length > 10) {
+
+                            var strArray = [];
+
+                            var i = 1;
+
+                            angular.forEach(srNumberArray, function (item) {
+
+                                if (i <= srNumberArray.length) {
+
+                                    strArray.push(item);
+
+                                    if (i % 10 == 0) {
+
+                                        var deferSRNotes = $q.defer();
+
+                                        cloudService.getSRNotesList(strArray, function (response) {
+
+                                            console.log("SRNOTES");
+
+                                            deferSRNotes.resolve("success");
+                                        });
+
+                                        strArray = [];
+
+                                        promiseArray.push(deferSRNotes.promise);
+
+                                    } else if (i == srNumberArray.length) {
+
+                                        var deferSRNotesFinal = $q.defer();
+
+                                        cloudService.getSRNotesList(strArray, function (response) {
+
+                                            console.log("SRNOTES");
+
+                                            deferSRNotesFinal.resolve("success");
+                                        });
+
+                                        strArray = [];
+
+                                        promiseArray.push(deferSRNotesFinal.promise);
+                                    }
+
+                                    i++;
+                                }
+                            });
+
+                        } else {
+
+                            var deferSRNotes = $q.defer();
+
+                            cloudService.getSRNotesList(srNumberArray, function (response) {
+
+                                console.log("SRNOTES");
+
+                                deferSRNotes.resolve("success");
+                            });
+
+                            promiseArray.push(deferSRNotes.promise);
+                        }
+
                         console.log("LENGTH SYNC " + promiseArray.length);
 
                         $rootScope.apicall = true;
@@ -602,9 +676,85 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                                     $rootScope.showTaskDetail = false;
                                     $rootScope.showDebrief = false;
                                 }
-                               
 
                                 $rootScope.apicall = false;
+
+                                localService.getSRNotesListFull(function (response) {
+
+                                    var srNumberArray = [];
+
+                                    angular.forEach(response, function (item) {
+
+                                        if (item.Incident != undefined) {
+
+                                            if (srNumberArray.indexOf(item.Incident) === -1) {
+
+                                                srNumberArray.push(item.Incident);
+                                            }
+                                        }
+                                    });
+
+                                    if (srNumberArray.length > 10) {
+
+                                        var strArray = [];
+
+                                        var i = 1;
+
+                                        angular.forEach(srNumberArray, function (item) {
+
+                                            if (i <= srNumberArray.length) {
+
+                                                strArray.push(item);
+
+                                                if (i % 10 == 0) {
+
+                                                    var deferSRNotes = $q.defer();
+
+                                                    cloudService.getSRAttachmentList(strArray, function (response) {
+
+                                                        console.log("SR ATTACHMENT");
+
+                                                        deferSRNotes.resolve("success");
+                                                    });
+
+                                                    strArray = [];
+
+                                                    promiseArray.push(deferSRNotes.promise);
+
+                                                } else if (i == srNumberArray.length) {
+
+                                                    var deferSRNotesFinal = $q.defer();
+
+                                                    cloudService.getSRAttachmentList(strArray, function (response) {
+
+                                                        console.log("SR ATTACHMENT");
+
+                                                        deferSRNotesFinal.resolve("success");
+                                                    });
+
+                                                    strArray = [];
+
+                                                    promiseArray.push(deferSRNotesFinal.promise);
+                                                }
+
+                                                i++;
+                                            }
+                                        });
+
+                                    } else {
+
+                                        var deferSRNotes = $q.defer();
+
+                                        cloudService.getSRAttachmentList(srNumberArray, function (response) {
+
+                                            console.log("SR ATTACHMENT");
+
+                                            deferSRNotes.resolve("success");
+                                        });
+
+                                        promiseArray.push(deferSRNotes.promise);
+                                    }
+                                });
                             },
 
                             function (error) {
@@ -619,65 +769,6 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                         getAttachments();
 
-                        var srNumberArray = [];
-
-                        angular.forEach(constantService.getTaskList(), function (item) {
-
-                            var value = item.Service_Request + "";
-
-                            if (item.Service_Request != undefined) {
-
-                                if (srNumberArray.indexOf(item.Service_Request) === -1) {
-
-                                    srNumberArray.push(item.Service_Request);
-                                }
-                            }
-                        });
-
-                        if (srNumberArray.length > 10) {
-
-                            var strArray = [];
-
-                            var loopLength = srNumberArray.length / 10;
-
-                            var rem = srNumberArray.length % 10;
-
-                            if (rem > 0) {
-                                loopLength = loopLength + 1;
-                            }
-
-                            for (var i = 1; i <= loopLength; i++) {
-
-                                strArray = [];
-
-                                for (var j = (i - 1) * 10; j < 10 * i; j++) {
-
-                                    if (j < srNumberArray.length) {
-
-                                        strArray.push(srNumberArray[j]);
-
-                                        if (j == ((10 * i) - 1)) {
-
-                                            cloudService.getSRNotesList(strArray, function (response) {
-                                                console.log("SRNOTES");
-                                            });
-
-                                        } else if (j == (srNumberArray.length - 1)) {
-
-                                            cloudService.getSRNotesList(strArray, function (response) {
-                                                console.log("SRNOTES");
-                                            });
-                                        }
-                                    }
-                                }
-                            }
-
-                        } else {
-
-                            cloudService.getSRNotesList(srNumberArray, function (response) {
-                                console.log("SRNOTES");
-                            });
-                        }
                     });
                 },
 
@@ -976,9 +1067,83 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 promiseArray.push(deferNoteType.promise);
 
-                console.log("LENGTH LOGIN " + promiseArray.length);
-
                 $rootScope.apicall = true;
+
+                var srNumberArray = [];
+
+                angular.forEach(constantService.getTaskList(), function (item) {
+
+                    if (item.Service_Request != undefined) {
+
+                        if (srNumberArray.indexOf(item.Service_Request) === -1) {
+
+                            srNumberArray.push(item.Service_Request);
+                        }
+                    }
+                });
+
+                if (srNumberArray.length > 10) {
+
+                    var strArray = [];
+
+                    var i = 1;
+
+                    angular.forEach(srNumberArray, function (item) {
+
+                        if (i <= srNumberArray.length) {
+
+                            strArray.push(item);
+
+                            if (i % 10 == 0) {
+
+                                var deferSRNotes = $q.defer();
+
+                                cloudService.getSRNotesList(strArray, function (response) {
+
+                                    console.log("SRNOTES");
+
+                                    deferSRNotes.resolve("success");
+                                });
+
+                                strArray = [];
+
+                                promiseArray.push(deferSRNotes.promise);
+
+                            } else if (i == srNumberArray.length) {
+
+                                var deferSRNotesFinal = $q.defer();
+
+                                cloudService.getSRNotesList(strArray, function (response) {
+
+                                    console.log("SRNOTES");
+
+                                    deferSRNotesFinal.resolve("success");
+                                });
+
+                                strArray = [];
+
+                                promiseArray.push(deferSRNotesFinal.promise);
+                            }
+
+                            i++;
+                        }
+                    });
+
+                } else {
+
+                    var deferSRNotes = $q.defer();
+
+                    cloudService.getSRNotesList(srNumberArray, function (response) {
+
+                        console.log("SRNOTES");
+
+                        deferSRNotes.resolve("success");
+                    });
+
+                    promiseArray.push(deferSRNotes.promise);
+                }
+
+                console.log("LENGTH LOGIN " + promiseArray.length);
 
                 $q.all(promiseArray).then(
                     function (response) {
@@ -1003,6 +1168,83 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                         }
 
                         $rootScope.apicall = false;
+
+                        localService.getSRNotesListFull(function (response) {
+
+                            var srNumberArray = [];
+
+                            angular.forEach(response, function (item) {
+
+                                if (item.Incident != undefined) {
+
+                                    if (srNumberArray.indexOf(item.Incident) === -1) {
+
+                                        srNumberArray.push(item.Incident);
+                                    }
+                                }
+                            });
+
+                            if (srNumberArray.length > 10) {
+
+                                var strArray = [];
+
+                                var i = 1;
+
+                                angular.forEach(srNumberArray, function (item) {
+
+                                    if (i <= srNumberArray.length) {
+
+                                        strArray.push(item);
+
+                                        if (i % 10 == 0) {
+
+                                            var deferSRNotes = $q.defer();
+
+                                            cloudService.getSRAttachmentList(strArray, function (response) {
+
+                                                console.log("SR ATTACHMENT");
+
+                                                deferSRNotes.resolve("success");
+                                            });
+
+                                            strArray = [];
+
+                                            promiseArray.push(deferSRNotes.promise);
+
+                                        } else if (i == srNumberArray.length) {
+
+                                            var deferSRNotesFinal = $q.defer();
+
+                                            cloudService.getSRAttachmentList(strArray, function (response) {
+
+                                                console.log("SR ATTACHMENT");
+
+                                                deferSRNotesFinal.resolve("success");
+                                            });
+
+                                            strArray = [];
+
+                                            promiseArray.push(deferSRNotesFinal.promise);
+                                        }
+
+                                        i++;
+                                    }
+                                });
+
+                            } else {
+
+                                var deferSRNotes = $q.defer();
+
+                                cloudService.getSRAttachmentList(srNumberArray, function (response) {
+
+                                    console.log("SR ATTACHMENT");
+
+                                    deferSRNotes.resolve("success");
+                                });
+
+                                promiseArray.push(deferSRNotes.promise);
+                            }
+                        });
                     },
 
                     function (error) {
@@ -1033,66 +1275,6 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 getAttachments();
 
-                 var srNumberArray = [];
-                
-                 angular.forEach(constantService.getTaskList(), function (item) {
-
-                     var value = item.Service_Request + "";
-
-                     if (item.Service_Request != undefined) {
-
-                         if (srNumberArray.indexOf(item.Service_Request) === -1) {
-
-                             srNumberArray.push(item.Service_Request);
-                         }
-                     }
-                 });
-
-                 if (srNumberArray.length > 10) {
-
-                     var strArray = [];
-
-                     var loopLength = srNumberArray.length / 10;
-
-                     var rem = srNumberArray.length % 10;
-
-                     if (rem > 0) {
-                         loopLength = loopLength + 1;
-                     }
-
-                     for (var i = 1; i <= loopLength; i++) {
-
-                         strArray = [];
-
-                         for (var j = (i - 1) * 10; j < 10 * i; j++) {
-
-                             if (j < srNumberArray.length) {
-
-                                 strArray.push(srNumberArray[j]);
-
-                                 if (j == ((10 * i) - 1)) {
-
-                                     cloudService.getSRNotesList(strArray, function (response) {
-                                         console.log("SRNOTES");
-                                     });
-
-                                 } else if (j == (srNumberArray.length - 1)) {
-
-                                     cloudService.getSRNotesList(strArray, function (response) {
-                                         console.log("SRNOTES");
-                                     });
-                                 }
-                             }
-                         }
-                     }
-
-                 } else {
-
-                     cloudService.getSRNotesList(srNumberArray, function (response) {
-                         console.log("SRNOTES");
-                     });
-                 }
-                                            
             });
         }
 
