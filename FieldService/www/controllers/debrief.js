@@ -3071,12 +3071,22 @@
                     doc1.text(300, 50, $filter('translate')('Field Job# ') + $scope.summary.taskObject.Task_Number)
                 doc1.setFontSize(20)
                 doc1.setFontType('normal')
-                doc1.text(500, 20, $filter('translate')('Emerson Process Management'))
-                doc1.text(500, 28, $filter('translate')('(UNITED KINGDOM)'))
-                doc1.text(500, 36, $filter('translate')('Leicester'))
-                doc1.text(500, 44, $filter('translate')('United Kingdom'))
-                doc1.text(500, 52, $filter('translate')('Tel'))
-                doc1.text(500, 60, $filter('translate')('Fax: +44(0)122 2892896'))
+                if (valueService.getLanguage() == 'fr') {
+                    doc1.text(500, 20, $filter('translate')('Emerson Process Management Co.,Ltd.'))
+                    doc1.text(500, 28, $filter('translate')('14, Rue Edison - BP21 69 671 BRON Cedex'))
+                    //doc1.text(500, 36, $filter('translate')('Leicester'))
+                    //doc1.text(500, 44, $filter('translate')('United Kingdom'))
+                    //doc1.text(500, 52, $filter('translate')('Tel'))
+                    //doc1.text(500, 60, $filter('translate')('Fax: +44(0)122 2892896'))
+                }
+                else {
+                    doc1.text(500, 20, $filter('translate')('Emerson Process Management'))
+                    doc1.text(500, 28, $filter('translate')('(UNITED KINGDOM)'))
+                    doc1.text(500, 36, $filter('translate')('Leicester'))
+                    doc1.text(500, 44, $filter('translate')('United Kingdom'))
+                    doc1.text(500, 52, $filter('translate')('Tel'))
+                    doc1.text(500, 60, $filter('translate')('Fax: +44(0)122 2892896'))
+                }
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 doc1.text(25, 80, $filter('translate')('Customer Call Details'))

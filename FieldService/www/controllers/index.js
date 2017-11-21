@@ -917,6 +917,22 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                 );
 
                 getAttachments();
+
+                // var srNumberArray = [];
+                //
+                // angular.forEach(constantService.getTaskList(), function (item) {
+                //
+                //     if (srNumberArray.indexOf(item.Service_Request) === -1) {
+                //
+                //         srNumberArray.push(item.Service_Request);
+                //     }
+                // });
+                //
+                // console.log("SR NUMBER ARRAY " + srNumberArray);
+                //
+                // cloudService.getSRNotesList(srNumberArray, function (response) {
+                //
+                // });
             });
         }
 
