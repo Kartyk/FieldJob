@@ -238,7 +238,8 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
                         Labor_Method: item.Labor_Method,
                         Travel_Method: item.Travel_Method,
                         Material_Method: item.Material_Method,
-                        Activity_Id: item.Activity_Id
+                        Activity_Id: item.Activity_Id,
+                        SR_ID: item.SR_ID
                     });
 
                 } else {
