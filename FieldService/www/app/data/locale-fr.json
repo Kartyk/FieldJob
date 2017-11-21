@@ -121,6 +121,7 @@
   "search": "Rechercher",
   "Continue": "Suite",
   "item name": "nom de l'élément",
+  "Item Name": "nom de l'élément",
   "Product Quantity": "Quantité de produits",
   "Serial number": "Numéro de série",
   "Serial in": "Série entrée",
@@ -168,6 +169,7 @@
   "Note Description": "Description de la remarque",
   "Select Your Language": "Sélectionner la langue",
   "ORGINAL PO": "NUMÉRO DU BDC INITIAL",
+  "Original PO": "NUMÉRO DU BDC INITIAL",
   "State/Province": "État/province",
   "Clarity Task Name": "Nom de la tâche Clarity",
   "Sign out": "Déconnexion",
@@ -210,9 +212,10 @@
   "Labor- Standard": "Main d'œuvre - Standard",
   "Labor- Overtime": "Main d'œuvre - Heures supplémentaires",
   "Labor- Double Time": "Main d'œuvre - Temps double",
-  "Charge\nType":"TYPE DE\n FACTURATION",
-  "Charge\nMethod":"méthode de\n facturation",
-  "Work\nType":"Type de\n travail"
+  "Charge\nType": "TYPE DE\n FACTURATION",
+  "Charge\nMethod": "méthode de\n facturation",
+  "Work\nType": "Type de\n travail",
+  "Task Number": "Numéro de tâche"
 
 
 }
