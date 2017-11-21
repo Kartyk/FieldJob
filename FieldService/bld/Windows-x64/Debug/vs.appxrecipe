@@ -32,7 +32,7 @@
     <AppXManifest Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\build\windows\debug\x64\win10\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-11-21T12:46:29.945</Modified>
+      <Modified>2017-11-21T14:02:48.403</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
@@ -485,47 +485,47 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\app.js">
       <PackagePath>www\app\app.js</PackagePath>
-      <Modified>2017-11-21T12:46:14.797</Modified>
+      <Modified>2017-11-21T14:02:32.030</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\controllers\debrief.js">
       <PackagePath>www\controllers\debrief.js</PackagePath>
-      <Modified>2017-11-21T12:26:49.528</Modified>
+      <Modified>2017-11-21T14:02:26.915</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\controllers\index.js">
       <PackagePath>www\controllers\index.js</PackagePath>
-      <Modified>2017-11-21T12:46:15.184</Modified>
+      <Modified>2017-11-21T14:02:32.383</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\controllers\login.js">
       <PackagePath>www\controllers\login.js</PackagePath>
-      <Modified>2017-11-21T12:46:15.204</Modified>
+      <Modified>2017-11-21T14:02:32.387</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\controllers\myTask.js">
       <PackagePath>www\controllers\myTask.js</PackagePath>
-      <Modified>2017-11-21T12:46:15.251</Modified>
+      <Modified>2017-11-21T14:02:32.442</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\controllers\taskOverFlow.js">
       <PackagePath>www\controllers\taskOverFlow.js</PackagePath>
-      <Modified>2017-11-21T12:46:15.304</Modified>
+      <Modified>2017-11-21T14:02:32.494</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\controllers\todo.js">
       <PackagePath>www\controllers\todo.js</PackagePath>
-      <Modified>2017-11-21T12:46:15.324</Modified>
+      <Modified>2017-11-21T14:02:32.524</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\cordova-js-src\confighelper.js">
       <PackagePath>www\cordova-js-src\confighelper.js</PackagePath>
-      <Modified>2017-11-21T12:46:15.347</Modified>
+      <Modified>2017-11-21T14:02:32.528</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\cordova-js-src\exec.js">
       <PackagePath>www\cordova-js-src\exec.js</PackagePath>
-      <Modified>2017-11-21T12:46:15.366</Modified>
+      <Modified>2017-11-21T14:02:32.531</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\cordova-js-src\platform.js">
       <PackagePath>www\cordova-js-src\platform.js</PackagePath>
-      <Modified>2017-11-21T12:46:15.385</Modified>
+      <Modified>2017-11-21T14:02:32.535</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\cordova-js-src\splashscreen.js">
       <PackagePath>www\cordova-js-src\splashscreen.js</PackagePath>
-      <Modified>2017-11-21T12:46:15.435</Modified>
+      <Modified>2017-11-21T14:02:32.613</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\cordova.js">
       <PackagePath>www\cordova.js</PackagePath>
@@ -533,419 +533,419 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\cordova_plugins.js">
       <PackagePath>www\cordova_plugins.js</PackagePath>
-      <Modified>2017-11-21T12:46:15.465</Modified>
+      <Modified>2017-11-21T14:02:32.656</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\db\dbInitialize.js">
       <PackagePath>www\db\dbInitialize.js</PackagePath>
-      <Modified>2017-11-21T12:46:15.697</Modified>
+      <Modified>2017-11-21T14:02:32.947</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-animate\angular-animate.min.js">
       <PackagePath>www\lib\angular-animate\angular-animate.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:16.078</Modified>
+      <Modified>2017-11-21T14:02:33.420</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-aria\angular-aria.min.js">
       <PackagePath>www\lib\angular-aria\angular-aria.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:16.108</Modified>
+      <Modified>2017-11-21T14:02:33.424</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-base64-upload.js">
       <PackagePath>www\lib\angular-base64-upload.js</PackagePath>
-      <Modified>2017-11-21T12:46:16.150</Modified>
+      <Modified>2017-11-21T14:02:33.476</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-material\angular-material.min.js">
       <PackagePath>www\lib\angular-material\angular-material.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:16.300</Modified>
+      <Modified>2017-11-21T14:02:33.648</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-messages\angular-messages.min.js">
       <PackagePath>www\lib\angular-messages\angular-messages.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:16.329</Modified>
+      <Modified>2017-11-21T14:02:33.651</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\angular-translate-handler-log.js">
       <PackagePath>www\lib\angular-translate\angular-translate-handler-log.js</PackagePath>
-      <Modified>2017-11-21T12:46:16.347</Modified>
+      <Modified>2017-11-21T14:02:33.671</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\angular-translate-interpolation-messageformat.js">
       <PackagePath>www\lib\angular-translate\angular-translate-interpolation-messageformat.js</PackagePath>
-      <Modified>2017-11-21T12:46:16.368</Modified>
+      <Modified>2017-11-21T14:02:33.676</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\angular-translate-loader-static-files.js">
       <PackagePath>www\lib\angular-translate\angular-translate-loader-static-files.js</PackagePath>
-      <Modified>2017-11-21T12:46:16.386</Modified>
+      <Modified>2017-11-21T14:02:33.701</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\angular-translate-loader-url.js">
       <PackagePath>www\lib\angular-translate\angular-translate-loader-url.js</PackagePath>
-      <Modified>2017-11-21T12:46:16.406</Modified>
+      <Modified>2017-11-21T14:02:33.723</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\angular-translate-storage-cookie.js">
       <PackagePath>www\lib\angular-translate\angular-translate-storage-cookie.js</PackagePath>
-      <Modified>2017-11-21T12:46:16.425</Modified>
+      <Modified>2017-11-21T14:02:33.726</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\angular-translate-storage-local.js">
       <PackagePath>www\lib\angular-translate\angular-translate-storage-local.js</PackagePath>
-      <Modified>2017-11-21T12:46:16.446</Modified>
+      <Modified>2017-11-21T14:02:33.729</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\messageformat.js">
       <PackagePath>www\lib\angular-translate\messageformat.js</PackagePath>
-      <Modified>2017-11-21T12:46:16.523</Modified>
+      <Modified>2017-11-21T14:02:33.814</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\translate.js">
       <PackagePath>www\lib\angular-translate\translate.js</PackagePath>
-      <Modified>2017-11-21T12:46:16.602</Modified>
+      <Modified>2017-11-21T14:02:33.903</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-ui-router\angular-ui-router.min.js">
       <PackagePath>www\lib\angular-ui-router\angular-ui-router.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:16.677</Modified>
+      <Modified>2017-11-21T14:02:33.992</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular\angular.min.js">
       <PackagePath>www\lib\angular\angular.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:15.995</Modified>
+      <Modified>2017-11-21T14:02:33.319</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\bootstrap-datetimepicker.js">
       <PackagePath>www\lib\bootstrap-datetimepicker.js</PackagePath>
-      <Modified>2017-11-21T12:46:16.865</Modified>
+      <Modified>2017-11-21T14:02:34.212</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\bootstrap\bootstrap.min.js">
       <PackagePath>www\lib\bootstrap\bootstrap.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:16.777</Modified>
+      <Modified>2017-11-21T14:02:34.106</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\calendar.min.js">
       <PackagePath>www\lib\calendar.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:16.899</Modified>
+      <Modified>2017-11-21T14:02:34.259</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\FileSaver.js">
       <PackagePath>www\lib\FileSaver.js</PackagePath>
-      <Modified>2017-11-21T12:46:16.947</Modified>
+      <Modified>2017-11-21T14:02:34.313</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\fullcalendar.js">
       <PackagePath>www\lib\fullcalendar.js</PackagePath>
-      <Modified>2017-11-21T12:46:17.163</Modified>
+      <Modified>2017-11-21T14:02:34.551</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\gcal.js">
       <PackagePath>www\lib\gcal.js</PackagePath>
-      <Modified>2017-11-21T12:46:17.193</Modified>
+      <Modified>2017-11-21T14:02:34.553</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\html2canvas.min.js">
       <PackagePath>www\lib\html2canvas.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:17.272</Modified>
+      <Modified>2017-11-21T14:02:34.640</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular-ui\angular-ui-router.js">
       <PackagePath>www\lib\ionic\js\angular-ui\angular-ui-router.js</PackagePath>
-      <Modified>2017-11-21T12:46:18.082</Modified>
+      <Modified>2017-11-21T14:02:35.436</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular-ui\angular-ui-router.min.js">
       <PackagePath>www\lib\ionic\js\angular-ui\angular-ui-router.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:18.178</Modified>
+      <Modified>2017-11-21T14:02:35.540</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular-animate.js">
       <PackagePath>www\lib\ionic\js\angular\angular-animate.js</PackagePath>
-      <Modified>2017-11-21T12:46:17.384</Modified>
+      <Modified>2017-11-21T14:02:34.778</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular-animate.min.js">
       <PackagePath>www\lib\ionic\js\angular\angular-animate.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:17.477</Modified>
+      <Modified>2017-11-21T14:02:34.857</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular-resource.js">
       <PackagePath>www\lib\ionic\js\angular\angular-resource.js</PackagePath>
-      <Modified>2017-11-21T12:46:17.523</Modified>
+      <Modified>2017-11-21T14:02:34.914</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular-resource.min.js">
       <PackagePath>www\lib\ionic\js\angular\angular-resource.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:17.565</Modified>
+      <Modified>2017-11-21T14:02:34.917</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular-sanitize.js">
       <PackagePath>www\lib\ionic\js\angular\angular-sanitize.js</PackagePath>
-      <Modified>2017-11-21T12:46:17.621</Modified>
+      <Modified>2017-11-21T14:02:34.977</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular-sanitize.min.js">
       <PackagePath>www\lib\ionic\js\angular\angular-sanitize.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:17.649</Modified>
+      <Modified>2017-11-21T14:02:34.981</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular.js">
       <PackagePath>www\lib\ionic\js\angular\angular.js</PackagePath>
-      <Modified>2017-11-21T12:46:17.874</Modified>
+      <Modified>2017-11-21T14:02:35.228</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular.min.js">
       <PackagePath>www\lib\ionic\js\angular\angular.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:17.989</Modified>
+      <Modified>2017-11-21T14:02:35.354</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\ionic-angular.js">
       <PackagePath>www\lib\ionic\js\ionic-angular.js</PackagePath>
-      <Modified>2017-11-21T12:46:18.365</Modified>
+      <Modified>2017-11-21T14:02:35.746</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\ionic-angular.min.js">
       <PackagePath>www\lib\ionic\js\ionic-angular.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:18.468</Modified>
+      <Modified>2017-11-21T14:02:35.879</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\ionic.bundle.js">
       <PackagePath>www\lib\ionic\js\ionic.bundle.js</PackagePath>
-      <Modified>2017-11-21T12:46:18.671</Modified>
+      <Modified>2017-11-21T14:02:36.098</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\ionic.bundle.min.js">
       <PackagePath>www\lib\ionic\js\ionic.bundle.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:18.953</Modified>
+      <Modified>2017-11-21T14:02:36.462</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\ionic.js">
       <PackagePath>www\lib\ionic\js\ionic.js</PackagePath>
-      <Modified>2017-11-21T12:46:19.166</Modified>
+      <Modified>2017-11-21T14:02:36.698</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\ionic.min.js">
       <PackagePath>www\lib\ionic\js\ionic.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:19.324</Modified>
+      <Modified>2017-11-21T14:02:36.865</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\jquery-ui.min.js">
       <PackagePath>www\lib\jquery-ui.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:19.520</Modified>
+      <Modified>2017-11-21T14:02:37.081</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\jquery.min.js">
       <PackagePath>www\lib\jquery.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:19.628</Modified>
+      <Modified>2017-11-21T14:02:37.205</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\jspdf.js">
       <PackagePath>www\lib\jspdf.js</PackagePath>
-      <Modified>2017-11-21T12:46:19.906</Modified>
+      <Modified>2017-11-21T14:02:37.492</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\locale-all.js">
       <PackagePath>www\lib\locale-all.js</PackagePath>
-      <Modified>2017-11-21T12:46:20.022</Modified>
+      <Modified>2017-11-21T14:02:37.614</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\md-data-table.js">
       <PackagePath>www\lib\md-data-table.js</PackagePath>
-      <Modified>2017-11-21T12:46:20.081</Modified>
+      <Modified>2017-11-21T14:02:37.690</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\moment.min.js">
       <PackagePath>www\lib\moment.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:20.164</Modified>
+      <Modified>2017-11-21T14:02:37.780</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\FileAPI.js">
       <PackagePath>www\lib\ng-file-upload-shim\FileAPI.js</PackagePath>
-      <Modified>2017-11-21T12:46:20.914</Modified>
+      <Modified>2017-11-21T14:02:38.552</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\FileAPI.min.js">
       <PackagePath>www\lib\ng-file-upload-shim\FileAPI.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:20.987</Modified>
+      <Modified>2017-11-21T14:02:38.629</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\ng-file-upload-all.js">
       <PackagePath>www\lib\ng-file-upload-shim\ng-file-upload-all.js</PackagePath>
-      <Modified>2017-11-21T12:46:21.066</Modified>
+      <Modified>2017-11-21T14:02:38.721</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\ng-file-upload-all.min.js">
       <PackagePath>www\lib\ng-file-upload-shim\ng-file-upload-all.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:21.191</Modified>
+      <Modified>2017-11-21T14:02:38.889</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\ng-file-upload-shim.js">
       <PackagePath>www\lib\ng-file-upload-shim\ng-file-upload-shim.js</PackagePath>
-      <Modified>2017-11-21T12:46:21.253</Modified>
+      <Modified>2017-11-21T14:02:38.966</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\ng-file-upload-shim.min.js">
       <PackagePath>www\lib\ng-file-upload-shim\ng-file-upload-shim.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:21.257</Modified>
+      <Modified>2017-11-21T14:02:38.969</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\ng-file-upload.js">
       <PackagePath>www\lib\ng-file-upload-shim\ng-file-upload.js</PackagePath>
-      <Modified>2017-11-21T12:46:21.328</Modified>
+      <Modified>2017-11-21T14:02:39.046</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\ng-file-upload.min.js">
       <PackagePath>www\lib\ng-file-upload-shim\ng-file-upload.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:21.430</Modified>
+      <Modified>2017-11-21T14:02:39.141</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\FileAPI.js">
       <PackagePath>www\lib\ng-file-upload\FileAPI.js</PackagePath>
-      <Modified>2017-11-21T12:46:20.247</Modified>
+      <Modified>2017-11-21T14:02:37.883</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\FileAPI.min.js">
       <PackagePath>www\lib\ng-file-upload\FileAPI.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:20.321</Modified>
+      <Modified>2017-11-21T14:02:37.962</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\ng-file-upload-all.js">
       <PackagePath>www\lib\ng-file-upload\ng-file-upload-all.js</PackagePath>
-      <Modified>2017-11-21T12:46:20.402</Modified>
+      <Modified>2017-11-21T14:02:38.047</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\ng-file-upload-all.min.js">
       <PackagePath>www\lib\ng-file-upload\ng-file-upload-all.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:20.518</Modified>
+      <Modified>2017-11-21T14:02:38.179</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\ng-file-upload-shim.js">
       <PackagePath>www\lib\ng-file-upload\ng-file-upload-shim.js</PackagePath>
-      <Modified>2017-11-21T12:46:20.582</Modified>
+      <Modified>2017-11-21T14:02:38.243</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\ng-file-upload-shim.min.js">
       <PackagePath>www\lib\ng-file-upload\ng-file-upload-shim.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:20.628</Modified>
+      <Modified>2017-11-21T14:02:38.247</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\ng-file-upload.js">
       <PackagePath>www\lib\ng-file-upload\ng-file-upload.js</PackagePath>
-      <Modified>2017-11-21T12:46:20.701</Modified>
+      <Modified>2017-11-21T14:02:38.335</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\ng-file-upload.min.js">
       <PackagePath>www\lib\ng-file-upload\ng-file-upload.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:20.813</Modified>
+      <Modified>2017-11-21T14:02:38.436</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\package.js">
       <PackagePath>www\lib\ng-file-upload\package.js</PackagePath>
-      <Modified>2017-11-21T12:46:20.825</Modified>
+      <Modified>2017-11-21T14:02:38.439</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\pdfmake.min.js">
       <PackagePath>www\lib\pdfmake.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:21.859</Modified>
+      <Modified>2017-11-21T14:02:39.629</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\saveHtmlToPdf.js">
       <PackagePath>www\lib\saveHtmlToPdf.js</PackagePath>
-      <Modified>2017-11-21T12:46:21.882</Modified>
+      <Modified>2017-11-21T14:02:39.657</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\signature_pad.min.js">
       <PackagePath>www\lib\signature_pad.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:21.924</Modified>
+      <Modified>2017-11-21T14:02:39.712</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\spinner\angular-loading-spinner.js">
       <PackagePath>www\lib\spinner\angular-loading-spinner.js</PackagePath>
-      <Modified>2017-11-21T12:46:21.941</Modified>
+      <Modified>2017-11-21T14:02:39.717</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\spinner\angular-spinner.min.js">
       <PackagePath>www\lib\spinner\angular-spinner.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:21.959</Modified>
+      <Modified>2017-11-21T14:02:39.720</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\spinner\spin.min.js">
       <PackagePath>www\lib\spinner\spin.min.js</PackagePath>
-      <Modified>2017-11-21T12:46:21.990</Modified>
+      <Modified>2017-11-21T14:02:39.724</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ui-bootstrap-tpls-2.5.0.js">
       <PackagePath>www\lib\ui-bootstrap-tpls-2.5.0.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.116</Modified>
+      <Modified>2017-11-21T14:02:39.883</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-email-composer\src\windows\EmailComposerProxy.js">
       <PackagePath>www\plugins\cordova-plugin-email-composer\src\windows\EmailComposerProxy.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.137</Modified>
+      <Modified>2017-11-21T14:02:39.888</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-email-composer\src\windows\EmailComposerProxyImpl.js">
       <PackagePath>www\plugins\cordova-plugin-email-composer\src\windows\EmailComposerProxyImpl.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.167</Modified>
+      <Modified>2017-11-21T14:02:39.890</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-email-composer\www\email_composer.js">
       <PackagePath>www\plugins\cordova-plugin-email-composer\www\email_composer.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.200</Modified>
+      <Modified>2017-11-21T14:02:39.933</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file-opener2\src\windows\fileOpener2Proxy.js">
       <PackagePath>www\plugins\cordova-plugin-file-opener2\src\windows\fileOpener2Proxy.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.795</Modified>
+      <Modified>2017-11-21T14:02:40.406</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file-opener2\www\plugins.FileOpener2.js">
       <PackagePath>www\plugins\cordova-plugin-file-opener2\www\plugins.FileOpener2.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.813</Modified>
+      <Modified>2017-11-21T14:02:40.409</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\src\windows\FileProxy.js">
       <PackagePath>www\plugins\cordova-plugin-file\src\windows\FileProxy.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.268</Modified>
+      <Modified>2017-11-21T14:02:40.019</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\browser\isChrome.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\browser\isChrome.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.288</Modified>
+      <Modified>2017-11-21T14:02:40.023</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\DirectoryEntry.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\DirectoryEntry.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.312</Modified>
+      <Modified>2017-11-21T14:02:40.048</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\DirectoryReader.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\DirectoryReader.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.331</Modified>
+      <Modified>2017-11-21T14:02:40.053</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\Entry.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\Entry.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.380</Modified>
+      <Modified>2017-11-21T14:02:40.114</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\File.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\File.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.404</Modified>
+      <Modified>2017-11-21T14:02:40.140</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileEntry.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileEntry.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.423</Modified>
+      <Modified>2017-11-21T14:02:40.171</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileError.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileError.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.439</Modified>
+      <Modified>2017-11-21T14:02:40.174</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileReader.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileReader.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.491</Modified>
+      <Modified>2017-11-21T14:02:40.240</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileSystem.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileSystem.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.509</Modified>
+      <Modified>2017-11-21T14:02:40.262</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\fileSystemPaths.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\fileSystemPaths.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.525</Modified>
+      <Modified>2017-11-21T14:02:40.266</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\fileSystems.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\fileSystems.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.544</Modified>
+      <Modified>2017-11-21T14:02:40.269</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileUploadOptions.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileUploadOptions.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.566</Modified>
+      <Modified>2017-11-21T14:02:40.271</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileUploadResult.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileUploadResult.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.581</Modified>
+      <Modified>2017-11-21T14:02:40.275</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileWriter.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileWriter.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.650</Modified>
+      <Modified>2017-11-21T14:02:40.327</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\Flags.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\Flags.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.670</Modified>
+      <Modified>2017-11-21T14:02:40.343</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\LocalFileSystem.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\LocalFileSystem.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.681</Modified>
+      <Modified>2017-11-21T14:02:40.347</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\Metadata.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\Metadata.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.701</Modified>
+      <Modified>2017-11-21T14:02:40.370</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\ProgressEvent.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\ProgressEvent.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.724</Modified>
+      <Modified>2017-11-21T14:02:40.373</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\requestFileSystem.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\requestFileSystem.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.749</Modified>
+      <Modified>2017-11-21T14:02:40.376</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\resolveLocalFileSystemURI.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\resolveLocalFileSystemURI.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.771</Modified>
+      <Modified>2017-11-21T14:02:40.380</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-inappbrowser\src\windows\InAppBrowserProxy.js">
       <PackagePath>www\plugins\cordova-plugin-inappbrowser\src\windows\InAppBrowserProxy.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.863</Modified>
+      <Modified>2017-11-21T14:02:40.474</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-inappbrowser\www\inappbrowser.js">
       <PackagePath>www\plugins\cordova-plugin-inappbrowser\www\inappbrowser.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.887</Modified>
+      <Modified>2017-11-21T14:02:40.512</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-network-information\src\windows\NetworkInfoProxy.js">
       <PackagePath>www\plugins\cordova-plugin-network-information\src\windows\NetworkInfoProxy.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.909</Modified>
+      <Modified>2017-11-21T14:02:40.515</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-network-information\www\Connection.js">
       <PackagePath>www\plugins\cordova-plugin-network-information\www\Connection.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.921</Modified>
+      <Modified>2017-11-21T14:02:40.530</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-network-information\www\network.js">
       <PackagePath>www\plugins\cordova-plugin-network-information\www\network.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.944</Modified>
+      <Modified>2017-11-21T14:02:40.535</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-sqlite-storage\src\windows\sqlite-proxy.js">
       <PackagePath>www\plugins\cordova-sqlite-storage\src\windows\sqlite-proxy.js</PackagePath>
-      <Modified>2017-11-21T12:46:22.986</Modified>
+      <Modified>2017-11-21T14:02:40.537</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3JS\js\SQLite3.js">
       <PackagePath>www\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3JS\js\SQLite3.js</PackagePath>
-      <Modified>2017-11-21T12:46:23.043</Modified>
+      <Modified>2017-11-21T14:02:40.616</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-sqlite-storage\www\SQLitePlugin.js">
       <PackagePath>www\plugins\cordova-sqlite-storage\www\SQLitePlugin.js</PackagePath>
-      <Modified>2017-11-21T12:46:23.108</Modified>
+      <Modified>2017-11-21T14:02:40.691</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\scripts\platformOverrides.js">
       <PackagePath>www\scripts\platformOverrides.js</PackagePath>
@@ -957,31 +957,31 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\services\cloudService.js">
       <PackagePath>www\services\cloudService.js</PackagePath>
-      <Modified>2017-11-21T12:46:23.157</Modified>
+      <Modified>2017-11-21T14:02:40.754</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\services\constantService.js">
       <PackagePath>www\services\constantService.js</PackagePath>
-      <Modified>2017-11-21T12:46:23.177</Modified>
+      <Modified>2017-11-21T14:02:40.757</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\services\localService.js">
       <PackagePath>www\services\localService.js</PackagePath>
-      <Modified>2017-11-21T12:46:23.269</Modified>
+      <Modified>2017-11-21T14:02:40.866</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\services\ofscService.js">
       <PackagePath>www\services\ofscService.js</PackagePath>
-      <Modified>2017-11-21T12:46:23.291</Modified>
+      <Modified>2017-11-21T14:02:40.869</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\services\syncService.js">
       <PackagePath>www\services\syncService.js</PackagePath>
-      <Modified>2017-11-21T12:46:23.308</Modified>
+      <Modified>2017-11-21T14:02:40.891</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\services\valueService.js">
       <PackagePath>www\services\valueService.js</PackagePath>
-      <Modified>2017-11-21T12:46:23.351</Modified>
+      <Modified>2017-11-21T14:02:40.945</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\src\calendar.js">
       <PackagePath>www\src\calendar.js</PackagePath>
-      <Modified>2017-11-21T12:46:23.417</Modified>
+      <Modified>2017-11-21T14:02:41.022</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\WinJS\js\base.js">
       <PackagePath>www\WinJS\js\base.js</PackagePath>
@@ -989,127 +989,127 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\data\item.json">
       <PackagePath>www\app\data\item.json</PackagePath>
-      <Modified>2017-11-21T12:46:14.807</Modified>
+      <Modified>2017-11-21T14:02:32.043</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\data\locale-en.json">
       <PackagePath>www\app\data\locale-en.json</PackagePath>
-      <Modified>2017-11-21T12:46:14.818</Modified>
+      <Modified>2017-11-21T14:02:32.055</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\data\locale-fr.json">
       <PackagePath>www\app\data\locale-fr.json</PackagePath>
-      <Modified>2017-11-21T12:46:14.828</Modified>
+      <Modified>2017-11-21T14:02:32.070</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\data\locale-jp.json">
       <PackagePath>www\app\data\locale-jp.json</PackagePath>
-      <Modified>2017-11-21T12:46:14.831</Modified>
+      <Modified>2017-11-21T14:02:32.072</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\json\attachment.json">
       <PackagePath>www\app\json\attachment.json</PackagePath>
-      <Modified>2017-11-21T12:46:14.843</Modified>
+      <Modified>2017-11-21T14:02:32.086</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\json\contacts.json">
       <PackagePath>www\app\json\contacts.json</PackagePath>
-      <Modified>2017-11-21T12:46:14.853</Modified>
+      <Modified>2017-11-21T14:02:32.102</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\json\installBase.json">
       <PackagePath>www\app\json\installBase.json</PackagePath>
-      <Modified>2017-11-21T12:46:14.866</Modified>
+      <Modified>2017-11-21T14:02:32.117</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\json\notes.json">
       <PackagePath>www\app\json\notes.json</PackagePath>
-      <Modified>2017-11-21T12:46:14.876</Modified>
+      <Modified>2017-11-21T14:02:32.122</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\json\resources.json">
       <PackagePath>www\app\json\resources.json</PackagePath>
-      <Modified>2017-11-21T12:46:14.888</Modified>
+      <Modified>2017-11-21T14:02:32.137</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\json\taskDetails.json">
       <PackagePath>www\app\json\taskDetails.json</PackagePath>
-      <Modified>2017-11-21T12:46:14.898</Modified>
+      <Modified>2017-11-21T14:02:32.152</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\version.json">
       <PackagePath>www\lib\ionic\version.json</PackagePath>
-      <Modified>2017-11-21T12:46:19.336</Modified>
+      <Modified>2017-11-21T14:02:36.869</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\bower.json">
       <PackagePath>www\lib\ng-file-upload-shim\bower.json</PackagePath>
-      <Modified>2017-11-21T12:46:20.837</Modified>
+      <Modified>2017-11-21T14:02:38.443</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\bower.json">
       <PackagePath>www\lib\ng-file-upload\bower.json</PackagePath>
-      <Modified>2017-11-21T12:46:20.174</Modified>
+      <Modified>2017-11-21T14:02:37.783</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Attachments.html">
       <PackagePath>www\app\views\Attachments.html</PackagePath>
-      <Modified>2017-11-21T12:46:14.909</Modified>
+      <Modified>2017-11-21T14:02:32.157</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\CustomerSignature.html">
       <PackagePath>www\app\views\CustomerSignature.html</PackagePath>
-      <Modified>2017-11-21T12:46:14.921</Modified>
+      <Modified>2017-11-21T14:02:32.159</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\dashBoard.html">
       <PackagePath>www\app\views\dashBoard.html</PackagePath>
-      <Modified>2017-11-21T12:46:14.944</Modified>
+      <Modified>2017-11-21T14:02:32.190</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Debrief.html">
       <PackagePath>www\app\views\Debrief.html</PackagePath>
-      <Modified>2017-11-21T12:46:14.956</Modified>
+      <Modified>2017-11-21T14:02:32.194</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Dialog.html">
       <PackagePath>www\app\views\Dialog.html</PackagePath>
-      <Modified>2017-11-21T12:46:14.968</Modified>
+      <Modified>2017-11-21T14:02:32.197</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\EngineerSignature.html">
       <PackagePath>www\app\views\EngineerSignature.html</PackagePath>
-      <Modified>2017-11-21T12:46:14.979</Modified>
+      <Modified>2017-11-21T14:02:32.201</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Expenses.html">
       <PackagePath>www\app\views\Expenses.html</PackagePath>
-      <Modified>2017-11-21T12:46:14.994</Modified>
+      <Modified>2017-11-21T14:02:32.204</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\list.html">
       <PackagePath>www\app\views\list.html</PackagePath>
-      <Modified>2017-11-21T12:46:15.015</Modified>
+      <Modified>2017-11-21T14:02:32.208</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Login.html">
       <PackagePath>www\app\views\Login.html</PackagePath>
-      <Modified>2017-11-21T12:46:15.025</Modified>
+      <Modified>2017-11-21T14:02:32.212</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Material.html">
       <PackagePath>www\app\views\Material.html</PackagePath>
-      <Modified>2017-11-21T12:46:15.038</Modified>
+      <Modified>2017-11-21T14:02:32.228</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\myFieldJob.html">
       <PackagePath>www\app\views\myFieldJob.html</PackagePath>
-      <Modified>2017-11-21T12:46:15.050</Modified>
+      <Modified>2017-11-21T14:02:32.242</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\MyTask.html">
       <PackagePath>www\app\views\MyTask.html</PackagePath>
-      <Modified>2017-11-21T12:46:15.060</Modified>
+      <Modified>2017-11-21T14:02:32.246</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Notes.html">
       <PackagePath>www\app\views\Notes.html</PackagePath>
-      <Modified>2017-11-21T12:46:15.074</Modified>
+      <Modified>2017-11-21T14:02:32.251</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Summary.html">
       <PackagePath>www\app\views\Summary.html</PackagePath>
-      <Modified>2017-11-21T12:46:15.084</Modified>
+      <Modified>2017-11-21T14:02:32.266</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\TaskOverflow.html">
       <PackagePath>www\app\views\TaskOverflow.html</PackagePath>
-      <Modified>2017-11-21T12:46:15.097</Modified>
+      <Modified>2017-11-21T14:02:32.282</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Time.html">
       <PackagePath>www\app\views\Time.html</PackagePath>
-      <Modified>2017-11-21T12:46:15.111</Modified>
+      <Modified>2017-11-21T14:02:32.299</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\TimeNC.HTML">
       <PackagePath>www\app\views\TimeNC.HTML</PackagePath>
-      <Modified>2017-11-21T12:46:15.124</Modified>
+      <Modified>2017-11-21T14:02:32.303</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Todo.html">
       <PackagePath>www\app\views\Todo.html</PackagePath>
-      <Modified>2017-11-21T12:46:15.136</Modified>
+      <Modified>2017-11-21T14:02:32.319</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\index.html">
       <PackagePath>www\index.html</PackagePath>
@@ -1117,27 +1117,27 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\sidebarcollapse.html">
       <PackagePath>www\sidebarcollapse.html</PackagePath>
-      <Modified>2017-11-21T12:46:23.373</Modified>
+      <Modified>2017-11-21T14:02:40.971</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\bootstrap-datetimepicker.css">
       <PackagePath>www\css\bootstrap-datetimepicker.css</PackagePath>
-      <Modified>2017-11-21T12:46:15.475</Modified>
+      <Modified>2017-11-21T14:02:32.673</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\calendarDemo.css">
       <PackagePath>www\css\calendarDemo.css</PackagePath>
-      <Modified>2017-11-21T12:46:15.487</Modified>
+      <Modified>2017-11-21T14:02:32.678</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\fullcalendar.css">
       <PackagePath>www\css\fullcalendar.css</PackagePath>
-      <Modified>2017-11-21T12:46:15.497</Modified>
+      <Modified>2017-11-21T14:02:32.695</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\fullcalendar.min.css">
       <PackagePath>www\css\fullcalendar.min.css</PackagePath>
-      <Modified>2017-11-21T12:46:15.507</Modified>
+      <Modified>2017-11-21T14:02:32.710</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\fullcalendar.print.min.css">
       <PackagePath>www\css\fullcalendar.print.min.css</PackagePath>
-      <Modified>2017-11-21T12:46:15.517</Modified>
+      <Modified>2017-11-21T14:02:32.714</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\inappbrowser.css">
       <PackagePath>www\css\inappbrowser.css</PackagePath>
@@ -1149,31 +1149,31 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\style.css">
       <PackagePath>www\css\style.css</PackagePath>
-      <Modified>2017-11-21T12:46:15.528</Modified>
+      <Modified>2017-11-21T14:02:32.730</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\style1.css">
       <PackagePath>www\css\style1.css</PackagePath>
-      <Modified>2017-11-21T12:46:15.541</Modified>
+      <Modified>2017-11-21T14:02:32.744</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\styless.css">
       <PackagePath>www\css\styless.css</PackagePath>
-      <Modified>2017-11-21T12:46:15.552</Modified>
+      <Modified>2017-11-21T14:02:32.748</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-material\angular-material.min.css">
       <PackagePath>www\lib\angular-material\angular-material.min.css</PackagePath>
-      <Modified>2017-11-21T12:46:16.166</Modified>
+      <Modified>2017-11-21T14:02:33.495</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\bootstrap\bootstrap.min.css">
       <PackagePath>www\lib\bootstrap\bootstrap.min.css</PackagePath>
-      <Modified>2017-11-21T12:46:16.691</Modified>
+      <Modified>2017-11-21T14:02:34.005</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\css\ionic.css">
       <PackagePath>www\lib\ionic\css\ionic.css</PackagePath>
-      <Modified>2017-11-21T12:46:17.293</Modified>
+      <Modified>2017-11-21T14:02:34.666</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\css\ionic.min.css">
       <PackagePath>www\lib\ionic\css\ionic.min.css</PackagePath>
-      <Modified>2017-11-21T12:46:17.312</Modified>
+      <Modified>2017-11-21T14:02:34.689</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\db\emerson.sqlite">
       <PackagePath>www\db\emerson.sqlite</PackagePath>
@@ -1529,7 +1529,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\config.xml">
       <PackagePath>config.xml</PackagePath>
-      <Modified>2017-11-21T12:46:09.509</Modified>
+      <Modified>2017-11-21T14:02:26.361</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.UniversalCRT.Debug\10.0.16299.0\\redist\Debug\X64\ucrtbased.dll">
       <PackagePath>ucrtbased.dll</PackagePath>
@@ -1538,7 +1538,7 @@
     <AppxPackagedFile Include="C:\Users\Kotni\Documents\GitHub\FieldJob\FieldService\platforms\windows\build\windows\debug\x64\win10\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-11-21T12:46:28.163</Modified>
+      <Modified>2017-11-21T14:02:46.629</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
