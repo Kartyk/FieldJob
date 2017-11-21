@@ -762,6 +762,7 @@
             default:
                 break;
         }
+        valueService.setDebriefChanged(true);
     };
 
     $rootScope.addMaterialItem = function () {
@@ -981,6 +982,7 @@
             default:
                 break;
         }
+        valueService.setDebriefChanged(true);
     };
 
     $scope.deleteObject = function (index, item, stage) {
@@ -1038,6 +1040,7 @@
             default:
                 break;
         }
+        valueService.setDebriefChanged(true);
     };
 
     $scope.initializeDebrief();
@@ -1133,6 +1136,7 @@
         $scope.saveValues();
 
         valueService.saveValues();
+     
     }
 
     $scope.saveValues = function () {
@@ -1523,7 +1527,7 @@
 
                 });
 
-                var grandtimeObject = $scope.getTimenewObj("", "GRAND TOTAL", "", "", "", "", "", 0);
+                var grandtimeObject = $scope.getTimenewObj("GRAND TOTAL", "", "", "", "", "", "", 0);
 
                 var subtotalObject = $scope.getTimenewObj("", "SUB TOTAL", "", "", "", "", "", 0);
 
@@ -2559,9 +2563,9 @@
                             ctx.font = '13px sans-serif ';
 
                             if (key.Original_PO_Number)
-                                ctx.fillText(key.Original_PO_Number, 450, ibyvalue);
+                                ctx.fillText(key.Original_PO_Number, 500, ibyvalue);
                             else
-                                ctx.fillText('NO VALUE', 450, ibyvalue);
+                                ctx.fillText('NO VALUE', 500, ibyvalue);
 
                             ibyvalue = ibyvalue + 14;
                         });
@@ -2726,7 +2730,7 @@
                     });
 
                     var j = 0, xTimeField = 25, yTimeField = yAttachField + rectAttachHeight + 25, rectTimeWidth = 660,
-                        rectTimeHeight = 22 * $scope.summary.timeArray.length, yTimeFieldName = yTimeField + 20,
+                        rectTimeHeight = 29 * $scope.summary.timeArray.length, yTimeFieldName = yTimeField + 20,
                         yTimeFieldValue = yTimeField;
 
                     ctx.fillStyle = "#000";
@@ -2741,43 +2745,45 @@
 
                         ctx.fillStyle = "#000";
                         ctx.font = 'bold 13px sans-serif ';
-                        ctx.fillText('结算类型', 100, yTimeFieldName);
+                        ctx.fillText('结算类型', 150, yTimeFieldName);
 
                         ctx.fillStyle = "#000";
                         ctx.font = 'bold 13px sans-serif ';
-                        ctx.fillText('结算方式', 180, yTimeFieldName);
+                        ctx.fillText('结算方式', 250, yTimeFieldName);
                     }
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
-                    ctx.fillText('收费与否', 250, yTimeFieldName);
+                    ctx.fillText('收费与否', 350, yTimeFieldName);
 
-                    var xTimeField1 = 290;
+                    var xTimeField1 = 470;
 
                     if ($scope.userType == 'C') {
 
-                        angular.forEach($scope.timeArray[0].timeDefault.timeCode.values, function (timecodeKey, value) {
+                        //angular.forEach($scope.timeArray[0].timeDefault.timeCode.values, function (timecodeKey, value) {
 
-                            xTimeField1 = xTimeField1 + 50;
+                        //    xTimeField1 = xTimeField1 + 50;
 
-                            ctx.fillStyle = "#000";
-                            ctx.font = 'bold 13px sans-serif ';
-                            ctx.fillText($filter('translate')(timecodeKey.Overtimeshiftcode), xTimeField1, yTimeFieldName);
+                        //    ctx.fillStyle = "#000";
+                        //    ctx.font = 'bold 13px sans-serif ';
+                        //    ctx.fillText($filter('translate')(timecodeKey.Overtimeshiftcode), xTimeField1, yTimeFieldName);
 
-                        });
+                        //});
+                        ctx.fillText($filter('translate')('Time Code'), xTimeField1, yTimeFieldName);
                     }
+                    ctx.fillStyle = "#000";
+                    ctx.font = 'bold 13px sans-serif ';
+                    ctx.fillText($filter('translate')('Shift Code'), 570, yTimeFieldName);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('服务持续时间', 700, yTimeFieldName);
+                    ctx.fillText('服务持续时间', 690, yTimeFieldName);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('服务类别', 780, yTimeFieldName);
+                    ctx.fillText('服务类别', 790, yTimeFieldName);
 
-                    ctx.fillStyle = "#000";
-                    ctx.font = '13px sans-serif ';
-                    ctx.fillText('路途-加班', 965, yTimeFieldName);
+                    
 
                     ctx.fillStyle = "#000";
                     ctx.strokeRect(10, yTimeField + 5, 1010, rectTimeHeight);
@@ -2785,7 +2791,7 @@
                     while (j < $scope.summary.timeArray.length) {
 
                         yTimeFieldName = yTimeField + 20 * ++j;
-                        yTimeFieldValue = yTimeFieldName + 10;
+                        yTimeFieldValue = yTimeFieldName + 15;
 
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
@@ -2802,57 +2808,70 @@
                             ctx.font = '13px sans-serif ';
 
                             if ($scope.summary.timeArray[j - 1].Charge_Type)
-                                ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Charge_Type), 100, yTimeFieldValue);
+                                ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Charge_Type), 150, yTimeFieldValue);
 
                             ctx.fillStyle = "#000";
                             ctx.font = '13px sans-serif ';
 
                             if ($scope.summary.timeArray[j - 1].Charge_Method)
-                                ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Charge_Method), 180, yTimeFieldValue);
+                                ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Charge_Method), 250, yTimeFieldValue);
                         }
 
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
 
                         if ($scope.summary.timeArray[j - 1].Work_Type)
-                            ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Work_Type), 250, yTimeFieldValue);
+                            ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Work_Type), 350, yTimeFieldValue);
 
                         var a = 2;
 
                         if ($scope.userType == 'C') {
 
-                            angular.forEach($scope.timeArray[0].timeDefault.timeCode.values, function (timecodeKey, value) {
+                            //angular.forEach($scope.timeArray[0].timeDefault.timeCode.values, function (timecodeKey, value) {
 
-                                angular.forEach($scope.summary.timeArray[j - 1].timecode, function (key, value) {
+                            //    angular.forEach($scope.summary.timeArray[j - 1].timecode, function (key, value) {
 
-                                    console.log($scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode]);
+                            //        console.log($scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode]);
 
-                                    if ($scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode] != undefined) {
-                                        ctx.fillStyle = "#000";
-                                        ctx.font = '13px sans-serif ';
-                                        ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode].toString()), xTimeField1 - 50 * a, yTimeFieldValue);
-                                        a--;
+                            //        if ($scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode] != undefined) {
+                            //            ctx.fillStyle = "#000";
+                            //            ctx.font = '13px sans-serif ';
+                            //            ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode].toString()), xTimeField1 - 50 * a, yTimeFieldValue);
+                            //            a--;
 
-                                    } else {
+                            //        } else {
 
-                                    }
-                                });
-                            });
+                            //        }
+                            //    });
+                            //});
+
+                            ctx.fillStyle = "#000";
+                            ctx.font = '13px sans-serif ';
+                            if (($scope.summary.timeArray[j - 1].Time_Code) != undefined)
+                                ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Time_Code),  470, yTimeFieldValue);
+                            else
+                                doc1.text( "", xTimeField1 - 50, yTimeFieldValue);
+                            ctx.fillStyle = "#000";
+                            ctx.font = '13px sans-serif ';
+                            if ($scope.summary.timeArray[j - 1].Shift_Code != undefined)
+                                ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Shift_Code), 570, yTimeFieldValue);
+                            else
+                                ctx.fillText( "", xTimeField1 - 50, yTimeFieldValue);
                         }
 
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
-                        ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Duration.toString()), 700, yTimeFieldValue);
+                        ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Duration.toString()), 690, yTimeFieldValue);
 
 
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
-                        ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Item), 780, yTimeFieldValue);
+                        ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Item), 790, yTimeFieldValue);
 
 
-                        ctx.fillStyle = "#000";
-                        ctx.font = '13px sans-serif ';
-                        ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Description), 965, yTimeFieldValue);
+                        //ctx.fillStyle = "#000";
+                        //ctx.font = '13px sans-serif ';
+                        //ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Description), 965, yTimeFieldValue);
                     }
 
                     //Expenses heading
@@ -2860,7 +2879,7 @@
 
 
                     var k = 0, xExpenseField = 25, yExpenseField = yTimeField + rectTimeHeight + 25, rectExpenseWidth = 660,
-                        rectExpenseHeight = 22 * $scope.summary.expenseArray.length, yExpenseFieldName = yExpenseField + 20,
+                        rectExpenseHeight = 22 * $scope.summary.expenseArray.length, yExpenseFieldName = yExpenseField + 25,
                         yExpenseFieldValue;
 
                     ctx.fillStyle = "#000";
@@ -2910,7 +2929,7 @@
                         if ($scope.summary.expenseArray[k - 1].Justification)
                             ctx.fillText($filter('translate')($scope.summary.expenseArray[k - 1].Justification), 500, yExpenseFieldValue);
                     }
-                    rectExpenseHeight = yExpenseFieldValue - yExpenseFieldName + 15;
+                    rectExpenseHeight = yExpenseFieldValue - yExpenseFieldName + 20;
 
                     ctx.fillStyle = "#000";
                     ctx.strokeRect(10, yExpenseField + 10, 1010, rectExpenseHeight);
@@ -2918,7 +2937,7 @@
 
                     var l = 0, xMaterialField = 25, yMaterialField = yExpenseField + rectExpenseHeight + 25,
                         rectMaterialWidth = 660, rectMaterialHeight = 25 * $scope.summary.materialArray.length,
-                        yMaterialFieldName = yMaterialField + 20, yMaterialFieldValue;
+                        yMaterialFieldName = yMaterialField + 25, yMaterialFieldValue;
 
                     ctx.fillStyle = "#000";
                     ctx.font = '15px sans-serif ';
@@ -2948,7 +2967,7 @@
                     ctx.font = 'bold 13px sans-serif ';
                     ctx.fillText('具体描述', 870, yMaterialFieldName);
 
-                    yMaterialFieldValue = yMaterialFieldName + 10;
+                    yMaterialFieldValue = yMaterialFieldName + 15;
 
                     while (l < $scope.summary.materialArray.length) {
                         var m = 0, n = 0, o = 0;
@@ -3002,7 +3021,7 @@
                             ctx.fillText($filter('translate')($scope.summary.materialArray[l - 1].ItemName), 870, yMaterialFieldValue);
 
 
-                        yMaterialFieldValue = yMaterialFieldValue + 10 * $scope.summary.materialArray[l - 1].Product_Quantity;
+                        yMaterialFieldValue = yMaterialFieldValue + 15 * $scope.summary.materialArray[l - 1].Product_Quantity;
                     }
                     rectMaterialHeight = yMaterialFieldValue - yMaterialFieldName + 10;
 
@@ -3025,11 +3044,11 @@
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('工程师名字', 20, ySignField + 20);
+                    ctx.fillText('工程师名字', 20, ySignField + 25);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('客户名', 350, ySignField + 20);
+                    ctx.fillText('客户名', 350, ySignField + 25);
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
@@ -3141,8 +3160,13 @@
                 doc1.text(25, 100, $filter('translate')('Customer Name'))
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
-                if ($scope.summary.taskObject.Customer_Name)
-                    doc1.text(25, 110, $filter('translate')($scope.summary.taskObject.Customer_Name))
+                var isCustBig = false;
+                if ($scope.summary.taskObject.Customer_Name) {
+                    var splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.taskObject.Customer_Name), 150);
+                    if (splitTitle.length > 1)
+                        isCustBig = true;
+                    doc1.text(25, 110, splitTitle);
+                }
                 // console.log($scope.summary.taskObject.times[0].Start_Date.split(" ")[0]  | date : 'dd/MM/yyyy')
                 //
                 doc1.setFontSize(22)
@@ -3171,40 +3195,44 @@
                 console.log($scope.summary.taskObject.times[0].Duration)
                 if ($scope.summary.taskObject.times[0].Duration)
                     doc1.text(510, 110, $scope.summary.taskObject.times[0].Duration)
+                
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(25, 125, $filter('translate')('Service Request'))
+                var custBigYvalue = 0;
+                if (isCustBig)
+                    custBigYvalue = 10;
+                doc1.text(25, 125 + custBigYvalue, $filter('translate')('Service Request'))
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
                 if ($scope.summary.taskObject.Service_Request)
-                    doc1.text(25, 135, $scope.summary.taskObject.Service_Request)
+                    doc1.text(25, 135 + custBigYvalue, $scope.summary.taskObject.Service_Request)
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(180, 125, $filter('translate')('Field Job Request'))
+                doc1.text(180, 125 + custBigYvalue, $filter('translate')('Field Job Request'))
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
                 if ($scope.summary.taskObject.Task_Number.toString())
-                    doc1.text(180, 135, $scope.summary.taskObject.Task_Number.toString())
+                    doc1.text(180, 135 + custBigYvalue, $scope.summary.taskObject.Task_Number.toString())
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(345, 125, $filter('translate')('Job Description'))
+                doc1.text(345, 125 + custBigYvalue, $filter('translate')('Job Description'))
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
                 if ($scope.summary.taskObject.Job_Description)
-                    doc1.text(345, 135, $scope.summary.taskObject.Job_Description)
+                    doc1.text(345, 135 + custBigYvalue, $scope.summary.taskObject.Job_Description)
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(25, 150, $filter('translate')('Product Line'))
+                doc1.text(25, 150 + custBigYvalue, $filter('translate')('Product Line'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(180, 150, $filter('translate')('System ID / Serial'))
+                doc1.text(180, 150 + custBigYvalue, $filter('translate')('System ID / Serial'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(345, 150, $filter('translate')('Tag #'))
+                doc1.text(345, 150 + custBigYvalue, $filter('translate')('Tag #'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(510, 150, $filter('translate')('Original PO'))
-                var ibyvalue = 160;
+                doc1.text(510, 150 + custBigYvalue, $filter('translate')('Original PO'))
+                var ibyvalue = 160 + custBigYvalue;
                 angular.forEach($scope.summary.taskObject.InstallBase, function (key) {
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')

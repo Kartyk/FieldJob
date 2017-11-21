@@ -156,11 +156,15 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
             $rootScope.saveValues()
             sideNavigation(dataToPass);
             $mdDialog.hide();
+            $rootScope.showDebrief = false;
+            
         }
         $scope.cancel = function ()
         {
             sideNavigation(dataToPass);
             $mdDialog.hide();
+            valueService.setDebriefChanged(false);
+            $rootScope.showDebrief = false;
         }
     }
     function sideNavigation(item)
@@ -583,7 +587,22 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                                 console.log("SYNC SUCCESS ALL");
 
-                                $state.go($state.current, {}, {reload: true});
+                                //valueService.setTask();
+                                if (valueService.getUserType().defaultView == "My Task") {
+
+                                    $state.go("myFieldJob");
+                                    $rootScope.selectedItem = 2;
+                                    $rootScope.showTaskDetail = false;
+                                    $rootScope.showDebrief = false;
+
+                                } else {
+
+                                    $state.go("myTask");
+                                    $rootScope.selectedItem = 1;
+                                    $rootScope.showTaskDetail = false;
+                                    $rootScope.showDebrief = false;
+                                }
+                               
 
                                 $rootScope.apicall = false;
                             },

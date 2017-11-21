@@ -576,6 +576,7 @@
                     console.log("Engineer Success")
                 });
             }
+            setDebriefChanged(false);
         };
 
         function setWarrantyType(type) {
