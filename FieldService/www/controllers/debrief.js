@@ -762,6 +762,7 @@
             default:
                 break;
         }
+        valueService.setDebriefChanged(true);
     };
 
     $rootScope.addMaterialItem = function () {
@@ -981,6 +982,7 @@
             default:
                 break;
         }
+        valueService.setDebriefChanged(true);
     };
 
     $scope.deleteObject = function (index, item, stage) {
@@ -1038,6 +1040,7 @@
             default:
                 break;
         }
+        valueService.setDebriefChanged(true);
     };
 
     $scope.initializeDebrief();
@@ -1133,6 +1136,7 @@
         $scope.saveValues();
 
         valueService.saveValues();
+     
     }
 
     $scope.saveValues = function () {

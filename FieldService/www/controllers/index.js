@@ -156,11 +156,13 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
             $rootScope.saveValues()
             sideNavigation(dataToPass);
             $mdDialog.hide();
+            
         }
         $scope.cancel = function ()
         {
             sideNavigation(dataToPass);
             $mdDialog.hide();
+            valueService.setDebriefChanged(false);
         }
     }
     function sideNavigation(item)
