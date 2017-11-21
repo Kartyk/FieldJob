@@ -185,7 +185,7 @@
 
     $scope.setDropDownValues = function () {
 
-        $scope.timeDefault = {};
+       
 
         $scope.timeDefault = {
             fieldJobName: {
@@ -315,7 +315,52 @@
                 if (item.Date != undefined && item.Date != "")
                     item.Date = new Date(item.Date);
 
-                item.timeDefault = $scope.timeDefault;
+                item.timeDefault ={
+                    fieldJobName: {
+                        title: "Field Job Name",
+                        values: $scope.fieldJobArray
+                    },
+                    chargeType: {
+                        title: "Charge Type",
+                        values: $scope.chargeTypeArray
+                    },
+                    workType: {
+                        title: "Work Type",
+                        values: $scope.workTypeArray
+                    },
+                    chargeMethod: {
+                        title: "Charge Method",
+                        values: $scope.chargeMethodArray,
+                    },
+                    item: {
+                        title: "Item",
+                        values: $scope.itemValue
+                    },
+                    description: {
+                        title: "Description"
+                    },
+                    timeCode: {
+                        title: "Time Code",
+                        values: $scope.overTimeArray
+                    },
+                    timeCodeT: {
+                        title: "Time Code",
+                        value: ["OT1", "OT2", "OT3", "OS1", "OS2", "Standard"]
+                    },
+                    shiftCode: {
+                        title: "Shift Code",
+                        values: $scope.shiftCodeArray
+                    },
+                    Date: {
+                        title: "Date"
+                    },
+                    duration: {
+                        title: "Duration"
+                    },
+                    comments: {
+                        title: "Comments"
+                    }
+                };
 
                 item.DurationHours = moment.duration(item.Duration).hours();
 
@@ -1488,18 +1533,9 @@
 
                     grandtimeObject.Duration = $scope.calculateDuration(grandtimeObject, key);
 
-                    if (grandtimeObject.Duration.split(":")[0].length == 1) {
-
-                        var hours = "0" + grandtimeObject.Duration.split(":")[0];
-                        grandtimeObject.Duration = hours + ":" + grandtimeObject.Duration.split(":")[1]
-                    }
-
-                    if (grandtimeObject.Duration.split(":")[1].length == 1) {
-                        var mins = "0" + grandtimeObject.Duration.split(":")[1]
-                        grandtimeObject.Duration = grandtimeObject.Duration.split(":")[0] + ":" + mins
-                    }
-
-                    $scope.populateTimeCodeArray(grandTotalTimeArray, key);
+                   
+                    grandtimeObject.Duration = formatDuration(grandtimeObject.Duration)
+                    //$scope.populateTimeCodeArray(grandTotalTimeArray, key);
 
                     if (subTotalArray.length > 0) {
 
@@ -1513,23 +1549,10 @@
 
                                     newWorkType = false;
 
-                                    $scope.populateTimeCodeArray(subTotalTimeArray, key);
+                                  //  $scope.populateTimeCodeArray(subTotalTimeArray, key);
 
                                     subtotalObj.Duration = $scope.calculateDuration(subtotalObj, key);
-
-                                    if (subtotalObj.Duration.split(":")[0].length == 1) {
-
-                                        var hours = "0" + subtotalObj.Duration.split(":")[0];
-
-                                        subtotalObj.Duration = hours + ":" + subtotalObj.Duration.split(":")[1]
-                                    }
-
-                                    if (subtotalObj.Duration.split(":")[1].length == 1) {
-
-                                        var mins = "0" + subtotalObj.Duration.split(":")[1];
-
-                                        subtotalObj.Duration = subtotalObj.Duration.split(":")[0] + ":" + mins
-                                    }
+                                    subtotalObject.Duration = formatDuration(subtotalObject.Duration)
 
                                     keepGoing = false;
 
@@ -1555,25 +1578,13 @@
                                 subTotalTimeArray.push(codeobj);
                             });
 
-                            $scope.populateTimeCodeArray(subTotalTimeArray, key);
+                            //$scope.populateTimeCodeArray(subTotalTimeArray, key);
 
-                            subtotalObject.timecode = subTotalTimeArray;
+                            //subtotalObject.timecode = subTotalTimeArray;
 
                             subtotalObject.Duration = $scope.calculateDuration(subtotalObject, key);
 
-                            if (subtotalObject.Duration.split(":")[0].length == 1) {
-
-                                var hours = "0" + subtotalObject.Duration.split(":")[0];
-
-                                subtotalObject.Duration = hours + ":" + subtotalObject.Duration.split(":")[1];
-                            }
-
-                            if (subtotalObject.Duration.split(":")[1].length == 1) {
-
-                                var mins = "0" + subtotalObject.Duration.split(":")[1];
-
-                                subtotalObject.Duration = subtotalObject.Duration.split(":")[0] + ":" + mins;
-                            }
+                            subtotalObject.Duration = formatDuration(subtotalObject.Duration)
 
                             subTotalArray.push(subtotalObject);
                         }
@@ -1582,54 +1593,69 @@
 
                         subtotalObject.Work_Type = key.Work_Type.Value;
 
-                        $scope.populateTimeCodeArray(subTotalTimeArray, key);
+                        //$scope.populateTimeCodeArray(subTotalTimeArray, key);
 
-                        subtotalObject.timecode = subTotalTimeArray;
+                        //subtotalObject.timecode = subTotalTimeArray;
 
                         subtotalObject.Duration = $scope.calculateDuration(subtotalObject, key);
 
-                        if (subtotalObject.Duration.split(":")[0].length == 1) {
-
-                            var hours = "0" + subtotalObject.Duration.split(":")[0];
-
-                            subtotalObject.Duration = hours + ":" + subtotalObject.Duration.split(":")[1];
-                        }
-
-                        if (subtotalObject.Duration.split(":")[1].length == 1) {
-
-                            var mins = "0" + subtotalObject.Duration.split(":")[1];
-
-                            subtotalObject.Duration = subtotalObject.Duration.split(":")[0] + ":" + mins;
-                        }
-
+                       
+                        subtotalObject.Duration = formatDuration(subtotalObject.Duration)
                         subTotalArray.push(subtotalObject);
                     }
+                    if ($scope.summary.timeArray.length > 0)
+                    {
+                       
+                        var newTimecode = true
+                        angular.forEach($scope.summary.timeArray, function (summaryTime) {
+                            if (summaryTime.Time_Code == key.Time_Code.Overtimeshiftcode && summaryTime.Work_Type == key.Work_Type.Value)
+                            {
+                                summaryTime.Duration = $scope.calculateDuration(summaryTime, key);
+                                summaryTime.Duration = formatDuration(summaryTime.Duration)
+                                newTimecode = false;
 
-                    var timeObject = $scope.getTimenewObj(key.Work_Type.Value, $filter("date")(key.Date, "dd-MM-yyyy "), key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration, key.Time_Code, key.Shift_Code);
+                            }
+                        })
+                        if (newTimecode) {
+                            var timeObject = $scope.getTimenewObj(key.Work_Type.Value, $filter("date")(key.Date, "dd-MM-yyyy "), key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration, key.Time_Code.Overtimeshiftcode, key.Shift_Code.ShiftCodeName);
 
-                    timeObject.Duration = key.Duration;
-
-                    var timecodearray = [];
-
-                    angular.forEach($scope.timeArray[0].timeDefault.timeCode.values, function (timecode, value) {
-
-                        var codeobj = {};
-
-                        if (key.Time_Code.Overtimeshiftcode == timecode.Overtimeshiftcode) {
-
-                            codeobj[timecode.Overtimeshiftcode] = key.Duration;
-
-                        } else {
-
-                            codeobj[timecode.Overtimeshiftcode] = "";
+                            timeObject.Duration = $scope.calculateDuration(timeObject, key);
+                            timeObject.Duration = formatDuration(timeObject.Duration)
+                            $scope.summary.timeArray.push(timeObject)
                         }
+                    }
+                    else
+                    {
+                        var timeObject = $scope.getTimenewObj(key.Work_Type.Value, $filter("date")(key.Date, "dd-MM-yyyy "), key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration, key.Time_Code.Overtimeshiftcode, key.Shift_Code.ShiftCodeName);
 
-                        timecodearray.push(codeobj);
-                    });
+                        timeObject.Duration = $scope.calculateDuration(timeObject, key);
+                        timeObject.Duration = formatDuration(timeObject.Duration)
+                        $scope.summary.timeArray.push(timeObject)
+                    }
+                   
+                   
 
-                    timeObject.timecode = timecodearray;
+                    //var timecodearray = [];
 
-                    $scope.summary.timeArray.push(timeObject)
+                    //angular.forEach($scope.timeArray[0].timeDefault.timeCode.values, function (timecode, value) {
+
+                    //    var codeobj = {};
+
+                    //    if (key.Time_Code.Overtimeshiftcode == timecode.Overtimeshiftcode) {
+
+                    //        codeobj[timecode.Overtimeshiftcode] = key.Duration;
+
+                    //    } else {
+
+                    //        codeobj[timecode.Overtimeshiftcode] = "";
+                    //    }
+
+                    //    timecodearray.push(codeobj);
+                    //});
+
+                    //timeObject.timecode = timecodearray;
+
+                  
 
                 });
 
@@ -1662,7 +1688,23 @@
         return obj.hours + ":" + reminder;
 
     }
+    function formatDuration(duration)
+    {
+        if (duration.split(":")[0].length == 1) {
 
+            var hours = "0" + duration.split(":")[0];
+
+            duration = hours + ":" + duration.split(":")[1];
+        }
+
+        if (duration.split(":")[1].length == 1) {
+
+            var mins = "0" + duration.split(":")[1];
+
+            duration = duration.split(":")[0] + ":" + mins;
+        }
+        return duration
+    }
     $scope.populateTimeCodeArray = function (timeArray, key) {
 
         angular.forEach(timeArray, function (timecode, value) {
@@ -3265,7 +3307,7 @@
                 var j = 0, xTimeField = 25, yTimeField = yAttachField + rectAttachHeight + 20, rectTimeWidth = 660,
                     rectTimeHeight = 23 * $scope.summary.timeArray.length, yTimeFieldName = yTimeField + 20,
                     yTimeFieldValue = yTimeField;
-                var timeWidth = (660 / ($scope.timeArray[0].timeDefault.timeCode.values.length + 6)) ;
+                var timeWidth = (660 / 7) ;
 
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
@@ -3284,21 +3326,17 @@
                 doc1.text(xTimeField + (timeWidth * 3), yTimeFieldName, $filter('translate')('Work\nType'))
                 //  doc1.text(xTimeField + 235, yTimeFieldName, $filter('translate')('Standard'))
                 var xTimeField1 = xTimeField + 195;
-                var i = 4
-                angular.forEach($scope.timeArray[0].timeDefault.timeCode.values, function (timecodeKey, value) {
-                    xTimeField1 = xTimeField1 + 40;
-                    doc1.setFontSize(22)
-                    doc1.setFontType('bold')
-                    doc1.text(xTimeField + (timeWidth * i), yTimeFieldName, $filter('translate')(timecodeKey.Overtimeshiftcode))
-                    i++;
-                    // doc1.text(xTimeField + 275, yTimeFieldName, 'OT1')
-                    // doc1.text(xTimeField + 315, yTimeFieldName, 'OT2')
-                    // doc1.text(xTimeField + 355, yTimeFieldName, 'OT3')
-                });
+                doc1.setFontSize(22)
+                doc1.setFontType('bold')
+                doc1.text(xTimeField + (timeWidth * 4), yTimeFieldName, $filter('translate')('Time Code'))
+                doc1.setFontSize(22)
+                doc1.setFontType('bold')
+                doc1.text(xTimeField + (timeWidth * 5), yTimeFieldName, $filter('translate')('Shift Code'))
+              
 
-                doc1.text(xTimeField+(timeWidth*i), yTimeFieldName, $filter('translate')('Duration'))
-                doc1.text(xTimeField+(timeWidth * (++i)), yTimeFieldName, $filter('translate')('Item'))
-                //doc1.text(xTimeField+(timeWidth * (++i)), yTimeFieldName, 'Description')
+                doc1.text(xTimeField+(timeWidth*6), yTimeFieldName, $filter('translate')('Duration'))
+                doc1.text(xTimeField+(timeWidth * (7)), yTimeFieldName, $filter('translate')('Item'))
+                //doc1.text(xTimeField+(timeWidth * (7)), yTimeFieldName, 'Description')
 
                 doc1.rect(20, yTimeField + 5, rectTimeWidth, rectTimeHeight+10)
                 while (j < $scope.summary.timeArray.length) {
@@ -3328,57 +3366,34 @@
 
                     if ($scope.summary.timeArray[j - 1].Work_Type)
                         doc1.text(xTimeField + (timeWidth * 3), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Work_Type))
-                    var a = 2;
-                    i = 4;
-                    angular.forEach($scope.timeArray[0].timeDefault.timeCode.values, function (timecodeKey, value) {
-
-                        angular.forEach($scope.summary.timeArray[j - 1].timecode, function (key, value) {
-
-                            //console.log($scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode]);
-
-                            if ($scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode] != undefined) {
-
-                                //  doc1.text(xTimeField + 235, yTimeFieldName, $filter('translate')(timecodeKey.Overtimeshiftcode)
-                                // xTimeField1=xTimeField1 +40;
-                                // doc1.text(xTimeField1, yTimeFieldName, timecodeKey.Overtimeshiftcode)
-                                // xTimeField1=xTimeField1-40*a;
-                                doc1.setFontSize(22)
-                                doc1.setFontType('normal')
-                                doc1.text(xTimeField + (timeWidth * i), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode].toString()));
-                                a--;
-                                i++;
-
-                            } else {
-
-                                //  console.log("testsajhhhhhhhhhhhhhhhd")
-                            }
-                        });
-                    });
-                    // doc1.text(xTimeField + 235, yTimeFieldName, 'Standard')
-                    // doc1.text(xTimeField + 235, yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j-1].Shift_Code)
-                    // doc1.text(xTimeField + 275, yTimeFieldName, 'OT1')
-                    // doc1.text(xTimeField + 275, yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j-1].Time_Code)
-                    // doc1.text(xTimeField + 315, yTimeFieldName, 'OT2')
-                    // doc1.text(xTimeField + 315, yTimeFieldValue, $scope.summary.timeArray[j-1].Time_Code)
-                    // doc1.text(xTimeField + 355, yTimeFieldName, 'OT3')
-                    // doc1.text(xTimeField + 355, yTimeFieldValue, $scope.summary.timeArray[j-1].Time_Code)
+                    doc1.setFontSize(22)
+                    doc1.setFontType('normal')
+                    if (($scope.summary.timeArray[j - 1].Time_Code) != undefined)
+                        doc1.text(xTimeField + (timeWidth * 4), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Time_Code));
+                    else
+                        doc1.text(xTimeField + (timeWidth * 4), yTimeFieldValue, "");
+                    doc1.setFontSize(22)
+                    doc1.setFontType('normal')
+                    if ($scope.summary.timeArray[j - 1].Shift_Code != undefined)
+                        doc1.text(xTimeField + (timeWidth * 5), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Shift_Code));
+                    else
+                        doc1.text(xTimeField + (timeWidth * 5), yTimeFieldValue, "");
+                    
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.timeArray[j - 1].Duration)
-                        doc1.text(xTimeField + (timeWidth * i), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Duration.toString()))
+                        doc1.text(xTimeField + (timeWidth * 6), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Duration.toString()))
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.timeArray[j - 1].Item && $scope.summary.timeArray[j - 1].Item != "")
-                        doc1.text(xTimeField + (timeWidth * (++i)), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Item.split('-')[0] + '\n-' + $scope.summary.timeArray[j - 1].Item.split('-')[1]))
-                    else
-                        i++;
+                        doc1.text(xTimeField + (timeWidth * (7)), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Item.split('-')[0] + '\n-' + $scope.summary.timeArray[j - 1].Item.split('-')[1]))
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
 
                     //if ($scope.summary.timeArray[j - 1].Comments)
-                    //    doc1.text(xTimeField + (timeWidth * (++i)), yTimeFieldValue, $scope.summary.timeArray[j - 1].Comments)
+                    //    doc1.text(xTimeField + (timeWidth * (7)), yTimeFieldValue, $scope.summary.timeArray[j - 1].Comments)
                     //else
                     //    i++;
 
@@ -3457,7 +3472,7 @@
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 doc1.setFontSize(22)
-                doc1.setFontType('bold')Item Name
+                doc1.setFontType('bold')
                 doc1.text(490, yMaterialFieldName, $filter('translate')('Item Name'))
                 doc1.text(586, yMaterialFieldName, 'Description')
                 yMaterialFieldValue = yMaterialFieldName + 10;
