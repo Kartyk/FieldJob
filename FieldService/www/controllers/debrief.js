@@ -3444,17 +3444,17 @@
                 doc1.text(106, yMaterialFieldName, $filter('translate')('Quantity'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(202, yMaterialFieldName, $filter('translate')('Serial#'))
+                doc1.text(202, yMaterialFieldName, $filter('translate')('Serial number'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(298, yMaterialFieldName, $filter('translate')('Serial In#'))
+                doc1.text(298, yMaterialFieldName, $filter('translate')('Serial in'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(394, yMaterialFieldName, $filter('translate')('Serial Out#'))
+                doc1.text(394, yMaterialFieldName, $filter('translate')('Serial out'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 doc1.setFontSize(22)
-                doc1.setFontType('bold')
+                doc1.setFontType('bold')Item Name
                 doc1.text(490, yMaterialFieldName, $filter('translate')('Item Name'))
                 doc1.text(586, yMaterialFieldName, 'Description')
                 yMaterialFieldValue = yMaterialFieldName + 10;
@@ -3516,8 +3516,8 @@
                 doc1.setFontType('bold')
                 doc1.text(xSignField, ySignField + 5, $filter('translate')('Signature'))
                 doc1.rect(20, ySignField + 10, rectSignWidth, rectSignHeight)
-                doc1.text(50, ySignField + 25, $filter('translate')('ENGINEER NAME'))
-                doc1.text(250, ySignField + 25, $filter('translate')('CUSTOMER NAME'))
+                doc1.text(50, ySignField + 25, $filter('translate')('Engineer Name'))
+                doc1.text(250, ySignField + 25, $filter('translate')('Customer Name'))
                 doc1.text(50, ySignField + 35, $scope.engineerName);
 
                 if ($scope.summary.engineer != undefined && $scope.summary.engineer.signature)
