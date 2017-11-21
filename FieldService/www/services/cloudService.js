@@ -264,6 +264,8 @@
 
         function getSRNotesList(srNumberArray, callback) {
 
+            console.log("SR NUMBER " + JSON.stringify({ "SRNum": srNumberArray }));
+
             $http({
 
                 method: 'POST',
@@ -279,12 +281,22 @@
 
                 console.log("SR Notes Response " + JSON.stringify(response));
 
-                // $rootScope.apicall = true;
-                //
-                // localService.insertInstallBaseList(response, function (result) {
-                //
-                //     callback("success");
-                // });
+                $rootScope.apicall = true;
+
+                var noteArray = [];
+
+                angular.forEach(response.Notes_by_SRs, function (item) {
+
+                    angular.forEach(item.NotesSR, function (object) {
+
+                        noteArray.push(object);                   
+                    });
+                });
+                
+                localService.insertSRNotesList(noteArray, function (result) {
+                
+                     callback("success");
+                 });
 
             }).error(function (error) {
 

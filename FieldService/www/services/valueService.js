@@ -32,6 +32,7 @@
             installBase: [],
             contacts: [],
             taskNotes: [],
+            taskSRNotes:[],
             taskAttachment: [],
             time: [],
             expense: [],
@@ -81,6 +82,7 @@
 
         service.getContact = getContact;
         service.getTaskNotes = getTaskNotes;
+        service.getSRTaskNotes = getSRTaskNotes;       
         service.getTaskAttachment = getTaskAttachment;
 
         service.setTaskId = setTaskId;
@@ -242,6 +244,11 @@
                 debrief.taskNotes = response;
             });
 
+            localService.getSRNotesList(taskObject.Service_Request, function (response) {
+
+                debrief.taskSRNotes = response;
+            });
+
             localService.getAttachmentList(taskObject.Task_Number, "O", function (response) {
 
                 debrief.taskAttachment = response;
@@ -363,6 +370,11 @@
         function getTaskNotes() {
 
             return debrief.taskNotes;
+        };
+
+        function getSRTaskNotes() {
+
+            return debrief.taskSRNotes;
         };
 
         function getTaskAttachment() {

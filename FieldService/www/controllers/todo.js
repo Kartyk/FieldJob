@@ -15,7 +15,17 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
 
     $scope.noteArray = valueService.getTaskNotes();
 
-    console.log("NOTE ARRAY " + $scope.noteArray);
+    console.log("SRNOTE ARRAY " + JSON.stringify(valueService.getSRTaskNotes()));
+
+    if (valueService.getSRTaskNotes().length > 0) {
+
+        angular.forEach(valueService.getSRTaskNotes(), function (item) {
+
+            $scope.noteArray.push(item);
+        });      
+    }
+
+    console.log("NOTE ARRAY " + JSON.stringify($scope.noteArray));
 
     $scope.attachmentArray = valueService.getTaskAttachment();
     $scope.attachments=[];

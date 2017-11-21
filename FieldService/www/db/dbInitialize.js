@@ -17,6 +17,8 @@
 
         var sqlInternal = "CREATE TABLE IF NOT EXISTS Internal ('Activity_Id' INTEGER PRIMARY KEY  NOT NULL, 'Start_time' TEXT, 'End_time' TEXT, 'Activity_type' TEXT)";
 
+        var sqlSRNotes = "CREATE TABLE IF NOT EXISTS SRNotes ('Notes_ID' INTEGER, 'Service_Request' TEXT, 'Notes' TEXT, 'Notes_type' TEXT, 'Note_Description' TEXT, 'Created_By' TEXT, 'MobileCreatedBy' TEXT, 'Start_Date' TEXT, 'Last_updated_date' TEXT, 'Incident' TEXT)";
+
         var sqlInstallBase = "CREATE TABLE IF NOT EXISTS InstallBase ('Installed_Base_ID' INTEGER, 'Product_Line' TEXT, 'Serial_Number' TEXT, 'TagNumber' TEXT, 'Original_PO_Number' TEXT, 'Task_Number' TEXT, 'Service_Request' TEXT, 'Assigned' TEXT, 'Start_Date' TEXT, 'End_Date' TEXT)";
 
         var sqlContact = "CREATE TABLE IF NOT EXISTS Contact ('Contact_ID' INTEGER, 'Customer_Name' TEXT, 'Contact_Name' TEXT, 'Home_Phone' TEXT, 'Mobile_Phone' TEXT, 'Fax_Phone' TEXT, 'Office_Phone' TEXT, 'Email' TEXT, 'Foreign_Key' TEXT, 'Task_Number' TEXT, 'Service_Request' TEXT, 'Assigned' TEXT, 'Start_Date' TEXT, 'End_Date' TEXT)";
@@ -67,6 +69,9 @@
 
             tx.executeSql(sqlInternal);
             //console.log('DB SUCCESS: INTERNAL');
+
+            tx.executeSql(sqlSRNotes);
+            //console.log('DB SUCCESS: SRNOTES');
 
             tx.executeSql(sqlInstallBase);
             //console.log('DB SUCCESS: INSTALLBASE');

@@ -29,7 +29,8 @@
 
         service.insertTaskList = insertTaskList;
         service.insertInternalList = insertInternalList;
-        service.insertInstallBaseList = insertInstallBaseList;
+        service.insertSRNotesList = insertSRNotesList;
+        service.insertInstallBaseList = insertInstallBaseList;      
         service.insertContactList = insertContactList;
         service.insertNoteList = insertNoteList;
         service.insertAttachmentList = insertAttachmentList;
@@ -91,6 +92,7 @@
 
         service.getTaskList = getTaskList;
         service.getInternalList = getInternalList;
+        service.getSRNotesList = getSRNotesList;
         service.getInstallBaseList = getInstallBaseList;
         service.getContactList = getContactList;
         service.getNoteList = getNoteList;
@@ -472,6 +474,143 @@
             }, function (error) {
 
                 // console.log("TASK UPDATE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function insertSRNotesList(response, callback) {
+
+            var responseList = response;
+
+            var promises = [];
+
+            for (var i = 0; i < responseList.length; i++) {
+
+                (function (i) {
+
+                    var deferred = $q.defer();
+
+                    db.transaction(function (transaction) {
+
+                        var sqlSelect = "SELECT * FROM SRNotes WHERE Notes_ID = " + responseList[i].Notes_ID + " AND Service_Request = " + responseList[i].Service_Request;
+
+                         //console.log("SRNOTES  ====> " + sqlSelect);
+
+                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+
+                            var rowLength = res.rows.length;
+
+                             //console.log("SRNOTES LENGTH ====> " + rowLength);
+
+                            if (rowLength > 0) {
+
+                                updateSRNotes(responseList[i], deferred);
+
+                            } else {
+
+                                insertSRNotes(responseList[i], deferred);
+                            }
+
+                        }, function (tx, error) {
+
+                             //console.log("SRNOTES SELECT ERROR: " + error.message);
+                        });
+
+                    }, function (error) {
+
+                         //console.log("SRNOTES SELECT TRANSACTION ERROR: " + error.message);
+                    });
+
+                     //console.log("SRNOTES OBJECT =====> " + JSON.stringify(responseList));
+
+                    promises.push(deferred.promise);
+
+                })(i);
+            }
+
+            $q.all(promises).then(
+                function (response) {
+                    callback("SUCCESS");
+                },
+
+                function (error) {
+                    callback("ERROR");
+                }
+            );
+        };
+
+        function updateSRNotes(responseList, defer) {
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+            
+                var sqlUpdate = "UPDATE SRNotes SET Notes = ?, Notes_type = ?, Note_Description =?, Created_By = ?, MobileCreatedBy = ?, Start_Date = ?, Last_updated_date = ?, Incident = ?  WHERE Notes_ID = ? AND Service_Request = ?";
+
+                insertValues.push(responseList.Notes);
+                insertValues.push(responseList.Notes_type);
+                insertValues.push(responseList.Note_Description);
+                insertValues.push(responseList.Created_By);
+                insertValues.push(responseList.MobileCreatedBy);
+                insertValues.push(responseList.Start_Date);
+                insertValues.push(responseList.Last_updated_date);
+                insertValues.push(responseList.Incident);
+                insertValues.push(responseList.Notes_ID);
+                insertValues.push(responseList.Service_Request);
+
+                 //console.log("SRNOTES UPDATE VALUES =====> " + insertValues);
+
+                transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
+
+                    defer.resolve(res);
+
+                     //console.log("SRNOTES ROW AFFECTED: " + res.rowsAffected);
+
+                }, function (tx, error) {
+
+                     //console.log("SRNOTES UPDATE ERROR: " + error.message);
+                });
+
+            }, function (error) {
+
+                 //console.log("SRNOTES UPDATE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function insertSRNotes(responseList, defer) {
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlInsert = "INSERT INTO SRNotes VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+                insertValues.push(responseList.Notes_ID);
+                insertValues.push(responseList.Service_Request);
+                insertValues.push(responseList.Notes);
+                insertValues.push(responseList.Notes_type);
+                insertValues.push(responseList.Note_Description);
+                insertValues.push(responseList.Created_By);
+                insertValues.push(responseList.MobileCreatedBy);
+                insertValues.push(responseList.Start_Date);
+                insertValues.push(responseList.Last_updated_date);             
+                insertValues.push(responseList.Incident);
+
+                 //console.log("SRNOTES INSERT VALUES =====> " + insertValues);
+
+                transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
+
+                    defer.resolve(res);
+
+                     //console.log("SRNOTES INSERT ID: " + res.insertId);
+
+                }, function (tx, error) {
+
+                     //console.log("SRNOTES INSERT ERROR: " + error.message);
+                });
+
+            }, function (error) {
+
+                 //console.log("SRNOTES INSERT TRANSACTION ERROR: " + error.message);
             });
         };
 
@@ -3650,6 +3789,40 @@
             }, function (error) {
 
                 // console.log("GET TASK ACCEPT TRANSACTION ERROR: " + error.message);
+
+                callback(value);
+            });
+        };
+
+        function getSRNotesList(taskId, callback) {
+
+            var value = [];
+
+            return db.transaction(function (transaction) {
+
+                transaction.executeSql("SELECT * FROM SRNotes WHERE Service_Request = ? ", [taskId], function (tx, res) {
+
+                    var rowLength = res.rows.length;
+
+                    for (var i = 0; i < rowLength; i++) {
+
+                        value.push(res.rows.item(i));
+                    }
+
+                    // console.log("GET SRNOTES DB ==========> " + JSON.stringify(value));
+
+                    callback(value);
+
+                }, function (tx, error) {
+
+                    // console.log("GET SRNOTES SELECT ERROR: " + error.message);
+
+                    callback(value);
+                });
+
+            }, function (error) {
+
+                // console.log("GET SRNOTES TRANSACTION ERROR: " + error.message);
 
                 callback(value);
             });

@@ -599,6 +599,66 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                         );
 
                         getAttachments();
+
+                        var srNumberArray = [];
+
+                        angular.forEach(constantService.getTaskList(), function (item) {
+
+                            var value = item.Service_Request + "";
+
+                            if (item.Service_Request != undefined) {
+
+                                if (srNumberArray.indexOf(item.Service_Request) === -1) {
+
+                                    srNumberArray.push(item.Service_Request);
+                                }
+                            }
+                        });
+
+                        if (srNumberArray.length > 10) {
+
+                            var strArray = [];
+
+                            var loopLength = srNumberArray.length / 10;
+
+                            var rem = srNumberArray.length % 10;
+
+                            if (rem > 0) {
+                                loopLength = loopLength + 1;
+                            }
+
+                            for (var i = 1; i <= loopLength; i++) {
+
+                                strArray = [];
+
+                                for (var j = (i - 1) * 10; j < 10 * i; j++) {
+
+                                    if (j < srNumberArray.length) {
+
+                                        strArray.push(srNumberArray[j]);
+
+                                        if (j == ((10 * i) - 1)) {
+
+                                            cloudService.getSRNotesList(strArray, function (response) {
+                                                console.log("SRNOTES");
+                                            });
+
+                                        } else if (j == (srNumberArray.length - 1)) {
+
+                                            cloudService.getSRNotesList(strArray, function (response) {
+                                                console.log("SRNOTES");
+                                            });
+                                        }
+                                    }
+                                }
+                            }
+
+                        } else {
+
+                            cloudService.getSRNotesList(srNumberArray, function (response) {
+                                console.log("SRNOTES");
+                            });
+                        }
                     });
                 },
 
@@ -954,21 +1014,66 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 getAttachments();
 
-                // var srNumberArray = [];
-                //
-                // angular.forEach(constantService.getTaskList(), function (item) {
-                //
-                //     if (srNumberArray.indexOf(item.Service_Request) === -1) {
-                //
-                //         srNumberArray.push(item.Service_Request);
-                //     }
-                // });
-                //
-                // console.log("SR NUMBER ARRAY " + srNumberArray);
-                //
-                // cloudService.getSRNotesList(srNumberArray, function (response) {
-                //
-                // });
+                 var srNumberArray = [];
+                
+                 angular.forEach(constantService.getTaskList(), function (item) {
+
+                     var value = item.Service_Request + "";
+
+                     if (item.Service_Request != undefined) {
+
+                         if (srNumberArray.indexOf(item.Service_Request) === -1) {
+
+                             srNumberArray.push(item.Service_Request);
+                         }
+                     }
+                 });
+
+                 if (srNumberArray.length > 10) {
+
+                     var strArray = [];
+
+                     var loopLength = srNumberArray.length / 10;
+
+                     var rem = srNumberArray.length % 10;
+
+                     if (rem > 0) {
+                         loopLength = loopLength + 1;
+                     }
+
+                     for (var i = 1; i <= loopLength; i++) {
+
+                         strArray = [];
+
+                         for (var j = (i - 1) * 10; j < 10 * i; j++) {
+
+                             if (j < srNumberArray.length) {
+
+                                 strArray.push(srNumberArray[j]);
+
+                                 if (j == ((10 * i) - 1)) {
+
+                                     cloudService.getSRNotesList(strArray, function (response) {
+                                         console.log("SRNOTES");
+                                     });
+
+                                 } else if (j == (srNumberArray.length - 1)) {
+
+                                     cloudService.getSRNotesList(strArray, function (response) {
+                                         console.log("SRNOTES");
+                                     });
+                                 }
+                             }
+                         }
+                     }
+
+                 } else {
+
+                     cloudService.getSRNotesList(srNumberArray, function (response) {
+                         console.log("SRNOTES");
+                     });
+                 }
+                                            
             });
         }
 
