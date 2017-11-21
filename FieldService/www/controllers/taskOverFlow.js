@@ -183,9 +183,19 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
     $scope.defaultTasks = ["1/2 SOCKET", "Cage Retainer Tool", "Power Torque Erench", "Plyers", "3/4 SOCKET"];
 
     $scope.goToBack = function () {
-        $state.go('myTask');
-        $rootScope.selectedItem = 1;
-        $rootScope.showTaskDetail = false;
+        if (valueService.getUserType().defaultView == "My Task") {
+
+            $state.go("myFieldJob");
+            $rootScope.selectedItem = 2;
+            $rootScope.showTaskDetail = false;
+
+        } else {
+
+            $state.go("myTask");
+            $rootScope.selectedItem = 1;
+            $rootScope.showTaskDetail = false;
+        }
+       
     };
 
     $scope.goToOnsiteReq = function () {
