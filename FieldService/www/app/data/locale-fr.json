@@ -209,7 +209,10 @@
   "Travel- Double Time": "Voyage - Temps double",
   "Labor- Standard": "Main d'œuvre - Standard",
   "Labor- Overtime": "Main d'œuvre - Heures supplémentaires",
-  "Labor- Double Time": "Main d'œuvre - Temps double"
+  "Labor- Double Time": "Main d'œuvre - Temps double",
+  "Charge\nType":"TYPE DE\n FACTURATION",
+  "Charge\nMethod":"méthode de\n facturation",
+  "Work\nType":"Type de\n travail"
 
 
 }

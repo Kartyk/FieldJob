@@ -127,7 +127,44 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
         $rootScope.tabClicked = true;
 
         $rootScope.columnclass = "col-sm-11";
+        if (valueService.getDebriefChanged()) {
+            $mdDialog.show({
+                locals: { dataToPass: item }, 
+                controller: DialogController,
+                templateUrl: "app/views/Dialog.html",
+                parent: angular.element(document.body),
+                targetEvent: event,
+                clickOutsideToClose: false
 
+            }).then(function (selected) {
+
+               // $scope.status = "You said the information was '" + selected + "'.";
+
+            }, function () {
+
+                //$scope.status = "You cancelled the dialog.";
+            });
+        }
+        else {
+            sideNavigation(item)
+        }
+    }
+    function DialogController($scope, $mdDialog, dataToPass) {
+
+        $scope.saveData = function ()
+        {
+            $rootScope.saveValues()
+            sideNavigation(dataToPass);
+            $mdDialog.hide();
+        }
+        $scope.cancel = function ()
+        {
+            sideNavigation(dataToPass);
+            $mdDialog.hide();
+        }
+    }
+    function sideNavigation(item)
+    {
         switch (item.name) {
 
             case "MyCalendar":
@@ -182,7 +219,6 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                 break;
         }
     }
-
     $scope.menuToggle = function () {
 
         if ($rootScope.closed == true) {

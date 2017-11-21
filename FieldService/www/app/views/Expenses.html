@@ -2,7 +2,7 @@
     <div class="margintop30" ng-repeat="item in expenseArray track by $index" id="expense{{$index}}">
         
             <div class="card-childContainer  noBorder-radius" ng-class="{'newItemBorder': $index == addExpenseObj && $index != 0,'copyItem': $index == copyExpenseObj && $index != 0}">
-                <form class="form-horizontal input-items" action="/action_page.php">
+                <form class="form-horizontal input-items" action="/action_page.php" form-on-change="formChange()">
                     <div class="row">
                         <div class="layout-row">
 

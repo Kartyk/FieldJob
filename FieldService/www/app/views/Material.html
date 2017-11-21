@@ -79,7 +79,7 @@
         
             <div class="card-childContainer  noBorder-radius" ng-class="{'newItemBorder': item.Material_Id == addMaterialObj && $index != 0,'copyItem': item.Material_Id == copyMaterialObj && $index != 0}" style="text-transform:uppercase;">
 
-                <form class="form-horizontal input-items" name="userForm">
+                <form class="form-horizontal input-items" name="userForm" form-on-change="formChange()">
                     <div class="row" style="padding:0px 22px 0px 22px;">
                         <div class="col-sm-12 col-md-12 noMarginPadding">
                             <div class="col-sm-4 col-md-4 noMarginPadding">
@@ -99,6 +99,14 @@
                                 </div>
                             </div>
 
+                            <div class="col-sm-4 col-md-4 noMarginPadding">
+                                <div class="col-sm-12 col-md-12 col-lg-12 noMarginPadding">
+                                    <div class="form-group noMarginPadding">
+                                        <label class="control-label  marginbottom12 material-label" translate="item name"></label>
+                                        <input type="text" class=" inputFieldsMaterial" ng-model="item.ItemName" />
+                                    </div>
+                                </div>
+                            </div>
                            
                             <div class="col-sm-4 col-md-4 noMarginPadding">
                                 <div class="col-sm-12 col-md-12 noMarginPadding">
@@ -110,14 +118,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-4 col-md-4 noMarginPadding">
-                                <div class="col-sm-12 col-md-12 col-lg-12 noMarginPadding">
-                                    <div class="form-group noMarginPadding">
-                                        <label class="control-label  marginbottom12 material-label" translate="item name"></label>
-                                        <input type="text" class=" inputFieldsMaterial" ng-model="item.ItemName" />
-                                    </div>
-                                </div>
-                            </div>
+                         
 
                             
                         </div>

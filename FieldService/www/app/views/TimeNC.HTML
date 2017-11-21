@@ -3,7 +3,7 @@
 
     <div class="margintop30" ng-repeat="item in timeArray track by $index" id="time{{$index}}">
         <div class="card-childContainer  noBorder-radius" ng-class="{'newItemBorder': $index == addTimeObj && $index != 0,'copyItem': $index == copyTimeObj && $index != 0}">
-            <form class="form-horizontal input-items" action="/action_page.php" ng-disabled="$root.completedTask">
+            <form class="form-horizontal input-items" action="/action_page.php" ng-disabled="$root.completedTask" form-on-change="formChange()">
                 <div layout="row" layout-wrap>
                     
 

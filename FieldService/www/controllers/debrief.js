@@ -1222,24 +1222,25 @@
         console.log("STAGE =====> " + JSON.stringify(stage));
 
         if ($scope.currentTab == "time") {
-
+           
 
         } else if ($scope.currentTab == "expenses") {
-
+           
 
         } else if ($scope.currentTab == "material") {
-
+           
 
         } else if ($scope.currentTab == "notes") {
-
+            
 
         } else if ($scope.currentTab == "attachments") {
-
+            
 
         } else if ($scope.currentTab == "engineer signature") {
-
+           
         }
-
+        $scope.saveValues()
+        valueService.saveValues();
         if (stage.title.toLowerCase() == "time") {
 
             if ($scope.timeArray.length == 0) {
@@ -2288,7 +2289,7 @@
         // if (file != null)
         //     $scope.image.push(file);
         if (file != null) {
-
+            valueService.setDebriefChanged(true);
             var name = file.name.split(".")[0];
 
             var type = file.name.split(".")[1];
@@ -2336,7 +2337,7 @@
             var fileobj = {"filename": file.name, "fileDisc": name, "file": file, "filetype": type, "data": ""};
 
             var fileObject = null;
-
+            valueService.setDebriefChanged(true);
             Upload.base64DataUrl(file).then(function (urls) {
 
                 console.log(urls);
@@ -2366,7 +2367,7 @@
     }
 
     $scope.reviewSummary = function () {
-       // var promise = generatePDF();
+        var promise = generatePDF();
         $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Customer Signature"
     )
 
@@ -3274,7 +3275,7 @@
                 doc1.text(xTimeField, yTimeFieldName, $filter('translate')('Date'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xTimeField + timeWidth, yTimeFieldName, $filter('translate')('Charge'+'\n'+'Type'))
+                doc1.text(xTimeField + timeWidth, yTimeFieldName, $filter('translate')('Charge\nType'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 doc1.text(xTimeField + (timeWidth * 2), yTimeFieldName, $filter('translate')('Charge\nMethod'))
@@ -3295,8 +3296,8 @@
                     // doc1.text(xTimeField + 355, yTimeFieldName, 'OT3')
                 });
 
-                doc1.text(xTimeField+(timeWidth*i), yTimeFieldName, 'Duration')
-                doc1.text(xTimeField+(timeWidth * (++i)), yTimeFieldName, 'Item')
+                doc1.text(xTimeField+(timeWidth*i), yTimeFieldName, $filter('translate')('Duration'))
+                doc1.text(xTimeField+(timeWidth * (++i)), yTimeFieldName, $filter('translate')('Item'))
                 //doc1.text(xTimeField+(timeWidth * (++i)), yTimeFieldName, 'Description')
 
                 doc1.rect(20, yTimeField + 5, rectTimeWidth, rectTimeHeight+10)
@@ -3446,17 +3447,17 @@
                 doc1.text(106, yMaterialFieldName, $filter('translate')('Quantity'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(202, yMaterialFieldName, $filter('translate')('Serial#'))
+                doc1.text(202, yMaterialFieldName, $filter('translate')('Serial number'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(298, yMaterialFieldName, $filter('translate')('Serial In#'))
+                doc1.text(298, yMaterialFieldName, $filter('translate')('Serial in'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(394, yMaterialFieldName, $filter('translate')('Serial Out#'))
+                doc1.text(394, yMaterialFieldName, $filter('translate')('Serial out'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 doc1.setFontSize(22)
-                doc1.setFontType('bold')
+                doc1.setFontType('bold')Item Name
                 doc1.text(490, yMaterialFieldName, $filter('translate')('Item Name'))
                 doc1.text(586, yMaterialFieldName, 'Description')
                 yMaterialFieldValue = yMaterialFieldName + 10;
@@ -3518,8 +3519,8 @@
                 doc1.setFontType('bold')
                 doc1.text(xSignField, ySignField + 5, $filter('translate')('Signature'))
                 doc1.rect(20, ySignField + 10, rectSignWidth, rectSignHeight)
-                doc1.text(50, ySignField + 25, $filter('translate')('ENGINEER NAME'))
-                doc1.text(250, ySignField + 25, $filter('translate')('CUSTOMER NAME'))
+                doc1.text(50, ySignField + 25, $filter('translate')('Engineer Name'))
+                doc1.text(250, ySignField + 25, $filter('translate')('Customer Name'))
                 doc1.text(50, ySignField + 35, $scope.engineerName);
 
                 if ($scope.summary.engineer != undefined && $scope.summary.engineer.signature)
@@ -3614,4 +3615,8 @@
     $scope.deleteAttachment = function () {
         $scope.files.splice(this.$index, 1);
     };
+    $scope.formChange = function ()
+    {
+        valueService.setDebriefChanged(true);
+    }
 });
