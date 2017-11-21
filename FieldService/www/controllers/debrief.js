@@ -3272,7 +3272,7 @@
                 doc1.text(xTimeField, yTimeFieldName, $filter('translate')('Date'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xTimeField + timeWidth, yTimeFieldName, $filter('translate')('Charge'+'\n'+'Type'))
+                doc1.text(xTimeField + timeWidth, yTimeFieldName, $filter('translate')('Charge\nType'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 doc1.text(xTimeField + (timeWidth * 2), yTimeFieldName, $filter('translate')('Charge\nMethod'))
@@ -3293,8 +3293,8 @@
                     // doc1.text(xTimeField + 355, yTimeFieldName, 'OT3')
                 });
 
-                doc1.text(xTimeField+(timeWidth*i), yTimeFieldName, 'Duration')
-                doc1.text(xTimeField+(timeWidth * (++i)), yTimeFieldName, 'Item')
+                doc1.text(xTimeField+(timeWidth*i), yTimeFieldName, $filter('translate')('Duration'))
+                doc1.text(xTimeField+(timeWidth * (++i)), yTimeFieldName, $filter('translate')('Item'))
                 //doc1.text(xTimeField+(timeWidth * (++i)), yTimeFieldName, 'Description')
 
                 doc1.rect(20, yTimeField + 5, rectTimeWidth, rectTimeHeight+10)
