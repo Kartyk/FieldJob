@@ -203,7 +203,10 @@
   "Accept": "Acceptez",
   "Back": "Retour",
   "Field Service": "Service sur site",
-  "Item Description": "Description d'article"
+  "Item Description": "Description d'article",
+  "Charge\nType":"TYPE DE\n FACTURATION",
+  "Charge\nMethod":"méthode de\n facturation",
+  "Work\nType":"Type de\n travail"
 
 
 }
