@@ -3307,7 +3307,7 @@
                 var j = 0, xTimeField = 25, yTimeField = yAttachField + rectAttachHeight + 20, rectTimeWidth = 660,
                     rectTimeHeight = 23 * $scope.summary.timeArray.length, yTimeFieldName = yTimeField + 20,
                     yTimeFieldValue = yTimeField;
-                var timeWidth = (660 / 7) ;
+                var timeWidth = (660 / 8) ;
 
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
@@ -3317,13 +3317,13 @@
                 doc1.text(xTimeField, yTimeFieldName, $filter('translate')('Date'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xTimeField + timeWidth, yTimeFieldName, $filter('translate')('Charge\nType'))
+                doc1.text(xTimeField + timeWidth, yTimeFieldName, $filter('translate')('Charge Type'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xTimeField + (timeWidth * 2), yTimeFieldName, $filter('translate')('Charge\nMethod'))
+                doc1.text(xTimeField + (timeWidth * 2), yTimeFieldName, $filter('translate')('Charge Method'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xTimeField + (timeWidth * 3), yTimeFieldName, $filter('translate')('Work\nType'))
+                doc1.text(xTimeField + (timeWidth * 3), yTimeFieldName, $filter('translate')('Work Type'))
                 //  doc1.text(xTimeField + 235, yTimeFieldName, $filter('translate')('Standard'))
                 var xTimeField1 = xTimeField + 195;
                 doc1.setFontSize(22)
