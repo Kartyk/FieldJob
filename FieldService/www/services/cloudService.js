@@ -19,6 +19,7 @@
         service.getTaskList = getTaskList;
         service.getInternalList = getInternalList;
         service.getInstallBaseList = getInstallBaseList;
+        service.getSRNotesList = getSRNotesList;
         service.getContactList = getContactList;
         service.getNoteList = getNoteList;
         service.getProjectList = getProjectList;
@@ -258,6 +259,36 @@
             }).error(function (error) {
 
                 console.log("Install Base Error " + JSON.stringify(error));
+            });
+        }
+
+        function getSRNotesList(srNumberArray, callback) {
+
+            $http({
+
+                method: 'POST',
+                url: url + 'Fetch_NotesSR/notes_SR',
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getTaskBackId()
+                },
+                data: {"SRNum": srNumberArray}
+
+            }).success(function (response) {
+
+                console.log("SR Notes Response " + JSON.stringify(response));
+
+                // $rootScope.apicall = true;
+                //
+                // localService.insertInstallBaseList(response, function (result) {
+                //
+                //     callback("success");
+                // });
+
+            }).error(function (error) {
+
+                console.log("SR Notes Error " + JSON.stringify(error));
             });
         }
 

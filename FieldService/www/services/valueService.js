@@ -521,7 +521,7 @@
 
                 localService.deleteTime(debrief.task.Task_Number);
                 localService.insertTimeList(debrief.time, function (result) {
-                    console.log("success")
+                    console.log("Time Success")
                 });
             }
 
@@ -529,7 +529,7 @@
 
                 localService.deleteExpense(debrief.task.Task_Number);
                 localService.insertExpenseList(debrief.expense, function (result) {
-                    console.log("success")
+                    console.log("Expense Success")
                 });
             }
 
@@ -537,7 +537,7 @@
 
                 localService.deleteMaterial(debrief.task.Task_Number);
                 localService.insertMaterialList(debrief.material, function (result) {
-                    console.log("success")
+                    console.log("Material Success")
                 });
             }
 
@@ -545,7 +545,7 @@
 
                 localService.deleteNotes(debrief.task.Task_Number);
                 localService.insertNotesList(debrief.notes, function (result) {
-                    console.log("success")
+                    console.log("Notes Success")
                 });
             }
 
@@ -553,7 +553,7 @@
 
                 localService.deleteAttachment(debrief.task.Task_Number);
                 localService.insertAttachmentList(debrief.attachment, function (result) {
-                    console.log("success")
+                    console.log("Attachment Success")
                 });
             }
 
@@ -561,7 +561,7 @@
 
                 localService.deleteEngineer(debrief.task.Task_Number);
                 localService.insertEngineerList(debrief.engineer, function (result) {
-                    console.log("success")
+                    console.log("Engineer Success")
                 });
             }
         };

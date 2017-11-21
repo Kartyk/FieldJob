@@ -32,7 +32,7 @@
   "Customer Site Information": "Informations sur le site client",
   "Inventory/Material Request": "Inventaire / Demande de matériel",
   "Action Taken": "Action prise",
-  "In House": "In House",
+  "In House": "Au Bureau",
   "Off Shore": "Off Shore",
   "Onsite": "Sur Site",
   "Remote": "A Distance",
@@ -96,8 +96,8 @@
   "Time Code": "Code horaire",
   "Shift Code": "code équipe",
   "Duration": "Durée",
-  "delete": "suppression",
-  "copy": "copier",
+  "delete": "Supprimer",
+  "copy": "Copie",
   "In house": "En interne",
   "Offshore": "Off-shore",
   "onsite": "sur site",
@@ -133,7 +133,7 @@
   "Follow up": "Suivi",
   "Spare Quote": "Devis Équipement de rechange",
   "Sales Visit": "Visite commerciale",
-  "Sales Lead": "Prospection commerciale",
+  "Sales Lead": "Oportunité commercial",
   "Additional information on": "Informations complémentaires sur",
   "Service Engineer Signature": "SIGNATURE DU TECHNICIEN DE L'ASSISTANCE",
   "Clear": "effacer",
@@ -147,7 +147,7 @@
   "Engineer Signature": "Signature du technicien",
   "Summary": "Résumé",
   "Customer Signature": "Signature Client",
-  "Reviewed": "Reviewed (Passé en revue)  ",
+  "Reviewed": "Commenté",
   "Customer Name": "Nom du client ",
   "Engineer Name": "Nom du technicien",
   "ENTER CUSTOMER PRINT NAME": "NOM DU CLIENT EN CARACTÈRES D'IMPRIMERIE",
@@ -199,9 +199,14 @@
   "Normal": "Ordinaire",
   "Sign Out": "Déconnexion",
   "Onsite Requirement": "Exigences pour l'installation",
-  "Customer Call Details": "Détails de l'appel client"
-
-
+  "Customer Call Details": "Détails de l'appel client",
+  "Accept": "Acceptez",
+  "Back": "Retour",
+  "Field Service": "Service sur site",
+  "Item Description": "Description d'article",
+  "Charge\nType":"TYPE DE\n FACTURATION",
+  "Charge\nMethod":"méthode de\n facturation",
+  "Work\nType":"Type de\n travail"
 
 
 }

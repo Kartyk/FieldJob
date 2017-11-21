@@ -3072,12 +3072,22 @@
                     doc1.text(300, 50, $filter('translate')('Field Job# ') + $scope.summary.taskObject.Task_Number)
                 doc1.setFontSize(20)
                 doc1.setFontType('normal')
-                doc1.text(500, 20, $filter('translate')('Emerson Process Management'))
-                doc1.text(500, 28, $filter('translate')('(UNITED KINGDOM)'))
-                doc1.text(500, 36, $filter('translate')('Leicester'))
-                doc1.text(500, 44, $filter('translate')('United Kingdom'))
-                doc1.text(500, 52, $filter('translate')('Tel'))
-                doc1.text(500, 60, $filter('translate')('Fax: +44(0)122 2892896'))
+                if (valueService.getLanguage() == 'fr') {
+                    doc1.text(500, 20, $filter('translate')('Emerson Process Management Co.,Ltd.'))
+                    doc1.text(500, 28, $filter('translate')('14, Rue Edison - BP21 69 671 BRON Cedex'))
+                    //doc1.text(500, 36, $filter('translate')('Leicester'))
+                    //doc1.text(500, 44, $filter('translate')('United Kingdom'))
+                    //doc1.text(500, 52, $filter('translate')('Tel'))
+                    //doc1.text(500, 60, $filter('translate')('Fax: +44(0)122 2892896'))
+                }
+                else {
+                    doc1.text(500, 20, $filter('translate')('Emerson Process Management'))
+                    doc1.text(500, 28, $filter('translate')('(UNITED KINGDOM)'))
+                    doc1.text(500, 36, $filter('translate')('Leicester'))
+                    doc1.text(500, 44, $filter('translate')('United Kingdom'))
+                    doc1.text(500, 52, $filter('translate')('Tel'))
+                    doc1.text(500, 60, $filter('translate')('Fax: +44(0)122 2892896'))
+                }
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 doc1.text(25, 80, $filter('translate')('Customer Call Details'))
@@ -3263,7 +3273,7 @@
                 doc1.text(xTimeField, yTimeFieldName, $filter('translate')('Date'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xTimeField + timeWidth, yTimeFieldName, $filter('translate')('Charge'+'\n'+'Type'))
+                doc1.text(xTimeField + timeWidth, yTimeFieldName, $filter('translate')('Charge\nType'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 doc1.text(xTimeField + (timeWidth * 2), yTimeFieldName, $filter('translate')('Charge\nMethod'))
@@ -3284,8 +3294,8 @@
                     // doc1.text(xTimeField + 355, yTimeFieldName, 'OT3')
                 });
 
-                doc1.text(xTimeField+(timeWidth*i), yTimeFieldName, 'Duration')
-                doc1.text(xTimeField+(timeWidth * (++i)), yTimeFieldName, 'Item')
+                doc1.text(xTimeField+(timeWidth*i), yTimeFieldName, $filter('translate')('Duration'))
+                doc1.text(xTimeField+(timeWidth * (++i)), yTimeFieldName, $filter('translate')('Item'))
                 //doc1.text(xTimeField+(timeWidth * (++i)), yTimeFieldName, 'Description')
 
                 doc1.rect(20, yTimeField + 5, rectTimeWidth, rectTimeHeight+10)
@@ -3435,17 +3445,17 @@
                 doc1.text(106, yMaterialFieldName, $filter('translate')('Quantity'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(202, yMaterialFieldName, $filter('translate')('Serial#'))
+                doc1.text(202, yMaterialFieldName, $filter('translate')('Serial number'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(298, yMaterialFieldName, $filter('translate')('Serial In#'))
+                doc1.text(298, yMaterialFieldName, $filter('translate')('Serial in'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(394, yMaterialFieldName, $filter('translate')('Serial Out#'))
+                doc1.text(394, yMaterialFieldName, $filter('translate')('Serial out'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 doc1.setFontSize(22)
-                doc1.setFontType('bold')
+                doc1.setFontType('bold')Item Name
                 doc1.text(490, yMaterialFieldName, $filter('translate')('Item Name'))
                 doc1.text(586, yMaterialFieldName, 'Description')
                 yMaterialFieldValue = yMaterialFieldName + 10;
@@ -3507,8 +3517,8 @@
                 doc1.setFontType('bold')
                 doc1.text(xSignField, ySignField + 5, $filter('translate')('Signature'))
                 doc1.rect(20, ySignField + 10, rectSignWidth, rectSignHeight)
-                doc1.text(50, ySignField + 25, $filter('translate')('ENGINEER NAME'))
-                doc1.text(250, ySignField + 25, $filter('translate')('CUSTOMER NAME'))
+                doc1.text(50, ySignField + 25, $filter('translate')('Engineer Name'))
+                doc1.text(250, ySignField + 25, $filter('translate')('Customer Name'))
                 doc1.text(50, ySignField + 35, $scope.engineerName);
 
                 if ($scope.summary.engineer != undefined && $scope.summary.engineer.signature)
