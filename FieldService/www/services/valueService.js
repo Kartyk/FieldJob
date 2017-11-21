@@ -25,7 +25,7 @@
         var networkStatus = false;
 
         var language = "";
-
+        var debriefChanged = false;
         var debrief = {
             task: {},
             taskList: [],
@@ -143,11 +143,20 @@
 
         service.setLanguage = setLanguage;
         service.getLanguage = getLanguage;
+        service.setDebriefChanged = setDebriefChanged;
+        service.getDebriefChanged = getDebriefChanged
 
         service.syncData = syncData;
 
         return service;
-
+        function setDebriefChanged(isChanged)
+        {
+            debriefChanged = isChanged;
+        }
+        function getDebriefChanged()
+        {
+            return debriefChanged;
+        }
         function setLanguage(lang) {
             language = lang;
         }

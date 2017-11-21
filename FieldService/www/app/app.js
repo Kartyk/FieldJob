@@ -492,7 +492,17 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
         }
     };
 }]);
-
+app.directive("formOnChange", function ($parse) {
+    return {
+        require: "form",
+        link: function (scope, element, attrs) {
+            var cb = $parse(attrs.formOnChange);
+            element.on("change", function () {
+                cb(scope);
+            });
+        }
+    }
+});
 app.config(['$httpProvider', function ($httpProvider) {
     //initialize get if not there
     if (!$httpProvider.defaults.headers.get) {

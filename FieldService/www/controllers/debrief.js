@@ -1222,24 +1222,25 @@
         console.log("STAGE =====> " + JSON.stringify(stage));
 
         if ($scope.currentTab == "time") {
-
+           
 
         } else if ($scope.currentTab == "expenses") {
-
+           
 
         } else if ($scope.currentTab == "material") {
-
+           
 
         } else if ($scope.currentTab == "notes") {
-
+            
 
         } else if ($scope.currentTab == "attachments") {
-
+            
 
         } else if ($scope.currentTab == "engineer signature") {
-
+           
         }
-
+        $scope.saveValues()
+        valueService.saveValues();
         if (stage.title.toLowerCase() == "time") {
 
             if ($scope.timeArray.length == 0) {
@@ -2286,7 +2287,7 @@
         // if (file != null)
         //     $scope.image.push(file);
         if (file != null) {
-
+            valueService.setDebriefChanged(true);
             var name = file.name.split(".")[0];
 
             var type = file.name.split(".")[1];
@@ -2334,7 +2335,7 @@
             var fileobj = {"filename": file.name, "fileDisc": name, "file": file, "filetype": type, "data": ""};
 
             var fileObject = null;
-
+            valueService.setDebriefChanged(true);
             Upload.base64DataUrl(file).then(function (urls) {
 
                 console.log(urls);
@@ -2364,7 +2365,7 @@
     }
 
     $scope.reviewSummary = function () {
-       // var promise = generatePDF();
+        var promise = generatePDF();
         $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Customer Signature"
     )
 
@@ -3602,4 +3603,8 @@
     $scope.deleteAttachment = function () {
         $scope.files.splice(this.$index, 1);
     };
+    $scope.formChange = function ()
+    {
+        valueService.setDebriefChanged(true);
+    }
 });
