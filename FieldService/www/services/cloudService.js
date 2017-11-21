@@ -1492,7 +1492,7 @@
 
                         updateStatus =
                             {
-                                "activityId": activateId,
+                                "activity_id": activateId,
                                 "XA_TASK_STATUS": "8"
                             }
 
@@ -1500,7 +1500,7 @@
 
                         updateStatus =
                             {
-                                "activityId": activateId,
+                                "activity_id": activateId,
                                 "XA_TASK_STATUS": "3"
                             }
                     }
@@ -1528,7 +1528,7 @@
 
                                         var startActivityData =
                                             {
-                                                "activityId": response.items[0].activityId,
+                                                "activity_id": response.items[0].activityId+"",
                                                 "time":moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
                                             }
 
@@ -1543,7 +1543,7 @@
                                                 console.log("complete_activity*****" + complete.activityId);
 
                                                 var updateTaskSegement = {
-                                                    "activityId": startActivityData.activityId,
+                                                    "activity_id": startActivityData.activityId,
                                                     "XA_TASK_STATUS": "3"
                                                 };
 

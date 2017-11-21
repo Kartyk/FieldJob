@@ -53,7 +53,7 @@
 
         function start_activity(data, callback) {
 
-            console.log("data " + data);
+            console.log("data " + JSON.stringify(data));
 
             return $http({
 
@@ -111,8 +111,8 @@
             console.log(url + 'OFSC_Soap_Actions/update_status' + JSON.stringify(data));
             return $http({
 
-                method: 'PATCH',
-                url: url + 'OFSCActions/update_status',
+                method: 'POST',
+                url: url + 'OFSC_Soap_Actions/update_status',
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
