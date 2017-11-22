@@ -269,7 +269,7 @@
 
         function getSRNotesList(srNumberArray, callback) {
 
-            console.log("SR NUMBER " + JSON.stringify({ "SRNum": srNumberArray }));
+            console.log("SR NUMBER " + JSON.stringify({"SRNum": srNumberArray}));
 
             $http({
 
@@ -294,14 +294,14 @@
 
                     angular.forEach(item.NotesSR, function (object) {
 
-                        noteArray.push(object);                   
+                        noteArray.push(object);
                     });
                 });
-                
+
                 localService.insertSRNotesList(noteArray, function (result) {
-                
-                     callback("success");
-                 });
+
+                    callback("success");
+                });
 
             }).error(function (error) {
 
@@ -311,7 +311,7 @@
 
         function getSRAttachmentList(srNumberArray, callback) {
 
-            console.log("SR NUMBER " + JSON.stringify({ "SRID": srNumberArray }));
+            console.log("SR NUMBER " + JSON.stringify({"SRID": srNumberArray}));
 
             $http({
 
@@ -1365,22 +1365,20 @@
                     console.log("ACTIVATE RESOURCE " + JSON.stringify(response));
 
                     var updateStatus
-                       
-                    if (isAccept)
-                    {
+
+                    if (isAccept) {
                         updateStatus =
-                        {
-                            "activityId": activateId,
+                            {
+                                "activityId": activateId,
                                 "XA_TASK_STATUS": "8"
-                        }
+                            }
                     }
-                    else
-                    {
+                    else {
                         updateStatus =
-                        {
-                            "activityId": activateId,
+                            {
+                                "activityId": activateId,
                                 "XA_TASK_STATUS": "3"
-                        }
+                            }
                     }
                     ofscService.updateStatus(updateStatus, function (response) {
 

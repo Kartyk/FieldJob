@@ -495,13 +495,13 @@
 
                         var sqlSelect = "SELECT * FROM SRNotes WHERE Notes_ID = " + responseList[i].Notes_ID + " AND Service_Request = " + responseList[i].Service_Request;
 
-                         //console.log("SRNOTES  ====> " + sqlSelect);
+                        // console.log("SRNOTES  ====> " + sqlSelect);
 
                         transaction.executeSql(sqlSelect, [], function (tx, res) {
 
                             var rowLength = res.rows.length;
 
-                             //console.log("SRNOTES LENGTH ====> " + rowLength);
+                            // console.log("SRNOTES LENGTH ====> " + rowLength);
 
                             if (rowLength > 0) {
 
@@ -514,15 +514,15 @@
 
                         }, function (tx, error) {
 
-                             //console.log("SRNOTES SELECT ERROR: " + error.message);
+                            // console.log("SRNOTES SELECT ERROR: " + error.message);
                         });
 
                     }, function (error) {
 
-                         //console.log("SRNOTES SELECT TRANSACTION ERROR: " + error.message);
+                        // console.log("SRNOTES SELECT TRANSACTION ERROR: " + error.message);
                     });
 
-                     //console.log("SRNOTES OBJECT =====> " + JSON.stringify(responseList));
+                    // console.log("SRNOTES OBJECT =====> " + JSON.stringify(responseList));
 
                     promises.push(deferred.promise);
 
@@ -545,7 +545,7 @@
             db.transaction(function (transaction) {
 
                 var insertValues = [];
-            
+
                 var sqlUpdate = "UPDATE SRNotes SET Notes = ?, Notes_type = ?, Note_Description =?, Created_By = ?, MobileCreatedBy = ?, Start_Date = ?, Last_updated_date = ?, Incident = ?  WHERE Notes_ID = ? AND Service_Request = ?";
 
                 insertValues.push(responseList.Notes);
@@ -559,22 +559,22 @@
                 insertValues.push(responseList.Notes_ID);
                 insertValues.push(responseList.Service_Request);
 
-                 //console.log("SRNOTES UPDATE VALUES =====> " + insertValues);
+                //console.log("SRNOTES UPDATE VALUES =====> " + insertValues);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
                     defer.resolve(res);
 
-                     //console.log("SRNOTES ROW AFFECTED: " + res.rowsAffected);
+                    //console.log("SRNOTES ROW AFFECTED: " + res.rowsAffected);
 
                 }, function (tx, error) {
 
-                     //console.log("SRNOTES UPDATE ERROR: " + error.message);
+                    //console.log("SRNOTES UPDATE ERROR: " + error.message);
                 });
 
             }, function (error) {
 
-                 //console.log("SRNOTES UPDATE TRANSACTION ERROR: " + error.message);
+                //console.log("SRNOTES UPDATE TRANSACTION ERROR: " + error.message);
             });
         };
 
@@ -594,25 +594,25 @@
                 insertValues.push(responseList.Created_By);
                 insertValues.push(responseList.MobileCreatedBy);
                 insertValues.push(responseList.Start_Date);
-                insertValues.push(responseList.Last_updated_date);             
+                insertValues.push(responseList.Last_updated_date);
                 insertValues.push(responseList.Incident);
 
-                 //console.log("SRNOTES INSERT VALUES =====> " + insertValues);
+                //console.log("SRNOTES INSERT VALUES =====> " + insertValues);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
                     defer.resolve(res);
 
-                     //console.log("SRNOTES INSERT ID: " + res.insertId);
+                    //console.log("SRNOTES INSERT ID: " + res.insertId);
 
                 }, function (tx, error) {
 
-                     //console.log("SRNOTES INSERT ERROR: " + error.message);
+                    //console.log("SRNOTES INSERT ERROR: " + error.message);
                 });
 
             }, function (error) {
 
-                 //console.log("SRNOTES INSERT TRANSACTION ERROR: " + error.message);
+                //console.log("SRNOTES INSERT TRANSACTION ERROR: " + error.message);
             });
         };
 

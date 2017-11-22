@@ -38,7 +38,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
     };
 
     $scope.changeLanguage = function (lang) {
+
         valueService.setLanguage(lang);
+
         switch (lang) {
 
             case "en":
@@ -84,14 +86,15 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
         }
     }
 
-    $scope.sideNavItems = [{
-        id: 1,
-        displayName: "My Calendar",
-        name: "MyCalendar",
-        controller: "myTask",
-        image: "images/calendar/Rectangle8.png",
-        imageSelected: "images/calendar/Rectangle8copy.png"
-    },
+    $scope.sideNavItems = [
+        {
+            id: 1,
+            displayName: "My Calendar",
+            name: "MyCalendar",
+            controller: "myTask",
+            image: "images/calendar/Rectangle8.png",
+            imageSelected: "images/calendar/Rectangle8copy.png"
+        },
         {
             id: 2,
             displayName: "My Field Job",
@@ -127,7 +130,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
         $rootScope.tabClicked = true;
 
         $rootScope.columnclass = "col-sm-11";
+
         if (valueService.getDebriefChanged()) {
+
             $mdDialog.show({
                 locals: {dataToPass: item},
                 controller: DialogController,
@@ -135,7 +140,6 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                 parent: angular.element(document.body),
                 targetEvent: event,
                 clickOutsideToClose: false
-
             }).then(function (selected) {
 
                 // $scope.status = "You said the information was '" + selected + "'.";
@@ -144,30 +148,41 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 //$scope.status = "You cancelled the dialog.";
             });
-        }
-        else {
-            sideNavigation(item)
+
+        } else {
+
+            sideNavigation(item);
         }
     }
 
     function DialogController($scope, $mdDialog, dataToPass) {
 
         $scope.saveData = function () {
-            $rootScope.saveValues()
+
+            $rootScope.saveValues();
+
             sideNavigation(dataToPass);
+
             $mdDialog.hide();
+
             $rootScope.showDebrief = false;
 
         }
+
         $scope.cancel = function () {
+
             sideNavigation(dataToPass);
+
             $mdDialog.hide();
+
             valueService.setDebriefChanged(false);
+
             $rootScope.showDebrief = false;
         }
     }
 
     function sideNavigation(item) {
+
         switch (item.name) {
 
             case "MyCalendar":

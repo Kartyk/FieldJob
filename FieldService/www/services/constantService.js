@@ -25,25 +25,25 @@
         var contentType = 'application/json';
 
         // //DEV
-         var authKey = "Basic QTQ3MjE0NF9FTUVSU09OTU9CSUxFQ0xPVURfTU9CSUxFX0FOT05ZTU9VU19BUFBJRDpZLm81amxkaHVtYzF2ZQ==";
-        
-         var taskBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
-        
-         var chargeBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
-        
-         var shiftBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
-        
-         var fieldBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
-        
-         var materialBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
-        
-         var ofscBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
-        
-         var acceptBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
-        
-         var expenseBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
+        var authKey = "Basic QTQ3MjE0NF9FTUVSU09OTU9CSUxFQ0xPVURfTU9CSUxFX0FOT05ZTU9VU19BUFBJRDpZLm81amxkaHVtYzF2ZQ==";
 
-         var internalBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
+        var taskBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
+
+        var chargeBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
+
+        var shiftBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
+
+        var fieldBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
+
+        var materialBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
+
+        var ofscBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
+
+        var acceptBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
+
+        var expenseBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
+
+        var internalBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
 
 
         //SIT
@@ -67,7 +67,6 @@
         //var acceptBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
 
         //var expenseBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
-
 
 
         var stagesArray = {};

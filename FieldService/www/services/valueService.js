@@ -32,7 +32,7 @@
             installBase: [],
             contacts: [],
             taskNotes: [],
-            taskSRNotes:[],
+            taskSRNotes: [],
             taskAttachment: [],
             time: [],
             expense: [],
@@ -82,7 +82,7 @@
 
         service.getContact = getContact;
         service.getTaskNotes = getTaskNotes;
-        service.getSRTaskNotes = getSRTaskNotes;       
+        service.getSRTaskNotes = getSRTaskNotes;
         service.getTaskAttachment = getTaskAttachment;
 
         service.setTaskId = setTaskId;
@@ -151,14 +151,15 @@
         service.syncData = syncData;
 
         return service;
-        function setDebriefChanged(isChanged)
-        {
+
+        function setDebriefChanged(isChanged) {
             debriefChanged = isChanged;
         }
-        function getDebriefChanged()
-        {
+
+        function getDebriefChanged() {
             return debriefChanged;
         }
+
         function setLanguage(lang) {
             language = lang;
         }
@@ -1011,7 +1012,7 @@
                                                                 var reader = new FileReader();
 
                                                                 reader.onloadend = function () {
-                                                                  
+
                                                                     reportObject = {
                                                                         "Data": this.result.split(",")[1],
                                                                         "FileName": "Report_" + taskId + ".pdf",
