@@ -523,7 +523,7 @@
 
                     db.transaction(function (transaction) {
 
-                        var sqlSelect = "SELECT * FROM SRNotes WHERE Notes_ID = " + responseList[i].Notes_ID + " AND Service_Request = " + responseList[i].Service_Request;
+                        var sqlSelect = "SELECT * FROM SRNotes WHERE Notes_ID = " + responseList[i].Notes_ID + " AND Incident = " + responseList[i].Incident;
 
                         // console.log("SRNOTES  ====> " + sqlSelect);
 
@@ -580,7 +580,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE SRNotes SET Notes = ?, Notes_type = ?, Note_Description =?, Created_By = ?, MobileCreatedBy = ?, Start_Date = ?, Last_updated_date = ?, Incident = ?  WHERE Notes_ID = ? AND Service_Request = ?";
+                var sqlUpdate = "UPDATE SRNotes SET Notes = ?, Notes_type = ?, Note_Description =?, Created_By = ?, MobileCreatedBy = ?, Start_Date = ?, Last_updated_date = ?, Service_Request = ?  WHERE Notes_ID = ? AND Incident = ?";
 
                 insertValues.push(responseList.Notes);
                 insertValues.push(responseList.Notes_type);
@@ -589,9 +589,9 @@
                 insertValues.push(responseList.MobileCreatedBy);
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.Last_updated_date);
-                insertValues.push(responseList.Incident);
-                insertValues.push(responseList.Notes_ID);
                 insertValues.push(responseList.Service_Request);
+                insertValues.push(responseList.Notes_ID);
+                insertValues.push(responseList.Incident);
 
                 // console.log("SRNOTES UPDATE VALUES =====> " + insertValues);
 

@@ -1,4 +1,4 @@
-app.controller('taskOverFlowController', function ($scope, $http, $state, $rootScope, cloudService, valueService, constantService, localService,ofscService) {
+app.controller('taskOverFlowController', function ($scope, $http, $state, $rootScope, cloudService, valueService, constantService, localService, ofscService) {
 
     $scope.myVar = false;
 
@@ -33,7 +33,9 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
         console.log(valueService.getTask());
 
         if (valueService.getTask().Country == "People's Republic of China") {
+
             if (valueService.getNetworkStatus()) {
+
                 var map = new BMap.Map("allmap");
 
                 map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
@@ -70,7 +72,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
             if (firstload) {
                 if (valueService.getNetworkStatus()) {
                     map = new google.maps.Map(document.getElementById('map'), {
-                        center: { lat: -34.397, lng: 150.644 },
+                        center: {lat: -34.397, lng: 150.644},
                         zoom: 8
                     });
 
@@ -195,7 +197,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
             $rootScope.selectedItem = 1;
             $rootScope.showTaskDetail = false;
         }
-       
+
     };
 
     $scope.goToOnsiteReq = function () {

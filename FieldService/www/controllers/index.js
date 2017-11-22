@@ -819,7 +819,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                     $rootScope.apicall = true;
 
-                    cloudService.getSRAttachmentList(strArray, function (response) {
+                    cloudService.getSRAttachmentList(srNumberArray, function (response) {
 
                         console.log("SRATTACHMENT");
 
@@ -1253,7 +1253,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 $rootScope.apicall = true;
 
-                cloudService.getSRAttachmentList(strArray, function (response) {
+                cloudService.getSRAttachmentList(srNumberArray, function (response) {
 
                     console.log("SRATTACHMENT");
 

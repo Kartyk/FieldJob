@@ -957,7 +957,7 @@
                 };
             }
 
-            console.log("DATA " + data);
+            console.log("DATA " + JSON.stringify(data));
 
             $http({
 
@@ -972,7 +972,7 @@
 
             }).success(function (response) {
 
-                console.log("DownloadAttachment Response " + JSON.stringify(response));
+                // console.log("DownloadAttachment Response " + JSON.stringify(response));
 
                 callback(response);
 
@@ -1474,77 +1474,97 @@
         }
 
         function OfscActions(activateId, isAccept, callback) {
+
             var data = {
                 "resourceId": constantService.getUser().OFSCId,
                 "date": moment(new Date()).utcOffset(constantService.getTimeZone()).format('YYYY-MM-DD')
             };
+
             ofscService.activate_resource(data, function (response) {
 
                 if (response != undefined && response != null) {
 
                     console.log("ACTIVATE RESOURCE " + JSON.stringify(response));
 
-                    var updateStatus
+                    var updateStatus = {};
 
                     if (isAccept) {
+
                         updateStatus =
                             {
                                 "activityId": activateId,
                                 "XA_TASK_STATUS": "8"
                             }
-                    }
-                    else {
+
+                    } else {
+
                         updateStatus =
                             {
                                 "activityId": activateId,
                                 "XA_TASK_STATUS": "3"
                             }
                     }
+
                     ofscService.updateStatus(updateStatus, function (response) {
 
                         var activityDetails =
                             {
                                 "activityId": activateId,
-
                             }
 
                         ofscService.activityDetails(activateId, function (response) {
 
                             if (response != undefined && response.items != undefined && response.items.length > 0) {
-                                var startActivity = false
+
+                                var startActivity = false;
+
                                 angular.forEach(response.items, function (item) {
 
                                     var date = new Date(item.date);
 
                                     if (date.setHours(0, 0, 0, 0) == new Date().setHours(0, 0, 0, 0)) {
-                                        startActivity = true
+
+                                        startActivity = true;
+
                                         var startActivityData =
                                             {
                                                 "activityId": response.items[0].activityId,
-
                                             }
-                                        console.log("startActivityData*****" + startActivityData.activityId)
+
+                                        console.log("startActivityData*****" + startActivityData.activityId);
+
                                         ofscService.start_activity(startActivityData, function (response) {
 
                                             if (!isAccept) {
+
                                                 var complete = {"activityId": startActivityData.activityId};
+
                                                 console.log("complete_activity*****" + complete.activityId);
-                                                var updateTaskSegement={"activityId": startActivityData.activityId,"XA_TASK_STATUS": "3"};
+
+                                                var updateTaskSegement = {
+                                                    "activityId": startActivityData.activityId,
+                                                    "XA_TASK_STATUS": "3"
+                                                };
+
                                                 console.log("updateTaskSegement******" + updateTaskSegement);
+
                                                 ofscService.updateStatus(updateTaskSegement, function (response) {
-                                              if(response){
-                                                ofscService.complete_activity(complete, function (response) {
-                                                    callback();
-                                                  })
-                                                }
-                                              });
-                                            }
-                                            else {
+
+                                                    if (response) {
+                                                        ofscService.complete_activity(complete, function (response) {
+                                                            callback();
+                                                        })
+                                                    }
+                                                });
+
+                                            } else {
+
                                                 callback();
                                             }
-                                        })
+                                        });
                                     }
-                                })
+                                });
+
                                 if (!startActivity) {
 
                                     callback();
@@ -1557,9 +1577,8 @@
                                 //    })
                                 //}
                             }
-
-                        })
-                    })
+                        });
+                    });
                 }
             });
         }
