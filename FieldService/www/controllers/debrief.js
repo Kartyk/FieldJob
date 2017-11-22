@@ -2451,7 +2451,16 @@
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
-                    ctx.fillText($scope.summary.taskObject.Customer_Name, 30, 112);
+                    var c=0,isCustBig = false;
+                    var name = $scope.summary.taskObject.Customer_Name.match(/(.{1,25})/g);
+                    if (name.length == 1)
+                        ctx.fillText(name[0], 30, 112);
+                    else {
+                        isCustBig = true;
+                        for (c = 0; c < name.length; c++) {
+                            ctx.fillText(name[c], 30, 112 + c * 13);
+                        }
+                    }
                     //var isCustBig = false;
                     //if ($scope.summary.taskObject.Customer_Name) {
                     //    var splitTitle = ctx.splitTextToSize($filter('translate')($scope.summary.taskObject.Customer_Name), 150);
@@ -2494,52 +2503,54 @@
 
                     if ($scope.summary.taskObject.times[0].Duration)
                         ctx.fillText($scope.summary.taskObject.times[0].Duration, 810, 112);
-
+                    var custBigYvalue = 0;
+                    if (isCustBig)
+                        custBigYvalue = 10;
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('服务请求', 30, 138);
+                    ctx.fillText('服务请求', 30, 138 + custBigYvalue);
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
 
                     if ($scope.summary.taskObject.Service_Request)
-                        ctx.fillText($scope.summary.taskObject.Service_Request, 30, 152);
+                        ctx.fillText($scope.summary.taskObject.Service_Request, 30, 152 + custBigYvalue);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('现场服务号', 280, 138);
+                    ctx.fillText('现场服务号', 280, 138 + custBigYvalue);
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
 
                     if ($scope.summary.taskObject.Task_Number)
-                        ctx.fillText($scope.summary.taskObject.Task_Number, 280, 152);
+                        ctx.fillText($scope.summary.taskObject.Task_Number, 280, 152 + custBigYvalue);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('工作描述', 530, 138);
+                    ctx.fillText('工作描述', 530, 138 + custBigYvalue);
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
-                    ctx.fillText('To run the field', 530, 152);
+                    ctx.fillText('To run the field', 530, 152 + custBigYvalue);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('产品系列', 30, 182);
+                    ctx.fillText('产品系列', 30, 182 + custBigYvalue);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('系统序列号/产品序列号', 280, 182);
+                    ctx.fillText('系统序列号/产品序列号', 280, 182 + custBigYvalue);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('标签#', 530, 182);
+                    ctx.fillText('标签#', 530, 182 + custBigYvalue);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('原始订单号#', 810, 182);
+                    ctx.fillText('原始订单号#', 810, 182 + custBigYvalue);
 
-                    var ibyvalue = 196;
+                    var ibyvalue = 196 + custBigYvalue;
 
                     if ($scope.summary.taskObject.InstallBase) {
 
