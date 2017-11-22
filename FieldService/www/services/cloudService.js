@@ -1407,11 +1407,17 @@
                                         ofscService.start_activity(startActivityData, function (response) {
 
                                             if (!isAccept) {
-                                                var complete = {"activityId": startActivityData.activityId}
-                                                console.log("complete_activity*****" + complete.activityId)
+                                                var complete = {"activityId": startActivityData.activityId};
+                                                console.log("complete_activity*****" + complete.activityId);
+                                                var updateTaskSegement={"activityId": startActivityData.activityId,"XA_TASK_STATUS": "3"};
+                                                console.log("updateTaskSegement******" + updateTaskSegement);
+                                                ofscService.updateStatus(updateTaskSegement, function (response) {
+                                              if(response){
                                                 ofscService.complete_activity(complete, function (response) {
                                                     callback();
-                                                })
+                                                  })
+                                                }
+                                              });
                                             }
                                             else {
                                                 callback();
