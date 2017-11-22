@@ -20,6 +20,7 @@
         service.getInternalList = getInternalList;
         service.getInstallBaseList = getInstallBaseList;
         service.getSRNotesList = getSRNotesList;
+        service.getAttachmentList = getAttachmentList;
         service.getSRAttachmentList = getSRAttachmentList;
         service.getContactList = getContactList;
         service.getNoteList = getNoteList;
@@ -264,6 +265,8 @@
             }).error(function (error) {
 
                 console.log("Install Base Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
@@ -306,6 +309,60 @@
             }).error(function (error) {
 
                 console.log("SR Notes Error " + JSON.stringify(error));
+
+                callback("error");
+            });
+        }
+
+        function getAttachmentList(callback) {
+
+            $http({
+
+                method: 'GET',
+                url: url + 'FileID/to_getfileid?Id=' + constantService.getResourceId(),
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getChargeBackId()
+                }
+
+            }).success(function (response) {
+
+                console.log("Attachment Response " + JSON.stringify(response));
+
+                $rootScope.apicall = true;
+
+                var attachmentArray = [];
+
+                var filePath = cordova.file.dataDirectory;
+
+                angular.forEach(response.FileID, function (item) {
+
+                    var attachmentObject = {
+                        Attachment_Id: item.Attachments_Id,
+                        File_Path: filePath,
+                        File_Name: item.User_File_Name,
+                        File_Type: item.Content_type,
+                        Type: "O",
+                        AttachmentType: "O",
+                        Created_Date: item.Date_Created,
+                        Task_Number: item.Task_Number,
+                        SRID: ""
+                    };
+
+                    attachmentArray.push(attachmentObject);
+                });
+
+                localService.insertAttachmentList(attachmentArray, function (result) {
+
+                    callback("success");
+                });
+
+            }).error(function (error) {
+
+                console.log("Attachment Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
@@ -332,15 +389,29 @@
 
                 var attachmentArray = [];
 
+                var filePath = cordova.file.dataDirectory;
+
                 angular.forEach(response.Attachment_by_SRs, function (item) {
 
                     angular.forEach(item.AttachmentbySR, function (object) {
 
-                        attachmentArray.push(object);
+                        var attachmentObject = {
+                            Attachment_Id: object.File_Attachment_ID,
+                            File_Path: filePath,
+                            File_Name: object.User_File_Name,
+                            File_Type: object.Content_Type,
+                            Type: "S",
+                            AttachmentType: "S",
+                            Created_Date: object.Date_Created,
+                            Task_Number: "",
+                            SRID: object.SRID
+                        };
+
+                        attachmentArray.push(attachmentObject);
                     });
                 });
 
-                localService.insertSRAttachmentList(attachmentArray, function (result) {
+                localService.insertAttachmentList(attachmentArray, function (result) {
 
                     callback("success");
                 });
@@ -348,6 +419,8 @@
             }).error(function (error) {
 
                 console.log("SR Attachment Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
@@ -379,6 +452,8 @@
             }).error(function (error) {
 
                 console.log("Contact Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
@@ -410,6 +485,8 @@
             }).error(function (error) {
 
                 console.log("Note Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
@@ -491,6 +568,8 @@
             }).error(function (error) {
 
                 console.log("OverTime Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
@@ -520,6 +599,8 @@
             }).error(function (error) {
 
                 console.log("ShiftCode Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
@@ -549,6 +630,8 @@
             }).error(function (error) {
 
                 console.log("Charge Type Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
@@ -578,6 +661,8 @@
             }).error(function (error) {
 
                 console.log("Charge Method Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
@@ -607,6 +692,8 @@
             }).error(function (error) {
 
                 console.log("Field Job Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
@@ -636,6 +723,8 @@
             }).error(function (error) {
 
                 console.log("WorkType Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
@@ -666,6 +755,8 @@
             }).error(function (error) {
 
                 console.log("Item Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
@@ -695,6 +786,8 @@
             }).error(function (error) {
 
                 console.log("Currency Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
@@ -724,6 +817,8 @@
             }).error(function (error) {
 
                 console.log("ExpenseType Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
@@ -753,6 +848,8 @@
             }).error(function (error) {
 
                 console.log("NoteType Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
@@ -837,22 +934,45 @@
             });
         }
 
-        function downloadAttachment(taskNumber, attachmentId, callback) {
+        function downloadAttachment(attachmentObject, callback) {
+
+            var data = {};
+
+            if (attachmentObject.Task_Number != undefined && attachmentObject.Task_Number != null && attachmentObject.Task_Number != "") {
+
+                data = {
+                    "path": "/tasks",
+                    "TaskID": attachmentObject.Task_Number,
+                    "IncidentID": "",
+                    "FileAttachmentID": attachmentObject.Attachment_Id
+                };
+
+            } else if (attachmentObject.SRID != undefined && attachmentObject.SRID != null && attachmentObject.SRID != "") {
+
+                data = {
+                    "path": "/incidents",
+                    "TaskID": "",
+                    "IncidentID": attachmentObject.SRID,
+                    "FileAttachmentID": attachmentObject.Attachment_Id
+                };
+            }
+
+            console.log("DATA " + data);
 
             $http({
 
-                method: 'GET',
-                url: url + 'DownloadAttachment/tasks?taskId=' + taskNumber
-                + '&fileAttachmentId=' + attachmentId,
+                method: 'POST',
+                url: url + 'download_Attachment/download_attachments',
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getChargeBackId()
-                }
+                    "oracle-mobile-backend-id": constantService.getTaskBackId()
+                },
+                data: data
 
             }).success(function (response) {
 
-                // console.log("DownloadAttachment Response " + JSON.stringify(response));
+                console.log("DownloadAttachment Response " + JSON.stringify(response));
 
                 callback(response);
 

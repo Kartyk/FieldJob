@@ -7,30 +7,26 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
     $rootScope.closed = false;
 
     $scope.ProductQuantity = 1;
+
     $scope.isFutureDateInTodo = valueService.getIfFutureDateTask();
+
     $scope.toggle = function () {
 
         $scope.myVar = !$scope.myVar;
     };
 
+    $scope.noteArray = [];
+
     $scope.noteArray = valueService.getTaskNotes();
 
-    console.log("SRNOTE ARRAY " + JSON.stringify(valueService.getSRTaskNotes()));
-
-    if (valueService.getSRTaskNotes().length > 0) {
-
-        angular.forEach(valueService.getSRTaskNotes(), function (item) {
-
-            $scope.noteArray.push(item);
-        });      
-    }
-
-    console.log("NOTE ARRAY " + JSON.stringify($scope.noteArray));
-
     $scope.attachmentArray = valueService.getTaskAttachment();
-    $scope.attachments=[];
-    angular.forEach($scope.attachmentArray,function (attachment) {
-        var attachmentObject={};
+
+    $scope.attachments = [];
+
+    angular.forEach($scope.attachmentArray, function (attachment) {
+
+        var attachmentObject = {};
+
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 
             fs.root.getFile(attachment.File_Name, {create: true, exclusive: false}, function (fileEntry) {
@@ -48,25 +44,19 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
                         attachment.contentType = attachment.File_Type;
 
                         attachment.filename = attachment.File_Name.split(".")[0];
+
                         attachment.Date_Created = attachment.Created_Date;
-                        
+
                         attachment.filetype = attachment.File_Name.split(".")[1];
-                        $scope.$apply()
-                        // if (attachment.AttachmentType == "D") {
 
-                         //   $scope.attachments.push(attachmentObject);
-
-                        // } else if (attachment.AttachmentType == "M") {
-                        //
-                        //     $scope.image.push(attachmentObject)
-                        // }
+                        $scope.$apply();
                     };
 
                     reader.readAsDataURL(file);
                 });
             });
         });
-    })
+    });
 
     $scope.openResource = function (item) {
 
@@ -87,13 +77,13 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
     }
 
     $scope.add = function () {
-        if($scope.title!="")
-        {
-        $scope.tasks.push($scope.title);
-        //$scope.title='';
-        $scope.TodoForm.title.$setPristine();
-        $scope.TodoForm.title.$setPristine(true);
-        $scope.title = '';
+
+        if ($scope.title != "") {
+
+            $scope.tasks.push($scope.title);
+            $scope.TodoForm.title.$setPristine();
+            $scope.TodoForm.title.$setPristine(true);
+            $scope.title = '';
         }
     };
 

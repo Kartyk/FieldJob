@@ -95,10 +95,14 @@
         service.getInternalList = getInternalList;
         service.getSRNotesList = getSRNotesList;
         service.getSRNotesListFull = getSRNotesListFull;
+        service.getSRAttachmentList = getSRAttachmentList;
+        service.getSRAttachmentListFull = getSRAttachmentListFull;
         service.getInstallBaseList = getInstallBaseList;
         service.getContactList = getContactList;
         service.getNoteList = getNoteList;
         service.getAttachmentList = getAttachmentList;
+        service.getAttachmentListIncident = getAttachmentListIncident;
+        service.getAttachmentListType = getAttachmentListType;
         service.getProjectList = getProjectList;
 
         service.getOverTimeList = getOverTimeList;
@@ -165,11 +169,15 @@
                         }, function (tx, error) {
 
                             // console.log("TASK SELECT ERROR: " + error.message);
+
+                            deferred.reject(error);
                         });
 
                     }, function (error) {
 
                         // console.log("TASK SELECT TRANSACTION ERROR: " + error.message);
+
+                        deferred.reject(error);
                     });
 
                     // console.log("TASK OBJECT =====> " + JSON.stringify(responseList[i]));
@@ -196,7 +204,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Task SET Job_Description = ?, Duration = ?, Task_Status = ?, Customer_Name =?, Street_Address = ?, City = ?, State = ?, Country = ?, Zip_Code = ?, Expense_Method = ?, Labor_Method = ?, Travel_Method = ?, Material_Method = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?, Activity_Id = ?, Work_Phone_Number = ?, Mobile_Phone_Number = ? , Address1 = ? WHERE Task_Number = ?";
+                var sqlUpdate = "UPDATE Task SET Job_Description = ?, Duration = ?, Task_Status = ?, Customer_Name =?, Street_Address = ?, City = ?, State = ?, Country = ?, Zip_Code = ?, Expense_Method = ?, Labor_Method = ?, Travel_Method = ?, Material_Method = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?, Activity_Id = ?, Work_Phone_Number = ?, Mobile_Phone_Number = ?, Address1 = ?, SR_ID = ? WHERE Task_Number = ?";
 
                 insertValues.push(responseList.Job_Description);
                 insertValues.push(responseList.Duration);
@@ -219,6 +227,7 @@
                 insertValues.push(responseList.Work_Phone_Number);
                 insertValues.push(responseList.Mobile_Phone_Number);
                 insertValues.push(responseList.Address1);
+                insertValues.push(responseList.SR_ID);
                 insertValues.push(responseList.Task_Number);
 
                 // console.log("TASK UPDATE VALUES =====> " + insertValues);
@@ -232,11 +241,15 @@
                 }, function (tx, error) {
 
                     // console.log("TASK UPDATE ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("TASK UPDATE TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -246,7 +259,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Task VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Task VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Task_Number);
                 insertValues.push(responseList.Job_Description);
@@ -274,6 +287,7 @@
                 insertValues.push(responseList.Work_Phone_Number);
                 insertValues.push(responseList.Mobile_Phone_Number);
                 insertValues.push(responseList.Address1);
+                insertValues.push(responseList.SR_ID);
 
                 // console.log("TASK INSERT VALUES =====> " + insertValues);
 
@@ -286,11 +300,15 @@
                 }, function (tx, error) {
 
                     // console.log("TASK INSERT ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("TASK INSERT TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -330,11 +348,15 @@
                         }, function (tx, error) {
 
                             // console.log("INTERNAL SELECT ERROR: " + error.message);
+
+                            deferred.reject(error);
                         });
 
                     }, function (error) {
 
                         // console.log("INTERNAL SELECT TRANSACTION ERROR: " + error.message);
+
+                        deferred.reject(error);
                     });
 
                     // console.log("INTERNAL OBJECT =====> " + JSON.stringify(responseList[i]));
@@ -379,11 +401,15 @@
                 }, function (tx, error) {
 
                     // console.log("INTERNAL UPDATE ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("INTERNAL UPDATE TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -411,11 +437,15 @@
                 }, function (tx, error) {
 
                     // console.log("INTERNAL INSERT ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("INTERNAL INSERT TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -515,11 +545,15 @@
                         }, function (tx, error) {
 
                             // console.log("SRNOTES SELECT ERROR: " + error.message);
+
+                            deferred.reject(error);
                         });
 
                     }, function (error) {
 
                         // console.log("SRNOTES SELECT TRANSACTION ERROR: " + error.message);
+
+                        deferred.reject(error);
                     });
 
                     // console.log("SRNOTES OBJECT =====> " + JSON.stringify(responseList));
@@ -559,22 +593,26 @@
                 insertValues.push(responseList.Notes_ID);
                 insertValues.push(responseList.Service_Request);
 
-                //console.log("SRNOTES UPDATE VALUES =====> " + insertValues);
+                // console.log("SRNOTES UPDATE VALUES =====> " + insertValues);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
                     defer.resolve(res);
 
-                    //console.log("SRNOTES ROW AFFECTED: " + res.rowsAffected);
+                    // console.log("SRNOTES ROW AFFECTED: " + res.rowsAffected);
 
                 }, function (tx, error) {
 
-                    //console.log("SRNOTES UPDATE ERROR: " + error.message);
+                    // console.log("SRNOTES UPDATE ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
-                //console.log("SRNOTES UPDATE TRANSACTION ERROR: " + error.message);
+                // console.log("SRNOTES UPDATE TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -597,22 +635,26 @@
                 insertValues.push(responseList.Last_updated_date);
                 insertValues.push(responseList.Incident);
 
-                //console.log("SRNOTES INSERT VALUES =====> " + insertValues);
+                // console.log("SRNOTES INSERT VALUES =====> " + insertValues);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
                     defer.resolve(res);
 
-                    //console.log("SRNOTES INSERT ID: " + res.insertId);
+                    // console.log("SRNOTES INSERT ID: " + res.insertId);
 
                 }, function (tx, error) {
 
-                    //console.log("SRNOTES INSERT ERROR: " + error.message);
+                    // console.log("SRNOTES INSERT ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
-                //console.log("SRNOTES INSERT TRANSACTION ERROR: " + error.message);
+                // console.log("SRNOTES INSERT TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -632,13 +674,13 @@
 
                         var sqlSelect = "SELECT * FROM SRAttachment WHERE SRID = " + responseList[i].SRID;
 
-                        //console.log("SRATTACHMENT  ====> " + sqlSelect);
+                        // console.log("SRATTACHMENT  ====> " + sqlSelect);
 
                         transaction.executeSql(sqlSelect, [], function (tx, res) {
 
                             var rowLength = res.rows.length;
 
-                            //console.log("SRATTACHMENT LENGTH ====> " + rowLength);
+                            // console.log("SRATTACHMENT LENGTH ====> " + rowLength);
 
                             if (rowLength > 0) {
 
@@ -651,15 +693,19 @@
 
                         }, function (tx, error) {
 
-                            //console.log("SRATTACHMENT SELECT ERROR: " + error.message);
+                            // console.log("SRATTACHMENT SELECT ERROR: " + error.message);
+
+                            deferred.reject(error);
                         });
 
                     }, function (error) {
 
-                        //console.log("SRATTACHMENT SELECT TRANSACTION ERROR: " + error.message);
+                        // console.log("SRATTACHMENT SELECT TRANSACTION ERROR: " + error.message);
+
+                        deferred.reject(error);
                     });
 
-                    //console.log("SRATTACHMENT OBJECT =====> " + JSON.stringify(responseList));
+                    // console.log("SRATTACHMENT OBJECT =====> " + JSON.stringify(responseList));
 
                     promises.push(deferred.promise);
 
@@ -693,22 +739,26 @@
                 insertValues.push(responseList.Date_Last_Updated);
                 insertValues.push(responseList.SRID);
 
-                //console.log("SRATTACHMENT UPDATE VALUES =====> " + insertValues);
+                // console.log("SRATTACHMENT UPDATE VALUES =====> " + insertValues);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
                     defer.resolve(res);
 
-                    //console.log("SRATTACHMENT ROW AFFECTED: " + res.rowsAffected);
+                    // console.log("SRATTACHMENT ROW AFFECTED: " + res.rowsAffected);
 
                 }, function (tx, error) {
 
-                    //console.log("SRATTACHMENT UPDATE ERROR: " + error.message);
+                    // console.log("SRATTACHMENT UPDATE ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
-                //console.log("SRATTACHMENT UPDATE TRANSACTION ERROR: " + error.message);
+                // console.log("SRATTACHMENT UPDATE TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -728,22 +778,26 @@
                 insertValues.push(responseList.User_File_Name);
                 insertValues.push(responseList.Date_Last_Updated);
 
-                //console.log("SRATTACHMENT INSERT VALUES =====> " + insertValues);
+                // console.log("SRATTACHMENT INSERT VALUES =====> " + insertValues);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
                     defer.resolve(res);
 
-                    //console.log("SRATTACHMENT INSERT ID: " + res.insertId);
+                    // console.log("SRATTACHMENT INSERT ID: " + res.insertId);
 
                 }, function (tx, error) {
 
-                    //console.log("SRATTACHMENT INSERT ERROR: " + error.message);
+                    // console.log("SRATTACHMENT INSERT ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
-                //console.log("SRATTACHMENT INSERT TRANSACTION ERROR: " + error.message);
+                // console.log("SRATTACHMENT INSERT TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -783,11 +837,15 @@
                         }, function (tx, error) {
 
                             // console.log("INSTALLBASE SELECT ERROR: " + error.message);
+
+                            deferred.reject(error);
                         });
 
                     }, function (error) {
 
                         // console.log("INSTALLBASE SELECT TRANSACTION ERROR: " + error.message);
+
+                        deferred.reject(error);
                     });
 
                     // console.log("INSTALLBASE OBJECT =====> " + JSON.stringify(responseList));
@@ -838,11 +896,15 @@
                 }, function (tx, error) {
 
                     // console.log("INSTALLBASE UPDATE ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("INSTALLBASE UPDATE TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -876,11 +938,15 @@
                 }, function (tx, error) {
 
                     // console.log("INSTALLBASE INSERT ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("INSTALLBASE INSERT TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -920,11 +986,15 @@
                         }, function (tx, error) {
 
                             // console.log("CONTACT SELECT ERROR: " + error.message);
+
+                            deferred.reject(error);
                         });
 
                     }, function (error) {
 
                         // console.log("CONTACT SELECT TRANSACTION ERROR: " + error.message);
+
+                        deferred.reject(error);
                     });
 
                     // console.log("CONTACT OBJECT =====> " + JSON.stringify(responseList));
@@ -979,11 +1049,15 @@
                 }, function (tx, error) {
 
                     // console.log("CONTACT UPDATE ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("CONTACT UPDATE TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -1021,11 +1095,15 @@
                 }, function (tx, error) {
 
                     // console.log("CONTACT INSERT ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("CONTACT INSERT TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -1065,11 +1143,15 @@
                         }, function (tx, error) {
 
                             // console.log("NOTE SELECT ERROR: " + error.message);
+
+                            deferred.reject(error);
                         });
 
                     }, function (error) {
 
                         // console.log("NOTE SELECT TRANSACTION ERROR: " + error.message);
+
+                        deferred.reject(error);
                     });
 
                     // console.log("NOTE OBJECT =====> " + JSON.stringify(responseList));
@@ -1096,15 +1178,19 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Note SET Notes = ?, Notes_type = ?, Created_By = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?  WHERE ID = ? AND Task_Number =?";
+                var sqlUpdate = "UPDATE Note SET Notes = ?, Notes_type = ?, Note_Description = ?, Created_By = ?, MobileCreatedBy = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?, Last_updated_date = ?, SR_ID = ?  WHERE ID = ? AND Task_Number =?";
 
                 insertValues.push(responseList.Notes);
                 insertValues.push(responseList.Notes_type);
+                insertValues.push(responseList.Note_Description);
                 insertValues.push(responseList.Created_By);
+                insertValues.push(responseList.MobileCreatedBy);
                 insertValues.push(responseList.Service_Request);
                 insertValues.push(responseList.Assigned);
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.End_Date);
+                insertValues.push(responseList.Last_updated_date);
+                insertValues.push(responseList.SR_ID);
                 insertValues.push(responseList.ID);
                 insertValues.push(responseList.Task_Number);
 
@@ -1119,11 +1205,15 @@
                 }, function (tx, error) {
 
                     // console.log("NOTE UPDATE ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("NOTE UPDATE TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -1133,17 +1223,21 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Note VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Note VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.ID);
                 insertValues.push(responseList.Notes);
                 insertValues.push(responseList.Notes_type);
+                insertValues.push(responseList.Note_Description);
                 insertValues.push(responseList.Created_By);
+                insertValues.push(responseList.MobileCreatedBy);
                 insertValues.push(responseList.Task_Number);
                 insertValues.push(responseList.Service_Request);
                 insertValues.push(responseList.Assigned);
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.End_Date);
+                insertValues.push(responseList.Last_updated_date);
+                insertValues.push(responseList.SR_ID);
 
                 // console.log("NOTE INSERT VALUES =====> " + insertValues);
 
@@ -1156,11 +1250,15 @@
                 }, function (tx, error) {
 
                     // console.log("NOTE INSERT ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("NOTE INSERT TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -1178,7 +1276,7 @@
 
                     db.transaction(function (transaction) {
 
-                        var sqlSelect = "SELECT * FROM Attachment WHERE Attachment_Id = " + responseList[i].Attachment_Id + " AND Task_Number = " + responseList[i].Task_Number;
+                        var sqlSelect = "SELECT * FROM Attachment WHERE Attachment_Id = " + responseList[i].Attachment_Id;
 
                         // console.log("ATTACHMENT  ====> " + sqlSelect);
 
@@ -1200,11 +1298,15 @@
                         }, function (tx, error) {
 
                             // console.log("ATTACHMENT SELECT ERROR: " + error.message);
+
+                            deferred.reject(error);
                         });
 
                     }, function (error) {
 
                         // console.log("ATTACHMENT SELECT TRANSACTION ERROR: " + error.message);
+
+                        deferred.reject(error);
                     });
 
                     // console.log("ATTACHMENT OBJECT =====> " + JSON.stringify(responseList[i]));
@@ -1231,7 +1333,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Attachment SET File_Name = ?, File_Type = ?, File_Path = ?, Type = ?, AttachmentType = ?,Created_Date=? WHERE Attachment_Id = ? AND Task_Number = ?";
+                var sqlUpdate = "UPDATE Attachment SET File_Name = ?, File_Type = ?, File_Path = ?, Type = ?, AttachmentType = ?,Created_Date = ?, Task_Number = ?, SRID = ? WHERE Attachment_Id = ?";
 
                 insertValues.push(responseList.File_Name);
                 insertValues.push(responseList.File_Type);
@@ -1239,8 +1341,10 @@
                 insertValues.push(responseList.Type);
                 insertValues.push(responseList.AttachmentType);
                 insertValues.push(responseList.Created_Date);
-                insertValues.push(responseList.Attachment_Id);
                 insertValues.push(responseList.Task_Number);
+                insertValues.push(responseList.SRID);
+                insertValues.push(responseList.Attachment_Id);
+
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
@@ -1251,11 +1355,15 @@
                 }, function (tx, error) {
 
                     // console.log("ATTACHMENT UPDATE ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("ATTACHMENT UPDATE TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -1265,7 +1373,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Attachment VALUES (?, ?, ?, ?, ?, ?, ?,?)";
+                var sqlInsert = "INSERT INTO Attachment VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Attachment_Id);
                 insertValues.push(responseList.File_Name);
@@ -1275,7 +1383,7 @@
                 insertValues.push(responseList.AttachmentType);
                 insertValues.push(responseList.Created_Date);
                 insertValues.push(responseList.Task_Number);
-
+                insertValues.push(responseList.SRID);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
@@ -1286,11 +1394,15 @@
                 }, function (tx, error) {
 
                     // console.log("ATTACHMENT INSERT ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("ATTACHMENT INSERT TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -1427,11 +1539,15 @@
                         }, function (tx, error) {
 
                             // console.log("OVERTIME SELECT ERROR: " + error.message);
+
+                            deferred.reject(error);
                         });
 
                     }, function (error) {
 
                         // console.log("OVERTIME SELECT TRANSACTION ERROR: " + error.message);
+
+                        deferred.reject(error);
                     });
 
                     // console.log("OVERTIME OBJECT =====> " + JSON.stringify(responseList[i]));
@@ -1478,11 +1594,15 @@
                 }, function (tx, error) {
 
                     // console.log("OVERTIME UPDATE ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("OVERTIME UPDATE TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -1512,11 +1632,15 @@
                 }, function (tx, error) {
 
                     // console.log("OVERTIME INSERT ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("OVERTIME INSERT TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -1556,11 +1680,15 @@
                         }, function (tx, error) {
 
                             // console.log("SHIFTCODE SELECT ERROR: " + error.message);
+
+                            deferred.reject(error);
                         });
 
                     }, function (error) {
 
                         // console.log("SHIFTCODE SELECT TRANSACTION ERROR: " + error.message);
+
+                        deferred.reject(error);
                     });
 
                     // console.log("SHIFTCODE OBJECT =====> " + JSON.stringify(responseList[i]));
@@ -1607,11 +1735,15 @@
                 }, function (tx, error) {
 
                     // console.log("SHIFTCODE UPDATE ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("SHIFTCODE UPDATE TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -1641,11 +1773,15 @@
                 }, function (tx, error) {
 
                     // console.log("SHIFTCODE INSERT ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("SHIFTCODE INSERT TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -1685,11 +1821,15 @@
                         }, function (tx, error) {
 
                             // console.log("CHARGETYPE SELECT ERROR: " + error.message);
+
+                            deferred.reject(error);
                         });
 
                     }, function (error) {
 
                         // console.log("CHARGETYPE SELECT TRANSACTION ERROR: " + error.message);
+
+                        deferred.reject(error);
                     });
 
                     // console.log("CHARGETYPE OBJECT =====> " + JSON.stringify(responseList[i]));
@@ -1730,11 +1870,15 @@
                 }, function (tx, error) {
 
                     // console.log("CHARGETYPE UPDATE ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("CHARGETYPE UPDATE TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -1758,11 +1902,15 @@
                 }, function (tx, error) {
 
                     // console.log("CHARGETYPE INSERT ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("CHARGETYPE INSERT TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -1802,11 +1950,15 @@
                         }, function (tx, error) {
 
                             // console.log("CHARGEMETHOD SELECT ERROR: " + error.message);
+
+                            deferred.reject(error);
                         });
 
                     }, function (error) {
 
                         // console.log("CHARGEMETHOD SELECT TRANSACTION ERROR: " + error.message);
+
+                        deferred.reject(error);
                     });
 
                     // console.log("CHARGEMETHOD OBJECT =====> " + JSON.stringify(responseList[i]));
@@ -1847,11 +1999,15 @@
                 }, function (tx, error) {
 
                     // console.log("CHARGEMETHOD UPDATE ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("CHARGEMETHOD UPDATE TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -1875,11 +2031,15 @@
                 }, function (tx, error) {
 
                     // console.log("CHARGEMETHOD INSERT ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("CHARGEMETHOD INSERT TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -1919,11 +2079,15 @@
                         }, function (tx, error) {
 
                             // console.log("FIELDJOBNAME SELECT ERROR: " + error.message);
+
+                            deferred.reject(error);
                         });
 
                     }, function (error) {
 
                         // console.log("FIELDJOBNAME SELECT TRANSACTION ERROR: " + error.message);
+
+                        deferred.reject(error);
                     });
 
                     // console.log("FIELDJOBNAME OBJECT =====> " + JSON.stringify(responseList[i]));
@@ -1969,11 +2133,15 @@
                 }, function (tx, error) {
 
                     // console.log("FIELDJOBNAME UPDATE ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("FIELDJOBNAME UPDATE TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -2002,11 +2170,15 @@
                 }, function (tx, error) {
 
                     // console.log("FIELDJOBNAME INSERT ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("FIELDJOBNAME INSERT TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -2046,11 +2218,15 @@
                         }, function (tx, error) {
 
                             // console.log("WORKTYPE SELECT ERROR: " + error.message);
+
+                            deferred.reject(error);
                         });
 
                     }, function (error) {
 
                         // console.log("WORKTYPE SELECT TRANSACTION ERROR: " + error.message);
+
+                        deferred.reject(error);
                     });
 
                     // console.log("WORKTYPE OBJECT =====> " + JSON.stringify(responseList[i]));
@@ -2091,11 +2267,15 @@
                 }, function (tx, error) {
 
                     // console.log("WORKTYPE UPDATE ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("WORKTYPE UPDATE TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -2119,11 +2299,15 @@
                 }, function (tx, error) {
 
                     // console.log("WORKTYPE INSERT ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("WORKTYPE INSERT TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -2163,11 +2347,15 @@
                         }, function (tx, error) {
 
                             // console.log("ITEM SELECT ERROR: " + error.message);
+
+                            deferred.reject(error);
                         });
 
                     }, function (error) {
 
                         // console.log("ITEM SELECT TRANSACTION ERROR: " + error.message);
+
+                        deferred.reject(error);
                     });
 
                     // console.log("ITEM OBJECT =====> " + JSON.stringify(responseList[i]));
@@ -2209,11 +2397,15 @@
                 }, function (tx, error) {
 
                     // console.log("ITEM UPDATE ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("ITEM UPDATE TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -2238,11 +2430,15 @@
                 }, function (tx, error) {
 
                     // console.log("ITEM INSERT ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("ITEM INSERT TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -2282,11 +2478,15 @@
                         }, function (tx, error) {
 
                             // console.log("CURRENCY SELECT ERROR: " + error.message);
+
+                            deferred.reject(error);
                         });
 
                     }, function (error) {
 
                         // console.log("CURRENCY SELECT TRANSACTION ERROR: " + error.message);
+
+                        deferred.reject(error);
                     });
 
                     // console.log("CURRENCY OBJECT =====> " + JSON.stringify(responseList[i]));
@@ -2327,11 +2527,15 @@
                 }, function (tx, error) {
 
                     // console.log("CURRENCY UPDATE ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("CURRENCY UPDATE TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -2355,11 +2559,15 @@
                 }, function (tx, error) {
 
                     // console.log("CURRENCY INSERT ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("CURRENCY INSERT TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -2399,11 +2607,15 @@
                         }, function (tx, error) {
 
                             // console.log("EXPENSETYPE SELECT ERROR: " + error.message);
+
+                            deferred.reject(error);
                         });
 
                     }, function (error) {
 
                         // console.log("EXPENSETYPE SELECT TRANSACTION ERROR: " + error.message);
+
+                        deferred.reject(error);
                     });
 
                     // console.log("EXPENSETYPE OBJECT =====> " + JSON.stringify(responseList[i]));
@@ -2444,11 +2656,15 @@
                 }, function (tx, error) {
 
                     // console.log("EXPENSETYPE UPDATE ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("EXPENSETYPE UPDATE TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -2472,11 +2688,15 @@
                 }, function (tx, error) {
 
                     // console.log("EXPENSETYPE INSERT ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("EXPENSETYPE INSERT TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -2516,11 +2736,15 @@
                         }, function (tx, error) {
 
                             // console.log("NOTETYPE SELECT ERROR: " + error.message);
+
+                            deferred.reject(error);
                         });
 
                     }, function (error) {
 
                         // console.log("NOTETYPE SELECT TRANSACTION ERROR: " + error.message);
+
+                        deferred.reject(error);
                     });
 
                     // console.log("NOTETYPE OBJECT =====> " + JSON.stringify(responseList[i]));
@@ -2561,11 +2785,15 @@
                 }, function (tx, error) {
 
                     // console.log("NOTETYPE UPDATE ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("NOTETYPE UPDATE TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -2589,11 +2817,15 @@
                 }, function (tx, error) {
 
                     // console.log("NOTETYPE INSERT ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("NOTETYPE INSERT TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -2633,11 +2865,15 @@
                         }, function (tx, error) {
 
                             // console.log("TIME SELECT ERROR: " + error.message);
+
+                            deferred.reject(error);
                         });
 
                     }, function (error) {
 
                         // console.log("TIME SELECT TRANSACTION ERROR: " + error.message);
+
+                        deferred.reject(error);
                     });
 
                     // console.log("TIME OBJECT =====> " + JSON.stringify(responseList[i]));
@@ -2697,11 +2933,15 @@
                 }, function (tx, error) {
 
                     // console.log("TIME UPDATE ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("TIME UPDATE TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -2744,11 +2984,15 @@
                 }, function (tx, error) {
 
                     // console.log("TIME INSERT ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("TIME INSERT TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -2788,11 +3032,15 @@
                         }, function (tx, error) {
 
                             // console.log("EXPENSE SELECT ERROR: " + error.message);
+
+                            deferred.reject(error);
                         });
 
                     }, function (error) {
 
                         // console.log("EXPENSE SELECT TRANSACTION ERROR: " + error.message);
+
+                        deferred.reject(error);
                     });
 
                     // console.log("EXPENSE OBJECT =====> " + JSON.stringify(responseList[i]));
@@ -2843,11 +3091,15 @@
                 }, function (tx, error) {
 
                     // console.log("EXPENSE UPDATE ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("EXPENSE UPDATE TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -2881,11 +3133,15 @@
                 }, function (tx, error) {
 
                     // console.log("EXPENSE INSERT ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("EXPENSE INSERT TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -2925,11 +3181,15 @@
                         }, function (tx, error) {
 
                             // console.log("MATERIAL SELECT ERROR: " + error.message);
+
+                            deferred.reject(error);
                         });
 
                     }, function (error) {
 
                         // console.log("MATERIAL SELECT TRANSACTION ERROR: " + error.message);
+
+                        deferred.reject(error);
                     });
 
                     // console.log("MATERIAL OBJECT =====> " + JSON.stringify(responseList[i]));
@@ -2979,11 +3239,15 @@
                 }, function (tx, error) {
 
                     // console.log("MATERIAL UPDATE ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("MATERIAL UPDATE TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -3016,11 +3280,15 @@
                 }, function (tx, error) {
 
                     // console.log("MATERIAL INSERT ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("MATERIAL INSERT TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -3060,11 +3328,15 @@
                         }, function (tx, error) {
 
                             // console.log("NOTES SELECT ERROR: " + error.message);
+
+                            deferred.reject(error);
                         });
 
                     }, function (error) {
 
                         // console.log("NOTES SELECT TRANSACTION ERROR: " + error.message);
+
+                        deferred.reject(error);
                     });
 
                     // console.log("NOTES OBJECT =====> " + JSON.stringify(responseList[i]));
@@ -3111,11 +3383,15 @@
                 }, function (tx, error) {
 
                     // console.log("NOTES UPDATE ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("NOTES UPDATE TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -3145,11 +3421,15 @@
                 }, function (tx, error) {
 
                     // console.log("NOTES INSERT ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("NOTES INSERT TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -3185,11 +3465,15 @@
                 }, function (tx, error) {
 
                     // console.log("ENGINEER SELECT ERROR: " + error.message);
+
+                    deferred.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("ENGINEER SELECT TRANSACTION ERROR: " + error.message);
+
+                deferred.reject(error);
             });
 
             promises.push(deferred.promise);
@@ -3234,11 +3518,15 @@
                 }, function (tx, error) {
 
                     // console.log("ENGINEER UPDATE ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("ENGINEER UPDATE TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -3272,11 +3560,15 @@
                 }, function (tx, error) {
 
                     // console.log("ENGINEER INSERT ERROR: " + error.message);
+
+                    defer.reject(error);
                 });
 
             }, function (error) {
 
                 // console.log("ENGINEER INSERT TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
             });
         };
 
@@ -3995,6 +4287,74 @@
             });
         };
 
+        function getSRAttachmentList(taskId, callback) {
+
+            var value = [];
+
+            return db.transaction(function (transaction) {
+
+                transaction.executeSql("SELECT * FROM SRAttachment WHERE Reference_Number = ? ", [taskId], function (tx, res) {
+
+                    var rowLength = res.rows.length;
+
+                    for (var i = 0; i < rowLength; i++) {
+
+                        value.push(res.rows.item(i));
+                    }
+
+                    // console.log("GET SRATTACHMENT DB ==========> " + JSON.stringify(value));
+
+                    callback(value);
+
+                }, function (tx, error) {
+
+                    // console.log("GET SRATTACHMENT SELECT ERROR: " + error.message);
+
+                    callback(value);
+                });
+
+            }, function (error) {
+
+                // console.log("GET SRATTACHMENT TRANSACTION ERROR: " + error.message);
+
+                callback(value);
+            });
+        };
+
+        function getSRAttachmentListFull(callback) {
+
+            var value = [];
+
+            return db.transaction(function (transaction) {
+
+                transaction.executeSql("SELECT * FROM SRAttachment", [], function (tx, res) {
+
+                    var rowLength = res.rows.length;
+
+                    for (var i = 0; i < rowLength; i++) {
+
+                        value.push(res.rows.item(i));
+                    }
+
+                    // console.log("GET SRATTACHMENT DB ==========> " + JSON.stringify(value));
+
+                    callback(value);
+
+                }, function (tx, error) {
+
+                    // console.log("GET SRATTACHMENT SELECT ERROR: " + error.message);
+
+                    callback(value);
+                });
+
+            }, function (error) {
+
+                // console.log("GET SRATTACHMENT TRANSACTION ERROR: " + error.message);
+
+                callback(value);
+            });
+        };
+
         function getInstallBaseList(taskId, callback) {
 
             var value = [];
@@ -4614,6 +4974,74 @@
             return db.transaction(function (transaction) {
 
                 transaction.executeSql("SELECT * FROM Attachment WHERE Task_Number = ? AND Type = ?", [taskId, type], function (tx, res) {
+
+                    var rowLength = res.rows.length;
+
+                    for (var i = 0; i < rowLength; i++) {
+
+                        value.push(res.rows.item(i));
+                    }
+
+                    // console.log("GET ATTACHMENT DB ==========> " + JSON.stringify(value));
+
+                    callback(value);
+
+                }, function (tx, error) {
+
+                    // console.log("GET ATTACHMENT SELECT ERROR: " + error.message);
+
+                    callback(value);
+                });
+
+            }, function (error) {
+
+                // console.log("GET ATTACHMENT TRANSACTION ERROR: " + error.message);
+
+                callback(value);
+            });
+        };
+
+        function getAttachmentListIncident(taskId, type, callback) {
+
+            var value = [];
+
+            return db.transaction(function (transaction) {
+
+                transaction.executeSql("SELECT * FROM Attachment WHERE SRID = ? AND Type = ?", [taskId, type], function (tx, res) {
+
+                    var rowLength = res.rows.length;
+
+                    for (var i = 0; i < rowLength; i++) {
+
+                        value.push(res.rows.item(i));
+                    }
+
+                    // console.log("GET ATTACHMENT DB ==========> " + JSON.stringify(value));
+
+                    callback(value);
+
+                }, function (tx, error) {
+
+                    // console.log("GET ATTACHMENT SELECT ERROR: " + error.message);
+
+                    callback(value);
+                });
+
+            }, function (error) {
+
+                // console.log("GET ATTACHMENT TRANSACTION ERROR: " + error.message);
+
+                callback(value);
+            });
+        };
+
+        function getAttachmentListType(type, callback) {
+
+            var value = [];
+
+            return db.transaction(function (transaction) {
+
+                transaction.executeSql("SELECT * FROM Attachment WHERE Type = ?", [type], function (tx, res) {
 
                     var rowLength = res.rows.length;
 

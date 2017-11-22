@@ -32,7 +32,6 @@
             installBase: [],
             contacts: [],
             taskNotes: [],
-            taskSRNotes: [],
             taskAttachment: [],
             time: [],
             expense: [],
@@ -82,7 +81,6 @@
 
         service.getContact = getContact;
         service.getTaskNotes = getTaskNotes;
-        service.getSRTaskNotes = getSRTaskNotes;
         service.getTaskAttachment = getTaskAttachment;
 
         service.setTaskId = setTaskId;
@@ -242,17 +240,28 @@
 
             localService.getNoteList(taskObject.Task_Number, function (response) {
 
-                debrief.taskNotes = response;
-            });
+                localService.getSRNotesList(taskObject.Service_Request, function (result) {
 
-            localService.getSRNotesList(taskObject.Service_Request, function (response) {
+                    debrief.taskNotes = response;
 
-                debrief.taskSRNotes = response;
+                    angular.forEach(result, function (item) {
+
+                        debrief.taskNotes.push(item);
+                    });
+                });
             });
 
             localService.getAttachmentList(taskObject.Task_Number, "O", function (response) {
 
-                debrief.taskAttachment = response;
+                localService.getAttachmentListIncident(taskObject.SR_ID, "S", function (result) {
+
+                    debrief.taskAttachment = response;
+
+                    angular.forEach(result, function (item) {
+
+                        debrief.taskAttachment.push(item);
+                    });
+                });
             });
 
             localService.getTimeList(taskObject.Task_Number, function (response) {
@@ -371,11 +380,6 @@
         function getTaskNotes() {
 
             return debrief.taskNotes;
-        };
-
-        function getSRTaskNotes() {
-
-            return debrief.taskSRNotes;
         };
 
         function getTaskAttachment() {
@@ -1189,9 +1193,9 @@
 
             var selDate = new Date(selTask.Start_Date.split(" ")[0]);
 
-            console.log(currDate);
-
-            console.log(selDate);
+            // console.log(currDate);
+            //
+            // console.log(selDate);
 
             if (selDate.getFullYear() > currDate.getFullYear()) {
 
