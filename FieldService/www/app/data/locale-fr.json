@@ -211,11 +211,17 @@
   "Travel- Double Time": "Voyage - Temps double",
   "Labor- Standard": "Main d'œuvre - Standard",
   "Labor- Overtime": "Main d'œuvre - Heures supplémentaires",
-  "Labor- Double Time": "Main d'œuvre - Temps double",
+  "Labor- Double time": "Main d'œuvre - Temps double",
   "Charge\nType": "TYPE DE\n FACTURATION",
   "Charge\nMethod": "méthode de\n facturation",
   "Work\nType": "Type de\n travail",
-  "Task Number": "Numéro de tâche"
+  "Task Number": "Numéro de tâche",
+  "All": "Tout",
+  "Additional Information on Follow-Up": "Informations complémentaires sur le suivi",
+  "Additional Information on Spare Quote": "Informations complémentaires sur devis Équipement de rechange",
+  "Additional Information on Sales Visit": "Informations complémentaires sur visite commerciale",
+  "Additional Information on Sales Lead": "Informations complémentaires sur oportunité commercial",
+  "Please complete engineer signature on the 'Engineer Signature' tab.": "Veuillez compléter la signature de l'ingénieur sur l'onglet «Signature du technicien»."
 
 
 }

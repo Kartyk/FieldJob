@@ -182,7 +182,7 @@
   "ADDITIONAL RECIPIENTS": "其他接收人",
   "Required": "要求",
   "Submit": "提交",
-  "I confirm that I have read, understand and agreed to all terms": "以上条款我确认我已经阅读，明白及同意",
+  "I confirm that I have read, understand and agreed to all terms.": "以上条款我确认我已经阅读，明白及同意",
   "Tap or click below icon to view Field Service Summary report": "点击下面的图标查看现场服务总结报告",
   "Export": "导出",
   "Print": "打印",
@@ -202,6 +202,7 @@
   "Please Enter Valid Email": "请输入有效电子邮件",
   "References": "参考",
   "Quantity": "数量",
-  "Add List":"添加列表",
-  "Field Service Summary Report":"现场服务总结报告"
+  "Add List": "添加列表",
+  "Field Service Summary Report": "现场服务总结报告",
+  "Please complete engineer signature on the 'Engineer Signature' tab.": "請在“工程師簽名”選項卡上填寫工程師簽名。"
 }
