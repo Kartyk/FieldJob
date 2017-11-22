@@ -2440,30 +2440,38 @@
                     //Customer Call heading
                     ctx.fillStyle = "#000";
                     ctx.font = '15px sans-serif';
-                    ctx.fillText('客户具体服务需求', 10, 70);
+                    ctx.fillText('客户具体服务需求', 20, 70);
 
                     //Customer Call Labels and fields
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('客户名', 20, 98);
+                    ctx.fillText('客户名', 30, 98);
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
-                    ctx.fillText($scope.summary.taskObject.Customer_Name, 20, 112);
+                    ctx.fillText($scope.summary.taskObject.Customer_Name, 30, 112);
+                    //var isCustBig = false;
+                    //if ($scope.summary.taskObject.Customer_Name) {
+                    //    var splitTitle = ctx.splitTextToSize($filter('translate')($scope.summary.taskObject.Customer_Name), 150);
+                    //    if (splitTitle.length > 1)
+                    //        isCustBig = true;
+                    //    //doc1.text(25, 110, splitTitle);
+                    //    ctx.fillText(splitTitle, 30, 112);
+                    //}
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('服务日期', 200, 98);
+                    ctx.fillText('服务日期', 280, 98);
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
                     var start = moment.utc($scope.summary.taskObject.times[0].Start_Date).utcOffset(constantService.getTimeZone()).format("DD/MM/YYYY")
                     if (start)
-                        ctx.fillText(start, 200, 112);
+                        ctx.fillText(start, 280, 112);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('结束日期', 350, 98);
+                    ctx.fillText('结束日期', 530, 98);
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
@@ -2473,61 +2481,61 @@
                     if ($scope.summary.taskObject.times[0].End_Date != "" && $scope.summary.taskObject.times[0].End_Date != undefined) {
                         enddate = moment.utc($scope.summary.taskObject.times[0].End_Date).utcOffset(constantService.getTimeZone()).format("DD/MM/YYYY");
                     }
-                    ctx.fillText(enddate, 350, 112);
+                    ctx.fillText(enddate, 530, 112);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('服务持续时间', 500, 98);
+                    ctx.fillText('服务持续时间', 810, 98);
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
 
                     if ($scope.summary.taskObject.times[0].Duration)
-                        ctx.fillText($scope.summary.taskObject.times[0].Duration, 500, 112);
+                        ctx.fillText($scope.summary.taskObject.times[0].Duration, 810, 112);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('服务请求', 20, 138);
+                    ctx.fillText('服务请求', 30, 138);
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
 
                     if ($scope.summary.taskObject.Service_Request)
-                        ctx.fillText($scope.summary.taskObject.Service_Request, 20, 152);
+                        ctx.fillText($scope.summary.taskObject.Service_Request, 30, 152);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('现场服务号', 200, 138);
+                    ctx.fillText('现场服务号', 280, 138);
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
 
                     if ($scope.summary.taskObject.Task_Number)
-                        ctx.fillText($scope.summary.taskObject.Task_Number, 200, 152);
+                        ctx.fillText($scope.summary.taskObject.Task_Number, 280, 152);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('工作描述', 350, 138);
+                    ctx.fillText('工作描述', 530, 138);
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
-                    ctx.fillText('To run the field', 350, 152);
+                    ctx.fillText('To run the field', 530, 152);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('产品系列', 20, 182);
+                    ctx.fillText('产品系列', 30, 182);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('系统序列号/产品序列号', 200, 182);
+                    ctx.fillText('系统序列号/产品序列号', 280, 182);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('标签#', 350, 182);
+                    ctx.fillText('标签#', 530, 182);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('原始订单号#', 500, 182);
+                    ctx.fillText('原始订单号#', 810, 182);
 
                     var ibyvalue = 196;
 
@@ -2539,33 +2547,33 @@
                             ctx.font = '13px sans-serif ';
 
                             if (key.Product_Line)
-                                ctx.fillText(key.Product_Line, 20, ibyvalue);
+                                ctx.fillText(key.Product_Line, 30, ibyvalue);
                             else
-                                ctx.fillText('NO VALUE', 20, ibyvalue);
+                                ctx.fillText('NO VALUE', 30, ibyvalue);
 
                             ctx.fillStyle = "#000";
                             ctx.font = '13px sans-serif ';
 
                             if (key.Serial_Number)
-                                ctx.fillText(key.Serial_Number, 200, ibyvalue);
+                                ctx.fillText(key.Serial_Number, 280, ibyvalue);
                             else
-                                ctx.fillText('NO VALUE', 200, ibyvalue);
+                                ctx.fillText('NO VALUE', 280, ibyvalue);
 
                             ctx.fillStyle = "#000";
                             ctx.font = '13px sans-serif ';
 
                             if (key.TagNumber)
-                                ctx.fillText(key.TagNumber, 350, ibyvalue);
+                                ctx.fillText(key.TagNumber, 530, ibyvalue);
                             else
-                                ctx.fillText('NO VALUE', 350, ibyvalue);
+                                ctx.fillText('NO VALUE', 530, ibyvalue);
 
                             ctx.fillStyle = "#000";
                             ctx.font = '13px sans-serif ';
 
                             if (key.Original_PO_Number)
-                                ctx.fillText(key.Original_PO_Number, 500, ibyvalue);
+                                ctx.fillText(key.Original_PO_Number, 810, ibyvalue);
                             else
-                                ctx.fillText('NO VALUE', 500, ibyvalue);
+                                ctx.fillText('NO VALUE', 810, ibyvalue);
 
                             ibyvalue = ibyvalue + 14;
                         });
@@ -2581,15 +2589,15 @@
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('备注类型', 20, yNotesField1);
+                    ctx.fillText('备注类型', 30, yNotesField1);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('备注', 200, yNotesField1);
+                    ctx.fillText('备注', 530, yNotesField1);
 
                     ctx.fillStyle = "#000";
                     ctx.font = '15px sans-serif ';
-                    ctx.fillText('备注', 10, yNotesField);
+                    ctx.fillText('备注', 20, yNotesField);
 
                     while (i < $scope.summary.notesArray.length) {
 
@@ -2600,24 +2608,24 @@
 
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
-                        ctx.fillText($filter('translate')($scope.summary.notesArray[i - 1].Note_Type), 20, yNotesField1_val);
+                        ctx.fillText($filter('translate')($scope.summary.notesArray[i - 1].Note_Type), 30, yNotesField1_val);
 
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
-                        ctx.fillText($filter('translate')($scope.summary.notesArray[i - 1].Notes), 200, yNotesField1_val);
+                        ctx.fillText($filter('translate')($scope.summary.notesArray[i - 1].Notes), 530, yNotesField1_val);
                     }
 
                     rectNotesHeight = yNotesField1_val - yNotesField + 10;
 
-                    var xAttachField = 25, yAttachField = yNotesField1_val + 30, rectAttachWidth = 660,
-                        rectAttachHeight = 135, xAttachField1 = 25;
+                    var xAttachField = 30, yAttachField = yNotesField1_val + 30, rectAttachWidth = 660,
+                        rectAttachHeight = 135, xAttachField1 = 30;
 
                     ctx.fillStyle = "#000";
                     ctx.font = '15px sans-serif ';
-                    ctx.fillText('附件', 10, yAttachField);
+                    ctx.fillText('附件', 20, yAttachField);
 
                     ctx.fillStyle = "#000";
-                    ctx.strokeRect(10, yAttachField + 10, 1010, rectAttachHeight);
+                    ctx.strokeRect(20, yAttachField + 10, 1090, rectAttachHeight);
 
                     var index = 0;
 
@@ -2631,11 +2639,11 @@
 
                             ctx.drawImage(attachfile, xAttachField1, yAttachField + 15);
 
-                            if (file.filename.length >= 20) {
+                            if (file.filename.length >= 18) {
 
                                 ctx.fillStyle = "#000";
                                 ctx.font = '15px sans-serif ';
-                                ctx.fillText($filter('translate')(file.filename.substr(0, 18)) + '..', xAttachField1, yAttachField + 125);
+                                ctx.fillText($filter('translate')(file.filename.substr(0, 16)) + '..', xAttachField1, yAttachField + 125);
                             } else {
 
                                 ctx.fillStyle = "#000";
@@ -2735,28 +2743,28 @@
 
                     ctx.fillStyle = "#000";
                     ctx.font = '15px sans-serif ';
-                    ctx.fillText('时间', 10, yTimeField);
+                    ctx.fillText('时间', 20, yTimeField);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('日期', 20, yTimeFieldName);
+                    ctx.fillText('日期', 30, yTimeFieldName);
 
                     if ($scope.userType == 'C') {
 
                         ctx.fillStyle = "#000";
                         ctx.font = 'bold 13px sans-serif ';
-                        ctx.fillText('结算类型', 150, yTimeFieldName);
+                        ctx.fillText('结算类型', 160, yTimeFieldName);
 
                         ctx.fillStyle = "#000";
                         ctx.font = 'bold 13px sans-serif ';
-                        ctx.fillText('结算方式', 250, yTimeFieldName);
+                        ctx.fillText('结算方式', 310, yTimeFieldName);
                     }
 
                     ctx.fillStyle = "#000";
-                    ctx.font = '13px sans-serif ';
-                    ctx.fillText('收费与否', 350, yTimeFieldName);
+                    ctx.font = 'bold 13px sans-serif ';
+                    ctx.fillText('收费与否', 460, yTimeFieldName);
 
-                    var xTimeField1 = 470;
+                    var xTimeField1 = 580;
 
                     if ($scope.userType == 'C') {
 
@@ -2773,20 +2781,20 @@
                     }
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText($filter('translate')('Shift Code'), 570, yTimeFieldName);
+                    ctx.fillText($filter('translate')('Shift Code'), 730, yTimeFieldName);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('服务持续时间', 690, yTimeFieldName);
+                    ctx.fillText('服务持续时间', 850, yTimeFieldName);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('服务类别', 790, yTimeFieldName);
+                    ctx.fillText('服务类别', 980, yTimeFieldName);
 
                     
 
                     ctx.fillStyle = "#000";
-                    ctx.strokeRect(10, yTimeField + 5, 1010, rectTimeHeight);
+                    ctx.strokeRect(20, yTimeField + 5, 1090, rectTimeHeight);
 
                     while (j < $scope.summary.timeArray.length) {
 
@@ -2797,7 +2805,7 @@
                         ctx.font = '13px sans-serif ';
 
                         if ($scope.summary.timeArray[j - 1].Date)
-                            ctx.fillText($scope.summary.timeArray[j - 1].Date, 20, yTimeFieldValue);
+                            ctx.fillText($scope.summary.timeArray[j - 1].Date, 30, yTimeFieldValue);
 
                         doc1.setFontSize(22)
                         doc1.setFontType('normal')
@@ -2808,20 +2816,20 @@
                             ctx.font = '13px sans-serif ';
 
                             if ($scope.summary.timeArray[j - 1].Charge_Type)
-                                ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Charge_Type), 150, yTimeFieldValue);
+                                ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Charge_Type), 160, yTimeFieldValue);
 
                             ctx.fillStyle = "#000";
                             ctx.font = '13px sans-serif ';
 
                             if ($scope.summary.timeArray[j - 1].Charge_Method)
-                                ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Charge_Method), 250, yTimeFieldValue);
+                                ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Charge_Method), 310, yTimeFieldValue);
                         }
 
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
 
                         if ($scope.summary.timeArray[j - 1].Work_Type)
-                            ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Work_Type), 350, yTimeFieldValue);
+                            ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Work_Type), 460, yTimeFieldValue);
 
                         var a = 2;
 
@@ -2848,25 +2856,25 @@
                             ctx.fillStyle = "#000";
                             ctx.font = '13px sans-serif ';
                             if (($scope.summary.timeArray[j - 1].Time_Code) != undefined)
-                                ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Time_Code),  470, yTimeFieldValue);
+                                ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Time_Code),  580, yTimeFieldValue);
                             else
                                 doc1.text( "", xTimeField1 - 50, yTimeFieldValue);
                             ctx.fillStyle = "#000";
                             ctx.font = '13px sans-serif ';
                             if ($scope.summary.timeArray[j - 1].Shift_Code != undefined)
-                                ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Shift_Code), 570, yTimeFieldValue);
+                                ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Shift_Code), 730, yTimeFieldValue);
                             else
                                 ctx.fillText( "", xTimeField1 - 50, yTimeFieldValue);
                         }
 
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
-                        ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Duration.toString()), 690, yTimeFieldValue);
+                        ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Duration.toString()), 850, yTimeFieldValue);
 
 
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
-                        ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Item), 790, yTimeFieldValue);
+                        ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Item), 980, yTimeFieldValue);
 
 
                         //ctx.fillStyle = "#000";
@@ -2884,23 +2892,23 @@
 
                     ctx.fillStyle = "#000";
                     ctx.font = '15px sans-serif ';
-                    ctx.fillText('费用', 10, yExpenseField + 5);
+                    ctx.fillText('费用', 20, yExpenseField + 5);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 12px sans-serif ';
-                    ctx.fillText('日期', 20, yExpenseFieldName);
+                    ctx.fillText('日期', 30, yExpenseFieldName);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 12px sans-serif ';
-                    ctx.fillText('费用种类', 200, yExpenseFieldName);
+                    ctx.fillText('费用种类', 280, yExpenseFieldName);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 12px sans-serif ';
-                    ctx.fillText('结算方式', 350, yExpenseFieldName);
+                    ctx.fillText('结算方式', 530, yExpenseFieldName);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 12px sans-serif ';
-                    ctx.fillText('阐述', 500, yExpenseFieldName);
+                    ctx.fillText('阐述', 780, yExpenseFieldName);
 
                     while (k < $scope.summary.expenseArray.length) {
 
@@ -2910,29 +2918,29 @@
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
                         if ($scope.summary.expenseArray[k - 1].Date)
-                            ctx.fillText($scope.summary.expenseArray[k - 1].Date, 20, yExpenseFieldValue);
+                            ctx.fillText($scope.summary.expenseArray[k - 1].Date, 30, yExpenseFieldValue);
 
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
                         if ($scope.summary.expenseArray[k - 1].Expense_Type)
-                            ctx.fillText($filter('translate')($scope.summary.expenseArray[k - 1].Expense_Type), 200, yExpenseFieldValue);
+                            ctx.fillText($filter('translate')($scope.summary.expenseArray[k - 1].Expense_Type), 280, yExpenseFieldValue);
 
 
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
                         if ($scope.summary.expenseArray[k - 1].Charge_Method)
-                            ctx.fillText($filter('translate')($scope.summary.expenseArray[k - 1].Charge_Method), 350, yExpenseFieldValue);
+                            ctx.fillText($filter('translate')($scope.summary.expenseArray[k - 1].Charge_Method), 530, yExpenseFieldValue);
 
 
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
                         if ($scope.summary.expenseArray[k - 1].Justification)
-                            ctx.fillText($filter('translate')($scope.summary.expenseArray[k - 1].Justification), 500, yExpenseFieldValue);
+                            ctx.fillText($filter('translate')($scope.summary.expenseArray[k - 1].Justification), 780, yExpenseFieldValue);
                     }
                     rectExpenseHeight = yExpenseFieldValue - yExpenseFieldName + 20;
 
                     ctx.fillStyle = "#000";
-                    ctx.strokeRect(10, yExpenseField + 10, 1010, rectExpenseHeight);
+                    ctx.strokeRect(20, yExpenseField + 10, 1090, rectExpenseHeight);
 
 
                     var l = 0, xMaterialField = 25, yMaterialField = yExpenseField + rectExpenseHeight + 25,
@@ -2941,15 +2949,15 @@
 
                     ctx.fillStyle = "#000";
                     ctx.font = '15px sans-serif ';
-                    ctx.fillText('物料', 10, yMaterialField + 5);
+                    ctx.fillText('物料', 20, yMaterialField + 5);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('结算类型', 20, yMaterialFieldName);
+                    ctx.fillText('结算类型', 30, yMaterialFieldName);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('产品数量', 150, yMaterialFieldName);
+                    ctx.fillText('产品数量', 160, yMaterialFieldName);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
@@ -2957,7 +2965,7 @@
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('已更换产品序列号#', 510, yMaterialFieldName);
+                    ctx.fillText('已更换产品序列号#', 480, yMaterialFieldName);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
@@ -2965,7 +2973,7 @@
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('具体描述', 870, yMaterialFieldName);
+                    ctx.fillText('具体描述', 900, yMaterialFieldName);
 
                     yMaterialFieldValue = yMaterialFieldName + 15;
 
@@ -2976,13 +2984,13 @@
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
                         if ($scope.summary.materialArray[l - 1].Charge_Type)
-                            ctx.fillText($filter('translate')($scope.summary.materialArray[l - 1].Charge_Type), 20, yMaterialFieldValue);
+                            ctx.fillText($filter('translate')($scope.summary.materialArray[l - 1].Charge_Type), 30, yMaterialFieldValue);
 
 
                         ctx.fillStyle = "#000";
                         ctx.font = ' 13px sans-serif ';
                         if ($scope.summary.materialArray[l - 1].Product_Quantity)
-                            ctx.fillText($scope.summary.materialArray[l - 1].Product_Quantity.toString(), 150, yMaterialFieldValue);
+                            ctx.fillText($scope.summary.materialArray[l - 1].Product_Quantity.toString(), 160, yMaterialFieldValue);
 
                         ctx.fillStyle = "#000";
                         ctx.font = ' 13px sans-serif ';
@@ -3001,7 +3009,7 @@
                             while (n < $scope.summary.materialArray[l - 1].serialIn.length) {
                                 ctx.textAlign = "start";
                                 yMaterialSerialIn = yMaterialFieldValue + 15 * n;
-                                ctx.fillText($scope.summary.materialArray[l - 1].serialIn[n++], 510, yMaterialSerialIn);
+                                ctx.fillText($scope.summary.materialArray[l - 1].serialIn[n++], 480, yMaterialSerialIn);
                             }
                         }
 
@@ -3018,7 +3026,7 @@
                         ctx.fillStyle = "#000";
                         ctx.font = ' 13px sans-serif ';
                         if ($scope.summary.materialArray[l - 1].ItemName)
-                            ctx.fillText($filter('translate')($scope.summary.materialArray[l - 1].ItemName), 870, yMaterialFieldValue);
+                            ctx.fillText($filter('translate')($scope.summary.materialArray[l - 1].ItemName), 900, yMaterialFieldValue);
 
 
                         yMaterialFieldValue = yMaterialFieldValue + 15 * $scope.summary.materialArray[l - 1].Product_Quantity;
@@ -3026,7 +3034,7 @@
                     rectMaterialHeight = yMaterialFieldValue - yMaterialFieldName + 10;
 
                     ctx.fillStyle = "#000";
-                    ctx.strokeRect(10, yMaterialField + 10, 1010, rectMaterialHeight);
+                    ctx.strokeRect(20, yMaterialField + 10, 1090, rectMaterialHeight);
 
 
 
@@ -3037,32 +3045,32 @@
 
                     ctx.fillStyle = "#000";
                     ctx.font = '15px sans-serif ';
-                    ctx.fillText('签字', 10, ySignField + 5);
+                    ctx.fillText('签字', 20, ySignField + 5);
 
                     ctx.fillStyle = "#000";
-                    ctx.strokeRect(10, ySignField + 10, 1010, rectSignHeight);
-
-                    ctx.fillStyle = "#000";
-                    ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('工程师名字', 20, ySignField + 25);
+                    ctx.strokeRect(20, ySignField + 10, 1090, rectSignHeight);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('客户名', 350, ySignField + 25);
+                    ctx.fillText('工程师名字', 70, ySignField + 25);
+
+                    ctx.fillStyle = "#000";
+                    ctx.font = 'bold 13px sans-serif ';
+                    ctx.fillText('客户名', 400, ySignField + 25);
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
-                    ctx.fillText($scope.engineerName, 20, ySignField + 35);
+                    ctx.fillText($scope.engineerName, 70, ySignField + 40);
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
-                    ctx.fillText($scope.summary.taskObject.Customer_Name, 350, ySignField + 35);
+                    ctx.fillText($scope.summary.taskObject.Customer_Name, 400, ySignField + 40);
 
                     var engineerSignature = document.getElementById('engineerSignature');
 
                     var callback1 = function (image) {
                         if (!image) image = this;
-                        ctx.drawImage(image, 20, ySignField + 45, 75, 40);
+                        ctx.drawImage(image, 70, ySignField + 50, 75, 40);
                     }
                     if (engineerSignature.complete) {
                         callback1(engineerSignature);
@@ -3073,7 +3081,7 @@
 
                     var callback1 = function (image) {
                         if (!image) image = this;
-                        ctx.drawImage(image, 350, ySignField + 45, 75, 40);
+                        ctx.drawImage(image, 400, ySignField + 50, 75, 40);
                     }
                     if (customerSignature.complete) {
                         callback1(customerSignature);
@@ -3082,14 +3090,14 @@
                     }
 
                     ctx.fillStyle = "#000";
-                    ctx.strokeRect(10, 80, 1010, ibyvalue - 60);
+                    ctx.strokeRect(20, 80, 1090, ibyvalue - 60);
 
                     ctx.fillStyle = "#000";
-                    ctx.strokeRect(10, yNotesField + 5, 1010, rectNotesHeight);//doc1.rect(20, yNotesField+5, rectNotesWidth, rectNotesHeight)
+                    ctx.strokeRect(20, yNotesField + 5, 1090, rectNotesHeight);//doc1.rect(20, yNotesField+5, rectNotesWidth, rectNotesHeight)
                     var imgSign = document.getElementById('logo');
                     var callback = function (image) {
                         if (!image) image = this;
-                        ctx.drawImage(image, 10, 5, 140, 40);
+                        ctx.drawImage(image, 30, 5, 140, 40);
                     }
                     if (imgSign.complete) {
                         callback(imgSign);
@@ -3098,16 +3106,20 @@
                     }
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 18px sans-serif ';
-                    ctx.fillText($filter('translate')('Field Service Summary Report'), 270, 25);
+                    ctx.fillText($filter('translate')('Field Service Summary Report'), 400, 25);//现场服务号
+                    ctx.fillStyle = "#000";
+                    ctx.font = 'bold 13px sans-serif ';
+                    if ($scope.summary.taskObject.Task_Number)
+                    ctx.fillText('现场服务号' + $scope.summary.taskObject.Task_Number, 400, 40)
 
                     ctx.fillStyle = "#000";
                     ctx.font = '11px sans-serif ';
-                    ctx.fillText('艾默生过程控制有限公司', 670, 12);
-                    ctx.fillText('上海市浦东新区金桥出口加工区新金桥路1277号，201206', 670, 24);
-                    ctx.fillText('服务热线：400-820-1996', 670, 36);
+                    ctx.fillText('艾默生过程控制有限公司', 720, 12);
+                    ctx.fillText('上海市浦东新区金桥出口加工区新金桥路1277号，201206', 720, 24);
+                    ctx.fillText('服务热线：400-820-1996', 720, 36);
 
                     ctx.fillStyle = "#000";
-                    ctx.strokeRect(10, 0, 1010, 50);
+                    ctx.strokeRect(20, 0, 1090, 50);
 
 
                     var imgData = canvas.toDataURL("image/png", 1.0);
