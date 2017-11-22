@@ -10,6 +10,8 @@
 
     $rootScope.headerName = "Debrief";
 
+    $scope.isCustomerSignChecked = true;
+
     if (valueService.getUserType().defaultView == "My Task") {
 
         $scope.routeAfterDone = "myFieldJob";

@@ -2435,3 +2435,7 @@ textarea:focus {
 .paddingleft10{
     padding-left:10px !important;
 }
+.checkboxRow{
+    display:inline-block;
+    margin-left:30px;
+}
