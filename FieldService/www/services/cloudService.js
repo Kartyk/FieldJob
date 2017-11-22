@@ -1538,16 +1538,16 @@
 
                                             if (!isAccept) {
 
-                                                var complete = {"activityId": startActivityData.activityId};
+                                                var complete = { "activityId": startActivityData.activity_id};
 
                                                 console.log("complete_activity*****" + complete.activityId);
 
                                                 var updateTaskSegement = {
-                                                    "activity_id": startActivityData.activityId,
+                                                    "activity_id": startActivityData.activity_id,
                                                     "XA_TASK_STATUS": "3"
                                                 };
 
-                                                console.log("updateTaskSegement******" + updateTaskSegement);
+                                                console.log("updateTaskSegement******" + JSON.stringify(updateTaskSegement));
 
                                                 ofscService.updateStatus(updateTaskSegement, function (response) {
 
