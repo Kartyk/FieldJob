@@ -10,7 +10,7 @@
 
     $rootScope.headerName = "Debrief";
 
-    $scope.isCustomerSignChecked = true;
+    $scope.isCustomerSignChecked = false;
 
     if (valueService.getUserType().defaultView == "My Task") {
 
