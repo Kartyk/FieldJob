@@ -1529,6 +1529,7 @@
                                         var startActivityData =
                                             {
                                                 "activityId": response.items[0].activityId,
+                                                "time":moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
                                             }
 
                                         console.log("startActivityData*****" + startActivityData.activityId);

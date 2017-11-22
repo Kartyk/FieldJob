@@ -53,6 +53,8 @@
 
         function start_activity(data, callback) {
 
+            console.log("data " + data);
+
             return $http({
 
                 method: 'POST',
