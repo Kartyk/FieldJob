@@ -3152,12 +3152,16 @@
 
 
                 doc1.rect(20, 8, 660, 55)
-                doc1.addImage(imgData, 'JPEG', 75, 15, 100, 40, 'emelogo', 'FAST')
-                doc1.setFontSize(40)
+                doc1.addImage(imgData, 'JPEG', 30, 15, 100, 40, 'emelogo', 'FAST')
+                if (valueService.getLanguage() == 'fr') {
+                    doc1.setFontSize(30)
+                }
+                else
+                    doc1.setFontSize(40)
                 doc1.setFontType('bold')
-                doc1.text(250, 35, $filter('translate')('Field Service Summary Report'))
+                doc1.text(205, 35, $filter('translate')('Field Service Summary Report'))
                 if ($scope.summary.taskObject.Task_Number.toString())
-                    doc1.text(300, 50, $filter('translate')('Field Job# ') + $scope.summary.taskObject.Task_Number)
+                    doc1.text(255, 50, $filter('translate')('Field Job')+'#' + $scope.summary.taskObject.Task_Number)
                 doc1.setFontSize(20)
                 doc1.setFontType('normal')
                 if (valueService.getLanguage() == 'fr') {
@@ -3250,13 +3254,13 @@
                 doc1.text(25, 150 + custBigYvalue, $filter('translate')('Product Line'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(180, 150 + custBigYvalue, $filter('translate')('System ID / Serial'))
+                doc1.text(180, 150 + custBigYvalue, $filter('translate')('System ID / Serial')+'#')
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 doc1.text(345, 150 + custBigYvalue, $filter('translate')('Tag #'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(510, 150 + custBigYvalue, $filter('translate')('Original PO'))
+                doc1.text(510, 150 + custBigYvalue, $filter('translate')('Original PO') + '#')
                 var ibyvalue = 160 + custBigYvalue;
                 angular.forEach($scope.summary.taskObject.InstallBase, function (key) {
                     doc1.setFontSize(22)
@@ -3370,10 +3374,13 @@
                 doc1.text(xTimeField, yTimeFieldName, $filter('translate')('Date'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xTimeField + timeWidth, yTimeFieldName, $filter('translate')('Charge Type'))
+                if (valueService.getLanguage() == 'fr')
+                    doc1.text(xTimeField + timeWidth , yTimeFieldName, $filter('translate')('Charge\nType'))
+                else
+                    doc1.text(xTimeField + timeWidth, yTimeFieldName, $filter('translate')('Charge\nType'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xTimeField + (timeWidth * 2), yTimeFieldName, $filter('translate')('Charge Method'))
+                doc1.text(xTimeField + (timeWidth * 2), yTimeFieldName, $filter('translate')('Charge\nMethod'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 doc1.text(xTimeField + (timeWidth * 3), yTimeFieldName, $filter('translate')('Work Type'))
@@ -3405,9 +3412,12 @@
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
-                    if ($scope.summary.timeArray[j - 1].Charge_Type)
-                        doc1.text(xTimeField + timeWidth, yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Charge_Type))
-
+                    if ($scope.summary.timeArray[j - 1].Charge_Type) {
+                        if (valueService.getLanguage() == 'fr')
+                            doc1.text(xTimeField + timeWidth, yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Charge_Type))
+                        else
+                            doc1.text(xTimeField + timeWidth, yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Charge_Type))
+                    }
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.timeArray[j - 1].Charge_Method)
@@ -3509,10 +3519,13 @@
                 // doc1.rect(20, yMaterialField + 10, rectMaterialWidth, rectMaterialHeight)
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(25, yMaterialFieldName, $filter('translate')('Charge Type'))
+                doc1.text(25, yMaterialFieldName, $filter('translate')('Charge\nType'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(106, yMaterialFieldName, $filter('translate')('Quantity'))
+                if (valueService.getLanguage() == 'fr')
+                    doc1.text(116, yMaterialFieldName, $filter('translate')('Quantity'))
+                else
+                    doc1.text(106, yMaterialFieldName, $filter('translate')('Quantity'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 doc1.text(202, yMaterialFieldName, $filter('translate')('Serial number'))
@@ -3528,7 +3541,7 @@
                 doc1.setFontType('bold')
                 doc1.text(490, yMaterialFieldName, $filter('translate')('Item Name'))
                 doc1.text(586, yMaterialFieldName, 'Description')
-                yMaterialFieldValue = yMaterialFieldName + 10;
+                yMaterialFieldValue = yMaterialFieldName + 20;
 
                 while (l < $scope.summary.materialArray.length) {
                     // yMaterialFieldName =  ;
@@ -3544,9 +3557,12 @@
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
-                    if ($scope.summary.materialArray[l - 1].Product_Quantity)
-                        doc1.text(106, yMaterialFieldValue, $scope.summary.materialArray[l - 1].Product_Quantity.toString())
-
+                    if ($scope.summary.materialArray[l - 1].Product_Quantity) {
+                        if (valueService.getLanguage() == 'fr')
+                            doc1.text(116, yMaterialFieldValue, $scope.summary.materialArray[l - 1].Product_Quantity.toString())
+                        else
+                            doc1.text(106, yMaterialFieldValue, $scope.summary.materialArray[l - 1].Product_Quantity.toString())
+                    }
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.materialArray[l - 1].serialNumber)
