@@ -2,6 +2,8 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
     $scope.onlineStatus = false;
 
+    $rootScope.dbCall = false;
+
     if (valueService.getNetworkStatus()) {
 
         $scope.onlineStatus = true;
@@ -301,7 +303,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
         if (valueService.getNetworkStatus()) {
 
-            $rootScope.apicall = true;
+            $rootScope.dbCall = true;
 
             var deferAccept = $q.defer();
 
@@ -413,6 +415,8 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
     $scope.login = function () {
 
+        $rootScope.dbCall = true;
+
         console.log($scope.userName);
 
         $rootScope.uName = $scope.userName;
@@ -502,13 +506,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 var deferInstall = $q.defer();
 
-                $rootScope.apicall = true;
-
                 cloudService.getInstallBaseList(function (result) {
 
                     console.log("INSTALL");
-
-                    $rootScope.apicall = true;
 
                     deferInstall.resolve("success");
                 });
@@ -517,13 +517,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 var deferContact = $q.defer();
 
-                $rootScope.apicall = true;
-
                 cloudService.getContactList(function (result) {
 
                     console.log("CONTACT");
-
-                    $rootScope.apicall = true;
 
                     deferContact.resolve("success");
                 });
@@ -532,13 +528,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 var deferNote = $q.defer();
 
-                $rootScope.apicall = true;
-
                 cloudService.getNoteList(function (result) {
 
                     console.log("NOTES");
-
-                    $rootScope.apicall = true;
 
                     deferNote.resolve("success");
                 });
@@ -547,13 +539,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 var deferOverTime = $q.defer();
 
-                $rootScope.apicall = true;
-
                 cloudService.getOverTimeList(function (result) {
 
                     console.log("OVERTIME");
-
-                    $rootScope.apicall = true;
 
                     deferOverTime.resolve("success");
                 });
@@ -562,13 +550,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 var deferShiftCode = $q.defer();
 
-                $rootScope.apicall = true;
-
                 cloudService.getShiftCodeList(function (result) {
 
                     console.log("SHIFTCODE");
-
-                    $rootScope.apicall = true;
 
                     deferShiftCode.resolve("success");
                 });
@@ -577,13 +561,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 var deferChargeType = $q.defer();
 
-                $rootScope.apicall = true;
-
                 cloudService.getChargeType(function (result) {
 
                     console.log("CHARGETYPE");
-
-                    $rootScope.apicall = true;
 
                     deferChargeType.resolve("success");
                 });
@@ -592,13 +572,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 var deferChargeMethod = $q.defer();
 
-                $rootScope.apicall = true;
-
                 cloudService.getChargeMethod(function (result) {
 
                     console.log("CHARGEMETHOD");
-
-                    $rootScope.apicall = true;
 
                     deferChargeMethod.resolve("success");
                 });
@@ -607,13 +583,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 var deferFieldJob = $q.defer();
 
-                $rootScope.apicall = true;
-
                 cloudService.getFieldJobName(function (result) {
 
                     console.log("FIELDJOB");
-
-                    $rootScope.apicall = true;
 
                     deferFieldJob.resolve("success");
                 });
@@ -622,13 +594,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 var deferWorkType = $q.defer();
 
-                $rootScope.apicall = true;
-
                 cloudService.getWorkType(function (result) {
 
                     console.log("WORKTYPE");
-
-                    $rootScope.apicall = true;
 
                     deferWorkType.resolve("success");
                 });
@@ -637,13 +605,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 var deferItem = $q.defer();
 
-                $rootScope.apicall = true;
-
                 cloudService.getItem(function (result) {
 
                     console.log("ITEM");
-
-                    $rootScope.apicall = true;
 
                     deferItem.resolve("success");
                 });
@@ -652,13 +616,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 var deferCurrency = $q.defer();
 
-                $rootScope.apicall = true;
-
                 cloudService.getCurrency(function (result) {
 
                     console.log("CURRENCY");
-
-                    $rootScope.apicall = true;
 
                     deferCurrency.resolve("success");
                 });
@@ -667,13 +627,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 var deferExpense = $q.defer();
 
-                $rootScope.apicall = true;
-
                 cloudService.getExpenseType(function (result) {
 
                     console.log("EXPENSETYPE");
-
-                    $rootScope.apicall = true;
 
                     deferExpense.resolve("success");
                 });
@@ -682,13 +638,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 var deferNoteType = $q.defer();
 
-                $rootScope.apicall = true;
-
                 cloudService.getNoteType(function (result) {
 
                     console.log("NOTETYPE");
-
-                    $rootScope.apicall = true;
 
                     deferNoteType.resolve("success");
                 });
@@ -697,20 +649,14 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 var deferAttachment = $q.defer();
 
-                $rootScope.apicall = true;
-
                 cloudService.getAttachmentList(function (result) {
 
                     console.log("ATTACHMENT");
-
-                    $rootScope.apicall = true;
 
                     deferAttachment.resolve("success");
                 });
 
                 promiseArray.push(deferAttachment.promise);
-
-                $rootScope.apicall = true;
 
                 var srNumberArray = [];
 
@@ -741,8 +687,6 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                                 var deferSRNotes = $q.defer();
 
-                                $rootScope.apicall = true;
-
                                 cloudService.getSRNotesList(strArray, function (response) {
 
                                     console.log("SRNOTES");
@@ -751,8 +695,6 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                                 });
 
                                 var deferSRAttachment = $q.defer();
-
-                                $rootScope.apicall = true;
 
                                 cloudService.getSRAttachmentList(strArray, function (response) {
 
@@ -771,8 +713,6 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                                 var deferSRNotesFinal = $q.defer();
 
-                                $rootScope.apicall = true;
-
                                 cloudService.getSRNotesList(strArray, function (response) {
 
                                     console.log("SRNOTES");
@@ -781,8 +721,6 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                                 });
 
                                 var deferSRAttachmentFinal = $q.defer();
-
-                                $rootScope.apicall = true;
 
                                 cloudService.getSRAttachmentList(strArray, function (response) {
 
@@ -806,8 +744,6 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                     var deferSRNotes = $q.defer();
 
-                    $rootScope.apicall = true;
-
                     cloudService.getSRNotesList(srNumberArray, function (response) {
 
                         console.log("SRNOTES");
@@ -816,8 +752,6 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                     });
 
                     var deferSRAttachment = $q.defer();
-
-                    $rootScope.apicall = true;
 
                     cloudService.getSRAttachmentList(srNumberArray, function (response) {
 
@@ -855,7 +789,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                             $rootScope.Islogin = true;
                         }
 
-                        $rootScope.apicall = false;
+                        $rootScope.dbCall = false;
 
                         getAttachments();
                     },
@@ -881,7 +815,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                             $rootScope.Islogin = true;
                         }
 
-                        $rootScope.apicall = false;
+                        $rootScope.dbCall = false;
 
                         getAttachments();
                     }
@@ -900,7 +834,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 cloudService.downloadAttachment(item, function (result) {
 
-                    if (result.data != undefined && result.data != null) {
+                    if (result != undefined && result != null && result.data != undefined && result.data != null) {
 
                         var base64Code = result.data;
 
@@ -917,7 +851,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 cloudService.downloadAttachment(item, function (result) {
 
-                    if (result.data != undefined && result.data != null) {
+                    if (result != undefined && result != null && result.data != undefined && result.data != null) {
 
                         var base64Code = result.data;
 
@@ -936,13 +870,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
             var deferInstall = $q.defer();
 
-            $rootScope.apicall = true;
-
             cloudService.getInstallBaseList(function (result) {
 
                 console.log("INSTALL");
-
-                $rootScope.apicall = true;
 
                 deferInstall.resolve("success");
             });
@@ -951,13 +881,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
             var deferContact = $q.defer();
 
-            $rootScope.apicall = true;
-
             cloudService.getContactList(function (result) {
 
                 console.log("CONTACT");
-
-                $rootScope.apicall = true;
 
                 deferContact.resolve("success");
             });
@@ -966,13 +892,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
             var deferNote = $q.defer();
 
-            $rootScope.apicall = true;
-
             cloudService.getNoteList(function (result) {
 
                 console.log("NOTES");
-
-                $rootScope.apicall = true;
 
                 deferNote.resolve("success");
             });
@@ -981,13 +903,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
             var deferOverTime = $q.defer();
 
-            $rootScope.apicall = true;
-
             cloudService.getOverTimeList(function (result) {
 
                 console.log("OVERTIME");
-
-                $rootScope.apicall = true;
 
                 deferOverTime.resolve("success");
             });
@@ -996,13 +914,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
             var deferShiftCode = $q.defer();
 
-            $rootScope.apicall = true;
-
             cloudService.getShiftCodeList(function (result) {
 
                 console.log("SHIFTCODE");
-
-                $rootScope.apicall = true;
 
                 deferShiftCode.resolve("success");
             });
@@ -1011,13 +925,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
             var deferChargeType = $q.defer();
 
-            $rootScope.apicall = true;
-
             cloudService.getChargeType(function (result) {
 
                 console.log("CHARGETYPE");
-
-                $rootScope.apicall = true;
 
                 deferChargeType.resolve("success");
             });
@@ -1026,13 +936,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
             var deferChargeMethod = $q.defer();
 
-            $rootScope.apicall = true;
-
             cloudService.getChargeMethod(function (result) {
 
                 console.log("CHARGEMETHOD");
-
-                $rootScope.apicall = true;
 
                 deferChargeMethod.resolve("success");
             });
@@ -1041,13 +947,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
             var deferFieldJob = $q.defer();
 
-            $rootScope.apicall = true;
-
             cloudService.getFieldJobName(function (result) {
 
                 console.log("FIELDJOB");
-
-                $rootScope.apicall = true;
 
                 deferFieldJob.resolve("success");
             });
@@ -1056,13 +958,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
             var deferWorkType = $q.defer();
 
-            $rootScope.apicall = true;
-
             cloudService.getWorkType(function (result) {
 
                 console.log("WORKTYPE");
-
-                $rootScope.apicall = true;
 
                 deferWorkType.resolve("success");
             });
@@ -1071,13 +969,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
             var deferItem = $q.defer();
 
-            $rootScope.apicall = true;
-
             cloudService.getItem(function (result) {
 
                 console.log("ITEM");
-
-                $rootScope.apicall = true;
 
                 deferItem.resolve("success");
             });
@@ -1086,13 +980,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
             var deferCurrency = $q.defer();
 
-            $rootScope.apicall = true;
-
             cloudService.getCurrency(function (result) {
 
                 console.log("CURRENCY");
-
-                $rootScope.apicall = true;
 
                 deferCurrency.resolve("success");
             });
@@ -1101,13 +991,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
             var deferExpense = $q.defer();
 
-            $rootScope.apicall = true;
-
             cloudService.getExpenseType(function (result) {
 
                 console.log("EXPENSETYPE");
-
-                $rootScope.apicall = true;
 
                 deferExpense.resolve("success");
             });
@@ -1116,13 +1002,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
             var deferNoteType = $q.defer();
 
-            $rootScope.apicall = true;
-
             cloudService.getNoteType(function (result) {
 
                 console.log("NOTETYPE");
-
-                $rootScope.apicall = true;
 
                 deferNoteType.resolve("success");
             });
@@ -1131,20 +1013,14 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
             var deferAttachment = $q.defer();
 
-            $rootScope.apicall = true;
-
             cloudService.getAttachmentList(function (result) {
 
                 console.log("ATTACHMENT");
-
-                $rootScope.apicall = true;
 
                 deferAttachment.resolve("success");
             });
 
             promiseArray.push(deferAttachment.promise);
-
-            $rootScope.apicall = true;
 
             var srNumberArray = [];
 
@@ -1175,8 +1051,6 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                             var deferSRNotes = $q.defer();
 
-                            $rootScope.apicall = true;
-
                             cloudService.getSRNotesList(strArray, function (response) {
 
                                 console.log("SRNOTES");
@@ -1185,8 +1059,6 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                             });
 
                             var deferSRAttachment = $q.defer();
-
-                            $rootScope.apicall = true;
 
                             cloudService.getSRAttachmentList(strArray, function (response) {
 
@@ -1205,8 +1077,6 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                             var deferSRNotesFinal = $q.defer();
 
-                            $rootScope.apicall = true;
-
                             cloudService.getSRNotesList(strArray, function (response) {
 
                                 console.log("SRNOTES");
@@ -1215,8 +1085,6 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                             });
 
                             var deferSRAttachmentFinal = $q.defer();
-
-                            $rootScope.apicall = true;
 
                             cloudService.getSRAttachmentList(strArray, function (response) {
 
@@ -1240,8 +1108,6 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 var deferSRNotes = $q.defer();
 
-                $rootScope.apicall = true;
-
                 cloudService.getSRNotesList(srNumberArray, function (response) {
 
                     console.log("SRNOTES");
@@ -1250,8 +1116,6 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                 });
 
                 var deferSRAttachment = $q.defer();
-
-                $rootScope.apicall = true;
 
                 cloudService.getSRAttachmentList(srNumberArray, function (response) {
 
@@ -1266,8 +1130,6 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
             }
 
             console.log("LENGTH SYNC " + promiseArray.length);
-
-            $rootScope.apicall = true;
 
             $q.all(promiseArray).then(
                 function (response) {
@@ -1289,7 +1151,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                         $rootScope.showDebrief = false;
                     }
 
-                    $rootScope.apicall = false;
+                    $rootScope.dbCall = false;
 
                     getAttachments();
                 },
@@ -1315,13 +1177,11 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                         $rootScope.showDebrief = false;
                     }
 
-                    $rootScope.apicall = false;
+                    $rootScope.dbCall = false;
 
                     getAttachments();
                 }
             );
         });
-
     }
-
 });

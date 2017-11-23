@@ -83,43 +83,44 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
 
                 $rootScope.selectedTask = event;
 
-                valueService.setTask(event);
+                valueService.setTask(event, function (response) {
 
-                $rootScope.selectedItem = 3;
+                    $rootScope.selectedItem = 3;
 
-                $rootScope.showTaskDetail = true;
+                    $rootScope.showTaskDetail = true;
 
-                if (event.Task_Status == 'Field Job Completed' || event.Task_Status == 'Completed') {
+                    if (event.Task_Status == 'Field Job Completed' || event.Task_Status == 'Completed') {
 
-                    $scope.showStartWork = false;
-                    $scope.showDebriefBtn = true;
-                    $rootScope.showAccept = false;
-                    $rootScope.completedTask = true;
+                        $scope.showStartWork = false;
+                        $scope.showDebriefBtn = true;
+                        $rootScope.showAccept = false;
+                        $rootScope.completedTask = true;
 
-                    $state.go('debrief');
+                        $state.go('debrief');
 
-                } else if (event.Task_Status == 'Assigned') {
+                    } else if (event.Task_Status == 'Assigned') {
 
-                    $scope.showStartWork = true;
-                    $rootScope.showAccept = true;
-                    $scope.showDebriefBtn = false;
+                        $scope.showStartWork = true;
+                        $rootScope.showAccept = true;
+                        $scope.showDebriefBtn = false;
 
-                    $state.go('taskOverFlow');
+                        $state.go('taskOverFlow');
 
-                } else if (event.Task_Status == 'Accepted') {
+                    } else if (event.Task_Status == 'Accepted') {
 
-                    $scope.showStartWork = true;
-                    $scope.showDebriefBtn = true;
-                    $rootScope.showAccept = false;
+                        $scope.showStartWork = true;
+                        $scope.showDebriefBtn = true;
+                        $rootScope.showAccept = false;
 
-                    $state.go('taskOverFlow');
+                        $state.go('taskOverFlow');
 
-                } else if (event.Type == 'INTERNAL') {
+                    } else if (event.Type == 'INTERNAL') {
 
-                } else {
+                    } else {
 
-                    $state.go('taskOverFlow');
-                }
+                        $state.go('taskOverFlow');
+                    }
+                });
             },
             eventRender: function (event, element) {
 
@@ -390,65 +391,66 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
 
         $scope.selectedTask = task;
 
-        valueService.setTask(task);
+        valueService.setTask(task, function (response) {
 
-        $rootScope.completedTask = false;
+            $rootScope.completedTask = false;
 
-        $scope.notFutureDate = valueService.checkIfFutureDayTask(task);
+            $scope.notFutureDate = valueService.checkIfFutureDayTask(task);
 
-        valueService.setIfFutureDateTask($scope.notFutureDate);
+            valueService.setIfFutureDateTask($scope.notFutureDate);
 
-        switch (task.Task_Status) {
+            switch (task.Task_Status) {
 
-            case 'Field Job Completed':
+                case 'Field Job Completed':
 
-                //$rootScope.showDebrief = true;
-                //$rootScope.showTaskDetail = true;
+                    //$rootScope.showDebrief = true;
+                    //$rootScope.showTaskDetail = true;
 
-                $scope.showStartWork = false;
-                $scope.showDebriefBtn = true;
-                $rootScope.showAccept = false;
-                $rootScope.completedTask = true;
+                    $scope.showStartWork = false;
+                    $scope.showDebriefBtn = true;
+                    $rootScope.showAccept = false;
+                    $rootScope.completedTask = true;
 
-                break;
+                    break;
 
-            case 'Completed':
+                case 'Completed':
 
-                //$rootScope.showDebrief = true;
-                //$rootScope.showTaskDetail = true;
+                    //$rootScope.showDebrief = true;
+                    //$rootScope.showTaskDetail = true;
 
-                $scope.showStartWork = false;
-                $scope.showDebriefBtn = true;
-                $rootScope.completedTask = true;
-                $rootScope.showAccept = false;
+                    $scope.showStartWork = false;
+                    $scope.showDebriefBtn = true;
+                    $rootScope.completedTask = true;
+                    $rootScope.showAccept = false;
 
-                break;
+                    break;
 
-            case 'Assigned':
+                case 'Assigned':
 
-                //$rootScope.showDebrief = false;
-                // $rootScope.showTaskDetail = true;
+                    //$rootScope.showDebrief = false;
+                    // $rootScope.showTaskDetail = true;
 
-                $scope.showStartWork = true;
-                $rootScope.showAccept = true;
-                $scope.showDebriefBtn = false;
+                    $scope.showStartWork = true;
+                    $rootScope.showAccept = true;
+                    $scope.showDebriefBtn = false;
 
-                break;
+                    break;
 
-            case 'Accepted':
+                case 'Accepted':
 
-                //$rootScope.showDebrief = true;
-                //$rootScope.showTaskDetail = true;
+                    //$rootScope.showDebrief = true;
+                    //$rootScope.showTaskDetail = true;
 
-                $scope.showStartWork = true;
-                $scope.showDebriefBtn = true;
-                $rootScope.showAccept = false;
+                    $scope.showStartWork = true;
+                    $scope.showDebriefBtn = true;
+                    $rootScope.showAccept = false;
 
-                break;
+                    break;
 
-            default:
-                break;
-        }
+                default:
+                    break;
+            }
+        });
     }
 
     $scope.calendarView = function () {

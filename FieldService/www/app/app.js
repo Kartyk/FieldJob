@@ -2,7 +2,7 @@
 
 var conf = {
 
-     apiUrl: 'https://emersonmobilecloud-a472144.mobileenv.us2.oraclecloud.com:443/mobile/custom/'
+    apiUrl: 'https://emersonmobilecloud-a472144.mobileenv.us2.oraclecloud.com:443/mobile/custom/'
     //apiUrl: 'https://emersonmobiletestenv-a472144.mobileenv.us2.oraclecloud.com:443/mobile/custom/'
 };
 
@@ -19,6 +19,8 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
     window.addEventListener('online', onLine);
 
     $rootScope.apicall = true;
+
+    $rootScope.dbCall = true;
 
     function onLine() {
 
@@ -88,7 +90,7 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
 
                         localService.getTaskList(function (response) {
 
-                            console.log("TASK MY FIELD JOB =====> " + JSON.stringify(response));
+                            console.log("MY FIELD JOB =====> " + JSON.stringify(response));
 
                             localService.getInternalList(function (internalresponse) {
 
@@ -116,7 +118,7 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
 
                         localService.getTaskList(function (response) {
 
-                            console.log("TASK MY TASK =====> " + JSON.stringify(response));
+                            console.log("MY CALENDAR =====> " + JSON.stringify(response));
 
                             localService.getInternalList(function (internalresponse) {
 
@@ -229,64 +231,48 @@ app.filter('timezonefilter', function (constantService) {
 
     return function (date) {
 
-        // console.log("*******************" + constantService.getTimeZone());
-
         if (date === "" || date === undefined)
             return date;
 
         return moment(date).format("DD/MM/YYYY");
-        // var convertedDate = new Date(date);
-        // return $filter('date')(convertedDate, 'dd MMM yyyy');
     }
 });
+
 app.directive('dateFormat', function ($filter) {
+
     return {
+
         require: '?ngModel',
         link: function (scope, elem, attrs, ctrl) {
-            if (!ctrl) return;
 
-
-            //ctrl.$formatters.unshift(function (a) {
-            //    return "06:00";
-            //});
-
+            if (!ctrl)
+                return;
 
             ctrl.$parsers.unshift(function (viewValue) {
-                //var plainNumber = viewValue.replace(/[^\d|\-+|\.+]/g, '');
-                //elem.val($filter(attrs.format)(plainNumber));
-                //return plainNumber;
+
                 if (viewValue !== undefined && viewValue !== "") {
+
                     if (viewValue.length == 2) {
+
                         viewValue = viewValue + ":";
+
                         elem.val(viewValue);
                     }
+
                     if (viewValue.length > 5) {
+
                         viewValue = viewValue.substring(0, 5);
+
                         elem.val(viewValue)
                     }
-                    //if (viewValue.split(":")[0] != undefined && viewValue.split(":")[0].length == 1) {
-                    //    var hours = "0" + viewValue.split(":")[0]
-                    //    viewValue = hours + ":" + viewValue.split(":")[1]
-                    //}
-                    //if (viewValue.split(":")[1] != undefined && viewValue.split(":")[1].length == 1) {
-                    //    var mins = "0" + viewValue.split(":")[1]
-                    //    viewValue = viewValue.split(":")[0] + ":" + mins
-                    //}
-                    //if (viewValue.split(":")[1] != undefined && viewValue.split(":")[1] != "undefined" && viewValue.split(":")[1].length > 2) {
-                    //    var mins = viewValue.split(":")[1].substring(0, 2);
-                    //    viewValue = viewValue.split(":")[0] + ":" + mins
-                    //}
-                    //if (viewValue.split(":")[1] == undefined || viewValue.split(":")[1] == "undefined") {
-                    //    viewValue = viewValue.split(":")[0] + ":00";
-                    //}
                 }
-
 
                 return viewValue;
             });
         }
     };
 });
+
 app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope', 'constantService', function ($interval, $timeout, $window, $rootScope, constantService) {
 
     'use strict';
@@ -312,14 +298,19 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
             $scope.accept = function () {
 
                 $rootScope.signature = $scope.dataurl;
+
                 var stagesSign = constantService.getStagesArray();
+
                 switch (stagesSign.title) {
+
                     case 'Engineer Signature':
                         $rootScope.Engsignature = $scope.dataurl;
                         break;
+
                     case 'Customer Signature':
                         $rootScope.customersignature = $scope.dataurl;
                         break;
+
                     default:
                         break;
                 }
@@ -327,7 +318,6 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
                     isEmpty: $scope.dataurl === EMPTY_IMAGE,
                     dataUrl: $scope.dataurl
                 };
-
             };
 
             $scope.onMouseup = function () {
@@ -337,14 +327,19 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
                 $scope.notifyDrawing({
                     drawing: false
                 });
+
                 var stagesSign = constantService.getStagesArray();
+
                 switch (stagesSign.title) {
+
                     case 'Engineer Signature':
                         $rootScope.engineerSignTime = new Date().toLocaleString();
                         break;
+
                     case 'Customer Signature':
                         $rootScope.customerSignTime = new Date().toLocaleString();
                         break;
+
                     default:
                         break;
                 }
@@ -355,14 +350,19 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
                 $timeout().then(function () {
 
                     $scope.dataurl = $scope.signaturePad.isEmpty() ? EMPTY_IMAGE : $scope.signaturePad.toDataURL();
+
                     var stagesSign = constantService.getStagesArray();
+
                     switch (stagesSign.title) {
+
                         case 'Engineer Signature':
                             $rootScope.Engsignature = $scope.dataurl;
                             break;
+
                         case 'Customer Signature':
                             $rootScope.customersignature = $scope.dataurl;
                             break;
+
                         default:
                             break;
                     }
@@ -370,28 +370,35 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
             };
 
             $scope.clear = function () {
+
                 $scope.signaturePad.clear();
+
                 $scope.dataurl = EMPTY_IMAGE;
+
                 var stagesTime = constantService.getStagesArray();
+
                 switch (stagesTime.title) {
+
                     case 'Engineer Signature':
                         $rootScope.engineerSignTime = '';
                         $rootScope.Engsignature = '';
                         break;
+
                     case 'Customer Signature':
                         $rootScope.customerSignTime = '';
                         $rootScope.customersignature = '';
                         break;
+
                     default:
                         break;
                 }
             };
 
             $scope.$watch("dataurl", function (dataUrl) {
+
                 if (!dataUrl || $scope.signaturePad.toDataURL() === dataUrl) {
                     return;
                 }
-
                 $scope.setDataUrl(dataUrl);
 
             });
@@ -412,12 +419,15 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
             scope.signaturePad = new SignaturePad(canvas);
 
             scope.setDataUrl = function (dataUrl) {
+
                 var ratio = Math.max(window.devicePixelRatio || 1, 1);
 
                 ctx.setTransform(1, 0, 0, 1, 0, 0);
+
                 ctx.scale(ratio, ratio);
 
                 scope.signaturePad.clear();
+
                 scope.signaturePad.fromDataURL(dataUrl);
 
                 $timeout().then(function () {
@@ -452,12 +462,14 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
             };
 
             var resizeIH = $interval(calculateScale, 200);
+
             scope.$on('$destroy', function () {
                 $interval.cancel(resizeIH);
                 resizeIH = null;
             });
 
             angular.element($window).bind('resize', calculateScale);
+
             scope.$on('$destroy', function () {
                 angular.element($window).unbind('resize', calculateScale);
             });
@@ -468,53 +480,58 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
             element.on('touchend', onTouchend);
 
             function onTouchstart(event) {
+
                 scope.$apply(function () {
-                    // notify that drawing has started
+
                     scope.notifyDrawing({
                         drawing: true
                     });
                 });
+
                 event.preventDefault();
             }
 
             function onTouchend(event) {
+
                 scope.$apply(function () {
-                    // updateModel
+
                     scope.updateModel();
 
-                    // notify that drawing has ended
                     scope.notifyDrawing({
                         drawing: false
                     });
                 });
+
                 event.preventDefault();
             }
         }
     };
 }]);
+
 app.directive("formOnChange", function ($parse) {
+
     return {
         require: "form",
         link: function (scope, element, attrs) {
+
             var cb = $parse(attrs.formOnChange);
+
             element.on("change", function () {
                 cb(scope);
             });
         }
     }
 });
+
 app.config(['$httpProvider', function ($httpProvider) {
-    //initialize get if not there
+
     if (!$httpProvider.defaults.headers.get) {
         $httpProvider.defaults.headers.get = {};
     }
 
-    // Answer edited to include suggestions from comments
-    // because previous version of code introduced browser-related errors
-
-    //disable IE ajax request caching
     $httpProvider.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
-    // extra
+
     $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
+
     $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
 }]);
