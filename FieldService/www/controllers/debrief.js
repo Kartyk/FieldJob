@@ -3479,8 +3479,11 @@
 
                     doc1.setFontType('normal');
 
-                    if ($scope.summary.timeArray[j - 1].Work_Type)
+                    if ($scope.summary.timeArray[j - 1].Work_Type) {
+                        if ($scope.summary.timeArray[j - 1].grandTotal == "bold")
+                            doc1.setFontType('bold')
                         doc1.text(xTimeField + (timeWidth * 3), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Work_Type))
+                    }
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if (($scope.summary.timeArray[j - 1].Time_Code) != undefined)
@@ -3497,8 +3500,11 @@
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
-                    if ($scope.summary.timeArray[j - 1].Duration)
+                    if ($scope.summary.timeArray[j - 1].Duration) {
+                        if ($scope.summary.timeArray[j - 1].grandTotal == "bold")
+                            doc1.setFontType('bold')
                         doc1.text(xTimeField + (timeWidth * 6), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Duration.toString()))
+                    }
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
