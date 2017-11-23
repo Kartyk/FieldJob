@@ -1,9 +1,14 @@
-﻿<md-dialog class="dialog-border">
+﻿<style>
+    .spacer {
+        flex: 1 1 auto;
+    }
+</style>
+<md-dialog class="dialog-border">
     <form ng-cloak>
         <md-dialog-content>
             <div class="md-dialog-content material-dialog">
 
-                <div ng-repeat="item in warrantyList">
+                <!--<div ng-repeat="item in warrantyList">
                     <div class="row">
                         <div class="col-sm-1" style="padding:0 !important">
                             <div style="padding-right:10px;" ng-class="{'tickImage':item == selectedWarranty}"></div>
@@ -13,11 +18,22 @@
                                    ng-class="{'tickImageLabel':item == selectedWarranty}">{{item.value}}</label>
                         </div>
                     </div>
+                </div>-->
+                <div class="row">
+                    <label >Before proceeding, Please save the record</label>
                 </div>
+                <!--<div class="row">
+                    <button class="engSign-Next" ng-click="saveData()"  translate="OK"></button>
+                    <button class="engSign-Next"  translate="CANCEL"></button>
+                </div>-->
             </div>
         </md-dialog-content>
-        <md-dialog-actions layout="row" class="dialog-ok">
-            <label ng-click="$root.addMaterialItem()" translate="continue"></label>
+        <md-dialog-actions >
+            <!--<label ng-click="saveData()" translate="OK"></label>
+            <label ng-click="cancel()" translate="CANCEL"></label>-->
+            <button md-button class="debrief-btn" ng-click="saveData()">SAVE</button>
+            <span class="spacer"></span>
+            <button md-button class="debrief-btn" ng-click="cancel()" style="background-color:#f0f0f0 !important;color:#283d3f !important;">CANCEL</button>
         </md-dialog-actions>
 
     </form>

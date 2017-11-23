@@ -1,99 +1,33 @@
-﻿app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalendarConfig, $rootScope, $state, $http, cloudService, localService, valueService, $filter,constantService) {
+﻿app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalendarConfig, $rootScope, $state, $http, cloudService, localService, valueService, $filter, constantService) {
 
-    $scope.showSearchTaskDiv = false;
-
-    $rootScope.Islogin = true;
-
-    $rootScope.headerName = 'Field Service';
-
-    $rootScope.selectedCategory = 'Field Service';
-
-    var eventsArray = [];
-
-    getTask();
-
-    console.log("GET TASK OUT");
-
-    function getTask() {
-
-        console.log("GET TASK IN");
-        if($rootScope.myTaskDetailsForLoggedInUser){
-
-            $scope.myTaskDetails = $rootScope.myTaskDetailsForLoggedInUser;
-            setEventArray($rootScope.myTaskDetailsForLoggedInUser);
-            eventInit();
-        }
-        else{
-            localService.getTaskList(function (response) {
-                if (response){
-                    $scope.myTaskDetails = response;
-
-                    setEventArray(response);
-
-                    eventInit();
-                }
-
-            });
-        }
-
-    }
-
-    function setEventArray(response) {
-
-        if (response != null && response.length > 0) {
-
-            response.forEach(function (item) {
-
-              // var startDate = item.Start_Date.split(' ');
-               var startDateTime= moment.utc(item.Start_Date).utcOffset(constantService.getTimeZone()).format("YYYY-MM-DDTHH:MM:SS")
-               //var startDateTime = startDate[0] + "T" + startDate[1];
-
-               //var endDate = item.End_Date.split(' ');
-               var endDateTime= moment.utc(item.End_Date).utcOffset(constantService.getTimeZone()).format("YYYY-MM-DDTHH:MM:SS")
-               //var endDateTime = endDate[0] + "T" + endDate[1];
-
-               var customerInfo = item.Customer_Name + "\n" + item.Street_Address + "\n" + item.City + "\n" + item.State + "\n" + item.Zip_Code;
-
-               //  if (item.Task_Status == 'Accepted' || item.Task_Status == 'Assigned'||) {
-                eventsArray.push({
-                    title: customerInfo,
-                    textEscape: true,
-                    start: startDateTime,
-                    end: endDateTime,
-                    Task_Number: item.Task_Number,
-                    Task_Status: item.Task_Status,
-                    Job_Description: item.Job_Description,
-                    Start_Date: item.Start_Date,
-                    End_Date: item.End_Date,
-                    Assigned: item.Assigned,
-                    Service_Request: item.Service_Request,
-                    Expense_Method: item.Expense_Method,
-                    Labor_Method: item.Labor_Method,
-                    Travel_Method: item.Travel_Method,
-                    Material_Method: item.Material_Method,
-                    Duration: item.Duration,
-                    Customer_Name: item.Customer_Name,
-                    Street_Address: item.Street_Address,
-                    City: item.City,
-                    State: item.State,
-                    Zip_Code: item.Zip_Code,
-                    Expense_Method: item.Expense_Method,
-                    Labor_Method: item.Labor_Method,
-                    Travel_Method: item.Travel_Method,
-                    Material_Method: item.Material_Method
-                });
-                //  }
-            });
-        }
-    }
-
-    function eventInit() {
+    $rootScope.eventInit = function (lang) {
 
         var minTimeVal = "07:00:00";
 
         var maxTimeVal = "24:00:00";
 
         $("fc-left").addClass("col-md-4");
+
+        var mycal, myFieldJob, localeused;
+
+        if (lang == 'ch') {
+
+            mycal = $filter('translate')("My Calendar");// "我的日历"
+            localeused = "zh-cn";
+            myFieldJob = $filter('translate')("My Field Job");// "我的田野工作";
+
+        } else if (lang == 'fr') {
+
+            mycal = $filter('translate')("My Calendar");
+            localeused = "fr";
+            myFieldJob = $filter('translate')("My Field Job");
+
+        } else {
+
+            mycal = "My Calendar";
+            localeused = "en";
+            myFieldJob = "My Field Job";
+        }
 
         $('#calendar').fullCalendar({
             customButtons: {
@@ -104,17 +38,23 @@
                     }
                 },
                 myCalendar: {
-                    text: 'My Calendar',
+                    text: mycal,
                     click: function (item) {
-                        console.log(item);
                         $state.go('myTask');
                     }
                 },
                 myTask: {
-                    text: 'My Field Job',
+                    text: myFieldJob,
                     click: function () {
-                        $state.go('myFieldJob');
+
+                        $rootScope.apicall = true;
+
+                        $rootScope.apicall = false;
+
+                        $state.go("myFieldJob");
+
                         $rootScope.tabClicked = true;
+
                         $rootScope.selectedItem = 2;
                     }
                 }
@@ -124,6 +64,7 @@
                 right: 'prev,title,next today',
                 center: 'agendaWeek,agendaDay,month'
             },
+            locale: localeused,
             //defaultDate: '2017-09-12',
             defaultView: 'agendaWeek',
             navLinks: true,
@@ -139,27 +80,47 @@
             maxTime: maxTimeVal,
             events: eventsArray,
             eventClick: function (event, jsEvent, view) {
-
-                console.log(event);
-
+                $rootScope.apicall = true;
                 $rootScope.selectedTask = event;
 
-                valueService.setTask(event);
+                valueService.setTask(event, function (response) {
 
-                $rootScope.selectedItem = 3;
+                    $rootScope.selectedItem = 3;
 
-                $rootScope.showTaskDetail = true;
+                    $rootScope.showTaskDetail = true;
 
-                if (event.Task_Status == 'Field Job Completed' || event.Task_Status == 'Completed') {
+                    if (event.Task_Status == 'Field Job Completed' || event.Task_Status == 'Completed') {
 
-                    $rootScope.completedTask = true;
+                        $scope.showStartWork = false;
+                        $scope.showDebriefBtn = true;
+                        $rootScope.showAccept = false;
+                        $rootScope.completedTask = true;
 
-                    $state.go('debrief');
+                        $state.go('debrief');
 
-                } else {
+                    } else if (event.Task_Status == 'Assigned') {
 
-                    $state.go('taskOverFlow');
-                }
+                        $scope.showStartWork = true;
+                        $rootScope.showAccept = true;
+                        $scope.showDebriefBtn = false;
+
+                        $state.go('taskOverFlow');
+
+                    } else if (event.Task_Status == 'Accepted') {
+
+                        $scope.showStartWork = true;
+                        $scope.showDebriefBtn = true;
+                        $rootScope.showAccept = false;
+
+                        $state.go('taskOverFlow');
+
+                    } else if (event.Type == 'INTERNAL') {
+
+                    } else {
+
+                        $state.go('taskOverFlow');
+                    }
+                });
             },
             eventRender: function (event, element) {
 
@@ -178,6 +139,133 @@
             }
         });
     }
+
+    $scope.showSearchTaskDiv = false;
+
+    $rootScope.Islogin = true;
+
+    $rootScope.headerName = 'Field Service';
+
+    $rootScope.selectedCategory = 'Field Service';
+
+    var eventsArray = [];
+
+    getTask();
+
+    function getTask() {
+
+        console.log("MY TASK " + JSON.stringify(constantService.getTaskList()));
+
+        if (constantService.getTaskList()) {
+
+            $scope.myTaskDetails = constantService.getTaskList();
+
+            setEventArray(constantService.getTaskList());
+
+            var lang = valueService.getLanguage(lang);
+
+            if (lang == undefined)
+                lang = "en";
+
+            $rootScope.eventInit(lang);
+
+        } else {
+
+            localService.getTaskList(function (response) {
+
+                if (response) {
+
+                    $scope.myTaskDetails = response;
+
+                    constantService.setTaskList(response)
+
+                    console.log("MY TASK IN DB" + $rootScope.myTaskDetails);
+
+                    setEventArray(response);
+
+                    var lang = valueService.getLanguage(lang);
+
+                    if (lang == undefined)
+                        lang = "en";
+
+                    $rootScope.eventInit(lang);
+                }
+            });
+        }
+    }
+
+    function setEventArray(response) {
+
+        if (response != null && response.length > 0) {
+
+            response.forEach(function (item) {
+
+                if (item.Type == "CUSTOMER") {
+
+                    // var startDate = item.Start_Date.split(' ');
+                    var startDateTime = moment(item.Start_Date).format("YYYY-MM-DDTHH:mm:ss");
+                    // var startDateTime = startDate[0] + "T" + startDate[1];
+
+                    // var endDate = item.End_Date.split(' ');
+                    var endDateTime = moment(item.End_Date).format("YYYY-MM-DDTHH:mm:ss");
+                    // var endDateTime = endDate[0] + "T" + endDate[1];
+
+                    var customerInfo = item.Job_Description + "\n" + item.Customer_Name + "\n" + item.Address1 + "\n" + item.Work_Phone_Number + "\n" + item.Mobile_Phone_Number;
+
+                    //  if (item.Task_Status == 'Accepted' || item.Task_Status == 'Assigned'||) {
+                    eventsArray.push({
+                        title: customerInfo,
+                        textEscape: true,
+                        start: startDateTime,
+                        end: endDateTime,
+                        Task_Number: item.Task_Number,
+                        Task_Status: item.Task_Status,
+                        Job_Description: item.Job_Description,
+                        Start_Date: item.Start_Date,
+                        End_Date: item.End_Date,
+                        Assigned: item.Assigned,
+                        Service_Request: item.Service_Request,
+                        Expense_Method: item.Expense_Method,
+                        Labor_Method: item.Labor_Method,
+                        Travel_Method: item.Travel_Method,
+                        Material_Method: item.Material_Method,
+                        Duration: item.Duration,
+                        Customer_Name: item.Customer_Name,
+                        Street_Address: item.Street_Address,
+                        City: item.City,
+                        State: item.State,
+                        Zip_Code: item.Zip_Code,
+                        Expense_Method: item.Expense_Method,
+                        Labor_Method: item.Labor_Method,
+                        Travel_Method: item.Travel_Method,
+                        Material_Method: item.Material_Method,
+                        Activity_Id: item.Activity_Id,
+                        SR_ID: item.SR_ID
+                    });
+
+                } else {
+
+                    var startDateTime = moment(item.Start_Date).format("YYYY-MM-DDTHH:mm:ss");
+                    // var startDateTime = startDate[0] + "T" + startDate[1];
+
+                    // var endDate = item.End_Date.split(' ');
+                    var endDateTime = moment(item.End_Date).format("YYYY-MM-DDTHH:mm:ss");
+                    // var endDateTime = endDate[0] + "T" + endDate[1];
+
+                    var customerInfo = item.Customer_Name;
+
+                    eventsArray.push({
+                        title: customerInfo,
+                        textEscape: true,
+                        start: startDateTime,
+                        end: endDateTime,
+                        Type: item.Type
+                    });
+                }
+            });
+        }
+    }
+
 
     $scope.goToDate = function () {
 
@@ -204,7 +292,6 @@
     };
 
     $scope.options = {
-
         customClass: getDayClass,
         minDate: new Date(),
         showWeeks: true
@@ -279,7 +366,7 @@
 
     $scope.changeTaskStatus = function (taskStatus) {
 
-        console.log(taskStatus);
+        console.log("STATUS " + taskStatus);
 
         if (taskStatus == "All") {
 
@@ -300,57 +387,70 @@
 
     $scope.onclickOfTask = function (task) {
 
-        console.log(task);
+        console.log("TASK " + JSON.stringify(task));
 
         $scope.selectedTask = task;
 
-        valueService.setTask(task);
+        valueService.setTask(task, function (response) {
 
-        $rootScope.completedTask = false;
+            $rootScope.completedTask = false;
 
-        $scope.notFutureDate = valueService.checkIfFutureDayTask(task);
+            $scope.notFutureDate = valueService.checkIfFutureDayTask(task);
 
-        valueService.setIfFutureDateTask($scope.notFutureDate);
+            valueService.setIfFutureDateTask($scope.notFutureDate);
 
-        switch (task.Task_Status) {
+            switch (task.Task_Status) {
 
-            case 'Field Job Completed':
-                //$rootScope.showDebrief = true;
-                $scope.showStartWork = false;
-                $scope.showDebriefBtn = true;
-                //$rootScope.showTaskDetail = true;
-                $rootScope.showAccept = false;
-                $rootScope.completedTask = true;
-                break;
+                case 'Field Job Completed':
 
-            case 'Completed':
-                //$rootScope.showDebrief = true;
-                $scope.showStartWork = false;
-                $scope.showDebriefBtn = true;
-                //$rootScope.showTaskDetail = true;
-                $rootScope.completedTask = true;
-                $rootScope.showAccept = false;
-                break;
+                    //$rootScope.showDebrief = true;
+                    //$rootScope.showTaskDetail = true;
 
-            case 'Assigned':
-                $scope.showStartWork = true;
-                $rootScope.showAccept = true;
-                $scope.showDebriefBtn = false;
-                //$rootScope.showDebrief = false;
-                // $rootScope.showTaskDetail = true;
-                break;
+                    $scope.showStartWork = false;
+                    $scope.showDebriefBtn = true;
+                    $rootScope.showAccept = false;
+                    $rootScope.completedTask = true;
 
-            case 'Accepted':
-                $scope.showStartWork = true;
-                $scope.showDebriefBtn = true;
-                $rootScope.showAccept = false;
-                //$rootScope.showDebrief = true;
-                //$rootScope.showTaskDetail = true;
-                break;
+                    break;
 
-            default:
-                break;
-        }
+                case 'Completed':
+
+                    //$rootScope.showDebrief = true;
+                    //$rootScope.showTaskDetail = true;
+
+                    $scope.showStartWork = false;
+                    $scope.showDebriefBtn = true;
+                    $rootScope.completedTask = true;
+                    $rootScope.showAccept = false;
+
+                    break;
+
+                case 'Assigned':
+
+                    //$rootScope.showDebrief = false;
+                    // $rootScope.showTaskDetail = true;
+
+                    $scope.showStartWork = true;
+                    $rootScope.showAccept = true;
+                    $scope.showDebriefBtn = false;
+
+                    break;
+
+                case 'Accepted':
+
+                    //$rootScope.showDebrief = true;
+                    //$rootScope.showTaskDetail = true;
+
+                    $scope.showStartWork = true;
+                    $scope.showDebriefBtn = true;
+                    $rootScope.showAccept = false;
+
+                    break;
+
+                default:
+                    break;
+            }
+        });
     }
 
     $scope.calendarView = function () {
@@ -381,25 +481,7 @@
 
             $rootScope.showDebrief = true;
 
-            $rootScope.selectedCategory = 'Field Job#' + $rootScope.selectedTask.Task_Number;
-
-            if ($scope.selectedTask.Task_Status == 'Assigned') {
-
-                if (valueService.getNetworkStatus()) {
-
-                    valueService.acceptTask(valueService.getTask().Task_Number);
-
-                } else {
-
-                    var taskObject = {
-                        Task_Status: "Accepted",
-                        Task_Number: valueService.getTask().Task_Number,
-                        Submit_Status: "A"
-                    };
-
-                    localService.updateTaskSubmitStatus(taskObject);
-                }
-            }
+            $rootScope.selectedCategory = 'Field Job#';
 
             $state.go('debrief');
         }

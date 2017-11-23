@@ -8,16 +8,55 @@
 
     $scope.ProductQuantity = 1;
 
+    $scope.isFutureDateInTodo = valueService.getIfFutureDateTask();
+
     $scope.toggle = function () {
 
         $scope.myVar = !$scope.myVar;
     };
 
+    $scope.noteArray = [];
+
     $scope.noteArray = valueService.getTaskNotes();
 
-    console.log("NOTE ARRAY " + $scope.noteArray);
-
     $scope.attachmentArray = valueService.getTaskAttachment();
+
+    $scope.attachments = [];
+
+    angular.forEach($scope.attachmentArray, function (attachment) {
+
+        var attachmentObject = {};
+
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+
+            fs.root.getFile(attachment.File_Name, {create: true, exclusive: false}, function (fileEntry) {
+
+                fileEntry.file(function (file) {
+
+                    var reader = new FileReader();
+
+                    reader.onloadend = function () {
+
+                        console.log("Successful file read: " + this.result);
+
+                        attachment.base64 = this.result.split(",")[1];
+
+                        attachment.contentType = attachment.File_Type;
+
+                        attachment.filename = attachment.File_Name.split(".")[0];
+
+                        attachment.Date_Created = attachment.Created_Date;
+
+                        attachment.filetype = attachment.File_Name.split(".")[1];
+
+                        $scope.$apply();
+                    };
+
+                    reader.readAsDataURL(file);
+                });
+            });
+        });
+    });
 
     $scope.openResource = function (item) {
 
@@ -38,11 +77,14 @@
     }
 
     $scope.add = function () {
-        $scope.tasks.push($scope.title);
-        //$scope.title='';
-        $scope.TodoForm.title.$setPristine();
-        $scope.TodoForm.title.$setPristine(true);
-        $scope.title = '';
+
+        if ($scope.title != "") {
+
+            $scope.tasks.push($scope.title);
+            $scope.TodoForm.title.$setPristine();
+            $scope.TodoForm.title.$setPristine(true);
+            $scope.title = '';
+        }
     };
 
     $scope.delete = function () {

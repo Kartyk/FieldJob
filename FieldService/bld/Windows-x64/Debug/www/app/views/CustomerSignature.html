@@ -25,6 +25,9 @@
         right: 0;
         bottom: 0;
     }
+    button[disabled].summary-report-donebtn {
+        opacity: 0.5 !important;
+    }
 </style>
 
 
@@ -39,7 +42,7 @@
                 <img id="tasksdone" src="Group 11@2x.png" style="width:50px !important;height:50px !important;" />
             </div>
             <div style="text-align:center;margin-top:30px;text-transform:none">
-                <label class="completed-msg"><span translate="Field Job #"></span>{{summary.taskObject.Task_Number}} completed successfully </label>
+                <label class="completed-msg"><span translate="Field Job"> #</span>{{summary.taskObject.Task_Number}} <span translate="Completed Successfully"></span> </label>
                 <br>
                 <label style="margin-top:25px" class="summary-report-label" translate="Tap or click below icon to view Field Service Summary report"></label>
             </div>
@@ -76,8 +79,8 @@
 
 
 
-    <form name="signatureForm">
-        <div class="card-childContainer paddingbot-20">
+    <form name="signatureForm" class="input-items">
+        <div class="card-childContainer">
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-4 col-lg-4">
@@ -94,15 +97,27 @@
                         <div class="mylabel font-size" translate="Email"></div>
                         <input type="text" class="inputFieldsMaterial" id="customerMail" name="customerMail" ng-disabled="isSubmitted" ng-model="customerEMail" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" required />
                         <!--  <span style="color:Red" ng-show="signatureForm.customerMail.$error.required"> Required! </span> -->
-                        <span style="color:Red" ng-show="signatureForm.customerMail.$dirty&&signatureForm.customerMail.$error.pattern">Please Enter Valid Email</span>
+                        <span style="color:Red" ng-show="signatureForm.customerMail.$dirty&&signatureForm.customerMail.$error.pattern" translate="Please Enter Valid Email"></span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="card-childContainer margintop30 paddingbot-20">
-            <div class="mylabel font-size" translate="Customer Signature"></div>
-            <div style="height: 220px;">
-                <signature-pad accept="accept" clear="clear" height="220" width="568" dataurl="dataurl" disabled="isSubmitted || $root.completedTask"></signature-pad>
+        <div class="card-childContainer margintop30">
+            <div>
+                <label class="mylabel font-size" translate="Customer Signature"></label>
+                <input type="checkbox" class="checkboxRow"  ng-model="isCustomerSignChecked">
+                <label class="mylabel font-size deny-sign">Deny Signature:</label>
+            </div>
+            
+           
+                
+                <textarea ng-show="isCustomerSignChecked" class="form-control text-area margintop25" rows="5" id="customerSign"
+                          ng-model="customerComments"></textarea>
+            
+            
+
+            <div style="height: 220px;width:100%" ng-hide="isCustomerSignChecked">
+                <signature-pad accept="accept" clear="clear" height="220" width="1050" dataurl="dataurl" disabled="isSubmitted || $root.completedTask"></signature-pad>
                  <label ng-bind="$root.customerSignTime"></label>
             </div>
             <hr>
@@ -116,15 +131,16 @@
                   <button  id="addBtn" ng-click="signature = accept()" style="width:100px">Save Sign</button>
                 </div> -->
                 <div class="flex-60 smmary-report-confirm">
-                    <label translate="I confirm that I have read, understand and agreed to all terms"></label>
+                    <label translate="I confirm that I have read, understand and agreed to all terms."></label>
+                    <div ng-show="summary.engineer.signature=='' || summary.engineer.signature==undefined"> <label style="font-weight:normal;color:red" translate="Please complete engineer signature on the 'Engineer Signature' tab."></label></div>
                 </div>
                 <div class="flex-20">
-                    <button class="summary-report-donebtn" ng-click="customerSubmit()" style="float:right;" ng-disabled="isSubmitted || $root.completedTask" translate="Submit"></button>
+                    <button class="summary-report-donebtn" ng-click="custsignature = accept();customerSubmit()" style="float:right;" ng-disabled="isSubmitted || $root.completedTask || summary.engineer.signature=='' || summary.engineer.signature==undefined " translate="Submit"></button>
                 </div>
             </div>
         </div>
     </form>
 </div>
-<!--          <div class="result" ng-show="signature">
-            <img ng-src="{{ signature.dataUrl }}">
-        </div> -->
+          <div class="result" style="display:none">
+            <img style="" id="customerSignature" ng-src="{{ $root.signature }}">
+        </div> 

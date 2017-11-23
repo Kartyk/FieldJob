@@ -3,13 +3,13 @@
 
     <div class="margintop30" ng-repeat="item in timeArray track by $index" id="time{{$index}}">
         <div class="card-childContainer  noBorder-radius" ng-class="{'newItemBorder': $index == addTimeObj && $index != 0,'copyItem': $index == copyTimeObj && $index != 0}">
-            <form class="form-horizontal" action="/action_page.php" ng-disabled="$root.completedTask">
+            <form class="form-horizontal input-items" action="/action_page.php" ng-disabled="$root.completedTask" form-on-change="formChange()">
                 <div layout="row" layout-wrap>
                     
 
                     
 
-                    <div flex="20" class="debrief-items-NC">
+                    <div flex="20" class="debrief-items-NC" style="max-width:13%;">
                         <label flex="100" class=" label-my" translate="{{item.timeDefault.workType.title}}"></label>
                         <div flex="100">
                             <select class="form-control select-debrief " ng-model="item.Work_Type"
@@ -22,7 +22,7 @@
 
                     
 
-                    <div flex="20" class="debrief-items-NC">
+                    <div flex="20" class="debrief-items-NC" style="max-width:20%;">
                         <label flex="100" class="  label-my" translate="{{item.timeDefault.item.title}}"></label>
                         <div cflex="100">
                             <select class="form-control select-debrief" ng-model="item.Item"
@@ -32,7 +32,7 @@
                         </div>
                     </div>
 
-                    <div flex="20" class="debrief-items-NC">
+                    <div flex="20" class="debrief-items-NC" style="max-width:20%;">
                         <label flex="100" class="  label-my" translate="{{item.timeDefault.description.title}}"></label>
                         <div flex="100">
                             <input type="text" name="description" class="form-control" ng-model="item.Description">
@@ -43,7 +43,7 @@
 
                     
 
-                    <div flex="20" class="debrief-items-NC">
+                    <div flex="20" class="debrief-items-NC" style="max-width:15%;">
                         <label flex="100" class="  label-my" translate="{{item.timeDefault.Date.title}}"
                                style="text-align: left;">-</label>
                         <div flex="100">
@@ -54,7 +54,7 @@
                                        alt-input-formats="altInputFormats" ng-change="setDuration($index)" />
 
                                 <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default" style="border-color:#ccc !important"
+                                    <button type="button" class="btn btn-default" style="border-color:#ccc !important;height:40px;"
                                             ng-click="openCalendar(item,'Time')">
                                         <i class="glyphicon glyphicon-calendar"></i>
                                     </button>
@@ -64,16 +64,16 @@
                         </div>
                     </div>
 
-                    <div flex="20" class="debrief-items-NC">
+                    <div flex="20" class="debrief-items-NC" style="max-width:10%;">
                         <label flex="100" class="  label-my" translate="{{item.timeDefault.duration.title}}"></label>
                         <div flex="100">
-                            <input type="text" class="form-control" date-format ng-model="item.Duration" ng-change="setDurationHours(item)" />
+                            <input type="text" class="form-control" date-format ng-model="item.Duration" ng-change="setDurationHours(item)" ng-blur="checkDuration(item)" />
 
                         </div>
                     </div>
 
 
-                    <div flex="100">
+                    <div flex="100" style="max-width:21%;">
 
                         <label flex="100" class="label-my" for="comment"
                                translate="{{item.timeDefault.comments.title}}"></label>
@@ -88,9 +88,9 @@
 
 
         </div>
-        <section style="border-radius:0 0 10px 10px" layout="row" layout-sm="column" layout-align="center center"
+        <section  layout="row" layout-sm="column" layout-align="center center"
                  layout-wrap class="time-btns" ng-class="{'newItemBorderSection': $index == addTimeObj && $index != 0,'copyItemSection': $index == copyTimeObj && $index != 0}">
-            <md-button class="time-font time-add" ng-click="addObject('Time')" ng-disabled="$root.completedTask" translate="Add"></md-button>
+            <md-button class="time-font time-add" ng-click="addObject('Time',true)" ng-disabled="$root.completedTask" translate="Add"></md-button>
             <md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Time')" ng-disabled="$root.completedTask" translate="delete"></md-button>
             <md-button class="time-font time-copy" ng-click="copyObject(item,'Time')" ng-disabled="$root.completedTask" translate="copy"></md-button>
         </section>

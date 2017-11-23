@@ -3363,6 +3363,7 @@
                 doc1.setFontType('bold')
                 doc1.text(xNotesField, yNotesField, $filter('translate')('Notes'))
                 // doc1.rect(20, yNotesField+10, rectNotesWidth, rectNotesHeight)
+                yNotesField1_val = yNotesField1
                 while (i < $scope.summary.notesArray.length) {
                     xNotesField1 = xNotesField;
                     //yNotesField1 = yNotesField + 22;
@@ -3413,7 +3414,7 @@
                     xAttachField1 += 60;
                 })
                 var j = 0, xTimeField = 25, yTimeField = yAttachField + rectAttachHeight + 20, rectTimeWidth = 660,
-                    rectTimeHeight = 23 * $scope.summary.timeArray.length, yTimeFieldName = yTimeField + 20,
+                    rectTimeHeight = 23 * $scope.summary.timeArray.length+10, yTimeFieldName = yTimeField + 20,
                     yTimeFieldValue = yTimeField;
                 var timeWidth = (660 / 8) ;
 
@@ -3531,7 +3532,7 @@
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 doc1.text(xExpenseField + 470, yExpenseFieldName, $filter('translate')('Justification'))
-                // yExpenseFieldValue = yExpenseFieldName + 10;
+                yExpenseFieldValue = yExpenseFieldName + 10;
                 while (k < $scope.summary.expenseArray.length) {
                     // yExpenseFieldName =  ;
                     yExpenseFieldValue = yExpenseFieldName + 10 * ++k;

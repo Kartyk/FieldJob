@@ -1,6 +1,8 @@
-﻿app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav, $mdDialog, $translate, $rootScope, usSpinnerService, cloudService, localService, valueService, constantService, ofscService) {
+﻿app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSidenav, $mdDialog, $translate, $rootScope, usSpinnerService, cloudService, localService, valueService, constantService, ofscService) {
 
     $scope.onlineStatus = false;
+
+    $rootScope.dbCall = false;
 
     if (valueService.getNetworkStatus()) {
 
@@ -9,27 +11,6 @@
     } else {
 
         $scope.onlineStatus = false;
-    }
-
-    if (valueService.getNetworkStatus()) {
-
-        localService.getAcceptTaskList(function (response) {
-
-            angular.forEach(response, function (item) {
-
-                valueService.acceptTask(item.Task_Number);
-
-            });
-        });
-
-        localService.getPendingTaskList(function (response) {
-
-            angular.forEach(response, function (item) {
-
-                valueService.submitDebrief(item.Task_Number);
-
-            });
-        });
     }
 
     $scope.spinnerLoading = true;
@@ -60,6 +41,8 @@
 
     $scope.changeLanguage = function (lang) {
 
+        valueService.setLanguage(lang);
+
         switch (lang) {
 
             case "en":
@@ -70,7 +53,8 @@
                 $translate.use('en').then(function () {
                     console.log('English Used');
                 });
-
+                $('#calendar').fullCalendar('destroy');
+                $rootScope.eventInit("en");
                 break;
 
             case "fr":
@@ -80,17 +64,21 @@
                 $scope.chinaFlag = true;
                 $translate.use('fr').then(function () {
                     console.log('french Used');
+                    $('#calendar').fullCalendar('destroy');
+                    $rootScope.eventInit("fr");
                 });
 
                 break;
 
-            case "ch" :
+            case "ch":
 
                 $scope.usFlag = true;
                 $scope.franceFlag = true;
                 $scope.chinaFlag = false;
                 $translate.use('jp').then(function () {
                     console.log('Chinese Used');
+                    $('#calendar').fullCalendar('destroy');
+                    $rootScope.eventInit("ch");
                 });
 
                 break;
@@ -145,6 +133,58 @@
 
         $rootScope.columnclass = "col-sm-11";
 
+        if (valueService.getDebriefChanged()) {
+
+            $mdDialog.show({
+                locals: {dataToPass: item},
+                controller: DialogController,
+                templateUrl: "app/views/Dialog.html",
+                parent: angular.element(document.body),
+                targetEvent: event,
+                clickOutsideToClose: false
+            }).then(function (selected) {
+
+                // $scope.status = "You said the information was '" + selected + "'.";
+
+            }, function () {
+
+                //$scope.status = "You cancelled the dialog.";
+            });
+
+        } else {
+
+            sideNavigation(item);
+        }
+    }
+
+    function DialogController($scope, $mdDialog, dataToPass) {
+
+        $scope.saveData = function () {
+
+            $rootScope.saveValues();
+
+            sideNavigation(dataToPass);
+
+            $mdDialog.hide();
+
+            $rootScope.showDebrief = false;
+
+        }
+
+        $scope.cancel = function () {
+
+            sideNavigation(dataToPass);
+
+            $mdDialog.hide();
+
+            valueService.setDebriefChanged(false);
+
+            $rootScope.showDebrief = false;
+        }
+    }
+
+    function sideNavigation(item) {
+
         switch (item.name) {
 
             case "MyCalendar":
@@ -185,7 +225,7 @@
 
                 break;
 
-            case "Debrief" :
+            case "Debrief":
 
                 $scope.taskOverview = true;
 
@@ -222,11 +262,16 @@
 
     $scope.signout = function () {
 
-        // localService.deleteUser();
+        if (valueService.getNetworkStatus()) {
 
-        // var db = sqlitePlugin.deleteDatabase({name: 'emerson.sqlite', location: 'default'});
+            constantService.onDeviceReady();
 
-        $state.go('login');
+            $state.go('login');
+
+        } else {
+
+            $state.go('login');
+        }
     }
 
     $scope.export2PDF = function () {
@@ -250,61 +295,117 @@
         });
     }
 
-    $scope.saveValues = function () {
-
-        valueService.saveValues();
-    }
-
     $scope.syncFunctionality = function () {
+
+        console.log("NETWORK " + valueService.getNetworkStatus());
+
+        var promises = [];
 
         if (valueService.getNetworkStatus()) {
 
+            $rootScope.dbCall = true;
+
+            var deferAccept = $q.defer();
+
             localService.getAcceptTaskList(function (response) {
 
-                angular.forEach(response, function (item) {
+                console.log("SYNC ACCEPT");
 
-                    valueService.acceptTask(item.Task_Number);
+                if (response.length > 0) {
 
-                });
+                    var i = 0;
+
+                    angular.forEach(response, function (item) {
+
+                        var deferred = $q.defer();
+
+                        valueService.acceptTask(item.Task_Number, function (result) {
+
+                            cloudService.OfscActions(item.Activity_Id, true, function (res) {
+
+                                $rootScope.showAccept = false;
+
+                                deferred.resolve("success");
+
+                                if ((response.length - 1) == i) {
+                                    deferAccept.resolve("Accept");
+                                }
+
+                                i++;
+                            });
+                        });
+
+                        promises.push(deferred.promise);
+                    });
+
+                } else {
+
+                    deferAccept.resolve("Accept");
+                }
             });
 
-            // valueService.syncData();
+            promises.push(deferAccept.promise);
+
+            var deferSubmit = $q.defer();
 
             localService.getPendingTaskList(function (response) {
 
-                angular.forEach(response, function (item) {
+                console.log("SYNC SUBMIT");
 
-                    valueService.submitDebrief(item.Task_Number);
+                if (response.length > 0) {
 
-                });
+                    var j = 0;
+
+                    angular.forEach(response, function (item) {
+
+                        var deferred = $q.defer();
+
+                        valueService.submitDebrief(item, item.Task_Number, function (result) {
+
+                            console.log("SUBMIT DEBRIEF");
+
+                            cloudService.OfscActions(item.Activity_Id, false, function (res) {
+
+                                deferred.resolve("success");
+
+                                console.log("DEBRIEF SUCCESS");
+
+                                if ((response.length - 1) == j) {
+                                    deferSubmit.resolve("Submit");
+                                }
+
+                                j++;
+                            });
+                        });
+
+                        promises.push(deferred.promise);
+                    });
+
+                } else {
+
+                    deferSubmit.resolve("Submit");
+                }
             });
 
-            cloudService.getTaskList(function (response) {
+            promises.push(deferSubmit.promise);
 
-                localService.deleteInstallBase();
-                localService.deleteNote();
-                localService.deleteContact();
-                localService.deleteShiftCode();
-                localService.deleteOverTime();
-                localService.deleteFieldJobName();
+            console.log("PENDING UPDATE LENGTH " + promises.length);
 
-                cloudService.getInstallBaseList();
-                cloudService.getContactList();
-                cloudService.getNoteList();
+            $q.all(promises).then(
+                function (response) {
 
-                cloudService.getOverTimeList();
-                cloudService.getShiftCodeList();
+                    console.log("SYNC DATA ACCEPT SUBMIT SUCCESS");
 
-                cloudService.getChargeType();
-                cloudService.getChargeMethod();
-                cloudService.getFieldJobName();
+                    syncData();
+                },
 
-                cloudService.getWorkType();
-                cloudService.getItem();
-                cloudService.getCurrency();
+                function (error) {
 
-                $state.go('myTask');
-            });
+                    console.log("SYNC DATA ACCEPT SUBMIT FAILURE");
+
+                    syncData();
+                }
+            );
         }
     }
 
@@ -313,6 +414,8 @@
     $scope.userName = "";
 
     $scope.login = function () {
+
+        $rootScope.dbCall = true;
 
         console.log($scope.userName);
 
@@ -326,7 +429,7 @@
             header: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Basic ' + authorizationValue,
-                'oracle-mobile-backend-id': constantService.getTaskBackId
+                'oracle-mobile-backend-id': constantService.getChargeBackId()
             }
         };
 
@@ -335,8 +438,6 @@
         cloudService.login(data, function (response) {
 
             if (response && response.message == null) {
-
-                $rootScope.Islogin = true;
 
                 valueService.setResourceId(response['ID']);
 
@@ -374,11 +475,17 @@
 
                         var data = {
                             "resourceId": constantService.getUser().OFSCId,
-                            "date": moment(new Date()).format('YYYY-MM-DD')
+                            "date": moment(new Date()).utcOffset(constantService.getTimeZone()).format('YYYY-MM-DD')
                         };
 
+                        console.log(JSON.stringify(data));
+
                         ofscService.activate_resource(data, function (response) {
-                            console.log("ACTIVATE RESOURCE " + JSON.stringify(response));
+
+                            if (response != undefined && response != null) {
+
+                                console.log("ACTIVATE RESOURCE " + JSON.stringify(response));
+                            }
                         });
 
                         offlineGetCall();
@@ -395,58 +502,324 @@
 
             cloudService.getTaskList(function (response) {
 
-                // localService.deleteInstallBase();
-                // localService.deleteContact();
-                // localService.deleteNote();
-                //
-                // localService.deleteOverTime();
-                // localService.deleteShiftCode();
-                //
-                // localService.deleteChargeType();
-                // localService.deleteChargeMethod();
-                // localService.deleteFieldJobName();
-                //
-                // localService.deleteWorkType();
-                // localService.deleteItem();
-                // localService.deleteCurrency();
-                //
-                // localService.deleteExpenseType();
-                // localService.deleteNoteType();
+                var promiseArray = [];
 
-                if (constantService.getUser().Default_View == "My Task") {
+                var deferInstall = $q.defer();
 
-                    $rootScope.selectedItem = 2;
+                cloudService.getInstallBaseList(function (result) {
 
-                    $state.go('myFieldJob');
+                    console.log("INSTALL");
+
+                    deferInstall.resolve("success");
+                });
+
+                promiseArray.push(deferInstall.promise);
+
+                var deferContact = $q.defer();
+
+                cloudService.getContactList(function (result) {
+
+                    console.log("CONTACT");
+
+                    deferContact.resolve("success");
+                });
+
+                promiseArray.push(deferContact.promise);
+
+                var deferNote = $q.defer();
+
+                cloudService.getNoteList(function (result) {
+
+                    console.log("NOTES");
+
+                    deferNote.resolve("success");
+                });
+
+                promiseArray.push(deferNote.promise);
+
+                var deferOverTime = $q.defer();
+
+                cloudService.getOverTimeList(function (result) {
+
+                    console.log("OVERTIME");
+
+                    deferOverTime.resolve("success");
+                });
+
+                promiseArray.push(deferOverTime.promise);
+
+                var deferShiftCode = $q.defer();
+
+                cloudService.getShiftCodeList(function (result) {
+
+                    console.log("SHIFTCODE");
+
+                    deferShiftCode.resolve("success");
+                });
+
+                promiseArray.push(deferShiftCode.promise);
+
+                var deferChargeType = $q.defer();
+
+                cloudService.getChargeType(function (result) {
+
+                    console.log("CHARGETYPE");
+
+                    deferChargeType.resolve("success");
+                });
+
+                promiseArray.push(deferChargeType.promise);
+
+                var deferChargeMethod = $q.defer();
+
+                cloudService.getChargeMethod(function (result) {
+
+                    console.log("CHARGEMETHOD");
+
+                    deferChargeMethod.resolve("success");
+                });
+
+                promiseArray.push(deferChargeMethod.promise);
+
+                var deferFieldJob = $q.defer();
+
+                cloudService.getFieldJobName(function (result) {
+
+                    console.log("FIELDJOB");
+
+                    deferFieldJob.resolve("success");
+                });
+
+                promiseArray.push(deferFieldJob.promise);
+
+                var deferWorkType = $q.defer();
+
+                cloudService.getWorkType(function (result) {
+
+                    console.log("WORKTYPE");
+
+                    deferWorkType.resolve("success");
+                });
+
+                promiseArray.push(deferWorkType.promise);
+
+                var deferItem = $q.defer();
+
+                cloudService.getItem(function (result) {
+
+                    console.log("ITEM");
+
+                    deferItem.resolve("success");
+                });
+
+                promiseArray.push(deferItem.promise);
+
+                var deferCurrency = $q.defer();
+
+                cloudService.getCurrency(function (result) {
+
+                    console.log("CURRENCY");
+
+                    deferCurrency.resolve("success");
+                });
+
+                promiseArray.push(deferCurrency.promise);
+
+                var deferExpense = $q.defer();
+
+                cloudService.getExpenseType(function (result) {
+
+                    console.log("EXPENSETYPE");
+
+                    deferExpense.resolve("success");
+                });
+
+                promiseArray.push(deferExpense.promise);
+
+                var deferNoteType = $q.defer();
+
+                cloudService.getNoteType(function (result) {
+
+                    console.log("NOTETYPE");
+
+                    deferNoteType.resolve("success");
+                });
+
+                promiseArray.push(deferNoteType.promise);
+
+                var deferAttachment = $q.defer();
+
+                cloudService.getAttachmentList(function (result) {
+
+                    console.log("ATTACHMENT");
+
+                    deferAttachment.resolve("success");
+                });
+
+                promiseArray.push(deferAttachment.promise);
+
+                var srNumberArray = [];
+
+                angular.forEach(constantService.getTaskList(), function (item) {
+
+                    if (item.SR_ID != undefined) {
+
+                        if (srNumberArray.indexOf(item.SR_ID) === -1) {
+
+                            srNumberArray.push(item.SR_ID);
+                        }
+                    }
+                });
+
+                if (srNumberArray.length > 10) {
+
+                    var strArray = [];
+
+                    var i = 1;
+
+                    angular.forEach(srNumberArray, function (item) {
+
+                        if (i <= srNumberArray.length) {
+
+                            strArray.push(item);
+
+                            if (i % 10 == 0) {
+
+                                var deferSRNotes = $q.defer();
+
+                                cloudService.getSRNotesList(strArray, function (response) {
+
+                                    console.log("SRNOTES");
+
+                                    deferSRNotes.resolve("success");
+                                });
+
+                                var deferSRAttachment = $q.defer();
+
+                                cloudService.getSRAttachmentList(strArray, function (response) {
+
+                                    console.log("SRATTACHMENT");
+
+                                    deferSRAttachment.resolve("success");
+                                });
+
+                                strArray = [];
+
+                                promiseArray.push(deferSRNotes.promise);
+
+                                promiseArray.push(deferSRAttachment.promise);
+
+                            } else if (i == srNumberArray.length) {
+
+                                var deferSRNotesFinal = $q.defer();
+
+                                cloudService.getSRNotesList(strArray, function (response) {
+
+                                    console.log("SRNOTES");
+
+                                    deferSRNotesFinal.resolve("success");
+                                });
+
+                                var deferSRAttachmentFinal = $q.defer();
+
+                                cloudService.getSRAttachmentList(strArray, function (response) {
+
+                                    console.log("SRATTACHMENT");
+
+                                    deferSRAttachmentFinal.resolve("success");
+                                });
+
+                                strArray = [];
+
+                                promiseArray.push(deferSRNotesFinal.promise);
+
+                                promiseArray.push(deferSRAttachmentFinal.promise);
+                            }
+
+                            i++;
+                        }
+                    });
 
                 } else {
 
-                    $rootScope.selectedItem = 1;
+                    var deferSRNotes = $q.defer();
 
-                    $state.go('myTask');
+                    cloudService.getSRNotesList(srNumberArray, function (response) {
+
+                        console.log("SRNOTES");
+
+                        deferSRNotes.resolve("success");
+                    });
+
+                    var deferSRAttachment = $q.defer();
+
+                    cloudService.getSRAttachmentList(srNumberArray, function (response) {
+
+                        console.log("SRATTACHMENT");
+
+                        deferSRAttachment.resolve("success");
+                    });
+
+                    promiseArray.push(deferSRNotes.promise);
+
+                    promiseArray.push(deferSRAttachment.promise);
                 }
 
-                $rootScope.apicall = false;
+                console.log("LENGTH LOGIN " + promiseArray.length);
 
-                cloudService.getInstallBaseList();
-                cloudService.getContactList();
-                cloudService.getNoteList();
+                $q.all(promiseArray).then(
+                    function (response) {
 
-                cloudService.getOverTimeList();
-                cloudService.getShiftCodeList();
+                        console.log("LOGIN SUCCESS ALL");
 
-                cloudService.getChargeType();
-                cloudService.getChargeMethod();
-                cloudService.getFieldJobName();
+                        if (constantService.getUser().Default_View == "My Task") {
 
-                cloudService.getWorkType();
-                cloudService.getItem();
-                cloudService.getCurrency();
+                            $rootScope.selectedItem = 2;
 
-                cloudService.getExpenseType();
-                cloudService.getNoteType();
+                            $state.go('myFieldJob');
 
-                getAttachments();
+                            $rootScope.Islogin = true;
+
+                        } else {
+
+                            $rootScope.selectedItem = 1;
+
+                            $state.go('myTask');
+
+                            $rootScope.Islogin = true;
+                        }
+
+                        $rootScope.dbCall = false;
+
+                        getAttachments();
+                    },
+
+                    function (error) {
+
+                        console.log("LOGIN FAILURE ALL");
+
+                        if (constantService.getUser().Default_View == "My Task") {
+
+                            $rootScope.selectedItem = 2;
+
+                            $state.go('myFieldJob');
+
+                            $rootScope.Islogin = true;
+
+                        } else {
+
+                            $rootScope.selectedItem = 1;
+
+                            $state.go('myTask');
+
+                            $rootScope.Islogin = true;
+                        }
+
+                        $rootScope.dbCall = false;
+
+                        getAttachments();
+                    }
+                );
             });
         }
 
@@ -455,82 +828,360 @@
 
     function getAttachments() {
 
-        cloudService.getFileIds(function (response) {
+        localService.getAttachmentListType("O", function (response) {
 
-            if (response.Attachments_Info != undefined && response.Attachments_Info.length > 0) {
+            angular.forEach(response, function (item) {
 
-                angular.forEach(response.Attachments_Info, function (taskArray, value) {
+                cloudService.downloadAttachment(item, function (result) {
 
-                    angular.forEach(taskArray.Attachments, function (attachmentValue, value) {
+                    if (result != undefined && result != null && result.data != undefined && result.data != null) {
 
-                        download(attachmentValue, taskArray.Task_Id, function (response) {
+                        var base64Code = result.data;
 
-                            $rootScope.apicall = false;
-
-                            $scope.attachmentArray = [];
-
-                            var filePath = cordova.file.dataDirectory;
-
-                            if (response != undefined && response != null) {
-
-                                var base64Code = response;
-
-                                valueService.saveBase64File(filePath, attachmentValue.User_File_Name, base64Code, attachmentValue.Content_type);
-
-                                var attachmentObject = {
-                                    Attachment_Id: attachmentValue.Attachments_Id,
-                                    File_Path: filePath,
-                                    File_Name: attachmentValue.User_File_Name,
-                                    File_Type: attachmentValue.Content_type,
-                                    Type: "O",
-                                    AttachmentType: "O",
-                                    Task_Number: taskArray.Task_Id
-                                };
-
-                                $scope.attachmentArray.push(attachmentObject);
-
-                                localService.insertAttachmentList($scope.attachmentArray);
-
-                            }
-                        });
-                    });
+                        valueService.saveBase64File(item.File_Path, item.File_Name, base64Code, item.File_Type);
+                    }
                 });
+
+            });
+        });
+
+        localService.getAttachmentListType("S", function (response) {
+
+            angular.forEach(response, function (item) {
+
+                cloudService.downloadAttachment(item, function (result) {
+
+                    if (result != undefined && result != null && result.data != undefined && result.data != null) {
+
+                        var base64Code = result.data;
+
+                        valueService.saveBase64File(item.File_Path, item.File_Name, base64Code, item.File_Type);
+                    }
+                });
+            });
+        });
+    }
+
+    function syncData() {
+
+        cloudService.getTaskList(function (response) {
+
+            var promiseArray = [];
+
+            var deferInstall = $q.defer();
+
+            cloudService.getInstallBaseList(function (result) {
+
+                console.log("INSTALL");
+
+                deferInstall.resolve("success");
+            });
+
+            promiseArray.push(deferInstall.promise);
+
+            var deferContact = $q.defer();
+
+            cloudService.getContactList(function (result) {
+
+                console.log("CONTACT");
+
+                deferContact.resolve("success");
+            });
+
+            promiseArray.push(deferContact.promise);
+
+            var deferNote = $q.defer();
+
+            cloudService.getNoteList(function (result) {
+
+                console.log("NOTES");
+
+                deferNote.resolve("success");
+            });
+
+            promiseArray.push(deferNote.promise);
+
+            var deferOverTime = $q.defer();
+
+            cloudService.getOverTimeList(function (result) {
+
+                console.log("OVERTIME");
+
+                deferOverTime.resolve("success");
+            });
+
+            promiseArray.push(deferOverTime.promise);
+
+            var deferShiftCode = $q.defer();
+
+            cloudService.getShiftCodeList(function (result) {
+
+                console.log("SHIFTCODE");
+
+                deferShiftCode.resolve("success");
+            });
+
+            promiseArray.push(deferShiftCode.promise);
+
+            var deferChargeType = $q.defer();
+
+            cloudService.getChargeType(function (result) {
+
+                console.log("CHARGETYPE");
+
+                deferChargeType.resolve("success");
+            });
+
+            promiseArray.push(deferChargeType.promise);
+
+            var deferChargeMethod = $q.defer();
+
+            cloudService.getChargeMethod(function (result) {
+
+                console.log("CHARGEMETHOD");
+
+                deferChargeMethod.resolve("success");
+            });
+
+            promiseArray.push(deferChargeMethod.promise);
+
+            var deferFieldJob = $q.defer();
+
+            cloudService.getFieldJobName(function (result) {
+
+                console.log("FIELDJOB");
+
+                deferFieldJob.resolve("success");
+            });
+
+            promiseArray.push(deferFieldJob.promise);
+
+            var deferWorkType = $q.defer();
+
+            cloudService.getWorkType(function (result) {
+
+                console.log("WORKTYPE");
+
+                deferWorkType.resolve("success");
+            });
+
+            promiseArray.push(deferWorkType.promise);
+
+            var deferItem = $q.defer();
+
+            cloudService.getItem(function (result) {
+
+                console.log("ITEM");
+
+                deferItem.resolve("success");
+            });
+
+            promiseArray.push(deferItem.promise);
+
+            var deferCurrency = $q.defer();
+
+            cloudService.getCurrency(function (result) {
+
+                console.log("CURRENCY");
+
+                deferCurrency.resolve("success");
+            });
+
+            promiseArray.push(deferCurrency.promise);
+
+            var deferExpense = $q.defer();
+
+            cloudService.getExpenseType(function (result) {
+
+                console.log("EXPENSETYPE");
+
+                deferExpense.resolve("success");
+            });
+
+            promiseArray.push(deferExpense.promise);
+
+            var deferNoteType = $q.defer();
+
+            cloudService.getNoteType(function (result) {
+
+                console.log("NOTETYPE");
+
+                deferNoteType.resolve("success");
+            });
+
+            promiseArray.push(deferNoteType.promise);
+
+            var deferAttachment = $q.defer();
+
+            cloudService.getAttachmentList(function (result) {
+
+                console.log("ATTACHMENT");
+
+                deferAttachment.resolve("success");
+            });
+
+            promiseArray.push(deferAttachment.promise);
+
+            var srNumberArray = [];
+
+            angular.forEach(constantService.getTaskList(), function (item) {
+
+                if (item.SR_ID != undefined) {
+
+                    if (srNumberArray.indexOf(item.SR_ID) === -1) {
+
+                        srNumberArray.push(item.SR_ID);
+                    }
+                }
+            });
+
+            if (srNumberArray.length > 10) {
+
+                var strArray = [];
+
+                var i = 1;
+
+                angular.forEach(srNumberArray, function (item) {
+
+                    if (i <= srNumberArray.length) {
+
+                        strArray.push(item);
+
+                        if (i % 10 == 0) {
+
+                            var deferSRNotes = $q.defer();
+
+                            cloudService.getSRNotesList(strArray, function (response) {
+
+                                console.log("SRNOTES");
+
+                                deferSRNotes.resolve("success");
+                            });
+
+                            var deferSRAttachment = $q.defer();
+
+                            cloudService.getSRAttachmentList(strArray, function (response) {
+
+                                console.log("SRATTACHMENT");
+
+                                deferSRAttachment.resolve("success");
+                            });
+
+                            strArray = [];
+
+                            promiseArray.push(deferSRNotes.promise);
+
+                            promiseArray.push(deferSRAttachment.promise);
+
+                        } else if (i == srNumberArray.length) {
+
+                            var deferSRNotesFinal = $q.defer();
+
+                            cloudService.getSRNotesList(strArray, function (response) {
+
+                                console.log("SRNOTES");
+
+                                deferSRNotesFinal.resolve("success");
+                            });
+
+                            var deferSRAttachmentFinal = $q.defer();
+
+                            cloudService.getSRAttachmentList(strArray, function (response) {
+
+                                console.log("SRATTACHMENT");
+
+                                deferSRAttachmentFinal.resolve("success");
+                            });
+
+                            strArray = [];
+
+                            promiseArray.push(deferSRNotesFinal.promise);
+
+                            promiseArray.push(deferSRAttachmentFinal.promise);
+                        }
+
+                        i++;
+                    }
+                });
+
+            } else {
+
+                var deferSRNotes = $q.defer();
+
+                cloudService.getSRNotesList(srNumberArray, function (response) {
+
+                    console.log("SRNOTES");
+
+                    deferSRNotes.resolve("success");
+                });
+
+                var deferSRAttachment = $q.defer();
+
+                cloudService.getSRAttachmentList(srNumberArray, function (response) {
+
+                    console.log("SRATTACHMENT");
+
+                    deferSRAttachment.resolve("success");
+                });
+
+                promiseArray.push(deferSRNotes.promise);
+
+                promiseArray.push(deferSRAttachment.promise);
             }
+
+            console.log("LENGTH SYNC " + promiseArray.length);
+
+            $q.all(promiseArray).then(
+                function (response) {
+
+                    console.log("SYNC SUCCESS ALL");
+
+                    if (valueService.getUserType().defaultView == "My Task") {
+
+                        $state.go("myFieldJob");
+                        $rootScope.selectedItem = 2;
+                        $rootScope.showTaskDetail = false;
+                        $rootScope.showDebrief = false;
+
+                    } else {
+
+                        $state.go("myTask");
+                        $rootScope.selectedItem = 1;
+                        $rootScope.showTaskDetail = false;
+                        $rootScope.showDebrief = false;
+                    }
+
+                    $rootScope.dbCall = false;
+
+                    getAttachments();
+                },
+
+                function (error) {
+
+                    console.log("SYNC FAILURE ALL");
+
+                    // $state.go($state.current, {}, {reload: true});
+
+                    if (valueService.getUserType().defaultView == "My Task") {
+
+                        $state.go("myFieldJob");
+                        $rootScope.selectedItem = 2;
+                        $rootScope.showTaskDetail = false;
+                        $rootScope.showDebrief = false;
+
+                    } else {
+
+                        $state.go("myTask");
+                        $rootScope.selectedItem = 1;
+                        $rootScope.showTaskDetail = false;
+                        $rootScope.showDebrief = false;
+                    }
+
+                    $rootScope.dbCall = false;
+
+                    getAttachments();
+                }
+            );
         });
     }
-
-    function download(resource, taskId, callback) {
-
-        $rootScope.apicall = false;
-
-        cloudService.downloadAttachment(taskId, resource.Attachments_Id, function (response) {
-
-            if (response != undefined)
-                callback(response.data);
-
-        });
-    }
-
 });
-
-//$scope.changeLanguage();
-
-/*$(function (){
-   $("[data-toggle = 'popover']").popover({
-         'placement': 'bottom',
-         'animation': true,
-         'html': true,
-         'title' : getPopoverCustomTitle(),
-         'content': getPopoverCustomContent()
-     });
-});
-
-function getPopoverCustomTitle() {
-// return '<div class="popover ' + className + '" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>';
-return '<div class="popover-custom-title"><label>Alex</label><label>Field Engineer</label><label>Sign Out</label></div>';
-}
-
-function getPopoverCustomContent() {
-// return '<div class="popover ' + className + '" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>';
-return '<div class="popover-custom-content"><label>Select your Language</label><br><hr><img src="images/Layer 10.png" ng-click="changeLanguage()"><img src="images/Layer 12.png" ng-click="changeLanguage()"></div>';
-}*/

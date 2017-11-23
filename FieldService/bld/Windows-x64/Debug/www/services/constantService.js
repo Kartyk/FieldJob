@@ -1,219 +1,306 @@
-﻿(function() {
+﻿(function () {
 
-  'use strict';
+    'use strict';
 
-  app.service('constantService', constantService);
+    app.service('constantService', constantService);
 
-  constantService.$inject = ['$http', '$rootScope', '$window', '$location', 'localService'];
+    constantService.$inject = ['$http', '$rootScope', '$window', '$location', 'localService'];
 
-  function constantService($http, $rootScope, $window, $location, localService) {
+    function constantService($http, $rootScope, $window, $location, localService) {
 
-    var service = {};
+        var service = {};
 
-    var userObject = {};
+        var userObject = {};
 
-    var resourceId = null;
+        var resourceId = null;
 
-    var timeZone = null;
+        var timeZone = null;
 
-    var contactsEmail = [];
+        var contactsEmail = [];
 
-    var taskList = [];
+        var taskList = [];
 
-    var contactsCCEmail = null;
+        var contactsCCEmail = null;
 
-    var contentType = 'application/json';
+        var contentType = 'application/json';
 
-    var authKey = "Basic QTQ3MjE0NF9FTUVSU09OTU9CSUxFQ0xPVURfTU9CSUxFX0FOT05ZTU9VU19BUFBJRDpZLm81amxkaHVtYzF2ZQ==";
+        // //DEV
+        //var authKey = "Basic QTQ3MjE0NF9FTUVSU09OTU9CSUxFQ0xPVURfTU9CSUxFX0FOT05ZTU9VU19BUFBJRDpZLm81amxkaHVtYzF2ZQ==";
 
-    var taskBackEndId = "cc9a9b83-02ff-4be1-8b70-bccb3ac6c592";
+        //var taskBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
 
-    var chargeBackEndId = "7172e7e3-d292-4bb3-be0b-1e475c6f66a7";
+        //var chargeBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
 
-    var shiftBackEndId = "4b2f8c2d-f6d1-4957-8add-b0d471cdaea4";
+        //var shiftBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
 
-    var fieldBackEndId = "b861a04a-de53-4c76-9430-3f485c21c5f4";
+        //var fieldBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
 
-    var materialBackEndId = "0686fd58-8150-4264-ac09-348f79436fb9";
+        //var materialBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
 
-    var ofscBackEndId = "557f06cf-1dda-42f1-a8a8-afc52f823904";
+        //var ofscBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
 
-    var acceptBackEndId = "3fec5f35-296c-49a6-92b7-cbac8e071522";
+        //var acceptBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
 
-    var stagesArray = {};
-    
-    var startDate = new Date();
+        //var expenseBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
 
-    startDate.setDate(startDate.getDate() - 15);
+        //var internalBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
 
-    var startDateISOFormat = startDate.toISOString();
+        //var srBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276"
 
-    var endDate = new Date();
 
-    endDate.setDate(endDate.getDate() + 15);
+        //SIT
 
-    var endDateISOFormat = endDate.toISOString();
+        var authKey = "Basic QTQ3MjE0NF9FTUVSU09OTU9CSUxFVEVTVEVOVl9NT0JJTEVfQU5PTllNT1VTX0FQUElEOm9ma3U1ZG4xUHZscS5t";
 
-    service.setResourceId = setResourceId;
-    service.getResourceId = getResourceId;
+        var taskBackEndId = "b043c17e-7dcd-41a5-abc6-39fa2f8ab0a6";
 
-    service.setUser = setUser;
-    service.getUser = getUser;
+        var internalBackEndId = "fe3b9068-deca-4a48-88f7-b73b19274b12";
 
-    service.getStartDate = getStartDate;
-    service.getEndDate = getEndDate;
+        var chargeBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
 
-    service.setTaskList = setTaskList;
-    service.getTaskList = getTaskList;
+        var shiftBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
 
-    service.getContentType = getContentType;
-    service.getAuthor = getAuthor;
+        var fieldBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
 
-    service.getTaskBackId = getTaskBackId;
-    service.getChargeBackId = getChargeBackId;
-    service.getFieldBackId = getFieldBackId;
-    service.getShiftBackId = getShiftBackId;
-    service.getMaterialBackId = getMaterialBackId;
-    service.getOfscBackId = getOfscBackId;
-    service.getAcceptBackId = getAcceptBackId;
+        var materialBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
 
-    service.setUserEmailId = setUserEmailId;
-    service.getUserEmailId = getUserEmailId;
+        var ofscBackEndId = "b043c17e-7dcd-41a5-abc6-39fa2f8ab0a6";
 
-    service.setCCEmailID = setCCEmailID;
-    service.getCCEmailID = getCCEmailID;
+        var acceptBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
 
-    service.setTimeZone = setTimeZone;
-    service.getTimeZone = getTimeZone;
-    service.setStagesArray = setStagesArray;
-    service.getStagesArray = getStagesArray;
+        var expenseBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
 
-    return service;
+         var srBackEndId = "fb4010a8-02b7-4e20-88d0-d7f4029f6bd0";
 
-    function setResourceId(id) {
-      resourceId = id;
-    };
 
-    function getResourceId() {
-      return resourceId;
-    };
+        var stagesArray = {};
 
-    function setUser(user) {
+        var startDate = new Date();
 
-      userObject = user;
+        startDate.setDate(startDate.getDate() - 15);
 
-      setTimeZone(userObject.Time_Zone);
+        var startDateISOFormat = startDate.toISOString();
 
-      $rootScope.uName = userObject.Name;
-    };
+        var endDate = new Date();
 
-    function getUser() {
-      return userObject;
-    };
+        endDate.setDate(endDate.getDate() + 15);
 
-    function setTimeZone(zone) {
-      timeZone = zone;
-    };
+        var endDateISOFormat = endDate.toISOString();
 
-    function getTimeZone() {
+        service.setResourceId = setResourceId;
+        service.getResourceId = getResourceId;
 
-      return timeZone;
-    };
+        service.setUser = setUser;
+        service.getUser = getUser;
 
-    function setUserEmailId(id) {
+        service.getStartDate = getStartDate;
+        service.getEndDate = getEndDate;
 
-      for (var i = 0; i < id.length; i++) {
+        service.setTaskList = setTaskList;
+        service.getTaskList = getTaskList;
 
-        contactsEmail.push(id[i].Email);
-      }
-    };
+        service.getContentType = getContentType;
+        service.getAuthor = getAuthor;
 
-    function getUserEmailId() {
+        service.getTaskBackId = getTaskBackId;
+        service.getInternalBackId = getInternalBackId;
+        service.getChargeBackId = getChargeBackId;
+        service.getFieldBackId = getFieldBackId;
+        service.getShiftBackId = getShiftBackId;
+        service.getMaterialBackId = getMaterialBackId;
+        service.getOfscBackId = getOfscBackId;
+        service.getAcceptBackId = getAcceptBackId;
+        service.getSRBackId = getSRBackId;
 
-      return contactsEmail;
-    };
+        service.setUserEmailId = setUserEmailId;
+        service.getUserEmailId = getUserEmailId;
 
-    function setCCEmailID(email) {
+        service.setCCEmailID = setCCEmailID;
+        service.getCCEmailID = getCCEmailID;
 
-      contactsCCEmail = email;
-    };
+        service.setTimeZone = setTimeZone;
+        service.getTimeZone = getTimeZone;
 
-    function getCCEmailID() {
+        service.setStagesArray = setStagesArray;
+        service.getStagesArray = getStagesArray;
 
-      return contactsCCEmail;
-    };
+        service.onDeviceReady = onDeviceReady;
+        service.getExpenseTypeBackendId = getExpenseTypeBackendId;
 
-    function getStartDate() {
+        return service;
 
-      return startDateISOFormat;
-    };
+        function getExpenseTypeBackendId() {
+            return expenseBackEndId;
+        }
 
-    function getEndDate() {
+        function setResourceId(id) {
+            resourceId = id;
+        };
 
-      return endDateISOFormat;
-    };
+        function getResourceId() {
+            return resourceId;
+        };
 
-    function setTaskList(response) {
+        function setUser(user) {
 
-      taskList = response;
-    };
+            userObject = user;
 
-    function getTaskList() {
+            setTimeZone(userObject.Time_Zone);
 
-      return taskList;
-    };
+            $rootScope.uName = userObject.Name;
+        };
 
-    function getAuthor() {
+        function getUser() {
+            return userObject;
+        };
 
-      return authKey;
-    };
+        function setTimeZone(zone) {
+            timeZone = zone;
+        };
 
-    function getTaskBackId() {
+        function getTimeZone() {
 
-      return taskBackEndId;
-    };
+            return timeZone;
+        };
 
-    function getChargeBackId() {
+        function setUserEmailId(id) {
 
-      return chargeBackEndId;
-    };
+            for (var i = 0; i < id.length; i++) {
 
-    function getFieldBackId() {
+                contactsEmail.push(id[i].Email);
+            }
+        };
 
-      return fieldBackEndId;
-    };
+        function getUserEmailId() {
 
-    function getShiftBackId() {
+            return contactsEmail;
+        };
 
-      return shiftBackEndId;
-    };
+        function setCCEmailID(email) {
 
-    function getMaterialBackId() {
+            contactsCCEmail = email;
+        };
 
-      return materialBackEndId;
-    };
+        function getCCEmailID() {
 
-    function getOfscBackId() {
+            return contactsCCEmail;
+        };
 
-      return ofscBackEndId;
-    };
+        function getStartDate() {
 
-    function getAcceptBackId() {
+            return startDateISOFormat;
+        };
 
-      return acceptBackEndId;
-    };
+        function getEndDate() {
 
-    function getContentType() {
+            return endDateISOFormat;
+        };
 
-      return contentType;
-    };
+        function setTaskList(response) {
 
-    function setStagesArray(stages) {
-      stagesArray = stages;
+            taskList = response;
+        };
+
+        function getTaskList() {
+
+            return taskList;
+        };
+
+        function getAuthor() {
+
+            return authKey;
+        };
+
+        function getTaskBackId() {
+
+            return taskBackEndId;
+        };
+
+        function getInternalBackId() {
+
+            return internalBackEndId;
+        };
+
+        function getChargeBackId() {
+
+            return chargeBackEndId;
+        };
+
+        function getFieldBackId() {
+
+            return fieldBackEndId;
+        };
+
+        function getShiftBackId() {
+
+            return shiftBackEndId;
+        };
+
+        function getMaterialBackId() {
+
+            return materialBackEndId;
+        };
+
+        function getOfscBackId() {
+
+            return ofscBackEndId;
+        };
+
+        function getAcceptBackId() {
+
+            return acceptBackEndId;
+        };
+
+        function getSRBackId() {
+
+            return srBackEndId;
+        };
+
+        function getContentType() {
+
+            return contentType;
+        };
+
+        function setStagesArray(stages) {
+            stagesArray = stages;
+        };
+
+        function getStagesArray() {
+            return stagesArray;
+        };
+
+
+        function onDeviceReady() {
+
+            localService.deleteTaskList();
+            localService.deleteInternalList();
+            localService.deleteInstallBase();
+            localService.deleteContact();
+            localService.deleteNote();
+
+            localService.deleteOverTime();
+            localService.deleteShiftCode();
+
+            localService.deleteChargeType();
+            localService.deleteChargeMethod();
+            localService.deleteFieldJobName();
+
+            localService.deleteWorkType();
+            localService.deleteItem();
+            localService.deleteCurrency();
+
+            localService.deleteExpenseType();
+            localService.deleteNoteType();
+
+            localService.deleteTimeList();
+            localService.deleteExpenseList();
+            localService.deleteNotesList();
+            localService.deleteMaterialList();
+            localService.deleteAttachmentList();
+            localService.deleteEngineerList();
+
+            localService.deleteUser();
+
+        };
     }
-
-    function getStagesArray() {
-      return stagesArray;
-    };
-  }
 })();

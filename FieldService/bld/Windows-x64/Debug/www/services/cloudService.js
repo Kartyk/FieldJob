@@ -4,9 +4,9 @@
 
     app.factory('cloudService', cloudService);
 
-    cloudService.$inject = ['$http', '$rootScope', '$window', '$location', 'localService', 'constantService'];
+    cloudService.$inject = ['$http', '$rootScope', '$window', '$location', 'localService', 'constantService', 'ofscService'];
 
-    function cloudService($http, $rootScope, $window, $location, localService, constantService) {
+    function cloudService($http, $rootScope, $window, $location, localService, constantService, ofscService) {
 
         var url = conf.apiUrl;
 
@@ -17,7 +17,11 @@
         service.getTechnicianProfile = getTechnicianProfile;
 
         service.getTaskList = getTaskList;
+        service.getInternalList = getInternalList;
         service.getInstallBaseList = getInstallBaseList;
+        service.getSRNotesList = getSRNotesList;
+        service.getAttachmentList = getAttachmentList;
+        service.getSRAttachmentList = getSRAttachmentList;
         service.getContactList = getContactList;
         service.getNoteList = getNoteList;
         service.getProjectList = getProjectList;
@@ -41,9 +45,9 @@
         service.startTask = startTask;
 
         service.uploadTime = uploadTime;
-        service.updateExpenses = updateExpenses;
-        service.updateMaterial = updateMaterial;
-        service.updateNotes = updateNotes;
+        service.uploadExpense = uploadExpense;
+        service.uploadMaterial = uploadMaterial;
+        service.uploadNote = uploadNote;
 
         service.createAttachment = createAttachment;
         service.downloadAttachment = downloadAttachment;
@@ -67,7 +71,7 @@
 
         service.setCredentials = setCredentials;
         service.clearCredentials = clearCredentials;
-
+        service.OfscActions = OfscActions;
         return service;
 
         function login(formData, callback) {
@@ -122,29 +126,14 @@
 
         function getTaskList(callback) {
 
-          //var ofscResponse = [];
-          var responseOfTaskDetails=[];
+            var taskArray = [];
 
-          //var startDate = moment(constantService.getStartDate()).format("YYYY-MM-DD");
-          //var endDate = moment(constantService.getEndDate()).format("YYYY-MM-DD");
-          //var type="CUSTOMER";
-          //return $http({
+            var internalOFSCResponse = [];
 
-          //    method: 'GET',
-          //    url: url + 'OFSCActions/tasktype?resourceId='+constantService.getResourceId()+'&fromDate='+startDate+'&toDate='+endDate+'&type='+type,
-          //    headers: {
-          //        "Content-Type": constantService.getContentType(),
-          //        "Authorization": constantService.getAuthor(),
-          //        "oracle-mobile-backend-id": constantService.getOfscBackId()
-          //    }
-          //}).success(function (response) {
-
-          //    ofscResponse = response.finalResult;
-          //  console.log(ofscResponse);
             $http({
 
                 method: 'GET',
-                url: url + 'TaskDetails/Resource_ID_taskdetails?resourceId=' + constantService.getResourceId()
+                url: url + 'TaskDetails_Combined/Task_Details?resourceId=' + constantService.getResourceId()
                 + '&fromDate=' + constantService.getStartDate()
                 + '&toDate=' + constantService.getEndDate(),
                 headers: {
@@ -155,31 +144,49 @@
 
             }).success(function (response) {
 
-                console.log("Task Response " + JSON.stringify(response));
+                console.log("Task Response " + JSON.stringify(response.TaskDetails));
 
-                response.TaskDetails.forEach(function (item) {
+                getInternalList(function (internalresponse) {
 
-                      //   ofscResponse.forEach(function(itemForOFSC){
-                      //
-                      //     if(itemForOFSC.ActivityID==item.Activity_Id){
-                      //
-                      //         console.log("true" + item.Activity_Id)
-                      //
-                      //        item.Start_Date= itemForOFSC.Start_Date;
-                      //
-                      //        item.End_Date= itemForOFSC.End_Date;
-                      //
-                      //     }
-                      // });
+                    angular.forEach(internalresponse, function (item) {
 
-                      responseOfTaskDetails.push(item);
-                  });
+                        var internalOFSCJSONObject = {};
 
-                console.log("**************************************************");
-                console.log(responseOfTaskDetails);
-                localService.insertTaskList(responseOfTaskDetails);
+                        internalOFSCJSONObject.Start_Date = item.Start_time;
+                        internalOFSCJSONObject.End_Date = item.End_time;
+                        internalOFSCJSONObject.Type = "INTERNAL";
+                        internalOFSCJSONObject.Customer_Name = item.Activity_type;
+                        internalOFSCJSONObject.Task_Number = item.Activity_Id;
 
-                callback(responseOfTaskDetails);
+                        internalOFSCResponse.push(internalOFSCJSONObject);
+                    });
+
+                    angular.forEach(response.TaskDetails, function (item) {
+
+                        item.Type = "CUSTOMER";
+
+                        item.email = "";
+
+                        item.Date = new Date();
+
+                        taskArray.push(item);
+                    });
+
+                    localService.insertTaskList(taskArray, function (result) {
+
+                        console.log("TASK");
+
+                        angular.forEach(internalOFSCResponse, function (item) {
+
+                            taskArray.push(item);
+                        });
+
+                        constantService.setTaskList(taskArray);
+
+                        callback(taskArray);
+
+                    });
+                });
 
             }).error(function (error) {
 
@@ -187,46 +194,50 @@
 
                 callback(error);
             });
-
-          //}).error(function (error) {
-
-          //    console.log('Login Error', JSON.stringify(error));
-
-          //    callback(error);
-          //});
-
         }
 
-        function getOFSCDate(callback){
-            console.log('getOFSCDate ::', JSON.stringify(formData));
-            var startDate = moment(constantService.getStartDate()).format("YYYY-MM-DD");
-            var endDate = moment(constantService.getEndDate()).format("YYYY-MM-DD");
-            var type="CUSTOMER";
-            return $http({
+        function getInternalList(callback) {
 
-                method: 'GET',
-                url: url + 'OFSCActions/tasktype?resourceId='+constantService.getResourceId()+'&fromDate='+startDate+'&toDate='+endDate+'&type='+type,
+            $http({
+
+                method: 'POST',
+                url: url + 'Internal_OFSC/get_ids',
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
                     "oracle-mobile-backend-id": constantService.getOfscBackId()
+                },
+                data: {
+                    "resourceId": constantService.getResourceId(),
+                    "fromDate": moment(constantService.getStartDate()).format('YYYY-MM-DD'),
+                    "toDate": moment(constantService.getEndDate()).format('YYYY-MM-DD')
                 }
+
             }).success(function (response) {
 
-                console.log('OFSC Date Call Response', JSON.stringify(response));
+                console.log("Internal Response " + JSON.stringify(response.activities));
 
-                callback(response);
+                localService.insertInternalList(response.activities, function (result) {
+
+                    console.log("INTERNAL");
+
+                    localService.getInternalList(function (res) {
+
+                        callback(res);
+                    });
+                });
 
             }).error(function (error) {
 
-                console.log('Login Error', JSON.stringify(error));
+                console.log("Internal Error " + JSON.stringify(error));
 
-                callback(error);
+                var response = [];
+
+                callback(response);
             });
+        }
 
-          }
-
-        function getInstallBaseList() {
+        function getInstallBaseList(callback) {
 
             $http({
 
@@ -237,22 +248,183 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getTaskBackId()
+                    "oracle-mobile-backend-id": constantService.getInternalBackId()
                 }
 
             }).success(function (response) {
 
                 console.log("Install Base Response " + JSON.stringify(response));
 
-                localService.insertInstallBaseList(response);
+                $rootScope.apicall = true;
+
+                localService.insertInstallBaseList(response, function (result) {
+
+                    callback("success");
+                });
 
             }).error(function (error) {
 
                 console.log("Install Base Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
-        function getContactList() {
+        function getSRNotesList(srNumberArray, callback) {
+
+            console.log("SR NUMBER " + JSON.stringify({"SRNum": srNumberArray}));
+
+            $http({
+
+                method: 'POST',
+                url: url + 'Fetch_NotesSR/notes_SR',
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getSRBackId()
+                },
+                data: {"SRNum": srNumberArray}
+
+            }).success(function (response) {
+
+                console.log("SR Notes Response " + JSON.stringify(response));
+
+                $rootScope.apicall = true;
+
+                var noteArray = [];
+
+                angular.forEach(response.Notes_by_SRs, function (item) {
+
+                    angular.forEach(item.NotesSR, function (object) {
+
+                        noteArray.push(object);
+                    });
+                });
+
+                localService.insertSRNotesList(noteArray, function (result) {
+
+                    callback("success");
+                });
+
+            }).error(function (error) {
+
+                console.log("SR Notes Error " + JSON.stringify(error));
+
+                callback("error");
+            });
+        }
+
+        function getAttachmentList(callback) {
+
+            $http({
+
+                method: 'GET',
+                url: url + 'FileID/to_getfileid?Id=' + constantService.getResourceId(),
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getSRBackId()
+                }
+
+            }).success(function (response) {
+
+                console.log("Attachment Response " + JSON.stringify(response));
+
+                $rootScope.apicall = true;
+
+                var attachmentArray = [];
+
+                var filePath = cordova.file.dataDirectory;
+
+                angular.forEach(response.FileID, function (item) {
+
+                    var attachmentObject = {
+                        Attachment_Id: item.Attachments_Id,
+                        File_Path: filePath,
+                        File_Name: item.User_File_Name,
+                        File_Type: item.Content_type,
+                        Type: "O",
+                        AttachmentType: "O",
+                        Created_Date: item.Date_Created,
+                        Task_Number: item.Task_Number,
+                        SRID: ""
+                    };
+
+                    attachmentArray.push(attachmentObject);
+                });
+
+                localService.insertAttachmentList(attachmentArray, function (result) {
+
+                    callback("success");
+                });
+
+            }).error(function (error) {
+
+                console.log("Attachment Error " + JSON.stringify(error));
+
+                callback("error");
+            });
+        }
+
+        function getSRAttachmentList(srNumberArray, callback) {
+
+            console.log("SR NUMBER " + JSON.stringify({"SRID": srNumberArray}));
+
+            $http({
+
+                method: 'POST',
+                url: url + 'Fetch_SRAttachments/SR_Attachment',
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getSRBackId()
+                },
+                data: {"SRID": srNumberArray}
+
+            }).success(function (response) {
+
+                console.log("SR Attachment Response " + JSON.stringify(response));
+
+                $rootScope.apicall = true;
+
+                var attachmentArray = [];
+
+                var filePath = cordova.file.dataDirectory;
+
+                angular.forEach(response.Attachment_by_SRs, function (item) {
+
+                    angular.forEach(item.AttachmentbySR, function (object) {
+
+                        var attachmentObject = {
+                            Attachment_Id: object.File_Attachment_ID,
+                            File_Path: filePath,
+                            File_Name: object.User_File_Name,
+                            File_Type: object.Content_Type,
+                            Type: "S",
+                            AttachmentType: "S",
+                            Created_Date: object.Date_Created,
+                            Task_Number: "",
+                            SRID: object.SRID
+                        };
+
+                        attachmentArray.push(attachmentObject);
+                    });
+                });
+
+                localService.insertAttachmentList(attachmentArray, function (result) {
+
+                    callback("success");
+                });
+
+            }).error(function (error) {
+
+                console.log("SR Attachment Error " + JSON.stringify(error));
+
+                callback("error");
+            });
+        }
+
+        function getContactList(callback) {
 
             $http({
 
@@ -263,22 +435,29 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getTaskBackId()
+                    "oracle-mobile-backend-id": constantService.getChargeBackId()
                 }
 
             }).success(function (response) {
 
                 console.log("Contact Response " + JSON.stringify(response));
 
-                localService.insertContactList(response);
+                $rootScope.apicall = true;
+
+                localService.insertContactList(response, function (result) {
+
+                    callback("success");
+                });
 
             }).error(function (error) {
 
                 console.log("Contact Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
-        function getNoteList() {
+        function getNoteList(callback) {
 
             $http({
 
@@ -289,18 +468,25 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getTaskBackId()
+                    "oracle-mobile-backend-id": constantService.getChargeBackId()
                 }
 
             }).success(function (response) {
 
                 console.log("Note Response " + JSON.stringify(response));
 
-                localService.insertNoteList(response);
+                $rootScope.apicall = true;
+
+                localService.insertNoteList(response, function (result) {
+
+                    callback("success");
+                });
 
             }).error(function (error) {
 
                 console.log("Note Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
@@ -315,7 +501,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getTaskBackId()
+                    "oracle-mobile-backend-id": constantService.getChargeBackId()
                 }
 
             }).success(function (response) {
@@ -339,7 +525,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getTaskBackId()
+                    "oracle-mobile-backend-id": constantService.getChargeBackId()
                 }
 
             }).success(function (response) {
@@ -356,7 +542,7 @@
             });
         }
 
-        function getOverTimeList() {
+        function getOverTimeList(callback) {
 
             $http({
 
@@ -365,22 +551,29 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getShiftBackId()
+                    "oracle-mobile-backend-id": constantService.getChargeBackId()
                 }
 
             }).success(function (response) {
 
                 console.log("OverTime Response " + JSON.stringify(response));
 
-                localService.insertOverTimeList(response.OverTImeShiftCode);
+                $rootScope.apicall = true;
+
+                localService.insertOverTimeList(response.OverTImeShiftCode, function (result) {
+
+                    callback("success");
+                });
 
             }).error(function (error) {
 
                 console.log("OverTime Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
-        function getShiftCodeList() {
+        function getShiftCodeList(callback) {
 
             $http({
 
@@ -389,22 +582,29 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getShiftBackId()
+                    "oracle-mobile-backend-id": constantService.getChargeBackId()
                 }
 
             }).success(function (response) {
 
                 console.log("ShiftCode Response " + JSON.stringify(response));
 
-                localService.insertShiftCodeList(response.ShiftCode);
+                $rootScope.apicall = true;
+
+                localService.insertShiftCodeList(response.ShiftCode, function (result) {
+
+                    callback("success");
+                });
 
             }).error(function (error) {
 
                 console.log("ShiftCode Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
-        function getChargeType() {
+        function getChargeType(callback) {
 
             $http({
 
@@ -420,15 +620,22 @@
 
                 console.log("ChargeType Response " + JSON.stringify(response));
 
-                localService.insertChargeTypeList(response.Charge_Type);
+                $rootScope.apicall = true;
+
+                localService.insertChargeTypeList(response.Charge_Type, function (result) {
+
+                    callback("success");
+                });
 
             }).error(function (error) {
 
                 console.log("Charge Type Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
-        function getChargeMethod() {
+        function getChargeMethod(callback) {
 
             $http({
 
@@ -444,15 +651,22 @@
 
                 console.log("ChargeMethod Response " + JSON.stringify(response));
 
-                localService.insertChargeMethodList(response.Charge_Method);
+                $rootScope.apicall = true;
+
+                localService.insertChargeMethodList(response.Charge_Method, function (result) {
+
+                    callback("success");
+                });
 
             }).error(function (error) {
 
                 console.log("Charge Method Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
-        function getFieldJobName() {
+        function getFieldJobName(callback) {
 
             $http({
 
@@ -461,22 +675,29 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getFieldBackId()
+                    "oracle-mobile-backend-id": constantService.getChargeBackId()
                 }
 
             }).success(function (response) {
 
                 console.log("FieldJob Response " + JSON.stringify(response));
 
-                localService.insertFieldJobNameList(response.TaskName);
+                $rootScope.apicall = true;
+
+                localService.insertFieldJobNameList(response.TaskName, function (result) {
+
+                    callback("success");
+                });
 
             }).error(function (error) {
 
                 console.log("Field Job Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
-        function getWorkType() {
+        function getWorkType(callback) {
 
             $http({
 
@@ -492,15 +713,22 @@
 
                 console.log("WorkType Response " + JSON.stringify(response));
 
-                localService.insertWorkTypeList(response.Charge_Method);
+                $rootScope.apicall = true;
+
+                localService.insertWorkTypeList(response.Charge_Method, function (result) {
+
+                    callback("success");
+                });
 
             }).error(function (error) {
 
                 console.log("WorkType Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
-        function getItem() {
+        function getItem(callback) {
 
             $http({
 
@@ -509,22 +737,30 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getChargeBackId()
+                    "oracle-mobile-backend-id": constantService.getSRBackId()
                 }
 
             }).success(function (response) {
 
                 console.log("Item Response " + JSON.stringify(response));
 
-                localService.insertItemList(response.Charge_Method);
+                $rootScope.apicall = true;
+
+                localService.insertItemList(response.Items, function (result) {
+
+                    callback("success");
+
+                });
 
             }).error(function (error) {
 
                 console.log("Item Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
-        function getCurrency() {
+        function getCurrency(callback) {
 
             $http({
 
@@ -540,15 +776,22 @@
 
                 console.log("Currency Response " + JSON.stringify(response));
 
-                localService.insertCurrencyList(response.Charge_Method);
+                $rootScope.apicall = true;
+
+                localService.insertCurrencyList(response.Charge_Method, function (result) {
+
+                    callback("success");
+                });
 
             }).error(function (error) {
 
                 console.log("Currency Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
-        function getExpenseType() {
+        function getExpenseType(callback) {
 
             $http({
 
@@ -557,22 +800,29 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getChargeBackId()
+                    "oracle-mobile-backend-id": constantService.getInternalBackId()
                 }
 
             }).success(function (response) {
 
                 console.log("ExpenseType Response " + JSON.stringify(response));
 
-                localService.insertExpenseTypeList(response.ExpenseType);
+                $rootScope.apicall = true;
+
+                localService.insertExpenseTypeList(response.ExpenseType, function (result) {
+
+                    callback("success");
+                });
 
             }).error(function (error) {
 
                 console.log("ExpenseType Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
-        function getNoteType() {
+        function getNoteType(callback) {
 
             $http({
 
@@ -581,18 +831,25 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getChargeBackId()
+                    "oracle-mobile-backend-id": constantService.getOfscBackId()
                 }
 
             }).success(function (response) {
 
                 console.log("NoteType Response " + JSON.stringify(response));
 
-                localService.insertNoteTypeList(response.Notes_Type);
+                $rootScope.apicall = true;
+
+                localService.insertNoteTypeList(response.Notes_Type, function (result) {
+
+                    callback("success");
+                });
 
             }).error(function (error) {
 
                 console.log("NoteType Error " + JSON.stringify(error));
+
+                callback("error");
             });
         }
 
@@ -603,11 +860,11 @@
             return $http({
 
                 method: 'POST',
-                url: url + 'Status_Api/to_change_status',
+                url: url + 'UpdateTaskDetails/update',
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getAcceptBackId()
+                    "oracle-mobile-backend-id": constantService.getInternalBackId()
                 },
                 data: formData
 
@@ -659,40 +916,63 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getTaskBackId()
+                    "oracle-mobile-backend-id": constantService.getChargeBackId()
                 },
                 data: attachment
 
             }).success(function (response) {
 
-                // console.log("downloadAttachment Cloud Response " + JSON.stringify(response));
+                console.log("Create Attachment Response " + JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                console.log("CreateAttachment Cloud Error " + JSON.stringify(error));
+                console.log("Create Attachment Error " + JSON.stringify(error));
 
                 callback(error);
             });
         }
 
-        function downloadAttachment(taskNumber, attachmentId, callback) {
+        function downloadAttachment(attachmentObject, callback) {
+
+            var data = {};
+
+            if (attachmentObject.Task_Number != undefined && attachmentObject.Task_Number != null && attachmentObject.Task_Number != "") {
+
+                data = {
+                    "path": "/tasks",
+                    "TaskID": attachmentObject.Task_Number,
+                    "IncidentID": "",
+                    "FileAttachmentID": attachmentObject.Attachment_Id
+                };
+
+            } else if (attachmentObject.SRID != undefined && attachmentObject.SRID != null && attachmentObject.SRID != "") {
+
+                data = {
+                    "path": "/incidents",
+                    "TaskID": "",
+                    "IncidentID": attachmentObject.SRID,
+                    "FileAttachmentID": attachmentObject.Attachment_Id
+                };
+            }
+
+            console.log("DATA " + JSON.stringify(data));
 
             $http({
 
-                method: 'GET',
-                url: url + 'DownloadAttachment/tasks?taskId=' + taskNumber
-                + '&fileAttachmentId=' + attachmentId,
+                method: 'POST',
+                url: url + 'download_Attachment/download_attachments',
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getTaskBackId()
-                }
+                    "oracle-mobile-backend-id": constantService.getSRBackId()
+                },
+                data: data
 
             }).success(function (response) {
 
-                // console.log("downloadAttachment Cloud Response " + JSON.stringify(response));
+                // console.log("DownloadAttachment Response " + JSON.stringify(response));
 
                 callback(response);
 
@@ -706,7 +986,7 @@
 
         function uploadTime(timedata, callback) {
 
-            console.log("UploadTime Data " + JSON.stringify(timedata));
+            console.log("Time Data " + JSON.stringify(timedata));
 
             return $http({
 
@@ -715,27 +995,27 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getTaskBackId()
+                    "oracle-mobile-backend-id": constantService.getInternalBackId()
                 },
                 data: timedata
 
             }).success(function (response) {
 
-                console.log("UploadTime Response " + JSON.stringify(response));
+                console.log("Upload Time Response " + JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                console.log("UploadTime Error " + JSON.stringify(error));
+                console.log("Upload Time Error " + JSON.stringify(error));
 
                 callback(error);
             });
         }
 
-        function updateExpenses(expenseData, callback) {
+        function uploadExpense(expenseData, callback) {
 
-            console.log("UpdateExpenses Data " + JSON.stringify(expenseData));
+            console.log("Expense Data " + JSON.stringify(expenseData));
 
             return $http({
 
@@ -744,29 +1024,29 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getTaskBackId()
+                    "oracle-mobile-backend-id": constantService.getChargeBackId()
                 },
                 data: expenseData
 
             }).success(function (response) {
 
-                console.log("UpdateExpenses Response " + JSON.stringify(response));
+                console.log("Upload Expense Response " + JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                console.log("UpdateExpenses Error " + JSON.stringify(error));
+                console.log("Upload Expense Error " + JSON.stringify(error));
 
                 callback(error);
             });
         }
 
-        function updateMaterial(materialData, callback) {
+        function uploadMaterial(materialData, callback) {
 
             var urlWarranty = "Material_API/material_update";
 
-            console.log("UpdateMaterial  Data" + JSON.stringify(materialData));
+            console.log("Material Data" + JSON.stringify(materialData));
 
             $http({
 
@@ -775,27 +1055,27 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getMaterialBackId()
+                    "oracle-mobile-backend-id": constantService.getChargeBackId()
                 },
                 data: materialData
 
             }).success(function (response) {
 
-                console.log("updateMaterial Response " + JSON.stringify(response));
+                console.log("Upload Material Response " + JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                console.log("updateMaterial Error " + JSON.stringify(error));
+                console.log("Upload Material Error " + JSON.stringify(error));
 
                 callback(error);
             });
         }
 
-        function updateNotes(noteData, callback) {
+        function uploadNote(noteData, callback) {
 
-            console.log("UpdateNotes Data", JSON.stringify(noteData));
+            console.log("Note Data", JSON.stringify(noteData));
 
             return $http({
 
@@ -804,19 +1084,19 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getTaskBackId()
+                    "oracle-mobile-backend-id": constantService.getChargeBackId()
                 },
                 data: noteData
 
             }).success(function (response) {
 
-                console.log("UpdateNotes Response " + JSON.stringify(response));
+                console.log("Upload Note Response " + JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                console.log("UpdateNotes Error " + JSON.stringify(error));
+                console.log("Upload Note Error " + JSON.stringify(error));
 
                 callback(error);
             });
@@ -1191,6 +1471,117 @@
             $rootScope.globals = {};
 
             // $cookieStore.remove('advGlobalObj');
+        }
+
+        function OfscActions(activateId, isAccept, callback) {
+
+            var data = {
+                "resourceId": constantService.getUser().OFSCId,
+                "date": moment(new Date()).utcOffset(constantService.getTimeZone()).format('YYYY-MM-DD')
+            };
+
+            ofscService.activate_resource(data, function (response) {
+
+                if (response != undefined && response != null) {
+
+                    console.log("ACTIVATE RESOURCE " + JSON.stringify(response));
+
+                    var updateStatus = {};
+
+                    if (isAccept) {
+
+                        updateStatus =
+                            {
+                                "activity_id": activateId,
+                                "XA_TASK_STATUS": "8"
+                            }
+
+                    } else {
+
+                        updateStatus =
+                            {
+                                "activity_id": activateId,
+                                "XA_TASK_STATUS": "3"
+                            }
+                    }
+
+                    ofscService.updateStatus(updateStatus, function (response) {
+
+                        var activityDetails =
+                            {
+                                "activityId": activateId,
+                            }
+
+                        ofscService.activityDetails(activateId, function (response) {
+
+                            if (response != undefined && response.items != undefined && response.items.length > 0) {
+
+                                var startActivity = false;
+
+                                angular.forEach(response.items, function (item) {
+
+                                    var date = new Date(item.date);
+
+                                    if (date.setHours(0, 0, 0, 0) == new Date().setHours(0, 0, 0, 0)) {
+
+                                        startActivity = true;
+
+                                        var startActivityData =
+                                            {
+                                                "activity_id": response.items[0].activityId+"",
+                                                "time":moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+                                            }
+
+                                        console.log("startActivityData*****" + startActivityData.activityId);
+
+                                        ofscService.start_activity(startActivityData, function (response) {
+
+                                            if (!isAccept) {
+
+                                                var complete = { "activityId": startActivityData.activity_id};
+
+                                                console.log("complete_activity*****" + complete.activityId);
+
+                                                var updateTaskSegement = {
+                                                    "activity_id": startActivityData.activity_id,
+                                                    "XA_TASK_STATUS": "3"
+                                                };
+
+                                                console.log("updateTaskSegement******" + JSON.stringify(updateTaskSegement));
+
+                                                ofscService.updateStatus(updateTaskSegement, function (response) {
+
+                                                    if (response) {
+                                                        ofscService.complete_activity(complete, function (response) {
+                                                            callback();
+                                                        })
+                                                    }
+                                                });
+
+                                            } else {
+
+                                                callback();
+                                            }
+                                        });
+                                    }
+                                });
+
+                                if (!startActivity) {
+
+                                    callback();
+
+                                }
+                                //else if (!startActivity)
+                                //{
+                                //    ofscService.complete_activity(data, function (response) {
+                                //        callback();
+                                //    })
+                                //}
+                            }
+                        });
+                    });
+                }
+            });
         }
     }
 
