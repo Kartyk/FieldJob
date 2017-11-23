@@ -205,7 +205,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getTaskBackId()
+                    "oracle-mobile-backend-id": constantService.getOfscBackId()
                 },
                 data: {
                     "resourceId": constantService.getResourceId(),
@@ -281,7 +281,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getTaskBackId()
+                    "oracle-mobile-backend-id": constantService.getSRBackId()
                 },
                 data: {"SRNum": srNumberArray}
 
@@ -323,7 +323,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getChargeBackId()
+                    "oracle-mobile-backend-id": constantService.getSRBackId()
                 }
 
             }).success(function (response) {
@@ -377,7 +377,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getTaskBackId()
+                    "oracle-mobile-backend-id": constantService.getSRBackId()
                 },
                 data: {"SRID": srNumberArray}
 
@@ -737,7 +737,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getTaskBackId()
+                    "oracle-mobile-backend-id": constantService.getSRBackId()
                 }
 
             }).success(function (response) {
@@ -831,7 +831,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getChargeBackId()
+                    "oracle-mobile-backend-id": constantService.getOfscBackId()
                 }
 
             }).success(function (response) {
@@ -966,7 +966,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getTaskBackId()
+                    "oracle-mobile-backend-id": constantService.getSRBackId()
                 },
                 data: data
 
