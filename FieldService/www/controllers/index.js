@@ -418,6 +418,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
         $rootScope.dbCall = true;
 
         console.log($scope.userName);
+        
 
         $rootScope.uName = $scope.userName;
 
