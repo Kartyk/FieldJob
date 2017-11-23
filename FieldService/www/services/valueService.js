@@ -224,6 +224,7 @@
             return header;
         };
 
+
         function setTask(taskObject, callback) {
 
             console.log("SET TASK DETAILS")
@@ -270,6 +271,7 @@
 
                         deferNote.resolve("success");
                     });
+                    deferNotes.resolve("success");
                 });
             });
 
@@ -289,6 +291,7 @@
 
                         deferAttachment.resolve("success");
                     });
+                    deferAttach.resolve("success");
                 });
             });
 
@@ -334,6 +337,7 @@
                 debrief.notes = response;
 
                 deferNotes.resolve("success");
+
             });
 
             promiseArray.push(deferNotes.promise);
@@ -345,6 +349,7 @@
                 debrief.attachment = response;
 
                 deferAttach.resolve("success");
+
             });
 
             promiseArray.push(deferAttach.promise);
@@ -356,6 +361,7 @@
                 debrief.engineer = response;
 
                 deferEngineer.resolve("success");
+
             });
 
             promiseArray.push(deferEngineer.promise);
@@ -367,6 +373,7 @@
                 debrief.overTime = response;
 
                 deferOverTime.resolve("success");
+
             });
 
             promiseArray.push(deferOverTime.promise);
@@ -422,6 +429,7 @@
                 debrief.workType = response;
 
                 deferWorkType.resolve("success");
+
             });
 
             promiseArray.push(deferWorkType.promise);
@@ -489,7 +497,6 @@
                     callback("failure")
                 }
             );
-
         };
 
         function getTask() {

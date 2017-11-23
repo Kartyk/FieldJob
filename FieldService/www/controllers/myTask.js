@@ -10,7 +10,7 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
 
         var mycal, myFieldJob, localeused;
 
-        if (lang == 'ch' ) {
+        if (lang == 'ch') {
 
             mycal = $filter('translate')("My Calendar");// "我的日历"
             localeused = "zh-cn";
@@ -80,7 +80,7 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
             maxTime: maxTimeVal,
             events: eventsArray,
             eventClick: function (event, jsEvent, view) {
-
+                $rootScope.apicall = true;
                 $rootScope.selectedTask = event;
 
                 valueService.setTask(event, function (response) {
@@ -210,7 +210,7 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
                     var endDateTime = moment(item.End_Date).format("YYYY-MM-DDTHH:mm:ss");
                     // var endDateTime = endDate[0] + "T" + endDate[1];
 
-                    var customerInfo = item.Job_Description + "\n" + item.Customer_Name + "\n" + item.Address1  + "\n" + item.Work_Phone_Number + "\n" + item.Mobile_Phone_Number;
+                    var customerInfo = item.Job_Description + "\n" + item.Customer_Name + "\n" + item.Address1 + "\n" + item.Work_Phone_Number + "\n" + item.Mobile_Phone_Number;
 
                     //  if (item.Task_Status == 'Accepted' || item.Task_Status == 'Assigned'||) {
                     eventsArray.push({
