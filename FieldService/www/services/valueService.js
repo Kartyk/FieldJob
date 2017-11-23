@@ -242,6 +242,8 @@
                 debrief.installBase = response;
 
                 deferInstall.resolve("success");
+
+                console.log("INSTALL");
             });
 
             promiseArray.push(deferInstall.promise);
@@ -253,6 +255,8 @@
                 debrief.contacts = response;
 
                 deferContact.resolve("success");
+
+                console.log("CONTACTS");
             });
 
             promiseArray.push(deferContact.promise);
@@ -261,6 +265,8 @@
 
             localService.getNoteList(taskObject.Task_Number, function (response) {
 
+                console.log("NOTES");
+
                 localService.getSRNotesList(taskObject.Service_Request, function (result) {
 
                     debrief.taskNotes = response;
@@ -268,10 +274,11 @@
                     angular.forEach(result, function (item) {
 
                         debrief.taskNotes.push(item);
-
-                        deferNote.resolve("success");
                     });
-                    deferNotes.resolve("success");
+
+                    deferNote.resolve("success");
+
+                    console.log("SR NOTES");
                 });
             });
 
@@ -281,6 +288,8 @@
 
             localService.getAttachmentList(taskObject.Task_Number, "O", function (response) {
 
+                console.log("ATTACHMENT");
+
                 localService.getAttachmentListIncident(taskObject.SR_ID, "S", function (result) {
 
                     debrief.taskAttachment = response;
@@ -288,10 +297,11 @@
                     angular.forEach(result, function (item) {
 
                         debrief.taskAttachment.push(item);
-
-                        deferAttachment.resolve("success");
                     });
-                    deferAttach.resolve("success");
+
+                    deferAttachment.resolve("success");
+
+                    console.log("SR ATTACHMENT");
                 });
             });
 
@@ -304,6 +314,8 @@
                 debrief.time = response;
 
                 deferTime.resolve("success");
+
+                console.log("TIME");
             });
 
             promiseArray.push(deferTime.promise);
@@ -315,6 +327,8 @@
                 debrief.expense = response;
 
                 deferExpense.resolve("success");
+
+                console.log("EXPENSE");
             });
 
             promiseArray.push(deferExpense.promise);
@@ -326,6 +340,8 @@
                 debrief.material = response;
 
                 deferMaterial.resolve("success");
+
+                console.log("MATERIAL");
             });
 
             promiseArray.push(deferMaterial.promise);
@@ -338,6 +354,7 @@
 
                 deferNotes.resolve("success");
 
+                console.log("D NOTES");
             });
 
             promiseArray.push(deferNotes.promise);
@@ -350,6 +367,7 @@
 
                 deferAttach.resolve("success");
 
+                console.log("D ATTACHMENT");
             });
 
             promiseArray.push(deferAttach.promise);
@@ -361,6 +379,8 @@
                 debrief.engineer = response;
 
                 deferEngineer.resolve("success");
+
+                console.log("ENGINEER");
 
             });
 
@@ -374,6 +394,8 @@
 
                 deferOverTime.resolve("success");
 
+                console.log("OVER TIME");
+
             });
 
             promiseArray.push(deferOverTime.promise);
@@ -385,6 +407,8 @@
                 debrief.shiftCode = response;
 
                 deferShiftCode.resolve("success");
+
+                console.log("SHIFT CODE");
             });
 
             promiseArray.push(deferShiftCode.promise);
@@ -396,6 +420,8 @@
                 debrief.chargeType = response;
 
                 deferChargeType.resolve("success");
+
+                console.log("CHARGE TYPE");
             });
 
             promiseArray.push(deferChargeType.promise);
@@ -407,6 +433,8 @@
                 debrief.chargeMethod = response;
 
                 deferChargeMethod.resolve("success");
+
+                console.log("CHARGE METHOD");
             });
 
             promiseArray.push(deferChargeMethod.promise);
@@ -418,6 +446,8 @@
                 debrief.fieldName = response;
 
                 deferFieldJob.resolve("success");
+
+                console.log("FIELD JOB");
             });
 
             promiseArray.push(deferFieldJob.promise);
@@ -430,6 +460,8 @@
 
                 deferWorkType.resolve("success");
 
+                console.log("WORK TYPE");
+
             });
 
             promiseArray.push(deferWorkType.promise);
@@ -441,6 +473,8 @@
                 debrief.item = response;
 
                 deferItem.resolve("success");
+
+                console.log("ITEM");
             });
 
             promiseArray.push(deferItem.promise);
@@ -452,6 +486,8 @@
                 debrief.currency = response;
 
                 deferCurrency.resolve("success");
+
+                console.log("CURRENCY");
             });
 
             promiseArray.push(deferCurrency.promise);
@@ -463,6 +499,8 @@
                 debrief.expenseType = response;
 
                 deferExpenseType.resolve("success");
+
+                console.log("EXPENSE TYPE");
             });
 
             promiseArray.push(deferExpenseType.promise);
@@ -474,6 +512,8 @@
                 debrief.noteType = response;
 
                 deferNoteType.resolve("success");
+
+                console.log("NOTE TYPE");
             });
 
             promiseArray.push(deferNoteType.promise);
