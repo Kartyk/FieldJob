@@ -577,7 +577,7 @@
         }
     };
 
-    $scope.addObject = function (stage) {
+    $scope.addObject = function (stage,isButtonClick) {
 
         var durationFromResponse, DurationHours, DurationMinutes;
 
@@ -764,6 +764,7 @@
             default:
                 break;
         }
+        if (isButtonClick)
         valueService.setDebriefChanged(true);
     };
 
@@ -1296,7 +1297,7 @@
 
             if ($scope.timeArray.length == 0) {
 
-                $scope.addObject(stage.title);
+                $scope.addObject(stage.title,false);
 
                 if ($scope.timeDefault.chargeMethod.values != undefined && $scope.timeDefault.chargeMethod.values.length > 0) {
 
@@ -1318,7 +1319,7 @@
 
             if ($scope.expenseArray.length == 0) {
 
-                $scope.addObject(stage.title);
+                $scope.addObject(stage.title,false);
 
                 if ($scope.expenseDefault.chargeMethod.values != undefined && $scope.expenseDefault.chargeMethod.values.length > 0) {
 
@@ -1340,7 +1341,7 @@
 
             if ($scope.materialArray.length == 0) {
 
-                $scope.addObject(stage.title);
+                $scope.addObject(stage.title,false);
 
                 if ($scope.materialDefault.chargeType.values != undefined && $scope.materialDefault.chargeType.values.length > 0) {
 
@@ -1362,7 +1363,7 @@
 
             if ($scope.notesArray.length == 0) {
 
-                $scope.addObject(stage.title);
+                $scope.addObject(stage.title, false);
             }
 
             $scope.currentTab = "notes";

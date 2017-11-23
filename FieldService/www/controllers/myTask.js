@@ -80,46 +80,49 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
             maxTime: maxTimeVal,
             events: eventsArray,
             eventClick: function (event, jsEvent, view) {
-
+                $rootScope.apicall = true;
                 $rootScope.selectedTask = event;
 
-                valueService.setTask(event);
+                valueService.setTask(event, function () {
+                    $rootScope.apicall = true;
+                    $rootScope.selectedItem = 3;
 
-                $rootScope.selectedItem = 3;
+                    $rootScope.showTaskDetail = true;
 
-                $rootScope.showTaskDetail = true;
+                    if (event.Task_Status == 'Field Job Completed' || event.Task_Status == 'Completed') {
 
-                if (event.Task_Status == 'Field Job Completed' || event.Task_Status == 'Completed') {
+                        $scope.showStartWork = false;
+                        $scope.showDebriefBtn = true;
+                        $rootScope.showAccept = false;
+                        $rootScope.completedTask = true;
 
-                    $scope.showStartWork = false;
-                    $scope.showDebriefBtn = true;
-                    $rootScope.showAccept = false;
-                    $rootScope.completedTask = true;
+                        $state.go('debrief');
 
-                    $state.go('debrief');
+                    } else if (event.Task_Status == 'Assigned') {
 
-                } else if (event.Task_Status == 'Assigned') {
+                        $scope.showStartWork = true;
+                        $rootScope.showAccept = true;
+                        $scope.showDebriefBtn = false;
 
-                    $scope.showStartWork = true;
-                    $rootScope.showAccept = true;
-                    $scope.showDebriefBtn = false;
+                        $state.go('taskOverFlow');
 
-                    $state.go('taskOverFlow');
+                    } else if (event.Task_Status == 'Accepted') {
 
-                } else if (event.Task_Status == 'Accepted') {
+                        $scope.showStartWork = true;
+                        $scope.showDebriefBtn = true;
+                        $rootScope.showAccept = false;
 
-                    $scope.showStartWork = true;
-                    $scope.showDebriefBtn = true;
-                    $rootScope.showAccept = false;
+                        $state.go('taskOverFlow');
 
-                    $state.go('taskOverFlow');
+                    } else if (event.Type == 'INTERNAL') {
 
-                } else if (event.Type == 'INTERNAL') {
+                    } else {
 
-                } else {
+                        $state.go('taskOverFlow');
+                    }
+                });
 
-                    $state.go('taskOverFlow');
-                }
+               
             },
             eventRender: function (event, element) {
 

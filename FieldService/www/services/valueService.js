@@ -224,18 +224,62 @@
             return header;
         };
 
-        function setTask(taskObject) {
+        function setTask(taskObject,callback) {
+            var promiseArray = [];
+            var deferInstallbase = $q.defer();
+            var deferContact = $q.defer();
+            var deferNotes = $q.defer();
+            var deferAttach = $q.defer();
+            var deferTime = $q.defer();
+            var deferExpense = $q.defer();
+            var deferMaterial = $q.defer();
+            var deferNotesD = $q.defer();
+            var deferAttachments = $q.defer();
+            var deferEngg = $q.defer();
+            var deferOT = $q.defer();
+            var deferSC = $q.defer();
+            var deferChargeType = $q.defer();
+            var deferChargeMethod = $q.defer();
+            var deferItem = $q.defer();
+            var deferExpenseType = $q.defer();
+            var deferJobname = $q.defer();
+            var deferWorktype = $q.defer();
+            var deferNoteType = $q.defer();
+            var deferCurrency = $q.defer();
 
+            promiseArray.push(deferInstallbase.promise);
+            promiseArray.push(deferContact.promise);
+            promiseArray.push(deferNotes.promise);
+            promiseArray.push(deferAttach.promise);
+
+            promiseArray.push(deferTime.promise);
+            promiseArray.push(deferExpense.promise);
+            promiseArray.push(deferMaterial.promise);
+            promiseArray.push(deferNotesD.promise);
+            promiseArray.push(deferAttachments.promise);
+            promiseArray.push(deferEngg.promise);
+            promiseArray.push(deferOT.promise);
+            promiseArray.push(deferSC.promise);
+            promiseArray.push(deferChargeType.promise);
+            promiseArray.push(deferChargeMethod.promise);
+            promiseArray.push(deferItem.promise);
+            promiseArray.push(deferExpenseType.promise);
+            promiseArray.push(deferJobname.promise);
+            promiseArray.push(deferWorktype.promise);
+            promiseArray.push(deferNoteType.promise);
+            promiseArray.push(deferCurrency.promise);
             debrief.task = taskObject;
 
             localService.getInstallBaseList(taskObject.Task_Number, function (response) {
 
                 debrief.installBase = response;
+                deferInstallbase.resolve("success");
             });
-
+           
             localService.getContactList(taskObject.Task_Number, function (response) {
 
                 debrief.contacts = response;
+                deferContact.resolve("success");
             });
 
             localService.getNoteList(taskObject.Task_Number, function (response) {
@@ -248,6 +292,7 @@
 
                         debrief.taskNotes.push(item);
                     });
+                    deferNotes.resolve("success");
                 });
             });
 
@@ -261,88 +306,114 @@
 
                         debrief.taskAttachment.push(item);
                     });
+                    deferAttach.resolve("success");
                 });
             });
 
             localService.getTimeList(taskObject.Task_Number, function (response) {
 
                 debrief.time = response;
+                deferTime.resolve("success");
             });
 
             localService.getExpenseList(taskObject.Task_Number, function (response) {
 
                 debrief.expense = response;
+                deferExpense.resolve("success");
             });
 
             localService.getMaterialList(taskObject.Task_Number, function (response) {
 
                 debrief.material = response;
+                deferMaterial.resolve("success");
             });
 
             localService.getNotesList(taskObject.Task_Number, function (response) {
 
                 debrief.notes = response;
+                deferNotesD.resolve("success");
             });
 
             localService.getAttachmentList(taskObject.Task_Number, "D", function (response) {
 
                 debrief.attachment = response;
+                deferAttachments.resolve("success");
             });
 
             localService.getEngineer(taskObject.Task_Number, function (response) {
 
                 debrief.engineer = response;
+                deferEngg.resolve("success");
             });
 
             localService.getOverTimeList(taskObject.Task_Number, function (response) {
 
                 debrief.overTime = response;
+                deferOT.resolve("success");
             });
 
             localService.getShiftCodeList(taskObject.Task_Number, function (response) {
 
                 debrief.shiftCode = response;
+                deferSC.resolve("success");
             });
 
             localService.getChargeTypeList(function (response) {
 
                 debrief.chargeType = response;
+                deferChargeType.resolve("success");
             });
 
             localService.getChargeMethodList(function (response) {
 
                 debrief.chargeMethod = response;
+                deferChargeMethod.resolve("success");
             });
 
             localService.getFieldJobNameList(taskObject.Task_Number, function (response) {
 
                 debrief.fieldName = response;
+                deferJobname.resolve("success");
             });
 
             localService.getWorkTypeList(function (response) {
 
                 debrief.workType = response;
+                deferWorktype.resolve("success");
             });
 
             localService.getItemList(function (response) {
 
                 debrief.item = response;
+                deferItem.resolve("success");
             });
 
             localService.getCurrencyList(function (response) {
 
                 debrief.currency = response;
+                deferCurrency.resolve("success");
             });
 
             localService.getExpenseTypeList(function (response) {
 
                 debrief.expenseType = response;
+                deferExpenseType.resolve("success");
             });
 
             localService.getNoteTypeList(function (response) {
 
                 debrief.noteType = response;
+                deferNoteType.resolve("success");
             });
+            $q.all(promiseArray).then(
+                function ()
+                {
+                    if (callback != null) {
+                        callback()
+                    }
+                }
+               
+                )
         };
 
         function getTask() {
