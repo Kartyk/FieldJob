@@ -597,9 +597,54 @@
                     DurationHours = 8;
                     DurationMinutes = 0;
                 }
-
+               var timeDefault = {
+                    fieldJobName: {
+                        title: "Field Job Name",
+                        values: $scope.fieldJobArray
+                    },
+                    chargeType: {
+                        title: "Charge Type",
+                        values: $scope.chargeTypeArray
+                    },
+                    workType: {
+                        title: "Work Type",
+                        values: $scope.workTypeArray
+                    },
+                    chargeMethod: {
+                        title: "Charge Method",
+                        values: $scope.chargeMethodArray,
+                    },
+                    item: {
+                        title: "Item",
+                        values: $scope.itemValue
+                    },
+                    description: {
+                        title: "Description"
+                    },
+                    timeCode: {
+                        title: "Time Code",
+                        values: $scope.overTimeArray
+                    },
+                    timeCodeT: {
+                        title: "Time Code",
+                        value: ["OT1", "OT2", "OT3", "OS1", "OS2", "Standard"]
+                    },
+                    shiftCode: {
+                        title: "Shift Code",
+                        values: $scope.shiftCodeArray
+                    },
+                    Date: {
+                        title: "Date"
+                    },
+                    duration: {
+                        title: "Duration"
+                    },
+                    comments: {
+                        title: "Comments"
+                    }
+                };
                 $scope.timeArray.push({
-                    timeDefault: $scope.timeDefault,
+                    timeDefault: timeDefault,
                     Time_Id: $scope.taskId + "" + ($scope.timeArray.length + 1),
                     Field_Job_Name: "",
                     Field_Job_Name_Id: "",
