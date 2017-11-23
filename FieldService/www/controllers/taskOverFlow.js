@@ -171,7 +171,9 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
             $rootScope.selectedTask = $scope.taskDetails;
 
-            valueService.setTask($scope.taskDetails);
+            valueService.setTask($scope.taskDetails, function (response) {
+                
+            });
         }
     });
 

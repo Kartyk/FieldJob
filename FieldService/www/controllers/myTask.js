@@ -10,7 +10,7 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
 
         var mycal, myFieldJob, localeused;
 
-        if (lang == 'ch' ) {
+        if (lang == 'ch') {
 
             mycal = $filter('translate')("My Calendar");// "我的日历"
             localeused = "zh-cn";
@@ -83,8 +83,8 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
                 $rootScope.apicall = true;
                 $rootScope.selectedTask = event;
 
-                valueService.setTask(event, function () {
-                    $rootScope.apicall = true;
+                valueService.setTask(event, function (response) {
+
                     $rootScope.selectedItem = 3;
 
                     $rootScope.showTaskDetail = true;
@@ -121,8 +121,6 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
                         $state.go('taskOverFlow');
                     }
                 });
-
-               
             },
             eventRender: function (event, element) {
 
@@ -212,7 +210,7 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
                     var endDateTime = moment(item.End_Date).format("YYYY-MM-DDTHH:mm:ss");
                     // var endDateTime = endDate[0] + "T" + endDate[1];
 
-                    var customerInfo = item.Job_Description + "\n" + item.Customer_Name + "\n" + item.Address1  + "\n" + item.Work_Phone_Number + "\n" + item.Mobile_Phone_Number;
+                    var customerInfo = item.Job_Description + "\n" + item.Customer_Name + "\n" + item.Address1 + "\n" + item.Work_Phone_Number + "\n" + item.Mobile_Phone_Number;
 
                     //  if (item.Task_Status == 'Accepted' || item.Task_Status == 'Assigned'||) {
                     eventsArray.push({
@@ -393,65 +391,66 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
 
         $scope.selectedTask = task;
 
-        valueService.setTask(task);
+        valueService.setTask(task, function (response) {
 
-        $rootScope.completedTask = false;
+            $rootScope.completedTask = false;
 
-        $scope.notFutureDate = valueService.checkIfFutureDayTask(task);
+            $scope.notFutureDate = valueService.checkIfFutureDayTask(task);
 
-        valueService.setIfFutureDateTask($scope.notFutureDate);
+            valueService.setIfFutureDateTask($scope.notFutureDate);
 
-        switch (task.Task_Status) {
+            switch (task.Task_Status) {
 
-            case 'Field Job Completed':
+                case 'Field Job Completed':
 
-                //$rootScope.showDebrief = true;
-                //$rootScope.showTaskDetail = true;
+                    //$rootScope.showDebrief = true;
+                    //$rootScope.showTaskDetail = true;
 
-                $scope.showStartWork = false;
-                $scope.showDebriefBtn = true;
-                $rootScope.showAccept = false;
-                $rootScope.completedTask = true;
+                    $scope.showStartWork = false;
+                    $scope.showDebriefBtn = true;
+                    $rootScope.showAccept = false;
+                    $rootScope.completedTask = true;
 
-                break;
+                    break;
 
-            case 'Completed':
+                case 'Completed':
 
-                //$rootScope.showDebrief = true;
-                //$rootScope.showTaskDetail = true;
+                    //$rootScope.showDebrief = true;
+                    //$rootScope.showTaskDetail = true;
 
-                $scope.showStartWork = false;
-                $scope.showDebriefBtn = true;
-                $rootScope.completedTask = true;
-                $rootScope.showAccept = false;
+                    $scope.showStartWork = false;
+                    $scope.showDebriefBtn = true;
+                    $rootScope.completedTask = true;
+                    $rootScope.showAccept = false;
 
-                break;
+                    break;
 
-            case 'Assigned':
+                case 'Assigned':
 
-                //$rootScope.showDebrief = false;
-                // $rootScope.showTaskDetail = true;
+                    //$rootScope.showDebrief = false;
+                    // $rootScope.showTaskDetail = true;
 
-                $scope.showStartWork = true;
-                $rootScope.showAccept = true;
-                $scope.showDebriefBtn = false;
+                    $scope.showStartWork = true;
+                    $rootScope.showAccept = true;
+                    $scope.showDebriefBtn = false;
 
-                break;
+                    break;
 
-            case 'Accepted':
+                case 'Accepted':
 
-                //$rootScope.showDebrief = true;
-                //$rootScope.showTaskDetail = true;
+                    //$rootScope.showDebrief = true;
+                    //$rootScope.showTaskDetail = true;
 
-                $scope.showStartWork = true;
-                $scope.showDebriefBtn = true;
-                $rootScope.showAccept = false;
+                    $scope.showStartWork = true;
+                    $scope.showDebriefBtn = true;
+                    $rootScope.showAccept = false;
 
-                break;
+                    break;
 
-            default:
-                break;
-        }
+                default:
+                    break;
+            }
+        });
     }
 
     $scope.calendarView = function () {
