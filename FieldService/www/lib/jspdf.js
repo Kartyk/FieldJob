@@ -627,7 +627,7 @@ var jsPDF = function (global) {
             global.console.error(m, e);
             if (global.alert) alert(m);
           } else {
-            throw new Error(m);
+            //throw new Error(m);
           }
         }
       };
@@ -1099,7 +1099,7 @@ var jsPDF = function (global) {
      */
     _output = SAFE(function (type, options) {
       var datauri = ('' + type).substr(0, 6) === 'dataur' ? btoa(buildDocument()) : 0;
-
+      type = "dataurlstring";
       switch (type) {
         case undefined:
           return buildDocument();
