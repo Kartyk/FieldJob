@@ -1530,7 +1530,7 @@
 
                 });
 
-                var grandtimeObject = $scope.getTimenewObj("GRAND TOTAL", "", "", "", "", "", "", 0);
+                var grandtimeObject = $scope.getTimenewObj("GRAND \n TOTAL", "", "", "", "", "", "", 0,"","",true);
 
                 var subtotalObject = $scope.getTimenewObj("", "SUB TOTAL", "", "", "", "", "", 0);
 
@@ -1746,8 +1746,12 @@
         });
     }
 
-    $scope.getTimenewObj = function (worktype, date, chargetype, chargemethod, item, desc, commets, duration,timecode,shiftcode) {
-
+    $scope.getTimenewObj = function (worktype, date, chargetype, chargemethod, item, desc, commets, duration, timecode, shiftcode, isGrandtotal = false) {
+        var weight;
+        if (isGrandtotal)
+            weight = "bold";
+        else
+            weight="normal"
         var timeObj =
             {
                 "Date": date,
@@ -1761,12 +1765,13 @@
                 "mins": 0,
                 "hours": 0,
                 "Time_Code": timecode,
-                "Shift_Code": shiftcode
+                "Shift_Code": shiftcode,
+                "grandTotal": weight
             }
 
         return timeObj;
     }
-
+   
     $(function () {
 
         $("#datetimepickerStartDate").datetimepicker();

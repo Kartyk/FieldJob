@@ -226,7 +226,7 @@
                                     <td class="noborder bg-white padding-right">{{time.Date }}</td>
                                     <td class="noborder bg-white padding-right" ng-if="userType=='C'">{{time.Charge_Type| translate}}</td>
                                     <td class="noborder bg-white padding-right" ng-if="userType=='C'">{{time.Charge_Method| translate}}</td>
-                                    <td class="noborder bg-white padding-right">{{time.Work_Type| translate}}</td>
+                                    <td class="noborder bg-white padding-right" ng-style="{'white-space':'pre','font-weight':time.grandTotal}">{{time.Work_Type| translate}}</td>
                                     <!-- <td md-cell>{{time.standard}}</td> -->
                                     <td class="noborder bg-white padding-right" ng-if="userType=='C'" >{{time.Time_Code}} </td>
                                     <td class="noborder bg-white padding-right" ng-if="userType=='C'">{{time.Shift_Code}} </td>
@@ -234,7 +234,7 @@
                                         <td md-cell>{{time.ot3}}</td>
                                         <td md-cell>{{time.os1}}</td>
                                         <td md-cell>{{time.os2}}</td> -->
-                                        <td class="noborder bg-white padding-right">{{time.Duration}}</td>
+                                        <td class="noborder bg-white padding-right" ng-style="{'font-weight':time.grandTotal}">{{time.Duration}}</td>
                                         <td class="noborder bg-white padding-right">{{time.Item| translate}}</td>
                                         <!--<td class="noborder bg-white padding-right"><div class="summary-description">{{time.Description}}</div></td>-->
                                     </tr>
