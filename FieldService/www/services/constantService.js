@@ -277,7 +277,7 @@
                 'Login_Status': "0"
             };
 
-            localService.updateUser(getUser());
+            localService.updateUser(userObject);
 
             // localService.deleteTaskList();
             // localService.deleteInternalList();

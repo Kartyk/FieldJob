@@ -3970,7 +3970,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO User VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO User VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(userObject.ID);
                 insertValues.push(userObject.ClarityID);
@@ -3988,6 +3988,7 @@
                 insertValues.push(userObject.User_Name);
                 insertValues.push(userObject.Work_Day);
                 insertValues.push(userObject.Work_Hour);
+                insertValues.push(userObject.Login_Status);
                 insertValues.push(userObject.Last_updated);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
