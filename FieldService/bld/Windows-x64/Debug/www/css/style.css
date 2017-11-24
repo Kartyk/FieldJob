@@ -2445,3 +2445,6 @@ textarea:focus {
     margin-right:10px;
     float:right;
 }
+.taskStatusList li{
+    padding:10px;
+}

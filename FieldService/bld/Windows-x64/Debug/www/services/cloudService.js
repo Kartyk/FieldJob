@@ -327,7 +327,7 @@
                 }
 
             }).success(function (response) {
-
+                var temp = JSON.stringify(response);
                 console.log("Attachment Response " + JSON.stringify(response));
 
                 $rootScope.apicall = true;

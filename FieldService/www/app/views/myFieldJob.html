@@ -93,9 +93,42 @@
                             <th style="width:40%;" class="text-left paddingleft10"><span translate="Location"></span></th>
                             <th style="width:15%;" class="text-left paddingleft10" style="width: 10%;"><span translate="Start Date"></span></th>
                             <th style="width:10%;">
-                                <md-select ng-model="selectedTaskStatus" ng-change="changeTaskStatus(selectedTaskStatus)" placeholder="Status">
+                                <div class="dropdown">
+                                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                        <label translate="Status" ng-show="selectedTaskStatus==undefined"></label>
+                                        <label translate="{{selectedTaskStatus}}" ng-show="selectedTaskStatus!=undefined"></label>
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu taskStatusList" >
+                                        <li ng-repeat="status in getStatus" ng-model="selectedTaskStatus" translate="{{status}}" ng-click="changeTaskStatus(status)"></li>
+                                        <!--<li><a href="#">HTML</a></li>
+                                        <li><a href="#">CSS</a></li>
+                                        <li><a href="#">JavaScript</a></li>
+                                        <li class="divider"></li>
+                                        <li class="dropdown-header">Dropdown header 2</li>
+                                        <li><a href="#">About Us</a></li>-->
+                                    </ul>
+                                </div>
+                                <!--<md-select ng-model="selectedTaskStatus" ng-change="changeTaskStatus(selectedTaskStatus)" placeholder="Status" >
                                     <md-option class="status-options" ng-value="status" ng-repeat="status in getStatus" translate="{{status}}"></md-option>
-                                </md-select>
+                                </md-select>-->
+                               
+                                   
+                                        
+                                    
+                                    <!--<div>-->
+                                        <!--<md-input-container>-->
+
+                                            <!-- <md-select-label>{{ 'Status' | translate }}</md-select-label>-->
+                                            <!--<label>{{ 'Status' | translate }}</label>-->
+                                            
+                                            <!--<md-select id="mySelect" ng-model="selectedTaskStatus" ng-change="changeTaskStatus(selectedTaskStatus)">
+                                                <md-option class="status-options" ng-value="status" ng-repeat="status in getStatus" translate="{{status}}"></md-option>
+                                            </md-select>-->
+                                        <!--</md-input-container>-->
+                                <!--<label translate="Status" ng-show="selectedTaskStatus==undefined"></label>-->
+                                    <!--</div>-->
+                               
                             </th>
 
                         </tr>
