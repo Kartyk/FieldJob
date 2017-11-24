@@ -3189,7 +3189,7 @@
 
                     var imgData = canvas.toDataURL("image/png", 1.0);
 
-                    doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850);
+                    doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf', 'FAST');
 
                     //  doc1.save("Report_" + $scope.summary.taskObject.Task_Number + ".pdf");
                 }
