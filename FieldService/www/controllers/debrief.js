@@ -3187,10 +3187,7 @@
                     ctx.strokeRect(20, 0, 1090, 50);
 
 
-                    var imgData = canvas.toDataURL({
-                        format: 'jpeg',
-                        quality: 0.9 // compression works now!
-                    });
+                    var imgData = canvas.toDataURL("image/png", 1.0);
 
                     doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf', 'FAST');
 
