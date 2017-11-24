@@ -70,7 +70,7 @@
 
         var expenseBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
 
-         var srBackEndId = "fb4010a8-02b7-4e20-88d0-d7f4029f6bd0";
+        var srBackEndId = "fb4010a8-02b7-4e20-88d0-d7f4029f6bd0";
 
 
         var stagesArray = {};
@@ -272,34 +272,41 @@
 
         function onDeviceReady() {
 
-            localService.deleteTaskList();
-            localService.deleteInternalList();
-            localService.deleteInstallBase();
-            localService.deleteContact();
-            localService.deleteNote();
+            var userObject = {
+                'ID': getUser().ID,
+                'Login_Status': "0"
+            };
 
-            localService.deleteOverTime();
-            localService.deleteShiftCode();
+            localService.updateUser(userObject);
 
-            localService.deleteChargeType();
-            localService.deleteChargeMethod();
-            localService.deleteFieldJobName();
-
-            localService.deleteWorkType();
-            localService.deleteItem();
-            localService.deleteCurrency();
-
-            localService.deleteExpenseType();
-            localService.deleteNoteType();
-
-            localService.deleteTimeList();
-            localService.deleteExpenseList();
-            localService.deleteNotesList();
-            localService.deleteMaterialList();
-            localService.deleteAttachmentList();
-            localService.deleteEngineerList();
-
-            localService.deleteUser();
+            // localService.deleteTaskList();
+            // localService.deleteInternalList();
+            // localService.deleteInstallBase();
+            // localService.deleteContact();
+            // localService.deleteNote();
+            //
+            // localService.deleteOverTime();
+            // localService.deleteShiftCode();
+            //
+            // localService.deleteChargeType();
+            // localService.deleteChargeMethod();
+            // localService.deleteFieldJobName();
+            //
+            // localService.deleteWorkType();
+            // localService.deleteItem();
+            // localService.deleteCurrency();
+            //
+            // localService.deleteExpenseType();
+            // localService.deleteNoteType();
+            //
+            // localService.deleteTimeList();
+            // localService.deleteExpenseList();
+            // localService.deleteNotesList();
+            // localService.deleteMaterialList();
+            // localService.deleteAttachmentList();
+            // localService.deleteEngineerList();
+            //
+            // localService.deleteUser();
 
         };
     }

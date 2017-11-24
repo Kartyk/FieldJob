@@ -264,14 +264,14 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
         if (valueService.getNetworkStatus()) {
 
-            constantService.onDeviceReady();
-
             $state.go('login');
 
         } else {
 
             $state.go('login');
         }
+
+        constantService.onDeviceReady();
     }
 
     $scope.export2PDF = function () {
@@ -296,6 +296,11 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
     }
 
     $scope.syncFunctionality = function () {
+
+        syncSubmit();
+    }
+
+    function syncSubmit() {
 
         console.log("NETWORK " + valueService.getNetworkStatus());
 
@@ -415,415 +420,424 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
     $scope.login = function () {
 
-        $rootScope.dbCall = true;
+        // if (constantService.getNetworkStatus()) {
 
-        console.log($scope.userName);
+            $rootScope.dbCall = true;
 
-        $rootScope.uName = $scope.userName;
+            console.log($scope.userName);
 
-        var baseData = $scope.userName.toLowerCase() + ":" + $scope.password;
+            $rootScope.uName = $scope.userName;
 
-        var authorizationValue = window.btoa(baseData);
+            var baseData = $scope.userName.toLowerCase() + ":" + $scope.password;
 
-        var data = {
-            header: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Basic ' + authorizationValue,
-                'oracle-mobile-backend-id': constantService.getChargeBackId()
-            }
-        };
+            var authorizationValue = window.btoa(baseData);
 
-        localService.deleteUser();
+            var data = {
+                header: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Basic ' + authorizationValue,
+                    'oracle-mobile-backend-id': constantService.getChargeBackId()
+                }
+            };
 
-        cloudService.login(data, function (response) {
+            localService.deleteUser();
 
-            if (response && response.message == null) {
+            cloudService.login(data, function (response) {
 
-                valueService.setResourceId(response['ID']);
+                if (response && response.message == null) {
 
-                constantService.setResourceId(response['ID']);
+                    valueService.setResourceId(response['ID']);
 
-                cloudService.getTechnicianProfile(function (response) {
+                    constantService.setResourceId(response['ID']);
 
-                    var userObject = {
-                        ID: response[0].ID,
-                        ClarityID: response[0].ClarityID,
-                        Currency: response[0].Currency,
-                        Default_View: response[0].Default_View,
-                        Email: response[0].Email,
-                        Language: response[0].Language,
-                        Name: response[0].Name,
-                        OFSCId: response[0].OFSCId,
-                        Password: response[0].Password,
-                        Time_Zone: response[0].Time_Zone,
-                        Type: response[0].Type,
-                        User_Name: response[0].User_Name,
-                        Work_Day: response[0].Work_Day,
-                        Work_Hour: response[0].Work_Hour,
-                        Last_updated: new Date()
-                    };
+                    cloudService.getTechnicianProfile(function (response) {
 
-                    localService.insertUser(userObject);
-
-                    localService.getUser(function (response) {
-
-                        console.log("USER =====> " + JSON.stringify(response));
-
-                        constantService.setUser(response[0]);
-
-                        valueService.setUser(response[0]);
-
-                        var data = {
-                            "resourceId": constantService.getUser().OFSCId,
-                            "date": moment(new Date()).utcOffset(constantService.getTimeZone()).format('YYYY-MM-DD')
+                        var userObject = {
+                            ID: response[0].ID,
+                            ClarityID: response[0].ClarityID,
+                            Currency: response[0].Currency,
+                            Default_View: response[0].Default_View,
+                            Email: response[0].Email,
+                            Language: response[0].Language,
+                            Name: response[0].Name,
+                            OFSCId: response[0].OFSCId,
+                            Password: response[0].Password,
+                            Time_Zone: response[0].Time_Zone,
+                            Type: response[0].Type,
+                            User_Name: response[0].User_Name,
+                            Work_Day: response[0].Work_Day,
+                            Work_Hour: response[0].Work_Hour,
+                            Login_Status: "1",
+                            Last_updated: new Date()
                         };
 
-                        console.log(JSON.stringify(data));
+                        localService.insertUser(userObject);
 
-                        ofscService.activate_resource(data, function (response) {
+                        localService.getUser(function (response) {
 
-                            if (response != undefined && response != null) {
+                            console.log("USER =====> " + JSON.stringify(response));
 
-                                console.log("ACTIVATE RESOURCE " + JSON.stringify(response));
-                            }
+                            constantService.setUser(response[0]);
+
+                            valueService.setUser(response[0]);
+
+                            var data = {
+                                "resourceId": constantService.getUser().OFSCId,
+                                "date": moment(new Date()).utcOffset(constantService.getTimeZone()).format('YYYY-MM-DD')
+                            };
+
+                            console.log(JSON.stringify(data));
+
+                            ofscService.activate_resource(data, function (response) {
+
+                                if (response != undefined && response != null) {
+
+                                    console.log("ACTIVATE RESOURCE " + JSON.stringify(response));
+                                }
+                            });
+
+                            syncSubmit();
                         });
-
-                        offlineGetCall();
-                    });
-                });
-
-            } else {
-
-                $scope.loginError = true;
-            }
-        });
-
-        function offlineGetCall() {
-
-            cloudService.getTaskList(function (response) {
-
-                var promiseArray = [];
-
-                var deferInstall = $q.defer();
-
-                cloudService.getInstallBaseList(function (result) {
-
-                    console.log("INSTALL");
-
-                    deferInstall.resolve("success");
-                });
-
-                promiseArray.push(deferInstall.promise);
-
-                var deferContact = $q.defer();
-
-                cloudService.getContactList(function (result) {
-
-                    console.log("CONTACT");
-
-                    deferContact.resolve("success");
-                });
-
-                promiseArray.push(deferContact.promise);
-
-                var deferNote = $q.defer();
-
-                cloudService.getNoteList(function (result) {
-
-                    console.log("NOTES");
-
-                    deferNote.resolve("success");
-                });
-
-                promiseArray.push(deferNote.promise);
-
-                var deferOverTime = $q.defer();
-
-                cloudService.getOverTimeList(function (result) {
-
-                    console.log("OVERTIME");
-
-                    deferOverTime.resolve("success");
-                });
-
-                promiseArray.push(deferOverTime.promise);
-
-                var deferShiftCode = $q.defer();
-
-                cloudService.getShiftCodeList(function (result) {
-
-                    console.log("SHIFTCODE");
-
-                    deferShiftCode.resolve("success");
-                });
-
-                promiseArray.push(deferShiftCode.promise);
-
-                var deferChargeType = $q.defer();
-
-                cloudService.getChargeType(function (result) {
-
-                    console.log("CHARGETYPE");
-
-                    deferChargeType.resolve("success");
-                });
-
-                promiseArray.push(deferChargeType.promise);
-
-                var deferChargeMethod = $q.defer();
-
-                cloudService.getChargeMethod(function (result) {
-
-                    console.log("CHARGEMETHOD");
-
-                    deferChargeMethod.resolve("success");
-                });
-
-                promiseArray.push(deferChargeMethod.promise);
-
-                var deferFieldJob = $q.defer();
-
-                cloudService.getFieldJobName(function (result) {
-
-                    console.log("FIELDJOB");
-
-                    deferFieldJob.resolve("success");
-                });
-
-                promiseArray.push(deferFieldJob.promise);
-
-                var deferWorkType = $q.defer();
-
-                cloudService.getWorkType(function (result) {
-
-                    console.log("WORKTYPE");
-
-                    deferWorkType.resolve("success");
-                });
-
-                promiseArray.push(deferWorkType.promise);
-
-                var deferItem = $q.defer();
-
-                cloudService.getItem(function (result) {
-
-                    console.log("ITEM");
-
-                    deferItem.resolve("success");
-                });
-
-                promiseArray.push(deferItem.promise);
-
-                var deferCurrency = $q.defer();
-
-                cloudService.getCurrency(function (result) {
-
-                    console.log("CURRENCY");
-
-                    deferCurrency.resolve("success");
-                });
-
-                promiseArray.push(deferCurrency.promise);
-
-                var deferExpense = $q.defer();
-
-                cloudService.getExpenseType(function (result) {
-
-                    console.log("EXPENSETYPE");
-
-                    deferExpense.resolve("success");
-                });
-
-                promiseArray.push(deferExpense.promise);
-
-                var deferNoteType = $q.defer();
-
-                cloudService.getNoteType(function (result) {
-
-                    console.log("NOTETYPE");
-
-                    deferNoteType.resolve("success");
-                });
-
-                promiseArray.push(deferNoteType.promise);
-
-                var deferAttachment = $q.defer();
-
-                cloudService.getAttachmentList(function (result) {
-
-                    console.log("ATTACHMENT");
-
-                    deferAttachment.resolve("success");
-                });
-
-                promiseArray.push(deferAttachment.promise);
-
-                var srNumberArray = [];
-
-                angular.forEach(constantService.getTaskList(), function (item) {
-
-                    if (item.SR_ID != undefined) {
-
-                        if (srNumberArray.indexOf(item.SR_ID) === -1) {
-
-                            srNumberArray.push(item.SR_ID);
-                        }
-                    }
-                });
-
-                if (srNumberArray.length > 10) {
-
-                    var strArray = [];
-
-                    var i = 1;
-
-                    angular.forEach(srNumberArray, function (item) {
-
-                        if (i <= srNumberArray.length) {
-
-                            strArray.push(item);
-
-                            if (i % 10 == 0) {
-
-                                var deferSRNotes = $q.defer();
-
-                                cloudService.getSRNotesList(strArray, function (response) {
-
-                                    console.log("SRNOTES");
-
-                                    deferSRNotes.resolve("success");
-                                });
-
-                                var deferSRAttachment = $q.defer();
-
-                                cloudService.getSRAttachmentList(strArray, function (response) {
-
-                                    console.log("SRATTACHMENT");
-
-                                    deferSRAttachment.resolve("success");
-                                });
-
-                                strArray = [];
-
-                                promiseArray.push(deferSRNotes.promise);
-
-                                promiseArray.push(deferSRAttachment.promise);
-
-                            } else if (i == srNumberArray.length) {
-
-                                var deferSRNotesFinal = $q.defer();
-
-                                cloudService.getSRNotesList(strArray, function (response) {
-
-                                    console.log("SRNOTES");
-
-                                    deferSRNotesFinal.resolve("success");
-                                });
-
-                                var deferSRAttachmentFinal = $q.defer();
-
-                                cloudService.getSRAttachmentList(strArray, function (response) {
-
-                                    console.log("SRATTACHMENT");
-
-                                    deferSRAttachmentFinal.resolve("success");
-                                });
-
-                                strArray = [];
-
-                                promiseArray.push(deferSRNotesFinal.promise);
-
-                                promiseArray.push(deferSRAttachmentFinal.promise);
-                            }
-
-                            i++;
-                        }
                     });
 
                 } else {
 
-                    var deferSRNotes = $q.defer();
+                    $scope.loginError = true;
 
-                    cloudService.getSRNotesList(srNumberArray, function (response) {
-
-                        console.log("SRNOTES");
-
-                        deferSRNotes.resolve("success");
-                    });
-
-                    var deferSRAttachment = $q.defer();
-
-                    cloudService.getSRAttachmentList(srNumberArray, function (response) {
-
-                        console.log("SRATTACHMENT");
-
-                        deferSRAttachment.resolve("success");
-                    });
-
-                    promiseArray.push(deferSRNotes.promise);
-
-                    promiseArray.push(deferSRAttachment.promise);
+                    $rootScope.dbCall = false;
                 }
-
-                console.log("LENGTH LOGIN " + promiseArray.length);
-
-                $q.all(promiseArray).then(
-                    function (response) {
-
-                        console.log("LOGIN SUCCESS ALL");
-
-                        if (constantService.getUser().Default_View == "My Task") {
-
-                            $rootScope.selectedItem = 2;
-
-                            $state.go('myFieldJob');
-
-                            $rootScope.Islogin = true;
-
-                        } else {
-
-                            $rootScope.selectedItem = 1;
-
-                            $state.go('myTask');
-
-                            $rootScope.Islogin = true;
-                        }
-
-                        $rootScope.dbCall = false;
-
-                        getAttachments();
-                    },
-
-                    function (error) {
-
-                        console.log("LOGIN FAILURE ALL");
-
-                        if (constantService.getUser().Default_View == "My Task") {
-
-                            $rootScope.selectedItem = 2;
-
-                            $state.go('myFieldJob');
-
-                            $rootScope.Islogin = true;
-
-                        } else {
-
-                            $rootScope.selectedItem = 1;
-
-                            $state.go('myTask');
-
-                            $rootScope.Islogin = true;
-                        }
-
-                        $rootScope.dbCall = false;
-
-                        getAttachments();
-                    }
-                );
             });
-        }
 
-        console.log("Login API END");
+            console.log("Login API END");
+
+        // } else {
+        //
+        // }
+    }
+
+    function offlineGetCall() {
+
+        cloudService.getTaskList(function (response) {
+
+            var promiseArray = [];
+
+            var deferInstall = $q.defer();
+
+            cloudService.getInstallBaseList(function (result) {
+
+                console.log("INSTALL");
+
+                deferInstall.resolve("success");
+            });
+
+            promiseArray.push(deferInstall.promise);
+
+            var deferContact = $q.defer();
+
+            cloudService.getContactList(function (result) {
+
+                console.log("CONTACT");
+
+                deferContact.resolve("success");
+            });
+
+            promiseArray.push(deferContact.promise);
+
+            var deferNote = $q.defer();
+
+            cloudService.getNoteList(function (result) {
+
+                console.log("NOTES");
+
+                deferNote.resolve("success");
+            });
+
+            promiseArray.push(deferNote.promise);
+
+            var deferOverTime = $q.defer();
+
+            cloudService.getOverTimeList(function (result) {
+
+                console.log("OVERTIME");
+
+                deferOverTime.resolve("success");
+            });
+
+            promiseArray.push(deferOverTime.promise);
+
+            var deferShiftCode = $q.defer();
+
+            cloudService.getShiftCodeList(function (result) {
+
+                console.log("SHIFTCODE");
+
+                deferShiftCode.resolve("success");
+            });
+
+            promiseArray.push(deferShiftCode.promise);
+
+            var deferChargeType = $q.defer();
+
+            cloudService.getChargeType(function (result) {
+
+                console.log("CHARGETYPE");
+
+                deferChargeType.resolve("success");
+            });
+
+            promiseArray.push(deferChargeType.promise);
+
+            var deferChargeMethod = $q.defer();
+
+            cloudService.getChargeMethod(function (result) {
+
+                console.log("CHARGEMETHOD");
+
+                deferChargeMethod.resolve("success");
+            });
+
+            promiseArray.push(deferChargeMethod.promise);
+
+            var deferFieldJob = $q.defer();
+
+            cloudService.getFieldJobName(function (result) {
+
+                console.log("FIELDJOB");
+
+                deferFieldJob.resolve("success");
+            });
+
+            promiseArray.push(deferFieldJob.promise);
+
+            var deferWorkType = $q.defer();
+
+            cloudService.getWorkType(function (result) {
+
+                console.log("WORKTYPE");
+
+                deferWorkType.resolve("success");
+            });
+
+            promiseArray.push(deferWorkType.promise);
+
+            var deferItem = $q.defer();
+
+            cloudService.getItem(function (result) {
+
+                console.log("ITEM");
+
+                deferItem.resolve("success");
+            });
+
+            promiseArray.push(deferItem.promise);
+
+            var deferCurrency = $q.defer();
+
+            cloudService.getCurrency(function (result) {
+
+                console.log("CURRENCY");
+
+                deferCurrency.resolve("success");
+            });
+
+            promiseArray.push(deferCurrency.promise);
+
+            var deferExpense = $q.defer();
+
+            cloudService.getExpenseType(function (result) {
+
+                console.log("EXPENSETYPE");
+
+                deferExpense.resolve("success");
+            });
+
+            promiseArray.push(deferExpense.promise);
+
+            var deferNoteType = $q.defer();
+
+            cloudService.getNoteType(function (result) {
+
+                console.log("NOTETYPE");
+
+                deferNoteType.resolve("success");
+            });
+
+            promiseArray.push(deferNoteType.promise);
+
+            var deferAttachment = $q.defer();
+
+            cloudService.getAttachmentList(function (result) {
+
+                console.log("ATTACHMENT");
+
+                deferAttachment.resolve("success");
+            });
+
+            promiseArray.push(deferAttachment.promise);
+
+            var srNumberArray = [];
+
+            angular.forEach(constantService.getTaskList(), function (item) {
+
+                if (item.SR_ID != undefined) {
+
+                    if (srNumberArray.indexOf(item.SR_ID) === -1) {
+
+                        srNumberArray.push(item.SR_ID);
+                    }
+                }
+            });
+
+            if (srNumberArray.length > 10) {
+
+                var strArray = [];
+
+                var i = 1;
+
+                angular.forEach(srNumberArray, function (item) {
+
+                    if (i <= srNumberArray.length) {
+
+                        strArray.push(item);
+
+                        if (i % 10 == 0) {
+
+                            var deferSRNotes = $q.defer();
+
+                            cloudService.getSRNotesList(strArray, function (response) {
+
+                                console.log("SRNOTES");
+
+                                deferSRNotes.resolve("success");
+                            });
+
+                            var deferSRAttachment = $q.defer();
+
+                            cloudService.getSRAttachmentList(strArray, function (response) {
+
+                                console.log("SRATTACHMENT");
+
+                                deferSRAttachment.resolve("success");
+                            });
+
+                            strArray = [];
+
+                            promiseArray.push(deferSRNotes.promise);
+
+                            promiseArray.push(deferSRAttachment.promise);
+
+                        } else if (i == srNumberArray.length) {
+
+                            var deferSRNotesFinal = $q.defer();
+
+                            cloudService.getSRNotesList(strArray, function (response) {
+
+                                console.log("SRNOTES");
+
+                                deferSRNotesFinal.resolve("success");
+                            });
+
+                            var deferSRAttachmentFinal = $q.defer();
+
+                            cloudService.getSRAttachmentList(strArray, function (response) {
+
+                                console.log("SRATTACHMENT");
+
+                                deferSRAttachmentFinal.resolve("success");
+                            });
+
+                            strArray = [];
+
+                            promiseArray.push(deferSRNotesFinal.promise);
+
+                            promiseArray.push(deferSRAttachmentFinal.promise);
+                        }
+
+                        i++;
+                    }
+                });
+
+            } else {
+
+                var deferSRNotes = $q.defer();
+
+                cloudService.getSRNotesList(srNumberArray, function (response) {
+
+                    console.log("SRNOTES");
+
+                    deferSRNotes.resolve("success");
+                });
+
+                var deferSRAttachment = $q.defer();
+
+                cloudService.getSRAttachmentList(srNumberArray, function (response) {
+
+                    console.log("SRATTACHMENT");
+
+                    deferSRAttachment.resolve("success");
+                });
+
+                promiseArray.push(deferSRNotes.promise);
+
+                promiseArray.push(deferSRAttachment.promise);
+            }
+
+            console.log("LENGTH LOGIN " + promiseArray.length);
+
+            $q.all(promiseArray).then(
+                function (response) {
+
+                    console.log("LOGIN SUCCESS ALL");
+
+                    if (constantService.getUser().Default_View == "My Task") {
+
+                        $rootScope.selectedItem = 2;
+
+                        $state.go('myFieldJob');
+
+                        $rootScope.Islogin = true;
+
+                    } else {
+
+                        $rootScope.selectedItem = 1;
+
+                        $state.go('myTask');
+
+                        $rootScope.Islogin = true;
+                    }
+
+                    $rootScope.dbCall = false;
+
+                    getAttachments();
+                },
+
+                function (error) {
+
+                    console.log("LOGIN FAILURE ALL");
+
+                    if (constantService.getUser().Default_View == "My Task") {
+
+                        $rootScope.selectedItem = 2;
+
+                        $state.go('myFieldJob');
+
+                        $rootScope.Islogin = true;
+
+                    } else {
+
+                        $rootScope.selectedItem = 1;
+
+                        $state.go('myTask');
+
+                        $rootScope.Islogin = true;
+                    }
+
+                    $rootScope.dbCall = false;
+
+                    getAttachments();
+                }
+            );
+        });
     }
 
     function getAttachments() {
