@@ -3187,9 +3187,12 @@
                     ctx.strokeRect(20, 0, 1090, 50);
 
 
-                    var imgData = canvas.toDataURL("image/png", 1.0);
+                    var imgData = canvas.toDataURL({
+                        format: 'jpeg',
+                        quality: 0.9 // compression works now!
+                    });
 
-                    doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850);
+                    doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf', 'FAST');
 
                     //  doc1.save("Report_" + $scope.summary.taskObject.Task_Number + ".pdf");
                 }
