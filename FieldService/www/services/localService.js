@@ -4013,9 +4013,9 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE User SET User_Name = ?  WHERE ID = ?";
+                var sqlUpdate = "UPDATE User SET Login_Status = ?  WHERE ID = ?";
 
-                insertValues.push(userObject.User_Name);
+                insertValues.push(userObject.Login_Status);
                 insertValues.push(userObject.ID);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {

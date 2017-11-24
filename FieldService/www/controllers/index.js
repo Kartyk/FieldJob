@@ -460,6 +460,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                         User_Name: response[0].User_Name,
                         Work_Day: response[0].Work_Day,
                         Work_Hour: response[0].Work_Hour,
+                        Login_Status: "1",
                         Last_updated: new Date()
                     };
 
