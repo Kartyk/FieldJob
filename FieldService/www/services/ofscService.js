@@ -108,7 +108,9 @@
         }
 
         function updateStatus(data, callback) {
+
             console.log(url + 'OFSC_Soap_Actions/update_status' + JSON.stringify(data));
+
             return $http({
 
                 method: 'POST',

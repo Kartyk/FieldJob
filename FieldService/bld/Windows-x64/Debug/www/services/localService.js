@@ -556,7 +556,7 @@
                         deferred.reject(error);
                     });
 
-                    // console.log("SRNOTES OBJECT =====> " + JSON.stringify(responseList));
+                    // console.log("SRNOTES OBJECT =====> " + JSON.stringify(responseList[i]));
 
                     promises.push(deferred.promise);
 
@@ -705,7 +705,7 @@
                         deferred.reject(error);
                     });
 
-                    // console.log("SRATTACHMENT OBJECT =====> " + JSON.stringify(responseList));
+                    // console.log("SRATTACHMENT OBJECT =====> " + JSON.stringify(responseList[i]));
 
                     promises.push(deferred.promise);
 
@@ -848,7 +848,7 @@
                         deferred.reject(error);
                     });
 
-                    // console.log("INSTALLBASE OBJECT =====> " + JSON.stringify(responseList));
+                    // console.log("INSTALLBASE OBJECT =====> " + JSON.stringify(responseList[i]));
 
                     promises.push(deferred.promise);
 
@@ -954,6 +954,8 @@
 
             var responseList = response.Contacts;
 
+            // console.log("CONTACT LENGTH ====> " + responseList.length);
+
             var promises = [];
 
             for (var i = 0; i < responseList.length; i++) {
@@ -997,7 +999,7 @@
                         deferred.reject(error);
                     });
 
-                    // console.log("CONTACT OBJECT =====> " + JSON.stringify(responseList));
+                    // console.log("CONTACT OBJECT =====> " + JSON.stringify(responseList[i]));
 
                     promises.push(deferred.promise);
 
@@ -1154,7 +1156,7 @@
                         deferred.reject(error);
                     });
 
-                    // console.log("NOTE OBJECT =====> " + JSON.stringify(responseList));
+                    // console.log("NOTE OBJECT =====> " + JSON.stringify(responseList[i]));
 
                     promises.push(deferred.promise);
 
@@ -3970,7 +3972,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO User VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO User VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(userObject.ID);
                 insertValues.push(userObject.ClarityID);
@@ -3988,6 +3990,7 @@
                 insertValues.push(userObject.User_Name);
                 insertValues.push(userObject.Work_Day);
                 insertValues.push(userObject.Work_Hour);
+                insertValues.push(userObject.Login_Status);
                 insertValues.push(userObject.Last_updated);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
@@ -4013,9 +4016,9 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE User SET User_Name = ?  WHERE ID = ?";
+                var sqlUpdate = "UPDATE User SET Login_Status = ?  WHERE ID = ?";
 
-                insertValues.push(userObject.User_Name);
+                insertValues.push(userObject.Login_Status);
                 insertValues.push(userObject.ID);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {

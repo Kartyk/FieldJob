@@ -102,7 +102,7 @@
     <splash src="res/screens/ios/screen-iphone-landscape-736h.png" width="2208" height="1242" />
   </platform>
   <platform name="windows">
-    <splash src="res/screens/windows/SplashScreen.scale-100.jpg" width="1920" height="1152" />
+    <splash src="res/screens/windows/SplashScreen.scale-100.png" width="1920" height="1080" />
   </platform>
   <plugin name="cordova-sqlite-storage" spec="~2.0.4" />
   <plugin name="cordova-plugin-inappbrowser" spec="~1.7.1" />

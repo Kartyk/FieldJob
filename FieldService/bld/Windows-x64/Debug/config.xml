@@ -27,7 +27,7 @@
     <icon height="120" src="res/icons/windows/StoreLogo.scale-240.png" width="120" />
     <icon height="150" src="res/icons/windows/Wide310x150Logo.scale-100.png" width="310" />
     <icon height="360" src="res/icons/windows/Wide310x150Logo.scale-240.png" width="744" />
-    <splash height="1152" src="res/screens/windows/SplashScreen.scale-100.jpg" width="1920" />
+    <splash height="1080" src="res/screens/windows/SplashScreen.scale-100.png" width="1920" />
     <preference name="SplashScreen" value="screen" />
     <preference name="windows-target-version" value="10.0" />
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />
