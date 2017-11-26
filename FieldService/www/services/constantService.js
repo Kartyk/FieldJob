@@ -66,12 +66,13 @@
 
         var ofscBackEndId = "b043c17e-7dcd-41a5-abc6-39fa2f8ab0a6";
 
+        var ofscNewBackEndId = "69559620-94dc-4bdc-9054-85d42cef7f6a";
+
         var acceptBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
 
         var expenseBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
 
         var srBackEndId = "fb4010a8-02b7-4e20-88d0-d7f4029f6bd0";
-
 
         var stagesArray = {};
 
@@ -109,6 +110,7 @@
         service.getShiftBackId = getShiftBackId;
         service.getMaterialBackId = getMaterialBackId;
         service.getOfscBackId = getOfscBackId;
+        service.getNewOfscBackId = getNewOfscBackId;
         service.getAcceptBackId = getAcceptBackId;
         service.getSRBackId = getSRBackId;
 
@@ -244,6 +246,11 @@
         function getOfscBackId() {
 
             return ofscBackEndId;
+        };
+
+        function getNewOfscBackId() {
+
+            return ofscNewBackEndId;
         };
 
         function getAcceptBackId() {

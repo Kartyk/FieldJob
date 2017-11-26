@@ -1660,7 +1660,8 @@
                        
                         var newTimecode = true
                         angular.forEach($scope.summary.timeArray, function (summaryTime) {
-                            if (summaryTime.Time_Code == key.Time_Code.Overtimeshiftcode && summaryTime.Work_Type == key.Work_Type.Value)
+                           
+                            if (summaryTime.Date == moment(key.Date).format('DD-MM-YYYY') && summaryTime.Time_Code == key.Time_Code.Overtimeshiftcode && summaryTime.Work_Type == key.Work_Type.Value)
                             {
                                 summaryTime.Duration = $scope.calculateDuration(summaryTime, key);
                                 summaryTime.Duration = formatDuration(summaryTime.Duration)
@@ -1669,7 +1670,7 @@
                             }
                         })
                         if (newTimecode) {
-                            var timeObject = $scope.getTimenewObj(key.Work_Type.Value, $filter("date")(key.Date, "dd-MM-yyyy "), key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration, key.Time_Code.Overtimeshiftcode, key.Shift_Code.ShiftCodeName);
+                            var timeObject = $scope.getTimenewObj(key.Work_Type.Value, moment(key.Date).format('DD-MM-YYYY'), key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration, key.Time_Code.Overtimeshiftcode, key.Shift_Code.ShiftCodeName);
 
                             timeObject.Duration = $scope.calculateDuration(timeObject, key);
                             timeObject.Duration = formatDuration(timeObject.Duration)
@@ -1678,7 +1679,7 @@
                     }
                     else
                     {
-                        var timeObject = $scope.getTimenewObj(key.Work_Type.Value, $filter("date")(key.Date, "dd-MM-yyyy "), key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration, key.Time_Code.Overtimeshiftcode, key.Shift_Code.ShiftCodeName);
+                        var timeObject = $scope.getTimenewObj(key.Work_Type.Value, moment(key.Date).format('DD-MM-YYYY'), key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration, key.Time_Code.Overtimeshiftcode, key.Shift_Code.ShiftCodeName);
 
                         timeObject.Duration = $scope.calculateDuration(timeObject, key);
                         timeObject.Duration = formatDuration(timeObject.Duration)
@@ -2110,6 +2111,7 @@
                                                                     };
 
                                                                     localService.updateTaskSubmitStatus(taskObject, function (result) {
+
                                                                     });
 
                                                                     cloudService.OfscActions($rootScope.selectedTask.Activity_Id, false, function (response) {
@@ -3188,7 +3190,7 @@
 
                     var imgData = canvas.toDataURL("image/png", 1.0);
 
-                    doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850);
+                    doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf', 'FAST');
 
                     //  doc1.save("Report_" + $scope.summary.taskObject.Task_Number + ".pdf");
                 }
@@ -3403,7 +3405,7 @@
                     else if (file.filetype == "doc" || file.filetype == "docx")
                         doc1.addImage(wordimg, 'JPEG', xAttachField1, yAttachField + 15, 50, 40, file.fileDisc, 'FAST')
                     else
-                        doc1.addImage("data:" + file.contentType + ";base64, " + file.base64, 'JPEG', xAttachField1, yAttachField + 15, 50, 40, '', 'FAST')
+                        doc1.addImage("data:" + file.contentType + ";base64, " + file.base64, 'JPEG', xAttachField1, yAttachField + 15, 50, 40, file.fileDisc, 'FAST')
                     doc1.setFontSize(16)
                     doc1.setFontType('normal')
                     if (file.fileDisc.length >= 20)

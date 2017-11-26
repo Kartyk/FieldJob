@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Machine>L-156108605</Machine>
-    <WindowsUser>AR392695</WindowsUser>
+    <Machine>DESKTOP-AIV0R7Q</Machine>
+    <WindowsUser>Wipro</WindowsUser>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetOsVersion>10.0</TargetOsVersion>
     <TargetOsDescription>Windows 10.0</TargetOsDescription>
     <SolutionConfiguration>debug|x64</SolutionConfiguration>
     <PackageArchitecture>x64</PackageArchitecture>
-    <PackageIdentityName>dcbaedf0-cf9e-11e7-a52a-579debb9ecd7</PackageIdentityName>
+    <PackageIdentityName>b33616a0-d1bd-11e7-8803-538cc9473ca8</PackageIdentityName>
     <PackageIdentityPublisher>CN=Apache Cordova Team</PackageIdentityPublisher>
-    <IntermediateOutputPath>E:\EmersonRepo\FieldJob\FieldService\platforms\windows\build\windows\bld\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\build\windows\bld\</IntermediateOutputPath>
     <RemoteDeploymentType>
     </RemoteDeploymentType>
     <PackageRegistrationPath>
@@ -19,8 +19,8 @@
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>
     </WindowsSdkPath>
-    <LayoutDir>E:\EmersonRepo\FieldJob\FieldService\platforms\windows\build\windows\debug\x64\win10\AppX</LayoutDir>
-    <RegisteredManifestChecksum>0FBCB134F57CE4D934022E155E1FFBE73BB75C1149ACD3982327B7E0E083DACC</RegisteredManifestChecksum>
+    <LayoutDir>C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\build\windows\debug\x64\win10\AppX</LayoutDir>
+    <RegisteredManifestChecksum>12623257E990621A172559E26BFC1C2C9C7DD8A8C61A176B7B3EA726C0FB3C7D</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>io.cordova.myapp22b111_1.0.0.0_x64__h35559jr9hy9m</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>io.cordova.myapp22b111_h35559jr9hy9m!io.cordova.myapp22b111</RegisteredUserModeAppID>
     <RegisteredPackageID>io.cordova.myapp22b111</RegisteredPackageID>
@@ -29,1516 +29,1516 @@
     <JitOptimizationSuppressed>True</JitOptimizationSuppressed>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\build\windows\debug\x64\win10\AppxManifest.xml">
+    <AppXManifest Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\build\windows\debug\x64\win10\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-11-23T13:00:34.462</Modified>
+      <Modified>2017-11-25T08:56:49.233</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3\SQLite3.UWP\x64\debug\SQLite3.UWP\SQLite3.winmd">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3\SQLite3.UWP\x64\debug\SQLite3.UWP\SQLite3.winmd">
       <PackagePath>SQLite3.winmd</PackagePath>
-      <Modified>2017-11-03T12:20:47.549</Modified>
+      <Modified>2017-11-24T15:15:10.234</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3\SQLite3.UWP\x64\debug\SQLite3.UWP\SQLite3.UWP.dll">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3\SQLite3.UWP\x64\debug\SQLite3.UWP\SQLite3.UWP.dll">
       <PackagePath>SQLite3.UWP.dll</PackagePath>
-      <Modified>2017-11-22T17:25:11.566</Modified>
+      <Modified>2017-11-24T15:43:40.969</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\images\SplashScreen.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\images\SplashScreen.scale-100.png">
       <PackagePath>images\SplashScreen.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-11-22T16:04:48.250</Modified>
+      <Modified>2017-11-25T08:50:34.785</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\images\Square150x150Logo.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\images\Square150x150Logo.scale-100.png">
       <PackagePath>images\Square150x150Logo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-11-23T11:47:22.373</Modified>
+      <Modified>2017-11-25T08:50:47.940</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\images\Square30x30Logo.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\images\Square30x30Logo.scale-100.png">
       <PackagePath>images\Square30x30Logo.scale-100.png</PackagePath>
-      <Modified>2017-11-23T11:47:22.464</Modified>
+      <Modified>2017-11-25T08:50:47.956</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\images\Square310x310Logo.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\images\Square310x310Logo.scale-100.png">
       <PackagePath>images\Square310x310Logo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-11-23T11:47:22.495</Modified>
+      <Modified>2017-11-25T08:50:47.956</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\images\Square44x44Logo.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\images\Square44x44Logo.scale-100.png">
       <PackagePath>images\Square44x44Logo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-11-23T11:47:22.524</Modified>
+      <Modified>2017-11-25T08:50:47.956</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\images\Square70x70Logo.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\images\Square70x70Logo.scale-100.png">
       <PackagePath>images\Square70x70Logo.scale-100.png</PackagePath>
-      <Modified>2017-11-23T11:47:22.559</Modified>
+      <Modified>2017-11-25T08:50:47.971</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\images\Square71x71Logo.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\images\Square71x71Logo.scale-100.png">
       <PackagePath>images\Square71x71Logo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-11-23T11:47:22.574</Modified>
+      <Modified>2017-11-25T08:50:47.971</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\images\StoreLogo.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\images\StoreLogo.scale-100.png">
       <PackagePath>images\StoreLogo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-11-23T11:47:22.597</Modified>
+      <Modified>2017-11-25T08:50:47.971</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\images\Wide310x150Logo.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\images\Wide310x150Logo.scale-100.png">
       <PackagePath>images\Wide310x150Logo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-11-23T11:47:22.613</Modified>
+      <Modified>2017-11-25T08:50:47.987</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\active.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\active.png">
       <PackagePath>www\active.png</PackagePath>
-      <Modified>2017-11-22T16:05:02.048</Modified>
+      <Modified>2017-11-25T08:50:43.205</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\can.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\can.png">
       <PackagePath>www\can.png</PackagePath>
-      <Modified>2017-11-22T16:05:02.548</Modified>
+      <Modified>2017-11-25T08:50:43.424</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\Group 11.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\Group 11.png">
       <PackagePath>www\Group 11.png</PackagePath>
-      <Modified>2017-11-22T16:05:01.658</Modified>
+      <Modified>2017-11-25T08:50:42.877</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\Group 11%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\Group 11%402x.png">
       <PackagePath>www\Group 11%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:01.673</Modified>
+      <Modified>2017-11-25T08:50:42.877</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\hamburgermenu.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\hamburgermenu.png">
       <PackagePath>www\hamburgermenu.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.564</Modified>
+      <Modified>2017-11-25T08:50:43.830</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\calendar\Rectangle 8 copy%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\calendar\Rectangle 8 copy%402x.png">
       <PackagePath>www\images\calendar\Rectangle 8 copy%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.877</Modified>
+      <Modified>2017-11-25T08:50:43.971</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\calendar\Rectangle 8%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\calendar\Rectangle 8%402x.png">
       <PackagePath>www\images\calendar\Rectangle 8%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.877</Modified>
+      <Modified>2017-11-25T08:50:43.971</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\calendar\Rectangle8.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\calendar\Rectangle8.png">
       <PackagePath>www\images\calendar\Rectangle8.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.877</Modified>
+      <Modified>2017-11-25T08:50:43.986</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\calendar\Rectangle8copy.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\calendar\Rectangle8copy.png">
       <PackagePath>www\images\calendar\Rectangle8copy.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.892</Modified>
+      <Modified>2017-11-25T08:50:43.986</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\cancel.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\cancel.png">
       <PackagePath>www\images\cancel.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.924</Modified>
+      <Modified>2017-11-25T08:50:43.986</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\chassis.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\chassis.png">
       <PackagePath>www\images\chassis.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.924</Modified>
+      <Modified>2017-11-25T08:50:44.002</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\close.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\close.png">
       <PackagePath>www\images\close.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.924</Modified>
+      <Modified>2017-11-25T08:50:44.002</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\crosspattern1.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\crosspattern1.png">
       <PackagePath>www\images\crosspattern1.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.939</Modified>
+      <Modified>2017-11-25T08:50:44.002</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\debrief\brief copy%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\debrief\brief copy%402x.png">
       <PackagePath>www\images\debrief\brief copy%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.939</Modified>
+      <Modified>2017-11-25T08:50:44.002</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\debrief\brief.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\debrief\brief.png">
       <PackagePath>www\images\debrief\brief.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.955</Modified>
+      <Modified>2017-11-25T08:50:44.018</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\debrief\brief%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\debrief\brief%402x.png">
       <PackagePath>www\images\debrief\brief%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.955</Modified>
+      <Modified>2017-11-25T08:50:44.018</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\debrief\briefcopy.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\debrief\briefcopy.png">
       <PackagePath>www\images\debrief\briefcopy.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.970</Modified>
+      <Modified>2017-11-25T08:50:44.018</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\doc.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\doc.png">
       <PackagePath>www\images\doc.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.970</Modified>
+      <Modified>2017-11-25T08:50:44.018</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\email1x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\email1x.png">
       <PackagePath>www\images\email1x.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.002</Modified>
+      <Modified>2017-11-25T08:50:44.033</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\email2x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\email2x.png">
       <PackagePath>www\images\email2x.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.002</Modified>
+      <Modified>2017-11-25T08:50:44.033</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\emerson.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\emerson.png">
       <PackagePath>www\images\emerson.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.017</Modified>
+      <Modified>2017-11-25T08:50:44.033</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\emerson0.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\emerson0.png">
       <PackagePath>www\images\emerson0.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.017</Modified>
+      <Modified>2017-11-25T08:50:44.049</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\emerson1x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\emerson1x.png">
       <PackagePath>www\images\emerson1x.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.033</Modified>
+      <Modified>2017-11-25T08:50:44.049</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\emerson2x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\emerson2x.png">
       <PackagePath>www\images\emerson2x.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.049</Modified>
+      <Modified>2017-11-25T08:50:44.049</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\Emerson_Electric_Company.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Emerson_Electric_Company.png">
       <PackagePath>www\images\Emerson_Electric_Company.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.611</Modified>
+      <Modified>2017-11-25T08:50:43.846</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\engine.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\engine.png">
       <PackagePath>www\images\engine.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.064</Modified>
+      <Modified>2017-11-25T08:50:44.049</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\excel.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\excel.png">
       <PackagePath>www\images\excel.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.064</Modified>
+      <Modified>2017-11-25T08:50:44.064</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\Excel_1x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Excel_1x.png">
       <PackagePath>www\images\Excel_1x.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.627</Modified>
+      <Modified>2017-11-25T08:50:43.861</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\Excel_2x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Excel_2x.png">
       <PackagePath>www\images\Excel_2x.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.627</Modified>
+      <Modified>2017-11-25T08:50:43.861</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\Group 5.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Group 5.png">
       <PackagePath>www\images\Group 5.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.642</Modified>
+      <Modified>2017-11-25T08:50:43.861</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\hambergur\hamburgermenu.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\hambergur\hamburgermenu.png">
       <PackagePath>www\images\hambergur\hamburgermenu.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.064</Modified>
+      <Modified>2017-11-25T08:50:44.064</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\hambergur\hamburgermenu%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\hambergur\hamburgermenu%402x.png">
       <PackagePath>www\images\hambergur\hamburgermenu%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.095</Modified>
+      <Modified>2017-11-25T08:50:44.064</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\Layer 10.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Layer 10.png">
       <PackagePath>www\images\Layer 10.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.658</Modified>
+      <Modified>2017-11-25T08:50:43.877</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\Layer 10%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Layer 10%402x.png">
       <PackagePath>www\images\Layer 10%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.658</Modified>
+      <Modified>2017-11-25T08:50:43.877</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\Layer 11.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Layer 11.png">
       <PackagePath>www\images\Layer 11.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.674</Modified>
+      <Modified>2017-11-25T08:50:43.877</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\Layer 11%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Layer 11%402x.png">
       <PackagePath>www\images\Layer 11%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.674</Modified>
+      <Modified>2017-11-25T08:50:43.877</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\Layer 12.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Layer 12.png">
       <PackagePath>www\images\Layer 12.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.674</Modified>
+      <Modified>2017-11-25T08:50:43.893</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\Layer 12%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Layer 12%402x.png">
       <PackagePath>www\images\Layer 12%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.689</Modified>
+      <Modified>2017-11-25T08:50:43.893</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\Layer 17.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Layer 17.png">
       <PackagePath>www\images\Layer 17.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.705</Modified>
+      <Modified>2017-11-25T08:50:43.893</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\Layer 17%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Layer 17%402x.png">
       <PackagePath>www\images\Layer 17%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.705</Modified>
+      <Modified>2017-11-25T08:50:43.893</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\Layer 18.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Layer 18.png">
       <PackagePath>www\images\Layer 18.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.720</Modified>
+      <Modified>2017-11-25T08:50:43.908</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\Layer 18%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Layer 18%402x.png">
       <PackagePath>www\images\Layer 18%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.736</Modified>
+      <Modified>2017-11-25T08:50:43.908</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\Map_greenbutton.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Map_greenbutton.png">
       <PackagePath>www\images\Map_greenbutton.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.736</Modified>
+      <Modified>2017-11-25T08:50:43.908</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\Map_greenbutton%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Map_greenbutton%402x.png">
       <PackagePath>www\images\Map_greenbutton%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.736</Modified>
+      <Modified>2017-11-25T08:50:43.924</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\Map_greybutton.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Map_greybutton.png">
       <PackagePath>www\images\Map_greybutton.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.752</Modified>
+      <Modified>2017-11-25T08:50:43.924</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\Map_greybutton%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Map_greybutton%402x.png">
       <PackagePath>www\images\Map_greybutton%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.752</Modified>
+      <Modified>2017-11-25T08:50:43.924</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\mytask\Layer 8 copy%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\mytask\Layer 8 copy%402x.png">
       <PackagePath>www\images\mytask\Layer 8 copy%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.142</Modified>
+      <Modified>2017-11-25T08:50:44.096</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\mytask\myTaskSel.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\mytask\myTaskSel.png">
       <PackagePath>www\images\mytask\myTaskSel.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.142</Modified>
+      <Modified>2017-11-25T08:50:44.111</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\mytask\Shape 36%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\mytask\Shape 36%402x.png">
       <PackagePath>www\images\mytask\Shape 36%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.142</Modified>
+      <Modified>2017-11-25T08:50:44.096</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\mytask\Shape36.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\mytask\Shape36.png">
       <PackagePath>www\images\mytask\Shape36.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.142</Modified>
+      <Modified>2017-11-25T08:50:44.096</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\mytask\taskoverview.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\mytask\taskoverview.png">
       <PackagePath>www\images\mytask\taskoverview.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.174</Modified>
+      <Modified>2017-11-25T08:50:44.111</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\Notepad_1x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Notepad_1x.png">
       <PackagePath>www\images\Notepad_1x.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.767</Modified>
+      <Modified>2017-11-25T08:50:43.924</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\Notepad_2x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Notepad_2x.png">
       <PackagePath>www\images\Notepad_2x.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.783</Modified>
+      <Modified>2017-11-25T08:50:43.939</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\padlock.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\padlock.png">
       <PackagePath>www\images\padlock.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.174</Modified>
+      <Modified>2017-11-25T08:50:44.111</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\padlock0.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\padlock0.png">
       <PackagePath>www\images\padlock0.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.189</Modified>
+      <Modified>2017-11-25T08:50:44.111</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\pdf.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\pdf.png">
       <PackagePath>www\images\pdf.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.205</Modified>
+      <Modified>2017-11-25T08:50:44.127</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\pdf1x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\pdf1x.png">
       <PackagePath>www\images\pdf1x.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.220</Modified>
+      <Modified>2017-11-25T08:50:44.127</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\pdf2x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\pdf2x.png">
       <PackagePath>www\images\pdf2x.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.220</Modified>
+      <Modified>2017-11-25T08:50:44.127</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\PowerPoint_1x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\PowerPoint_1x.png">
       <PackagePath>www\images\PowerPoint_1x.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.799</Modified>
+      <Modified>2017-11-25T08:50:43.939</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\PowerPoint_2x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\PowerPoint_2x.png">
       <PackagePath>www\images\PowerPoint_2x.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.814</Modified>
+      <Modified>2017-11-25T08:50:43.939</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\print1x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\print1x.png">
       <PackagePath>www\images\print1x.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.236</Modified>
+      <Modified>2017-11-25T08:50:44.143</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\print2x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\print2x.png">
       <PackagePath>www\images\print2x.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.252</Modified>
+      <Modified>2017-11-25T08:50:44.143</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\save\save.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\save\save.png">
       <PackagePath>www\images\save\save.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.439</Modified>
+      <Modified>2017-11-25T08:50:44.143</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\save\save%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\save\save%402x.png">
       <PackagePath>www\images\save\save%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.486</Modified>
+      <Modified>2017-11-25T08:50:44.158</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\search_1x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\search_1x.png">
       <PackagePath>www\images\search_1x.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.517</Modified>
+      <Modified>2017-11-25T08:50:44.158</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\search_2x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\search_2x.png">
       <PackagePath>www\images\search_2x.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.533</Modified>
+      <Modified>2017-11-25T08:50:44.158</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\Shape3.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Shape3.png">
       <PackagePath>www\images\Shape3.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.814</Modified>
+      <Modified>2017-11-25T08:50:43.939</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\Shape3%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Shape3%402x.png">
       <PackagePath>www\images\Shape3%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.830</Modified>
+      <Modified>2017-11-25T08:50:43.955</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\syncup\syncup.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\syncup\syncup.png">
       <PackagePath>www\images\syncup\syncup.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.580</Modified>
+      <Modified>2017-11-25T08:50:44.174</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\syncup\syncup%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\syncup\syncup%402x.png">
       <PackagePath>www\images\syncup\syncup%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.596</Modified>
+      <Modified>2017-11-25T08:50:44.189</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\taskoverview\Shape 1 copy 2%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\taskoverview\Shape 1 copy 2%402x.png">
       <PackagePath>www\images\taskoverview\Shape 1 copy 2%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.596</Modified>
+      <Modified>2017-11-25T08:50:44.189</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\taskoverview\Shape 8 copy%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\taskoverview\Shape 8 copy%402x.png">
       <PackagePath>www\images\taskoverview\Shape 8 copy%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.611</Modified>
+      <Modified>2017-11-25T08:50:44.189</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\taskoverview\taskOverflowSel.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\taskoverview\taskOverflowSel.png">
       <PackagePath>www\images\taskoverview\taskOverflowSel.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.611</Modified>
+      <Modified>2017-11-25T08:50:44.205</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\taskoverview\taskoverview.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\taskoverview\taskoverview.png">
       <PackagePath>www\images\taskoverview\taskoverview.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.611</Modified>
+      <Modified>2017-11-25T08:50:44.205</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\tick.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\tick.png">
       <PackagePath>www\images\tick.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.627</Modified>
+      <Modified>2017-11-25T08:50:44.205</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\tick2x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\tick2x.png">
       <PackagePath>www\images\tick2x.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.627</Modified>
+      <Modified>2017-11-25T08:50:44.205</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\tick%401x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\tick%401x.png">
       <PackagePath>www\images\tick%401x.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.627</Modified>
+      <Modified>2017-11-25T08:50:44.221</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\tick%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\tick%402x.png">
       <PackagePath>www\images\tick%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.642</Modified>
+      <Modified>2017-11-25T08:50:44.221</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\UKflag.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\UKflag.png">
       <PackagePath>www\images\UKflag.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.830</Modified>
+      <Modified>2017-11-25T08:50:43.955</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\user.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\user.png">
       <PackagePath>www\images\user.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.658</Modified>
+      <Modified>2017-11-25T08:50:44.236</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\user0.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\user0.png">
       <PackagePath>www\images\user0.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.658</Modified>
+      <Modified>2017-11-25T08:50:44.236</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\user_avator\image\Layer 5%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\user_avator\image\Layer 5%402x.png">
       <PackagePath>www\images\user_avator\image\Layer 5%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.705</Modified>
+      <Modified>2017-11-25T08:50:44.252</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\user_avator\image\Layer5.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\user_avator\image\Layer5.png">
       <PackagePath>www\images\user_avator\image\Layer5.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.705</Modified>
+      <Modified>2017-11-25T08:50:44.268</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\user_avator\Layer5.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\user_avator\Layer5.png">
       <PackagePath>www\images\user_avator\Layer5.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.674</Modified>
+      <Modified>2017-11-25T08:50:44.236</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\user_avator\username_green.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\user_avator\username_green.png">
       <PackagePath>www\images\user_avator\username_green.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.721</Modified>
+      <Modified>2017-11-25T08:50:44.268</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\user_avator\username_green%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\user_avator\username_green%402x.png">
       <PackagePath>www\images\user_avator\username_green%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.721</Modified>
+      <Modified>2017-11-25T08:50:44.268</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\user_avator\username_grey.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\user_avator\username_grey.png">
       <PackagePath>www\images\user_avator\username_grey.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.752</Modified>
+      <Modified>2017-11-25T08:50:44.283</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\user_avator\username_grey%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\user_avator\username_grey%402x.png">
       <PackagePath>www\images\user_avator\username_grey%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.752</Modified>
+      <Modified>2017-11-25T08:50:44.283</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\user_avator\VectorSmartObject.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\user_avator\VectorSmartObject.png">
       <PackagePath>www\images\user_avator\VectorSmartObject.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.674</Modified>
+      <Modified>2017-11-25T08:50:44.252</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\user_avator\VectorSmartObject%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\user_avator\VectorSmartObject%402x.png">
       <PackagePath>www\images\user_avator\VectorSmartObject%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:04.689</Modified>
+      <Modified>2017-11-25T08:50:44.252</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\Word_1x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Word_1x.png">
       <PackagePath>www\images\Word_1x.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.845</Modified>
+      <Modified>2017-11-25T08:50:43.955</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\Word_2x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Word_2x.png">
       <PackagePath>www\images\Word_2x.png</PackagePath>
-      <Modified>2017-11-22T16:05:03.845</Modified>
+      <Modified>2017-11-25T08:50:43.955</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\patterns.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\patterns.png">
       <PackagePath>www\patterns.png</PackagePath>
-      <Modified>2017-11-22T16:05:12.672</Modified>
+      <Modified>2017-11-25T08:50:47.612</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\Shape 6 copy 2.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\Shape 6 copy 2.png">
       <PackagePath>www\Shape 6 copy 2.png</PackagePath>
-      <Modified>2017-11-22T16:05:01.673</Modified>
+      <Modified>2017-11-25T08:50:42.892</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\Shape 6 copy 2%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\Shape 6 copy 2%402x.png">
       <PackagePath>www\Shape 6 copy 2%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:01.689</Modified>
+      <Modified>2017-11-25T08:50:42.892</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\Shape 7 copy 2.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\Shape 7 copy 2.png">
       <PackagePath>www\Shape 7 copy 2.png</PackagePath>
-      <Modified>2017-11-22T16:05:01.689</Modified>
+      <Modified>2017-11-25T08:50:42.892</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\Shape 7 copy 2%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\Shape 7 copy 2%402x.png">
       <PackagePath>www\Shape 7 copy 2%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:01.689</Modified>
+      <Modified>2017-11-25T08:50:42.892</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\Shape 8 copy 2.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\Shape 8 copy 2.png">
       <PackagePath>www\Shape 8 copy 2.png</PackagePath>
-      <Modified>2017-11-22T16:05:01.705</Modified>
+      <Modified>2017-11-25T08:50:42.908</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\Shape 8 copy 2%402x.png">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\Shape 8 copy 2%402x.png">
       <PackagePath>www\Shape 8 copy 2%402x.png</PackagePath>
-      <Modified>2017-11-22T16:05:01.705</Modified>
+      <Modified>2017-11-25T08:50:42.908</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\app.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\app.js">
       <PackagePath>www\app\app.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.681</Modified>
+      <Modified>2017-11-25T08:56:37.463</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\controllers\debrief.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\controllers\debrief.js">
       <PackagePath>www\controllers\debrief.js</PackagePath>
-      <Modified>2017-11-23T13:00:19.963</Modified>
+      <Modified>2017-11-25T08:50:43.533</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\controllers\index.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\controllers\index.js">
       <PackagePath>www\controllers\index.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.744</Modified>
+      <Modified>2017-11-25T08:56:37.713</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\controllers\login.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\controllers\login.js">
       <PackagePath>www\controllers\login.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.744</Modified>
+      <Modified>2017-11-25T08:56:37.728</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\controllers\myTask.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\controllers\myTask.js">
       <PackagePath>www\controllers\myTask.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.744</Modified>
+      <Modified>2017-11-25T08:56:37.760</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\controllers\taskOverFlow.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\controllers\taskOverFlow.js">
       <PackagePath>www\controllers\taskOverFlow.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.744</Modified>
+      <Modified>2017-11-25T08:56:37.791</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\controllers\todo.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\controllers\todo.js">
       <PackagePath>www\controllers\todo.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.744</Modified>
+      <Modified>2017-11-25T08:56:37.807</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\cordova-js-src\confighelper.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\cordova-js-src\confighelper.js">
       <PackagePath>www\cordova-js-src\confighelper.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.744</Modified>
+      <Modified>2017-11-25T08:56:37.822</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\cordova-js-src\exec.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\cordova-js-src\exec.js">
       <PackagePath>www\cordova-js-src\exec.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.760</Modified>
+      <Modified>2017-11-25T08:56:37.822</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\cordova-js-src\platform.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\cordova-js-src\platform.js">
       <PackagePath>www\cordova-js-src\platform.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.760</Modified>
+      <Modified>2017-11-25T08:56:37.838</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\cordova-js-src\splashscreen.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\cordova-js-src\splashscreen.js">
       <PackagePath>www\cordova-js-src\splashscreen.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.760</Modified>
+      <Modified>2017-11-25T08:56:37.885</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\cordova.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\cordova.js">
       <PackagePath>www\cordova.js</PackagePath>
-      <Modified>2017-11-22T16:05:03.127</Modified>
+      <Modified>2017-11-25T08:50:43.705</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\cordova_plugins.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\cordova_plugins.js">
       <PackagePath>www\cordova_plugins.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.760</Modified>
+      <Modified>2017-11-25T08:56:37.900</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\db\dbInitialize.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\db\dbInitialize.js">
       <PackagePath>www\db\dbInitialize.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.775</Modified>
+      <Modified>2017-11-25T08:56:38.072</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\angular-animate\angular-animate.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-animate\angular-animate.min.js">
       <PackagePath>www\lib\angular-animate\angular-animate.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.822</Modified>
+      <Modified>2017-11-25T08:56:38.369</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\angular-aria\angular-aria.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-aria\angular-aria.min.js">
       <PackagePath>www\lib\angular-aria\angular-aria.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.822</Modified>
+      <Modified>2017-11-25T08:56:38.385</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\angular-base64-upload.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-base64-upload.js">
       <PackagePath>www\lib\angular-base64-upload.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.822</Modified>
+      <Modified>2017-11-25T08:56:38.416</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\angular-material\angular-material.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-material\angular-material.min.js">
       <PackagePath>www\lib\angular-material\angular-material.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.822</Modified>
+      <Modified>2017-11-25T08:56:38.510</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\angular-messages\angular-messages.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-messages\angular-messages.min.js">
       <PackagePath>www\lib\angular-messages\angular-messages.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.838</Modified>
+      <Modified>2017-11-25T08:56:38.541</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\angular-translate-handler-log.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\angular-translate-handler-log.js">
       <PackagePath>www\lib\angular-translate\angular-translate-handler-log.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.838</Modified>
+      <Modified>2017-11-25T08:56:38.557</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\angular-translate-interpolation-messageformat.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\angular-translate-interpolation-messageformat.js">
       <PackagePath>www\lib\angular-translate\angular-translate-interpolation-messageformat.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.838</Modified>
+      <Modified>2017-11-25T08:56:38.572</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\angular-translate-loader-static-files.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\angular-translate-loader-static-files.js">
       <PackagePath>www\lib\angular-translate\angular-translate-loader-static-files.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.838</Modified>
+      <Modified>2017-11-25T08:56:38.588</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\angular-translate-loader-url.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\angular-translate-loader-url.js">
       <PackagePath>www\lib\angular-translate\angular-translate-loader-url.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.838</Modified>
+      <Modified>2017-11-25T08:56:38.604</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\angular-translate-storage-cookie.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\angular-translate-storage-cookie.js">
       <PackagePath>www\lib\angular-translate\angular-translate-storage-cookie.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.838</Modified>
+      <Modified>2017-11-25T08:56:38.604</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\angular-translate-storage-local.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\angular-translate-storage-local.js">
       <PackagePath>www\lib\angular-translate\angular-translate-storage-local.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.838</Modified>
+      <Modified>2017-11-25T08:56:38.619</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\messageformat.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\messageformat.js">
       <PackagePath>www\lib\angular-translate\messageformat.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.853</Modified>
+      <Modified>2017-11-25T08:56:38.666</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\translate.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\translate.js">
       <PackagePath>www\lib\angular-translate\translate.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.853</Modified>
+      <Modified>2017-11-25T08:56:38.731</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\angular-ui-router\angular-ui-router.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-ui-router\angular-ui-router.min.js">
       <PackagePath>www\lib\angular-ui-router\angular-ui-router.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.853</Modified>
+      <Modified>2017-11-25T08:56:38.770</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\angular\angular.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular\angular.min.js">
       <PackagePath>www\lib\angular\angular.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.806</Modified>
+      <Modified>2017-11-25T08:56:38.307</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\bootstrap-datetimepicker.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\bootstrap-datetimepicker.js">
       <PackagePath>www\lib\bootstrap-datetimepicker.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.869</Modified>
+      <Modified>2017-11-25T08:56:38.895</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\bootstrap\bootstrap.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\bootstrap\bootstrap.min.js">
       <PackagePath>www\lib\bootstrap\bootstrap.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.853</Modified>
+      <Modified>2017-11-25T08:56:38.848</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\calendar.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\calendar.min.js">
       <PackagePath>www\lib\calendar.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.869</Modified>
+      <Modified>2017-11-25T08:56:38.911</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\FileSaver.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\FileSaver.js">
       <PackagePath>www\lib\FileSaver.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.869</Modified>
+      <Modified>2017-11-25T08:56:38.942</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\fullcalendar.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\fullcalendar.js">
       <PackagePath>www\lib\fullcalendar.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.869</Modified>
+      <Modified>2017-11-25T08:56:39.098</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\gcal.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\gcal.js">
       <PackagePath>www\lib\gcal.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.869</Modified>
+      <Modified>2017-11-25T08:56:39.114</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\html2canvas.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\html2canvas.min.js">
       <PackagePath>www\lib\html2canvas.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.885</Modified>
+      <Modified>2017-11-25T08:56:39.161</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular-ui\angular-ui-router.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular-ui\angular-ui-router.js">
       <PackagePath>www\lib\ionic\js\angular-ui\angular-ui-router.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.932</Modified>
+      <Modified>2017-11-25T08:56:39.833</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular-ui\angular-ui-router.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular-ui\angular-ui-router.min.js">
       <PackagePath>www\lib\ionic\js\angular-ui\angular-ui-router.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.932</Modified>
+      <Modified>2017-11-25T08:56:39.895</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular-animate.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular-animate.js">
       <PackagePath>www\lib\ionic\js\angular\angular-animate.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.900</Modified>
+      <Modified>2017-11-25T08:56:39.270</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular-animate.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular-animate.min.js">
       <PackagePath>www\lib\ionic\js\angular\angular-animate.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.900</Modified>
+      <Modified>2017-11-25T08:56:39.348</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular-resource.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular-resource.js">
       <PackagePath>www\lib\ionic\js\angular\angular-resource.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.900</Modified>
+      <Modified>2017-11-25T08:56:39.380</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular-resource.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular-resource.min.js">
       <PackagePath>www\lib\ionic\js\angular\angular-resource.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.900</Modified>
+      <Modified>2017-11-25T08:56:39.411</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular-sanitize.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular-sanitize.js">
       <PackagePath>www\lib\ionic\js\angular\angular-sanitize.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.900</Modified>
+      <Modified>2017-11-25T08:56:39.458</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular-sanitize.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular-sanitize.min.js">
       <PackagePath>www\lib\ionic\js\angular\angular-sanitize.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.900</Modified>
+      <Modified>2017-11-25T08:56:39.489</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular.js">
       <PackagePath>www\lib\ionic\js\angular\angular.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.932</Modified>
+      <Modified>2017-11-25T08:56:39.677</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular.min.js">
       <PackagePath>www\lib\ionic\js\angular\angular.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.932</Modified>
+      <Modified>2017-11-25T08:56:39.770</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\ionic-angular.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\ionic-angular.js">
       <PackagePath>www\lib\ionic\js\ionic-angular.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.947</Modified>
+      <Modified>2017-11-25T08:56:40.020</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\ionic-angular.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\ionic-angular.min.js">
       <PackagePath>www\lib\ionic\js\ionic-angular.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.947</Modified>
+      <Modified>2017-11-25T08:56:40.083</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\ionic.bundle.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\ionic.bundle.js">
       <PackagePath>www\lib\ionic\js\ionic.bundle.js</PackagePath>
-      <Modified>2017-11-23T13:00:20.994</Modified>
+      <Modified>2017-11-25T08:56:40.239</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\ionic.bundle.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\ionic.bundle.min.js">
       <PackagePath>www\lib\ionic\js\ionic.bundle.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.010</Modified>
+      <Modified>2017-11-25T08:56:40.458</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\ionic.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\ionic.js">
       <PackagePath>www\lib\ionic\js\ionic.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.025</Modified>
+      <Modified>2017-11-25T08:56:40.614</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\ionic.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\ionic.min.js">
       <PackagePath>www\lib\ionic\js\ionic.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.025</Modified>
+      <Modified>2017-11-25T08:56:40.739</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\jquery-ui.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\jquery-ui.min.js">
       <PackagePath>www\lib\jquery-ui.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.041</Modified>
+      <Modified>2017-11-25T08:56:40.895</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\jquery.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\jquery.min.js">
       <PackagePath>www\lib\jquery.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.041</Modified>
+      <Modified>2017-11-25T08:56:40.974</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\jspdf.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\jspdf.js">
       <PackagePath>www\lib\jspdf.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.057</Modified>
+      <Modified>2017-11-25T08:56:41.177</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\locale-all.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\locale-all.js">
       <PackagePath>www\lib\locale-all.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.072</Modified>
+      <Modified>2017-11-25T08:56:41.255</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\md-data-table.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\md-data-table.js">
       <PackagePath>www\lib\md-data-table.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.072</Modified>
+      <Modified>2017-11-25T08:56:41.302</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\moment.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\moment.min.js">
       <PackagePath>www\lib\moment.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.088</Modified>
+      <Modified>2017-11-25T08:56:41.364</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\FileAPI.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\FileAPI.js">
       <PackagePath>www\lib\ng-file-upload-shim\FileAPI.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.119</Modified>
+      <Modified>2017-11-25T08:56:41.911</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\FileAPI.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\FileAPI.min.js">
       <PackagePath>www\lib\ng-file-upload-shim\FileAPI.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.119</Modified>
+      <Modified>2017-11-25T08:56:41.958</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\ng-file-upload-all.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\ng-file-upload-all.js">
       <PackagePath>www\lib\ng-file-upload-shim\ng-file-upload-all.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.135</Modified>
+      <Modified>2017-11-25T08:56:42.021</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\ng-file-upload-all.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\ng-file-upload-all.min.js">
       <PackagePath>www\lib\ng-file-upload-shim\ng-file-upload-all.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.135</Modified>
+      <Modified>2017-11-25T08:56:42.114</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\ng-file-upload-shim.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\ng-file-upload-shim.js">
       <PackagePath>www\lib\ng-file-upload-shim\ng-file-upload-shim.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.135</Modified>
+      <Modified>2017-11-25T08:56:42.146</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\ng-file-upload-shim.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\ng-file-upload-shim.min.js">
       <PackagePath>www\lib\ng-file-upload-shim\ng-file-upload-shim.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.135</Modified>
+      <Modified>2017-11-25T08:56:42.146</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\ng-file-upload.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\ng-file-upload.js">
       <PackagePath>www\lib\ng-file-upload-shim\ng-file-upload.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.135</Modified>
+      <Modified>2017-11-25T08:56:42.208</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\ng-file-upload.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\ng-file-upload.min.js">
       <PackagePath>www\lib\ng-file-upload-shim\ng-file-upload.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.150</Modified>
+      <Modified>2017-11-25T08:56:42.271</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\FileAPI.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\FileAPI.js">
       <PackagePath>www\lib\ng-file-upload\FileAPI.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.088</Modified>
+      <Modified>2017-11-25T08:56:41.427</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\FileAPI.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\FileAPI.min.js">
       <PackagePath>www\lib\ng-file-upload\FileAPI.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.088</Modified>
+      <Modified>2017-11-25T08:56:41.474</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\ng-file-upload-all.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\ng-file-upload-all.js">
       <PackagePath>www\lib\ng-file-upload\ng-file-upload-all.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.103</Modified>
+      <Modified>2017-11-25T08:56:41.536</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\ng-file-upload-all.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\ng-file-upload-all.min.js">
       <PackagePath>www\lib\ng-file-upload\ng-file-upload-all.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.103</Modified>
+      <Modified>2017-11-25T08:56:41.645</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\ng-file-upload-shim.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\ng-file-upload-shim.js">
       <PackagePath>www\lib\ng-file-upload\ng-file-upload-shim.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.103</Modified>
+      <Modified>2017-11-25T08:56:41.677</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\ng-file-upload-shim.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\ng-file-upload-shim.min.js">
       <PackagePath>www\lib\ng-file-upload\ng-file-upload-shim.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.103</Modified>
+      <Modified>2017-11-25T08:56:41.724</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\ng-file-upload.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\ng-file-upload.js">
       <PackagePath>www\lib\ng-file-upload\ng-file-upload.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.103</Modified>
+      <Modified>2017-11-25T08:56:41.786</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\ng-file-upload.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\ng-file-upload.min.js">
       <PackagePath>www\lib\ng-file-upload\ng-file-upload.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.119</Modified>
+      <Modified>2017-11-25T08:56:41.849</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\package.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\package.js">
       <PackagePath>www\lib\ng-file-upload\package.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.119</Modified>
+      <Modified>2017-11-25T08:56:41.849</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\pdfmake.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\pdfmake.min.js">
       <PackagePath>www\lib\pdfmake.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.166</Modified>
+      <Modified>2017-11-25T08:56:42.567</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\saveHtmlToPdf.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\saveHtmlToPdf.js">
       <PackagePath>www\lib\saveHtmlToPdf.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.166</Modified>
+      <Modified>2017-11-25T08:56:42.583</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\signature_pad.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\signature_pad.min.js">
       <PackagePath>www\lib\signature_pad.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.166</Modified>
+      <Modified>2017-11-25T08:56:42.630</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\spinner\angular-loading-spinner.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\spinner\angular-loading-spinner.js">
       <PackagePath>www\lib\spinner\angular-loading-spinner.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.182</Modified>
+      <Modified>2017-11-25T08:56:42.630</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\spinner\angular-spinner.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\spinner\angular-spinner.min.js">
       <PackagePath>www\lib\spinner\angular-spinner.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.182</Modified>
+      <Modified>2017-11-25T08:56:42.646</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\spinner\spin.min.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\spinner\spin.min.js">
       <PackagePath>www\lib\spinner\spin.min.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.182</Modified>
+      <Modified>2017-11-25T08:56:42.677</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ui-bootstrap-tpls-2.5.0.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ui-bootstrap-tpls-2.5.0.js">
       <PackagePath>www\lib\ui-bootstrap-tpls-2.5.0.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.182</Modified>
+      <Modified>2017-11-25T08:56:42.786</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-email-composer\src\windows\EmailComposerProxy.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-email-composer\src\windows\EmailComposerProxy.js">
       <PackagePath>www\plugins\cordova-plugin-email-composer\src\windows\EmailComposerProxy.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.182</Modified>
+      <Modified>2017-11-25T08:56:42.802</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-email-composer\src\windows\EmailComposerProxyImpl.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-email-composer\src\windows\EmailComposerProxyImpl.js">
       <PackagePath>www\plugins\cordova-plugin-email-composer\src\windows\EmailComposerProxyImpl.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.197</Modified>
+      <Modified>2017-11-25T08:56:42.817</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-email-composer\www\email_composer.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-email-composer\www\email_composer.js">
       <PackagePath>www\plugins\cordova-plugin-email-composer\www\email_composer.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.197</Modified>
+      <Modified>2017-11-25T08:56:42.833</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file-opener2\src\windows\fileOpener2Proxy.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file-opener2\src\windows\fileOpener2Proxy.js">
       <PackagePath>www\plugins\cordova-plugin-file-opener2\src\windows\fileOpener2Proxy.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.260</Modified>
+      <Modified>2017-11-25T08:56:43.224</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file-opener2\www\plugins.FileOpener2.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file-opener2\www\plugins.FileOpener2.js">
       <PackagePath>www\plugins\cordova-plugin-file-opener2\www\plugins.FileOpener2.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.260</Modified>
+      <Modified>2017-11-25T08:56:43.239</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\src\windows\FileProxy.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\src\windows\FileProxy.js">
       <PackagePath>www\plugins\cordova-plugin-file\src\windows\FileProxy.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.197</Modified>
+      <Modified>2017-11-25T08:56:42.896</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\browser\isChrome.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\browser\isChrome.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\browser\isChrome.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.197</Modified>
+      <Modified>2017-11-25T08:56:42.896</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\DirectoryEntry.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\DirectoryEntry.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\DirectoryEntry.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.197</Modified>
+      <Modified>2017-11-25T08:56:42.911</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\DirectoryReader.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\DirectoryReader.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\DirectoryReader.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.197</Modified>
+      <Modified>2017-11-25T08:56:42.927</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\Entry.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\Entry.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\Entry.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.228</Modified>
+      <Modified>2017-11-25T08:56:42.958</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\File.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\File.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\File.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.228</Modified>
+      <Modified>2017-11-25T08:56:42.974</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileEntry.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileEntry.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileEntry.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.228</Modified>
+      <Modified>2017-11-25T08:56:42.989</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileError.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileError.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileError.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.228</Modified>
+      <Modified>2017-11-25T08:56:42.989</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileReader.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileReader.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileReader.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.228</Modified>
+      <Modified>2017-11-25T08:56:43.036</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileSystem.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileSystem.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileSystem.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.228</Modified>
+      <Modified>2017-11-25T08:56:43.052</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\fileSystemPaths.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\fileSystemPaths.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\fileSystemPaths.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.228</Modified>
+      <Modified>2017-11-25T08:56:43.068</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\fileSystems.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\fileSystems.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\fileSystems.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.244</Modified>
+      <Modified>2017-11-25T08:56:43.083</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileUploadOptions.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileUploadOptions.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileUploadOptions.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.244</Modified>
+      <Modified>2017-11-25T08:56:43.083</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileUploadResult.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileUploadResult.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileUploadResult.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.244</Modified>
+      <Modified>2017-11-25T08:56:43.099</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileWriter.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileWriter.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileWriter.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.244</Modified>
+      <Modified>2017-11-25T08:56:43.130</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\Flags.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\Flags.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\Flags.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.244</Modified>
+      <Modified>2017-11-25T08:56:43.146</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\LocalFileSystem.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\LocalFileSystem.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\LocalFileSystem.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.244</Modified>
+      <Modified>2017-11-25T08:56:43.161</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\Metadata.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\Metadata.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\Metadata.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.244</Modified>
+      <Modified>2017-11-25T08:56:43.161</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\ProgressEvent.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\ProgressEvent.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\ProgressEvent.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.260</Modified>
+      <Modified>2017-11-25T08:56:43.177</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\requestFileSystem.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\requestFileSystem.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\requestFileSystem.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.260</Modified>
+      <Modified>2017-11-25T08:56:43.193</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\resolveLocalFileSystemURI.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\resolveLocalFileSystemURI.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\resolveLocalFileSystemURI.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.260</Modified>
+      <Modified>2017-11-25T08:56:43.208</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-inappbrowser\src\windows\InAppBrowserProxy.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-inappbrowser\src\windows\InAppBrowserProxy.js">
       <PackagePath>www\plugins\cordova-plugin-inappbrowser\src\windows\InAppBrowserProxy.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.260</Modified>
+      <Modified>2017-11-25T08:56:43.271</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-inappbrowser\www\inappbrowser.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-inappbrowser\www\inappbrowser.js">
       <PackagePath>www\plugins\cordova-plugin-inappbrowser\www\inappbrowser.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.260</Modified>
+      <Modified>2017-11-25T08:56:43.286</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-network-information\src\windows\NetworkInfoProxy.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-network-information\src\windows\NetworkInfoProxy.js">
       <PackagePath>www\plugins\cordova-plugin-network-information\src\windows\NetworkInfoProxy.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.275</Modified>
+      <Modified>2017-11-25T08:56:43.286</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-network-information\www\Connection.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-network-information\www\Connection.js">
       <PackagePath>www\plugins\cordova-plugin-network-information\www\Connection.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.275</Modified>
+      <Modified>2017-11-25T08:56:43.302</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-network-information\www\network.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-network-information\www\network.js">
       <PackagePath>www\plugins\cordova-plugin-network-information\www\network.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.291</Modified>
+      <Modified>2017-11-25T08:56:43.318</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-sqlite-storage\src\windows\sqlite-proxy.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-sqlite-storage\src\windows\sqlite-proxy.js">
       <PackagePath>www\plugins\cordova-sqlite-storage\src\windows\sqlite-proxy.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.291</Modified>
+      <Modified>2017-11-25T08:56:43.349</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3JS\js\SQLite3.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3JS\js\SQLite3.js">
       <PackagePath>www\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3JS\js\SQLite3.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.291</Modified>
+      <Modified>2017-11-25T08:56:43.380</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\plugins\cordova-sqlite-storage\www\SQLitePlugin.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-sqlite-storage\www\SQLitePlugin.js">
       <PackagePath>www\plugins\cordova-sqlite-storage\www\SQLitePlugin.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.291</Modified>
+      <Modified>2017-11-25T08:56:43.427</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\scripts\platformOverrides.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\scripts\platformOverrides.js">
       <PackagePath>www\scripts\platformOverrides.js</PackagePath>
-      <Modified>2017-11-22T16:05:12.750</Modified>
+      <Modified>2017-11-25T08:50:47.705</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\scripts\winstore-jscompat.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\scripts\winstore-jscompat.js">
       <PackagePath>www\scripts\winstore-jscompat.js</PackagePath>
-      <Modified>2017-11-22T16:05:12.765</Modified>
+      <Modified>2017-11-25T08:50:47.721</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\services\cloudService.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\services\cloudService.js">
       <PackagePath>www\services\cloudService.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.291</Modified>
+      <Modified>2017-11-25T08:56:43.458</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\services\constantService.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\services\constantService.js">
       <PackagePath>www\services\constantService.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.291</Modified>
+      <Modified>2017-11-25T08:56:43.474</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\services\localService.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\services\localService.js">
       <PackagePath>www\services\localService.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.307</Modified>
+      <Modified>2017-11-25T08:56:43.552</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\services\ofscService.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\services\ofscService.js">
       <PackagePath>www\services\ofscService.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.307</Modified>
+      <Modified>2017-11-25T08:56:43.568</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\services\syncService.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\services\syncService.js">
       <PackagePath>www\services\syncService.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.307</Modified>
+      <Modified>2017-11-25T08:56:43.568</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\services\valueService.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\services\valueService.js">
       <PackagePath>www\services\valueService.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.307</Modified>
+      <Modified>2017-11-25T08:56:43.614</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\src\calendar.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\src\calendar.js">
       <PackagePath>www\src\calendar.js</PackagePath>
-      <Modified>2017-11-23T13:00:21.338</Modified>
+      <Modified>2017-11-25T08:56:43.661</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\WinJS\js\base.js">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\WinJS\js\base.js">
       <PackagePath>www\WinJS\js\base.js</PackagePath>
-      <Modified>2017-11-22T16:05:02.033</Modified>
+      <Modified>2017-11-25T08:50:43.205</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\data\item.json">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\data\item.json">
       <PackagePath>www\app\data\item.json</PackagePath>
-      <Modified>2017-11-23T13:00:20.681</Modified>
+      <Modified>2017-11-25T08:56:37.478</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\data\locale-en.json">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\data\locale-en.json">
       <PackagePath>www\app\data\locale-en.json</PackagePath>
-      <Modified>2017-11-23T13:00:20.681</Modified>
+      <Modified>2017-11-25T08:56:37.478</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\data\locale-fr.json">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\data\locale-fr.json">
       <PackagePath>www\app\data\locale-fr.json</PackagePath>
-      <Modified>2017-11-23T13:00:20.681</Modified>
+      <Modified>2017-11-25T08:56:37.494</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\data\locale-jp.json">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\data\locale-jp.json">
       <PackagePath>www\app\data\locale-jp.json</PackagePath>
-      <Modified>2017-11-23T13:00:20.681</Modified>
+      <Modified>2017-11-25T08:56:37.494</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\json\attachment.json">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\json\attachment.json">
       <PackagePath>www\app\json\attachment.json</PackagePath>
-      <Modified>2017-11-23T13:00:20.681</Modified>
+      <Modified>2017-11-25T08:56:37.510</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\json\contacts.json">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\json\contacts.json">
       <PackagePath>www\app\json\contacts.json</PackagePath>
-      <Modified>2017-11-23T13:00:20.697</Modified>
+      <Modified>2017-11-25T08:56:37.510</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\json\installBase.json">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\json\installBase.json">
       <PackagePath>www\app\json\installBase.json</PackagePath>
-      <Modified>2017-11-23T13:00:20.697</Modified>
+      <Modified>2017-11-25T08:56:37.525</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\json\notes.json">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\json\notes.json">
       <PackagePath>www\app\json\notes.json</PackagePath>
-      <Modified>2017-11-23T13:00:20.697</Modified>
+      <Modified>2017-11-25T08:56:37.525</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\json\resources.json">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\json\resources.json">
       <PackagePath>www\app\json\resources.json</PackagePath>
-      <Modified>2017-11-23T13:00:20.697</Modified>
+      <Modified>2017-11-25T08:56:37.525</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\json\taskDetails.json">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\json\taskDetails.json">
       <PackagePath>www\app\json\taskDetails.json</PackagePath>
-      <Modified>2017-11-23T13:00:20.697</Modified>
+      <Modified>2017-11-25T08:56:37.541</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\version.json">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\version.json">
       <PackagePath>www\lib\ionic\version.json</PackagePath>
-      <Modified>2017-11-23T13:00:21.041</Modified>
+      <Modified>2017-11-25T08:56:40.755</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\bower.json">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\bower.json">
       <PackagePath>www\lib\ng-file-upload-shim\bower.json</PackagePath>
-      <Modified>2017-11-23T13:00:21.119</Modified>
+      <Modified>2017-11-25T08:56:41.864</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\bower.json">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\bower.json">
       <PackagePath>www\lib\ng-file-upload\bower.json</PackagePath>
-      <Modified>2017-11-23T13:00:21.088</Modified>
+      <Modified>2017-11-25T08:56:41.364</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\views\Attachments.html">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Attachments.html">
       <PackagePath>www\app\views\Attachments.html</PackagePath>
-      <Modified>2017-11-23T13:00:20.697</Modified>
+      <Modified>2017-11-25T08:56:37.541</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\views\CustomerSignature.html">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\CustomerSignature.html">
       <PackagePath>www\app\views\CustomerSignature.html</PackagePath>
-      <Modified>2017-11-23T13:00:20.697</Modified>
+      <Modified>2017-11-25T08:56:37.557</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\views\dashBoard.html">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\dashBoard.html">
       <PackagePath>www\app\views\dashBoard.html</PackagePath>
-      <Modified>2017-11-23T13:00:20.697</Modified>
+      <Modified>2017-11-25T08:56:37.572</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\views\Debrief.html">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Debrief.html">
       <PackagePath>www\app\views\Debrief.html</PackagePath>
-      <Modified>2017-11-23T13:00:20.713</Modified>
+      <Modified>2017-11-25T08:56:37.572</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\views\Dialog.html">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Dialog.html">
       <PackagePath>www\app\views\Dialog.html</PackagePath>
-      <Modified>2017-11-23T13:00:20.713</Modified>
+      <Modified>2017-11-25T08:56:37.588</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\views\EngineerSignature.html">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\EngineerSignature.html">
       <PackagePath>www\app\views\EngineerSignature.html</PackagePath>
-      <Modified>2017-11-23T13:00:20.713</Modified>
+      <Modified>2017-11-25T08:56:37.588</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\views\Expenses.html">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Expenses.html">
       <PackagePath>www\app\views\Expenses.html</PackagePath>
-      <Modified>2017-11-23T13:00:20.713</Modified>
+      <Modified>2017-11-25T08:56:37.603</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\views\list.html">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\list.html">
       <PackagePath>www\app\views\list.html</PackagePath>
-      <Modified>2017-11-23T13:00:20.713</Modified>
+      <Modified>2017-11-25T08:56:37.603</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\views\Login.html">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Login.html">
       <PackagePath>www\app\views\Login.html</PackagePath>
-      <Modified>2017-11-23T13:00:20.713</Modified>
+      <Modified>2017-11-25T08:56:37.619</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\views\Material.html">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Material.html">
       <PackagePath>www\app\views\Material.html</PackagePath>
-      <Modified>2017-11-23T13:00:20.713</Modified>
+      <Modified>2017-11-25T08:56:37.619</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\views\myFieldJob.html">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\myFieldJob.html">
       <PackagePath>www\app\views\myFieldJob.html</PackagePath>
-      <Modified>2017-11-23T13:00:20.728</Modified>
+      <Modified>2017-11-25T08:56:37.635</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\views\MyTask.html">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\MyTask.html">
       <PackagePath>www\app\views\MyTask.html</PackagePath>
-      <Modified>2017-11-23T13:00:20.728</Modified>
+      <Modified>2017-11-25T08:56:37.635</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\views\Notes.html">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Notes.html">
       <PackagePath>www\app\views\Notes.html</PackagePath>
-      <Modified>2017-11-23T13:00:20.728</Modified>
+      <Modified>2017-11-25T08:56:37.650</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\views\Summary.html">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Summary.html">
       <PackagePath>www\app\views\Summary.html</PackagePath>
-      <Modified>2017-11-23T13:00:20.728</Modified>
+      <Modified>2017-11-25T08:56:37.650</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\views\TaskOverflow.html">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\TaskOverflow.html">
       <PackagePath>www\app\views\TaskOverflow.html</PackagePath>
-      <Modified>2017-11-23T13:00:20.728</Modified>
+      <Modified>2017-11-25T08:56:37.666</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\views\Time.html">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Time.html">
       <PackagePath>www\app\views\Time.html</PackagePath>
-      <Modified>2017-11-23T13:00:20.728</Modified>
+      <Modified>2017-11-25T08:56:37.666</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\views\TimeNC.HTML">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\TimeNC.HTML">
       <PackagePath>www\app\views\TimeNC.HTML</PackagePath>
-      <Modified>2017-11-23T13:00:20.728</Modified>
+      <Modified>2017-11-25T08:56:37.682</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\app\views\Todo.html">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Todo.html">
       <PackagePath>www\app\views\Todo.html</PackagePath>
-      <Modified>2017-11-23T13:00:20.744</Modified>
+      <Modified>2017-11-25T08:56:37.682</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\index.html">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\index.html">
       <PackagePath>www\index.html</PackagePath>
-      <Modified>2017-11-23T11:47:21.404</Modified>
+      <Modified>2017-11-25T08:50:44.330</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\sidebarcollapse.html">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\sidebarcollapse.html">
       <PackagePath>www\sidebarcollapse.html</PackagePath>
-      <Modified>2017-11-23T13:00:21.307</Modified>
+      <Modified>2017-11-25T08:56:43.614</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\css\bootstrap-datetimepicker.css">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\bootstrap-datetimepicker.css">
       <PackagePath>www\css\bootstrap-datetimepicker.css</PackagePath>
-      <Modified>2017-11-23T13:00:20.760</Modified>
+      <Modified>2017-11-25T08:56:37.916</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\css\calendarDemo.css">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\calendarDemo.css">
       <PackagePath>www\css\calendarDemo.css</PackagePath>
-      <Modified>2017-11-23T13:00:20.760</Modified>
+      <Modified>2017-11-25T08:56:37.916</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\css\fullcalendar.css">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\fullcalendar.css">
       <PackagePath>www\css\fullcalendar.css</PackagePath>
-      <Modified>2017-11-23T13:00:20.760</Modified>
+      <Modified>2017-11-25T08:56:37.932</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\css\fullcalendar.min.css">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\fullcalendar.min.css">
       <PackagePath>www\css\fullcalendar.min.css</PackagePath>
-      <Modified>2017-11-23T13:00:20.760</Modified>
+      <Modified>2017-11-25T08:56:37.932</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\css\fullcalendar.print.min.css">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\fullcalendar.print.min.css">
       <PackagePath>www\css\fullcalendar.print.min.css</PackagePath>
-      <Modified>2017-11-23T13:00:20.775</Modified>
+      <Modified>2017-11-25T08:56:37.947</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\css\inappbrowser.css">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\inappbrowser.css">
       <PackagePath>www\css\inappbrowser.css</PackagePath>
-      <Modified>2017-11-22T16:05:33.755</Modified>
+      <Modified>2017-11-25T08:50:57.988</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\css\splashscreen.css">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\splashscreen.css">
       <PackagePath>www\css\splashscreen.css</PackagePath>
-      <Modified>2017-11-22T16:05:03.345</Modified>
+      <Modified>2017-11-25T08:50:43.736</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\css\style.css">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\style.css">
       <PackagePath>www\css\style.css</PackagePath>
-      <Modified>2017-11-23T13:00:20.775</Modified>
+      <Modified>2017-11-25T08:56:37.947</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\css\style1.css">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\style1.css">
       <PackagePath>www\css\style1.css</PackagePath>
-      <Modified>2017-11-23T13:00:20.775</Modified>
+      <Modified>2017-11-25T08:56:37.963</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\css\styless.css">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\styless.css">
       <PackagePath>www\css\styless.css</PackagePath>
-      <Modified>2017-11-23T13:00:20.775</Modified>
+      <Modified>2017-11-25T08:56:37.963</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\angular-material\angular-material.min.css">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-material\angular-material.min.css">
       <PackagePath>www\lib\angular-material\angular-material.min.css</PackagePath>
-      <Modified>2017-11-23T13:00:20.822</Modified>
+      <Modified>2017-11-25T08:56:38.432</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\bootstrap\bootstrap.min.css">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\bootstrap\bootstrap.min.css">
       <PackagePath>www\lib\bootstrap\bootstrap.min.css</PackagePath>
-      <Modified>2017-11-23T13:00:20.853</Modified>
+      <Modified>2017-11-25T08:56:38.786</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\css\ionic.css">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\css\ionic.css">
       <PackagePath>www\lib\ionic\css\ionic.css</PackagePath>
-      <Modified>2017-11-23T13:00:20.885</Modified>
+      <Modified>2017-11-25T08:56:39.192</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\css\ionic.min.css">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\css\ionic.min.css">
       <PackagePath>www\lib\ionic\css\ionic.min.css</PackagePath>
-      <Modified>2017-11-23T13:00:20.885</Modified>
+      <Modified>2017-11-25T08:56:39.208</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\db\emerson.sqlite">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\db\emerson.sqlite">
       <PackagePath>www\db\emerson.sqlite</PackagePath>
-      <Modified>2017-11-22T16:05:03.549</Modified>
+      <Modified>2017-11-25T08:50:43.830</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\02hat_loader_2.gif">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\02hat_loader_2.gif">
       <PackagePath>www\images\02hat_loader_2.gif</PackagePath>
-      <Modified>2017-11-22T16:05:03.580</Modified>
+      <Modified>2017-11-25T08:50:43.846</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\02hat_loader_final1.gif">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\02hat_loader_final1.gif">
       <PackagePath>www\images\02hat_loader_final1.gif</PackagePath>
-      <Modified>2017-11-22T16:05:03.580</Modified>
+      <Modified>2017-11-25T08:50:43.846</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\02hat_loader_final2.gif">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\02hat_loader_final2.gif">
       <PackagePath>www\images\02hat_loader_final2.gif</PackagePath>
-      <Modified>2017-11-22T16:05:03.595</Modified>
+      <Modified>2017-11-25T08:50:43.846</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\briefcase.svg">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\briefcase.svg">
       <PackagePath>www\images\briefcase.svg</PackagePath>
-      <Modified>2017-11-22T16:05:03.861</Modified>
+      <Modified>2017-11-25T08:50:43.971</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\man.svg">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\man.svg">
       <PackagePath>www\images\man.svg</PackagePath>
-      <Modified>2017-11-22T16:05:04.111</Modified>
+      <Modified>2017-11-25T08:50:44.080</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\menu.svg">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\menu.svg">
       <PackagePath>www\images\menu.svg</PackagePath>
-      <Modified>2017-11-22T16:05:04.127</Modified>
+      <Modified>2017-11-25T08:50:44.080</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\post-it.svg">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\post-it.svg">
       <PackagePath>www\images\post-it.svg</PackagePath>
-      <Modified>2017-11-22T16:05:04.236</Modified>
+      <Modified>2017-11-25T08:50:44.127</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\small-calendar.svg">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\small-calendar.svg">
       <PackagePath>www\images\small-calendar.svg</PackagePath>
-      <Modified>2017-11-22T16:05:04.549</Modified>
+      <Modified>2017-11-25T08:50:44.174</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\switch.svg">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\switch.svg">
       <PackagePath>www\images\switch.svg</PackagePath>
-      <Modified>2017-11-22T16:05:04.564</Modified>
+      <Modified>2017-11-25T08:50:44.174</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\images\update-arrows.svg">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\update-arrows.svg">
       <PackagePath>www\images\update-arrows.svg</PackagePath>
-      <Modified>2017-11-22T16:05:04.658</Modified>
+      <Modified>2017-11-25T08:50:44.221</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\fonts\icomoon\icomoon.dev.svg">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\fonts\icomoon\icomoon.dev.svg">
       <PackagePath>www\lib\fonts\icomoon\icomoon.dev.svg</PackagePath>
-      <Modified>2017-11-22T16:05:06.533</Modified>
+      <Modified>2017-11-25T08:50:45.190</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\fonts\icomoon\icomoon.svg">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\fonts\icomoon\icomoon.svg">
       <PackagePath>www\lib\fonts\icomoon\icomoon.svg</PackagePath>
-      <Modified>2017-11-22T16:05:06.549</Modified>
+      <Modified>2017-11-25T08:50:45.205</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\fonts\ionicons.svg">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\fonts\ionicons.svg">
       <PackagePath>www\lib\ionic\fonts\ionicons.svg</PackagePath>
-      <Modified>2017-11-22T16:05:07.049</Modified>
+      <Modified>2017-11-25T08:50:45.346</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\5165454-high-resolution-desktop-wallpapers-1920x1080.jpg">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\5165454-high-resolution-desktop-wallpapers-1920x1080.jpg">
       <PackagePath>www\lib\5165454-high-resolution-desktop-wallpapers-1920x1080.jpg</PackagePath>
-      <Modified>2017-11-22T16:05:04.892</Modified>
+      <Modified>2017-11-25T08:50:44.361</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\images.jpg">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\images.jpg">
       <PackagePath>www\lib\images.jpg</PackagePath>
-      <Modified>2017-11-22T16:05:06.893</Modified>
+      <Modified>2017-11-25T08:50:45.299</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\fonts\fontawesome-webfont.ttf">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\fonts\fontawesome-webfont.ttf">
       <PackagePath>www\lib\fonts\fontawesome-webfont.ttf</PackagePath>
-      <Modified>2017-11-22T16:05:06.393</Modified>
+      <Modified>2017-11-25T08:50:45.096</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\fonts\glyphicons-halflings-regular.ttf">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\fonts\glyphicons-halflings-regular.ttf">
       <PackagePath>www\lib\fonts\glyphicons-halflings-regular.ttf</PackagePath>
-      <Modified>2017-11-22T16:05:06.439</Modified>
+      <Modified>2017-11-25T08:50:45.127</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\fonts\helvetica-bold.ttf">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\fonts\helvetica-bold.ttf">
       <PackagePath>www\lib\fonts\helvetica-bold.ttf</PackagePath>
-      <Modified>2017-11-22T16:05:06.486</Modified>
+      <Modified>2017-11-25T08:50:45.158</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\fonts\helvetica-light.ttf">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\fonts\helvetica-light.ttf">
       <PackagePath>www\lib\fonts\helvetica-light.ttf</PackagePath>
-      <Modified>2017-11-22T16:05:06.502</Modified>
+      <Modified>2017-11-25T08:50:45.174</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\fonts\icomoon\icomoon.ttf">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\fonts\icomoon\icomoon.ttf">
       <PackagePath>www\lib\fonts\icomoon\icomoon.ttf</PackagePath>
-      <Modified>2017-11-22T16:05:06.596</Modified>
+      <Modified>2017-11-25T08:50:45.205</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\fonts\OpenSans-Bold.ttf">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\fonts\OpenSans-Bold.ttf">
       <PackagePath>www\lib\fonts\OpenSans-Bold.ttf</PackagePath>
-      <Modified>2017-11-22T16:05:06.096</Modified>
+      <Modified>2017-11-25T08:50:44.924</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\fonts\OpenSans-BoldItalic.ttf">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\fonts\OpenSans-BoldItalic.ttf">
       <PackagePath>www\lib\fonts\OpenSans-BoldItalic.ttf</PackagePath>
-      <Modified>2017-11-22T16:05:06.127</Modified>
+      <Modified>2017-11-25T08:50:44.940</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\fonts\OpenSans-ExtraBold.ttf">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\fonts\OpenSans-ExtraBold.ttf">
       <PackagePath>www\lib\fonts\OpenSans-ExtraBold.ttf</PackagePath>
-      <Modified>2017-11-22T16:05:06.143</Modified>
+      <Modified>2017-11-25T08:50:44.955</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\fonts\OpenSans-ExtraBoldItalic.ttf">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\fonts\OpenSans-ExtraBoldItalic.ttf">
       <PackagePath>www\lib\fonts\OpenSans-ExtraBoldItalic.ttf</PackagePath>
-      <Modified>2017-11-22T16:05:06.252</Modified>
+      <Modified>2017-11-25T08:50:44.986</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\fonts\OpenSans-Italic.ttf">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\fonts\OpenSans-Italic.ttf">
       <PackagePath>www\lib\fonts\OpenSans-Italic.ttf</PackagePath>
-      <Modified>2017-11-22T16:05:06.283</Modified>
+      <Modified>2017-11-25T08:50:45.002</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\fonts\OpenSans-Light.ttf">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\fonts\OpenSans-Light.ttf">
       <PackagePath>www\lib\fonts\OpenSans-Light.ttf</PackagePath>
-      <Modified>2017-11-22T16:05:06.299</Modified>
+      <Modified>2017-11-25T08:50:45.018</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\fonts\OpenSans-LightItalic.ttf">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\fonts\OpenSans-LightItalic.ttf">
       <PackagePath>www\lib\fonts\OpenSans-LightItalic.ttf</PackagePath>
-      <Modified>2017-11-22T16:05:06.330</Modified>
+      <Modified>2017-11-25T08:50:45.033</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\fonts\OpenSans-Regular.ttf">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\fonts\OpenSans-Regular.ttf">
       <PackagePath>www\lib\fonts\OpenSans-Regular.ttf</PackagePath>
-      <Modified>2017-11-22T16:05:06.346</Modified>
+      <Modified>2017-11-25T08:50:45.049</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\fonts\OpenSans-Semibold.ttf">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\fonts\OpenSans-Semibold.ttf">
       <PackagePath>www\lib\fonts\OpenSans-Semibold.ttf</PackagePath>
-      <Modified>2017-11-22T16:05:06.361</Modified>
+      <Modified>2017-11-25T08:50:45.065</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\fonts\OpenSans-SemiboldItalic.ttf">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\fonts\OpenSans-SemiboldItalic.ttf">
       <PackagePath>www\lib\fonts\OpenSans-SemiboldItalic.ttf</PackagePath>
-      <Modified>2017-11-22T16:05:06.377</Modified>
+      <Modified>2017-11-25T08:50:45.080</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\fonts\ionicons.ttf">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\fonts\ionicons.ttf">
       <PackagePath>www\lib\ionic\fonts\ionicons.ttf</PackagePath>
-      <Modified>2017-11-22T16:05:07.065</Modified>
+      <Modified>2017-11-25T08:50:45.361</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\fonts\fontawesome-webfont.woff">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\fonts\fontawesome-webfont.woff">
       <PackagePath>www\lib\fonts\fontawesome-webfont.woff</PackagePath>
-      <Modified>2017-11-22T16:05:06.408</Modified>
+      <Modified>2017-11-25T08:50:45.111</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\fonts\glyphicons-halflings-regular.woff">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\fonts\glyphicons-halflings-regular.woff">
       <PackagePath>www\lib\fonts\glyphicons-halflings-regular.woff</PackagePath>
-      <Modified>2017-11-22T16:05:06.455</Modified>
+      <Modified>2017-11-25T08:50:45.143</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\fonts\icomoon\icomoon.woff">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\fonts\icomoon\icomoon.woff">
       <PackagePath>www\lib\fonts\icomoon\icomoon.woff</PackagePath>
-      <Modified>2017-11-22T16:05:06.596</Modified>
+      <Modified>2017-11-25T08:50:45.221</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\fonts\ionicons.woff">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\fonts\ionicons.woff">
       <PackagePath>www\lib\ionic\fonts\ionicons.woff</PackagePath>
-      <Modified>2017-11-22T16:05:07.080</Modified>
+      <Modified>2017-11-25T08:50:45.361</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\fonts\fontawesome-webfont.woff2">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\fonts\fontawesome-webfont.woff2">
       <PackagePath>www\lib\fonts\fontawesome-webfont.woff2</PackagePath>
-      <Modified>2017-11-22T16:05:06.424</Modified>
+      <Modified>2017-11-25T08:50:45.111</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\fonts\glyphicons-halflings-regular.woff2">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\fonts\glyphicons-halflings-regular.woff2">
       <PackagePath>www\lib\fonts\glyphicons-halflings-regular.woff2</PackagePath>
-      <Modified>2017-11-22T16:05:06.471</Modified>
+      <Modified>2017-11-25T08:50:45.143</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\fonts\icomoon\icomoon.eot">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\fonts\icomoon\icomoon.eot">
       <PackagePath>www\lib\fonts\icomoon\icomoon.eot</PackagePath>
-      <Modified>2017-11-22T16:05:06.533</Modified>
+      <Modified>2017-11-25T08:50:45.190</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\fonts\ionicons.eot">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\fonts\ionicons.eot">
       <PackagePath>www\lib\ionic\fonts\ionicons.eot</PackagePath>
-      <Modified>2017-11-22T16:05:07.002</Modified>
+      <Modified>2017-11-25T08:50:45.330</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\ionic.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\ionic.scss">
       <PackagePath>www\lib\ionic\scss\ionic.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.502</Modified>
+      <Modified>2017-11-25T08:50:46.362</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\ionicons\ionicons.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\ionicons\ionicons.scss">
       <PackagePath>www\lib\ionic\scss\ionicons\ionicons.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.580</Modified>
+      <Modified>2017-11-25T08:50:46.408</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\ionicons\_ionicons-font.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\ionicons\_ionicons-font.scss">
       <PackagePath>www\lib\ionic\scss\ionicons\_ionicons-font.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.518</Modified>
+      <Modified>2017-11-25T08:50:46.377</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\ionicons\_ionicons-icons.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\ionicons\_ionicons-icons.scss">
       <PackagePath>www\lib\ionic\scss\ionicons\_ionicons-icons.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.549</Modified>
+      <Modified>2017-11-25T08:50:46.377</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\ionicons\_ionicons-variables.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\ionicons\_ionicons-variables.scss">
       <PackagePath>www\lib\ionic\scss\ionicons\_ionicons-variables.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.580</Modified>
+      <Modified>2017-11-25T08:50:46.393</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_action-sheet.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_action-sheet.scss">
       <PackagePath>www\lib\ionic\scss\_action-sheet.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.065</Modified>
+      <Modified>2017-11-25T08:50:46.080</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_animations.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_animations.scss">
       <PackagePath>www\lib\ionic\scss\_animations.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.065</Modified>
+      <Modified>2017-11-25T08:50:46.080</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_backdrop.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_backdrop.scss">
       <PackagePath>www\lib\ionic\scss\_backdrop.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.080</Modified>
+      <Modified>2017-11-25T08:50:46.096</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_badge.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_badge.scss">
       <PackagePath>www\lib\ionic\scss\_badge.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.080</Modified>
+      <Modified>2017-11-25T08:50:46.096</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_bar.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_bar.scss">
       <PackagePath>www\lib\ionic\scss\_bar.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.112</Modified>
+      <Modified>2017-11-25T08:50:46.112</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_button-bar.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_button-bar.scss">
       <PackagePath>www\lib\ionic\scss\_button-bar.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.127</Modified>
+      <Modified>2017-11-25T08:50:46.112</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_button.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_button.scss">
       <PackagePath>www\lib\ionic\scss\_button.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.127</Modified>
+      <Modified>2017-11-25T08:50:46.127</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_checkbox.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_checkbox.scss">
       <PackagePath>www\lib\ionic\scss\_checkbox.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.143</Modified>
+      <Modified>2017-11-25T08:50:46.143</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_form.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_form.scss">
       <PackagePath>www\lib\ionic\scss\_form.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.159</Modified>
+      <Modified>2017-11-25T08:50:46.143</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_grid.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_grid.scss">
       <PackagePath>www\lib\ionic\scss\_grid.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.159</Modified>
+      <Modified>2017-11-25T08:50:46.158</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_items.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_items.scss">
       <PackagePath>www\lib\ionic\scss\_items.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.174</Modified>
+      <Modified>2017-11-25T08:50:46.158</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_list.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_list.scss">
       <PackagePath>www\lib\ionic\scss\_list.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.190</Modified>
+      <Modified>2017-11-25T08:50:46.174</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_loading.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_loading.scss">
       <PackagePath>www\lib\ionic\scss\_loading.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.190</Modified>
+      <Modified>2017-11-25T08:50:46.174</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_menu.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_menu.scss">
       <PackagePath>www\lib\ionic\scss\_menu.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.205</Modified>
+      <Modified>2017-11-25T08:50:46.174</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_mixins.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_mixins.scss">
       <PackagePath>www\lib\ionic\scss\_mixins.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.252</Modified>
+      <Modified>2017-11-25T08:50:46.190</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_modal.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_modal.scss">
       <PackagePath>www\lib\ionic\scss\_modal.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.268</Modified>
+      <Modified>2017-11-25T08:50:46.190</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_platform.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_platform.scss">
       <PackagePath>www\lib\ionic\scss\_platform.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.268</Modified>
+      <Modified>2017-11-25T08:50:46.205</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_popover.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_popover.scss">
       <PackagePath>www\lib\ionic\scss\_popover.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.284</Modified>
+      <Modified>2017-11-25T08:50:46.221</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_popup.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_popup.scss">
       <PackagePath>www\lib\ionic\scss\_popup.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.299</Modified>
+      <Modified>2017-11-25T08:50:46.221</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_progress.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_progress.scss">
       <PackagePath>www\lib\ionic\scss\_progress.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.299</Modified>
+      <Modified>2017-11-25T08:50:46.237</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_radio.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_radio.scss">
       <PackagePath>www\lib\ionic\scss\_radio.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.315</Modified>
+      <Modified>2017-11-25T08:50:46.237</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_range.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_range.scss">
       <PackagePath>www\lib\ionic\scss\_range.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.315</Modified>
+      <Modified>2017-11-25T08:50:46.252</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_refresher.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_refresher.scss">
       <PackagePath>www\lib\ionic\scss\_refresher.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.330</Modified>
+      <Modified>2017-11-25T08:50:46.252</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_reset.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_reset.scss">
       <PackagePath>www\lib\ionic\scss\_reset.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.346</Modified>
+      <Modified>2017-11-25T08:50:46.268</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_scaffolding.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_scaffolding.scss">
       <PackagePath>www\lib\ionic\scss\_scaffolding.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.346</Modified>
+      <Modified>2017-11-25T08:50:46.268</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_select.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_select.scss">
       <PackagePath>www\lib\ionic\scss\_select.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.362</Modified>
+      <Modified>2017-11-25T08:50:46.283</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_slide-box.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_slide-box.scss">
       <PackagePath>www\lib\ionic\scss\_slide-box.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.377</Modified>
+      <Modified>2017-11-25T08:50:46.283</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_slides.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_slides.scss">
       <PackagePath>www\lib\ionic\scss\_slides.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.393</Modified>
+      <Modified>2017-11-25T08:50:46.299</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_spinner.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_spinner.scss">
       <PackagePath>www\lib\ionic\scss\_spinner.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.393</Modified>
+      <Modified>2017-11-25T08:50:46.299</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_tabs.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_tabs.scss">
       <PackagePath>www\lib\ionic\scss\_tabs.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.409</Modified>
+      <Modified>2017-11-25T08:50:46.315</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_toggle.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_toggle.scss">
       <PackagePath>www\lib\ionic\scss\_toggle.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.424</Modified>
+      <Modified>2017-11-25T08:50:46.315</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_transitions.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_transitions.scss">
       <PackagePath>www\lib\ionic\scss\_transitions.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.440</Modified>
+      <Modified>2017-11-25T08:50:46.330</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_type.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_type.scss">
       <PackagePath>www\lib\ionic\scss\_type.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.440</Modified>
+      <Modified>2017-11-25T08:50:46.330</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_util.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_util.scss">
       <PackagePath>www\lib\ionic\scss\_util.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.455</Modified>
+      <Modified>2017-11-25T08:50:46.346</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_variables.scss">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\scss\_variables.scss">
       <PackagePath>www\lib\ionic\scss\_variables.scss</PackagePath>
-      <Modified>2017-11-22T16:05:09.502</Modified>
+      <Modified>2017-11-25T08:50:46.362</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\FileAPI.flash.swf">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\FileAPI.flash.swf">
       <PackagePath>www\lib\ng-file-upload-shim\FileAPI.flash.swf</PackagePath>
-      <Modified>2017-11-22T16:05:10.437</Modified>
+      <Modified>2017-11-25T08:50:46.721</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\FileAPI.flash.swf">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\FileAPI.flash.swf">
       <PackagePath>www\lib\ng-file-upload\FileAPI.flash.swf</PackagePath>
-      <Modified>2017-11-22T16:05:11.172</Modified>
+      <Modified>2017-11-25T08:50:47.002</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\README.md">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\README.md">
       <PackagePath>www\lib\ng-file-upload-shim\README.md</PackagePath>
-      <Modified>2017-11-22T16:05:10.593</Modified>
+      <Modified>2017-11-25T08:50:46.784</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\README.md">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\README.md">
       <PackagePath>www\lib\ng-file-upload\README.md</PackagePath>
-      <Modified>2017-11-22T16:05:11.297</Modified>
+      <Modified>2017-11-25T08:50:47.065</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\LICENSE">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\LICENSE">
       <PackagePath>www\lib\ng-file-upload\LICENSE</PackagePath>
-      <Modified>2017-11-22T16:05:11.297</Modified>
+      <Modified>2017-11-25T08:50:47.065</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\php\get-events.php">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\php\get-events.php">
       <PackagePath>www\php\get-events.php</PackagePath>
-      <Modified>2017-11-22T16:05:12.687</Modified>
+      <Modified>2017-11-25T08:50:47.627</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\php\get-timezones.php">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\php\get-timezones.php">
       <PackagePath>www\php\get-timezones.php</PackagePath>
-      <Modified>2017-11-22T16:05:12.703</Modified>
+      <Modified>2017-11-25T08:50:47.643</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\www\php\utils.php">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\php\utils.php">
       <PackagePath>www\php\utils.php</PackagePath>
-      <Modified>2017-11-22T16:05:12.734</Modified>
+      <Modified>2017-11-25T08:50:47.674</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\config.xml">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\config.xml">
       <PackagePath>config.xml</PackagePath>
-      <Modified>2017-11-23T13:00:19.697</Modified>
+      <Modified>2017-11-25T08:56:33.531</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.UniversalCRT.Debug\10.0.16299.0\\redist\Debug\X64\ucrtbased.dll">
       <PackagePath>ucrtbased.dll</PackagePath>
       <Modified>2017-09-28T20:28:52.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\EmersonRepo\FieldJob\FieldService\platforms\windows\build\windows\debug\x64\win10\resources.pri">
+    <AppxPackagedFile Include="C:\Users\Wipro\Documents\GitHub\FieldJob\FieldService\platforms\windows\build\windows\debug\x64\win10\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-11-23T13:00:31.165</Modified>
+      <Modified>2017-11-25T08:56:48.077</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

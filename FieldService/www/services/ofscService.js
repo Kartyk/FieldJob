@@ -29,7 +29,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getOfscBackId()
+                    "oracle-mobile-backend-id": constantService.getNewOfscBackId()
                 },
                 data: data
 
@@ -62,7 +62,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getOfscBackId()
+                    "oracle-mobile-backend-id": constantService.getNewOfscBackId()
                 },
                 data: data
 
@@ -89,7 +89,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getOfscBackId()
+                    "oracle-mobile-backend-id": constantService.getNewOfscBackId()
                 },
                 data: data
 
@@ -108,7 +108,9 @@
         }
 
         function updateStatus(data, callback) {
+
             console.log(url + 'OFSC_Soap_Actions/update_status' + JSON.stringify(data));
+
             return $http({
 
                 method: 'POST',
@@ -116,7 +118,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getOfscBackId()
+                    "oracle-mobile-backend-id": constantService.getNewOfscBackId()
                 },
                 data: data
 
@@ -143,7 +145,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getOfscBackId()
+                    "oracle-mobile-backend-id": constantService.getNewOfscBackId()
                 }
 
             }).success(function (response) {

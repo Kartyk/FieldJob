@@ -139,7 +139,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getTaskBackId()
+                    "oracle-mobile-backend-id": constantService.getNewOfscBackId()
                 }
 
             }).success(function (response) {
@@ -205,7 +205,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getOfscBackId()
+                    "oracle-mobile-backend-id": constantService.getNewOfscBackId()
                 },
                 data: {
                     "resourceId": constantService.getResourceId(),
@@ -425,6 +425,8 @@
         }
 
         function getContactList(callback) {
+
+            console.log("START DATE " + constantService.getStartDate() + " END DATE" + constantService.getEndDate());
 
             $http({
 
@@ -1490,27 +1492,24 @@
 
                     if (isAccept) {
 
-                        updateStatus =
-                            {
-                                "activity_id": activateId,
-                                "XA_TASK_STATUS": "8"
-                            }
+                        updateStatus = {
+                            "activity_id": activateId,
+                            "XA_TASK_STATUS": "8"
+                        };
 
                     } else {
 
-                        updateStatus =
-                            {
-                                "activity_id": activateId,
-                                "XA_TASK_STATUS": "3"
-                            }
+                        updateStatus = {
+                            "activity_id": activateId,
+                            "XA_TASK_STATUS": "2"
+                        };
                     }
 
                     ofscService.updateStatus(updateStatus, function (response) {
 
-                        var activityDetails =
-                            {
-                                "activityId": activateId,
-                            }
+                        var activityDetails = {
+                            "activityId": activateId
+                        };
 
                         ofscService.activityDetails(activateId, function (response) {
 
@@ -1526,11 +1525,10 @@
 
                                         startActivity = true;
 
-                                        var startActivityData =
-                                            {
-                                                "activity_id": response.items[0].activityId+"",
-                                                "time":moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
-                                            }
+                                        var startActivityData = {
+                                            "activity_id": response.items[0].activityId + "",
+                                            "time": moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+                                        };
 
                                         console.log("startActivityData*****" + startActivityData.activityId);
 
@@ -1544,7 +1542,7 @@
 
                                                 var updateTaskSegement = {
                                                     "activity_id": startActivityData.activity_id,
-                                                    "XA_TASK_STATUS": "3"
+                                                    "XA_TASK_STATUS": "2"
                                                 };
 
                                                 console.log("updateTaskSegement******" + JSON.stringify(updateTaskSegement));
@@ -1552,9 +1550,11 @@
                                                 ofscService.updateStatus(updateTaskSegement, function (response) {
 
                                                     if (response) {
+
                                                         ofscService.complete_activity(complete, function (response) {
+
                                                             callback();
-                                                        })
+                                                        });
                                                     }
                                                 });
 

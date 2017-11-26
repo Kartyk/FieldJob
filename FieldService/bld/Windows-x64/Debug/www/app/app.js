@@ -74,9 +74,15 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
 
             if (response.length > 0) {
 
-                constantService.setUser(response[0]);
+                angular.forEach(response, function (item) {
 
-                valueService.setUser(response[0]);
+                    if(item.Login_Status == "1") {
+
+                        constantService.setUser(item);
+
+                        valueService.setUser(item);
+                    }
+                });
 
                 if (constantService.getUser().ID !== null) {
 
@@ -84,63 +90,69 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
 
                     constantService.setResourceId(constantService.getUser().ID);
 
-                    if (constantService.getUser().Default_View == "My Task") {
+                    if (constantService.getUser().Login_Status == "1") {
 
-                        $rootScope.selectedItem = 2;
+                        if (constantService.getUser().Default_View == "My Task") {
 
-                        localService.getTaskList(function (response) {
+                            $rootScope.selectedItem = 2;
 
-                            console.log("MY FIELD JOB =====> " + JSON.stringify(response));
+                            localService.getTaskList(function (response) {
 
-                            localService.getInternalList(function (internalresponse) {
+                                console.log("MY FIELD JOB =====> " + JSON.stringify(response));
 
-                                angular.forEach(internalresponse, function (item) {
+                                localService.getInternalList(function (internalresponse) {
 
-                                    var internalOFSCJSONObject = {};
+                                    angular.forEach(internalresponse, function (item) {
 
-                                    internalOFSCJSONObject.Start_Date = item.Start_time;
-                                    internalOFSCJSONObject.End_Date = item.End_time;
-                                    internalOFSCJSONObject.Type = "INTERNAL";
-                                    internalOFSCJSONObject.Customer_Name = item.Activity_type;
-                                    internalOFSCJSONObject.Task_Number = item.Activity_Id;
+                                        var internalOFSCJSONObject = {};
 
-                                    response.push(internalOFSCJSONObject);
+                                        internalOFSCJSONObject.Start_Date = item.Start_time;
+                                        internalOFSCJSONObject.End_Date = item.End_time;
+                                        internalOFSCJSONObject.Type = "INTERNAL";
+                                        internalOFSCJSONObject.Customer_Name = item.Activity_type;
+                                        internalOFSCJSONObject.Task_Number = item.Activity_Id;
+
+                                        response.push(internalOFSCJSONObject);
+                                    });
+
+                                    constantService.setTaskList(response);
+
+                                    $state.go('myFieldJob');
+
                                 });
-
-                                constantService.setTaskList(response);
-
-                                $state.go('myFieldJob');
-
                             });
-                        });
+
+                        } else {
+
+                            localService.getTaskList(function (response) {
+
+                                console.log("MY CALENDAR =====> " + JSON.stringify(response));
+
+                                localService.getInternalList(function (internalresponse) {
+
+                                    angular.forEach(internalresponse, function (item) {
+
+                                        var internalOFSCJSONObject = {};
+
+                                        internalOFSCJSONObject.Start_Date = item.Start_time;
+                                        internalOFSCJSONObject.End_Date = item.End_time;
+                                        internalOFSCJSONObject.Type = "INTERNAL";
+                                        internalOFSCJSONObject.Customer_Name = item.Activity_type;
+                                        internalOFSCJSONObject.Task_Number = item.Activity_Id;
+
+                                        response.push(internalOFSCJSONObject);
+                                    });
+
+                                    constantService.setTaskList(response);
+
+                                    $state.go('myTask');
+
+                                });
+                            });
+                        }
 
                     } else {
-
-                        localService.getTaskList(function (response) {
-
-                            console.log("MY CALENDAR =====> " + JSON.stringify(response));
-
-                            localService.getInternalList(function (internalresponse) {
-
-                                angular.forEach(internalresponse, function (item) {
-
-                                    var internalOFSCJSONObject = {};
-
-                                    internalOFSCJSONObject.Start_Date = item.Start_time;
-                                    internalOFSCJSONObject.End_Date = item.End_time;
-                                    internalOFSCJSONObject.Type = "INTERNAL";
-                                    internalOFSCJSONObject.Customer_Name = item.Activity_type;
-                                    internalOFSCJSONObject.Task_Number = item.Activity_Id;
-
-                                    response.push(internalOFSCJSONObject);
-                                });
-
-                                constantService.setTaskList(response);
-
-                                $state.go('myTask');
-
-                            });
-                        });
+                        $location.path('/login');
                     }
 
                 } else {
