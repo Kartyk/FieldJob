@@ -74,6 +74,8 @@
 
         var srBackEndId = "fb4010a8-02b7-4e20-88d0-d7f4029f6bd0";
 
+        var timeDataBackEndId = "f85ff6e6-01f5-4a38-aa55-ec0625ec41f9";
+
         var stagesArray = {};
 
         var startDate = new Date();
@@ -113,6 +115,7 @@
         service.getNewOfscBackId = getNewOfscBackId;
         service.getAcceptBackId = getAcceptBackId;
         service.getSRBackId = getSRBackId;
+        service.getTimeDataBackId = getTimeDataBackId;
 
         service.setUserEmailId = setUserEmailId;
         service.getUserEmailId = getUserEmailId;
@@ -216,6 +219,11 @@
         function getTaskBackId() {
 
             return taskBackEndId;
+        };
+
+        function getTimeDataBackId() {
+
+            return timeDataBackEndId;
         };
 
         function getInternalBackId() {

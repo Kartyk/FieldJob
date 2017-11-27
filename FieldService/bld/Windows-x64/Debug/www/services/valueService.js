@@ -1007,7 +1007,13 @@
                     if (timeArray.length > 0) {
 
                         for (var i = 0; i < timeArray.length; i++) {
-
+                            var chargemethod;
+                            if (getUserType().clarityType == 'C') {
+                                chargemethod = timeArray[i].Charge_Method_Id;
+                            }
+                            else {
+                                chargemethod = "";
+                            }
                             var timeData = {
                                 "task_id": timeArray[i].Task_Number,
                                 "shift_code": timeArray[i].Shift_Code_Id,
@@ -1020,7 +1026,7 @@
                                 "work_type": timeArray[i].Work_Type_Id,
                                 "start_date": moment.utc(new Date(timeArray[i].Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),
                                 "end_date": moment.utc(new Date(timeArray[i].Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                                "charge_method": timeArray[i].Charge_Method_Id,
+                                "charge_method": chargemethod,
                                 "JobName": timeArray[i].Field_Job_Name_Id
                             }
 

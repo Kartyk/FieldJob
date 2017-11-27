@@ -294,7 +294,7 @@
                         <td class="noborder bg-white width14">{{material.Charge_Type| translate}}</td>
                         <td class="noborder bg-white width14">{{material.Product_Quantity}}</td>
                         <td class="noborder bg-white width14">
-                            <span ng-repeat="serailno in material.serialNumber">
+                            <span ng-repeat="serailno in material.serialNumber track by $index">
                                 {{serailno}}<br />
                             </span>
                         </td>

@@ -997,7 +997,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getInternalBackId()
+                    "oracle-mobile-backend-id": constantService.getTimeDataBackId()
                 },
                 data: timedata
 
@@ -1577,6 +1577,10 @@
                                 //        callback();
                                 //    })
                                 //}
+                            }
+                            else
+                            {
+                                callback();
                             }
                         });
                     });
