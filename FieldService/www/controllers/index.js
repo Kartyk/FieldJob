@@ -261,17 +261,10 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
     }
 
     $scope.signout = function () {
-
-        if (valueService.getNetworkStatus()) {
-
-            $state.go('login');
-
-        } else {
-
-            $state.go('login');
-        }
-
+           
         constantService.onDeviceReady();
+
+        $state.go('login');
     }
 
     $scope.export2PDF = function () {
