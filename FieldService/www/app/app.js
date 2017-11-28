@@ -261,25 +261,40 @@ app.directive('dateFormat', function ($filter) {
                 return;
 
             ctrl.$parsers.unshift(function (viewValue) {
+                var transformedInput = viewValue.replace(/[^0-9 :]/g, '');
+                if (transformedInput !== viewValue) {
+                    ctrl.$setViewValue(transformedInput);
+                    ctrl.$render();
+                }
+               // return transformedInput;
+                if (transformedInput !== undefined && transformedInput !== "") {
 
-                if (viewValue !== undefined && viewValue !== "") {
+                    if (transformedInput.length == 2 && transformedInput.indexOf(':')==-1) {
 
-                    if (viewValue.length == 2) {
-
-                        viewValue = viewValue + ":";
-
-                        elem.val(viewValue);
+                        transformedInput = transformedInput + ":";
+                        ctrl.$setViewValue(transformedInput);
+                        ctrl.$render();
+                        //elem.val(transformedInput);
                     }
 
-                    if (viewValue.length > 5) {
+                    if (transformedInput.length > 5) {
 
-                        viewValue = viewValue.substring(0, 5);
+                        transformedInput = transformedInput.substring(0, 5);
+                        ctrl.$setViewValue(transformedInput);
+                        ctrl.$render();
+                        //elem.val(transformedInput)
+                    }
 
-                        elem.val(viewValue)
+                    else if (transformedInput!=undefined && transformedInput.split(":")[1] != undefined && transformedInput.split(":")[1].length > 2)
+                    {
+                        var temp = transformedInput.split(":")[1].substring(0, transformedInput.split(":")[1].length - 1)
+                        transformedInput = transformedInput.split(":")[0]+":"+ temp;
+                        ctrl.$setViewValue(transformedInput);
+                        ctrl.$render();
                     }
                 }
 
-                return viewValue;
+                return transformedInput;
             });
         }
     };
