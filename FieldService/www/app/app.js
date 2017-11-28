@@ -261,7 +261,10 @@ app.directive('dateFormat', function ($filter) {
                 return;
 
             ctrl.$parsers.unshift(function (viewValue) {
-                var transformedInput = viewValue.replace(/[^0-9 :]/g, '');
+               // var transformedInput = viewValue.replace(/(\:{1,3}[^0-9])/g, '');
+                var transformedInput = viewValue.replace(/([^0-9 :])/g, '');
+               // transformedInput = transformedInput.replace(/:{2,4}/g, '');
+                transformedInput = transformedInput.replace(/:+/g, ':');
                 if (transformedInput !== viewValue) {
                     ctrl.$setViewValue(transformedInput);
                     ctrl.$render();

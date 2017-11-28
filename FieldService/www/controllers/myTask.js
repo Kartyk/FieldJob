@@ -82,7 +82,7 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
             eventClick: function (event, jsEvent, view) {
                 $rootScope.apicall = true;
                 $rootScope.selectedTask = event;
-
+                $rootScope.completedTask = false;
                 valueService.setTask(event, function (response) {
 
                     $rootScope.selectedItem = 3;
