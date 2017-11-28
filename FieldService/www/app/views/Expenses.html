@@ -3,13 +3,13 @@
         
             <div class="card-childContainer  noBorder-radius" ng-class="{'newItemBorder': $index == addExpenseObj && $index != 0,'copyItem': $index == copyExpenseObj && $index != 0}">
                 <form class="form-horizontal input-items" action="/action_page.php" form-on-change="formChange()">
-                    <div class="row">
-                        <div class="layout-row">
+                    <!--<div class="row">-->
+                        <div layout="row" layout-wrap>
 
-                            <div class="form-group flex-25 expensePaddi">
-                                <label class=" col-sm-12 label-my" translate="{{item.expenseDefault.date.title}}"></label>
+                            <div flex="20" class="debrief-items-NC" style="max-width:15%;">
+                                <label flex="100" class="label-my" translate="{{item.expenseDefault.date.title}}"></label>
 
-                                <div class="col-sm-12">
+                                <div flex="100">
                                     <div class='input-group date' id='datePickerDate' ng-model="item.date.value">
                                         <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
                                                ng-model="item.Date" is-open="item.calendarOpened"
@@ -25,11 +25,11 @@
                                 </div>
                             </div>
 
-                            <div class="form-group flex-25 expensePaddi">
+                            <div flex="20" class="debrief-items-NC" style="max-width:20%;">
 
-                                <label class=" col-sm-12 label-my" for="expense-type"
+                                <label flex="100" class="label-my" for="expense-type"
                                        translate="{{item.expenseDefault.expenseType.title}}"></label>
-                                <div class="col-sm-12">
+                                <div flex="100">
                                     <select class="form-control select-debrief"
                                             id="expense-type"
                                             ng-model="item.Expense_Type"
@@ -39,44 +39,47 @@
                                 </div>
                             </div>
 
-                            <div class="form-group flex-25 expensePaddi">
-                                <label class="col-sm-12 label-my" translate="{{item.expenseDefault.amount.title}}"></label>
-                                <div class="col-sm-12">
+                            <div flex="20" class="debrief-items-NC" style="max-width:10%;">
+                                <label flex="100" class="label-my" translate="{{item.expenseDefault.amount.title}}"></label>
+                                <div flex="100">
                                     <input type="text" class="form-control" ng-model="item.Amount" />
 
                                 </div>
                             </div>
 
 
-                            <div class="form-group flex-20 expensePaddi">
-                                <label class=" col-sm-12 label-my"
+                            <div flex="20" class="debrief-items-NC" style="max-width:12%;">
+                                <label flex="100" class="label-my"
                                        translate="{{item.expenseDefault.currency.title}}"></label>
-                                <div class="col-sm-12">
+                                <div flex="100">
                                     <select class="form-control select-debrief" ng-model="item.Currency"
                                             ng-options="x as x.Value for x in item.expenseDefault.currency.values track by x.ID" ng-change="setCurrency(item)">
-                                        <option value="" disabled selected>Select Currency</option>
+                                        <option value="" disabled selected>Select</option>
                                     </select>
                                 </div>
                             </div>
 
-                            <div class="form-group flex-25 expensePaddi">
-                                <label class=" col-sm-12 label-my"
+                            <div flex="20" class="debrief-items-NC" style="max-width:18%;">
+                                <label flex="100" class="label-my"
                                        translate="{{item.expenseDefault.chargeMethod.title}}"></label>
-                                <div class="col-sm-12">
+                                <div flex="100">
                                     <select class="form-control select-debrief" ng-model="item.Charge_Method"
                                             ng-options="x as x.Value | translate for x in item.expenseDefault.chargeMethod.values  track by x.ID" ng-change="setChargeMethodForExpense(item)">
                                         <option value="" disabled selected>Select Charge Method</option>
                                     </select>
                                 </div>
                             </div>
+
+                            <div flex="100" style="max-width:25%;">
+                                <label flex="100" class="label-my" for="justification" translate="{{item.expenseDefault.justification.title}}"></label>
+                                <textarea flex="100" class="form-control  debrief-textarea-NC " rows="5" id="justification"
+                                          ng-model="item.Justification"></textarea>
+                            </div>
+
                         </div>
 
-                        <div class="col-sm-12 margintop30 marginbottom30">
-                            <label class="  label-my" for="justification" translate="{{item.expenseDefault.justification.title}}"></label>
-                            <textarea class="form-control text-area" rows="5" id="justification"
-                                      ng-model="item.Justification"></textarea>
-                        </div>
-                        </div>
+                       
+                        <!--</div>-->
 
 </form>
 

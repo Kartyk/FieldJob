@@ -24,7 +24,7 @@
 
                     <div flex="20" class="debrief-items-NC" style="max-width:20%;">
                         <label flex="100" class="  label-my" translate="{{item.timeDefault.item.title}}"></label>
-                        <div cflex="100">
+                        <div flex="100">
                             <select class="form-control select-debrief" ng-model="item.Item"
                                     ng-options="x as x.Value | translate for x in item.timeDefault.item.values track by x.ID" ng-change="setItem(item)">
                                 <option value="" disabled selected>Select Item</option>
@@ -43,7 +43,7 @@
 
                     
 
-                    <div flex="20" class="debrief-items-NC" style="max-width:20%;">
+                    <div flex="20" class="debrief-items-NC" style="max-width:15%;">
                         <label flex="100" class="  label-my" translate="{{item.timeDefault.Date.title}}"
                                style="text-align: left;">-</label>
                         <div flex="100">
@@ -64,7 +64,7 @@
                         </div>
                     </div>
 
-                    <div flex="20" class="debrief-items-NC" style="max-width:20%;">
+                    <div flex="20" class="debrief-items-NC" style="max-width:10%;">
                         <label flex="100" class="  label-my" translate="{{item.timeDefault.duration.title}}"></label>
                         <div flex="100">
                             <input type="text" class="form-control" date-format ng-model="item.Duration" ng-change="setDurationHours(item)" ng-blur="checkDuration(item)" />
@@ -73,7 +73,7 @@
                     </div>
 
 
-                    <div flex="100" style="max-width:20%;">
+                    <div flex="100" style="max-width:35%;">
 
                         <label flex="100" class="label-my" for="comment"
                                translate="{{item.timeDefault.comments.title}}"></label>
