@@ -1526,7 +1526,7 @@
                     }
                     if (key.Note_Type.Value == "Action Taken")
                     {
-                        $scope.summary.noteType = false;
+                        $scope.summary.noteType = true;
                     }
                     $scope.summary.notesArray.push(notesObject);
                 });
