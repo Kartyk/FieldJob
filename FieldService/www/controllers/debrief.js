@@ -410,7 +410,7 @@
                             item.timeDefault.item.values = $scope.itemTravel;
                         } else if (type.Value == "Normal") {
                             item.timeDefault.item.values = $scope.itemNormal;
-                        } else if (type.Value == "Night Shift") {
+                        } else if (type.Value == "Nightshift") {
                             item.timeDefault.item.values = $scope.itemNightShift;
                         }
                     }
@@ -1671,13 +1671,22 @@
                        
                         var newTimecode = true
                         angular.forEach($scope.summary.timeArray, function (summaryTime) {
-                           
-                            if (summaryTime.Date == moment(key.Date).format('DD-MM-YYYY') && summaryTime.Time_Code == key.Time_Code.Overtimeshiftcode && summaryTime.Work_Type == key.Work_Type.Value)
-                            {
-                                summaryTime.Duration = $scope.calculateDuration(summaryTime, key);
-                                summaryTime.Duration = formatDuration(summaryTime.Duration)
-                                newTimecode = false;
+                            if ($scope.userType == 'C') {
+                                if (summaryTime.Charge_Method == key.Charge_Method.Value && summaryTime.Charge_Type == key.Charge_Type.Value && summaryTime.Shift_Code == key.Shift_Code.Value && summaryTime.Date == moment(key.Date).format('DD-MM-YYYY') && summaryTime.Time_Code == key.Time_Code.Overtimeshiftcode && summaryTime.Work_Type == key.Work_Type.Value && summaryTime.Item == key.Item.Value) {
+                                    summaryTime.Duration = $scope.calculateDuration(summaryTime, key);
+                                    summaryTime.Duration = formatDuration(summaryTime.Duration)
+                                    newTimecode = false;
 
+                                }
+                            }
+                            else
+                            {
+                                if (summaryTime.Date == moment(key.Date).format('DD-MM-YYYY') && summaryTime.Work_Type == key.Work_Type.Value && summaryTime.Item == key.Item.Value)
+                                {
+                                    summaryTime.Duration = $scope.calculateDuration(summaryTime, key);
+                                    summaryTime.Duration = formatDuration(summaryTime.Duration)
+                                    newTimecode = false;
+                                }
                             }
                         })
                         if (newTimecode) {
@@ -2230,9 +2239,8 @@
 
                                         constantService.setTaskList(response);
 
-                                        $rootScope.apicall = false;
-
-                                        
+                                        $rootScope.dbCall = false;
+                                                                               
                                     });
                                 });
                             }
