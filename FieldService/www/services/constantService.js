@@ -4,9 +4,9 @@
 
     app.service('constantService', constantService);
 
-    constantService.$inject = ['$http', '$rootScope', '$window', '$location', 'localService'];
+    constantService.$inject = ['$http', '$rootScope', '$window', '$location'];
 
-    function constantService($http, $rootScope, $window, $location, localService) {
+    function constantService($http, $rootScope, $window, $location) {
 
         var service = {};
 
@@ -129,7 +129,6 @@
         service.setStagesArray = setStagesArray;
         service.getStagesArray = getStagesArray;
 
-        service.onDeviceReady = onDeviceReady;
         service.getExpenseTypeBackendId = getExpenseTypeBackendId;
 
         return service;
@@ -282,47 +281,6 @@
 
         function getStagesArray() {
             return stagesArray;
-        };
-
-
-        function onDeviceReady() {
-
-            var userObject = {
-                'ID': getUser().ID,
-                'Login_Status': "0"
-            };
-
-            localService.updateUser(userObject);
-
-            // localService.deleteTaskList();
-            // localService.deleteInternalList();
-            // localService.deleteInstallBase();
-            // localService.deleteContact();
-            // localService.deleteNote();
-            //
-            // localService.deleteOverTime();
-            // localService.deleteShiftCode();
-            //
-            // localService.deleteChargeType();
-            // localService.deleteChargeMethod();
-            // localService.deleteFieldJobName();
-            //
-            // localService.deleteWorkType();
-            // localService.deleteItem();
-            // localService.deleteCurrency();
-            //
-            // localService.deleteExpenseType();
-            // localService.deleteNoteType();
-            //
-            // localService.deleteTimeList();
-            // localService.deleteExpenseList();
-            // localService.deleteNotesList();
-            // localService.deleteMaterialList();
-            // localService.deleteAttachmentList();
-            // localService.deleteEngineerList();
-            //
-            // localService.deleteUser();
-
         };
     }
 })();

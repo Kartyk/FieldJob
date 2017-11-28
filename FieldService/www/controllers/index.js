@@ -261,8 +261,42 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
     }
 
     $scope.signout = function () {
-           
-        constantService.onDeviceReady();
+
+        var userObject = {
+            'ID': constantService.getUser().ID,
+            'Login_Status': "0"
+        };
+
+        localService.updateUser(userObject);
+
+        // localService.deleteTaskList();
+        // localService.deleteInternalList();
+        // localService.deleteInstallBase();
+        // localService.deleteContact();
+        // localService.deleteNote();
+        //
+        // localService.deleteOverTime();
+        // localService.deleteShiftCode();
+        //
+        // localService.deleteChargeType();
+        // localService.deleteChargeMethod();
+        // localService.deleteFieldJobName();
+        //
+        // localService.deleteWorkType();
+        // localService.deleteItem();
+        // localService.deleteCurrency();
+        //
+        // localService.deleteExpenseType();
+        // localService.deleteNoteType();
+        //
+        // localService.deleteTimeList();
+        // localService.deleteExpenseList();
+        // localService.deleteNotesList();
+        // localService.deleteMaterialList();
+        // localService.deleteAttachmentList();
+        // localService.deleteEngineerList();
+        //
+        // localService.deleteUser();
 
         $state.go('login');
     }
