@@ -1949,7 +1949,7 @@
 
                             if (valueService.getNetworkStatus()) {
 
-                                valueService.acceptTask(valueService.getTask().Task_Number, function () {
+                              //  valueService.acceptTask(valueService.getTask().Task_Number, function () {
                                     var timeJSONData = [];
                                     var expenseJSONData = [];
                                     var materialJSONData = [];
@@ -2223,7 +2223,7 @@
                                             });
                                         });
                                     });
-                                });
+                               // });
 
                                
 
