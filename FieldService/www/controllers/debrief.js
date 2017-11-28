@@ -229,7 +229,7 @@
                 title: "Date"
             },
             duration: {
-                title: "Duration"
+                title: "Duration (HH:MM)"
             },
             comments: {
                 title: "Comments"
@@ -357,7 +357,7 @@
                         title: "Date"
                     },
                     duration: {
-                        title: "Duration"
+                        title: "Duration (HH:MM)"
                     },
                     comments: {
                         title: "Comments"
@@ -648,7 +648,7 @@
                         title: "Date"
                     },
                     duration: {
-                        title: "Duration"
+                        title: "Duration (HH:MM)"
                     },
                     comments: {
                         title: "Comments"
