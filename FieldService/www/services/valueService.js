@@ -1257,7 +1257,6 @@
                                                                         "taskid": taskId,
                                                                         "taskstatus": "Completed",
                                                                         "email": taskObject.Email,
-                                                                        "requestDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
                                                                         "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
                                                                         "followUp": response.followUp + "",
                                                                         "salesQuote": response.salesQuote + "",

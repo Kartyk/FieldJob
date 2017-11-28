@@ -2115,7 +2115,6 @@
                                                                         "taskid": $scope.taskId,
                                                                         "taskstatus": "Completed",
                                                                         "email": constantService.getCCEmailID(),
-                                                                        "requestDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000+00:00"),
                                                                         "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000+00:00"),
                                                                         "followUp": $scope.engineerObject.followUp.toString(),
                                                                         "salesQuote": $scope.engineerObject.salesQuote.toString(),
