@@ -1265,7 +1265,9 @@
                                                                         "followuptext": response.Follow_Up,
                                                                         "sparequotetext": response.Spare_Quote,
                                                                         "salesText": response.Sales_Visit,
-                                                                        "salesleadText": response.Sales_Head
+                                                                        "salesleadText": response.Sales_Head,
+                                                                        "denySignature": response.isCustomerSignChecked,
+                                                                        "signatureComments": response.customerComments
                                                                     };
 
                                                                     var timeUploadJSON = {

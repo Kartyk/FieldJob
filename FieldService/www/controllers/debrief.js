@@ -587,6 +587,7 @@
             $scope.engineerObject.salesQuote = ($scope.engineerObject.salesQuote == 'true');
             $scope.engineerObject.salesVisit = ($scope.engineerObject.salesVisit == 'true');
             $scope.engineerObject.salesLead = ($scope.engineerObject.salesLead == 'true');
+            $scope.engineerObject.isCustomerSignChecked = ($scope.engineerObject.isCustomerSignChecked == 'true');
         }
     };
 
@@ -2125,7 +2126,9 @@
                                                                         "followuptext": $scope.engineerObject.Follow_Up,
                                                                         "sparequotetext": $scope.engineerObject.Spare_Quote,
                                                                         "salesText": $scope.engineerObject.Sales_Visit,
-                                                                        "salesleadText": $scope.engineerObject.Sales_Head
+                                                                        "salesleadText": $scope.engineerObject.Sales_Head,
+                                                                        "denySignature": $scope.engineerObject.isCustomerSignChecked,
+                                                                        "signatureComments": $scope.engineerObject.customerComments
                                                                     };
 
                                                                     cloudService.updateAcceptTask(formData, function (response) {
@@ -2192,7 +2195,9 @@
                                                                     "followuptext": $scope.engineerObject.Follow_Up,
                                                                     "sparequotetext": $scope.engineerObject.Spare_Quote,
                                                                     "salesText": $scope.engineerObject.Sales_Visit,
-                                                                    "salesleadText": $scope.engineerObject.Sales_Head
+                                                                    "salesleadText": $scope.engineerObject.Sales_Head,
+                                                                    "denySignature": $scope.engineerObject.isCustomerSignChecked,
+                                                                    "signatureComments": $scope.engineerObject.customerComments
                                                                 };
 
                                                                 cloudService.updateAcceptTask(formData, function (response) {
