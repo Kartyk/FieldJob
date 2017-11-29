@@ -580,6 +580,7 @@
                 customerComments:"",
                 Task_Number: $scope.taskId
             };
+            $scope.customerText = "Customer Signature";
 
         } else {
 
@@ -588,6 +589,14 @@
             $scope.engineerObject.salesVisit = ($scope.engineerObject.salesVisit == 'true');
             $scope.engineerObject.salesLead = ($scope.engineerObject.salesLead == 'true');
             $scope.engineerObject.isCustomerSignChecked = ($scope.engineerObject.isCustomerSignChecked == 'true');
+            if ($scope.engineerObject.isCustomerSignChecked)
+            {
+                $scope.customerCommentText = "Customer Comments";
+            }
+            else
+            {
+                $scope.customerText = "Customer Signature";
+            }
         }
     };
 
@@ -3816,4 +3825,19 @@
     {
         valueService.setDebriefChanged(true);
     }
+    $scope.debriefClear = function ()
+    {
+        $scope.engineerObject.customerComments = "";
+    }
+    $scope.ChangeText = function ()
+    {
+        if ($scope.engineerObject.isCustomerSignChecked)
+        {
+            $scope.customerCommentText = "Customer Comments";
+        }
+        else
+        {
+            $scope.customerText = "Customer Signature";
+        }
+     }
 });

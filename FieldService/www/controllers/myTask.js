@@ -1,5 +1,11 @@
 app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalendarConfig, $rootScope, $state, $http, cloudService, localService, valueService, $filter, constantService) {
-
+    if (valueService.getNetworkStatus()) {
+        $rootScope.onlineimage = true;
+    }
+    else
+    {
+        $rootScope.onlineimage = false;
+    }
     $rootScope.eventInit = function (lang) {
 
         var minTimeVal = "07:00:00";
@@ -139,7 +145,14 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
             }
         });
     }
-
+    $rootScope.offline = function () {
+        $rootScope.onlineimage = false;
+        $scope.$apply();
+    }
+    $rootScope.online = function () {
+        $rootScope.onlineimage = true;
+        $scope.$apply();
+    }
     $scope.showSearchTaskDiv = false;
 
     $rootScope.Islogin = true;

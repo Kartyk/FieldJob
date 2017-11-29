@@ -21,19 +21,18 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
     $rootScope.apicall = true;
 
     $rootScope.dbCall = true;
-
+    //$rootScope.online = true;
     function onLine() {
 
         console.log("Online");
-
-        valueService.setNetworkStatus(true);
+       valueService.setNetworkStatus(true);
+        $rootScope.online();
     }
 
     function offLine() {
-
         console.log("Offline");
-
         valueService.setNetworkStatus(false);
+        $rootScope.offline();
     }
 
     document.addEventListener("deviceready", onDeviceReady, false);
@@ -59,10 +58,11 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
             if (networkState === Connection.NONE) {
 
                 valueService.setNetworkStatus(false);
-
+               // $rootScope.offline();
             } else {
 
                 valueService.setNetworkStatus(true);
+               // $rootScope.online();
             }
         }
 
@@ -292,6 +292,12 @@ app.directive('dateFormat', function ($filter) {
                     {
                         var temp = transformedInput.split(":")[1].substring(0, transformedInput.split(":")[1].length - 1)
                         transformedInput = transformedInput.split(":")[0]+":"+ temp;
+                        ctrl.$setViewValue(transformedInput);
+                        ctrl.$render();
+                    }
+                    else if (transformedInput != undefined && transformedInput.split(":")[0] != undefined && transformedInput.split(":")[0].length > 2) {
+                        var temp = transformedInput.split(":")[0].substring(0, transformedInput.split(":")[0].length - 1)
+                        transformedInput =  temp + ":" + transformedInput.split(":")[0];
                         ctrl.$setViewValue(transformedInput);
                         ctrl.$render();
                     }
