@@ -246,7 +246,7 @@ app.filter('timezonefilter', function (constantService) {
         if (date === "" || date === undefined)
             return date;
 
-        return moment(date).format("DD/MM/YYYY");
+        return moment(date).format("DD-MMM-YYYY");
     }
 });
 

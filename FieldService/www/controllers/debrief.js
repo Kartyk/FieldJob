@@ -1450,7 +1450,7 @@
                 angular.forEach($scope.expenseArray, function (key, value) {
 
                     var expenseObject = {
-                        "Date": $filter("date")(key.Date, "dd-MM-yyyy "),
+                        "Date": $filter("date")(key.Date, "dd-MMM-yyyy "),
                         "Expense_Type": key.Expense_Type.Value,
                         "Amount": key.Amount,
                         "Currency": key.Currency.Value,
@@ -1677,7 +1677,7 @@
                         var newTimecode = true
                         angular.forEach($scope.summary.timeArray, function (summaryTime) {
                             if ($scope.userType == 'C') {
-                                if (summaryTime.Charge_Method == key.Charge_Method.Value && summaryTime.Charge_Type == key.Charge_Type.Value && summaryTime.Shift_Code == key.Shift_Code.Value && summaryTime.Date == moment(key.Date).format('DD-MM-YYYY') && summaryTime.Time_Code == key.Time_Code.Overtimeshiftcode && summaryTime.Work_Type == key.Work_Type.Value && summaryTime.Item == key.Item.Value) {
+                                if (summaryTime.Charge_Method == key.Charge_Method.Value && summaryTime.Charge_Type == key.Charge_Type.Value && summaryTime.Shift_Code == key.Shift_Code.Value && summaryTime.Date == moment(key.Date).format('DD-MMM-YYYY') && summaryTime.Time_Code == key.Time_Code.Overtimeshiftcode && summaryTime.Work_Type == key.Work_Type.Value && summaryTime.Item == key.Item.Value) {
                                     summaryTime.Duration = $scope.calculateDuration(summaryTime, key);
                                     summaryTime.Duration = formatDuration(summaryTime.Duration)
                                     newTimecode = false;
@@ -1686,7 +1686,7 @@
                             }
                             else
                             {
-                                if (summaryTime.Date == moment(key.Date).format('DD-MM-YYYY') && summaryTime.Work_Type == key.Work_Type.Value && summaryTime.Item == key.Item.Value)
+                                if (summaryTime.Date == moment(key.Date).format('DD-MMM-YYYY') && summaryTime.Work_Type == key.Work_Type.Value && summaryTime.Item == key.Item.Value)
                                 {
                                     summaryTime.Duration = $scope.calculateDuration(summaryTime, key);
                                     summaryTime.Duration = formatDuration(summaryTime.Duration)
@@ -1695,7 +1695,7 @@
                             }
                         })
                         if (newTimecode) {
-                            var timeObject = $scope.getTimenewObj(key.Work_Type.Value, moment(key.Date).format('DD-MM-YYYY'), key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration, key.Time_Code.Overtimeshiftcode, key.Shift_Code.ShiftCodeName);
+                            var timeObject = $scope.getTimenewObj(key.Work_Type.Value, moment(key.Date).format('DD-MMM-YYYY'), key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration, key.Time_Code.Overtimeshiftcode, key.Shift_Code.ShiftCodeName);
 
                             timeObject.Duration = $scope.calculateDuration(timeObject, key);
                             timeObject.Duration = formatDuration(timeObject.Duration)
@@ -1704,7 +1704,7 @@
                     }
                     else
                     {
-                        var timeObject = $scope.getTimenewObj(key.Work_Type.Value, moment(key.Date).format('DD-MM-YYYY'), key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration, key.Time_Code.Overtimeshiftcode, key.Shift_Code.ShiftCodeName);
+                        var timeObject = $scope.getTimenewObj(key.Work_Type.Value, moment(key.Date).format('DD-MMM-YYYY'), key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration, key.Time_Code.Overtimeshiftcode, key.Shift_Code.ShiftCodeName);
 
                         timeObject.Duration = $scope.calculateDuration(timeObject, key);
                         timeObject.Duration = formatDuration(timeObject.Duration)
@@ -2352,9 +2352,9 @@
         $scope.startDate = new Date(year, month, day);
     };
 
-    $scope.formats = ["dd-MMMM-yyyy", "yyyy/MM/dd", "dd/MM/yyyy", "shortDate"];
+    $scope.formats = ["dd-MMMM-yyyy", "yyyy/MM/dd", "dd/MM/yyyy", "shortDate","dd-MMM-yyyy"];
 
-    $scope.format = $scope.formats[2];
+    $scope.format = $scope.formats[4];
 
     $scope.altInputFormats = ["M!/d!/yyyy"];
 
