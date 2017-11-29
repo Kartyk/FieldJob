@@ -95,7 +95,7 @@
   "Description": "Description",
   "Time Code": "Code horaire",
   "Shift Code": "Code équipe",
-  "Duration": "Durée",
+  "Duration (HH:MM)": "Durée (HH:MM)",
   "delete": "Supprimer",
   "copy": "Copie",
   "In house": "En interne",
