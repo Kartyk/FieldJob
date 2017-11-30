@@ -1546,9 +1546,10 @@
 
                                             if (!isAccept) {
 
-                                                var complete = { "activityId": startActivityData.activity_id};
+                                                var complete = { "activityId": startActivityData.activity_id, "date": moment(new Date()).format('YYYY-MM-DD HH:mm:ss')};
 
                                                 console.log("complete_activity*****" + complete.activityId);
+                                                console.log("complete activity ******" + complete.date);
 
                                                 var updateTaskSegement = {
                                                     "activity_id": startActivityData.activity_id,
