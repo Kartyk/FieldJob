@@ -3481,39 +3481,43 @@
                 doc1.text(xTimeField, yTimeFieldName, $filter('translate')('Date'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
+                var coloumnNo = 1;
                 if ($scope.userType == "C") {
                     if (valueService.getLanguage() == 'fr')
                         doc1.text(xTimeField + timeWidth, yTimeFieldName, $filter('translate')('Charge\nType'))
                     else
                         doc1.text(xTimeField + timeWidth, yTimeFieldName, $filter('translate')('Charge\nType'))
+                    coloumnNo++;
                 }
+
                 if ($scope.userType == "C") {
                     doc1.setFontSize(22)
                     doc1.setFontType('bold')
-                    doc1.text(xTimeField + (timeWidth * 2), yTimeFieldName, $filter('translate')('Charge\nMethod'))
+                    doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldName, $filter('translate')('Charge\nMethod'))
+                    
                 }
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xTimeField + (timeWidth * 3), yTimeFieldName, $filter('translate')('Work Type'))
+                doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldName, $filter('translate')('Work Type'))
                 //  doc1.text(xTimeField + 235, yTimeFieldName, $filter('translate')('Standard'))
 
                 var xTimeField1 = xTimeField + 195;
                 if ($scope.userType == "C") {
                     doc1.setFontSize(22)
                     doc1.setFontType('bold')
-                    doc1.text(xTimeField + (timeWidth * 4), yTimeFieldName, $filter('translate')('Time Code'))
+                    doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldName, $filter('translate')('Time Code'))
                     doc1.setFontSize(22)
                     doc1.setFontType('bold')
-                    doc1.text(xTimeField + (timeWidth * 5), yTimeFieldName, $filter('translate')('Shift Code'))
+                    doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldName, $filter('translate')('Shift Code'))
 
                 }
-                doc1.text(xTimeField+(timeWidth*6), yTimeFieldName, $filter('translate')('Duration'))
-                doc1.text(xTimeField+(timeWidth * (7)), yTimeFieldName, $filter('translate')('Item'))
+                doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldName, $filter('translate')('Duration'))
+                doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldName, $filter('translate')('Item'))
                 //doc1.text(xTimeField+(timeWidth * (7)), yTimeFieldName, 'Description')
-
+               
                 doc1.rect(20, yTimeField + 5, rectTimeWidth, rectTimeHeight+10)
                 while (j < $scope.summary.timeArray.length) {
-
+                    coloumnNo = 1;
                     yTimeFieldName = yTimeField + 20 * ++j;
                     yTimeFieldValue = yTimeFieldName +20;
                     // doc1.text(xTimeField, yTimeFieldName, 'Date')
@@ -3531,12 +3535,13 @@
                                 doc1.text(xTimeField + timeWidth, yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Charge_Type))
                             else
                                 doc1.text(xTimeField + timeWidth, yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Charge_Type))
+                            coloumnNo++;
                         }
 
                         doc1.setFontSize(22)
                         doc1.setFontType('normal')
                         if ($scope.summary.timeArray[j - 1].Charge_Method)
-                            doc1.text(xTimeField + (timeWidth * 2), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Charge_Method))
+                            doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Charge_Method))
                     }
                     doc1.setFontSize(22)
 
@@ -3545,21 +3550,21 @@
                     if ($scope.summary.timeArray[j - 1].Work_Type) {
                         if ($scope.summary.timeArray[j - 1].grandTotal == "bold")
                             doc1.setFontType('bold')
-                        doc1.text(xTimeField + (timeWidth * 3), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Work_Type))
+                        doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Work_Type))
                     }
                     if ($scope.userType == "C") {
                         doc1.setFontSize(22)
                         doc1.setFontType('normal')
                         if (($scope.summary.timeArray[j - 1].Time_Code) != undefined)
-                            doc1.text(xTimeField + (timeWidth * 4), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Time_Code));
+                            doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Time_Code));
                         else
-                            doc1.text(xTimeField + (timeWidth * 4), yTimeFieldValue, "");
+                            doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, "");
                         doc1.setFontSize(22)
                         doc1.setFontType('normal')
                         if ($scope.summary.timeArray[j - 1].Shift_Code != undefined)
-                            doc1.text(xTimeField + (timeWidth * 5), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Shift_Code));
+                            doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Shift_Code));
                         else
-                            doc1.text(xTimeField + (timeWidth * 5), yTimeFieldValue, "");
+                            doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, "");
                     }
 
                     doc1.setFontSize(22)
@@ -3567,13 +3572,13 @@
                     if ($scope.summary.timeArray[j - 1].Duration) {
                         if ($scope.summary.timeArray[j - 1].grandTotal == "bold")
                             doc1.setFontType('bold')
-                        doc1.text(xTimeField + (timeWidth * 6), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Duration.toString()))
+                        doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Duration.toString()))
                     }
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.timeArray[j - 1].Item && $scope.summary.timeArray[j - 1].Item != "")
-                        doc1.text(xTimeField + (timeWidth * (7)), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Item.split('-')[0] + '\n-' + $scope.summary.timeArray[j - 1].Item.split('-')[1]))
+                        doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Item.split('-')[0] + '\n-' + $scope.summary.timeArray[j - 1].Item.split('-')[1]))
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
 
