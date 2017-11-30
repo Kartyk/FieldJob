@@ -1149,25 +1149,37 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                 function (response) {
 
                     console.log("SYNC SUCCESS ALL");
+                    if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
+                        $state.go($state.current, {}, { reload: true });
+                        $rootScope.dbCall = false;
 
-                    if (valueService.getUserType().defaultView == "My Task") {
-
-                        $state.go("myFieldJob");
-                        $rootScope.selectedItem = 2;
-                        $rootScope.showTaskDetail = false;
-                        $rootScope.showDebrief = false;
-
-                    } else {
-
-                        $state.go("myTask");
-                        $rootScope.selectedItem = 1;
-                        $rootScope.showTaskDetail = false;
-                        $rootScope.showDebrief = false;
+                        getAttachments();
                     }
+                    else {
+                        valueService.setTask(valueService.getTask(), function () {
+                            $state.go($state.current, {}, { reload: true });
+                            $rootScope.dbCall = false;
 
-                    $rootScope.dbCall = false;
+                            getAttachments();
+                        });
+                    }
+                   
+                    //if (valueService.getUserType().defaultView == "My Task") {
 
-                    getAttachments();
+                    //    $state.go("myFieldJob");
+                    //    $rootScope.selectedItem = 2;
+                    //    $rootScope.showTaskDetail = false;
+                    //    $rootScope.showDebrief = false;
+
+                    //} else {
+
+                    //    $state.go("myTask");
+                    //    $rootScope.selectedItem = 1;
+                    //    $rootScope.showTaskDetail = false;
+                    //    $rootScope.showDebrief = false;
+                    //}
+
+                    
                 },
 
                 function (error) {
@@ -1175,25 +1187,36 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                     console.log("SYNC FAILURE ALL");
 
                     // $state.go($state.current, {}, {reload: true});
+                    if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
+                        $state.go($state.current, {}, { reload: true });
+                        $rootScope.dbCall = false;
 
-                    if (valueService.getUserType().defaultView == "My Task") {
-
-                        $state.go("myFieldJob");
-                        $rootScope.selectedItem = 2;
-                        $rootScope.showTaskDetail = false;
-                        $rootScope.showDebrief = false;
-
-                    } else {
-
-                        $state.go("myTask");
-                        $rootScope.selectedItem = 1;
-                        $rootScope.showTaskDetail = false;
-                        $rootScope.showDebrief = false;
+                        getAttachments();
                     }
+                    else {
+                        valueService.setTask(valueService.getTask(), function () {
+                            $state.go($state.current, {}, { reload: true });
+                            $rootScope.dbCall = false;
 
-                    $rootScope.dbCall = false;
+                            getAttachments();
+                        });
+                    }
+                    //if (valueService.getUserType().defaultView == "My Task") {
 
-                    getAttachments();
+                    //    $state.go("myFieldJob");
+                    //    $rootScope.selectedItem = 2;
+                    //    $rootScope.showTaskDetail = false;
+                    //    $rootScope.showDebrief = false;
+
+                    //} else {
+
+                    //    $state.go("myTask");
+                    //    $rootScope.selectedItem = 1;
+                    //    $rootScope.showTaskDetail = false;
+                    //    $rootScope.showDebrief = false;
+                    //}
+
+                  
                 }
             );
         });
