@@ -953,8 +953,7 @@
 
             var formData = {
                 "taskid": taskId,
-                "taskstatus": "Accepted",
-                "requestDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000+00:00")
+                "taskstatus": "Accepted"
             };
 
             cloudService.updateAcceptTask(formData, function (response) {

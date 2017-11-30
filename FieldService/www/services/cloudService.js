@@ -199,15 +199,15 @@
         function getInternalList(callback) {
             var startDate = new Date();
 
-            startDate.setMonth(startDate.getMonth() - 1);
+            startDate.setDate(startDate.getDate() - 15);
 
-            var startDateISOFormat = startDate.toISOString();
+            var startDateISOFormat = moment(startDate).format('YYYY-MM-DD');
 
             var endDate = new Date();
 
-            endDate.setMonth(endDate.getMonth() + 3);
+            endDate.setDate(endDate.getDate() + 15);
 
-            var endDateISOFormat = endDate.toISOString();
+            var endDateISOFormat = moment(endDate).format('YYYY-MM-DD');
             $http({
 
                 method: 'POST',
@@ -219,8 +219,8 @@
                 },
                 data: {
                     "resourceId": constantService.getResourceId(),
-                    "fromDate": moment(startDate).format('YYYY-MM-DD'),
-                    "toDate": moment(endDate).format('YYYY-MM-DD')
+                    "fromDate": startDateISOFormat,
+                    "toDate": endDateISOFormat
                 }
 
             }).success(function (response) {
