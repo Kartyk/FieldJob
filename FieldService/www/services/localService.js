@@ -204,7 +204,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Task SET Job_Description = ?, Duration = ?, Task_Status = ?, Customer_Name =?, Street_Address = ?, City = ?, State = ?, Country = ?, Zip_Code = ?, Expense_Method = ?, Labor_Method = ?, Travel_Method = ?, Material_Method = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?, Activity_Id = ?, Work_Phone_Number = ?, Mobile_Phone_Number = ?, Address1 = ?, SR_ID = ?, Name = ? WHERE Task_Number = ?";
+                var sqlUpdate = "UPDATE Task SET Job_Description = ?, Duration = ?, Task_Status = ?, Customer_Name =?, Street_Address = ?, City = ?, State = ?, Country = ?, Zip_Code = ?, Expense_Method = ?, Labor_Method = ?, Travel_Method = ?, Material_Method = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?, Activity_Id = ?, Work_Phone_Number = ?, Mobile_Phone_Number = ?, Address1 = ?, SR_ID = ?, Contact_Name = ? WHERE Task_Number = ?";
 
                 insertValues.push(responseList.Job_Description);
                 insertValues.push(responseList.Duration);
@@ -228,7 +228,7 @@
                 insertValues.push(responseList.Mobile_Phone_Number);
                 insertValues.push(responseList.Address1);
                 insertValues.push(responseList.SR_ID);
-                insertValues.push(responseList.Name);
+                insertValues.push(responseList.Contact_Name);
                 insertValues.push(responseList.Task_Number);
 
                 // console.log("TASK UPDATE VALUES =====> " + insertValues);
@@ -289,7 +289,7 @@
                 insertValues.push(responseList.Mobile_Phone_Number);
                 insertValues.push(responseList.Address1);
                 insertValues.push(responseList.SR_ID);
-                insertValues.push(responseList.Name);
+                insertValues.push(responseList.Contact_Name);
 
                 // console.log("TASK INSERT VALUES =====> " + insertValues);
 
