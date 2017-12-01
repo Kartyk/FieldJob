@@ -52,6 +52,8 @@
 
         var ofscNewBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
 
+        var combinedBackEndId = "cb0399de-d185-4cf1-ac60-9012d20add71";
+
 
         //SIT
 
@@ -118,6 +120,7 @@
         service.getMaterialBackId = getMaterialBackId;
         service.getOfscBackId = getOfscBackId;
         service.getNewOfscBackId = getNewOfscBackId;
+        service.getCombinedBackId = getCombinedBackId;
         service.getAcceptBackId = getAcceptBackId;
         service.getSRBackId = getSRBackId;
         service.getTimeDataBackId = getTimeDataBackId;
@@ -264,6 +267,11 @@
         function getNewOfscBackId() {
 
             return ofscNewBackEndId;
+        };
+
+        function getCombinedBackId() {
+
+            return combinedBackEndId;
         };
 
         function getAcceptBackId() {
