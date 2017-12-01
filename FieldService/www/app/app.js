@@ -405,7 +405,7 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
                 });
             };
 
-            $scope.clear = function () {
+            $rootScope.clear = function () {
 
                 $scope.signaturePad.clear();
 

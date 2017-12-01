@@ -1577,7 +1577,7 @@
                 });
             }
 
-            if ($scope.timeArray != undefined) {
+            if ($scope.timeArray != undefined && $scope.timeArray.length>0) {
 
                 var length = $scope.timeArray.length, i = 0;
 
@@ -3537,11 +3537,14 @@
                                 doc1.text(xTimeField + timeWidth, yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Charge_Type))
                             coloumnNo++;
                         }
-
+                        else
+                            coloumnNo++;
                         doc1.setFontSize(22)
                         doc1.setFontType('normal')
                         if ($scope.summary.timeArray[j - 1].Charge_Method)
                             doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Charge_Method))
+                        else
+                            coloumnNo++
                     }
                     doc1.setFontSize(22)
 
@@ -3552,6 +3555,8 @@
                             doc1.setFontType('bold')
                         doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Work_Type))
                     }
+                    else
+                        coloumnNo++
                     if ($scope.userType == "C") {
                         doc1.setFontSize(22)
                         doc1.setFontType('normal')
@@ -3574,11 +3579,15 @@
                             doc1.setFontType('bold')
                         doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Duration.toString()))
                     }
+                    else
+                        coloumnNo++
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.timeArray[j - 1].Item && $scope.summary.timeArray[j - 1].Item != "")
                         doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Item.split('-')[0] + '\n-' + $scope.summary.timeArray[j - 1].Item.split('-')[1]))
+                    else
+                        coloumnNo++
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
 
