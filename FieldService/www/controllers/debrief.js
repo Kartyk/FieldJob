@@ -2424,6 +2424,12 @@
             item.DurationMinutes = 0;
 
         }
+        else if (item.Duration != undefined && item.Duration.trim() == ":")
+        {
+            item.Duration = "00:00";
+            item.DurationHours = 0;
+            item.DurationMinutes = 0;
+        }
     }
 
     $scope.file = "";
