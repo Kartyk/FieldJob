@@ -136,7 +136,7 @@
         if (valueService.getDebriefChanged()) {
 
             $mdDialog.show({
-                locals: {dataToPass: item},
+                locals: { dataToPass: item },
                 controller: DialogController,
                 templateUrl: "app/views/Dialog.html",
                 parent: angular.element(document.body),
@@ -422,93 +422,93 @@
 
         // if (constantService.getNetworkStatus()) {
 
-            $rootScope.dbCall = true;
+        $rootScope.dbCall = true;
 
-            console.log($scope.userName);
+        console.log($scope.userName);
 
-            $rootScope.uName = $scope.userName;
+        $rootScope.uName = $scope.userName;
 
-            var baseData = $scope.userName.toLowerCase() + ":" + $scope.password;
+        var baseData = $scope.userName.toLowerCase() + ":" + $scope.password;
 
-            var authorizationValue = window.btoa(baseData);
+        var authorizationValue = window.btoa(baseData);
 
-            var data = {
-                header: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Basic ' + authorizationValue,
-                    'oracle-mobile-backend-id': constantService.getChargeBackId()
-                }
-            };
+        var data = {
+            header: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Basic ' + authorizationValue,
+                'oracle-mobile-backend-id': constantService.getChargeBackId()
+            }
+        };
 
-            localService.deleteUser();
+        localService.deleteUser();
 
-            cloudService.login(data, function (response) {
+        cloudService.login(data, function (response) {
 
-                if (response && response.message == null) {
+            if (response && response.message == null) {
 
-                    valueService.setResourceId(response['ID']);
+                valueService.setResourceId(response['ID']);
 
-                    constantService.setResourceId(response['ID']);
+                constantService.setResourceId(response['ID']);
 
-                    cloudService.getTechnicianProfile(function (response) {
+                cloudService.getTechnicianProfile(function (response) {
 
-                        var userObject = {
-                            ID: response[0].ID,
-                            ClarityID: response[0].ClarityID,
-                            Currency: response[0].Currency,
-                            Default_View: response[0].Default_View,
-                            Email: response[0].Email,
-                            Language: response[0].Language,
-                            Name: response[0].Name,
-                            OFSCId: response[0].OFSCId,
-                            Password: response[0].Password,
-                            Time_Zone: response[0].Time_Zone,
-                            Type: response[0].Type,
-                            User_Name: response[0].User_Name,
-                            Work_Day: response[0].Work_Day,
-                            Work_Hour: response[0].Work_Hour,
-                            Login_Status: "1",
-                            Last_updated: new Date()
+                    var userObject = {
+                        ID: response[0].ID,
+                        ClarityID: response[0].ClarityID,
+                        Currency: response[0].Currency,
+                        Default_View: response[0].Default_View,
+                        Email: response[0].Email,
+                        Language: response[0].Language,
+                        Name: response[0].Name,
+                        OFSCId: response[0].OFSCId,
+                        Password: response[0].Password,
+                        Time_Zone: response[0].Time_Zone,
+                        Type: response[0].Type,
+                        User_Name: response[0].User_Name,
+                        Work_Day: response[0].Work_Day,
+                        Work_Hour: response[0].Work_Hour,
+                        Login_Status: "1",
+                        Last_updated: new Date()
+                    };
+
+                    localService.insertUser(userObject);
+
+                    localService.getUser(function (response) {
+
+                        console.log("USER =====> " + JSON.stringify(response));
+
+                        constantService.setUser(response[0]);
+
+                        valueService.setUser(response[0]);
+
+                        var data = {
+                            "resourceId": constantService.getUser().OFSCId,
+                            "date": moment(new Date()).utcOffset(constantService.getTimeZone()).format('YYYY-MM-DD')
                         };
 
-                        localService.insertUser(userObject);
+                        console.log(JSON.stringify(data));
 
-                        localService.getUser(function (response) {
+                        ofscService.activate_resource(data, function (response) {
 
-                            console.log("USER =====> " + JSON.stringify(response));
+                            if (response != undefined && response != null) {
 
-                            constantService.setUser(response[0]);
-
-                            valueService.setUser(response[0]);
-
-                            var data = {
-                                "resourceId": constantService.getUser().OFSCId,
-                                "date": moment(new Date()).utcOffset(constantService.getTimeZone()).format('YYYY-MM-DD')
-                            };
-
-                            console.log(JSON.stringify(data));
-
-                            ofscService.activate_resource(data, function (response) {
-
-                                if (response != undefined && response != null) {
-
-                                    console.log("ACTIVATE RESOURCE " + JSON.stringify(response));
-                                }
-                            });
-
-                            syncSubmit();
+                                console.log("ACTIVATE RESOURCE " + JSON.stringify(response));
+                            }
                         });
+
+                        syncSubmit();
                     });
+                });
 
-                } else {
+            } else {
 
-                    $scope.loginError = true;
+                $scope.loginError = true;
 
-                    $rootScope.dbCall = false;
-                }
-            });
+                $rootScope.dbCall = false;
+            }
+        });
 
-            console.log("Login API END");
+        console.log("Login API END");
 
         // } else {
         //
@@ -1149,25 +1149,54 @@
                 function (response) {
 
                     console.log("SYNC SUCCESS ALL");
+                    if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
+                        $state.go($state.current, {}, { reload: true });
+                        $rootScope.dbCall = false;
 
-                    if (valueService.getUserType().defaultView == "My Task") {
+                        getAttachments();
+                    }
+                    else if ($state.current.name == "login") {
+                        if (valueService.getUserType().defaultView == "My Task") {
+                            $state.go("myFieldJob");
+                            $rootScope.selectedItem = 2;
+                            $rootScope.showTaskDetail = false;
+                            $rootScope.showDebrief = false;
+                        }
+                        else {
+                            $state.go("myTask");
+                            $rootScope.selectedItem = 1;
+                            $rootScope.showTaskDetail = false;
+                            $rootScope.showDebrief = false;
+                        }
+                        $rootScope.dbCall = false;
+                        getAttachments();
+                    }
+                    else {
 
-                        $state.go("myFieldJob");
-                        $rootScope.selectedItem = 2;
-                        $rootScope.showTaskDetail = false;
-                        $rootScope.showDebrief = false;
+                        valueService.setTask(valueService.getTask(), function () {
+                            $state.go($state.current, {}, { reload: true });
+                            $rootScope.dbCall = false;
 
-                    } else {
-
-                        $state.go("myTask");
-                        $rootScope.selectedItem = 1;
-                        $rootScope.showTaskDetail = false;
-                        $rootScope.showDebrief = false;
+                            getAttachments();
+                        });
                     }
 
-                    $rootScope.dbCall = false;
+                    //if (valueService.getUserType().defaultView == "My Task") {
 
-                    getAttachments();
+                    //    $state.go("myFieldJob");
+                    //    $rootScope.selectedItem = 2;
+                    //    $rootScope.showTaskDetail = false;
+                    //    $rootScope.showDebrief = false;
+
+                    //} else {
+
+                    //    $state.go("myTask");
+                    //    $rootScope.selectedItem = 1;
+                    //    $rootScope.showTaskDetail = false;
+                    //    $rootScope.showDebrief = false;
+                    //}
+
+
                 },
 
                 function (error) {
@@ -1175,25 +1204,36 @@
                     console.log("SYNC FAILURE ALL");
 
                     // $state.go($state.current, {}, {reload: true});
+                    if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
+                        $state.go($state.current, {}, { reload: true });
+                        $rootScope.dbCall = false;
 
-                    if (valueService.getUserType().defaultView == "My Task") {
-
-                        $state.go("myFieldJob");
-                        $rootScope.selectedItem = 2;
-                        $rootScope.showTaskDetail = false;
-                        $rootScope.showDebrief = false;
-
-                    } else {
-
-                        $state.go("myTask");
-                        $rootScope.selectedItem = 1;
-                        $rootScope.showTaskDetail = false;
-                        $rootScope.showDebrief = false;
+                        getAttachments();
                     }
+                    else {
+                        valueService.setTask(valueService.getTask(), function () {
+                            $state.go($state.current, {}, { reload: true });
+                            $rootScope.dbCall = false;
 
-                    $rootScope.dbCall = false;
+                            getAttachments();
+                        });
+                    }
+                    //if (valueService.getUserType().defaultView == "My Task") {
 
-                    getAttachments();
+                    //    $state.go("myFieldJob");
+                    //    $rootScope.selectedItem = 2;
+                    //    $rootScope.showTaskDetail = false;
+                    //    $rootScope.showDebrief = false;
+
+                    //} else {
+
+                    //    $state.go("myTask");
+                    //    $rootScope.selectedItem = 1;
+                    //    $rootScope.showTaskDetail = false;
+                    //    $rootScope.showDebrief = false;
+                    //}
+
+
                 }
             );
         });

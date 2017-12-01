@@ -13,7 +13,7 @@
 
         var sqlUser = "CREATE TABLE IF NOT EXISTS User ('ID' INTEGER PRIMARY KEY  NOT NULL, 'ClarityID' TEXT, 'Currency' TEXT, 'Default_View' TEXT, 'Email' TEXT, 'Language' TEXT, 'Name' TEXT, 'OFSCId' TEXT, 'Password' TEXT, 'Time_Zone' TEXT, 'Type' TEXT, 'User_Name' TEXT, 'Work_Day' TEXT, 'Work_Hour' TEXT, 'Login_Status' TEXT, 'Last_Updated' TEXT)";
 
-        var sqlTask = "CREATE TABLE IF NOT EXISTS Task ('Task_Number' INTEGER PRIMARY KEY  NOT NULL, 'Job_Description' TEXT, 'Duration' TEXT, 'Task_Status' TEXT, 'Customer_Name' TEXT, 'Street_Address' TEXT, 'City' TEXT, 'State' TEXT, 'Country' TEXT, 'Zip_Code' TEXT, 'Expense_Method' TEXT, 'Labor_Method' TEXT, 'Travel_Method' TEXT, 'Material_Method' TEXT, 'Service_Request' TEXT, 'Assigned' TEXT, 'Start_Date' TEXT, 'End_Date' TEXT, 'Submit_Status' TEXT, 'Email' TEXT, 'Date' TEXT, 'Type' TEXT, 'Activity_Id' TEXT, 'Work_Phone_Number' TEXT, 'Mobile_Phone_Number' TEXT, 'Address1' TEXT, 'SR_ID' TEXT, 'Name' TEXT)";
+        var sqlTask = "CREATE TABLE IF NOT EXISTS Task ('Task_Number' INTEGER PRIMARY KEY  NOT NULL, 'Job_Description' TEXT, 'Duration' TEXT, 'Task_Status' TEXT, 'Customer_Name' TEXT, 'Street_Address' TEXT, 'City' TEXT, 'State' TEXT, 'Country' TEXT, 'Zip_Code' TEXT, 'Expense_Method' TEXT, 'Labor_Method' TEXT, 'Travel_Method' TEXT, 'Material_Method' TEXT, 'Service_Request' TEXT, 'Assigned' TEXT, 'Start_Date' TEXT, 'End_Date' TEXT, 'Submit_Status' TEXT, 'Email' TEXT, 'Date' TEXT, 'Type' TEXT, 'Activity_Id' TEXT, 'Work_Phone_Number' TEXT, 'Mobile_Phone_Number' TEXT, 'Address1' TEXT, 'SR_ID' TEXT, 'Contact_Name' TEXT)";
 
         var sqlInternal = "CREATE TABLE IF NOT EXISTS Internal ('Activity_Id' INTEGER PRIMARY KEY  NOT NULL, 'Start_time' TEXT, 'End_time' TEXT, 'Activity_type' TEXT)";
 
@@ -59,7 +59,7 @@
 
         var sqlAttachment = "CREATE TABLE IF NOT EXISTS Attachment ('Attachment_Id' INTEGER PRIMARY KEY  NOT NULL, 'File_Name' TEXT, 'File_Type' TEXT, 'File_Path' TEXT, 'Type' TEXT, 'AttachmentType' TEXT, 'Created_Date' TEXT, 'Task_Number' TEXT, 'SRID' TEXT)";
 
-        var sqlEngineer = "CREATE TABLE IF NOT EXISTS Engineer ('Engineer_Id' INTEGER PRIMARY KEY  NOT NULL, 'followUp' boolean, 'salesQuote' boolean, 'salesVisit' boolean, 'salesLead' boolean, 'Follow_Up' TEXT, 'Spare_Quote' TEXT, 'Sales_Visit' TEXT, 'Sales_Head' TEXT, 'Sign_File_Path' TEXT, 'File_Name' TEXT, 'Task_Number' TEXT)";
+        var sqlEngineer = "CREATE TABLE IF NOT EXISTS Engineer ('Engineer_Id' INTEGER PRIMARY KEY  NOT NULL, 'followUp' boolean, 'salesQuote' boolean, 'salesVisit' boolean, 'salesLead' boolean, 'Follow_Up' TEXT, 'Spare_Quote' TEXT, 'Sales_Visit' TEXT, 'Sales_Head' TEXT, 'Sign_File_Path' TEXT, 'File_Name' TEXT, 'Task_Number' TEXT, 'isCustomerSignChecked' TEXT, 'customerComments' TEXT)";
 
         db.transaction(function (tx) {
 

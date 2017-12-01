@@ -5,7 +5,7 @@
   "Job Description": "工作描述",
   "Start Date": "服务日期",
   "End Date": "结束日期",
-  "Duration": "服务持续时间",
+  "Duration (HH:MM)": "服务持续时间 (HH:MM)",
   "Product Line": "产品系列",
   "System ID / Serial": "系统序列号/产品序列号",
   "Customer Site": "客户现场",
@@ -204,5 +204,6 @@
   "Quantity": "数量",
   "Add List": "添加列表",
   "Field Service Summary Report": "现场服务总结报告",
-  "Please complete engineer signature on the 'Engineer Signature' tab.": "請在“工程師簽名”選項卡上填寫工程師簽名。"
+  "Please complete engineer signature on the 'Engineer Signature' tab.": "請在“工程師簽名”選項卡上填寫工程師簽名。",
+  "Customer Comments": "Customer Comments"
 }

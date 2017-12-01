@@ -953,8 +953,7 @@
 
             var formData = {
                 "taskid": taskId,
-                "taskstatus": "Accepted",
-                "requestDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000+00:00")
+                "taskstatus": "Accepted"
             };
 
             cloudService.updateAcceptTask(formData, function (response) {
@@ -1265,7 +1264,9 @@
                                                                         "followuptext": response.Follow_Up,
                                                                         "sparequotetext": response.Spare_Quote,
                                                                         "salesText": response.Sales_Visit,
-                                                                        "salesleadText": response.Sales_Head
+                                                                        "salesleadText": response.Sales_Head,
+                                                                        "denySignature": response.isCustomerSignChecked,
+                                                                        "signatureComments": response.customerComments
                                                                     };
 
                                                                     var timeUploadJSON = {

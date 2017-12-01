@@ -81,10 +81,10 @@
 
     <script src="lib/ng-file-upload/ng-file-upload.min.js"></script>
     <script src="lib/signature_pad.min.js"></script>
-
+  
     <script type="text/javascript" src="app/app.js"></script>
     <script type="text/javascript" src="controllers/index.js"></script>
-    <script type="text/javascript" src="controllers/myTask.js"></script>
+   <script type="text/javascript" src="controllers/myTask.js"></script>
     <script type="text/javascript" src="controllers/taskOverFlow.js"></script>
     <script type="text/javascript" src="controllers/todo.js"></script>
     <script type="text/javascript" src="controllers/debrief.js"></script>
@@ -181,10 +181,12 @@
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="text-align: center;">
                     <label class="title" translate="{{$root.selectedCategory}}"></label><span class="title" ng-if="$root.showDebrief">#{{$root.selectedTask.Task_Number}}</span>
+                   
                     <ul class="nav navbar-nav pull-right">
 
                         <li class="popover__wrapper">
-                            <div class="user-avatar"></div>
+                            <div class="user-avatar" ng-show="$root.onlineimage"></div>
+                            <div class="user-avatar-online" ng-show="!$root.onlineimage"></div>
                             <div class="push popover__content">
                                 <div>
                                     <p class="popover__message uname">{{$root.uName | uppercase}}</p>

@@ -576,8 +576,11 @@
                 Sales_Head: "",
                 Sign_File_Path: "",
                 File_Name: "",
+                isCustomerSignChecked: false,
+                customerComments:"",
                 Task_Number: $scope.taskId
             };
+            $scope.customerText = "Customer Signature";
 
         } else {
 
@@ -585,6 +588,15 @@
             $scope.engineerObject.salesQuote = ($scope.engineerObject.salesQuote == 'true');
             $scope.engineerObject.salesVisit = ($scope.engineerObject.salesVisit == 'true');
             $scope.engineerObject.salesLead = ($scope.engineerObject.salesLead == 'true');
+            $scope.engineerObject.isCustomerSignChecked = ($scope.engineerObject.isCustomerSignChecked == 'true');
+            if ($scope.engineerObject.isCustomerSignChecked)
+            {
+                $scope.customerCommentText = "Customer Comments";
+            }
+            else
+            {
+                $scope.customerText = "Customer Signature";
+            }
         }
     };
 
@@ -1448,7 +1460,7 @@
                 angular.forEach($scope.expenseArray, function (key, value) {
 
                     var expenseObject = {
-                        "Date": $filter("date")(key.Date, "dd-MM-yyyy "),
+                        "Date": $filter("date")(key.Date, "dd-MMM-yyyy "),
                         "Expense_Type": key.Expense_Type.Value,
                         "Amount": key.Amount,
                         "Currency": key.Currency.Value,
@@ -1675,7 +1687,7 @@
                         var newTimecode = true
                         angular.forEach($scope.summary.timeArray, function (summaryTime) {
                             if ($scope.userType == 'C') {
-                                if (summaryTime.Charge_Method == key.Charge_Method.Value && summaryTime.Charge_Type == key.Charge_Type.Value && summaryTime.Shift_Code == key.Shift_Code.Value && summaryTime.Date == moment(key.Date).format('DD-MM-YYYY') && summaryTime.Time_Code == key.Time_Code.Overtimeshiftcode && summaryTime.Work_Type == key.Work_Type.Value && summaryTime.Item == key.Item.Value) {
+                                if (summaryTime.Charge_Method == key.Charge_Method.Value && summaryTime.Charge_Type == key.Charge_Type.Value && summaryTime.Shift_Code == key.Shift_Code.Value && summaryTime.Date == moment(key.Date).format('DD-MMM-YYYY') && summaryTime.Time_Code == key.Time_Code.Overtimeshiftcode && summaryTime.Work_Type == key.Work_Type.Value && summaryTime.Item == key.Item.Value) {
                                     summaryTime.Duration = $scope.calculateDuration(summaryTime, key);
                                     summaryTime.Duration = formatDuration(summaryTime.Duration)
                                     newTimecode = false;
@@ -1684,7 +1696,7 @@
                             }
                             else
                             {
-                                if (summaryTime.Date == moment(key.Date).format('DD-MM-YYYY') && summaryTime.Work_Type == key.Work_Type.Value && summaryTime.Item == key.Item.Value)
+                                if (summaryTime.Date == moment(key.Date).format('DD-MMM-YYYY') && summaryTime.Work_Type == key.Work_Type.Value && summaryTime.Item == key.Item.Value)
                                 {
                                     summaryTime.Duration = $scope.calculateDuration(summaryTime, key);
                                     summaryTime.Duration = formatDuration(summaryTime.Duration)
@@ -1693,7 +1705,7 @@
                             }
                         })
                         if (newTimecode) {
-                            var timeObject = $scope.getTimenewObj(key.Work_Type.Value, moment(key.Date).format('DD-MM-YYYY'), key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration, key.Time_Code.Overtimeshiftcode, key.Shift_Code.ShiftCodeName);
+                            var timeObject = $scope.getTimenewObj(key.Work_Type.Value, moment(key.Date).format('DD-MMM-YYYY'), key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration, key.Time_Code.Overtimeshiftcode, key.Shift_Code.ShiftCodeName);
 
                             timeObject.Duration = $scope.calculateDuration(timeObject, key);
                             timeObject.Duration = formatDuration(timeObject.Duration)
@@ -1702,7 +1714,7 @@
                     }
                     else
                     {
-                        var timeObject = $scope.getTimenewObj(key.Work_Type.Value, moment(key.Date).format('DD-MM-YYYY'), key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration, key.Time_Code.Overtimeshiftcode, key.Shift_Code.ShiftCodeName);
+                        var timeObject = $scope.getTimenewObj(key.Work_Type.Value, moment(key.Date).format('DD-MMM-YYYY'), key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration, key.Time_Code.Overtimeshiftcode, key.Shift_Code.ShiftCodeName);
 
                         timeObject.Duration = $scope.calculateDuration(timeObject, key);
                         timeObject.Duration = formatDuration(timeObject.Duration)
@@ -2123,7 +2135,9 @@
                                                                         "followuptext": $scope.engineerObject.Follow_Up,
                                                                         "sparequotetext": $scope.engineerObject.Spare_Quote,
                                                                         "salesText": $scope.engineerObject.Sales_Visit,
-                                                                        "salesleadText": $scope.engineerObject.Sales_Head
+                                                                        "salesleadText": $scope.engineerObject.Sales_Head,
+                                                                        "denySignature": $scope.engineerObject.isCustomerSignChecked,
+                                                                        "signatureComments": $scope.engineerObject.customerComments
                                                                     };
 
                                                                     cloudService.updateAcceptTask(formData, function (response) {
@@ -2190,7 +2204,9 @@
                                                                     "followuptext": $scope.engineerObject.Follow_Up,
                                                                     "sparequotetext": $scope.engineerObject.Spare_Quote,
                                                                     "salesText": $scope.engineerObject.Sales_Visit,
-                                                                    "salesleadText": $scope.engineerObject.Sales_Head
+                                                                    "salesleadText": $scope.engineerObject.Sales_Head,
+                                                                    "denySignature": $scope.engineerObject.isCustomerSignChecked,
+                                                                    "signatureComments": $scope.engineerObject.customerComments
                                                                 };
 
                                                                 cloudService.updateAcceptTask(formData, function (response) {
@@ -2350,9 +2366,9 @@
         $scope.startDate = new Date(year, month, day);
     };
 
-    $scope.formats = ["dd-MMMM-yyyy", "yyyy/MM/dd", "dd/MM/yyyy", "shortDate"];
+    $scope.formats = ["dd-MMMM-yyyy", "yyyy/MM/dd", "dd/MM/yyyy", "shortDate","dd-MMM-yyyy"];
 
-    $scope.format = $scope.formats[2];
+    $scope.format = $scope.formats[4];
 
     $scope.altInputFormats = ["M!/d!/yyyy"];
 
@@ -3449,7 +3465,13 @@
                 var j = 0, xTimeField = 25, yTimeField = yAttachField + rectAttachHeight + 20, rectTimeWidth = 660,
                     rectTimeHeight = 23 * $scope.summary.timeArray.length+10, yTimeFieldName = yTimeField + 20,
                     yTimeFieldValue = yTimeField;
-                var timeWidth = (660 / 8) ;
+                var columns;
+                if ($scope.userType == "C") {
+                    columns = 8
+                }
+                else
+                    columns = 4;
+                var timeWidth = (660 / columns) ;
 
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
@@ -3459,33 +3481,43 @@
                 doc1.text(xTimeField, yTimeFieldName, $filter('translate')('Date'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                if (valueService.getLanguage() == 'fr')
-                    doc1.text(xTimeField + timeWidth , yTimeFieldName, $filter('translate')('Charge\nType'))
-                else
-                    doc1.text(xTimeField + timeWidth, yTimeFieldName, $filter('translate')('Charge\nType'))
+                var coloumnNo = 1;
+                if ($scope.userType == "C") {
+                    if (valueService.getLanguage() == 'fr')
+                        doc1.text(xTimeField + timeWidth, yTimeFieldName, $filter('translate')('Charge\nType'))
+                    else
+                        doc1.text(xTimeField + timeWidth, yTimeFieldName, $filter('translate')('Charge\nType'))
+                    coloumnNo++;
+                }
+
+                if ($scope.userType == "C") {
+                    doc1.setFontSize(22)
+                    doc1.setFontType('bold')
+                    doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldName, $filter('translate')('Charge\nMethod'))
+                    
+                }
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xTimeField + (timeWidth * 2), yTimeFieldName, $filter('translate')('Charge\nMethod'))
-                doc1.setFontSize(22)
-                doc1.setFontType('bold')
-                doc1.text(xTimeField + (timeWidth * 3), yTimeFieldName, $filter('translate')('Work Type'))
+                doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldName, $filter('translate')('Work Type'))
                 //  doc1.text(xTimeField + 235, yTimeFieldName, $filter('translate')('Standard'))
+
                 var xTimeField1 = xTimeField + 195;
-                doc1.setFontSize(22)
-                doc1.setFontType('bold')
-                doc1.text(xTimeField + (timeWidth * 4), yTimeFieldName, $filter('translate')('Time Code'))
-                doc1.setFontSize(22)
-                doc1.setFontType('bold')
-                doc1.text(xTimeField + (timeWidth * 5), yTimeFieldName, $filter('translate')('Shift Code'))
-              
+                if ($scope.userType == "C") {
+                    doc1.setFontSize(22)
+                    doc1.setFontType('bold')
+                    doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldName, $filter('translate')('Time Code'))
+                    doc1.setFontSize(22)
+                    doc1.setFontType('bold')
+                    doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldName, $filter('translate')('Shift Code'))
 
-                doc1.text(xTimeField+(timeWidth*6), yTimeFieldName, $filter('translate')('Duration'))
-                doc1.text(xTimeField+(timeWidth * (7)), yTimeFieldName, $filter('translate')('Item'))
+                }
+                doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldName, $filter('translate')('Duration'))
+                doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldName, $filter('translate')('Item'))
                 //doc1.text(xTimeField+(timeWidth * (7)), yTimeFieldName, 'Description')
-
+               
                 doc1.rect(20, yTimeField + 5, rectTimeWidth, rectTimeHeight+10)
                 while (j < $scope.summary.timeArray.length) {
-
+                    coloumnNo = 1;
                     yTimeFieldName = yTimeField + 20 * ++j;
                     yTimeFieldValue = yTimeFieldName +20;
                     // doc1.text(xTimeField, yTimeFieldName, 'Date')
@@ -3497,17 +3529,20 @@
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
-                    if ($scope.summary.timeArray[j - 1].Charge_Type) {
-                        if (valueService.getLanguage() == 'fr')
-                            doc1.text(xTimeField + timeWidth, yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Charge_Type))
-                        else
-                            doc1.text(xTimeField + timeWidth, yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Charge_Type))
-                    }
-                    doc1.setFontSize(22)
-                    doc1.setFontType('normal')
-                    if ($scope.summary.timeArray[j - 1].Charge_Method)
-                        doc1.text(xTimeField + (timeWidth * 2), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Charge_Method))
+                    if ($scope.userType == "C") {
+                        if ($scope.summary.timeArray[j - 1].Charge_Type) {
+                            if (valueService.getLanguage() == 'fr')
+                                doc1.text(xTimeField + timeWidth, yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Charge_Type))
+                            else
+                                doc1.text(xTimeField + timeWidth, yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Charge_Type))
+                            coloumnNo++;
+                        }
 
+                        doc1.setFontSize(22)
+                        doc1.setFontType('normal')
+                        if ($scope.summary.timeArray[j - 1].Charge_Method)
+                            doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Charge_Method))
+                    }
                     doc1.setFontSize(22)
 
                     doc1.setFontType('normal');
@@ -3515,34 +3550,35 @@
                     if ($scope.summary.timeArray[j - 1].Work_Type) {
                         if ($scope.summary.timeArray[j - 1].grandTotal == "bold")
                             doc1.setFontType('bold')
-                        doc1.text(xTimeField + (timeWidth * 3), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Work_Type))
+                        doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Work_Type))
                     }
-                    doc1.setFontSize(22)
-                    doc1.setFontType('normal')
-                    if (($scope.summary.timeArray[j - 1].Time_Code) != undefined)
-                        doc1.text(xTimeField + (timeWidth * 4), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Time_Code));
-                    else
-                        doc1.text(xTimeField + (timeWidth * 4), yTimeFieldValue, "");
-                    doc1.setFontSize(22)
-                    doc1.setFontType('normal')
-                    if ($scope.summary.timeArray[j - 1].Shift_Code != undefined)
-                        doc1.text(xTimeField + (timeWidth * 5), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Shift_Code));
-                    else
-                        doc1.text(xTimeField + (timeWidth * 5), yTimeFieldValue, "");
-                    
+                    if ($scope.userType == "C") {
+                        doc1.setFontSize(22)
+                        doc1.setFontType('normal')
+                        if (($scope.summary.timeArray[j - 1].Time_Code) != undefined)
+                            doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Time_Code));
+                        else
+                            doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, "");
+                        doc1.setFontSize(22)
+                        doc1.setFontType('normal')
+                        if ($scope.summary.timeArray[j - 1].Shift_Code != undefined)
+                            doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Shift_Code));
+                        else
+                            doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, "");
+                    }
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.timeArray[j - 1].Duration) {
                         if ($scope.summary.timeArray[j - 1].grandTotal == "bold")
                             doc1.setFontType('bold')
-                        doc1.text(xTimeField + (timeWidth * 6), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Duration.toString()))
+                        doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Duration.toString()))
                     }
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.timeArray[j - 1].Item && $scope.summary.timeArray[j - 1].Item != "")
-                        doc1.text(xTimeField + (timeWidth * (7)), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Item.split('-')[0] + '\n-' + $scope.summary.timeArray[j - 1].Item.split('-')[1]))
+                        doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Item.split('-')[0] + '\n-' + $scope.summary.timeArray[j - 1].Item.split('-')[1]))
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
 
@@ -3794,4 +3830,19 @@
     {
         valueService.setDebriefChanged(true);
     }
+    $scope.debriefClear = function ()
+    {
+        $scope.engineerObject.customerComments = "";
+    }
+    $scope.ChangeText = function ()
+    {
+        if ($scope.engineerObject.isCustomerSignChecked)
+        {
+            $scope.customerCommentText = "Customer Comments";
+        }
+        else
+        {
+            $scope.customerText = "Customer Signature";
+        }
+     }
 });
