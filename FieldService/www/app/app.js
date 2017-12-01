@@ -2,8 +2,8 @@
 
 var conf = {
 
-     //        apiUrl: 'https://emersonmobilecloud-a472144.mobileenv.us2.oraclecloud.com:443/mobile/custom/'
-               apiUrl: 'https://emersonmobiletestenv-a472144.mobileenv.us2.oraclecloud.com:443/mobile/custom/'
+    apiUrl: 'https://emersonmobilecloud-a472144.mobileenv.us2.oraclecloud.com:443/mobile/custom/'
+    // apiUrl: 'https://emersonmobiletestenv-a472144.mobileenv.us2.oraclecloud.com:443/mobile/custom/'
 };
 
 var app = angular.module('emerson', ['ngMaterial', 'ngLoadingSpinner', 'md.data.table', 'ui.router', 'ui.bootstrap', 'ui.calendar', 'pascalprecht.translate', 'ngFileUpload']);
@@ -21,11 +21,12 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
     $rootScope.apicall = true;
 
     $rootScope.dbCall = true;
+
     //$rootScope.online = true;
     function onLine() {
 
         console.log("Online");
-       valueService.setNetworkStatus(true);
+        valueService.setNetworkStatus(true);
         $rootScope.online();
     }
 
@@ -58,11 +59,11 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
             if (networkState === Connection.NONE) {
 
                 valueService.setNetworkStatus(false);
-               // $rootScope.offline();
+                // $rootScope.offline();
             } else {
 
                 valueService.setNetworkStatus(true);
-               // $rootScope.online();
+                // $rootScope.online();
             }
         }
 
@@ -76,7 +77,7 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
 
                 angular.forEach(response, function (item) {
 
-                    if(item.Login_Status == "1") {
+                    if (item.Login_Status == "1") {
 
                         constantService.setUser(item);
 
@@ -261,18 +262,18 @@ app.directive('dateFormat', function ($filter) {
                 return;
 
             ctrl.$parsers.unshift(function (viewValue) {
-               // var transformedInput = viewValue.replace(/(\:{1,3}[^0-9])/g, '');
+                // var transformedInput = viewValue.replace(/(\:{1,3}[^0-9])/g, '');
                 var transformedInput = viewValue.replace(/([^0-9 :])/g, '');
-               // transformedInput = transformedInput.replace(/:{2,4}/g, '');
+                // transformedInput = transformedInput.replace(/:{2,4}/g, '');
                 transformedInput = transformedInput.replace(/:+/g, ':');
                 if (transformedInput !== viewValue) {
                     ctrl.$setViewValue(transformedInput);
                     ctrl.$render();
                 }
-               // return transformedInput;
+                // return transformedInput;
                 if (transformedInput !== undefined && transformedInput !== "") {
 
-                    if (transformedInput.length == 2 && transformedInput.indexOf(':')==-1) {
+                    if (transformedInput.length == 2 && transformedInput.indexOf(':') == -1) {
 
                         transformedInput = transformedInput + ":";
                         ctrl.$setViewValue(transformedInput);
@@ -288,16 +289,15 @@ app.directive('dateFormat', function ($filter) {
                         //elem.val(transformedInput)
                     }
 
-                    else if (transformedInput!=undefined && transformedInput.split(":")[1] != undefined && transformedInput.split(":")[1].length > 2)
-                    {
+                    else if (transformedInput != undefined && transformedInput.split(":")[1] != undefined && transformedInput.split(":")[1].length > 2) {
                         var temp = transformedInput.split(":")[1].substring(0, transformedInput.split(":")[1].length - 1)
-                        transformedInput = transformedInput.split(":")[0]+":"+ temp;
+                        transformedInput = transformedInput.split(":")[0] + ":" + temp;
                         ctrl.$setViewValue(transformedInput);
                         ctrl.$render();
                     }
                     else if (transformedInput != undefined && transformedInput.split(":")[0] != undefined && transformedInput.split(":")[0].length > 2) {
                         var temp = transformedInput.split(":")[0].substring(0, transformedInput.split(":")[0].length - 1)
-                        transformedInput =  temp + ":" + transformedInput.split(":")[0];
+                        transformedInput = temp + ":" + transformedInput.split(":")[0];
                         ctrl.$setViewValue(transformedInput);
                         ctrl.$render();
                     }

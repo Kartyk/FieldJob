@@ -136,7 +136,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
         if (valueService.getDebriefChanged()) {
 
             $mdDialog.show({
-                locals: { dataToPass: item },
+                locals: {dataToPass: item},
                 controller: DialogController,
                 templateUrl: "app/views/Dialog.html",
                 parent: angular.element(document.body),
@@ -262,16 +262,43 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
     $scope.signout = function () {
 
-        if (valueService.getNetworkStatus()) {
+        var userObject = {
+            'ID': getUser().ID,
+            'Login_Status': "0"
+        };
 
-            $state.go('login');
+        localService.updateUser(userObject);
 
-        } else {
+        $state.go('login');
 
-            $state.go('login');
-        }
-
-        constantService.onDeviceReady();
+        // localService.deleteTaskList();
+        // localService.deleteInternalList();
+        // localService.deleteInstallBase();
+        // localService.deleteContact();
+        // localService.deleteNote();
+        //
+        // localService.deleteOverTime();
+        // localService.deleteShiftCode();
+        //
+        // localService.deleteChargeType();
+        // localService.deleteChargeMethod();
+        // localService.deleteFieldJobName();
+        //
+        // localService.deleteWorkType();
+        // localService.deleteItem();
+        // localService.deleteCurrency();
+        //
+        // localService.deleteExpenseType();
+        // localService.deleteNoteType();
+        //
+        // localService.deleteTimeList();
+        // localService.deleteExpenseList();
+        // localService.deleteNotesList();
+        // localService.deleteMaterialList();
+        // localService.deleteAttachmentList();
+        // localService.deleteEngineerList();
+        //
+        // localService.deleteUser();
     }
 
     $scope.export2PDF = function () {
@@ -444,7 +471,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
         cloudService.login(data, function (response) {
 
-            if (response && response.message == null) {
+            if (response && response != null && response.length > 0) {
 
                 valueService.setResourceId(response['ID']);
 
@@ -1150,7 +1177,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                     console.log("SYNC SUCCESS ALL");
                     if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
-                        $state.go($state.current, {}, { reload: true });
+                        $state.go($state.current, {}, {reload: true});
                         $rootScope.dbCall = false;
 
                         getAttachments();
@@ -1174,7 +1201,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                     else {
 
                         valueService.setTask(valueService.getTask(), function () {
-                            $state.go($state.current, {}, { reload: true });
+                            $state.go($state.current, {}, {reload: true});
                             $rootScope.dbCall = false;
 
                             getAttachments();
@@ -1205,14 +1232,14 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                     // $state.go($state.current, {}, {reload: true});
                     if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
-                        $state.go($state.current, {}, { reload: true });
+                        $state.go($state.current, {}, {reload: true});
                         $rootScope.dbCall = false;
 
                         getAttachments();
                     }
                     else {
                         valueService.setTask(valueService.getTask(), function () {
-                            $state.go($state.current, {}, { reload: true });
+                            $state.go($state.current, {}, {reload: true});
                             $rootScope.dbCall = false;
 
                             getAttachments();

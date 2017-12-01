@@ -1568,7 +1568,7 @@
 
                         updateStatus = {
                             "activity_id": activateId,
-                            "XA_TASK_STATUS": "2"
+                            "XA_TASK_STATUS": "3"
                         };
                     }
 
@@ -1604,7 +1604,10 @@
                                             if (!isAccept) {
 
 
-                                                var complete = { "activityId": startActivityData.activity_id, "date": moment(new Date()).format('YYYY-MM-DD HH:mm:ss')};
+                                                var complete = {
+                                                    "activityId": startActivityData.activity_id,
+                                                    "date": moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+                                                };
 
 
                                                 console.log("complete_activity*****" + complete.activityId);
@@ -1612,7 +1615,7 @@
 
                                                 var updateTaskSegement = {
                                                     "activity_id": startActivityData.activity_id,
-                                                    "XA_TASK_STATUS": "2"
+                                                    "XA_TASK_STATUS": "3"
                                                 };
 
                                                 console.log("updateTaskSegement******" + JSON.stringify(updateTaskSegement));

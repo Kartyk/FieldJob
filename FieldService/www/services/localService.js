@@ -4,9 +4,9 @@
 
     app.factory("localService", localService);
 
-    localService.$inject = ["$http", "$rootScope", "$window", "$location", "$q"];
+    localService.$inject = ["$http", "$rootScope", "$window", "$location", "$q", "constantService"];
 
-    function localService($http, $rootScope, $window, $location, $q) {
+    function localService($http, $rootScope, $window, $location, $q, constantService) {
 
         var service = {};
 
@@ -30,7 +30,6 @@
         service.insertTaskList = insertTaskList;
         service.insertInternalList = insertInternalList;
         service.insertSRNotesList = insertSRNotesList;
-        service.insertSRAttachmentList = insertSRAttachmentList;
         service.insertInstallBaseList = insertInstallBaseList;
         service.insertContactList = insertContactList;
         service.insertNoteList = insertNoteList;
@@ -204,7 +203,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Task SET Job_Description = ?, Duration = ?, Task_Status = ?, Customer_Name =?, Street_Address = ?, City = ?, State = ?, Country = ?, Zip_Code = ?, Expense_Method = ?, Labor_Method = ?, Travel_Method = ?, Material_Method = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?, Activity_Id = ?, Work_Phone_Number = ?, Mobile_Phone_Number = ?, Address1 = ?, SR_ID = ?, Contact_Name = ? WHERE Task_Number = ?";
+                var sqlUpdate = "UPDATE Task SET Job_Description = ?, Duration = ?, Task_Status = ?, Customer_Name =?, Street_Address = ?, City = ?, State = ?, Country = ?, Zip_Code = ?, Expense_Method = ?, Labor_Method = ?, Travel_Method = ?, Material_Method = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?, Activity_Id = ?, Work_Phone_Number = ?, Mobile_Phone_Number = ?, Address1 = ?, SR_ID = ?, Name = ?, ResourceId = ? WHERE Task_Number = ?";
 
                 insertValues.push(responseList.Job_Description);
                 insertValues.push(responseList.Duration);
@@ -228,7 +227,8 @@
                 insertValues.push(responseList.Mobile_Phone_Number);
                 insertValues.push(responseList.Address1);
                 insertValues.push(responseList.SR_ID);
-                insertValues.push(responseList.Contact_Name);
+                insertValues.push(responseList.Name);
+                insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.Task_Number);
 
                 // console.log("TASK UPDATE VALUES =====> " + insertValues);
@@ -260,7 +260,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Task VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Task VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Task_Number);
                 insertValues.push(responseList.Job_Description);
@@ -289,7 +289,9 @@
                 insertValues.push(responseList.Mobile_Phone_Number);
                 insertValues.push(responseList.Address1);
                 insertValues.push(responseList.SR_ID);
-                insertValues.push(responseList.Contact_Name);
+                insertValues.push(responseList.Name);
+                insertValues.push(constantService.getResourceId());
+
 
                 // console.log("TASK INSERT VALUES =====> " + insertValues);
 
@@ -385,11 +387,12 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Internal SET Start_time = ?, End_time = ?, Activity_type = ? WHERE Activity_Id = ?";
+                var sqlUpdate = "UPDATE Internal SET Start_time = ?, End_time = ?, Activity_type = ?, ResourceId = ? WHERE Activity_Id = ?";
 
                 insertValues.push(responseList.Start_time);
                 insertValues.push(responseList.End_time);
                 insertValues.push(responseList.Activity_type);
+                insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.Activity_Id);
 
                 // console.log("INTERNAL UPDATE VALUES =====> " + insertValues);
@@ -421,12 +424,13 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Internal VALUES (?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Internal VALUES (?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Activity_Id);
                 insertValues.push(responseList.Start_time);
                 insertValues.push(responseList.End_time);
                 insertValues.push(responseList.Activity_type);
+                insertValues.push(constantService.getResourceId());
 
                 // console.log("INTERNAL INSERT VALUES =====> " + insertValues);
 
@@ -582,7 +586,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE SRNotes SET Notes = ?, Notes_type = ?, Note_Description =?, Created_By = ?, MobileCreatedBy = ?, Start_Date = ?, Last_updated_date = ?, Service_Request = ?  WHERE Notes_ID = ? AND Incident = ?";
+                var sqlUpdate = "UPDATE SRNotes SET Notes = ?, Notes_type = ?, Note_Description =?, Created_By = ?, MobileCreatedBy = ?, Start_Date = ?, Last_updated_date = ?, Service_Request = ?, ResourceId = ?  WHERE Notes_ID = ? AND Incident = ?";
 
                 insertValues.push(responseList.Notes);
                 insertValues.push(responseList.Notes_type);
@@ -592,6 +596,7 @@
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.Last_updated_date);
                 insertValues.push(responseList.Service_Request);
+                insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.Notes_ID);
                 insertValues.push(responseList.Incident);
 
@@ -624,7 +629,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO SRNotes VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO SRNotes VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Notes_ID);
                 insertValues.push(responseList.Service_Request);
@@ -636,6 +641,7 @@
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.Last_updated_date);
                 insertValues.push(responseList.Incident);
+                insertValues.push(constantService.getResourceId());
 
                 // console.log("SRNOTES INSERT VALUES =====> " + insertValues);
 
@@ -655,149 +661,6 @@
             }, function (error) {
 
                 // console.log("SRNOTES INSERT TRANSACTION ERROR: " + error.message);
-
-                defer.reject(error);
-            });
-        };
-
-        function insertSRAttachmentList(response, callback) {
-
-            var responseList = response;
-
-            var promises = [];
-
-            for (var i = 0; i < responseList.length; i++) {
-
-                (function (i) {
-
-                    var deferred = $q.defer();
-
-                    db.transaction(function (transaction) {
-
-                        var sqlSelect = "SELECT * FROM SRAttachment WHERE SRID = " + responseList[i].SRID;
-
-                        // console.log("SRATTACHMENT  ====> " + sqlSelect);
-
-                        transaction.executeSql(sqlSelect, [], function (tx, res) {
-
-                            var rowLength = res.rows.length;
-
-                            // console.log("SRATTACHMENT LENGTH ====> " + rowLength);
-
-                            if (rowLength > 0) {
-
-                                updateSRAttachment(responseList[i], deferred);
-
-                            } else {
-
-                                insertSRAttachment(responseList[i], deferred);
-                            }
-
-                        }, function (tx, error) {
-
-                            // console.log("SRATTACHMENT SELECT ERROR: " + error.message);
-
-                            deferred.reject(error);
-                        });
-
-                    }, function (error) {
-
-                        // console.log("SRATTACHMENT SELECT TRANSACTION ERROR: " + error.message);
-
-                        deferred.reject(error);
-                    });
-
-                    // console.log("SRATTACHMENT OBJECT =====> " + JSON.stringify(responseList[i]));
-
-                    promises.push(deferred.promise);
-
-                })(i);
-            }
-
-            $q.all(promises).then(
-                function (response) {
-                    callback("SUCCESS");
-                },
-
-                function (error) {
-                    callback("ERROR");
-                }
-            );
-        };
-
-        function updateSRAttachment(responseList, defer) {
-
-            db.transaction(function (transaction) {
-
-                var insertValues = [];
-
-                var sqlUpdate = "UPDATE SRAttachment SET Reference_Number = ?, File_Attachment_ID = ?, Date_Created = ?, Content_Type = ?, User_File_Name = ?, Date_Last_Updated = ? WHERE SRID = ?";
-
-                insertValues.push(responseList.Reference_Number);
-                insertValues.push(responseList.File_Attachment_ID);
-                insertValues.push(responseList.Date_Created);
-                insertValues.push(responseList.Content_Type);
-                insertValues.push(responseList.User_File_Name);
-                insertValues.push(responseList.Date_Last_Updated);
-                insertValues.push(responseList.SRID);
-
-                // console.log("SRATTACHMENT UPDATE VALUES =====> " + insertValues);
-
-                transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
-
-                    defer.resolve(res);
-
-                    // console.log("SRATTACHMENT ROW AFFECTED: " + res.rowsAffected);
-
-                }, function (tx, error) {
-
-                    // console.log("SRATTACHMENT UPDATE ERROR: " + error.message);
-
-                    defer.reject(error);
-                });
-
-            }, function (error) {
-
-                // console.log("SRATTACHMENT UPDATE TRANSACTION ERROR: " + error.message);
-
-                defer.reject(error);
-            });
-        };
-
-        function insertSRAttachment(responseList, defer) {
-
-            db.transaction(function (transaction) {
-
-                var insertValues = [];
-
-                var sqlInsert = "INSERT INTO SRAttachment VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-                insertValues.push(responseList.SRID);
-                insertValues.push(responseList.Reference_Number);
-                insertValues.push(responseList.File_Attachment_ID);
-                insertValues.push(responseList.Date_Created);
-                insertValues.push(responseList.Content_Type);
-                insertValues.push(responseList.User_File_Name);
-                insertValues.push(responseList.Date_Last_Updated);
-
-                // console.log("SRATTACHMENT INSERT VALUES =====> " + insertValues);
-
-                transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
-
-                    defer.resolve(res);
-
-                    // console.log("SRATTACHMENT INSERT ID: " + res.insertId);
-
-                }, function (tx, error) {
-
-                    // console.log("SRATTACHMENT INSERT ERROR: " + error.message);
-
-                    defer.reject(error);
-                });
-
-            }, function (error) {
-
-                // console.log("SRATTACHMENT INSERT TRANSACTION ERROR: " + error.message);
 
                 defer.reject(error);
             });
@@ -874,7 +737,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE InstallBase SET Product_Line = ?, Serial_Number = ?, TagNumber = ?, Original_PO_Number =?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?  WHERE Installed_Base_ID = ? AND Task_Number = ?";
+                var sqlUpdate = "UPDATE InstallBase SET Product_Line = ?, Serial_Number = ?, TagNumber = ?, Original_PO_Number =?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?, ResourceId = ?  WHERE Installed_Base_ID = ? AND Task_Number = ?";
 
                 insertValues.push(responseList.Product_Line);
                 insertValues.push(responseList.Serial_Number);
@@ -884,6 +747,7 @@
                 insertValues.push(responseList.Assigned);
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.End_Date);
+                insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.Installed_Base_ID);
                 insertValues.push(responseList.Task_Number);
 
@@ -916,7 +780,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO InstallBase VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO InstallBase VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Installed_Base_ID);
                 insertValues.push(responseList.Product_Line);
@@ -928,6 +792,7 @@
                 insertValues.push(responseList.Assigned);
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.End_Date);
+                insertValues.push(constantService.getResourceId());
 
                 // console.log("INSTALLBASE INSERT VALUES =====> " + insertValues);
 
@@ -1025,7 +890,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Contact SET Customer_Name = ?, Contact_Name = ?, Home_Phone = ?, Mobile_Phone =?, Fax_Phone = ?, Office_Phone = ?, Email = ?, Foreign_Key = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?  WHERE Contact_ID = ? AND Task_Number = ?";
+                var sqlUpdate = "UPDATE Contact SET Customer_Name = ?, Contact_Name = ?, Home_Phone = ?, Mobile_Phone =?, Fax_Phone = ?, Office_Phone = ?, Email = ?, Foreign_Key = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?, ResourceId = ?  WHERE Contact_ID = ? AND Task_Number = ?";
 
                 insertValues.push(responseList.Customer_Name);
                 insertValues.push(responseList.Contact_Name);
@@ -1039,6 +904,7 @@
                 insertValues.push(responseList.Assigned);
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.End_Date);
+                insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.Contact_ID);
                 insertValues.push(responseList.Task_Number);
 
@@ -1071,7 +937,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Contact VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Contact VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Contact_ID);
                 insertValues.push(responseList.Customer_Name);
@@ -1087,6 +953,7 @@
                 insertValues.push(responseList.Assigned);
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.End_Date);
+                insertValues.push(constantService.getResourceId());
 
                 // console.log("CONTACT INSERT VALUES =====> " + insertValues);
 
@@ -1182,7 +1049,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Note SET Notes = ?, Notes_type = ?, Note_Description = ?, Created_By = ?, MobileCreatedBy = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?, Last_updated_date = ?, SR_ID = ?  WHERE ID = ? AND Task_Number =?";
+                var sqlUpdate = "UPDATE Note SET Notes = ?, Notes_type = ?, Note_Description = ?, Created_By = ?, MobileCreatedBy = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?, Last_updated_date = ?, SR_ID = ?, ResourceId = ?  WHERE ID = ? AND Task_Number =?";
 
                 insertValues.push(responseList.Notes);
                 insertValues.push(responseList.Notes_type);
@@ -1195,6 +1062,7 @@
                 insertValues.push(responseList.End_Date);
                 insertValues.push(responseList.Last_updated_date);
                 insertValues.push(responseList.SR_ID);
+                insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.ID);
                 insertValues.push(responseList.Task_Number);
 
@@ -1227,7 +1095,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Note VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Note VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.ID);
                 insertValues.push(responseList.Notes);
@@ -1242,6 +1110,7 @@
                 insertValues.push(responseList.End_Date);
                 insertValues.push(responseList.Last_updated_date);
                 insertValues.push(responseList.SR_ID);
+                insertValues.push(constantService.getResourceId());
 
                 // console.log("NOTE INSERT VALUES =====> " + insertValues);
 
@@ -1337,7 +1206,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Attachment SET File_Name = ?, File_Type = ?, File_Path = ?, Type = ?, AttachmentType = ?,Created_Date = ?, Task_Number = ?, SRID = ? WHERE Attachment_Id = ?";
+                var sqlUpdate = "UPDATE Attachment SET File_Name = ?, File_Type = ?, File_Path = ?, Type = ?, AttachmentType = ?,Created_Date = ?, Task_Number = ?, SRID = ?, ResourceId = ? WHERE Attachment_Id = ?";
 
                 insertValues.push(responseList.File_Name);
                 insertValues.push(responseList.File_Type);
@@ -1347,6 +1216,7 @@
                 insertValues.push(responseList.Created_Date);
                 insertValues.push(responseList.Task_Number);
                 insertValues.push(responseList.SRID);
+                insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.Attachment_Id);
 
 
@@ -1377,7 +1247,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Attachment VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Attachment VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Attachment_Id);
                 insertValues.push(responseList.File_Name);
@@ -1388,6 +1258,7 @@
                 insertValues.push(responseList.Created_Date);
                 insertValues.push(responseList.Task_Number);
                 insertValues.push(responseList.SRID);
+                insertValues.push(constantService.getResourceId());
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
@@ -1578,7 +1449,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE OverTime SET Overtimeshiftcode = ?, Technician_ID = ?, Field_Job_ID = ?, Project = ?, Start_Date = ?, Date_Completed = ?  WHERE OverTime_Shift_Code_ID = ? AND Task = ?";
+                var sqlUpdate = "UPDATE OverTime SET Overtimeshiftcode = ?, Technician_ID = ?, Field_Job_ID = ?, Project = ?, Start_Date = ?, Date_Completed = ?, ResourceId = ?  WHERE OverTime_Shift_Code_ID = ? AND Task = ?";
 
                 insertValues.push(responseList.Overtimeshiftcode);
                 insertValues.push(responseList.Technician_ID);
@@ -1586,6 +1457,7 @@
                 insertValues.push(responseList.Project);
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.Date_Completed);
+                insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.OverTime_Shift_Code_ID);
                 insertValues.push(responseList.Task);
 
@@ -1616,7 +1488,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO OverTime VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO OverTime VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.OverTime_Shift_Code_ID);
                 insertValues.push(responseList.Overtimeshiftcode);
@@ -1626,6 +1498,7 @@
                 insertValues.push(responseList.Project);
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.Date_Completed);
+                insertValues.push(constantService.getResourceId());
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
@@ -1719,7 +1592,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE ShiftCode SET ShiftCodeName = ?, Technician_ID = ?, Field_Job_ID = ?, Start_Date = ?, Date_Completed = ?, Project = ?  WHERE Shift_Code_ID = ? AND TaskNumber = ?";
+                var sqlUpdate = "UPDATE ShiftCode SET ShiftCodeName = ?, Technician_ID = ?, Field_Job_ID = ?, Start_Date = ?, Date_Completed = ?, Project = ?, ResourceId = ?  WHERE Shift_Code_ID = ? AND TaskNumber = ?";
 
                 insertValues.push(responseList.ShiftCodeName);
                 insertValues.push(responseList.Technician_ID);
@@ -1727,6 +1600,7 @@
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.Date_Completed);
                 insertValues.push(responseList.Project);
+                insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.Shift_Code_ID);
                 insertValues.push(responseList.TaskNumber);
 
@@ -1757,7 +1631,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO ShiftCode VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO ShiftCode VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Shift_Code_ID);
                 insertValues.push(responseList.ShiftCodeName);
@@ -1767,6 +1641,7 @@
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.Date_Completed);
                 insertValues.push(responseList.Project);
+                insertValues.push(constantService.getResourceId());
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
@@ -1860,9 +1735,10 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE ChargeType SET Value = ?  WHERE ID = ?";
+                var sqlUpdate = "UPDATE ChargeType SET Value = ?, ResourceId = ?  WHERE ID = ?";
 
                 insertValues.push(responseList.Value);
+                insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.ID);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
@@ -1892,10 +1768,11 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO ChargeType VALUES (?, ?)";
+                var sqlInsert = "INSERT INTO ChargeType VALUES (?, ?, ?)";
 
                 insertValues.push(responseList.ID);
                 insertValues.push(responseList.Value);
+                insertValues.push(constantService.getResourceId());
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
@@ -1989,9 +1866,10 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE ChargeMethod SET Value = ?  WHERE ID = ?";
+                var sqlUpdate = "UPDATE ChargeMethod SET Value = ?, ResourceId = ?  WHERE ID = ?";
 
                 insertValues.push(responseList.Value);
+                insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.ID);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
@@ -2021,10 +1899,11 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO ChargeMethod VALUES (?, ?)";
+                var sqlInsert = "INSERT INTO ChargeMethod VALUES (?, ?, ?)";
 
                 insertValues.push(responseList.ID);
                 insertValues.push(responseList.Value);
+                insertValues.push(constantService.getResourceId());
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
@@ -2118,13 +1997,14 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE FieldJobName SET JobName = ?, Technician_ID = ?, Project = ?, Start_Date = ?, Date_Completed = ?  WHERE TaskCode = ? AND Task = ?";
+                var sqlUpdate = "UPDATE FieldJobName SET JobName = ?, Technician_ID = ?, Project = ?, Start_Date = ?, Date_Completed = ?, ResourceId = ?  WHERE TaskCode = ? AND Task = ?";
 
                 insertValues.push(responseList.JobName);
                 insertValues.push(responseList.Technician_ID);
                 insertValues.push(responseList.Project);
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.Date_Completed);
+                insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.TaskCode);
                 insertValues.push(responseList.Task);
 
@@ -2155,7 +2035,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO FieldJobName VALUES (?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO FieldJobName VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.TaskCode);
                 insertValues.push(responseList.JobName);
@@ -2164,6 +2044,7 @@
                 insertValues.push(responseList.Project);
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.Date_Completed);
+                insertValues.push(constantService.getResourceId());
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
@@ -2257,9 +2138,10 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE WorkType SET Value = ?  WHERE ID = ?";
+                var sqlUpdate = "UPDATE WorkType SET Value = ?, ResourceId = ? WHERE ID = ?";
 
                 insertValues.push(responseList.Value);
+                insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.ID);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
@@ -2289,10 +2171,11 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO WorkType VALUES (?, ?)";
+                var sqlInsert = "INSERT INTO WorkType VALUES (?, ?, ?)";
 
                 insertValues.push(responseList.ID);
                 insertValues.push(responseList.Value);
+                insertValues.push(constantService.getResourceId());
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
@@ -2386,10 +2269,11 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Item SET Value = ?, Type = ?  WHERE ID = ?";
+                var sqlUpdate = "UPDATE Item SET Value = ?, Type = ?, ResourceId = ?  WHERE ID = ?";
 
                 insertValues.push(responseList.Value);
                 insertValues.push(responseList.Type);
+                insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.ID);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
@@ -2419,11 +2303,12 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Item VALUES (?, ?, ?)";
+                var sqlInsert = "INSERT INTO Item VALUES (?, ?, ?, ?)";
 
                 insertValues.push(responseList.ID);
                 insertValues.push(responseList.Value);
                 insertValues.push(responseList.Type);
+                insertValues.push(constantService.getResourceId());
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
@@ -2517,9 +2402,10 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Currency SET Value = ?  WHERE ID = ?";
+                var sqlUpdate = "UPDATE Currency SET Value = ?, ResourceId = ?  WHERE ID = ?";
 
                 insertValues.push(responseList.Value);
+                insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.ID);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
@@ -2549,10 +2435,11 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Currency VALUES (?, ?)";
+                var sqlInsert = "INSERT INTO Currency VALUES (?, ?, ?)";
 
                 insertValues.push(responseList.ID);
                 insertValues.push(responseList.Value);
+                insertValues.push(constantService.getResourceId());
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
@@ -2646,9 +2533,10 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE ExpenseType SET Value = ?  WHERE ID = ?";
+                var sqlUpdate = "UPDATE ExpenseType SET Value = ?, ResourceId = ?  WHERE ID = ?";
 
                 insertValues.push(responseList.Value);
+                insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.ID);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
@@ -2678,10 +2566,11 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO ExpenseType VALUES (?, ?)";
+                var sqlInsert = "INSERT INTO ExpenseType VALUES (?, ?, ?)";
 
                 insertValues.push(responseList.ID);
                 insertValues.push(responseList.Value);
+                insertValues.push(constantService.getResourceId());
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
@@ -2775,9 +2664,10 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE NoteType SET Value = ?  WHERE ID = ?";
+                var sqlUpdate = "UPDATE NoteType SET Value = ?, ResourceId = ?  WHERE ID = ?";
 
                 insertValues.push(responseList.Value);
+                insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.ID);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
@@ -2807,10 +2697,11 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO NoteType VALUES (?, ?)";
+                var sqlInsert = "INSERT INTO NoteType VALUES (?, ?, ?)";
 
                 insertValues.push(responseList.ID);
                 insertValues.push(responseList.Value);
+                insertValues.push(constantService.getResourceId());
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
@@ -2904,7 +2795,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Time SET timeDefault = ?, Field_Job_Name = ?, Field_Job_Name_Id = ?, Charge_Type = ?, Charge_Type_Id = ?, Charge_Method = ?, Charge_Method_Id = ?, Work_Type = ?, Work_Type_Id = ?, Item = ?, Item_Id = ?, Description = ?, Time_Code = ?, Time_Code_Id = ?, Shift_Code = ?, Shift_Code_Id = ?, Date = ?, Duration = ?, Comments = ?  WHERE Time_Id = ? AND Task_Number = ?";
+                var sqlUpdate = "UPDATE Time SET timeDefault = ?, Field_Job_Name = ?, Field_Job_Name_Id = ?, Charge_Type = ?, Charge_Type_Id = ?, Charge_Method = ?, Charge_Method_Id = ?, Work_Type = ?, Work_Type_Id = ?, Item = ?, Item_Id = ?, Description = ?, Time_Code = ?, Time_Code_Id = ?, Shift_Code = ?, Shift_Code_Id = ?, Date = ?, Duration = ?, Comments = ?, ResourceId = ?  WHERE Time_Id = ? AND Task_Number = ?";
 
                 insertValues.push(responseList.timeDefault);
                 insertValues.push(responseList.Field_Job_Name);
@@ -2925,6 +2816,7 @@
                 insertValues.push(responseList.Date);
                 insertValues.push(responseList.Duration);
                 insertValues.push(responseList.Comments);
+                insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.Time_Id);
                 insertValues.push(responseList.Task_Number);
 
@@ -2955,7 +2847,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Time VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Time VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Time_Id);
                 insertValues.push(responseList.timeDefault);
@@ -2978,6 +2870,7 @@
                 insertValues.push(responseList.Duration);
                 insertValues.push(responseList.Comments);
                 insertValues.push(responseList.Task_Number);
+                insertValues.push(constantService.getResourceId());
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
@@ -3071,7 +2964,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Expense SET expenseDefault = ?, Date = ?, Expense_Type = ?, Expense_Type_Id = ?, Amount = ?, Currency = ?, Currency_Id = ?, Charge_Method = ?, Charge_Method_Id = ?, Justification = ? WHERE Expense_Id = ? AND Task_Number = ?";
+                var sqlUpdate = "UPDATE Expense SET expenseDefault = ?, Date = ?, Expense_Type = ?, Expense_Type_Id = ?, Amount = ?, Currency = ?, Currency_Id = ?, Charge_Method = ?, Charge_Method_Id = ?, Justification = ?, ResourceId = ? WHERE Expense_Id = ? AND Task_Number = ?";
 
                 insertValues.push(responseList.expenseDefault);
                 insertValues.push(responseList.Date);
@@ -3083,6 +2976,7 @@
                 insertValues.push(responseList.Charge_Method);
                 insertValues.push(responseList.Charge_Method_Id);
                 insertValues.push(responseList.Justification);
+                insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.Expense_Id);
                 insertValues.push(responseList.Task_Number);
 
@@ -3113,7 +3007,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Expense VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Expense VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Expense_Id);
                 insertValues.push(responseList.expenseDefault);
@@ -3127,6 +3021,7 @@
                 insertValues.push(responseList.Charge_Method_Id);
                 insertValues.push(responseList.Justification);
                 insertValues.push(responseList.Task_Number);
+                insertValues.push(constantService.getResourceId());
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
@@ -3220,7 +3115,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Material SET materialDefault = ?, Charge_Type = ?, Charge_Type_Id = ?, Description = ?, ItemName = ?, Product_Quantity = ?, Serial_Number = ?, Serial_In = ?, Serial_Out = ? WHERE Material_Id = ? AND Task_Number = ?";
+                var sqlUpdate = "UPDATE Material SET materialDefault = ?, Charge_Type = ?, Charge_Type_Id = ?, Description = ?, ItemName = ?, Product_Quantity = ?, Serial_Number = ?, Serial_In = ?, Serial_Out = ?, ResourceId = ? WHERE Material_Id = ? AND Task_Number = ?";
 
                 insertValues.push(responseList.materialDefault);
                 insertValues.push(responseList.Charge_Type);
@@ -3231,6 +3126,7 @@
                 insertValues.push(responseList.Serial_Number);
                 insertValues.push(responseList.Serial_In);
                 insertValues.push(responseList.Serial_Out);
+                insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.Material_Id);
                 insertValues.push(responseList.Task_Number);
 
@@ -3261,7 +3157,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Material VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Material VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Material_Id);
                 insertValues.push(responseList.materialDefault);
@@ -3274,6 +3170,7 @@
                 insertValues.push(responseList.Serial_In);
                 insertValues.push(responseList.Serial_Out);
                 insertValues.push(responseList.Task_Number);
+                insertValues.push(constantService.getResourceId());
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
@@ -3367,7 +3264,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Notes SET noteDefault = ?, Note_Type = ?, Note_Type_Id = ?, Date = ?, Created_By = ?, Notes = ? WHERE Notes_Id = ? AND Task_Number = ?";
+                var sqlUpdate = "UPDATE Notes SET noteDefault = ?, Note_Type = ?, Note_Type_Id = ?, Date = ?, Created_By = ?, Notes = ?, ResourceId = ? WHERE Notes_Id = ? AND Task_Number = ?";
 
                 insertValues.push(responseList.noteDefault);
                 insertValues.push(responseList.Note_Type);
@@ -3375,6 +3272,7 @@
                 insertValues.push(responseList.Date);
                 insertValues.push(responseList.Created_By);
                 insertValues.push(responseList.Notes);
+                insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.Notes_Id);
                 insertValues.push(responseList.Task_Number);
 
@@ -3405,7 +3303,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Notes VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Notes VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Notes_Id);
                 insertValues.push(responseList.noteDefault);
@@ -3415,6 +3313,7 @@
                 insertValues.push(responseList.Created_By);
                 insertValues.push(responseList.Notes);
                 insertValues.push(responseList.Task_Number);
+                insertValues.push(constantService.getResourceId());
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
@@ -3502,7 +3401,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Engineer SET Follow_Up = ?, Spare_Quote= ?, Sales_Visit = ?, Sales_Head =?, Sign_File_Path =?, File_Name = ?, Task_Number = ?, isCustomerSignChecked = ?, customerComments = ?  WHERE Engineer_Id = ?";
+                var sqlUpdate = "UPDATE Engineer SET Follow_Up = ?, Spare_Quote= ?, Sales_Visit = ?, Sales_Head =?, Sign_File_Path =?, File_Name =?, Task_Number = ?, ResourceId = ?  WHERE Engineer_Id = ?";
 
                 insertValues.push(responseList.Follow_Up);
                 insertValues.push(responseList.Spare_Quote);
@@ -3511,8 +3410,7 @@
                 insertValues.push(responseList.Sign_File_Path);
                 insertValues.push(responseList.File_Name);
                 insertValues.push(responseList.Task_Number);
-                insertValues.push(responseList.isCustomerSignChecked);
-                insertValues.push(responseList.customerComments);
+                insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.Engineer_Id);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
@@ -3542,7 +3440,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Engineer VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Engineer VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Engineer_Id);
                 insertValues.push(responseList.followUp);
@@ -3556,8 +3454,7 @@
                 insertValues.push(responseList.Sign_File_Path);
                 insertValues.push(responseList.File_Name);
                 insertValues.push(responseList.Task_Number);
-                insertValues.push(responseList.isCustomerSignChecked);
-                insertValues.push(responseList.customerComments);
+                insertValues.push(constantService.getResourceId());
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
@@ -4098,7 +3995,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM Task", [], function (tx, res) {
+                transaction.executeSql("SELECT * FROM Task WHERE ResourceId = ?", [constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4132,7 +4029,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM Internal", [], function (tx, res) {
+                transaction.executeSql("SELECT * FROM Internal WHERE ResourceId = ?", [constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4166,7 +4063,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM Task WHERE Submit_Status = ?", ["P"], function (tx, res) {
+                transaction.executeSql("SELECT * FROM Task WHERE Submit_Status = ? AND ResourceId = ?", ["P", constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4200,7 +4097,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM Task WHERE Submit_Status = ?", ["A"], function (tx, res) {
+                transaction.executeSql("SELECT * FROM Task WHERE Submit_Status = ? AND ResourceId = ?", ["A", constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4234,7 +4131,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM SRNotes WHERE Service_Request = ? ", [taskId], function (tx, res) {
+                transaction.executeSql("SELECT * FROM SRNotes WHERE Service_Request = ? AND ResourceId = ?", [taskId, constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4268,7 +4165,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM SRNotes", [], function (tx, res) {
+                transaction.executeSql("SELECT * FROM SRNotes WHERE ResourceId = ?", [constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4302,7 +4199,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM SRAttachment WHERE Reference_Number = ? ", [taskId], function (tx, res) {
+                transaction.executeSql("SELECT * FROM SRAttachment WHERE Reference_Number = ? AND ResourceId = ?", [taskId, constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4336,7 +4233,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM SRAttachment", [], function (tx, res) {
+                transaction.executeSql("SELECT * FROM SRAttachment WHERE ResourceId = ?", [constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4370,7 +4267,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM InstallBase WHERE Task_Number = ? ", [taskId], function (tx, res) {
+                transaction.executeSql("SELECT * FROM InstallBase WHERE Task_Number = ? AND ResourceId = ?", [taskId, constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4404,7 +4301,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM Contact WHERE Task_Number = ? ", [taskId], function (tx, res) {
+                transaction.executeSql("SELECT * FROM Contact WHERE Task_Number = ? AND ResourceId = ?", [taskId, constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4438,7 +4335,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM Note WHERE Task_Number = ? ", [taskId], function (tx, res) {
+                transaction.executeSql("SELECT * FROM Note WHERE Task_Number = ? AND ResourceId = ?", [taskId, constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4506,7 +4403,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM OverTime WHERE Task = ?", [taskId], function (tx, res) {
+                transaction.executeSql("SELECT * FROM OverTime WHERE Task = ? AND ResourceId = ?", [taskId, constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4540,7 +4437,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM ShiftCode  WHERE TaskNumber = ?", [taskId], function (tx, res) {
+                transaction.executeSql("SELECT * FROM ShiftCode  WHERE TaskNumber = ? AND ResourceId = ?", [taskId, constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4574,7 +4471,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM ChargeType", [], function (tx, res) {
+                transaction.executeSql("SELECT * FROM ChargeType WHERE ResourceId = ?", [constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4608,7 +4505,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM ChargeMethod", [], function (tx, res) {
+                transaction.executeSql("SELECT * FROM ChargeMethod WHERE ResourceId = ?", [constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4642,7 +4539,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM FieldJobName WHERE Task = ?", [taskNumber], function (tx, res) {
+                transaction.executeSql("SELECT * FROM FieldJobName WHERE Task = ? AND ResourceId = ?", [taskNumber, constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4676,7 +4573,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM WorkType", [], function (tx, res) {
+                transaction.executeSql("SELECT * FROM WorkType WHERE ResourceId = ?", [constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4710,7 +4607,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM Item", [], function (tx, res) {
+                transaction.executeSql("SELECT * FROM Item WHERE ResourceId = ?", [constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4744,7 +4641,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM Currency", [], function (tx, res) {
+                transaction.executeSql("SELECT * FROM Currency WHERE ResourceId = ?", [constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4778,7 +4675,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM ExpenseType", [], function (tx, res) {
+                transaction.executeSql("SELECT * FROM ExpenseType WHERE ResourceId = ?", [constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4812,7 +4709,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM NoteType", [], function (tx, res) {
+                transaction.executeSql("SELECT * FROM NoteType WHERE ResourceId = ?", [constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4846,7 +4743,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM Time WHERE Task_Number = ? ", [taskId], function (tx, res) {
+                transaction.executeSql("SELECT * FROM Time WHERE Task_Number = ? AND ResourceId = ?", [taskId, constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4880,7 +4777,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM Expense WHERE Task_Number = ? ", [taskId], function (tx, res) {
+                transaction.executeSql("SELECT * FROM Expense WHERE Task_Number = ? AND ResourceId = ?", [taskId, constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4914,7 +4811,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM Material WHERE Task_Number = ? ", [taskId], function (tx, res) {
+                transaction.executeSql("SELECT * FROM Material WHERE Task_Number = ? AND ResourceId = ?", [taskId, constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4948,7 +4845,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM Notes WHERE Task_Number = ? ", [taskId], function (tx, res) {
+                transaction.executeSql("SELECT * FROM Notes WHERE Task_Number = ? AND ResourceId = ?", [taskId, constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4982,7 +4879,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM Attachment WHERE Task_Number = ? AND Type = ?", [taskId, type], function (tx, res) {
+                transaction.executeSql("SELECT * FROM Attachment WHERE Task_Number = ? AND Type = ? AND ResourceId = ?", [taskId, type, constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -5016,7 +4913,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM Attachment WHERE SRID = ? AND Type = ?", [taskId, type], function (tx, res) {
+                transaction.executeSql("SELECT * FROM Attachment WHERE SRID = ? AND Type = ? AND ResourceId = ?", [taskId, type, constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -5050,7 +4947,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM Attachment WHERE Type = ?", [type], function (tx, res) {
+                transaction.executeSql("SELECT * FROM Attachment WHERE Type = ? AND ResourceId = ?", [type, constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -5084,7 +4981,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM Engineer WHERE Task_Number = ? ", [taskId], function (tx, res) {
+                transaction.executeSql("SELECT * FROM Engineer WHERE Task_Number = ? AND ResourceId = ?", [taskId, constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
