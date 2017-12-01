@@ -17,6 +17,7 @@
         service.getTechnicianProfile = getTechnicianProfile;
 
         service.getTaskList = getTaskList;
+        service.getTaskDetails = getTaskDetails;
         service.getInternalList = getInternalList;
         service.getInstallBaseList = getInstallBaseList;
         service.getSRNotesList = getSRNotesList;
@@ -119,6 +120,62 @@
             }).error(function (error) {
 
                 console.log('Technician Error', JSON.stringify(error));
+
+                callback(error);
+            });
+        }
+
+        function getTaskDetails(isLogin, callback) {
+
+            var data = {};
+
+            if (isLogin == "0") {
+
+                data = {
+                    "isLogin": "0",
+                    "fromDate": constantService.getStartDate(),
+                    "toDate": constantService.getEndDate(),
+                    "updateDate": "",
+                    "resourceId": constantService.getResourceId()
+                };
+
+            } else if (isLogin == "1") {
+
+                data = {
+                    "isLogin": "1",
+                    "fromDate": "",
+                    "toDate": "",
+                    "updateDate": constantService.getUser().Last_Updated.toISOString(),
+                    "resourceId": constantService.getResourceId()
+                };
+            }
+
+            console.log("START ======> " + JSON.stringify(data));
+
+            console.log("START ======> " + new Date());
+
+            $http({
+
+                method: 'POST',
+                url: url + "getTaskDetails/get_Tasks",
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getCombinedBackId()
+                },
+                data: data
+
+            }).success(function (response) {
+
+                console.log("END ======> " + new Date());
+
+                console.log("Task Response " + JSON.stringify(response));
+
+            }).error(function (error) {
+
+                console.log("END ======> " + new Date());
+
+                console.log("Task Error " + JSON.stringify(error));
 
                 callback(error);
             });
@@ -1546,7 +1603,9 @@
 
                                             if (!isAccept) {
 
+
                                                 var complete = { "activityId": startActivityData.activity_id, "date": moment(new Date()).format('YYYY-MM-DD HH:mm:ss')};
+
 
                                                 console.log("complete_activity*****" + complete.activityId);
                                                 console.log("complete activity ******" + complete.date);
@@ -1589,8 +1648,7 @@
                                 //    })
                                 //}
                             }
-                            else
-                            {
+                            else {
                                 callback();
                             }
                         });
