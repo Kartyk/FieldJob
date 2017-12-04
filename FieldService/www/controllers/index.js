@@ -471,7 +471,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
         cloudService.login(data, function (response) {
 
-            if (response && response != null && response.length > 0) {
+            if (response && response != null && response.ID != undefined && response.ID!="") {
 
                 valueService.setResourceId(response['ID']);
 
