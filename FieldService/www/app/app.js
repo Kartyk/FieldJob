@@ -438,13 +438,36 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
                     }
                 });
             };
-
-            $rootScope.clear = function () {
+            $rootScope.clearcustomerSign =  function () {
 
                 $scope.signaturePad.clear();
 
                 $scope.dataurl = EMPTY_IMAGE;
+                $scope.updateModel();
+                var stagesTime = constantService.getStagesArray();
 
+                switch (stagesTime.title) {
+
+                    case 'Engineer Signature':
+                        $rootScope.engineerSignTime = '';
+                        $rootScope.Engsignature = '';
+                        break;
+
+                    case 'Customer Signature':
+                        $rootScope.customerSignTime = '';
+                        $rootScope.customersignature = '';
+                        break;
+
+                    default:
+                        break;
+                }
+            };
+             $scope.clear = function () {
+
+                $scope.signaturePad.clear();
+                
+                $scope.dataurl = EMPTY_IMAGE;
+                $scope.updateModel();
                 var stagesTime = constantService.getStagesArray();
 
                 switch (stagesTime.title) {

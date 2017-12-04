@@ -2453,3 +2453,7 @@ textarea:focus {
 .taskStatusList li{
     padding:10px;
 }
+.padding-right15
+{
+    padding-right:15px !important;
+}

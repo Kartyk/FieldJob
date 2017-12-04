@@ -125,7 +125,7 @@
             <div class="layout-row">
                 <!--             <div class="flex-30" ng-click="clear()" style="width:100px" ng-disabled="isSubmitted">Clear</div> -->
                 <div class="flex-20">
-                    <button class="serbtn" ng-click="$root.clear();debriefClear()" ng-disabled="isSubmitted || $root.completedTask" translate="Clear"></button>
+                    <button class="serbtn" ng-click="$root.clearcustomerSign();debriefClear()" ng-disabled="isSubmitted || $root.completedTask" translate="Clear"></button>
 
                 </div>
                 <!-- <div class="flex-15">
@@ -137,12 +137,12 @@
                     <div ng-show="!summary.noteType" > <label style="font-weight:normal;color:red">Please add Action Taken note in Notes tab</label></div>
                 </div>
                 <div class="flex-20">
-                    <button class="summary-report-donebtn" ng-click="custsignature = accept();customerSubmit()" style="float:right;" ng-disabled="isSubmitted || $root.completedTask || summary.engineer.signature=='' || summary.engineer.signature==undefined || !summary.noteType" translate="Submit"></button>
+                    <button type="submit" class="summary-report-donebtn" ng-click="custsignature = accept();customerSubmit()" style="float:right;" ng-disabled="isSubmitted || $root.completedTask || summary.engineer.signature=='' || summary.engineer.signature==undefined || !summary.noteType || !$root.timeformValid||!$root.expenseformValid|| !$root.materialFormValid" translate="Submit"></button>
                 </div>
             </div>
         </div>
     </form>
 </div>
           <div class="result" style="display:none">
-            <img style="" id="customerSignature" ng-src="{{ $root.signature }}">
+            <img style="" id="customerSignature" ng-src="{{ $root.customersignature }}">
         </div> 

@@ -26,7 +26,9 @@
 
         <md-button class="subheader-btns selectedTabColor" aria-label="Learn More"  ui-sref="taskOverFlow" translate="Field Job Details">
         </md-button>
-        <md-button class="subheader-btns" aria-label="Learn More" ng-disabled="!$root.accepted" ng-click="goToOnsiteReq()" translate="Onsite Requirement" style="margin-left: 34px !important;position:relative;bottom:11px;">
+        <!--<md-button class="subheader-btns" aria-label="Learn More" ng-disabled="!$root.accepted" ng-click="goToOnsiteReq()" translate="Onsite Requirement" style="margin-left: 34px !important;position:relative;bottom:11px;">
+        </md-button>-->
+        <md-button class="subheader-btns" aria-label="Learn More"  ng-click="goToOnsiteReq()" translate="Onsite Requirement" style="margin-left: 34px !important;position:relative;bottom:11px;">
         </md-button>
     </div>
 
@@ -48,17 +50,17 @@
         <div class="taskOverFlow-div">
             <div layout="row">
 
-                <div flex="25">
+                <div flex="25" class="padding-right15">
                     <div class="mylabel" translate="Service Request"></div>
                     <div class="myvalue">{{taskDetails.Service_Request}}</div>
                 </div>
 
-                <div flex="25">
+                <div flex="25" class="padding-right15">
                     <div class="mylabel" translate="Field Job Number"></div>
                     <div class="myvalue">{{taskDetails.Task_Number}}</div>
                 </div>
 
-                <div flex="50">
+                <div flex="50" >
 
                      <div class="mylabel" translate="Job Description"></div>
                         <div class="myvalue">{{taskDetails.Job_Description}}
@@ -122,11 +124,11 @@
             <div class="margintop30 no-marbottom">
 
                 <div layout="row">
-                    <div flex="25" class="mylabel">
+                    <div flex="25" class="mylabel padding-right15">
                         <span translate="Product Line"></span>
                             <span> #</span>
                     </div>
-                    <div flex="25" class="mylabel">
+                    <div flex="25" class="mylabel padding-right15">
                         <span translate="System ID / Serial"></span>
                             <span> #</span>
                     </div>
@@ -199,7 +201,7 @@
             </div>
 
             <div class="ng-scope layout-row margintop40">
-                <div class="flex-33">
+                <div class="flex-33" style="padding-right:15px;">
                     <div class="mylabel" translate="Street Address"></div>
                     <div class="myvalue">{{taskDetails.Street_Address}}</div>
                 </div>

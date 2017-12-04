@@ -1,7 +1,7 @@
-﻿app.controller("debriefController", function ($scope, $state, $rootScope, $window, $timeout, $filter, $http, $q, cloudService, $mdDialog, valueService, localService, Upload, constantService, $anchorScroll, $location) {
+﻿app.controller("debriefController", function ($translate,$scope, $state, $rootScope, $window, $timeout, $filter, $http, $q, cloudService, $mdDialog, valueService, localService, Upload, constantService, $anchorScroll, $location) {
 
     $scope.currentTab = "time";
-
+    //$scope.timeformValid = false;
     $rootScope.Islogin = true;
 
     $scope.userType = valueService.getUserType().clarityType;
@@ -11,7 +11,34 @@
     $rootScope.headerName = "Debrief";
 
     $scope.isCustomerSignChecked = false;
-
+    changeLanguage(valueService.getLanguage());
+    function changeLanguage (lang) {
+        valueService.setLanguage(lang);
+        switch (lang) {
+            case "en":
+               $translate.use('en').then(function () {
+                    console.log('English Used');
+                });
+                break;
+            case "fr":
+                $translate.use('fr').then(function () {
+                    console.log('french Used');                
+                });
+                break;
+            case "ch":
+                $translate.use('jp').then(function () {
+                    console.log('Chinese Used');                   
+                });
+                break;
+            case "":
+                $translate.use('en').then(function () {
+                    console.log('English Used');
+                });
+                break;
+            default:
+                break;
+        }
+    }
     if (valueService.getUserType().defaultView == "My Task") {
 
         $scope.routeAfterDone = "myFieldJob";
@@ -1448,7 +1475,7 @@
         }
 
         if (stage.title == "Summary") {
-
+            console.log($rootScope.timeformValid);
             $scope.summary.timeArray = [];
             $scope.summary.expenseArray = [];
             $scope.summary.materialArray = [];
@@ -1755,6 +1782,14 @@
 
                 $scope.summary.timeArray.push(grandtimeObject)
             }
+        }
+        if (stage.title.toLowerCase() == "customer signature") {
+            $scope.summary.noteType = false;
+            angular.forEach($scope.notesArray, function (key, value) {
+                if (key.Note_Type.Value == "Action Taken") {
+                    $scope.summary.noteType = true;
+                }
+            })
         }
     }
 
@@ -2418,7 +2453,7 @@
         }
     };
     $scope.checkDuration = function (item) {
-        if (item.Duration == "") {
+        if (item.Duration == "" || item.Duration == undefined) {
             item.Duration = "00:00";
             item.DurationHours = 0;
             item.DurationMinutes = 0;
@@ -3860,5 +3895,6 @@
         {
             $scope.customerText = "Customer Signature";
         }
-     }
+    }
+  
 });

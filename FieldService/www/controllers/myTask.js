@@ -1,4 +1,4 @@
-app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalendarConfig, $rootScope, $state, $http, cloudService, localService, valueService, $filter, constantService) {
+app.controller('myTaskController', function ($translate, $scope, $compile, $timeout, uiCalendarConfig, $rootScope, $state, $http, cloudService, localService, valueService, $filter, constantService) {
 
     if (valueService.getNetworkStatus()) {
 
@@ -166,6 +166,38 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
     $rootScope.headerName = 'Field Service';
 
     $rootScope.selectedCategory = 'Field Service';
+
+    changeLanguage(valueService.getLanguage());
+
+    function changeLanguage(lang) {
+
+        valueService.setLanguage(lang);
+
+        switch (lang) {
+            case "en":
+                $translate.use('en').then(function () {
+                    console.log('English Used');
+                });
+                break;
+            case "fr":
+                $translate.use('fr').then(function () {
+                    console.log('french Used');
+                });
+                break;
+            case "ch":
+                $translate.use('jp').then(function () {
+                    console.log('Chinese Used');
+                });
+                break;
+            case "":
+                $translate.use('en').then(function () {
+                    console.log('English Used');
+                });
+                break;
+            default:
+                break;
+        }
+    }
 
     var eventsArray = [];
 
@@ -494,7 +526,7 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
 
             $rootScope.showDebrief = true;
 
-            $rootScope.selectedCategory = 'Field Job#';
+            $rootScope.selectedCategory = 'Field Job';
 
             $state.go('debrief');
         }
