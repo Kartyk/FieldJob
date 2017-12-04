@@ -1,4 +1,4 @@
-app.controller('taskOverFlowController', function ($scope, $http, $state, $rootScope, cloudService, valueService, constantService, localService, ofscService) {
+app.controller('taskOverFlowController', function ($scope, $http, $state, $rootScope, cloudService, valueService, constantService, localService, ofscService, $translate) {
 
     $scope.myVar = false;
 
@@ -9,7 +9,36 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
     $scope.ProductQuantity = 1;
 
     $scope.isFutureDate = valueService.getIfFutureDateTask();
-
+    $rootScope.showDebrief = false;
+    $rootScope.selectedCategory = 'Field Service';
+    changeLanguage(valueService.getLanguage());
+    function changeLanguage(lang) {
+        valueService.setLanguage(lang);
+        switch (lang) {
+            case "en":
+                $translate.use('en').then(function () {
+                    console.log('English Used');
+                });
+                break;
+            case "fr":
+                $translate.use('fr').then(function () {
+                    console.log('french Used');
+                });
+                break;
+            case "ch":
+                $translate.use('jp').then(function () {
+                    console.log('Chinese Used');
+                });
+                break;
+            case "":
+                $translate.use('en').then(function () {
+                    console.log('English Used');
+                });
+                break;
+            default:
+                break;
+        }
+    }
     $scope.toggle = function () {
         $scope.myVar = !$scope.myVar;
     };

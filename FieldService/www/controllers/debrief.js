@@ -1,4 +1,4 @@
-﻿app.controller("debriefController", function ($scope, $state, $rootScope, $window, $timeout, $filter, $http, $q, cloudService, $mdDialog, valueService, localService, Upload, constantService, $anchorScroll, $location) {
+﻿app.controller("debriefController", function ($translate,$scope, $state, $rootScope, $window, $timeout, $filter, $http, $q, cloudService, $mdDialog, valueService, localService, Upload, constantService, $anchorScroll, $location) {
 
     $scope.currentTab = "time";
 
@@ -11,7 +11,34 @@
     $rootScope.headerName = "Debrief";
 
     $scope.isCustomerSignChecked = false;
-
+    changeLanguage(valueService.getLanguage());
+    function changeLanguage (lang) {
+        valueService.setLanguage(lang);
+        switch (lang) {
+            case "en":
+               $translate.use('en').then(function () {
+                    console.log('English Used');
+                });
+                break;
+            case "fr":
+                $translate.use('fr').then(function () {
+                    console.log('french Used');                
+                });
+                break;
+            case "ch":
+                $translate.use('jp').then(function () {
+                    console.log('Chinese Used');                   
+                });
+                break;
+            case "":
+                $translate.use('en').then(function () {
+                    console.log('English Used');
+                });
+                break;
+            default:
+                break;
+        }
+    }
     if (valueService.getUserType().defaultView == "My Task") {
 
         $scope.routeAfterDone = "myFieldJob";
@@ -3860,5 +3887,6 @@
         {
             $scope.customerText = "Customer Signature";
         }
-     }
+    }
+  
 });
