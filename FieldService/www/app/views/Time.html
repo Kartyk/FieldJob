@@ -3,7 +3,7 @@
    
             <div class="margintop30" ng-repeat="item in timeArray track by $index" id="time{{$index}}" >
             <div class="card-childContainer  noBorder-radius" ng-class="{'newItemBorder': $index == addTimeObj && $index != 0,'copyItem': $index == copyTimeObj && $index != 0}">
-                <form class="form-horizontal input-items" action="/action_page.php" ng-disabled="$root.completedTask" form-on-change="formChange()">
+                <form class="form-horizontal input-items" action="/action_page.php" ng-disabled="$root.completedTask" form-on-change="formChange()" name="timeform">
                 <div layout="row" layout-wrap>
                     <div ng-if="userType=='C'" flex="30" class="debrief-items" style="max-width: 20%;">
                          <label  flex="100" class="label-my" 
@@ -28,14 +28,17 @@
                     </div>
 
                     <div flex="20" class="debrief-items">
-                        <label flex="100" class=" label-my" translate="{{item.timeDefault.workType.title}}"></label>
+                        <label flex="100" class=" label-my" translate="{{item.timeDefault.workType.title}}"></label><span style="color:red">*</span>
                         <div flex="100">
-                            <select class="form-control" ng-model="item.Work_Type"
+                            <select class="form-control" ng-model="item.Work_Type" name="worktype" ng-required="true"
                                     ng-options="x as x.Value | translate for x in item.timeDefault.workType.values track by x.ID"
                                     ng-change="setWorkType(item.Work_Type, item)">
                                 <option value="" disabled selected>Select Work Type</option>
                             </select>
                         </div>
+                        <span style="color:red" ng-show="timeform.worktype.$error.required">
+                            Please select worktype
+                        </span>
                     </div>
 
                     <div ng-if="userType=='C'" flex="20" class="debrief-items">
@@ -49,13 +52,16 @@
                     </div>
 
                     <div flex="20" class="debrief-items">
-                        <label flex="100" class="  label-my" translate="{{item.timeDefault.item.title}}"></label>
+                        <label flex="100" class="  label-my" translate="{{item.timeDefault.item.title}}"></label><span style="color:red">*</span>
                         <div cflex="100">
-                            <select class="form-control" ng-model="item.Item"
+                            <select class="form-control" ng-model="item.Item" name="itemtype" ng-required="true"
                                     ng-options="x as x.Value | translate for x in item.timeDefault.item.values track by x.ID" ng-change="setItem(item)">
                                 <option value="" disabled selected>Select Item</option>
                             </select>
                         </div>
+                        <span style="color:red" ng-show="timeform.itemtype.$error.required">
+                            Please select item
+                        </span>
                     </div>
 
                     <!--<div flex="20" class="debrief-items">
@@ -107,12 +113,15 @@
                     </div>
 
                     <div flex="20" class="debrief-items">
-                        <label flex="100" class="  label-my" translate="{{item.timeDefault.duration.title}}"></label>
+                        <label flex="100" class="  label-my" translate="{{item.timeDefault.duration.title}}"></label><span style="color:red">*</span>
                         <div flex="100">
-                            <input type="text" class="form-control" date-format ng-model="item.Duration" ng-change="setDurationHours(item)" ng-blur="checkDuration(item)"
+                            <input type="text" class="form-control" date-format ng-model="item.Duration" name="duration" ng-required="true" ng-change="setDurationHours(item)" ng-blur="checkDuration(item)"
                                    />
 
                         </div>
+                        <span style="color:red" ng-show="timeform.duration.$error.required">
+                            Please enter duration
+                        </span>
                     </div>
 
 
@@ -133,9 +142,12 @@
        </div>
                 <section  layout="row" layout-sm="column" layout-align="center center"
                      layout-wrap class="time-btns" ng-class="{'newItemBorderSection': $index == addTimeObj && $index != 0,'copyItemSection': $index == copyTimeObj && $index != 0}">
-                <md-button class="time-font time-add" ng-click="addObject('Time',true)" ng-disabled="$root.completedTask" translate="Add"></md-button>
+                    <span style="visibility:hidden">{{ $root.timeformValid = timeform.$valid}}</span>
+                    <md-button class="time-font time-add" ng-click="addObject('Time',true)" ng-disabled="$root.completedTask" translate="Add"></md-button>
                 <md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Time')" ng-disabled="$root.completedTask" translate="delete"></md-button>
                 <md-button class="time-font time-copy" ng-click="copyObject(item,'Time')" ng-disabled="$root.completedTask" translate="copy"></md-button>
+                    <!--<md-button type="submit" ng-disabled="!timeformValid">TEST</md-button>-->
+                   
             </section>
 
 </div>

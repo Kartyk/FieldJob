@@ -2,7 +2,7 @@
     <div class="margintop30" ng-repeat="item in expenseArray track by $index" id="expense{{$index}}">
         
             <div class="card-childContainer  noBorder-radius" ng-class="{'newItemBorder': $index == addExpenseObj && $index != 0,'copyItem': $index == copyExpenseObj && $index != 0}">
-                <form class="form-horizontal input-items" action="/action_page.php" form-on-change="formChange()">
+                <form class="form-horizontal input-items" action="/action_page.php" form-on-change="formChange()" name="expeseform">
                     <!--<div class="row">-->
                         <div layout="row" layout-wrap>
 
@@ -28,15 +28,18 @@
                             <div flex="20" class="debrief-items-NC" style="max-width:20%;">
 
                                 <label flex="100" class="label-my" for="expense-type"
-                                       translate="{{item.expenseDefault.expenseType.title}}"></label>
+                                       translate="{{item.expenseDefault.expenseType.title}}"></label><span style="color:red">*</span>
                                 <div flex="100">
-                                    <select class="form-control select-debrief"
+                                    <select class="form-control select-debrief" ng-required="true" name="expensetype"
                                             id="expense-type"
                                             ng-model="item.Expense_Type"
                                             ng-options="x as x.Value | translate for x  in item.expenseDefault.expenseType.values track by x.ID" ng-change="setExpenseItem(item)">
                                         <option value="" disabled selected>Select Expense Type</option>
                                     </select>
                                 </div>
+                                <span style="color:red" ng-show="expeseform.expensetype.$error.required">
+                                    Please select expense type
+                                </span>
                             </div>
 
                             <div flex="20" class="debrief-items-NC" style="max-width:10%;">
@@ -86,6 +89,7 @@
             </div>
             <section  layout="row" layout-sm="column" layout-align="center center"
                          layout-wrap class="time-btns" ng-class="{'newItemBorderSection': $index == addExpenseObj && $index != 0,'copyItemSection': $index == copyExpenseObj && $index != 0}">
+                <span style="visibility:hidden">{{ $root.expenseformValid = expeseform.$valid}}</span>
                 <md-button class="time-font  time-add" ng-click="addObject('Expenses',true)" translate="Add"></md-button>
                 <md-button class="time-font  time-delete" ng-click="deleteObject($index,item,'Expenses')" translate="delete">
                 </md-button>
