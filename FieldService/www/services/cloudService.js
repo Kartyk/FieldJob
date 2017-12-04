@@ -1568,7 +1568,7 @@
 
                         updateStatus = {
                             "activity_id": activateId,
-                            "XA_TASK_STATUS": "3"
+                            "XA_TASK_STATUS": "2"
                         };
                     }
 
@@ -1586,14 +1586,14 @@
 
                                 angular.forEach(response.items, function (item) {
 
-                                    var date = new Date(item.date);
+                                    var date = new Date(item.startTime);
 
                                     if (date.setHours(0, 0, 0, 0) == new Date().setHours(0, 0, 0, 0)) {
 
                                         startActivity = true;
 
                                         var startActivityData = {
-                                            "activity_id": response.items[0].activityId + "",
+                                            "activity_id": item.activityId + "",
                                             "time": moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
                                         };
 
@@ -1615,7 +1615,7 @@
 
                                                 var updateTaskSegement = {
                                                     "activity_id": startActivityData.activity_id,
-                                                    "XA_TASK_STATUS": "3"
+                                                    "XA_TASK_STATUS": "2"
                                                 };
 
                                                 console.log("updateTaskSegement******" + JSON.stringify(updateTaskSegement));
