@@ -263,7 +263,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
     $scope.signout = function () {
 
         var userObject = {
-            'ID': getUser().ID,
+            'ID': constantService.getUser().ID,
             'Login_Status': "0"
         };
 
