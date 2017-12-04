@@ -39,6 +39,7 @@
     <script type="text/javascript" src="./lib/spinner/spin.min.js"></script>
     <script type="text/javascript" src="./lib/spinner/angular-loading-spinner.js"></script>
     <script type="text/javascript" src="./lib/spinner/angular-spinner.min.js"></script>
+
     <!-- Angular Translate libraries -->
     <script src="./lib/angular/angular.min.js"></script>
     <script src="./lib/angular-translate/messageformat.js"></script>
@@ -66,25 +67,25 @@
     <script src="./lib/bootstrap-datetimepicker.js"></script>
     <script src="./lib/fullcalendar.js"></script>
     <script src="./lib/locale-all.js"></script>
-    <!-- <script src="./lib/gcal.js"></script> -->
     <script src="./lib/calendar.min.js"></script>
+
+    <!-- <script src="./lib/gcal.js"></script> -->
     <!-- <script src="lib/daterangepicker.js"></script> -->
     <!-- <script src="lib/angular-daterangepicker.js"></script> -->
 
     <script type="text/javascript" src="lib/jspdf.js"></script>
 
-
     <script type="text/javascript" src="lib/pdfmake.min.js"></script>
     <script type="text/javascript" src="lib/html2canvas.min.js"></script>
 
     <script src="lib/ng-file-upload/ng-file-upload-shim.min.js"></script>
-
     <script src="lib/ng-file-upload/ng-file-upload.min.js"></script>
+
     <script src="lib/signature_pad.min.js"></script>
-  
+
     <script type="text/javascript" src="app/app.js"></script>
     <script type="text/javascript" src="controllers/index.js"></script>
-   <script type="text/javascript" src="controllers/myTask.js"></script>
+    <script type="text/javascript" src="controllers/myTask.js"></script>
     <script type="text/javascript" src="controllers/taskOverFlow.js"></script>
     <script type="text/javascript" src="controllers/todo.js"></script>
     <script type="text/javascript" src="controllers/debrief.js"></script>
@@ -96,6 +97,7 @@
     <script type="text/javascript" src="services/constantService.js"></script>
     <script type="text/javascript" src="services/syncService.js"></script>
     <script type="text/javascript" src="services/ofscService.js"></script>
+
     <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjsFMJ41fB77qvY_kbf0Jk1_5uSpHzQqk"></script>
     <script type="text/javascript"
@@ -111,6 +113,7 @@
     </style>
 
     <script type="text/javascript">
+
         var showingNavBar;
 
         function onPageComplete() {
@@ -130,6 +133,7 @@
         }
 
         document.addEventListener("showpagecomplete", onPageComplete, false);
+
     </script>
 
 </head>
@@ -137,15 +141,18 @@
 <body ng-app="emerson" ng-controller="indexController" ng-cloak>
 
 <!--<span class="md-dialog-container" ng-show="$root.apicall"-->
-      <!--style="background-color:#ffffff;opacity:0.8;text-align:center;z-index:1051 !important;"-->
-      <!--us-spinner="{radius:10, width:5, length: 12}"><img src="./images/02hat_loader_2.gif"/></span>-->
+<!--style="background-color:#ffffff;opacity:0.8;text-align:center;z-index:1051 !important;"-->
+<!--us-spinner="{radius:10, width:5, length: 12}"><img src="./images/02hat_loader_2.gif"/></span>-->
 
 <span class="md-dialog-container" ng-show="$root.dbCall"
-      style="background-color:#ffffff;opacity:0.8;text-align:center;z-index:1051 !important;"><img src="./images/02hat_loader_2.gif"/></span>
+      style="background-color:#ffffff;opacity:0.8;text-align:center;z-index:1051 !important;"><img
+        src="./images/02hat_loader_2.gif"/></span>
 
 <div class="wrapper">
+
     <!-- Sidebar Holder -->
     <nav id="sidebar" ng-show="$root.Islogin">
+
         <div class="sidebar-header">
             <div class="logoIcon"></div>
         </div>
@@ -163,8 +170,6 @@
             </li>
 
         </ul>
-
-
     </nav>
 
     <!-- Page Content Holder -->
@@ -172,6 +177,7 @@
 
         <nav class="navbar navbar-default navbar-fixed-top nav-noLeft" ng-show="$root.Islogin"
              ng-class="{'nav-left' : hideNavLeft}">
+
             <div>
 
                 <div class="navbar-header">
@@ -180,8 +186,10 @@
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="text-align: center;">
-                    <label class="title" translate="{{$root.selectedCategory}}"></label><span class="title" ng-if="$root.showDebrief">#{{$root.selectedTask.Task_Number}}</span>
-                   
+
+                    <label class="title" translate="{{$root.selectedCategory}}"></label><span class="title"
+                                                                                              ng-if="$root.showDebrief">#{{$root.selectedTask.Task_Number}}</span>
+
                     <ul class="nav navbar-nav pull-right">
 
                         <li class="popover__wrapper">
@@ -191,7 +199,7 @@
                                 <div>
                                     <p class="popover__message uname">{{$root.uName | uppercase}}</p>
                                     <p class="popover__message designation">Service Engineer</p>
-                                    <p class="popover__message sign-out" ng-click="signout()" translate="Sign Out"></p>
+                                    <p class="popover__message sign-out" ng-click="signOut()" translate="Sign Out"></p>
                                 </div>
                                 <hr class="popover-hr">
                                 <div class="language-contents">

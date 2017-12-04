@@ -1,11 +1,14 @@
 app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalendarConfig, $rootScope, $state, $http, cloudService, localService, valueService, $filter, constantService) {
+
     if (valueService.getNetworkStatus()) {
+
         $rootScope.onlineimage = true;
-    }
-    else
-    {
+
+    } else {
+
         $rootScope.onlineimage = false;
     }
+
     $rootScope.eventInit = function (lang) {
 
         var minTimeVal = "07:00:00";
@@ -52,10 +55,6 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
                 myTask: {
                     text: myFieldJob,
                     click: function () {
-
-                        $rootScope.apicall = true;
-
-                        $rootScope.apicall = false;
 
                         $state.go("myFieldJob");
 
@@ -145,14 +144,21 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
             }
         });
     }
+
     $rootScope.offline = function () {
+
         $rootScope.onlineimage = false;
+
         $scope.$apply();
     }
+
     $rootScope.online = function () {
+
         $rootScope.onlineimage = true;
+
         $scope.$apply();
     }
+
     $scope.showSearchTaskDiv = false;
 
     $rootScope.Islogin = true;
@@ -192,8 +198,6 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
 
                     constantService.setTaskList(response)
 
-                    console.log("MY TASK IN DB" + $rootScope.myTaskDetails);
-
                     setEventArray(response);
 
                     var lang = valueService.getLanguage(lang);
@@ -223,7 +227,7 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
                     var endDateTime = moment(item.End_Date).format("YYYY-MM-DDTHH:mm:ss");
                     // var endDateTime = endDate[0] + "T" + endDate[1];
 
-                    var customerInfo = item.Job_Description + "\n" + item.Customer_Name + "\n" + item.Address1 + "\n" + item.Contact_Name + "\n"+ item.Work_Phone_Number + "\n" + item.Mobile_Phone_Number;
+                    var customerInfo = item.Job_Description + "\n" + item.Customer_Name + "\n" + item.Address1 + "\n" + item.Contact_Name + "\n" + item.Work_Phone_Number + "\n" + item.Mobile_Phone_Number;
 
                     //  if (item.Task_Status == 'Accepted' || item.Task_Status == 'Assigned'||) {
                     eventsArray.push({
@@ -248,10 +252,6 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
                         City: item.City,
                         State: item.State,
                         Zip_Code: item.Zip_Code,
-                        Expense_Method: item.Expense_Method,
-                        Labor_Method: item.Labor_Method,
-                        Travel_Method: item.Travel_Method,
-                        Material_Method: item.Material_Method,
                         Activity_Id: item.Activity_Id,
                         SR_ID: item.SR_ID
                     });

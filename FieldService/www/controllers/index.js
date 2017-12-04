@@ -4,6 +4,10 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
     $rootScope.dbCall = false;
 
+    $rootScope.Islogin = false;
+
+    $scope.userName = "";
+
     if (valueService.getNetworkStatus()) {
 
         $scope.onlineStatus = true;
@@ -50,11 +54,15 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                 $scope.usFlag = false;
                 $scope.franceFlag = true;
                 $scope.chinaFlag = true;
+
                 $translate.use('en').then(function () {
                     console.log('English Used');
                 });
+
                 $('#calendar').fullCalendar('destroy');
+
                 $rootScope.eventInit("en");
+
                 break;
 
             case "fr":
@@ -62,9 +70,13 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                 $scope.usFlag = true;
                 $scope.franceFlag = false;
                 $scope.chinaFlag = true;
+
                 $translate.use('fr').then(function () {
-                    console.log('french Used');
+
+                    console.log('French Used');
+
                     $('#calendar').fullCalendar('destroy');
+
                     $rootScope.eventInit("fr");
                 });
 
@@ -75,9 +87,13 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                 $scope.usFlag = true;
                 $scope.franceFlag = true;
                 $scope.chinaFlag = false;
+
                 $translate.use('jp').then(function () {
+
                     console.log('Chinese Used');
+
                     $('#calendar').fullCalendar('destroy');
+
                     $rootScope.eventInit("ch");
                 });
 
@@ -168,7 +184,6 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
             $mdDialog.hide();
 
             $rootScope.showDebrief = false;
-
         }
 
         $scope.cancel = function () {
@@ -260,10 +275,10 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
         $scope.hideNavLeft = !$scope.hideNavLeft;
     }
 
-    $scope.signout = function () {
+    $scope.signOut = function () {
 
         var userObject = {
-            'ID': getUser().ID,
+            'ID': constantService.getUser().ID,
             'Login_Status': "0"
         };
 
@@ -322,12 +337,211 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
         });
     }
 
-    $scope.syncFunctionality = function () {
+    $scope.login = function () {
 
-        syncSubmit();
+        var baseData = $scope.userName.toLowerCase() + ":" + $scope.password;
+
+        var authorizationValue = window.btoa(baseData);
+
+        if (valueService.getNetworkStatus()) {
+
+            $rootScope.dbCall = true;
+
+            console.log($scope.userName);
+
+            $rootScope.uName = $scope.userName;
+
+            var data = {
+                header: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Basic ' + authorizationValue,
+                    'oracle-mobile-backend-id': constantService.getChargeBackId()
+                }
+            };
+
+            localService.deleteUser();
+
+            cloudService.login(data, function (response) {
+
+                if (response && response != null && response.ID != undefined && response.ID != "") {
+
+                    valueService.setResourceId(response['ID']);
+
+                    constantService.setResourceId(response['ID']);
+
+                    cloudService.getTechnicianProfile(function (response) {
+
+                        var userObject = {
+                            ID: response[0].ID,
+                            ClarityID: response[0].ClarityID,
+                            Currency: response[0].Currency,
+                            Default_View: response[0].Default_View,
+                            Email: response[0].Email,
+                            Language: response[0].Language,
+                            Name: response[0].Name,
+                            OFSCId: response[0].OFSCId,
+                            Password: response[0].Password,
+                            Time_Zone: response[0].Time_Zone,
+                            Type: response[0].Type,
+                            User_Name: response[0].User_Name,
+                            Work_Day: response[0].Work_Day,
+                            Work_Hour: response[0].Work_Hour,
+                            Login_Status: "1",
+                            Last_updated: new Date(),
+                            encrypt: authorizationValue
+                        };
+
+                        localService.insertUser(userObject);
+
+                        localService.getUser(function (response) {
+
+                            console.log("USER =====> " + JSON.stringify(response));
+
+                            constantService.setUser(response[0]);
+
+                            valueService.setUser(response[0]);
+
+                            var data = {
+                                "resourceId": constantService.getUser().OFSCId,
+                                "date": moment(new Date()).utcOffset(constantService.getTimeZone()).format('YYYY-MM-DD')
+                            };
+
+                            ofscService.activate_resource(data, function (response) {
+
+                            });
+
+                            syncSubmit("0");
+                        });
+                    });
+
+                } else {
+
+                    $scope.loginError = true;
+
+                    $rootScope.dbCall = false;
+                }
+            });
+
+        } else {
+
+            localService.getUserLogin(authorizationValue, function (response) {
+
+                console.log("USER =====> " + JSON.stringify(response));
+
+                if (response.length > 0) {
+
+                    var userObject = {
+                        'ID': response[0].ID,
+                        'Login_Status': "1"
+                    };
+
+                    localService.updateUserLogin(userObject, function (result) {
+
+                        localService.getUser(function (response) {
+
+                            console.log("USER =====> " + JSON.stringify(response));
+
+                            if (response.length > 0) {
+
+                                angular.forEach(response, function (item) {
+
+                                    if (item.Login_Status == "1") {
+
+                                        constantService.setUser(item);
+
+                                        valueService.setUser(item);
+                                    }
+                                });
+
+                                if (constantService.getUser().ID !== null) {
+
+                                    valueService.setResourceId(constantService.getUser().ID);
+
+                                    constantService.setResourceId(constantService.getUser().ID);
+
+                                    if (constantService.getUser().Default_View == "My Task") {
+
+                                        $rootScope.selectedItem = 2;
+
+                                        localService.getTaskList(function (response) {
+
+                                            console.log("MY FIELD JOB =====> " + JSON.stringify(response));
+
+                                            localService.getInternalList(function (internalresponse) {
+
+                                                angular.forEach(internalresponse, function (item) {
+
+                                                    var internalOFSCJSONObject = {};
+
+                                                    internalOFSCJSONObject.Start_Date = item.Start_time;
+                                                    internalOFSCJSONObject.End_Date = item.End_time;
+                                                    internalOFSCJSONObject.Type = "INTERNAL";
+                                                    internalOFSCJSONObject.Customer_Name = item.Activity_type;
+                                                    internalOFSCJSONObject.Task_Number = item.Activity_Id;
+
+                                                    response.push(internalOFSCJSONObject);
+                                                });
+
+                                                constantService.setTaskList(response);
+
+                                                $state.go('myFieldJob');
+                                            });
+                                        });
+
+                                    } else {
+
+                                        localService.getTaskList(function (response) {
+
+                                            console.log("MY CALENDAR =====> " + JSON.stringify(response));
+
+                                            localService.getInternalList(function (internalresponse) {
+
+                                                angular.forEach(internalresponse, function (item) {
+
+                                                    var internalOFSCJSONObject = {};
+
+                                                    internalOFSCJSONObject.Start_Date = item.Start_time;
+                                                    internalOFSCJSONObject.End_Date = item.End_time;
+                                                    internalOFSCJSONObject.Type = "INTERNAL";
+                                                    internalOFSCJSONObject.Customer_Name = item.Activity_type;
+                                                    internalOFSCJSONObject.Task_Number = item.Activity_Id;
+
+                                                    response.push(internalOFSCJSONObject);
+                                                });
+
+                                                constantService.setTaskList(response);
+
+                                                $state.go('myTask');
+                                            });
+                                        });
+                                    }
+
+                                } else {
+
+                                    $scope.loginError = true;
+                                }
+                            } else {
+
+                                $scope.loginError = true;
+                            }
+                        });
+                    });
+                } else {
+
+                    $scope.loginError = true;
+                }
+            });
+        }
+
+        console.log("Login END");
     }
 
-    function syncSubmit() {
+    $scope.syncFunctionality = function () {
+
+        syncSubmit("1");
+    }
+
+    function syncSubmit(isLogin) {
 
         console.log("NETWORK " + valueService.getNetworkStatus());
 
@@ -428,279 +642,50 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                     console.log("SYNC DATA ACCEPT SUBMIT SUCCESS");
 
-                    syncData();
+                    if (isLogin == "0") {
+                        fetchData(isLogin);
+                    } else if (isLogin == "1") {
+                        syncData(isLogin);
+                    }
                 },
 
                 function (error) {
 
                     console.log("SYNC DATA ACCEPT SUBMIT FAILURE");
 
-                    syncData();
+                    if (isLogin == "0") {
+                        fetchData(isLogin);
+                    } else if (isLogin == "1") {
+                        syncData(isLogin);
+                    }
                 }
             );
         }
     }
 
-    $rootScope.Islogin = false;
+    function fetchData(isLogin) {
 
-    $scope.userName = "";
-
-    $scope.login = function () {
-
-        // if (constantService.getNetworkStatus()) {
-
-        $rootScope.dbCall = true;
-
-        console.log($scope.userName);
-
-        $rootScope.uName = $scope.userName;
-
-        var baseData = $scope.userName.toLowerCase() + ":" + $scope.password;
-
-        var authorizationValue = window.btoa(baseData);
-
-        var data = {
-            header: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Basic ' + authorizationValue,
-                'oracle-mobile-backend-id': constantService.getChargeBackId()
-            }
-        };
-
-        localService.deleteUser();
-
-        cloudService.login(data, function (response) {
-
-            if (response && response != null && response.length > 0) {
-
-                valueService.setResourceId(response['ID']);
-
-                constantService.setResourceId(response['ID']);
-
-                cloudService.getTechnicianProfile(function (response) {
-
-                    var userObject = {
-                        ID: response[0].ID,
-                        ClarityID: response[0].ClarityID,
-                        Currency: response[0].Currency,
-                        Default_View: response[0].Default_View,
-                        Email: response[0].Email,
-                        Language: response[0].Language,
-                        Name: response[0].Name,
-                        OFSCId: response[0].OFSCId,
-                        Password: response[0].Password,
-                        Time_Zone: response[0].Time_Zone,
-                        Type: response[0].Type,
-                        User_Name: response[0].User_Name,
-                        Work_Day: response[0].Work_Day,
-                        Work_Hour: response[0].Work_Hour,
-                        Login_Status: "1",
-                        Last_updated: new Date()
-                    };
-
-                    localService.insertUser(userObject);
-
-                    localService.getUser(function (response) {
-
-                        console.log("USER =====> " + JSON.stringify(response));
-
-                        constantService.setUser(response[0]);
-
-                        valueService.setUser(response[0]);
-
-                        var data = {
-                            "resourceId": constantService.getUser().OFSCId,
-                            "date": moment(new Date()).utcOffset(constantService.getTimeZone()).format('YYYY-MM-DD')
-                        };
-
-                        console.log(JSON.stringify(data));
-
-                        ofscService.activate_resource(data, function (response) {
-
-                            if (response != undefined && response != null) {
-
-                                console.log("ACTIVATE RESOURCE " + JSON.stringify(response));
-                            }
-                        });
-
-                        syncSubmit();
-                    });
-                });
-
-            } else {
-
-                $scope.loginError = true;
-
-                $rootScope.dbCall = false;
-            }
-        });
-
-        console.log("Login API END");
-
-        // } else {
-        //
-        // }
-    }
-
-    function offlineGetCall() {
-
-        cloudService.getTaskList(function (response) {
+        cloudService.getTaskInternalList(isLogin, function (response) {
 
             var promiseArray = [];
 
-            var deferInstall = $q.defer();
+            var deferTaskDetail = $q.defer();
 
-            cloudService.getInstallBaseList(function (result) {
+            cloudService.getTaskDetails(isLogin, function (result) {
 
-                console.log("INSTALL");
-
-                deferInstall.resolve("success");
+                deferTaskDetail.resolve("success");
             });
 
-            promiseArray.push(deferInstall.promise);
+            promiseArray.push(deferTaskDetail.promise);
 
-            var deferContact = $q.defer();
+            var deferLOV = $q.defer();
 
-            cloudService.getContactList(function (result) {
+            cloudService.getLOVDetails(isLogin, function (result) {
 
-                console.log("CONTACT");
-
-                deferContact.resolve("success");
+                deferLOV.resolve("success");
             });
 
-            promiseArray.push(deferContact.promise);
-
-            var deferNote = $q.defer();
-
-            cloudService.getNoteList(function (result) {
-
-                console.log("NOTES");
-
-                deferNote.resolve("success");
-            });
-
-            promiseArray.push(deferNote.promise);
-
-            var deferOverTime = $q.defer();
-
-            cloudService.getOverTimeList(function (result) {
-
-                console.log("OVERTIME");
-
-                deferOverTime.resolve("success");
-            });
-
-            promiseArray.push(deferOverTime.promise);
-
-            var deferShiftCode = $q.defer();
-
-            cloudService.getShiftCodeList(function (result) {
-
-                console.log("SHIFTCODE");
-
-                deferShiftCode.resolve("success");
-            });
-
-            promiseArray.push(deferShiftCode.promise);
-
-            var deferChargeType = $q.defer();
-
-            cloudService.getChargeType(function (result) {
-
-                console.log("CHARGETYPE");
-
-                deferChargeType.resolve("success");
-            });
-
-            promiseArray.push(deferChargeType.promise);
-
-            var deferChargeMethod = $q.defer();
-
-            cloudService.getChargeMethod(function (result) {
-
-                console.log("CHARGEMETHOD");
-
-                deferChargeMethod.resolve("success");
-            });
-
-            promiseArray.push(deferChargeMethod.promise);
-
-            var deferFieldJob = $q.defer();
-
-            cloudService.getFieldJobName(function (result) {
-
-                console.log("FIELDJOB");
-
-                deferFieldJob.resolve("success");
-            });
-
-            promiseArray.push(deferFieldJob.promise);
-
-            var deferWorkType = $q.defer();
-
-            cloudService.getWorkType(function (result) {
-
-                console.log("WORKTYPE");
-
-                deferWorkType.resolve("success");
-            });
-
-            promiseArray.push(deferWorkType.promise);
-
-            var deferItem = $q.defer();
-
-            cloudService.getItem(function (result) {
-
-                console.log("ITEM");
-
-                deferItem.resolve("success");
-            });
-
-            promiseArray.push(deferItem.promise);
-
-            var deferCurrency = $q.defer();
-
-            cloudService.getCurrency(function (result) {
-
-                console.log("CURRENCY");
-
-                deferCurrency.resolve("success");
-            });
-
-            promiseArray.push(deferCurrency.promise);
-
-            var deferExpense = $q.defer();
-
-            cloudService.getExpenseType(function (result) {
-
-                console.log("EXPENSETYPE");
-
-                deferExpense.resolve("success");
-            });
-
-            promiseArray.push(deferExpense.promise);
-
-            var deferNoteType = $q.defer();
-
-            cloudService.getNoteType(function (result) {
-
-                console.log("NOTETYPE");
-
-                deferNoteType.resolve("success");
-            });
-
-            promiseArray.push(deferNoteType.promise);
-
-            var deferAttachment = $q.defer();
-
-            cloudService.getAttachmentList(function (result) {
-
-                console.log("ATTACHMENT");
-
-                deferAttachment.resolve("success");
-            });
-
-            promiseArray.push(deferAttachment.promise);
+            promiseArray.push(deferLOV.promise);
 
             var srNumberArray = [];
 
@@ -816,21 +801,36 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                     console.log("LOGIN SUCCESS ALL");
 
-                    if (constantService.getUser().Default_View == "My Task") {
+                    if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
 
-                        $rootScope.selectedItem = 2;
+                        $state.go($state.current, {}, {reload: true});
 
-                        $state.go('myFieldJob');
+                    } else if ($state.current.name == "login") {
 
-                        $rootScope.Islogin = true;
+                        if (valueService.getUserType().defaultView == "My Task") {
+
+                            $state.go("myFieldJob");
+
+                            $rootScope.selectedItem = 2;
+                            $rootScope.showTaskDetail = false;
+                            $rootScope.showDebrief = false;
+
+                        } else {
+
+                            $state.go("myTask");
+
+                            $rootScope.selectedItem = 1;
+                            $rootScope.showTaskDetail = false;
+                            $rootScope.showDebrief = false;
+                        }
 
                     } else {
 
-                        $rootScope.selectedItem = 1;
+                        valueService.setTask(valueService.getTask(), function () {
 
-                        $state.go('myTask');
+                            $state.go($state.current, {}, {reload: true});
 
-                        $rootScope.Islogin = true;
+                        });
                     }
 
                     $rootScope.dbCall = false;
@@ -842,21 +842,269 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                     console.log("LOGIN FAILURE ALL");
 
-                    if (constantService.getUser().Default_View == "My Task") {
+                    if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
 
-                        $rootScope.selectedItem = 2;
+                        $state.go($state.current, {}, {reload: true});
 
-                        $state.go('myFieldJob');
+                    } else if ($state.current.name == "login") {
 
-                        $rootScope.Islogin = true;
+                        if (valueService.getUserType().defaultView == "My Task") {
+
+                            $state.go("myFieldJob");
+
+                            $rootScope.selectedItem = 2;
+                            $rootScope.showTaskDetail = false;
+                            $rootScope.showDebrief = false;
+
+                        } else {
+
+                            $state.go("myTask");
+
+                            $rootScope.selectedItem = 1;
+                            $rootScope.showTaskDetail = false;
+                            $rootScope.showDebrief = false;
+                        }
 
                     } else {
 
-                        $rootScope.selectedItem = 1;
+                        valueService.setTask(valueService.getTask(), function () {
 
-                        $state.go('myTask');
+                            $state.go($state.current, {}, {reload: true});
 
-                        $rootScope.Islogin = true;
+                        });
+                    }
+
+                    $rootScope.dbCall = false;
+
+                    getAttachments();
+                }
+            );
+        });
+    }
+
+    function syncData(isLogin) {
+
+        cloudService.getTaskInternalList(isLogin, function (response) {
+
+            var promiseArray = [];
+
+            var deferTaskDetail = $q.defer();
+
+            cloudService.getTaskDetails(isLogin, function (result) {
+
+                deferTaskDetail.resolve("success");
+            });
+
+            promiseArray.push(deferTaskDetail.promise);
+
+            var deferLOV = $q.defer();
+
+            cloudService.getLOVDetails(isLogin, function (result) {
+
+                deferLOV.resolve("success");
+            });
+
+            promiseArray.push(deferLOV.promise);
+
+            var srNumberArray = [];
+
+            angular.forEach(constantService.getTaskList(), function (item) {
+
+                if (item.SR_ID != undefined) {
+
+                    if (srNumberArray.indexOf(item.SR_ID) === -1) {
+
+                        srNumberArray.push(item.SR_ID);
+                    }
+                }
+            });
+
+            if (srNumberArray.length > 10) {
+
+                var strArray = [];
+
+                var i = 1;
+
+                angular.forEach(srNumberArray, function (item) {
+
+                    if (i <= srNumberArray.length) {
+
+                        strArray.push(item);
+
+                        if (i % 10 == 0) {
+
+                            var deferSRNotes = $q.defer();
+
+                            cloudService.getSRNotesList(strArray, function (response) {
+
+                                console.log("SRNOTES");
+
+                                deferSRNotes.resolve("success");
+                            });
+
+                            var deferSRAttachment = $q.defer();
+
+                            cloudService.getSRAttachmentList(strArray, function (response) {
+
+                                console.log("SRATTACHMENT");
+
+                                deferSRAttachment.resolve("success");
+                            });
+
+                            strArray = [];
+
+                            promiseArray.push(deferSRNotes.promise);
+
+                            promiseArray.push(deferSRAttachment.promise);
+
+                        } else if (i == srNumberArray.length) {
+
+                            var deferSRNotesFinal = $q.defer();
+
+                            cloudService.getSRNotesList(strArray, function (response) {
+
+                                console.log("SRNOTES");
+
+                                deferSRNotesFinal.resolve("success");
+                            });
+
+                            var deferSRAttachmentFinal = $q.defer();
+
+                            cloudService.getSRAttachmentList(strArray, function (response) {
+
+                                console.log("SRATTACHMENT");
+
+                                deferSRAttachmentFinal.resolve("success");
+                            });
+
+                            strArray = [];
+
+                            promiseArray.push(deferSRNotesFinal.promise);
+
+                            promiseArray.push(deferSRAttachmentFinal.promise);
+                        }
+
+                        i++;
+                    }
+                });
+
+            } else {
+
+                var deferSRNotes = $q.defer();
+
+                cloudService.getSRNotesList(srNumberArray, function (response) {
+
+                    console.log("SRNOTES");
+
+                    deferSRNotes.resolve("success");
+                });
+
+                var deferSRAttachment = $q.defer();
+
+                cloudService.getSRAttachmentList(srNumberArray, function (response) {
+
+                    console.log("SRATTACHMENT");
+
+                    deferSRAttachment.resolve("success");
+                });
+
+                promiseArray.push(deferSRNotes.promise);
+
+                promiseArray.push(deferSRAttachment.promise);
+            }
+
+            console.log("LENGTH SYNC " + promiseArray.length);
+
+            $q.all(promiseArray).then(
+                function (response) {
+
+                    var userObject = {
+                        'ID': constantService.getUser().ID,
+                        'Last_updated': new Date()
+                    };
+
+                    localService.updateLastSync(userObject);
+
+                    console.log("SYNC SUCCESS ALL");
+
+                    if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
+
+                        $state.go($state.current, {}, {reload: true});
+
+                    } else if ($state.current.name == "login") {
+
+                        if (valueService.getUserType().defaultView == "My Task") {
+
+                            $state.go("myFieldJob");
+
+                            $rootScope.selectedItem = 2;
+                            $rootScope.showTaskDetail = false;
+                            $rootScope.showDebrief = false;
+
+                        } else {
+
+                            $state.go("myTask");
+
+                            $rootScope.selectedItem = 1;
+                            $rootScope.showTaskDetail = false;
+                            $rootScope.showDebrief = false;
+                        }
+
+                    } else {
+
+                        valueService.setTask(valueService.getTask(), function () {
+
+                            $state.go($state.current, {}, {reload: true});
+
+                        });
+                    }
+
+                    $rootScope.dbCall = false;
+
+                    getAttachments();
+                },
+
+                function (error) {
+
+                    var userObject = {
+                        'ID': constantService.getUser().ID,
+                        'Last_updated': new Date()
+                    };
+
+                    localService.updateLastSync(userObject);
+
+                    console.log("SYNC FAILURE ALL");
+
+                    if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
+
+                        $state.go($state.current, {}, {reload: true});
+
+                    } else if ($state.current.name == "login") {
+
+                        if (valueService.getUserType().defaultView == "My Task") {
+
+                            $state.go("myFieldJob");
+
+                            $rootScope.selectedItem = 2;
+                            $rootScope.showTaskDetail = false;
+                            $rootScope.showDebrief = false;
+
+                        } else {
+
+                            $state.go("myTask");
+
+                            $rootScope.selectedItem = 1;
+                            $rootScope.showTaskDetail = false;
+                            $rootScope.showDebrief = false;
+                        }
+
+                    } else {
+
+                        valueService.setTask(valueService.getTask(), function () {
+
+                            $state.go($state.current, {}, {reload: true});
+
+                        });
                     }
 
                     $rootScope.dbCall = false;
@@ -882,7 +1130,6 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                         valueService.saveBase64File(item.File_Path, item.File_Name, base64Code, item.File_Type);
                     }
                 });
-
             });
         });
 
@@ -903,7 +1150,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
         });
     }
 
-    function syncData() {
+    function getData() {
 
         cloudService.getTaskList(function (response) {
 
@@ -1175,92 +1422,84 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
             $q.all(promiseArray).then(
                 function (response) {
 
-                    console.log("SYNC SUCCESS ALL");
-                    if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
-                        $state.go($state.current, {}, {reload: true});
-                        $rootScope.dbCall = false;
+                    console.log("LOGIN SUCCESS ALL");
 
-                        getAttachments();
-                    }
-                    else if ($state.current.name == "login") {
+                    if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
+
+                        $state.go($state.current, {}, {reload: true});
+
+                    } else if ($state.current.name == "login") {
+
                         if (valueService.getUserType().defaultView == "My Task") {
+
                             $state.go("myFieldJob");
+
                             $rootScope.selectedItem = 2;
                             $rootScope.showTaskDetail = false;
                             $rootScope.showDebrief = false;
-                        }
-                        else {
+
+                        } else {
+
                             $state.go("myTask");
+
                             $rootScope.selectedItem = 1;
                             $rootScope.showTaskDetail = false;
                             $rootScope.showDebrief = false;
                         }
-                        $rootScope.dbCall = false;
-                        getAttachments();
-                    }
-                    else {
+
+                    } else {
 
                         valueService.setTask(valueService.getTask(), function () {
-                            $state.go($state.current, {}, {reload: true});
-                            $rootScope.dbCall = false;
 
-                            getAttachments();
+                            $state.go($state.current, {}, {reload: true});
+
                         });
                     }
 
-                    //if (valueService.getUserType().defaultView == "My Task") {
+                    $rootScope.dbCall = false;
 
-                    //    $state.go("myFieldJob");
-                    //    $rootScope.selectedItem = 2;
-                    //    $rootScope.showTaskDetail = false;
-                    //    $rootScope.showDebrief = false;
-
-                    //} else {
-
-                    //    $state.go("myTask");
-                    //    $rootScope.selectedItem = 1;
-                    //    $rootScope.showTaskDetail = false;
-                    //    $rootScope.showDebrief = false;
-                    //}
-
-
+                    getAttachments();
                 },
 
                 function (error) {
 
-                    console.log("SYNC FAILURE ALL");
+                    console.log("LOGIN FAILURE ALL");
 
-                    // $state.go($state.current, {}, {reload: true});
                     if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
+
                         $state.go($state.current, {}, {reload: true});
-                        $rootScope.dbCall = false;
 
-                        getAttachments();
-                    }
-                    else {
+                    } else if ($state.current.name == "login") {
+
+                        if (valueService.getUserType().defaultView == "My Task") {
+
+                            $state.go("myFieldJob");
+
+                            $rootScope.selectedItem = 2;
+                            $rootScope.showTaskDetail = false;
+                            $rootScope.showDebrief = false;
+
+                        } else {
+
+                            $state.go("myTask");
+
+                            $rootScope.selectedItem = 1;
+                            $rootScope.showTaskDetail = false;
+                            $rootScope.showDebrief = false;
+                        }
+
+                    } else {
+
                         valueService.setTask(valueService.getTask(), function () {
-                            $state.go($state.current, {}, {reload: true});
-                            $rootScope.dbCall = false;
 
-                            getAttachments();
+                            $state.go($state.current, {}, {reload: true});
+
                         });
                     }
-                    //if (valueService.getUserType().defaultView == "My Task") {
 
-                    //    $state.go("myFieldJob");
-                    //    $rootScope.selectedItem = 2;
-                    //    $rootScope.showTaskDetail = false;
-                    //    $rootScope.showDebrief = false;
+                    $rootScope.dbCall = false;
 
-                    //} else {
-
-                    //    $state.go("myTask");
-                    //    $rootScope.selectedItem = 1;
-                    //    $rootScope.showTaskDetail = false;
-                    //    $rootScope.showDebrief = false;
-                    //}
-
-
+                    getAttachments();
                 }
             );
         });

@@ -23,8 +23,11 @@
         }
 
         service.getUser = getUser;
+        service.getUserLogin = getUserLogin;
+        service.updateUserLogin = updateUserLogin;
         service.insertUser = insertUser;
         service.updateUser = updateUser;
+        service.updateLastSync = updateLastSync;
         service.deleteUser = deleteUser;
 
         service.insertTaskList = insertTaskList;
@@ -668,7 +671,7 @@
 
         function insertInstallBaseList(response, callback) {
 
-            var responseList = response.InstallBase;
+            var responseList = response;
 
             var promises = [];
 
@@ -819,9 +822,7 @@
 
         function insertContactList(response, callback) {
 
-            var responseList = response.Contacts;
-
-            // console.log("CONTACT LENGTH ====> " + responseList.length);
+            var responseList = response;
 
             var promises = [];
 
@@ -980,7 +981,7 @@
 
         function insertNoteList(response, callback) {
 
-            var responseList = response.Notes;
+            var responseList = response;
 
             var promises = [];
 
@@ -1283,7 +1284,7 @@
 
         function insertProjectList(response) {
 
-            var responseList = response.Project;
+            var responseList = response;
 
             for (var i = 0; i < responseList.length; i++) {
 
@@ -3875,7 +3876,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO User VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO User VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(userObject.ID);
                 insertValues.push(userObject.ClarityID);
@@ -3895,6 +3896,7 @@
                 insertValues.push(userObject.Work_Hour);
                 insertValues.push(userObject.Login_Status);
                 insertValues.push(userObject.Last_updated);
+                insertValues.push(userObject.encrypt);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
@@ -3922,6 +3924,34 @@
                 var sqlUpdate = "UPDATE User SET Login_Status = ?  WHERE ID = ?";
 
                 insertValues.push(userObject.Login_Status);
+                insertValues.push(userObject.ID);
+
+                transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
+
+                    // console.log("USER ROW AFFECTED: " + res.rowsAffected);
+
+                }, function (tx, error) {
+
+                    // console.log("USER UPDATE ERROR: " + error.message);
+                });
+
+            }, function (error) {
+
+                // console.log("USER UPDATE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function updateLastSync(userObject) {
+
+            // console.log("USER UPDATE OBJECT =====> " + JSON.stringify(userObject));
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlUpdate = "UPDATE User SET Last_updated = ?  WHERE ID = ?";
+
+                insertValues.push(userObject.Last_updated);
                 insertValues.push(userObject.ID);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
@@ -3986,6 +4016,74 @@
                 // console.log("GET USER TRANSACTION ERROR: " + error.message);
 
                 callback(value);
+            });
+        };
+
+        function getUserLogin(encrypt, callback) {
+
+            var value = [];
+
+            return db.transaction(function (transaction) {
+
+                transaction.executeSql("SELECT * FROM User WHERE encrypt = ?", [encrypt], function (tx, res) {
+
+                    var rowLength = res.rows.length;
+
+                    for (var i = 0; i < rowLength; i++) {
+
+                        value.push(res.rows.item(i));
+                    }
+
+                    // console.log("GET USER DB ==========> " + JSON.stringify(value));
+
+                    callback(value);
+
+                }, function (tx, error) {
+
+                    // console.log("GET USER SELECT ERROR: " + error.message);
+
+                    callback(value);
+                });
+
+            }, function (error) {
+
+                // console.log("GET USER TRANSACTION ERROR: " + error.message);
+
+                callback(value);
+            });
+        };
+
+        function updateUserLogin(userObject, callback) {
+
+            // console.log("USER UPDATE OBJECT =====> " + JSON.stringify(userObject));
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlUpdate = "UPDATE User SET Login_Status = ?  WHERE ID = ?";
+
+                insertValues.push(userObject.Login_Status);
+                insertValues.push(userObject.ID);
+
+                transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
+
+                    // console.log("USER ROW AFFECTED: " + res.rowsAffected);
+
+                    callback("success");
+
+                }, function (tx, error) {
+
+                    // console.log("USER UPDATE ERROR: " + error.message);
+
+                    callback("success");
+                });
+
+            }, function (error) {
+
+                // console.log("USER UPDATE TRANSACTION ERROR: " + error.message);
+
+                callback("success");
             });
         };
 

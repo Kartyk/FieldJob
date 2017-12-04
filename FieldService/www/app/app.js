@@ -14,25 +14,27 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
 
     $rootScope.online = false;
 
+    $rootScope.dbCall = true;
+
     window.addEventListener('offline', offLine);
 
     window.addEventListener('online', onLine);
 
-    $rootScope.apicall = true;
-
-    $rootScope.dbCall = true;
-
-    //$rootScope.online = true;
     function onLine() {
 
         console.log("Online");
+
         valueService.setNetworkStatus(true);
+
         $rootScope.online();
     }
 
     function offLine() {
+
         console.log("Offline");
+
         valueService.setNetworkStatus(false);
+
         $rootScope.offline();
     }
 
@@ -45,6 +47,7 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
             var networkState = navigator.connection.type;
 
             var states = {};
+
             states[Connection.UNKNOWN] = 'Unknown connection';
             states[Connection.ETHERNET] = 'Ethernet connection';
             states[Connection.WIFI] = 'WiFi connection';
@@ -59,10 +62,13 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
             if (networkState === Connection.NONE) {
 
                 valueService.setNetworkStatus(false);
+
                 // $rootScope.offline();
+
             } else {
 
                 valueService.setNetworkStatus(true);
+
                 // $rootScope.online();
             }
         }
@@ -153,9 +159,9 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
                         }
 
                     } else {
+
                         $location.path('/login');
                     }
-
                 } else {
 
                     $location.path('/login');
@@ -186,41 +192,48 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         controller: "indexController",
         templateUrl: "app/views/Login.html"
     });
+
     $stateProvider.state("dashBoard", {
         url: "/dashBoard",
         controller: "indexController",
         templateUrl: "app/views/dashBoard.html"
     });
+
     $stateProvider.state("myTask", {
         url: "/myTask",
         // parent: 'dashBoard',
         controller: "myTaskController",
         templateUrl: "app/views/MyTask.html"
     });
+
     $stateProvider.state("myFieldJob", {
         url: "/myFieldJob",
         // parent: 'dashBoard',
         controller: "myTaskController",
         templateUrl: "app/views/myFieldJob.html"
     });
+
     $stateProvider.state("debrief", {
         url: "/debrief",
         // parent: 'dashBoard',
         controller: "debriefController",
         templateUrl: "app/views/Debrief.html"
     });
+
     $stateProvider.state("taskOverFlow", {
         url: "/taskOverFlow",
         // parent: 'dashBoard',
         controller: "taskOverFlowController",
         templateUrl: "app/views/TaskOverflow.html"
     });
+
     $stateProvider.state("todo", {
         url: "/todo",
         // parent: 'dashBoard',
         controller: "todoController",
         templateUrl: "app/views/Todo.html"
     });
+
     $stateProvider.state("material", {
         url: "/material",
         // parent: 'dashBoard',
@@ -237,7 +250,6 @@ app.config(function ($translateProvider) {
     });
 
     $translateProvider.preferredLanguage('en');
-
 });
 
 app.filter('timezonefilter', function (constantService) {
@@ -262,43 +274,65 @@ app.directive('dateFormat', function ($filter) {
                 return;
 
             ctrl.$parsers.unshift(function (viewValue) {
+
                 // var transformedInput = viewValue.replace(/(\:{1,3}[^0-9])/g, '');
+
                 var transformedInput = viewValue.replace(/([^0-9 :])/g, '');
+
                 // transformedInput = transformedInput.replace(/:{2,4}/g, '');
+
                 transformedInput = transformedInput.replace(/:+/g, ':');
+
                 if (transformedInput !== viewValue) {
+
                     ctrl.$setViewValue(transformedInput);
+
                     ctrl.$render();
                 }
+
                 // return transformedInput;
+
                 if (transformedInput !== undefined && transformedInput !== "") {
 
                     if (transformedInput.length == 2 && transformedInput.indexOf(':') == -1) {
 
                         transformedInput = transformedInput + ":";
+
                         ctrl.$setViewValue(transformedInput);
+
                         ctrl.$render();
+
                         //elem.val(transformedInput);
                     }
 
                     if (transformedInput.length > 5) {
 
                         transformedInput = transformedInput.substring(0, 5);
-                        ctrl.$setViewValue(transformedInput);
-                        ctrl.$render();
-                        //elem.val(transformedInput)
-                    }
 
-                    else if (transformedInput != undefined && transformedInput.split(":")[1] != undefined && transformedInput.split(":")[1].length > 2) {
-                        var temp = transformedInput.split(":")[1].substring(0, transformedInput.split(":")[1].length - 1)
-                        transformedInput = transformedInput.split(":")[0] + ":" + temp;
                         ctrl.$setViewValue(transformedInput);
+
                         ctrl.$render();
-                    }
-                    else if (transformedInput != undefined && transformedInput.split(":")[0] != undefined && transformedInput.split(":")[0].length > 2) {
-                        var temp = transformedInput.split(":")[0].substring(0, transformedInput.split(":")[0].length - 1)
-                        transformedInput = temp + ":" + transformedInput.split(":")[0];
+
+                        //elem.val(transformedInput)
+
+                    } else if (transformedInput != undefined && transformedInput.split(":")[1] != undefined && transformedInput.split(":")[1].length > 2) {
+
+                        var temp = transformedInput.split(":")[1].substring(0, transformedInput.split(":")[1].length - 1);
+
+                        transformedInput = transformedInput.split(":")[0] + ":" + temp;
+
                         ctrl.$setViewValue(transformedInput);
+
+                        ctrl.$render();
+
+                    } else if (transformedInput != undefined && transformedInput.split(":")[0] != undefined && transformedInput.split(":")[0].length > 2) {
+
+                        var temp = transformedInput.split(":")[0].substring(0, transformedInput.split(":")[0].length - 1);
+
+                        transformedInput = temp + ":" + transformedInput.split(":")[0];
+
+                        ctrl.$setViewValue(transformedInput);
+
                         ctrl.$render();
                     }
                 }
@@ -442,8 +476,11 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
         link: function (scope, element, attrs) {
 
             var canvas = element.find('canvas')[0];
+
             var parent = canvas.parentElement;
+
             var scale = 0;
+
             var ctx = canvas.getContext('2d');
 
             var width = parseInt(scope.width, 10);
@@ -479,6 +516,7 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
             var calculateScale = function () {
 
                 var scaleWidth = Math.min(parent.clientWidth / width, 1);
+
                 var scaleHeight = Math.min(parent.clientHeight / height, 1);
 
                 var newScale = Math.min(scaleWidth, scaleHeight);
@@ -488,12 +526,17 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
                 }
 
                 var newWidth = width * newScale;
+
                 var newHeight = height * newScale;
+
                 canvas.style.height = Math.round(newHeight) + "px";
+
                 canvas.style.width = Math.round(newWidth) + "px";
 
                 scale = newScale;
+
                 ctx.setTransform(1, 0, 0, 1, 0, 0);
+
                 ctx.scale(1 / scale, 1 / scale);
             };
 
@@ -513,6 +556,7 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
             calculateScale();
 
             element.on('touchstart', onTouchstart);
+
             element.on('touchend', onTouchend);
 
             function onTouchstart(event) {

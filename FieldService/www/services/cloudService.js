@@ -4,9 +4,9 @@
 
     app.factory('cloudService', cloudService);
 
-    cloudService.$inject = ['$http', '$rootScope', '$window', '$location', 'localService', 'constantService', 'ofscService'];
+    cloudService.$inject = ['$http', '$rootScope', '$window', '$location', '$q', 'localService', 'constantService', 'ofscService'];
 
-    function cloudService($http, $rootScope, $window, $location, localService, constantService, ofscService) {
+    function cloudService($http, $rootScope, $window, $location, $q, localService, constantService, ofscService) {
 
         var url = conf.apiUrl;
 
@@ -16,8 +16,11 @@
 
         service.getTechnicianProfile = getTechnicianProfile;
 
-        service.getTaskList = getTaskList;
+        service.getTaskInternalList = getTaskInternalList;
         service.getTaskDetails = getTaskDetails;
+        service.getLOVDetails = getLOVDetails;
+
+        service.getTaskList = getTaskList;
         service.getInternalList = getInternalList;
         service.getInstallBaseList = getInstallBaseList;
         service.getSRNotesList = getSRNotesList;
@@ -125,14 +128,14 @@
             });
         }
 
-        function getTaskDetails(isLogin, callback) {
+        function getTaskInternalList(isLogin, callback) {
 
             var data = {};
 
             if (isLogin == "0") {
 
                 data = {
-                    "isLogin": "0",
+                    "isLogin": isLogin,
                     "fromDate": constantService.getStartDate(),
                     "toDate": constantService.getEndDate(),
                     "updateDate": "",
@@ -142,17 +145,142 @@
             } else if (isLogin == "1") {
 
                 data = {
-                    "isLogin": "1",
-                    "fromDate": "",
-                    "toDate": "",
-                    "updateDate": constantService.getUser().Last_Updated.toISOString(),
+                    "isLogin": isLogin,
+                    "fromDate": constantService.getStartDate(),
+                    "toDate": constantService.getEndDate(),
+                    "updateDate": new Date(constantService.getUser().Last_Updated).toISOString(),
                     "resourceId": constantService.getResourceId()
                 };
             }
 
-            console.log("START ======> " + JSON.stringify(data));
+            console.log("TASK INTERNAL LIST REQUEST DATA ======> " + JSON.stringify(data));
 
-            console.log("START ======> " + new Date());
+            console.log("TASK INTERNAL LIST RESPONSE START ======> " + new Date());
+
+            $http({
+
+                method: 'POST',
+                url: url + "getTaskList/get_list",
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getCombinedBackId()
+                },
+                data: data
+
+            }).success(function (response) {
+
+                console.log("TASK INTERNAL LIST RESPONSE END ======> " + new Date());
+
+                console.log("Task Internal List Response " + JSON.stringify(response));
+
+                var taskList = [];
+
+                var internalList = [];
+
+                var taskInternalList = [];
+
+                angular.forEach(response.getTaskList, function (item) {
+
+                    if (item.TaskDetails && item.TaskDetails.length > 0) {
+
+                        angular.forEach(item.TaskDetails, function (taskObject) {
+
+                            taskObject.Type = "CUSTOMER";
+
+                            taskObject.email = "";
+
+                            taskObject.Date = new Date();
+
+                            taskList.push(taskObject);
+                        });
+                    }
+
+                    if (item.activities && item.activities.length > 0) {
+
+                        angular.forEach(item.activities, function (internalObject) {
+
+                            internalList.push(internalObject);
+                        });
+                    }
+                });
+
+                localService.insertTaskList(taskList, function (result) {
+
+                    localService.insertInternalList(internalList, function (result) {
+
+                        localService.getTaskList(function (taskListDB) {
+
+                            localService.getInternalList(function (internalListDB) {
+
+                                angular.forEach(taskListDB, function (taskObject) {
+
+                                    taskInternalList.push(taskObject);
+                                });
+
+                                angular.forEach(internalListDB, function (internalObject) {
+
+                                    var internalOFSCJSONObject = {};
+
+                                    internalOFSCJSONObject.Start_Date = internalObject.Start_time;
+                                    internalOFSCJSONObject.End_Date = internalObject.End_time;
+                                    internalOFSCJSONObject.Type = "INTERNAL";
+                                    internalOFSCJSONObject.Customer_Name = internalObject.Activity_type;
+                                    internalOFSCJSONObject.Task_Number = internalObject.Activity_Id;
+
+                                    taskInternalList.push(internalOFSCJSONObject);
+                                });
+
+                                console.log("TASK INTERNAL LIST INSERT SUCCESS");
+
+                                constantService.setTaskList(taskInternalList);
+
+                                callback(taskInternalList);
+
+                                console.log("TASK INTERNAL LIST INSERT END ======> " + new Date());
+                            });
+                        });
+                    });
+                });
+
+            }).error(function (error) {
+
+                console.log("END ======> " + new Date());
+
+                console.log("Task Internal List Error " + JSON.stringify(error));
+
+                callback(error);
+            });
+        }
+
+        function getTaskDetails(isLogin, callback) {
+
+            var data = {};
+
+            if (isLogin == "0") {
+
+                data = {
+                    "isLogin": isLogin,
+                    "fromDate": constantService.getStartDate(),
+                    "toDate": constantService.getEndDate(),
+                    "updateDate": "",
+                    "resourceId": constantService.getResourceId()
+                };
+
+            } else if (isLogin == "1") {
+
+                data = {
+                    "isLogin": isLogin,
+                    "fromDate": constantService.getStartDate(),
+                    "toDate": constantService.getEndDate(),
+                    "updateDate": new Date(constantService.getUser().Last_Updated).toISOString(),
+                    "resourceId": constantService.getResourceId()
+                };
+            }
+
+            console.log("TASK DETAILS REQUEST DATA ======> " + JSON.stringify(data));
+
+            console.log("TASK DETAILS RESPONSE START ======> " + new Date());
 
             $http({
 
@@ -167,15 +295,313 @@
 
             }).success(function (response) {
 
-                console.log("END ======> " + new Date());
+                console.log("TASK DETAILS RESPONSE END ======> " + new Date());
 
-                console.log("Task Response " + JSON.stringify(response));
+                console.log("Task Details Response " + JSON.stringify(response));
+
+                var promises = [];
+
+                angular.forEach(response.getTaskDetails, function (item) {
+
+                    if (item.InstallBase && item.InstallBase.length > 0) {
+
+                        var deferInstall = $q.defer();
+
+                        localService.insertInstallBaseList(item.InstallBase, function (result) {
+
+                            deferInstall.resolve("success");
+                        });
+
+                        promises.push(deferInstall.promise);
+                    }
+
+                    if (item.Contacts && item.Contacts.length > 0) {
+
+                        var deferContact = $q.defer();
+
+                        localService.insertContactList(item.Contacts, function (result) {
+
+                            deferContact.resolve("success");
+                        });
+
+                        promises.push(deferContact.promise);
+                    }
+
+                    if (item.Notes && item.Notes.length > 0) {
+
+                        var deferNotes = $q.defer();
+
+                        localService.insertNoteList(item.Notes, function (result) {
+
+                            deferNotes.resolve("success");
+                        });
+
+                        promises.push(deferNotes.promise);
+                    }
+
+                    if (item.OverTImeShiftCode && item.OverTImeShiftCode.length > 0) {
+
+                        var deferOverTime = $q.defer();
+
+                        localService.insertOverTimeList(item.OverTImeShiftCode, function (result) {
+
+                            deferOverTime.resolve("success");
+                        });
+
+                        promises.push(deferOverTime.promise);
+                    }
+
+                    if (item.ShiftCode && item.ShiftCode.length > 0) {
+
+                        var deferShiftCode = $q.defer();
+
+                        localService.insertShiftCodeList(item.ShiftCode, function (result) {
+
+                            deferShiftCode.resolve("success");
+                        });
+
+                        promises.push(deferShiftCode.promise);
+                    }
+
+                    if (item.TaskName && item.TaskName.length > 0) {
+
+                        var deferFieldJob = $q.defer();
+
+                        localService.insertFieldJobNameList(item.TaskName, function (result) {
+
+                            deferFieldJob.resolve("success");
+                        });
+
+                        promises.push(deferFieldJob.promise);
+                    }
+
+                    if (item.FileID && item.FileID.length > 0) {
+
+                        var attachmentArray = [];
+
+                        var filePath = cordova.file.dataDirectory;
+
+                        angular.forEach(item.FileID, function (item) {
+
+                            var attachmentObject = {
+                                Attachment_Id: item.Attachments_Id,
+                                File_Path: filePath,
+                                File_Name: item.User_File_Name,
+                                File_Type: item.Content_type,
+                                Type: "O",
+                                AttachmentType: "O",
+                                Created_Date: item.Date_Created,
+                                Task_Number: item.Task_Number,
+                                SRID: ""
+                            };
+
+                            attachmentArray.push(attachmentObject);
+                        });
+
+                        var deferAttachment = $q.defer();
+
+                        localService.insertAttachmentList(attachmentArray, function (result) {
+
+                            deferAttachment.resolve("success");
+                        });
+
+                        promises.push(deferAttachment.promise);
+                    }
+                });
+
+                console.log("LENGTH TASK DETAILS " + promises.length);
+
+                $q.all(promises).then(
+                    function (response) {
+
+                        console.log("TASK DETAILS INSERT SUCCESS");
+
+                        callback("success");
+
+                        console.log("TASK DETAILS INSERT END ======> " + new Date());
+                    },
+
+                    function (error) {
+
+                        console.log("TASK DETAILS INSERT FAILURE");
+
+                        callback("failure");
+
+                        console.log("TASK DETAILS INSERT END ======> " + new Date());
+                    }
+                );
 
             }).error(function (error) {
 
                 console.log("END ======> " + new Date());
 
-                console.log("Task Error " + JSON.stringify(error));
+                console.log("Task Details Error " + JSON.stringify(error));
+
+                callback(error);
+            });
+        }
+
+        function getLOVDetails(isLogin, callback) {
+
+            var data = {};
+
+            if (isLogin == "0") {
+
+                data = {
+                    "isLogin": isLogin,
+                    "fromDate": constantService.getStartDate(),
+                    "toDate": constantService.getEndDate(),
+                    "updateDate": "",
+                    "resourceId": constantService.getResourceId()
+                };
+
+            } else if (isLogin == "1") {
+
+                data = {
+                    "isLogin": isLogin,
+                    "fromDate": constantService.getStartDate(),
+                    "toDate": constantService.getEndDate(),
+                    "updateDate": new Date(constantService.getUser().Last_Updated).toISOString(),
+                    "resourceId": constantService.getResourceId()
+                };
+            }
+
+            console.log("LOV REQUEST DATA ======> " + JSON.stringify(data));
+
+            console.log("LOV RESPONSE START ======> " + new Date());
+
+            $http({
+
+                method: 'POST',
+                url: url + "getLOVDetails/LOV_Details",
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getCombinedBackId()
+                }
+
+            }).success(function (response) {
+
+                console.log("LOV RESPONSE END ======> " + new Date());
+
+                console.log("LOV Response " + JSON.stringify(response));
+
+                var promises = [];
+
+                angular.forEach(response.getLOVDetails, function (item) {
+
+                    if (item.Charge_Method && item.Charge_Method.length > 0) {
+
+                        var deferChargeMethod = $q.defer();
+
+                        localService.insertChargeMethodList(item.Charge_Method, function (result) {
+
+                            deferChargeMethod.resolve("success");
+                        });
+
+                        promises.push(deferChargeMethod.promise);
+                    }
+
+                    if (item.Charge_Type && item.Charge_Type.length > 0) {
+
+                        var deferChargeType = $q.defer();
+
+                        localService.insertChargeTypeList(item.Charge_Type, function (result) {
+
+                            deferChargeType.resolve("success");
+                        });
+
+                        promises.push(deferChargeType.promise);
+                    }
+
+                    if (item.Currencies && item.Currencies.length > 0) {
+
+                        var deferCurrency = $q.defer();
+
+                        localService.insertCurrencyList(item.Currencies, function (result) {
+
+                            deferCurrency.resolve("success");
+                        });
+
+                        promises.push(deferCurrency.promise);
+                    }
+
+                    if (item.ExpenseType && item.ExpenseType.length > 0) {
+
+                        var deferExpenseType = $q.defer();
+
+                        localService.insertExpenseTypeList(item.ExpenseType, function (result) {
+
+                            deferExpenseType.resolve("success");
+                        });
+
+                        promises.push(deferExpenseType.promise);
+                    }
+
+                    if (item.Items && item.Items.length > 0) {
+
+                        var deferItem = $q.defer();
+
+                        localService.insertItemList(item.Items, function (result) {
+
+                            deferItem.resolve("success");
+                        });
+
+                        promises.push(deferItem.promise);
+                    }
+
+                    if (item.Notes_Type && item.Notes_Type.length > 0) {
+
+                        var deferNoteType = $q.defer();
+
+                        localService.insertNoteTypeList(item.Notes_Type, function (result) {
+
+                            deferNoteType.resolve("success");
+                        });
+
+                        promises.push(deferNoteType.promise);
+                    }
+
+                    if (item.WorkType && item.WorkType.length > 0) {
+
+                        var deferWorkType = $q.defer();
+
+                        localService.insertWorkTypeList(item.WorkType, function (result) {
+
+                            deferWorkType.resolve("success");
+                        });
+
+                        promises.push(deferWorkType.promise);
+                    }
+                });
+
+                console.log("LENGTH LOV " + promises.length);
+
+                $q.all(promises).then(
+                    function (response) {
+
+                        console.log("LOV INSERT SUCCESS");
+
+                        callback("success");
+
+                        console.log("LOV INSERT END ======> " + new Date());
+                    },
+
+                    function (error) {
+
+                        console.log("LOV INSERT FAILURE");
+
+                        callback("failure");
+
+                        console.log("LOV INSERT END ======> " + new Date());
+                    }
+                );
+
+            }).error(function (error) {
+
+                console.log("END ======> " + new Date());
+
+                console.log("LOV Error " + JSON.stringify(error));
 
                 callback(error);
             });
@@ -254,6 +680,7 @@
         }
 
         function getInternalList(callback) {
+
             var startDate = new Date();
 
             startDate.setDate(startDate.getDate() - 15);
@@ -265,6 +692,7 @@
             endDate.setDate(endDate.getDate() + 15);
 
             var endDateISOFormat = moment(endDate).format('YYYY-MM-DD');
+
             $http({
 
                 method: 'POST',
@@ -322,9 +750,7 @@
 
                 console.log("Install Base Response " + JSON.stringify(response));
 
-                $rootScope.apicall = true;
-
-                localService.insertInstallBaseList(response, function (result) {
+                localService.insertInstallBaseList(response.InstallBase, function (result) {
 
                     callback("success");
                 });
@@ -513,7 +939,7 @@
 
                 $rootScope.apicall = true;
 
-                localService.insertContactList(response, function (result) {
+                localService.insertContactList(response.Contacts, function (result) {
 
                     callback("success");
                 });
@@ -546,7 +972,7 @@
 
                 $rootScope.apicall = true;
 
-                localService.insertNoteList(response, function (result) {
+                localService.insertNoteList(response.Notes, function (result) {
 
                     callback("success");
                 });
@@ -1597,28 +2023,27 @@
                                             "time": moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
                                         };
 
-                                        console.log("startActivityData*****" + startActivityData.activityId);
+                                        console.log("startActivityData " + startActivityData.activityId);
 
                                         ofscService.start_activity(startActivityData, function (response) {
 
                                             if (!isAccept) {
-
 
                                                 var complete = {
                                                     "activityId": startActivityData.activity_id,
                                                     "date": moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
                                                 };
 
+                                                console.log("completeActivityId " + complete.activityId);
 
-                                                console.log("complete_activity*****" + complete.activityId);
-                                                console.log("complete activity ******" + complete.date);
+                                                console.log("completeActivityDate " + complete.date);
 
                                                 var updateTaskSegement = {
                                                     "activity_id": startActivityData.activity_id,
                                                     "XA_TASK_STATUS": "3"
                                                 };
 
-                                                console.log("updateTaskSegement******" + JSON.stringify(updateTaskSegement));
+                                                console.log("updateTaskSegment " + JSON.stringify(updateTaskSegement));
 
                                                 ofscService.updateStatus(updateTaskSegement, function (response) {
 
@@ -1650,8 +2075,7 @@
                                 //        callback();
                                 //    })
                                 //}
-                            }
-                            else {
+                            } else {
                                 callback();
                             }
                         });
