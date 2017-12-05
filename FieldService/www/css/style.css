@@ -2457,3 +2457,10 @@ textarea:focus {
 {
     padding-right:15px !important;
 }
+td img.delete {
+    padding-right:0px !important;padding-bottom:15px !important
+}
+td img.delete:hover
+{
+    cursor:pointer
+}
