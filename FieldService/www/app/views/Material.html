@@ -188,12 +188,48 @@
                 <!--<md-button class="time-font time-delete" ng-click="deleteObject($index, item,'Material')">Delete
                 </md-button>-->
                 <span style="visibility:hidden">{{ $root.materialFormValid = materialForm.$valid}}</span>
-                <md-button class="time-font time-add" ng-click="addObject('Material',true)" ng-disabled="$root.completedTask" translate="Add"></md-button>
-                <md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Material')" ng-disabled="$root.completedTask" translate="delete"></md-button>
+                <md-button class="time-font time-add" ng-click="addObject('Material',true,item)" ng-disabled="$root.completedTask" translate="Add"></md-button>
+               <!-- <md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Material')" ng-disabled="$root.completedTask" translate="delete"></md-button>-->
                 <md-button class="time-font time-copy" ng-click="copyObject(item,'Material')" ng-disabled="$root.completedTask" translate="copy"></md-button>
             </section>
 
         
+
+    </div>
+    <div class="card-childContainer marginbottom30" style="margin-top:20px"  ng-if="materialArraySummary!=undefined && materialArraySummary.length>0">
+
+
+        <table class="table no-marbottom noborder">
+            <thead>
+                <tr class="summary-tr">
+                    <th class="noborder width14"><span translate="Charge Type"></span></th>
+                    <th class="noborder width14"><span translate="Quantity"></span></th>
+                    <th class="noborder width14"><span translate="Serial"></span><span>#</span></th>
+                    <th class="noborder width14"><span translate="Serial In"></span></th>
+                    <th class="noborder width14"><span translate="Serial Out"></span></th>
+                    <th class="noborder width14"><span translate="item name"></span></th>
+                    <th class="noborder width14"><span translate="Item Description"></span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="summary-tr" ng-repeat="material in materialArraySummary">
+                    <td class="noborder bg-white width14">{{material.Charge_Type.Value| translate}}</td>
+                    <td class="noborder bg-white width14">{{material.Product_Quantity}}</td>
+                    <td class="noborder bg-white width14">
+                        <span ng-repeat="serailno in material.serialNumber track by $index">
+                            {{serailno}}<br />
+                        </span>
+                    </td>
+                    <td class="noborder bg-white width14"><span ng-repeat="serailin in material.serialIn track by $index">{{serailin}}<br /></span></td>
+                    <td class="noborder bg-white width14"><span ng-repeat="serailout in material.serialOut track by $index">{{serailout}}<br /></span></td>
+                    <td class="noborder bg-white width14">{{material.ItemName}}</td>
+                    <td class="noborder bg-white width14">{{material.Description}}</td>
+                    <td class="noborder bg-white "><img src="images/cancel.png" class="cancelInEquip delete" ng-click="deleteObject($index,'Material')" /></td>
+                </tr>
+            </tbody>
+        </table>
+
+
 
     </div>
 </div>

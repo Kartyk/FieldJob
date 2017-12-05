@@ -66,11 +66,31 @@
                 </form>
             </div>
             <section  layout="row" layout-sm="column" layout-align="center center" layout-wrap class="time-btns" ng-class="{'newItemBorderSection': $index == addNoteObj && $index != 0,'copyItemSection': $index == copyNoteObj && $index != 0}">
-                <md-button class="time-font time-add" ng-click="addObject('Notes',true)" translate="Add"></md-button>
-                <md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Notes')" translate="delete"></md-button>
+                <md-button class="time-font time-add" ng-click="addObject('Notes',true,item)" translate="Add"></md-button>
+                <!--<md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Notes')" translate="delete"></md-button>-->
                 <md-button class="time-font time-copy" ng-click="copyObject(item,'Notes')" translate="copy"></md-button>
             </section>
 
        
+    </div>
+    <div class="card-childContainer marginbottom30" style="margin-top:20px"  ng-if="notesArraySummary!=undefined && notesArraySummary.length>0">
+
+        <table class="table no-marbottom noborder">
+            <thead>
+                <tr class="noborder">
+                    <th class="taskoverflow-tableTh noborder" translate="Note Type"></th>
+                    <th class="taskoverflow-tableTh noborder" translate="Note Description"> #</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="noborder" ng-repeat="note in notesArraySummary">
+                    <td class="taskoverflow-tableTd noborder bg-white">{{note.Note_Type.Value| translate}}</td>
+                    <td class="taskoverflow-tableTd noborder bg-white"> {{note.Notes| translate}}</td>
+                    <td class="noborder bg-white "><img src="images/cancel.png" class="cancelInEquip delete" ng-click="deleteObject($index,'Notes')" /></td>
+                </tr>
+            </tbody>
+
+        </table>
+
     </div>
 </div>
