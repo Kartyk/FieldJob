@@ -107,4 +107,54 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
     $scope.mapClicked = function () {
         $scope.mapIsClicked = !$scope.mapIsClicked;
     }
+    $scope.accept = function () {
+
+        console.log("STATUS " + $scope.selectedTask.Task_Status);
+       
+        if ($scope.selectedTask.Task_Status == 'Assigned') {
+            
+            if (valueService.getNetworkStatus()) {
+                $rootScope.dbCall = true;
+                valueService.acceptTask(valueService.getTask().Task_Number, function () {
+
+                    $scope.selectedTask.Task_Status = "Accepted";
+
+                    cloudService.OfscActions($scope.selectedTask.Activity_Id, true, function (response) {
+
+                        $rootScope.showAccept = false;
+                        $rootScope.dbCall = false;
+                       
+                    });
+
+                    localService.getTaskList(function (response) {
+
+                        constantService.setTaskList(response);
+
+                        $state.go($state.current, {}, { reload: true });
+                        
+                    });
+                });
+
+            } else {
+                $rootScope.dbCall = true;
+                var taskObject = {
+                    Task_Status: "Accepted",
+                    Task_Number: valueService.getTask().Task_Number,
+                    Submit_Status: "A",
+                    Date: new Date()
+                };
+
+                localService.updateTaskSubmitStatus(taskObject, function (result) {
+
+                    localService.getTaskList(function (response) {
+
+                        constantService.setTaskList(response);
+
+                        $state.go($state.current, {}, { reload: true });
+                        $rootScope.dbCall = false;
+                    });
+                });
+            }
+        }
+    };
 });

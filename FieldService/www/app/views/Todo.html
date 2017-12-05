@@ -14,8 +14,8 @@
         <div class="nav navbar-nav pull-right">
 
             <!-- <a class="startwork-btn md-button md-ink-ripple" ng-click="$root.showTaskOrDebrief(4)" ng-disabled="isFutureDate"><span translate="Debrief"></span></a> -->
-
-            <button type="button" class="btn btn-default startwork-btn" ng-click="$root.showTaskOrDebrief(4)"
+            <button type="button" class="btn btn-default accept-btn" ui-sref="todo" ng-click="accept()" ng-show="$root.showAccept" style="margin-left: 20px;" translate="Accept"></button>
+            <button type="button" class="btn btn-default startwork-btn"  ng-show="!$root.showAccept" ng-click="$root.showTaskOrDebrief(4)"
                     ng-disabled="isFutureDateInTodo" translate="Debrief"></button>
         </div>
 

@@ -270,7 +270,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
         if ($scope.selectedTask.Task_Status == 'Assigned') {
 
             if (valueService.getNetworkStatus()) {
-
+                $rootScope.dbCall = true;
                 valueService.acceptTask(valueService.getTask().Task_Number, function () {
 
                     $scope.selectedTask.Task_Status = "Accepted";
@@ -278,6 +278,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                     cloudService.OfscActions($scope.selectedTask.Activity_Id, true, function (response) {
 
                         $rootScope.showAccept = false;
+                        $rootScope.dbCall = false;
                     });
 
                     localService.getTaskList(function (response) {

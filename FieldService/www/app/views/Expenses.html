@@ -104,18 +104,22 @@
         <table class="table no-marbottom noborder">
             <thead>
                 <tr class="summary-tr">
-                    <th class="noborder width25"><span translate="Date"></span></th>
-                    <th class="noborder width25"><span translate="Expense Type"></span></th>
-                    <th class="noborder width25"><span translate="Charge Method"></span></th>
-                    <th class="noborder width25"><span translate="Justification"></span></th>
+                    <th class="noborder width15"><span translate="Date"></span></th>
+                    <th class="noborder width15" ><span translate="Expense Type"></span></th>
+                    <th class="noborder width15" ><span translate="Amount"></span></th>
+                    <th class="noborder width15"><span translate="Currency"></span></th>
+                    <th class="noborder width15" ><span translate="Charge Method"></span></th>
+                    <th class="noborder width15" ><span translate="Justification"></span></th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="summary-tr" ng-repeat="expense in expenseArraySummary">
-                    <td class="noborder bg-white width25">{{expense.Date|timezonefilter}}</td>
-                    <td class="noborder bg-white width25">{{expense.Expense_Type.Value | translate}}</td>
-                    <td class="noborder bg-white width25">{{expense.Charge_Method.Value |translate}}</td>
-                    <td class="noborder bg-white width25"><div class="summary-description" style="width: 160px;">{{expense.Justification}}</div></td>
+                    <td class="noborder bg-white width15" >{{expense.Date|timezonefilter}}</td>
+                    <td class="noborder bg-white width15" >{{expense.Expense_Type.Value | translate}}</td>
+                    <td class="noborder bg-white width15" >{{expense.Amount | translate}}</td>
+                    <td class="noborder bg-white width15" >{{expense.Currency.Value | translate}}</td>
+                    <td class="noborder bg-white width15" >{{expense.Charge_Method.Value |translate}}</td>
+                    <td class="noborder bg-white width15" ><div class="summary-description" style="width: 160px;">{{expense.Justification}}</div></td>
                     <td class="noborder bg-white "><img src="images/cancel.png" class="cancelInEquip delete" ng-click="deleteObject($index,'Expenses')" /></td>
                 </tr>
             </tbody>

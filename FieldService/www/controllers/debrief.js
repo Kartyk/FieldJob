@@ -503,6 +503,7 @@
                     var serialIn = item.Serial_In.split(",");
 
                     serialIn = item.Serial_In.split(",");
+                    item.serialIn = serialIn;
                 }
 
                 if (item.Serial_Out != undefined && item.Serial_Out != "") {
@@ -510,6 +511,7 @@
                     var serialOut = item.Serial_Out.split(",");
 
                     serialOut = item.Serial_Out.split(",");
+                    item.serialOut = serialOut;
                 }
 
                 if (item.Serial_Number != undefined && item.Serial_Number != "") {
@@ -517,6 +519,7 @@
                     var serialNo = item.Serial_Number.split(",");
 
                     serialNo = item.Serial_Number.split(",")
+                    item.serialNumber = serialNo;
                 }
 
                 item.Serial_Type = [];
@@ -697,6 +700,7 @@
                         title: "Comments"
                     }
                 };
+              
                var timeObject = {
                    timeDefault: timeDefault,
                    Time_Id: $scope.taskId + "" + ($scope.timeArray.length + 1),
@@ -723,6 +727,14 @@
                    Comments: "",
                    Task_Number: $scope.taskId
                }
+               angular.forEach($scope.timeDefault.chargeMethod.values, function (key, value) {
+
+                   if (key.Value == $scope.taskObject.Labor_Method) {
+
+                       timeObject.Charge_Method = key;
+                       timeObject.Charge_Method_Id = key.ID;
+                   }
+               });
                if ($scope.timeArray.length == 0)
                    $scope.timeArray.push(timeObject);
                else
@@ -792,6 +804,17 @@
                     Charge_Method_Id: "",
                     Justification: "",
                     Task_Number: $scope.taskId
+                }
+                if ($scope.expenseDefault.chargeMethod.values != undefined && $scope.expenseDefault.chargeMethod.values.length > 0) {
+
+                    angular.forEach($scope.expenseDefault.chargeMethod.values, function (key, value) {
+
+                        if (key.Value == $scope.taskObject.Expense_Method) {
+
+                            expenseObj.Charge_Method = key;
+                            expenseObj.Charge_Method_Id = key.ID;
+                        }
+                    });
                 }
                 if ($scope.expenseArray.length == 0)
                     $scope.expenseArray.push(expenseObj);
@@ -901,6 +924,17 @@
                     Task_Number: $scope.taskId,
                     ItemName: ""
                 }
+                if ($scope.materialDefault.chargeType.values != undefined && $scope.materialDefault.chargeType.values.length > 0) {
+
+                    angular.forEach($scope.materialDefault.chargeType.values, function (key, value) {
+
+                        if (key.Value == $scope.taskObject.Material_Method) {
+
+                            materialObj.Charge_Type = key;
+                            materialObj.Charge_Type_Id = key.ID;
+                        }
+                    });
+                }
                 if ($scope.materialArray.length == 0)
                     $scope.materialArray.push(materialObj);
                 else
@@ -912,7 +946,10 @@
                         Charge_Type_Id: item.Charge_Type_Id,
                         Description: item.Description,
                         Product_Quantity: item.Product_Quantity,
-                        Serial_Type:item.Serial_Type,
+                        Serial_Type: item.Serial_Type,
+                        "serialNumber": $scope.serialNumber(item.Serial_Type),
+                        "serialIn": $scope.serialIn(item.Serial_Type),
+                        "serialOut": $scope.serialOut(item.Serial_Type),
                         Task_Number: $scope.taskId,
                         ItemName:item.ItemName
                     });
@@ -1197,6 +1234,9 @@
                         Description: item.Description,
                         Product_Quantity: item.Product_Quantity,
                         Serial_Type: item.Serial_Type,
+                        "serialNumber": $scope.serialNumber(item.Serial_Type),
+                        "serialIn": $scope.serialIn(item.Serial_Type),
+                        "serialOut": $scope.serialOut(item.Serial_Type),
                         Task_Number: $scope.taskId,
                         ItemName: item.ItemName
                     });
@@ -1399,46 +1439,12 @@
 
         if ($scope.materialArraySummary.length > 0) {
 
-            $scope.serialNumber = function (serialArray) {
-
-                var serialNumberArray = [];
-
-                angular.forEach(serialArray, function (key, value) {
-
-                    serialNumberArray.push(key.number);
-                });
-
-                return serialNumberArray;
-            }
-
-            $scope.serialIn = function (serialArray) {
-
-                var serialNumberArray = [];
-
-                angular.forEach(serialArray, function (key, value) {
-
-                    serialNumberArray.push(key.in);
-                });
-
-                return serialNumberArray;
-            }
-
-            $scope.serialOut = function (serialArray) {
-
-                var serialNumberArray = [];
-
-                angular.forEach(serialArray, function (key, value) {
-
-                    serialNumberArray.push(key.out);
-                });
-
-                return serialNumberArray;
-            }
+            
 
             angular.forEach($scope.materialArraySummary, function (key, value) {
-                key.Serial_In = $scope.serialIn(key.Serial_Type);
-                key.Serial_Out = $scope.serialOut(key.Serial_Type);
-                key.Serial_Number = $scope.serialNumber(key.Serial_Type);
+                key.Serial_In = key.serialIn;
+                key.Serial_Out = key.serialOut;
+                key.Serial_Number = key.serialNumber;
             });
 
             valueService.setMaterial($scope.materialArraySummary);
@@ -1650,41 +1656,7 @@
 
             if ($scope.materialArraySummary != undefined) {
 
-                $scope.serialNumber = function (serialArray) {
-
-                    var serialNumberArray = [];
-
-                    angular.forEach(serialArray, function (key, value) {
-
-                        serialNumberArray.push(key.number);
-                    });
-
-                    return serialNumberArray;
-                }
-
-                $scope.serialIn = function (serialArray) {
-
-                    var serialNumberArray = [];
-
-                    angular.forEach(serialArray, function (key, value) {
-
-                        serialNumberArray.push(key.in);
-                    });
-
-                    return serialNumberArray;
-                }
-
-                $scope.serialOut = function (serialArray) {
-
-                    var serialNumberArray = [];
-
-                    angular.forEach(serialArray, function (key, value) {
-
-                        serialNumberArray.push(key.out);
-                    });
-
-                    return serialNumberArray;
-                }
+                
 
                 angular.forEach($scope.materialArraySummary, function (key, value) {
 
@@ -1940,7 +1912,41 @@
             })
         }
     }
+    $scope.serialNumber = function (serialArray) {
 
+        var serialNumberArray = [];
+
+        angular.forEach(serialArray, function (key, value) {
+
+            serialNumberArray.push(key.number);
+        });
+
+        return serialNumberArray;
+    }
+
+    $scope.serialIn = function (serialArray) {
+
+        var serialNumberArray = [];
+
+        angular.forEach(serialArray, function (key, value) {
+
+            serialNumberArray.push(key.in);
+        });
+
+        return serialNumberArray;
+    }
+
+    $scope.serialOut = function (serialArray) {
+
+        var serialNumberArray = [];
+
+        angular.forEach(serialArray, function (key, value) {
+
+            serialNumberArray.push(key.out);
+        });
+
+        return serialNumberArray;
+    }
     $scope.calculateDuration = function (obj, key) {
 
         obj.hours += key.DurationHours;

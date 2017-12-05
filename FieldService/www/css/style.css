@@ -2304,8 +2304,12 @@ md-select.md-default-theme ._md-select-value, md-select ._md-select-value{
 .width25{
   width: 25%;
 }
-.summary-reviewBtn{
-      margin-top: 50px;
+.width15 
+{
+    width:15%;
+}
+.summary-reviewBtn {
+    margin-top: 50px;
     width: 180px;
     height: 50px;
     background-color: #00aa7e !important;
