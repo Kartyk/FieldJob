@@ -129,6 +129,7 @@
 
         service.updateTaskSubmitStatus = updateTaskSubmitStatus;
         service.updateTaskEmail = updateTaskEmail;
+        service.updateAttachmentStatus = updateAttachmentStatus;
 
         service.getPendingTaskList = getPendingTaskList;
         service.getAcceptTaskList = getAcceptTaskList;
@@ -891,7 +892,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Contact SET Customer_Name = ?, Contact_Name = ?, Home_Phone = ?, Mobile_Phone =?, Fax_Phone = ?, Office_Phone = ?, Email = ?, Foreign_Key = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?, ResourceId = ?  WHERE Contact_ID = ? AND Task_Number = ?";
+                var sqlUpdate = "UPDATE Contact SET Customer_Name = ?, Contact_Name = ?, Home_Phone = ?, Mobile_Phone =?, Fax_Phone = ?, Office_Phone = ?, Email = ?, Foreign_Key = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?, Default = ?, Contact_Preference = ?, ResourceId = ?  WHERE Contact_ID = ? AND Task_Number = ?";
 
                 insertValues.push(responseList.Customer_Name);
                 insertValues.push(responseList.Contact_Name);
@@ -905,6 +906,8 @@
                 insertValues.push(responseList.Assigned);
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.End_Date);
+                insertValues.push(responseList.Default);
+                insertValues.push(responseList.Contact_Preference);
                 insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.Contact_ID);
                 insertValues.push(responseList.Task_Number);
@@ -938,7 +941,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Contact VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Contact VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Contact_ID);
                 insertValues.push(responseList.Customer_Name);
@@ -954,6 +957,8 @@
                 insertValues.push(responseList.Assigned);
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.End_Date);
+                insertValues.push(responseList.Default);
+                insertValues.push(responseList.Contact_Preference);
                 insertValues.push(constantService.getResourceId());
 
                 // console.log("CONTACT INSERT VALUES =====> " + insertValues);
@@ -1279,6 +1284,34 @@
                 // console.log("ATTACHMENT INSERT TRANSACTION ERROR: " + error.message);
 
                 defer.reject(error);
+            });
+        };
+
+        function updateAttachmentStatus(responseList) {
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlUpdate = "UPDATE Attachment SET Attachment_Status = ?  WHERE Attachment_Id = ?";
+
+                insertValues.push(responseList.Attachment_Status);
+                insertValues.push(responseList.Attachment_Id);
+
+                // console.log("TASK UPDATE VALUES =====> " + insertValues);
+
+                transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
+
+                    // console.log("TASK ROW AFFECTED: " + res.rowsAffected);
+
+                }, function (tx, error) {
+
+                    // console.log("TASK UPDATE ERROR: " + error.message);
+                });
+
+            }, function (error) {
+
+                // console.log("TASK UPDATE TRANSACTION ERROR: " + error.message);
             });
         };
 

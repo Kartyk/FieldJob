@@ -842,6 +842,7 @@
                         // console.log("WRITING CONTENT TO FILE");
 
                         fileWriter.write(DataBlob);
+                        
                         if (defer != null)
                             defer.resolve();
 

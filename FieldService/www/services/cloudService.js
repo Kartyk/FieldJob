@@ -310,6 +310,8 @@
                         localService.insertInstallBaseList(item.InstallBase, function (result) {
 
                             deferInstall.resolve("success");
+
+                            console.log("INSTALL BASE");
                         });
 
                         promises.push(deferInstall.promise);
@@ -322,6 +324,8 @@
                         localService.insertContactList(item.Contacts, function (result) {
 
                             deferContact.resolve("success");
+
+                            console.log("CONTACTS");
                         });
 
                         promises.push(deferContact.promise);
@@ -334,6 +338,8 @@
                         localService.insertNoteList(item.Notes, function (result) {
 
                             deferNotes.resolve("success");
+
+                            console.log("NOTES");
                         });
 
                         promises.push(deferNotes.promise);
@@ -346,6 +352,8 @@
                         localService.insertOverTimeList(item.OverTImeShiftCode, function (result) {
 
                             deferOverTime.resolve("success");
+
+                            console.log("OVER TIME");
                         });
 
                         promises.push(deferOverTime.promise);
@@ -358,6 +366,8 @@
                         localService.insertShiftCodeList(item.ShiftCode, function (result) {
 
                             deferShiftCode.resolve("success");
+
+                            console.log("SHIFT CODE");
                         });
 
                         promises.push(deferShiftCode.promise);
@@ -370,6 +380,8 @@
                         localService.insertFieldJobNameList(item.TaskName, function (result) {
 
                             deferFieldJob.resolve("success");
+
+                            console.log("FIELD JOB");
                         });
 
                         promises.push(deferFieldJob.promise);
@@ -403,6 +415,8 @@
                         localService.insertAttachmentList(attachmentArray, function (result) {
 
                             deferAttachment.resolve("success");
+
+                            console.log("ATTACHMENTS");
                         });
 
                         promises.push(deferAttachment.promise);
@@ -497,6 +511,8 @@
                         localService.insertChargeMethodList(item.Charge_Method, function (result) {
 
                             deferChargeMethod.resolve("success");
+
+                            console.log("CHARGE METHOD");
                         });
 
                         promises.push(deferChargeMethod.promise);
@@ -509,6 +525,8 @@
                         localService.insertChargeTypeList(item.Charge_Type, function (result) {
 
                             deferChargeType.resolve("success");
+
+                            console.log("CHARGE TYPE");
                         });
 
                         promises.push(deferChargeType.promise);
@@ -521,6 +539,8 @@
                         localService.insertCurrencyList(item.Currencies, function (result) {
 
                             deferCurrency.resolve("success");
+
+                            console.log("CURRENCY");
                         });
 
                         promises.push(deferCurrency.promise);
@@ -533,6 +553,8 @@
                         localService.insertExpenseTypeList(item.ExpenseType, function (result) {
 
                             deferExpenseType.resolve("success");
+
+                            console.log("EXPENSE TYPE");
                         });
 
                         promises.push(deferExpenseType.promise);
@@ -545,6 +567,8 @@
                         localService.insertItemList(item.Items, function (result) {
 
                             deferItem.resolve("success");
+
+                            console.log("ITEMS");
                         });
 
                         promises.push(deferItem.promise);
@@ -557,6 +581,8 @@
                         localService.insertNoteTypeList(item.Notes_Type, function (result) {
 
                             deferNoteType.resolve("success");
+
+                            console.log("NOTE TYPE");
                         });
 
                         promises.push(deferNoteType.promise);
@@ -569,6 +595,8 @@
                         localService.insertWorkTypeList(item.WorkType, function (result) {
 
                             deferWorkType.resolve("success");
+
+                            console.log("WORK TYPE");
                         });
 
                         promises.push(deferWorkType.promise);
