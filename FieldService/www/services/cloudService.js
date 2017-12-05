@@ -2022,7 +2022,7 @@
 
                         updateStatus = {
                             "activity_id": activateId,
-                            "XA_TASK_STATUS": "2"
+                            "XA_TASK_STATUS": "3"
                         };
                     }
 
@@ -2068,7 +2068,7 @@
 
                                                 var updateTaskSegement = {
                                                     "activity_id": startActivityData.activity_id,
-                                                    "XA_TASK_STATUS": "2"
+                                                    "XA_TASK_STATUS": "3"
                                                 };
 
                                                 console.log("updateTaskSegment " + JSON.stringify(updateTaskSegement));
