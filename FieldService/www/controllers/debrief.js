@@ -1515,7 +1515,46 @@
             valueService.setEngineer($scope.engineerObject);
         }
     }
+    $scope.Next = function (stage)
+    {
+        switch (stage) {
+            case 'Time':
+                if ($scope.timeArraySummary.length > 0) {
 
+                    valueService.setTime($scope.timeArraySummary);
+                }
+                break;
+            case 'Expenses':
+                if ($scope.expenseArraySummary.length > 0) {
+
+                    valueService.setExpense($scope.expenseArraySummary);
+                }
+                break;
+            case 'Material':
+                if ($scope.materialArraySummary.length > 0) {
+
+
+
+                    angular.forEach($scope.materialArraySummary, function (key, value) {
+                        key.Serial_In = key.serialIn;
+                        key.Serial_Out = key.serialOut;
+                        key.Serial_Number = key.serialNumber;
+                    });
+
+                    valueService.setMaterial($scope.materialArraySummary);
+                }
+                break;
+            case 'Notes':
+                if ($scope.notesArraySummary.length > 0) {
+
+                    valueService.setNote($scope.notesArraySummary);
+                }
+                break;
+        }
+       
+        valueService.saveValues();
+        $scope.selectedIndex = $scope.stages.findIndex(x => x.title == stage)+1
+    }
     $scope.tabChange = function (stage) {
 
         constantService.setStagesArray(stage);
@@ -1834,7 +1873,7 @@
                         var newTimecode = true
                         angular.forEach($scope.summary.timeArray, function (summaryTime) {
                             if ($scope.userType == 'C') {
-                                if (summaryTime.Charge_Method == key.Charge_Method.Value && summaryTime.Charge_Type == key.Charge_Type.Value && summaryTime.Shift_Code == key.Shift_Code.Value && summaryTime.Date == moment(key.Date).format('DD-MMM-YYYY') && summaryTime.Time_Code == key.Time_Code.Overtimeshiftcode && summaryTime.Work_Type == key.Work_Type.Value && summaryTime.Item == key.Item.Value) {
+                                if (summaryTime.Charge_Method == key.Charge_Method.Value && summaryTime.Charge_Type == key.Charge_Type.Value && summaryTime.Shift_Code == key.Shift_Code.ShiftCodeName && summaryTime.Date == moment(key.Date).format('DD-MMM-YYYY') && summaryTime.Time_Code == key.Time_Code.Overtimeshiftcode && summaryTime.Work_Type == key.Work_Type.Value && summaryTime.Item == key.Item.Value) {
                                     summaryTime.Duration = $scope.calculateDuration(summaryTime, key);
                                     summaryTime.Duration = formatDuration(summaryTime.Duration)
                                     newTimecode = false;
