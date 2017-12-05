@@ -1128,6 +1128,13 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                         var base64Code = result.data;
 
                         valueService.saveBase64File(item.File_Path, item.File_Name, base64Code, item.File_Type);
+
+                        var updateObject = {
+                            Attachment_Status: "1",
+                            Attachment_Id: item.Attachment_Id
+                        };
+
+                        localService.updateAttachmentStatus(updateObject);
                     }
                 });
             });
@@ -1144,6 +1151,13 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                         var base64Code = result.data;
 
                         valueService.saveBase64File(item.File_Path, item.File_Name, base64Code, item.File_Type);
+
+                        var updateObject = {
+                            Attachment_Status: "1",
+                            Attachment_Id: item.Attachment_Id
+                        };
+
+                        localService.updateAttachmentStatus(updateObject);
                     }
                 });
             });
