@@ -207,7 +207,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Task SET Job_Description = ?, Duration = ?, Task_Status = ?, Customer_Name =?, Street_Address = ?, City = ?, State = ?, Country = ?, Zip_Code = ?, Expense_Method = ?, Labor_Method = ?, Travel_Method = ?, Material_Method = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?, Activity_Id = ?, Work_Phone_Number = ?, Mobile_Phone_Number = ?, Address1 = ?, SR_ID = ?, Name = ?, ResourceId = ? WHERE Task_Number = ?";
+                var sqlUpdate = "UPDATE Task SET Job_Description = ?, Duration = ?, Task_Status = ?, Customer_Name =?, Street_Address = ?, City = ?, State = ?, Country = ?, Zip_Code = ?, Expense_Method = ?, Labor_Method = ?, Travel_Method = ?, Material_Method = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?, Activity_Id = ?, Work_Phone_Number = ?, Mobile_Phone_Number = ?, Address1 = ?, SR_ID = ?, Name = ?, Contact_Name = ?, ResourceId = ? WHERE Task_Number = ?";
 
                 insertValues.push(responseList.Job_Description);
                 insertValues.push(responseList.Duration);
@@ -232,6 +232,7 @@
                 insertValues.push(responseList.Address1);
                 insertValues.push(responseList.SR_ID);
                 insertValues.push(responseList.Name);
+                insertValues.push(responseList.Contact_Name);
                 insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.Task_Number);
 
@@ -264,7 +265,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Task VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Task VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Task_Number);
                 insertValues.push(responseList.Job_Description);
@@ -294,8 +295,8 @@
                 insertValues.push(responseList.Address1);
                 insertValues.push(responseList.SR_ID);
                 insertValues.push(responseList.Name);
+                insertValues.push(responseList.Contact_Name);
                 insertValues.push(constantService.getResourceId());
-
 
                 // console.log("TASK INSERT VALUES =====> " + insertValues);
 
@@ -1253,7 +1254,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Attachment VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Attachment VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Attachment_Id);
                 insertValues.push(responseList.File_Name);
@@ -1264,6 +1265,7 @@
                 insertValues.push(responseList.Created_Date);
                 insertValues.push(responseList.Task_Number);
                 insertValues.push(responseList.SRID);
+                insertValues.push("0");
                 insertValues.push(constantService.getResourceId());
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
@@ -1298,20 +1300,20 @@
                 insertValues.push(responseList.Attachment_Status);
                 insertValues.push(responseList.Attachment_Id);
 
-                // console.log("TASK UPDATE VALUES =====> " + insertValues);
+                // console.log("ATTACHMENT UPDATE VALUES =====> " + insertValues);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
-                    // console.log("TASK ROW AFFECTED: " + res.rowsAffected);
+                    // console.log("ATTACHMENT ROW AFFECTED: " + res.rowsAffected);
 
                 }, function (tx, error) {
 
-                    // console.log("TASK UPDATE ERROR: " + error.message);
+                    // console.log("ATTACHMENT UPDATE ERROR: " + error.message);
                 });
 
             }, function (error) {
 
-                // console.log("TASK UPDATE TRANSACTION ERROR: " + error.message);
+                // console.log("ATTACHMENT UPDATE TRANSACTION ERROR: " + error.message);
             });
         };
 
@@ -5078,7 +5080,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM Attachment WHERE Type = ? AND ResourceId = ?", [type, constantService.getResourceId()], function (tx, res) {
+                transaction.executeSql("SELECT * FROM Attachment WHERE Type = ? AND ResourceId = ? AND Attachment_Status = ?", [type, constantService.getResourceId(), "0"], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
