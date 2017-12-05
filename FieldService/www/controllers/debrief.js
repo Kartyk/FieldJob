@@ -80,9 +80,14 @@
     $scope.installBaseArray = [];
 
     $scope.timeArray = [];
+   
+    $scope.timeArraySummary = [];
     $scope.expenseArray = [];
+    $scope.expenseArraySummary = [];
     $scope.materialArray = [];
+    $scope.materialArraySummary = [];
     $scope.notesArray = [];
+    $scope.notesArraySummary = [];
     $scope.attachmentArray = [];
     $scope.engineerObject = {};
 
@@ -108,10 +113,10 @@
 
         $scope.installBaseArray = valueService.getInstallBase();
 
-        $scope.timeArray = valueService.getTime();
-        $scope.expenseArray = valueService.getExpense();
-        $scope.materialArray = valueService.getMaterial();
-        $scope.notesArray = valueService.getNote();
+        $scope.timeArraySummary = valueService.getTime();
+        $scope.expenseArraySummary = valueService.getExpense();
+        $scope.materialArraySummary = valueService.getMaterial();
+        $scope.notesArraySummary = valueService.getNote();
         $scope.attachmentArray = valueService.getAttachment();
 
         $scope.image = [];
@@ -212,9 +217,7 @@
 
     };
 
-    $scope.setDropDownValues = function () {
-
-       
+    $scope.setDropDownValues = function () {      
 
         $scope.timeDefault = {
             fieldJobName: {
@@ -336,114 +339,115 @@
     };
 
     $scope.setDefaultValues = function () {
+        
 
-        if ($scope.timeArray != null && $scope.timeArray.length > 0) {
+        if ($scope.timeArraySummary != null && $scope.timeArraySummary.length > 0) {
 
-            angular.forEach($scope.timeArray, function (item) {
+            angular.forEach($scope.timeArraySummary, function (item) {
 
                 if (item.Date != undefined && item.Date != "")
                     item.Date = new Date(item.Date);
 
-                item.timeDefault ={
-                    fieldJobName: {
-                        title: "Field Job Name",
-                        values: $scope.fieldJobArray
-                    },
-                    chargeType: {
-                        title: "Charge Type",
-                        values: $scope.chargeTypeArray
-                    },
-                    workType: {
-                        title: "Work Type",
-                        values: $scope.workTypeArray
-                    },
-                    chargeMethod: {
-                        title: "Charge Method",
-                        values: $scope.chargeMethodArray,
-                    },
-                    item: {
-                        title: "Item",
-                        values: $scope.itemValue
-                    },
-                    description: {
-                        title: "Description"
-                    },
-                    timeCode: {
-                        title: "Time Code",
-                        values: $scope.overTimeArray
-                    },
-                    timeCodeT: {
-                        title: "Time Code",
-                        value: ["OT1", "OT2", "OT3", "OS1", "OS2", "Standard"]
-                    },
-                    shiftCode: {
-                        title: "Shift Code",
-                        values: $scope.shiftCodeArray
-                    },
-                    Date: {
-                        title: "Date"
-                    },
-                    duration: {
-                        title: "Duration (HH:MM)"
-                    },
-                    comments: {
-                        title: "Comments"
-                    }
-                };
+                //$scope.timeArray[0].timeDefault = {
+                //    fieldJobName: {
+                //        title: "Field Job Name",
+                //        values: $scope.fieldJobArray
+                //    },
+                //    chargeType: {
+                //        title: "Charge Type",
+                //        values: $scope.chargeTypeArray
+                //    },
+                //    workType: {
+                //        title: "Work Type",
+                //        values: $scope.workTypeArray
+                //    },
+                //    chargeMethod: {
+                //        title: "Charge Method",
+                //        values: $scope.chargeMethodArray,
+                //    },
+                //    item: {
+                //        title: "Item",
+                //        values: $scope.itemValue
+                //    },
+                //    description: {
+                //        title: "Description"
+                //    },
+                //    timeCode: {
+                //        title: "Time Code",
+                //        values: $scope.overTimeArray
+                //    },
+                //    timeCodeT: {
+                //        title: "Time Code",
+                //        value: ["OT1", "OT2", "OT3", "OS1", "OS2", "Standard"]
+                //    },
+                //    shiftCode: {
+                //        title: "Shift Code",
+                //        values: $scope.shiftCodeArray
+                //    },
+                //    Date: {
+                //        title: "Date"
+                //    },
+                //    duration: {
+                //        title: "Duration (HH:MM)"
+                //    },
+                //    comments: {
+                //        title: "Comments"
+                //    }
+                //};
 
                 item.DurationHours = moment.duration(item.Duration).hours();
 
                 item.DurationMinutes = moment.duration(item.Duration).minutes();
 
-                angular.forEach(item.timeDefault.chargeType.values, function (type) {
+                angular.forEach($scope.timeDefault.chargeType.values, function (type) {
                     if (type.ID == item.Charge_Type_Id) {
                         item.Charge_Type = type;
                     }
                 });
 
-                angular.forEach(item.timeDefault.chargeMethod.values, function (type) {
+                angular.forEach($scope.timeDefault.chargeMethod.values, function (type) {
                     if (type.ID == item.Charge_Method_Id) {
                         item.Charge_Method = type;
                     }
                 });
 
-                angular.forEach(item.timeDefault.fieldJobName.values, function (type) {
+                angular.forEach($scope.timeDefault.fieldJobName.values, function (type) {
                     if (type.TaskCode == item.Field_Job_Name_Id) {
                         item.Field_Job_Name = type;
                     }
                 });
 
-                angular.forEach(item.timeDefault.timeCode.values, function (type) {
+                angular.forEach($scope.timeDefault.timeCode.values, function (type) {
                     if (type.OverTime_Shift_Code_ID == item.Time_Code_Id) {
                         item.Time_Code = type;
                     }
                 });
 
-                angular.forEach(item.timeDefault.shiftCode.values, function (type) {
+                angular.forEach($scope.timeDefault.shiftCode.values, function (type) {
                     if (type.Shift_Code_ID == item.Shift_Code_Id) {
                         item.Shift_Code = type;
                     }
                 });
 
-                angular.forEach(item.timeDefault.workType.values, function (type) {
+                angular.forEach($scope.timeDefault.workType.values, function (type) {
 
                     if (type.ID == item.Work_Type_Id) {
 
                         item.Work_Type = type;
 
                         if (type.Value == "Deputation") {
-                            item.timeDefault.item.values = $scope.itemDeputation;
+                            $scope.timeDefault.item.values = $scope.itemDeputation;
                         } else if (type.Value == "Travel") {
-                            item.timeDefault.item.values = $scope.itemTravel;
+                            $scope.timeDefault.item.values = $scope.itemTravel;
                         } else if (type.Value == "Normal") {
-                            item.timeDefault.item.values = $scope.itemNormal;
+                            $scope.timeDefault.item.values = $scope.itemNormal;
                         } else if (type.Value == "Nightshift") {
-                            item.timeDefault.item.values = $scope.itemNightShift;
+                            $scope.timeDefault.item.values = $scope.itemNightShift;
                         }
                     }
                 });
 
-                angular.forEach(item.timeDefault.item.values, function (type) {
+                angular.forEach($scope.timeDefault.item.values, function (type) {
                     if (type.ID == item.Item_Id) {
                         item.Item = type;
                     }
@@ -451,28 +455,28 @@
             });
         }
 
-        if ($scope.expenseArray != null && $scope.expenseArray.length > 0) {
+        if ($scope.expenseArraySummary != null && $scope.expenseArraySummary.length > 0) {
 
-            angular.forEach($scope.expenseArray, function (item) {
+            angular.forEach($scope.expenseArraySummary, function (item) {
 
                 if (item.Date != undefined && item.Date != "")
                     item.Date = new Date(item.Date);
 
-                item.expenseDefault = $scope.expenseDefault;
+                //item.expenseDefault = $scope.expenseDefault;
 
-                angular.forEach(item.expenseDefault.chargeMethod.values, function (type) {
+                angular.forEach($scope.expenseDefault.chargeMethod.values, function (type) {
                     if (type.ID == item.Charge_Method_Id) {
                         item.Charge_Method = type;
                     }
                 });
 
-                angular.forEach(item.expenseDefault.currency.values, function (type) {
+                angular.forEach($scope.expenseDefault.currency.values, function (type) {
                     if (type.ID == item.Currency_Id) {
                         item.Currency = type;
                     }
                 });
 
-                angular.forEach(item.expenseDefault.expenseType.values, function (type) {
+                angular.forEach($scope.expenseDefault.expenseType.values, function (type) {
                     if (type.ID == item.Expense_Type_Id) {
                         item.Expense_Type = type;
                     }
@@ -480,13 +484,13 @@
             });
         }
 
-        if ($scope.materialArray != null && $scope.materialArray.length > 0) {
+        if ($scope.materialArraySummary != null && $scope.materialArraySummary.length > 0) {
 
-            angular.forEach($scope.materialArray, function (item) {
+            angular.forEach($scope.materialArraySummary, function (item) {
 
-                item.materialDefault = $scope.materialDefault;
+               // item.materialDefault = $scope.materialDefault;
 
-                angular.forEach(item.materialDefault.chargeType.values, function (type) {
+                angular.forEach($scope.materialDefault.chargeType.values, function (type) {
                     if (type.ID == item.Charge_Type_Id) {
                         item.Charge_Type = type;
                     }
@@ -564,16 +568,16 @@
             });
         }
 
-        if ($scope.notesArray != null && $scope.notesArray.length > 0) {
+        if ($scope.notesArraySummary != null && $scope.notesArraySummary.length > 0) {
 
-            angular.forEach($scope.notesArray, function (item) {
+            angular.forEach($scope.notesArraySummary, function (item) {
 
                 if (item.Date != undefined && item.Date != "")
                     item.Date = new Date(item.Date);
 
-                item.noteDefault = $scope.noteDefault;
+              //  item.noteDefault = $scope.noteDefault;
 
-                angular.forEach(item.noteDefault.noteType.values, function (type) {
+                angular.forEach($scope.noteDefault.noteType.values, function (type) {
                     if (type.ID == item.Note_Type_Id) {
                         item.Note_Type = type;
                     }
@@ -627,7 +631,7 @@
         }
     };
 
-    $scope.addObject = function (stage,isButtonClick) {
+    $scope.addObject = function (stage,isButtonClick,item) {
 
         var durationFromResponse, DurationHours, DurationMinutes;
 
@@ -693,60 +697,89 @@
                         title: "Comments"
                     }
                 };
-                $scope.timeArray.push({
-                    timeDefault: timeDefault,
-                    Time_Id: $scope.taskId + "" + ($scope.timeArray.length + 1),
-                    Field_Job_Name: "",
-                    Field_Job_Name_Id: "",
-                    Charge_Type: "",
-                    Charge_Type_Id: "",
-                    Charge_Method: $scope.taskObject.Labor_Method,
-                    Charge_Method_Id: "",
-                    Work_Type: "",
-                    Work_Type_Id: "",
-                    Item: "",
-                    Item_Id: "",
-                    Description: "",
-                    Time_Code: "",
-                    Time_Code_Id: "",
-                    Shift_Code: "",
-                    Shift_Code_Id: "",
-                    Date: new Date(),
-                    Duration: durationFromResponse,
-                    DurationHours: DurationHours,
-                    DurationMinutes: DurationMinutes,
-                    mins: 0,
-                    Comments: "",
-                    Task_Number: $scope.taskId
-                });
-
-                if ($scope.timeArray.length > 1) {
-
-                    $scope.addTimeObj = $scope.timeArray.length - 1;
-
-                    var newHash = $scope.addTimeObj;
-
-                    if ($location.hash() !== newHash) {
-
-                        $location.hash('time' + $scope.addTimeObj);
-
-                    } else {
-
-                        $anchorScroll();
-                    }
-
-                    setTimeout(function () {
-
-                        $location.hash(null);
-                    }, 100);
+               var timeObject = {
+                   timeDefault: timeDefault,
+                   Time_Id: $scope.taskId + "" + ($scope.timeArray.length + 1),
+                   Field_Job_Name: "",
+                   Field_Job_Name_Id: "",
+                   Charge_Type: "",
+                   Charge_Type_Id: "",
+                   Charge_Method: $scope.taskObject.Labor_Method,
+                   Charge_Method_Id: "",
+                   Work_Type: "",
+                   Work_Type_Id: "",
+                   Item: "",
+                   Item_Id: "",
+                   Description: "",
+                   Time_Code: "",
+                   Time_Code_Id: "",
+                   Shift_Code: "",
+                   Shift_Code_Id: "",
+                   Date: new Date(),
+                   Duration: durationFromResponse,
+                   DurationHours: DurationHours,
+                   DurationMinutes: DurationMinutes,
+                   mins: 0,
+                   Comments: "",
+                   Task_Number: $scope.taskId
+               }
+               if ($scope.timeArray.length == 0)
+                   $scope.timeArray.push(timeObject);
+               else
+                   $scope.timeArray[0] = timeObject;
+                if (item != null && item != undefined) {
+                    $scope.timeArraySummary.push({
+                        Time_Id: $scope.taskId + "" + ($scope.timeArraySummary.length + 1),
+                        Field_Job_Name: item.Field_Job_Name,
+                        Field_Job_Name_Id: item.Field_Job_Name_Id,
+                        Charge_Type: item.Charge_Type,
+                        Charge_Type_Id: item.Charge_Type_Id,
+                        Charge_Method: item.Charge_Method,
+                        Charge_Method_Id: item.Charge_Method_Id,
+                        Work_Type: item.Work_Type,
+                        Work_Type_Id: item.Work_Type_Id,
+                        Item: item.Item,
+                        Item_Id: item.Item_Id,
+                        Description: "",
+                        Time_Code: item.Time_Code,
+                        Time_Code_Id: item.Time_Code_Id,
+                        Shift_Code: item.Shift_Code,
+                        Shift_Code_Id: item.Shift_Code_Id,
+                        Date: item.Date,
+                        Duration: item.Duration,
+                        DurationHours: item.DurationHours,
+                        DurationMinutes: item.DurationMinutes,
+                        mins: 0,
+                        Comments: item.Comments,
+                        Task_Number: $scope.taskId
+                    });
                 }
+                //if ($scope.timeArray.length > 1) {
+
+                //    $scope.addTimeObj = $scope.timeArray.length - 1;
+
+                //    var newHash = $scope.addTimeObj;
+
+                //    if ($location.hash() !== newHash) {
+
+                //        $location.hash('time' + $scope.addTimeObj);
+
+                //    } else {
+
+                //        $anchorScroll();
+                //    }
+
+                //    setTimeout(function () {
+
+                //        $location.hash(null);
+                //    }, 100);
+                //}
 
 
                 break;
 
             case "Expenses":
-
-                $scope.expenseArray.push({
+                var expenseObj = {
                     expenseDefault: $scope.expenseDefault,
                     Expense_Id: $scope.taskId + "" + ($scope.expenseArray.length + 1),
                     Date: new Date(),
@@ -759,34 +792,54 @@
                     Charge_Method_Id: "",
                     Justification: "",
                     Task_Number: $scope.taskId
-                });
-
-                if ($scope.expenseArray.length > 1) {
-
-                    $scope.addExpenseObj = $scope.expenseArray.length - 1;
-
-                    var newHash = $scope.addExpenseObj;
-
-                    if ($location.hash() !== newHash) {
-
-                        $location.hash('expense' + $scope.addExpenseObj);
-
-                    } else {
-
-                        $anchorScroll();
-                    }
-
-                    setTimeout(function () {
-
-                        $location.hash(null);
-                    }, 100);
                 }
+                if ($scope.expenseArray.length == 0)
+                    $scope.expenseArray.push(expenseObj);
+                else
+                    $scope.expenseArray[0] = expenseObj;
+                if (item != undefined && item != null) {
+                    $scope.expenseArraySummary.push(
+                        {
+                            Expense_Id: $scope.taskId + "" + ($scope.expenseArraySummary.length + 1),
+                            Date: item.Date,
+                            Expense_Type: item.Expense_Type,
+                            Expense_Type_Id: item.Expense_Type_Id,
+                            Amount: item.Amount,
+                            Currency: item.Currency,
+                            Currency_Id: item.Currency_Id,
+                            Charge_Method: item.Charge_Method,
+                            Charge_Method_Id: item.Charge_Method_Id,
+                            Justification: item.Justification,
+                            Task_Number: $scope.taskId
+                        }
+                    );
+                }
+
+                //if ($scope.expenseArray.length > 1) {
+
+                //    $scope.addExpenseObj = $scope.expenseArray.length - 1;
+
+                //    var newHash = $scope.addExpenseObj;
+
+                //    if ($location.hash() !== newHash) {
+
+                //        $location.hash('expense' + $scope.addExpenseObj);
+
+                //    } else {
+
+                //        $anchorScroll();
+                //    }
+
+                //    setTimeout(function () {
+
+                //        $location.hash(null);
+                //    }, 100);
+                //}
 
                 break;
 
             case "Notes":
-
-                $scope.notesArray.push({
+                var noteObj = {
                     noteDefault: $scope.noteDefault,
                     Notes_Id: $scope.taskId + "" + ($scope.notesArray.length + 1),
                     Note_Type: "",
@@ -795,65 +848,97 @@
                     Created_By: $rootScope.uName,
                     Notes: "",
                     Task_Number: $scope.taskId
-                });
-
-                if ($scope.notesArray.length > 1) {
-
-                    $scope.addNoteObj = $scope.notesArray.length - 1;
-
-                    var newHash = $scope.addNoteObj;
-
-                    if ($location.hash() !== newHash) {
-
-                        $location.hash('note' + $scope.addNoteObj);
-
-                    } else {
-
-                        $anchorScroll();
-                    }
-
-                    setTimeout(function () {
-
-                        $location.hash(null);
-                    }, 100);
                 }
+                if ($scope.notesArray.length == 0)
+                    $scope.notesArray.push(noteObj);
+                else
+                    $scope.notesArray[0] = noteObj;
+                if (item != undefined && item != null) {
+                    $scope.notesArraySummary.push({
+                        Notes_Id: $scope.taskId + "" + ($scope.notesArraySummary.length + 1),
+                        Note_Type: item.Note_Type,
+                        Note_Type_Id: item.Note_Type_Id,
+                        Date: item.Date,
+                        Created_By: $rootScope.uName,
+                        Notes: item.Notes,
+                        Task_Number: $scope.taskId
+                    });
+                }
+                
+
+                //if ($scope.notesArray.length > 1) {
+
+                //    $scope.addNoteObj = $scope.notesArray.length - 1;
+
+                //    var newHash = $scope.addNoteObj;
+
+                //    if ($location.hash() !== newHash) {
+
+                //        $location.hash('note' + $scope.addNoteObj);
+
+                //    } else {
+
+                //        $anchorScroll();
+                //    }
+
+                //    setTimeout(function () {
+
+                //        $location.hash(null);
+                //    }, 100);
+                //}
 
 
                 break;
             case "Material":
-
-                $scope.materialArray.push({
+                var materialObj = {
                     materialDefault: $scope.materialDefault,
                     Material_Id: $scope.taskId + "" + ($scope.materialArray.length + 1),
                     Charge_Type: "",
                     Charge_Type_Id: "",
                     Description: "",
                     Product_Quantity: 1,
-                    Serial_Type: [{"in": "", "out": "", "number": ""}],
+                    Serial_Type: [{ "in": "", "out": "", "number": "" }],
                     Task_Number: $scope.taskId,
                     ItemName: ""
-                });
-
-                if ($scope.materialArray.length > 1) {
-
-                    $scope.addMaterialObj = $scope.materialArray[$scope.materialArray.length - 1].Material_Id;
-
-                    var newHash = $scope.addMaterialObj;
-
-                    if ($location.hash() !== newHash) {
-
-                        $location.hash($scope.addMaterialObj);
-
-                    } else {
-
-                        $anchorScroll();
-                    }
-
-                    setTimeout(function () {
-
-                        $location.hash(null);
-                    }, 100);
                 }
+                if ($scope.materialArray.length == 0)
+                    $scope.materialArray.push(materialObj);
+                else
+                    $scope.materialArray[0] = materialObj;
+                if (item != undefined && item != null) {
+                    $scope.materialArraySummary.push({
+                        Material_Id: $scope.taskId + "" + ($scope.materialArraySummary.length + 1),
+                        Charge_Type: item.Charge_Type,
+                        Charge_Type_Id: item.Charge_Type_Id,
+                        Description: item.Description,
+                        Product_Quantity: item.Product_Quantity,
+                        Serial_Type:item.Serial_Type,
+                        Task_Number: $scope.taskId,
+                        ItemName:item.ItemName
+                    });
+                }
+               
+
+                //if ($scope.materialArray.length > 1) {
+
+                //    $scope.addMaterialObj = $scope.materialArray[$scope.materialArray.length - 1].Material_Id;
+
+                //    var newHash = $scope.addMaterialObj;
+
+                //    if ($location.hash() !== newHash) {
+
+                //        $location.hash($scope.addMaterialObj);
+
+                //    } else {
+
+                //        $anchorScroll();
+                //    }
+
+                //    setTimeout(function () {
+
+                //        $location.hash(null);
+                //    }, 100);
+                //}
 
                 break;
             default:
@@ -962,118 +1047,181 @@
 
                 itemToBeCopied.Time_Id = $scope.taskId + "" + ($scope.timeArray.length + 1);
 
-                $scope.timeArray.push(itemToBeCopied);
-
-                if ($scope.timeArray.length > 1) {
-
-                    $scope.copyTimeObj = $scope.timeArray.length - 1;
-
-                    var newHash = $scope.copyTimeObj;
-
-                    if ($location.hash() !== newHash) {
-
-                        $location.hash('time' + $scope.copyTimeObj);
-
-                    } else {
-
-                        $anchorScroll();
-                    }
-
-                    setTimeout(function () {
-
-                        $location.hash(null);
-
-                    }, 100);
+               //$scope.timeArray.push(itemToBeCopied);
+                if (item != null && item != undefined) {
+                    $scope.timeArraySummary.push({
+                        Time_Id: $scope.taskId + "" + ($scope.timeArraySummary.length + 1),
+                        Field_Job_Name: item.Field_Job_Name,
+                        Field_Job_Name_Id: item.Field_Job_Name_Id,
+                        Charge_Type: item.Charge_Type,
+                        Charge_Type_Id: item.Charge_Type_Id,
+                        Charge_Method: item.Charge_Method,
+                        Charge_Method_Id: item.Charge_Method_Id,
+                        Work_Type: item.Work_Type,
+                        Work_Type_Id: item.Work_Type_Id,
+                        Item: item.Item,
+                        Item_Id: item.Item_Id,
+                        Description: "",
+                        Time_Code: item.Time_Code,
+                        Time_Code_Id: item.Time_Code_Id,
+                        Shift_Code: item.Shift_Code,
+                        Shift_Code_Id: item.Shift_Code_Id,
+                        Date: item.Date,
+                        Duration: item.Duration,
+                        DurationHours: item.DurationHours,
+                        DurationMinutes: item.DurationMinutes,
+                        mins: 0,
+                        Comments: item.Comments,
+                        Task_Number: $scope.taskId
+                    });
                 }
+               // $scope.timeArraySummary.push(itemToBeCopied)
+
+                //if ($scope.timeArray.length > 1) {
+
+                //    $scope.copyTimeObj = $scope.timeArray.length - 1;
+
+                //    var newHash = $scope.copyTimeObj;
+
+                //    if ($location.hash() !== newHash) {
+
+                //        $location.hash('time' + $scope.copyTimeObj);
+
+                //    } else {
+
+                //        $anchorScroll();
+                //    }
+
+                //    setTimeout(function () {
+
+                //        $location.hash(null);
+
+                //    }, 100);
+                //}
 
                 break;
 
             case "Expenses":
 
-                itemToBeCopied.justification = "";
+                //itemToBeCopied.justification = "";
 
-                itemToBeCopied.Expense_Id = $scope.taskId + "" + ($scope.expenseArray.length + 1);
-
-                $scope.expenseArray.push(itemToBeCopied);
-
-                if ($scope.expenseArray.length > 1) {
-
-                    $scope.copyExpenseObj = $scope.expenseArray.length - 1;
-
-                    var newHash = $scope.copyExpenseObj;
-
-                    if ($location.hash() !== newHash) {
-
-                        $location.hash('expense' + $scope.copyExpenseObj);
-
-                    } else {
-
-                        $anchorScroll();
-                    }
-
-                    setTimeout(function () {
-
-                        $location.hash(null);
-                    }, 100);
+                //itemToBeCopied.Expense_Id = $scope.taskId + "" + ($scope.expenseArray.length + 1);
+                if (item != null && item != undefined) {
+                    $scope.expenseArraySummary.push({
+                        Expense_Id: $scope.taskId + "" + ($scope.expenseArraySummary.length + 1),
+                        Date: item.Date,
+                        Expense_Type: item.Expense_Type,
+                        Expense_Type_Id: item.Expense_Type_Id,
+                        Amount: item.Amount,
+                        Currency: item.Currency,
+                        Currency_Id: item.Currency_Id,
+                        Charge_Method: item.Charge_Method,
+                        Charge_Method_Id: item.Charge_Method_Id,
+                        Justification: item.Justification,
+                        Task_Number: $scope.taskId
+                    });
                 }
+                
+
+                //if ($scope.expenseArray.length > 1) {
+
+                //    $scope.copyExpenseObj = $scope.expenseArray.length - 1;
+
+                //    var newHash = $scope.copyExpenseObj;
+
+                //    if ($location.hash() !== newHash) {
+
+                //        $location.hash('expense' + $scope.copyExpenseObj);
+
+                //    } else {
+
+                //        $anchorScroll();
+                //    }
+
+                //    setTimeout(function () {
+
+                //        $location.hash(null);
+                //    }, 100);
+                //}
 
                 break;
 
             case "Notes":
 
-                itemToBeCopied.Notes_Id = $scope.taskId + "" + ($scope.notesArray.length + 1);
+                //itemToBeCopied.Notes_Id = $scope.taskId + "" + ($scope.notesArray.length + 1);
 
-                $scope.notesArray.push(itemToBeCopied);
-
-                if ($scope.notesArray.length > 1) {
-
-                    $scope.copyNoteObj = $scope.notesArray.length - 1;
-
-                    var newHash = $scope.copyNoteObj;
-
-                    if ($location.hash() !== newHash) {
-
-                        $location.hash('note' + $scope.copyNoteObj);
-
-                    } else {
-
-                        $anchorScroll();
-                    }
-
-                    setTimeout(function () {
-
-                        $location.hash(null);
-                    }, 100);
+                if (item != undefined && item != null) {
+                    $scope.notesArraySummary.push({
+                        Notes_Id: $scope.taskId + "" + ($scope.notesArraySummary.length + 1),
+                        Note_Type: item.Note_Type,
+                        Note_Type_Id: item.Note_Type_Id,
+                        Date: item.Date,
+                        Created_By: $rootScope.uName,
+                        Notes: item.Notes,
+                        Task_Number: $scope.taskId
+                    });
                 }
+
+                //if ($scope.notesArray.length > 1) {
+
+                //    $scope.copyNoteObj = $scope.notesArray.length - 1;
+
+                //    var newHash = $scope.copyNoteObj;
+
+                //    if ($location.hash() !== newHash) {
+
+                //        $location.hash('note' + $scope.copyNoteObj);
+
+                //    } else {
+
+                //        $anchorScroll();
+                //    }
+
+                //    setTimeout(function () {
+
+                //        $location.hash(null);
+                //    }, 100);
+                //}
 
 
                 break;
             case "Material":
 
-                itemToBeCopied.Material_Id = $scope.taskId + "" + ($scope.materialArray.length + 1);
+                //itemToBeCopied.Material_Id = $scope.taskId + "" + ($scope.materialArray.length + 1);
 
-                $scope.materialArray.push(itemToBeCopied);
-
-                if ($scope.materialArray.length > 1) {
-
-                    $scope.copyMaterialObj = $scope.materialArray[$scope.materialArray.length - 1].Material_Id;
-
-                    var newHash = $scope.copyMaterialObj;
-
-                    if ($location.hash() !== newHash) {
-
-                        $location.hash($scope.copyMaterialObj);
-
-                    } else {
-
-                        $anchorScroll();
-                    }
-
-                    setTimeout(function () {
-
-                        $location.hash(null);
-                    }, 100);
+                if (item != undefined && item != null) {
+                    $scope.materialArraySummary.push({
+                        Material_Id: $scope.taskId + "" + ($scope.materialArraySummary.length + 1),
+                        Charge_Type: item.Charge_Type,
+                        Charge_Type_Id: item.Charge_Type_Id,
+                        Description: item.Description,
+                        Product_Quantity: item.Product_Quantity,
+                        Serial_Type: item.Serial_Type,
+                        Task_Number: $scope.taskId,
+                        ItemName: item.ItemName
+                    });
                 }
+
+                //if ($scope.materialArray.length > 1) {
+
+                //    $scope.copyMaterialObj = $scope.materialArray[$scope.materialArray.length - 1].Material_Id;
+
+                //    var newHash = $scope.copyMaterialObj;
+
+                //    if ($location.hash() !== newHash) {
+
+                //        $location.hash($scope.copyMaterialObj);
+
+                //    } else {
+
+                //        $anchorScroll();
+                //    }
+
+                //    setTimeout(function () {
+
+                //        $location.hash(null);
+                //    }, 100);
+                //}
 
                 break;
 
@@ -1083,17 +1231,17 @@
         valueService.setDebriefChanged(true);
     };
 
-    $scope.deleteObject = function (index, item, stage) {
+    $scope.deleteObject = function (index,  stage) {
 
         switch (stage) {
 
             case "Time":
 
-                for (var i = 0; i < $scope.timeArray.length; i++) {
+                for (var i = 0; i < $scope.timeArraySummary.length; i++) {
 
                     if (index == i) {
 
-                        $scope.timeArray.splice(index, 1);
+                        $scope.timeArraySummary.splice(index, 1);
                     }
                 }
 
@@ -1101,11 +1249,11 @@
 
             case "Expenses":
 
-                for (var i = 0; i < $scope.expenseArray.length; i++) {
+                for (var i = 0; i < $scope.expenseArraySummary.length; i++) {
 
                     if (index == i) {
 
-                        $scope.expenseArray.splice(index, 1);
+                        $scope.expenseArraySummary.splice(index, 1);
                     }
                 }
 
@@ -1113,11 +1261,11 @@
 
             case "Material":
 
-                for (var i = 0; i < $scope.materialArray.length; i++) {
+                for (var i = 0; i < $scope.materialArraySummary.length; i++) {
 
                     if (index == i) {
 
-                        $scope.materialArray.splice(index, 1);
+                        $scope.materialArraySummary.splice(index, 1);
                     }
                 }
 
@@ -1125,11 +1273,11 @@
 
             case "Notes":
 
-                for (var i = 0; i < $scope.notesArray.length; i++) {
+                for (var i = 0; i < $scope.notesArraySummary.length; i++) {
 
                     if (index == i) {
 
-                        $scope.notesArray.splice(index, 1);
+                        $scope.notesArraySummary.splice(index, 1);
                     }
                 }
 
@@ -1239,17 +1387,17 @@
 
     $scope.saveValues = function () {
 
-        if ($scope.timeArray.length > 0) {
+        if ($scope.timeArraySummary.length > 0) {
 
-            valueService.setTime($scope.timeArray);
+            valueService.setTime($scope.timeArraySummary);
         }
 
-        if ($scope.expenseArray.length > 0) {
+        if ($scope.expenseArraySummary.length > 0) {
 
-            valueService.setExpense($scope.expenseArray);
+            valueService.setExpense($scope.expenseArraySummary);
         }
 
-        if ($scope.materialArray.length > 0) {
+        if ($scope.materialArraySummary.length > 0) {
 
             $scope.serialNumber = function (serialArray) {
 
@@ -1287,18 +1435,18 @@
                 return serialNumberArray;
             }
 
-            angular.forEach($scope.materialArray, function (key, value) {
+            angular.forEach($scope.materialArraySummary, function (key, value) {
                 key.Serial_In = $scope.serialIn(key.Serial_Type);
                 key.Serial_Out = $scope.serialOut(key.Serial_Type);
                 key.Serial_Number = $scope.serialNumber(key.Serial_Type);
             });
 
-            valueService.setMaterial($scope.materialArray);
+            valueService.setMaterial($scope.materialArraySummary);
         }
 
-        if ($scope.notesArray.length > 0) {
+        if ($scope.notesArraySummary.length > 0) {
 
-            valueService.setNote($scope.notesArray);
+            valueService.setNote($scope.notesArraySummary);
         }
 
         if ($scope.files.length > 0 || $scope.image.length > 0) {
@@ -1482,9 +1630,9 @@
             $scope.summary.notesArray = [];
             $scope.summary.taskObject = {};
 
-            if ($scope.expenseArray != undefined) {
+            if ($scope.expenseArraySummary != undefined) {
 
-                angular.forEach($scope.expenseArray, function (key, value) {
+                angular.forEach($scope.expenseArraySummary, function (key, value) {
 
                     var expenseObject = {
                         "Date": $filter("date")(key.Date, "dd-MMM-yyyy "),
@@ -1500,7 +1648,7 @@
                 });
             }
 
-            if ($scope.materialArray != undefined) {
+            if ($scope.materialArraySummary != undefined) {
 
                 $scope.serialNumber = function (serialArray) {
 
@@ -1538,7 +1686,7 @@
                     return serialNumberArray;
                 }
 
-                angular.forEach($scope.materialArray, function (key, value) {
+                angular.forEach($scope.materialArraySummary, function (key, value) {
 
                     var materialObject = {
                         "Charge_Type": key.Charge_Type.Value,
@@ -1554,9 +1702,9 @@
                 });
             }
 
-            if ($scope.notesArray != undefined) {
+            if ($scope.notesArraySummary != undefined) {
                 $scope.summary.noteType = false;
-                angular.forEach($scope.notesArray, function (key, value) {
+                angular.forEach($scope.notesArraySummary, function (key, value) {
 
                     var notesObject = {
                         "Note_Type": key.Note_Type.Value,
@@ -1604,9 +1752,9 @@
                 });
             }
 
-            if ($scope.timeArray != undefined && $scope.timeArray.length>0) {
+            if ($scope.timeArraySummary != undefined && $scope.timeArraySummary.length>0) {
 
-                var length = $scope.timeArray.length, i = 0;
+                var length = $scope.timeArraySummary.length, i = 0;
 
                 var grandTotalTimeArray = [];
 
@@ -1634,7 +1782,7 @@
 
                 var subTotalArray = [];
 
-                angular.forEach($scope.timeArray, function (key, value) {
+                angular.forEach($scope.timeArraySummary, function (key, value) {
 
                     grandtimeObject.Duration = $scope.calculateDuration(grandtimeObject, key);
 
@@ -2003,10 +2151,10 @@
                                     var noteJSONData = [];
                                     var attachmentJSONData = [];
 
-                                    var timeArray = $scope.timeArray;
-                                    var expenseArray = $scope.expenseArray;
-                                    var materialArray = $scope.materialArray;
-                                    var notesArray = $scope.notesArray;
+                                    var timeArray = $scope.timeArraySummary;
+                                    var expenseArray = $scope.expenseArraySummary;
+                                    var materialArray = $scope.materialArraySummary;
+                                    var notesArray = $scope.notesArraySummary;
 
                                     for (var i = 0; i < timeArray.length; i++) {
                                         var chargemethod;
