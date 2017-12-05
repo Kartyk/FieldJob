@@ -188,9 +188,9 @@
                 <!--<md-button class="time-font time-delete" ng-click="deleteObject($index, item,'Material')">Delete
                 </md-button>-->
                 <span style="visibility:hidden">{{ $root.materialFormValid = materialForm.$valid}}</span>
-                <md-button class="time-font time-add" ng-click="addObject('Material',true,item)" ng-disabled="$root.completedTask" translate="Add"></md-button>
+                <md-button class="time-font time-add summary-report-donebtn" ng-click="addObject('Material',true,item)" ng-disabled="$root.completedTask || !$root.materialFormValid " translate="Add"></md-button>
                <!-- <md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Material')" ng-disabled="$root.completedTask" translate="delete"></md-button>-->
-                <md-button class="time-font time-copy" ng-click="copyObject(item,'Material')" ng-disabled="$root.completedTask" translate="copy"></md-button>
+                <md-button class="time-font time-copy summary-report-donebtn" ng-click="copyObject(item,'Material')" ng-disabled="$root.completedTask || !$root.materialFormValid " translate="copy"></md-button>
             </section>
 
         

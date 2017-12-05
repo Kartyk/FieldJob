@@ -90,10 +90,10 @@
             <section  layout="row" layout-sm="column" layout-align="center center"
                          layout-wrap class="time-btns" ng-class="{'newItemBorderSection': $index == addExpenseObj && $index != 0,'copyItemSection': $index == copyExpenseObj && $index != 0}">
                 <span style="visibility:hidden">{{ $root.expenseformValid = expeseform.$valid}}</span>
-                <md-button class="time-font  time-add" ng-click="addObject('Expenses',true,item)" translate="Add"></md-button>
+                <md-button class="time-font  time-add summary-report-donebtn" ng-click="addObject('Expenses',true,item)" ng-disabled="$root.completedTask || !$root.expenseformValid " translate="Add"></md-button>
                 <!--<md-button class="time-font  time-delete" ng-click="deleteObject($index,item,'Expenses')" translate="delete">
                 </md-button>-->
-                <md-button class="time-font  time-copy" ng-click="copyObject(item,'Expenses')" translate="copy"></md-button>
+                <md-button class="time-font  time-copy summary-report-donebtn" ng-click="copyObject(item,'Expenses')" translate="copy" ng-disabled="$root.completedTask || !$root.expenseformValid "></md-button>
             </section>
 
        
