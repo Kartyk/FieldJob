@@ -97,12 +97,18 @@
 
 
         </div>
-        <section  layout="row" layout-sm="column" layout-align="center center"
+        <section layout="row" layout-sm="column" layout-align="center center"
                  layout-wrap class="time-btns" ng-class="{'newItemBorderSection': $index == addTimeObj && $index != 0,'copyItemSection': $index == copyTimeObj && $index != 0}">
+            <span flex></span>
             <span style="visibility:hidden">{{ $root.timeformValid = timeform.$valid}}</span>
-            <md-button class="time-font time-add summary-report-donebtn" ng-click="addObject('Time',true)" ng-disabled="$root.completedTask || !$root.timeformValid" translate="Add"></md-button>
-           <!-- <md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Time')" ng-disabled="$root.completedTask" translate="delete"></md-button>-->
-            <md-button class="time-font time-copy summary-report-donebtn" ng-click="copyObject(item,'Time')" ng-disabled="$root.completedTask || !$root.timeformValid" translate="copy"></md-button>
+            <md-button class="time-font time-add summary-report-donebtn addbtn" ng-click="addObject('Time',true,item)" ng-disabled="$root.completedTask || !$root.timeformValid " translate="Add"></md-button>
+
+            <!-- <md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Time')" ng-disabled="$root.completedTask" translate="delete"></md-button>-->
+            <md-button class="time-font time-copy summary-report-donebtn" ng-click="copyObject(item,'Time')" ng-disabled="$root.completedTask|| !$root.timeformValid" translate="copy"></md-button>
+            <span flex></span>
+            <button class="time-font time-add summary-report-donebtn" translate="NEXT" ng-click="Next('Time')"></button>
+            <!--<md-button type="submit" ng-disabled="!timeformValid">TEST</md-button>-->
+
         </section>
 
     </div>
@@ -135,6 +141,7 @@
                     <td class="noborder bg-white padding-right">{{time.Item.Value| translate}}</td>
                     <td class="noborder bg-white padding-right">{{time.Comments}}</td>
                     <td class="noborder bg-white "><img src="images/cancel.png" class="cancelInEquip delete" ng-click="deleteObject($index,'Time')" /></td>
+                    <td class="noborder bg-white "><img src="images/edit.png" class="cancelInEquip delete" ng-click="editObject(time,'Time',$index)" style="width:16px" /></td>
                 </tr>
             </tbody>
         </table>
