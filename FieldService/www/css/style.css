@@ -2198,6 +2198,13 @@ md-select.md-default-theme ._md-select-value, md-select ._md-select-value{
     margin-bottom: 20px;
     padding: 10px !important;
 }
+.note-textarea-NC {
+    background-color: #f0f0f0 !important;
+    border: none !important;
+   overflow-y:hidden;
+    margin-bottom: 20px;
+    padding: 10px !important;
+}
 .noBorder-radius {
     padding-bottom: 0px !important;
     border-bottom-left-radius: 0px !important;
@@ -2467,4 +2474,24 @@ td img.delete {
 td img.delete:hover
 {
     cursor:pointer
+}
+.nextbtn
+{
+    float:right;
+    /*margin-top:-20px !important;*/
+    padding-right:0 !important;
+    margin-right:0 !important;
+}
+.prevbtn {
+    float: left;
+    /*margin-top: -20px !important;*/
+}
+.padding0{
+    padding:0 !important;
+}
+.addbtn
+{
+    background-color:white !important;
+    color:black !important
+
 }

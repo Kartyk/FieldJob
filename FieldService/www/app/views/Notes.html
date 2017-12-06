@@ -53,7 +53,7 @@
                                    translate="{{item.noteDefault.notes.title}}"></label>
 
 
-                            <textarea class="form-control debrief-textarea-NC" rows="5" id="justification"
+                            <textarea class="form-control note-textarea-NC"  id="justification"
                                       ng-model="item.Notes"></textarea>
 
                         </div>
@@ -66,7 +66,8 @@
                 </form>
             </div>
             <section  layout="row" layout-sm="column" layout-align="center center" layout-wrap class="time-btns" ng-class="{'newItemBorderSection': $index == addNoteObj && $index != 0,'copyItemSection': $index == copyNoteObj && $index != 0}">
-                <md-button class="time-font time-add" ng-click="addObject('Notes',true,item)" translate="Add" ></md-button>
+                <md-button class="time-font time-add summary-report-donebtn" translate="BACK" ng-click="goPreviousTab('Notes')"></md-button>
+                <md-button class="time-font time-add addbtn" ng-click="addObject('Notes',true,item)" translate="Add" ></md-button>
                 <!--<md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Notes')" translate="delete"></md-button>-->
                 <md-button class="time-font time-copy" ng-click="copyObject(item,'Notes')" translate="copy"></md-button>
                 <md-button class="time-font time-add summary-report-donebtn" translate="NEXT" ng-click="Next('Notes')"></md-button>
