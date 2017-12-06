@@ -3437,7 +3437,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Engineer SET Follow_Up = ?, Spare_Quote= ?, Sales_Visit = ?, Sales_Head =?, Sign_File_Path =?, File_Name =?, Task_Number = ?, ResourceId = ?  WHERE Engineer_Id = ?";
+                var sqlUpdate = "UPDATE Engineer SET Follow_Up = ?, Spare_Quote= ?, Sales_Visit = ?, Sales_Head =?, Sign_File_Path =?, File_Name =?, Task_Number = ?, isCustomerSignChecked = ?, customerComments = ?, ResourceId = ?  WHERE Engineer_Id = ?";
 
                 insertValues.push(responseList.Follow_Up);
                 insertValues.push(responseList.Spare_Quote);
@@ -3446,6 +3446,8 @@
                 insertValues.push(responseList.Sign_File_Path);
                 insertValues.push(responseList.File_Name);
                 insertValues.push(responseList.Task_Number);
+                insertValues.push(responseList.isCustomerSignChecked);
+                insertValues.push(responseList.customerComments);
                 insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.Engineer_Id);
 
@@ -3476,7 +3478,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Engineer VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Engineer VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Engineer_Id);
                 insertValues.push(responseList.followUp);
@@ -3490,6 +3492,8 @@
                 insertValues.push(responseList.Sign_File_Path);
                 insertValues.push(responseList.File_Name);
                 insertValues.push(responseList.Task_Number);
+                insertValues.push(responseList.isCustomerSignChecked);
+                insertValues.push(responseList.customerComments);
                 insertValues.push(constantService.getResourceId());
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
