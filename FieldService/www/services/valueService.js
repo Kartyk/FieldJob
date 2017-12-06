@@ -25,7 +25,9 @@
         var networkStatus = false;
 
         var language = "";
+
         var debriefChanged = false;
+
         var debrief = {
             task: {},
             taskList: [],
@@ -224,18 +226,17 @@
             return header;
         };
 
-
         function setTask(taskObject, callback) {
 
-            console.log("SET TASK DETAILS")
+            console.log("SET TASK DETAILS");
+
+            $rootScope.dbCall = true;
 
             debrief.task = taskObject;
 
             var promiseArray = [];
 
             var deferInstall = $q.defer();
-
-            $rootScope.dbCall = true;
 
             localService.getInstallBaseList(taskObject.Task_Number, function (response) {
 
@@ -290,7 +291,7 @@
 
                 console.log("ATTACHMENT");
 
-                localService.getAttachmentListIncident(taskObject.SR_ID, "S", function (result) {
+                localService.getSRAttachmentList(taskObject.SR_ID, "S", function (result) {
 
                     debrief.taskAttachment = response;
 
@@ -306,6 +307,138 @@
             });
 
             promiseArray.push(deferAttachment.promise);
+
+            var deferOverTime = $q.defer();
+
+            localService.getOverTimeList(taskObject.Task_Number, function (response) {
+
+                debrief.overTime = response;
+
+                deferOverTime.resolve("success");
+
+                console.log("OVER TIME");
+
+            });
+
+            promiseArray.push(deferOverTime.promise);
+
+            var deferShiftCode = $q.defer();
+
+            localService.getShiftCodeList(taskObject.Task_Number, function (response) {
+
+                debrief.shiftCode = response;
+
+                deferShiftCode.resolve("success");
+
+                console.log("SHIFT CODE");
+            });
+
+            promiseArray.push(deferShiftCode.promise);
+
+            var deferFieldJob = $q.defer();
+
+            localService.getFieldJobNameList(taskObject.Task_Number, function (response) {
+
+                debrief.fieldName = response;
+
+                deferFieldJob.resolve("success");
+
+                console.log("FIELD JOB");
+            });
+
+            promiseArray.push(deferFieldJob.promise);
+
+            var deferChargeMethod = $q.defer();
+
+            localService.getChargeMethodList(function (response) {
+
+                debrief.chargeMethod = response;
+
+                deferChargeMethod.resolve("success");
+
+                console.log("CHARGE METHOD");
+            });
+
+            promiseArray.push(deferChargeMethod.promise);
+
+            var deferChargeType = $q.defer();
+
+            localService.getChargeTypeList(function (response) {
+
+                debrief.chargeType = response;
+
+                deferChargeType.resolve("success");
+
+                console.log("CHARGE TYPE");
+            });
+
+            promiseArray.push(deferChargeType.promise);
+
+            var deferExpenseType = $q.defer();
+
+            localService.getExpenseTypeList(function (response) {
+
+                debrief.expenseType = response;
+
+                deferExpenseType.resolve("success");
+
+                console.log("EXPENSE TYPE");
+            });
+
+            promiseArray.push(deferExpenseType.promise);
+
+            var deferNoteType = $q.defer();
+
+            localService.getNoteTypeList(function (response) {
+
+                debrief.noteType = response;
+
+                deferNoteType.resolve("success");
+
+                console.log("NOTE TYPE");
+            });
+
+            promiseArray.push(deferNoteType.promise);
+
+            var deferWorkType = $q.defer();
+
+            localService.getWorkTypeList(function (response) {
+
+                debrief.workType = response;
+
+                deferWorkType.resolve("success");
+
+                console.log("WORK TYPE");
+
+            });
+
+            promiseArray.push(deferWorkType.promise);
+
+            var deferItem = $q.defer();
+
+            localService.getItemList(function (response) {
+
+                debrief.item = response;
+
+                deferItem.resolve("success");
+
+                console.log("ITEM");
+            });
+
+            promiseArray.push(deferItem.promise);
+
+            var deferCurrency = $q.defer();
+
+            localService.getCurrencyList(function (response) {
+
+                debrief.currency = response;
+
+                deferCurrency.resolve("success");
+
+                console.log("CURRENCY");
+            });
+
+            promiseArray.push(deferCurrency.promise);
 
             var deferTime = $q.defer();
 
@@ -385,138 +518,6 @@
             });
 
             promiseArray.push(deferEngineer.promise);
-
-            var deferOverTime = $q.defer();
-
-            localService.getOverTimeList(taskObject.Task_Number, function (response) {
-
-                debrief.overTime = response;
-
-                deferOverTime.resolve("success");
-
-                console.log("OVER TIME");
-
-            });
-
-            promiseArray.push(deferOverTime.promise);
-
-            var deferShiftCode = $q.defer();
-
-            localService.getShiftCodeList(taskObject.Task_Number, function (response) {
-
-                debrief.shiftCode = response;
-
-                deferShiftCode.resolve("success");
-
-                console.log("SHIFT CODE");
-            });
-
-            promiseArray.push(deferShiftCode.promise);
-
-            var deferChargeType = $q.defer();
-
-            localService.getChargeTypeList(function (response) {
-
-                debrief.chargeType = response;
-
-                deferChargeType.resolve("success");
-
-                console.log("CHARGE TYPE");
-            });
-
-            promiseArray.push(deferChargeType.promise);
-
-            var deferChargeMethod = $q.defer();
-
-            localService.getChargeMethodList(function (response) {
-
-                debrief.chargeMethod = response;
-
-                deferChargeMethod.resolve("success");
-
-                console.log("CHARGE METHOD");
-            });
-
-            promiseArray.push(deferChargeMethod.promise);
-
-            var deferFieldJob = $q.defer();
-
-            localService.getFieldJobNameList(taskObject.Task_Number, function (response) {
-
-                debrief.fieldName = response;
-
-                deferFieldJob.resolve("success");
-
-                console.log("FIELD JOB");
-            });
-
-            promiseArray.push(deferFieldJob.promise);
-
-            var deferWorkType = $q.defer();
-
-            localService.getWorkTypeList(function (response) {
-
-                debrief.workType = response;
-
-                deferWorkType.resolve("success");
-
-                console.log("WORK TYPE");
-
-            });
-
-            promiseArray.push(deferWorkType.promise);
-
-            var deferItem = $q.defer();
-
-            localService.getItemList(function (response) {
-
-                debrief.item = response;
-
-                deferItem.resolve("success");
-
-                console.log("ITEM");
-            });
-
-            promiseArray.push(deferItem.promise);
-
-            var deferCurrency = $q.defer();
-
-            localService.getCurrencyList(function (response) {
-
-                debrief.currency = response;
-
-                deferCurrency.resolve("success");
-
-                console.log("CURRENCY");
-            });
-
-            promiseArray.push(deferCurrency.promise);
-
-            var deferExpenseType = $q.defer();
-
-            localService.getExpenseTypeList(function (response) {
-
-                debrief.expenseType = response;
-
-                deferExpenseType.resolve("success");
-
-                console.log("EXPENSE TYPE");
-            });
-
-            promiseArray.push(deferExpenseType.promise);
-
-            var deferNoteType = $q.defer();
-
-            localService.getNoteTypeList(function (response) {
-
-                debrief.noteType = response;
-
-                deferNoteType.resolve("success");
-
-                console.log("NOTE TYPE");
-            });
-
-            promiseArray.push(deferNoteType.promise);
 
             $q.all(promiseArray).then(
                 function (response) {

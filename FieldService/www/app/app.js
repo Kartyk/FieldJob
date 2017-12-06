@@ -97,6 +97,8 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
 
                     constantService.setResourceId(constantService.getUser().ID);
 
+                    constantService.setLastUpdated(new Date(constantService.getUser().Last_Updated).getTime());
+
                     if (constantService.getUser().Login_Status == "1") {
 
                         if (constantService.getUser().Default_View == "My Task") {
