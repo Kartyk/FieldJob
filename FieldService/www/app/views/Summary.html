@@ -333,8 +333,14 @@
                        
             </div>
 
-            <div class="row text-center">
+            <div class="layout-row">
+                <div class="flex-50">
+                    <md-button class="time-font time-add summary-report-donebtn " style="margin:0px" translate="BACK" ng-click="goPreviousTab('Summary')"></md-button>
+                </div>
+                <div class="flex-50">
                     <button class="summary-reviewBtn" ng-click="reviewSummary()" translate="Reviewed"></button>
+                </div>
+                
             </div>
             <canvas id="canvas" width="1110px" height="1204px" style="background-color:#FFF;display:none"></canvas>
             <img src="./images/emerson.png" id="logo" style="display:none"></img>

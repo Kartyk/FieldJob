@@ -82,7 +82,7 @@
                 <form class="form-horizontal input-items" name="materialForm" form-on-change="formChange()" >
                     <div class="row" style="padding:0px 22px 0px 22px;">
                         <div class="col-sm-12 col-md-12 noMarginPadding">
-                            <div class="col-sm-4 col-md-4 noMarginPadding">
+                            <div class="col-sm-3 col-md-3 noMarginPadding">
                                 <div class="form-group noMarginPadding">
                                     <label class="control-label  marginbottom12 material-label" translate="{{item.materialDefault.chargeType.title}}"></label>
                                     <!--<div class="col-sm-12">
@@ -99,7 +99,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-4 col-md-4 noMarginPadding">
+                            <div class="col-sm-3 col-md-3 noMarginPadding">
                                 <div class="col-sm-12 col-md-12 col-lg-12 noMarginPadding">
                                     <div class="form-group noMarginPadding">
                                         <label class="control-label  marginbottom12 material-label" translate="item name"></label><span style="color:red">*</span>
@@ -111,7 +111,7 @@
                                 </div>
                             </div>
                            
-                            <div class="col-sm-4 col-md-4 noMarginPadding">
+                            <div class="col-sm-3 col-md-3 noMarginPadding">
                                 <div class="col-sm-12 col-md-12 noMarginPadding">
                                     <div class="form-group noMarginPadding">
                                         <label class="control-label  marginbottom12 material-label" translate="{{item.materialDefault.description.title}}"></label>
@@ -121,34 +121,36 @@
                                     </div>
                                 </div>
                             </div>
-                         
-
-                            
-                        </div>
-
-                        <div class="col-sm-12 col-md-12 noMarginPadding">
-                            <div class="col-sm-4 col-md-4 noMarginPadding" style="margin-bottom:30px !important;">
+                            <div class="col-sm-3 col-md-3 noMarginPadding" style="margin-bottom:30px !important;">
                                 <div class="form-group noMarginPadding">
                                     <label class="control-label col-sm-12 marginbottom12 material-label" translate="{{item.materialDefault.productQuantity.title}}"></label>
                                     <div class="col-sm-12">
                                         <button class="minus-button" ng-click="deleteSerialItem($index)"
                                                 ng-disabled="item.Product_Quantity<=1">
-                                           -
+                                            -
                                         </button>
                                         <button class="quantity-button"
-                                               ng-model="itemContent.productQuantity.value">{{item.Product_Quantity}}</button>
-                                        <button class="plus-button" ng-click="addSerialItem($index) ">
-                                           +
+                                                ng-model="itemContent.productQuantity.value">
+                                            {{item.Product_Quantity}}
+                                        </button>
+                                        <button class="minus-button" ng-click="addSerialItem($index) ">
+                                            +
                                         </button>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-sm-8 col-md-8 noMarginPadding">
+                            
+                        </div>
+
+                        <div class="col-sm-12 col-md-12 noMarginPadding">
+                            
+
+                            <div class="col-sm-12 col-md-12 noMarginPadding">
                                 <div ng-repeat="serial in item.Serial_Type track by $index">
                                     <div ng-show="item.Charge_Type.Value == 'Warranty'">
-                                        <div class="row" style="clear:both;padding-left:15px;">
-                                        <div class="col-sm-6 col-md-6 noMarginPadding">
+                                        <!--<div class="row" style="clear:both;padding-left:15px;">-->
+                                        <div class="col-sm-3 col-md-3 noMarginPadding">
                                             <div class="form-group noMarginPadding">
                                                 <label class="control-label marginbottom12 material-label" translate="{{item.materialDefault.serialIn.title}}"></label>
                                                 <input class="inputFieldsMaterial" id="SerialIn"
@@ -156,19 +158,20 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6 col-md-6 noMarginPadding">
+                                        <div class="col-sm-3 col-md-3 noMarginPadding">
                                             <div class="form-group noMarginPadding">
                                                 <label class="control-label marginbottom12 material-label" translate="{{item.materialDefault.serialOut.title}}"></label>
                                                 <input class="inputFieldsMaterial" id="SerialOut"
                                                        ng-model="serial.out" name="SerialNumber"></input>
                                             </div>
-                                        </div></div>
+                                        </div>
                                     </div>
+                                    <!--</div>-->
 
-                                    <div class="col-md-6 col-sm-6 col-lg-6 noMarginPadding">
+                                    <div class="col-md-4 col-sm-4 col-lg-4 noMarginPadding" ng-show="item.Charge_Type.Value == 'Billable' || item.Charge_Type.Value == 'Goodwill' || item.Charge_Type.Value == 'Concession' ">
                                         
                                        
-                                            <div class="form-group noMarginPadding" ng-show="item.Charge_Type.Value == 'Billable' || item.Charge_Type.Value == 'Goodwill' || item.Charge_Type.Value == 'Concession' ">
+                                            <div class="form-group noMarginPadding" >
                                                 <label class="control-label marginbottom12 material-label" translate="{{item.materialDefault.serialNo.title}}"></label>
                                                 <input class="inputFieldsMaterial" id="SerialNo"
                                                        ng-model="serial.number" name="SerialNo"></input>
@@ -187,11 +190,14 @@
                      layout-wrap class="time-btns" ng-class="{'newItemBorderSection': item.Material_Id == addMaterialObj && $index != 0,'copyItemSection': item.Material_Id == copyMaterialObj && $index != 0}">
                 <!--<md-button class="time-font time-delete" ng-click="deleteObject($index, item,'Material')">Delete
                 </md-button>-->
-                <span style="visibility:hidden">{{ $root.materialFormValid = materialForm.$valid}}</span>
+               
                 <md-button class="time-font time-add summary-report-donebtn" translate="BACK" ng-click="goPreviousTab('Material')"></md-button>
+                <span style="visibility:hidden">{{ $root.materialFormValid = materialForm.$valid}}</span>
+                <span flex></span>
                 <md-button class="time-font time-add summary-report-donebtn addbtn" ng-click="addObject('Material',true,item)" ng-disabled="$root.completedTask || !$root.materialFormValid " translate="Add"></md-button>
                <!-- <md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Material')" ng-disabled="$root.completedTask" translate="delete"></md-button>-->
                 <md-button class="time-font time-copy summary-report-donebtn" ng-click="copyObject(item,'Material')" ng-disabled="$root.completedTask || !$root.materialFormValid " translate="copy"></md-button>
+                <span flex></span>
                 <md-button class="time-font time-add summary-report-donebtn" translate="NEXT" ng-click="Next('Material')"></md-button>
             </section>
 
@@ -227,6 +233,7 @@
                     <td class="noborder bg-white width14">{{material.ItemName}}</td>
                     <td class="noborder bg-white width14">{{material.Description}}</td>
                     <td class="noborder bg-white "><img src="images/cancel.png" class="cancelInEquip delete" ng-click="deleteObject($index,'Material')" /></td>
+                    <td class="noborder bg-white "><img src="images/edit.png" class="cancelInEquip delete" ng-click="editObject(material,'Material',$index)" style="width:16px" /></td>
                 </tr>
             </tbody>
         </table>

@@ -633,7 +633,43 @@
             }
         }
     };
-
+    $scope.editTimeIndex = -1;
+    $scope.editMaterialIndex = -1
+    $scope.editExpenseIndex = -1
+    $scope.editNoteIndex = -1
+    $scope.editObject = function (item, stage,index)
+    {
+        switch (stage)
+        {
+            case "Time": 
+                $scope.timeArray[0] = Object.create(item);
+                $scope.timeArray[0].timeDefault = $scope.timeDefault;
+                $scope.editTimeIndex = index;
+                break
+            case "Expenses":
+                $scope.expenseArray[0] = Object.create(item);
+                $scope.expenseArray[0].expenseDefault = $scope.expenseDefault;
+                $scope.editExpenseIndex = index;
+                break;
+            case "Notes":
+                $scope.notesArray[0] = Object.create(item);
+                $scope.notesArray[0].noteDefault = $scope.noteDefault;
+                $scope.editNoteIndex = index;
+                setTimeout(function () {
+                    var height = $(".note-textarea-NC").css('max-height').substring(0, 3);
+                    while ($(".note-textarea-NC").outerHeight() < $(".note-textarea-NC").prop('scrollHeight') && $(".note-textarea-NC").prop('scrollHeight') < height) {
+                        $(".note-textarea-NC").height($(".note-textarea-NC").height() + 1);
+                    }
+                }, 100);
+                
+                break;
+            case "Material":
+                $scope.materialArray[0] = Object.create(item);
+                $scope.materialArray[0].materialDefault = $scope.materialDefault;
+                $scope.editMaterialIndex = index;
+                break;
+        }
+    }
     $scope.addObject = function (stage,isButtonClick,item) {
 
         var durationFromResponse, DurationHours, DurationMinutes;
@@ -739,32 +775,41 @@
                    $scope.timeArray.push(timeObject);
                else
                    $scope.timeArray[0] = timeObject;
-                if (item != null && item != undefined) {
-                    $scope.timeArraySummary.push({
-                        Time_Id: $scope.taskId + "" + ($scope.timeArraySummary.length + 1),
-                        Field_Job_Name: item.Field_Job_Name,
-                        Field_Job_Name_Id: item.Field_Job_Name_Id,
-                        Charge_Type: item.Charge_Type,
-                        Charge_Type_Id: item.Charge_Type_Id,
-                        Charge_Method: item.Charge_Method,
-                        Charge_Method_Id: item.Charge_Method_Id,
-                        Work_Type: item.Work_Type,
-                        Work_Type_Id: item.Work_Type_Id,
-                        Item: item.Item,
-                        Item_Id: item.Item_Id,
-                        Description: "",
-                        Time_Code: item.Time_Code,
-                        Time_Code_Id: item.Time_Code_Id,
-                        Shift_Code: item.Shift_Code,
-                        Shift_Code_Id: item.Shift_Code_Id,
-                        Date: item.Date,
-                        Duration: item.Duration,
-                        DurationHours: item.DurationHours,
-                        DurationMinutes: item.DurationMinutes,
-                        mins: 0,
-                        Comments: item.Comments,
-                        Task_Number: $scope.taskId
-                    });
+               if (item != null && item != undefined) {
+                   var newTimeObj = {
+                       Time_Id: $scope.taskId + "" + ($scope.timeArraySummary.length + 1),
+                       Field_Job_Name: item.Field_Job_Name,
+                       Field_Job_Name_Id: item.Field_Job_Name_Id,
+                       Charge_Type: item.Charge_Type,
+                       Charge_Type_Id: item.Charge_Type_Id,
+                       Charge_Method: item.Charge_Method,
+                       Charge_Method_Id: item.Charge_Method_Id,
+                       Work_Type: item.Work_Type,
+                       Work_Type_Id: item.Work_Type_Id,
+                       Item: item.Item,
+                       Item_Id: item.Item_Id,
+                       Description: "",
+                       Time_Code: item.Time_Code,
+                       Time_Code_Id: item.Time_Code_Id,
+                       Shift_Code: item.Shift_Code,
+                       Shift_Code_Id: item.Shift_Code_Id,
+                       Date: item.Date,
+                       Duration: item.Duration,
+                       DurationHours: item.DurationHours,
+                       DurationMinutes: item.DurationMinutes,
+                       mins: 0,
+                       Comments: item.Comments,
+                       Task_Number: $scope.taskId
+                   }
+                   if ($scope.editTimeIndex == -1) {
+                       $scope.timeArraySummary.push(newTimeObj);
+                   }
+                   else
+                   {
+                       $scope.timeArraySummary[$scope.editTimeIndex] = newTimeObj;
+                       $scope.editTimeIndex = -1;
+                   }
+                   
                 }
                 //if ($scope.timeArray.length > 1) {
 
@@ -821,21 +866,29 @@
                 else
                     $scope.expenseArray[0] = expenseObj;
                 if (item != undefined && item != null) {
-                    $scope.expenseArraySummary.push(
-                        {
-                            Expense_Id: $scope.taskId + "" + ($scope.expenseArraySummary.length + 1),
-                            Date: item.Date,
-                            Expense_Type: item.Expense_Type,
-                            Expense_Type_Id: item.Expense_Type_Id,
-                            Amount: item.Amount,
-                            Currency: item.Currency,
-                            Currency_Id: item.Currency_Id,
-                            Charge_Method: item.Charge_Method,
-                            Charge_Method_Id: item.Charge_Method_Id,
-                            Justification: item.Justification,
-                            Task_Number: $scope.taskId
-                        }
-                    );
+                    var newObject = {
+                        Expense_Id: $scope.taskId + "" + ($scope.expenseArraySummary.length + 1),
+                        Date: item.Date,
+                        Expense_Type: item.Expense_Type,
+                        Expense_Type_Id: item.Expense_Type_Id,
+                        Amount: item.Amount,
+                        Currency: item.Currency,
+                        Currency_Id: item.Currency_Id,
+                        Charge_Method: item.Charge_Method,
+                        Charge_Method_Id: item.Charge_Method_Id,
+                        Justification: item.Justification,
+                        Task_Number: $scope.taskId
+                    }
+                    if ($scope.editExpenseIndex == -1)
+                    {
+                        $scope.expenseArraySummary.push(newObject);
+                    }
+                    else
+                    {
+                        $scope.expenseArraySummary[$scope.editExpenseIndex] = newObject
+                        $scope.editExpenseIndex = -1
+                    }
+                   
                 }
 
                 //if ($scope.expenseArray.length > 1) {
@@ -862,6 +915,7 @@
                 break;
 
             case "Notes":
+                $(".note-textarea-NC" ).height(20);
                 var noteObj = {
                     noteDefault: $scope.noteDefault,
                     Notes_Id: $scope.taskId + "" + ($scope.notesArray.length + 1),
@@ -877,7 +931,7 @@
                 else
                     $scope.notesArray[0] = noteObj;
                 if (item != undefined && item != null) {
-                    $scope.notesArraySummary.push({
+                    var newobj = {
                         Notes_Id: $scope.taskId + "" + ($scope.notesArraySummary.length + 1),
                         Note_Type: item.Note_Type,
                         Note_Type_Id: item.Note_Type_Id,
@@ -885,7 +939,17 @@
                         Created_By: $rootScope.uName,
                         Notes: item.Notes,
                         Task_Number: $scope.taskId
-                    });
+                    }
+                    if ($scope.editNoteIndex == -1)
+                    {
+                        $scope.notesArraySummary.push(newobj);
+                    }
+                    else
+                    {
+                        $scope.notesArraySummary[$scope.editNoteIndex] = newobj
+                        $scope.editNoteIndex = -1
+                    }
+                   
                 }
                 
 
@@ -940,7 +1004,7 @@
                 else
                     $scope.materialArray[0] = materialObj;
                 if (item != undefined && item != null) {
-                    $scope.materialArraySummary.push({
+                    var newobj = {
                         Material_Id: $scope.taskId + "" + ($scope.materialArraySummary.length + 1),
                         Charge_Type: item.Charge_Type,
                         Charge_Type_Id: item.Charge_Type_Id,
@@ -951,8 +1015,18 @@
                         "serialIn": $scope.serialIn(item.Serial_Type),
                         "serialOut": $scope.serialOut(item.Serial_Type),
                         Task_Number: $scope.taskId,
-                        ItemName:item.ItemName
-                    });
+                        ItemName: item.ItemName
+                    }
+                    if ($scope.editMaterialIndex == -1)
+                    {
+                        $scope.materialArraySummary.push(newobj);
+                    }
+                    else
+                    {
+                        $scope.materialArraySummary[$scope.editMaterialIndex] = newobj
+                        $scope.editMaterialIndex = -1;
+                    }
+                   
                 }
                
 
@@ -2107,7 +2181,10 @@
 
             .on('keyup', 'textarea', function (e) {
                 //  the following will help the text expand as typing takes place
-                while ($(this).outerHeight() < this.scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth")))
+                var height = $(this).css('max-height').substring(0, 3);
+                var temp = $(".note-textarea-NC").prop('scrollHeight');
+                var temp1 = $(".note-textarea-NC").outerHeight();
+                while ($(this).outerHeight() < this.scrollHeight && this.scrollHeight < height)
                 {
                     $(this).height($(this).height() + 1);
                 }
