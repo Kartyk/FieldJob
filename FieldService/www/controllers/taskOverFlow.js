@@ -12,6 +12,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
     $rootScope.showDebrief = false;
     $rootScope.selectedCategory = 'Field Service';
     changeLanguage(valueService.getLanguage());
+
     function changeLanguage(lang) {
         valueService.setLanguage(lang);
         switch (lang) {
@@ -39,6 +40,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                 break;
         }
     }
+
     $scope.toggle = function () {
         $scope.myVar = !$scope.myVar;
     };
@@ -201,7 +203,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
             $rootScope.selectedTask = $scope.taskDetails;
 
             valueService.setTask($scope.taskDetails, function (response) {
-                
+
             });
         }
     });
@@ -279,6 +281,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
             }
         }
     }
+
     $scope.accept = function () {
 
         console.log("STATUS " + $scope.selectedTask.Task_Status);
@@ -286,27 +289,30 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
         if ($scope.selectedTask.Task_Status == 'Assigned') {
 
             if (valueService.getNetworkStatus()) {
+
                 $rootScope.dbCall = true;
+
                 valueService.acceptTask(valueService.getTask().Task_Number, function () {
 
                     $scope.selectedTask.Task_Status = "Accepted";
+
                     updateStatus = {
                         "activity_id": $scope.selectedTask.Activity_Id,
                         "XA_TASK_STATUS": "8"
                     };
+
                     //SIT
                     //updateStatus = {
                     //    "activity_id": $scope.selectedTask.Activity_Id,
                     //    "XA_TASK_STATUS": "8"
                     //};
-                
 
                     ofscService.updateStatus(updateStatus, function (response) {
+
                         $rootScope.showAccept = false;
                         $rootScope.showWorkingBtn = true;
                         $rootScope.dbCall = false;
                     });
-                   
 
                     localService.getTaskList(function (response) {
 
