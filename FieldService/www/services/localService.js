@@ -115,6 +115,8 @@
         service.deleteNotesList = deleteNotesList;
         service.deleteEngineerList = deleteEngineerList;
 
+        service.deleteSRNotesList = deleteSRNotesList;
+
         service.deleteTime = deleteTime;
         service.deleteExpense = deleteExpense;
         service.deleteMaterial = deleteMaterial;
@@ -3849,6 +3851,20 @@
             }, function (error) {
 
                 // console.log("ENGINEER DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function deleteSRNotesList() {
+
+            db.transaction(function (transaction) {
+
+                var sqlDelete = "DELETE FROM SRNotes";
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                // console.log("SRNOTES DELETE TRANSACTION ERROR: " + error.message);
             });
         };
 

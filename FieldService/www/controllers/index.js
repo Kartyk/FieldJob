@@ -289,30 +289,30 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
         // localService.deleteTaskList();
         // localService.deleteInternalList();
-        // localService.deleteInstallBase();
-        // localService.deleteContact();
-        // localService.deleteNote();
         //
-        // localService.deleteOverTime();
-        // localService.deleteShiftCode();
+        // localService.deleteInstallBaseList();
+        // localService.deleteContactList();
+        // localService.deleteNoteList();
+        // localService.deleteAttachmentList();
+        // localService.deleteOverTimeList();
+        // localService.deleteShiftCodeList();
+        // localService.deleteFieldJobNameList();
         //
-        // localService.deleteChargeType();
-        // localService.deleteChargeMethod();
-        // localService.deleteFieldJobName();
-        //
-        // localService.deleteWorkType();
-        // localService.deleteItem();
-        // localService.deleteCurrency();
-        //
-        // localService.deleteExpenseType();
-        // localService.deleteNoteType();
+        // localService.deleteChargeMethodList();
+        // localService.deleteChargeTypeList();
+        // localService.deleteExpenseTypeList();
+        // localService.deleteNoteTypeList();
+        // localService.deleteWorkTypeList();
+        // localService.deleteItemList();
+        // localService.deleteCurrencyList();
         //
         // localService.deleteTimeList();
         // localService.deleteExpenseList();
         // localService.deleteNotesList();
         // localService.deleteMaterialList();
-        // localService.deleteAttachmentList();
         // localService.deleteEngineerList();
+        //
+        // localService.deleteSRNotesList();
         //
         // localService.deleteUser();
     }
