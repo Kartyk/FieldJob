@@ -1935,7 +1935,7 @@ md-tab-content{
     vertical-align: middle !important;
     font-family: Arial !important;
     font-size: 12px;
-    text-transform: capitalize;
+    /*text-transform: capitalize;*/
     color: #283d3f !important;
     height: 40px;
     background-color:#f0f0f0;
@@ -2286,10 +2286,10 @@ md-select.md-default-theme ._md-select-value, md-select ._md-select-value{
   padding-right: 30px !important;
 }
 .summary-description{
-  width: 110px;
+  /*width: 110px;*/
   overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
+  /*text-overflow:ellipsis;*/
+  white-space:pre-wrap;
   display:inline-block;
 }
 .summary-tr th{

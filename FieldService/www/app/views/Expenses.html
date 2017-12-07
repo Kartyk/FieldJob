@@ -75,7 +75,7 @@
 
                             <div flex="100" style="max-width:24%;">
                                 <label flex="100" class="label-my" for="justification" translate="{{item.expenseDefault.justification.title}}"></label>
-                                <textarea flex="100" class="form-control  debrief-textarea-NC " rows="5" id="justification"
+                                <textarea class="form-control note-textarea-NC" style="height:40px;max-height:150px" rows="5" id="justification"
                                           ng-model="item.Justification"></textarea>
                             </div>
 
@@ -124,7 +124,7 @@
                     <td class="noborder bg-white width15" >{{expense.Amount | translate}}</td>
                     <td class="noborder bg-white width15" >{{expense.Currency.Value | translate}}</td>
                     <td class="noborder bg-white width15" >{{expense.Charge_Method.Value |translate}}</td>
-                    <td class="noborder bg-white width15" ><div class="summary-description" style="width: 160px;">{{expense.Justification}}</div></td>
+                    <td class="noborder bg-white width15" ><div class="summary-description" >{{expense.Justification}}</div></td>
                     <td class="noborder bg-white "><img src="images/cancel.png" class="cancelInEquip delete" ng-click="deleteObject($index,'Expenses')" /></td>
                     <td class="noborder bg-white "><img src="images/edit.png" class="cancelInEquip delete" ng-click="editObject(expense,'Expenses',$index)" style="width:16px" /></td>
                 </tr>

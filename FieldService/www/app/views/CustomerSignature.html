@@ -106,8 +106,7 @@
             <div>
                 <label class="mylabel font-size" translate="{{customerText}}" ng-if="!engineerObject.isCustomerSignChecked"></label>
                 <label class="mylabel font-size" translate="{{customerCommentText}}" ng-if="engineerObject.isCustomerSignChecked"></label>
-                <input type="checkbox" class="checkboxRow" ng-change="ChangeText()" ng-model="engineerObject.isCustomerSignChecked">
-                <label class="mylabel font-size deny-sign" >Deny Signature:</label>
+               
             </div>
             
            
@@ -127,12 +126,13 @@
                 <div class="flex-20">
                     
                     <md-button class="time-font time-add summary-report-donebtn " style="margin:0px" translate="BACK" ng-click="goPreviousTab('Customer Signature')"></md-button>
+                   
                 </div>
                 <!-- <div class="flex-15">
                   <button  id="addBtn" ng-click="signature = accept()" style="width:100px">Save Sign</button>
                 </div> -->
                 <div class="flex-60 smmary-report-confirm">
-                    <label translate="I confirm that I have read, understand and agreed to all terms."></label>
+                    <label translate="I acknowledge that services have been performed as indicated."></label>
                     <div ng-show="summary.engineer.signature=='' || summary.engineer.signature==undefined"> <label style="font-weight:normal;color:red" translate="Please complete engineer signature on the 'Engineer Signature' tab."></label></div>
                     <div ng-show="!summary.noteType" > <label style="font-weight:normal;color:red">Please add Action Taken note in Notes tab</label></div>
                 </div>
@@ -142,6 +142,10 @@
                 <div class="flex-10">
                     <button type="submit" class="summary-report-donebtn" ng-click="custsignature = accept();customerSubmit()" style="float:right;" ng-disabled="isSubmitted || $root.completedTask || summary.engineer.signature=='' || summary.engineer.signature==undefined || !summary.noteType " translate="Submit"></button>
                 </div>
+            </div>
+            <div class="layout-row">
+                <input type="checkbox" class="checkboxRow" ng-change="ChangeText()" ng-model="engineerObject.isCustomerSignChecked">
+                <label class="mylabel font-size deny-sign">Deny Signature:</label>
             </div>
         </div>
     </form>

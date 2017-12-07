@@ -802,7 +802,9 @@
                        Task_Number: $scope.taskId
                    }
                    if ($scope.editTimeIndex == -1) {
+                       $scope.timeArraySummary.reverse()
                        $scope.timeArraySummary.push(newTimeObj);
+                       $scope.timeArraySummary.reverse()
                    }
                    else
                    {
@@ -881,7 +883,9 @@
                     }
                     if ($scope.editExpenseIndex == -1)
                     {
+                        $scope.expenseArraySummary.reverse();
                         $scope.expenseArraySummary.push(newObject);
+                        $scope.expenseArraySummary.reverse();
                     }
                     else
                     {
@@ -942,7 +946,9 @@
                     }
                     if ($scope.editNoteIndex == -1)
                     {
+                        $scope.notesArraySummary.reverse()
                         $scope.notesArraySummary.push(newobj);
+                        $scope.notesArraySummary.reverse()
                     }
                     else
                     {
@@ -1019,7 +1025,9 @@
                     }
                     if ($scope.editMaterialIndex == -1)
                     {
+                        $scope.materialArraySummary.reverse()
                         $scope.materialArraySummary.push(newobj);
+                        $scope.materialArraySummary.reverse()
                     }
                     else
                     {
@@ -1149,17 +1157,21 @@
     $scope.copyObject = function (item, stage) {
 
         var itemToBeCopied = angular.copy(item);
-
+      
+      
+       
+       
         switch (stage) {
 
             case "Time":
-
+                $scope.editTimeIndex = -1;
                 itemToBeCopied.Comments = "";
 
                 itemToBeCopied.Time_Id = $scope.taskId + "" + ($scope.timeArray.length + 1);
 
                //$scope.timeArray.push(itemToBeCopied);
                 if (item != null && item != undefined) {
+                    $scope.timeArraySummary.reverse()
                     $scope.timeArraySummary.push({
                         Time_Id: $scope.taskId + "" + ($scope.timeArraySummary.length + 1),
                         Field_Job_Name: item.Field_Job_Name,
@@ -1185,6 +1197,7 @@
                         Comments: item.Comments,
                         Task_Number: $scope.taskId
                     });
+                    $scope.timeArraySummary.reverse()
                 }
                // $scope.timeArraySummary.push(itemToBeCopied)
 
@@ -1213,11 +1226,13 @@
                 break;
 
             case "Expenses":
-
+                $scope.editExpenseIndex = -1
+              
                 //itemToBeCopied.justification = "";
 
                 //itemToBeCopied.Expense_Id = $scope.taskId + "" + ($scope.expenseArray.length + 1);
                 if (item != null && item != undefined) {
+                    $scope.expenseArraySummary.reverse()
                     $scope.expenseArraySummary.push({
                         Expense_Id: $scope.taskId + "" + ($scope.expenseArraySummary.length + 1),
                         Date: item.Date,
@@ -1231,6 +1246,7 @@
                         Justification: item.Justification,
                         Task_Number: $scope.taskId
                     });
+                    $scope.expenseArraySummary.reverse()
                 }
                 
 
@@ -1260,8 +1276,9 @@
             case "Notes":
 
                 //itemToBeCopied.Notes_Id = $scope.taskId + "" + ($scope.notesArray.length + 1);
-
+                $scope.editNoteIndex = -1
                 if (item != undefined && item != null) {
+                    $scope.notesArraySummary.reverse()
                     $scope.notesArraySummary.push({
                         Notes_Id: $scope.taskId + "" + ($scope.notesArraySummary.length + 1),
                         Note_Type: item.Note_Type,
@@ -1271,6 +1288,7 @@
                         Notes: item.Notes,
                         Task_Number: $scope.taskId
                     });
+                    $scope.notesArraySummary.reverse()
                 }
 
                 //if ($scope.notesArray.length > 1) {
@@ -1297,10 +1315,11 @@
 
                 break;
             case "Material":
-
+                $scope.editMaterialIndex = -1
                 //itemToBeCopied.Material_Id = $scope.taskId + "" + ($scope.materialArray.length + 1);
 
                 if (item != undefined && item != null) {
+                    $scope.materialArraySummary.reverse()
                     $scope.materialArraySummary.push({
                         Material_Id: $scope.taskId + "" + ($scope.materialArraySummary.length + 1),
                         Charge_Type: item.Charge_Type,
@@ -1314,6 +1333,7 @@
                         Task_Number: $scope.taskId,
                         ItemName: item.ItemName
                     });
+                    $scope.materialArraySummary.reverse()
                 }
 
                 //if ($scope.materialArray.length > 1) {
@@ -1894,7 +1914,7 @@
                                   //  $scope.populateTimeCodeArray(subTotalTimeArray, key);
 
                                     subtotalObj.Duration = $scope.calculateDuration(subtotalObj, key);
-                                    subtotalObject.Duration = formatDuration(subtotalObject.Duration)
+                                    subtotalObj.Duration = formatDuration(subtotalObj.Duration)
 
                                     keepGoing = false;
 
@@ -3739,7 +3759,8 @@
                 doc1.text(xNotesField1, yNotesField1, $filter('translate')('Note Type'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xNotesField2, yNotesField1, $filter('translate')('Note Description'))
+               
+                doc1.text(xNotesField2, yNotesField1, $filter('translate')('Note Description') );
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 doc1.text(xNotesField, yNotesField, $filter('translate')('Notes'))
@@ -3758,8 +3779,15 @@
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
-                    if ($scope.summary.notesArray[i - 1].Notes)
-                        doc1.text(xNotesField2, yNotesField1_val, $filter('translate')($scope.summary.notesArray[i - 1].Notes))
+                    if ($scope.summary.notesArray[i - 1].Notes) {
+                        var splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.notesArray[i - 1].Notes), rectNotesWidth - xNotesField2);
+                        doc1.text(xNotesField2, yNotesField1_val, splitTitle)
+                        if (splitTitle.length > 1)
+                        {
+                            yNotesField1_val = yNotesField1_val + 5 * splitTitle.length;
+                            yNotesField1 = yNotesField1_val;
+                        }
+                    }
                 }
                 rectNotesHeight = yNotesField1_val - yNotesField ;
                 doc1.rect(20, yNotesField + 5, rectNotesWidth, rectNotesHeight+5)
@@ -4054,8 +4082,15 @@
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
-                    if ($scope.summary.materialArray[l - 1].Description)
-                        doc1.text(586, yMaterialFieldValue, $filter('translate')($scope.summary.materialArray[l - 1].Description))
+                    if ($scope.summary.materialArray[l - 1].Description) {
+                        var splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.materialArray[l - 1].Description), rectMaterialWidth - 586);
+                        doc1.text(586, yMaterialFieldValue, splitTitle)
+                        if (splitTitle.length > 1) {
+                            yMaterialFieldValue = yMaterialFieldValue + 7 * splitTitle.length;
+                            //yNotesField1 = yNotesField1_val;
+                        }
+                    }
+
                     // doc1.text(460, yMaterialFieldName, 'Comments')
                     // doc1.text(460, yMaterialFieldValue, $scope.summary.materialArray[l-1].Charge_Type)
                     yMaterialFieldValue = yMaterialFieldValue + 10 * $scope.summary.materialArray[l - 1].Product_Quantity;
