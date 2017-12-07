@@ -144,6 +144,10 @@ app.controller('myTaskController', function ($translate, $scope, $compile, $time
 
                     element.addClass("acceptedEvent");
 
+                } else if (event.Task_Status == 'Working') {
+
+                    element.addClass("workingEvent");
+
                 } else {
 
                     element.addClass("assignedEvent");
@@ -440,7 +444,7 @@ app.controller('myTaskController', function ($translate, $scope, $compile, $time
     $scope.onclickOfTask = function (task) {
 
         console.log("TASK " + JSON.stringify(task));
-
+      
         $scope.selectedTask = task;
 
         valueService.setTask(task, function (response) {

@@ -40,9 +40,9 @@
                           <img src="./images/search_1x.png" style="height: 20px;" /> 
                 </button>
                 <!--  <a class="debrief-btn md-button md-ink-ripple" ng-show="showDebriefBtn" ng-click="showTaskOrDebrief(4)" ng-disabled=true><span translate="Debrief"></span></a> -->
-                <button type="button" class="btn btn-default debrief-btn" ng-show="showDebriefBtn" ng-disabled="notFutureDate" ng-click="showTaskOrDebrief(4)" translate="Debrief" style="margin-left: 20px;"></button>
+                <!--<button type="button" class="btn btn-default debrief-btn" ng-show="showDebriefBtn" ng-disabled="notFutureDate" ng-click="showTaskOrDebrief(4)" translate="Debrief" style="margin-left: 20px;"></button>-->
                <!-- <button type="button" class="btn btn-default debrief-btn" ng-show="showWorkingBtn" ng-disabled="notFutureDate" ng-click="showTaskOrDebrief(3)" translate="Start Work" style="margin-left: 20px;"></button>-->
-                <button type="button" class="btn btn-default startwork-btn" ng-show="showStartWork" ui-sref="taskOverFlow" ng-click="showTaskOrDebrief(3)" style="margin-left: 20px;" translate="Field Job Details"></button>
+                <!--<button type="button" class="btn btn-default startwork-btn" ng-show="showStartWork" ui-sref="taskOverFlow" ng-click="showTaskOrDebrief(3)" style="margin-left: 20px;" translate="Field Job Details"></button>-->
             </div>
             <!-- </div> -->
 
@@ -134,10 +134,10 @@
 
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody ng-repeat="task in myTaskDetails | filter: taskInput| filter: selectedTaskStatus" ng-class="{'rowSelected' : selectedTask == task}">
 
-                        <tr ng-repeat="task in myTaskDetails | filter: taskInput| filter: selectedTaskStatus" ng-if="task.Task_Status=='Assigned' || task.Task_Status=='Accepted' ||task.Task_Status=='Working' || task.Task_Status=='Field Job Completed' || task.Task_Status=='Completed'"
-                            ng-click="onclickOfTask(task)" ng-class="{'rowSelected' : selectedTask == task}" class="fieldjob-body">
+                        <tr ng-if="task.Task_Status=='Assigned' || task.Task_Status=='Accepted' ||task.Task_Status=='Working' || task.Task_Status=='Field Job Completed' || task.Task_Status=='Completed'"
+                            ng-click="onclickOfTask(task)"  class="fieldjob-body">
                             <td class="task-number">{{task.Task_Number}}</td>
                             <!-- <td md-cell>{{task.Job_Description}}</td> -->
                             <td class="task-details">{{task.Customer_Name}}</td>
@@ -145,10 +145,20 @@
                             <td class="task-details"> {{task.Start_Date| timezonefilter}} </td>
                             <!-- <td md-cell>{{task.Start_Date.split(" ")[0] | date:'dd/MM/yyyy hh:mm:ss' }}</td> -->
                             <td class="text-left">
-                                <label class="fieldjob-status" ng-class="{green : task.Task_Status == 'Accepted',grey : task.Task_Status == 'Field Job Completed',blue : task.Task_Status == 'Assigned',grey : task.Task_Status == 'Completed' }">{{task.Task_Status == 'Field Job Completed' ? 'Completed' : task.Task_Status}}</label>
+                                <label  class="fieldjob-status" ng-class="{green : task.Task_Status == 'Accepted',grey : task.Task_Status == 'Field Job Completed',blue : task.Task_Status == 'Assigned',grey : task.Task_Status == 'Completed',pushLeft:showStartWork }">{{task.Task_Status == 'Field Job Completed' ? 'Completed' : task.Task_Status}}</label>
+                            </td>
+
+                        </tr>
+                        <tr ng-if="selectedTask == task">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td> </td>
+                            <td>
+                                <button type="button" class="btn btn-default debrief-btn" ng-show="showDebriefBtn" ng-disabled="notFutureDate" ng-click="showTaskOrDebrief(4)" translate="Debrief" style="margin:0px 10px 10px 0px;"></button>
+                                <button type="button" class="btn btn-default startwork-btn" ng-show="showStartWork" ui-sref="taskOverFlow" ng-click="showTaskOrDebrief(3)" style="margin:0px 10px 10px 20px;" translate="Field Job Details"></button>
                             </td>
                         </tr>
-
                     </tbody>
                 </table>
                 <!--  </md-table-container> -->
