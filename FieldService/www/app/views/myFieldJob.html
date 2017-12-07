@@ -145,7 +145,7 @@
                             <td class="task-details"> {{task.Start_Date| timezonefilter}} </td>
                             <!-- <td md-cell>{{task.Start_Date.split(" ")[0] | date:'dd/MM/yyyy hh:mm:ss' }}</td> -->
                             <td class="text-left">
-                                <label class="fieldjob-status" ng-class="{green : task.Task_Status == 'Accepted',grey : task.Task_Status == 'Field Job Completed',blue : task.Task_Status == 'Assigned',grey : task.Task_Status == 'Completed' }">{{task.Task_Status == 'Field Job Completed' ? 'Completed' : task.Task_Status}}</label>
+                                <label class="fieldjob-status" ng-class="{green : task.Task_Status == 'Accepted',red : task.Task_Status == 'Working',grey : task.Task_Status == 'Field Job Completed',blue : task.Task_Status == 'Assigned',grey : task.Task_Status == 'Completed' }">{{task.Task_Status == 'Field Job Completed' ? 'Completed' : task.Task_Status}}</label>
                             </td>
                         </tr>
 
