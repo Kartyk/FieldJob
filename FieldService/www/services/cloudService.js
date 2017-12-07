@@ -1996,7 +1996,7 @@
             // $cookieStore.remove('advGlobalObj');
         }
 
-        function OfscActions(activateId, isAccept, callback) {
+        function OfscActions(activateId, isWork, callback) {
 
             var data = {
                 "resourceId": constantService.getUser().OFSCId,
@@ -2011,11 +2011,11 @@
 
                     var updateStatus = {};
 
-                    if (isAccept) {
+                    if (isWork) {
 
                         updateStatus = {
                             "activity_id": activateId,
-                            "XA_TASK_STATUS": "8"
+                            "XA_TASK_STATUS": "11"
                         };
 
                     } else {
@@ -2055,7 +2055,7 @@
 
                                         ofscService.start_activity(startActivityData, function (response) {
 
-                                            if (!isAccept) {
+                                            if (!isWork) {
 
                                                 var complete = {
                                                     "activityId": startActivityData.activity_id,

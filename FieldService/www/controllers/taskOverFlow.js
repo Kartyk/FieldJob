@@ -262,7 +262,23 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
         $scope.items.splice(this.$index, 1);
     };
+    $scope.startWork = function () {
+        if ($scope.selectedTask.Task_Status == 'Accepted') {
 
+            if (valueService.getNetworkStatus()) {
+                $rootScope.dbCall = true;
+                valueService.startWorking(valueService.getTask().Task_Number, function () {
+
+                    $scope.selectedTask.Task_Status = "Working";
+                    cloudService.OfscActions($scope.selectedTask.Activity_Id, true, function (response) {
+
+                        $rootScope.showWorkingBtn = false;
+                        $rootScope.dbCall = false;
+                    });
+                });
+            }
+        }
+    }
     $scope.accept = function () {
 
         console.log("STATUS " + $scope.selectedTask.Task_Status);
@@ -274,12 +290,18 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                 valueService.acceptTask(valueService.getTask().Task_Number, function () {
 
                     $scope.selectedTask.Task_Status = "Accepted";
+                    updateStatus = {
+                        "activity_id": $scope.selectedTask.Activity_Id,
+                        "XA_TASK_STATUS": "3"
+                    };
+                
 
-                    cloudService.OfscActions($scope.selectedTask.Activity_Id, true, function (response) {
-
+                    ofscService.updateStatus(updateStatus, function (response) {
                         $rootScope.showAccept = false;
+                        $rootScope.showWorkingBtn = true;
                         $rootScope.dbCall = false;
                     });
+                   
 
                     localService.getTaskList(function (response) {
 
