@@ -124,6 +124,7 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
             }
         }
     }
+
     $scope.accept = function () {
 
         console.log("STATUS " + $scope.selectedTask.Task_Status);
@@ -131,20 +132,23 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
         if ($scope.selectedTask.Task_Status == 'Assigned') {
 
             if (valueService.getNetworkStatus()) {
+
                 $rootScope.dbCall = true;
+
                 valueService.acceptTask(valueService.getTask().Task_Number, function () {
 
                     $scope.selectedTask.Task_Status = "Accepted";
+
                     updateStatus = {
                         "activity_id": $scope.selectedTask.Activity_Id,
                         "XA_TASK_STATUS": "8"
                     };
+
                     //SIT
                     //updateStatus = {
                     //    "activity_id": $scope.selectedTask.Activity_Id,
                     //    "XA_TASK_STATUS": "8"
                     //};
-
 
                     ofscService.updateStatus(updateStatus, function (response) {
                         $rootScope.showAccept = false;
@@ -152,12 +156,11 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
                         $rootScope.dbCall = false;
                     });
 
-
                     localService.getTaskList(function (response) {
 
                         constantService.setTaskList(response);
 
-                        $state.go($state.current, {}, { reload: true });
+                        $state.go($state.current, {}, {reload: true});
                     });
                 });
 
@@ -176,7 +179,7 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
 
                         constantService.setTaskList(response);
 
-                        $state.go($state.current, {}, { reload: true });
+                        $state.go($state.current, {}, {reload: true});
                     });
                 });
             }

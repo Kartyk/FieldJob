@@ -950,18 +950,18 @@
                 });
             });
         };
-        function startWorking(taskid, calback)
-        {
+
+        function startWorking(taskId, callback) {
+
             var formData = {
                 "taskid": taskId,
                 "taskstatus": "Working"
             };
+
             cloudService.updateAcceptTask(formData, function (response) {
 
-                console.log(JSON.stringify(response));
-                calback(response);
                 var taskObject = {
-                    Task_Status: "WORKING",
+                    Task_Status: "Working",
                     Task_Number: taskId,
                     Submit_Status: "I",
                     Date: new Date()
@@ -972,7 +972,8 @@
                     callback(result);
                 });
             });
-        }
+        };
+
         function acceptTask(taskId, callback) {
 
             var formData = {
