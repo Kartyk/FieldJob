@@ -550,7 +550,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
     $scope.syncFunctionality = function () {
 
-        syncSubmit("1");
+        syncSubmit("0");
     }
 
     function syncSubmit(isLogin) {
