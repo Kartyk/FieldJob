@@ -125,6 +125,7 @@ app.controller('myTaskController', function ($translate, $scope, $compile, $time
                         $scope.showDebriefBtn = false;
                         $rootScope.showWorkingBtn = true;
                         $rootScope.showAccept = false;
+                        $state.go('taskOverFlow');
                     }
                     else if (event.Type == 'INTERNAL') {
 
@@ -434,7 +435,7 @@ app.controller('myTaskController', function ($translate, $scope, $compile, $time
         }
     };
 
-    $scope.getStatus = ["All", "Assigned", "Accepted", "Completed"];
+    $scope.getStatus = ["All", "Assigned", "Accepted", "Working","Completed"];
 
     $scope.searchTask = function () {
 
