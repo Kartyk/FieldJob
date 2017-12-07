@@ -177,67 +177,79 @@
 
                 var taskInternalList = [];
 
-                angular.forEach(response.getTaskList, function (item) {
+                getInternalList(function (resultInternal) {
 
-                    if (item.TaskDetails && item.TaskDetails.length > 0) {
+                    angular.forEach(response.getTaskList, function (item) {
 
-                        angular.forEach(item.TaskDetails, function (taskObject) {
+                        if (item.TaskDetails && item.TaskDetails.length > 0) {
 
-                            taskObject.Type = "CUSTOMER";
+                            angular.forEach(item.TaskDetails, function (taskObject) {
 
-                            taskObject.email = "";
+                                taskObject.Type = "CUSTOMER";
 
-                            taskObject.Date = new Date();
+                                taskObject.email = "";
 
-                            taskList.push(taskObject);
-                        });
-                    }
+                                taskObject.Date = new Date();
 
-                    if (item.activities && item.activities.length > 0) {
+                                taskList.push(taskObject);
+                            });
+                        }
 
-                        angular.forEach(item.activities, function (internalObject) {
+                        if (item.activities && item.activities.length > 0) {
+
+                            angular.forEach(item.activities, function (internalObject) {
+
+                                internalList.push(internalObject);
+                            });
+                        }
+                    });
+
+                    if (resultInternal && resultInternal.length > 0) {
+
+                        angular.forEach(resultInternal, function (internalObject) {
 
                             internalList.push(internalObject);
                         });
                     }
-                });
 
-                localService.insertTaskList(taskList, function (result) {
+                    localService.insertTaskList(taskList, function (result) {
 
-                    localService.insertInternalList(internalList, function (result) {
+                        localService.insertInternalList(internalList, function (result) {
 
-                        localService.getTaskList(function (taskListDB) {
+                            localService.getTaskList(function (taskListDB) {
 
-                            localService.getInternalList(function (internalListDB) {
+                                localService.getInternalList(function (internalListDB) {
 
-                                angular.forEach(taskListDB, function (taskObject) {
+                                    angular.forEach(taskListDB, function (taskObject) {
 
-                                    taskInternalList.push(taskObject);
+                                        taskInternalList.push(taskObject);
+                                    });
+
+                                    angular.forEach(internalListDB, function (internalObject) {
+
+                                        var internalOFSCJSONObject = {};
+
+                                        internalOFSCJSONObject.Start_Date = internalObject.Start_time;
+                                        internalOFSCJSONObject.End_Date = internalObject.End_time;
+                                        internalOFSCJSONObject.Type = "INTERNAL";
+                                        internalOFSCJSONObject.Customer_Name = internalObject.Activity_type;
+                                        internalOFSCJSONObject.Task_Number = internalObject.Activity_Id;
+
+                                        taskInternalList.push(internalOFSCJSONObject);
+                                    });
+
+                                    console.log("TASK INTERNAL LIST INSERT SUCCESS");
+
+                                    constantService.setTaskList(taskInternalList);
+
+                                    callback(taskInternalList);
+
+                                    console.log("TASK INTERNAL LIST INSERT END ======> " + new Date());
                                 });
-
-                                angular.forEach(internalListDB, function (internalObject) {
-
-                                    var internalOFSCJSONObject = {};
-
-                                    internalOFSCJSONObject.Start_Date = internalObject.Start_time;
-                                    internalOFSCJSONObject.End_Date = internalObject.End_time;
-                                    internalOFSCJSONObject.Type = "INTERNAL";
-                                    internalOFSCJSONObject.Customer_Name = internalObject.Activity_type;
-                                    internalOFSCJSONObject.Task_Number = internalObject.Activity_Id;
-
-                                    taskInternalList.push(internalOFSCJSONObject);
-                                });
-
-                                console.log("TASK INTERNAL LIST INSERT SUCCESS");
-
-                                constantService.setTaskList(taskInternalList);
-
-                                callback(taskInternalList);
-
-                                console.log("TASK INTERNAL LIST INSERT END ======> " + new Date());
                             });
                         });
                     });
+
                 });
 
             }).error(function (error) {
@@ -946,15 +958,17 @@
 
         function getInternalList(callback) {
 
+            var internalList = [];
+
             var startDate = new Date();
 
-            startDate.setDate(startDate.getDate() - 15);
+            startDate.setDate(startDate.getDate() + 15);
 
             var startDateISOFormat = moment(startDate).format('YYYY-MM-DD');
 
             var endDate = new Date();
 
-            endDate.setDate(endDate.getDate() + 15);
+            endDate.setDate(endDate.getDate() + 45);
 
             var endDateISOFormat = moment(endDate).format('YYYY-MM-DD');
 
@@ -977,15 +991,24 @@
 
                 console.log("Internal Response " + JSON.stringify(response.activities));
 
-                localService.insertInternalList(response.activities, function (result) {
+                if (response && response.activities){
 
-                    console.log("INTERNAL");
+                    callback(response.activities);
 
-                    localService.getInternalList(function (res) {
+                } else {
 
-                        callback(res);
-                    });
-                });
+                    callback(internalList);
+                }
+
+                // localService.insertInternalList(response.activities, function (result) {
+                //
+                //     console.log("INTERNAL");
+                //
+                //     localService.getInternalList(function (res) {
+                //
+                //         callback(res);
+                //     });
+                // });
 
             }).error(function (error) {
 
