@@ -960,17 +960,17 @@
 
                 console.log(JSON.stringify(response));
                 calback(response);
-                //var taskObject = {
-                //    Task_Status: "Accepted",
-                //    Task_Number: taskId,
-                //    Submit_Status: "A",
-                //    Date: new Date()
-                //};
+                var taskObject = {
+                    Task_Status: "WORKING",
+                    Task_Number: taskId,
+                    Submit_Status: "A",
+                    Date: new Date()
+                };
 
-                //localService.updateTaskSubmitStatus(taskObject, function (result) {
+                localService.updateTaskSubmitStatus(taskObject, function (result) {
 
-                //    callback(result);
-                //});
+                    callback(result);
+                });
             });
         }
         function acceptTask(taskId, callback) {
@@ -987,7 +987,7 @@
                 var taskObject = {
                     Task_Status: "Accepted",
                     Task_Number: taskId,
-                    Submit_Status: "A",
+                    Submit_Status: "I",
                     Date: new Date()
                 };
 

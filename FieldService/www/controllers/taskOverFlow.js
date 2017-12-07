@@ -292,8 +292,13 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                     $scope.selectedTask.Task_Status = "Accepted";
                     updateStatus = {
                         "activity_id": $scope.selectedTask.Activity_Id,
-                        "XA_TASK_STATUS": "3"
+                        "XA_TASK_STATUS": "8"
                     };
+                    //SIT
+                    //updateStatus = {
+                    //    "activity_id": $scope.selectedTask.Activity_Id,
+                    //    "XA_TASK_STATUS": "8"
+                    //};
                 
 
                     ofscService.updateStatus(updateStatus, function (response) {

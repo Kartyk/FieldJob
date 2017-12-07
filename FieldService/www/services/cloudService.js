@@ -1972,9 +1972,19 @@
                             "activity_id": activateId,
                             "XA_TASK_STATUS": "11"
                         };
+                        //SIT
+                        //updateStatus = {
+                        //    "activity_id": activateId,
+                        //    "XA_TASK_STATUS": "10"
+                        //};
 
                     } else {
-
+                        //SIT
+                        //updateStatus = {
+                        //    "activity_id": activateId,
+                        //    "XA_TASK_STATUS": "2"
+                        //};
+                        //DEV
                         updateStatus = {
                             "activity_id": activateId,
                             "XA_TASK_STATUS": "3"
@@ -2020,11 +2030,16 @@
                                                 console.log("completeActivityId " + complete.activityId);
 
                                                 console.log("completeActivityDate " + complete.date);
-
+                                                //DEV
                                                 var updateTaskSegement = {
                                                     "activity_id": startActivityData.activity_id,
                                                     "XA_TASK_STATUS": "3"
                                                 };
+                                                //SIT
+                                                //var updateTaskSegement = {
+                                                //    "activity_id": startActivityData.activity_id,
+                                                //    "XA_TASK_STATUS": "2"
+                                                //};
 
                                                 console.log("updateTaskSegment " + JSON.stringify(updateTaskSegement));
 
