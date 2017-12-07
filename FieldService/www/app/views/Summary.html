@@ -121,14 +121,14 @@
     <table class="table no-marbottom noborder">
                         <thead>
                             <tr class="noborder">
-                                <th class="taskoverflow-tableTh noborder"  translate="Note Type"></th>
-                                <th class="taskoverflow-tableTh noborder" translate="Note Description"> #</th>
+                                <th class="taskoverflow-tableTh noborder col-sm-3"  translate="Note Type"></th>
+                                <th class="taskoverflow-tableTh noborder col-sm-9" translate="Note Description"> #</th>
                             </tr>
                         </thead>
                         <tbody >
                             <tr class="noborder" ng-repeat="note in summary.notesArray" >
-                                <td class="taskoverflow-tableTd noborder bg-white">{{note.Note_Type| translate}}</td>
-                                <td class="taskoverflow-tableTd noborder bg-white"> {{note.Notes| translate}}</td>
+                                <td class="taskoverflow-tableTd noborder bg-white col-sm-3">{{note.Note_Type| translate}}</td>
+                                <td class="taskoverflow-tableTd noborder bg-white col-sm-9"> {{note.Notes| translate}}</td>
                             </tr>
                         </tbody>
 
@@ -264,7 +264,7 @@
                                        <td class="noborder bg-white width25">{{expense.Date}}</td>
                                        <td class="noborder bg-white width25">{{expense.Expense_Type | translate}}</td>
                                        <td class="noborder bg-white width25">{{expense.Charge_Method |translate}}</td>
-                                       <td class="noborder bg-white width25"><div class="summary-description" style="width: 160px;">{{expense.Justification}}</div></td>
+                                       <td class="noborder bg-white width25"><div class="summary-description" >{{expense.Justification}}</div></td>
                                     </tr>
                                 </tbody>
                             </table>
