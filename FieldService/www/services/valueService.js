@@ -963,7 +963,7 @@
                 var taskObject = {
                     Task_Status: "WORKING",
                     Task_Number: taskId,
-                    Submit_Status: "A",
+                    Submit_Status: "I",
                     Date: new Date()
                 };
 
