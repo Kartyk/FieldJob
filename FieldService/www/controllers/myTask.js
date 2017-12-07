@@ -100,7 +100,7 @@ app.controller('myTaskController', function ($translate, $scope, $compile, $time
                         $scope.showDebriefBtn = true;
                         $rootScope.showAccept = false;
                         $rootScope.completedTask = true;
-
+                        $rootScope.showWorkingBtn = false;
                         $state.go('debrief');
 
                     } else if (event.Task_Status == 'Assigned') {
@@ -108,18 +108,25 @@ app.controller('myTaskController', function ($translate, $scope, $compile, $time
                         $scope.showStartWork = true;
                         $rootScope.showAccept = true;
                         $scope.showDebriefBtn = false;
-
+                        $rootScope.showWorkingBtn = false;
                         $state.go('taskOverFlow');
 
-                    } else if (event.Task_Status == 'Accepted') {
+                    } else if (event.Task_Status == 'Working'){// else if (event.Task_Status == 'Accepted') {
 
                         $scope.showStartWork = true;
                         $scope.showDebriefBtn = true;
                         $rootScope.showAccept = false;
+                        $rootScope.showWorkingBtn = false;
 
                         $state.go('taskOverFlow');
 
-                    } else if (event.Type == 'INTERNAL') {
+                    } else if (event.Task_Status == 'Accepted') {
+                        $scope.showStartWork = true;
+                        $scope.showDebriefBtn = false;
+                        $rootScope.showWorkingBtn = true;
+                        $rootScope.showAccept = false;
+                    }
+                    else if (event.Type == 'INTERNAL') {
 
                     } else {
 
@@ -453,6 +460,7 @@ app.controller('myTaskController', function ($translate, $scope, $compile, $time
 
                     $scope.showStartWork = false;
                     $scope.showDebriefBtn = true;
+                    $rootScope.showWorkingBtn = false;
                     $rootScope.showAccept = false;
                     $rootScope.completedTask = true;
 
@@ -467,7 +475,7 @@ app.controller('myTaskController', function ($translate, $scope, $compile, $time
                     $scope.showDebriefBtn = true;
                     $rootScope.completedTask = true;
                     $rootScope.showAccept = false;
-
+                    $rootScope.showWorkingBtn = false;
                     break;
 
                 case 'Assigned':
@@ -478,7 +486,7 @@ app.controller('myTaskController', function ($translate, $scope, $compile, $time
                     $scope.showStartWork = true;
                     $rootScope.showAccept = true;
                     $scope.showDebriefBtn = false;
-
+                    $rootScope.showWorkingBtn = false;
                     break;
 
                 case 'Accepted':
@@ -487,9 +495,19 @@ app.controller('myTaskController', function ($translate, $scope, $compile, $time
                     //$rootScope.showTaskDetail = true;
 
                     $scope.showStartWork = true;
+                    $scope.showDebriefBtn = false;
+                    $rootScope.showAccept = false;
+                    $rootScope.showWorkingBtn = true;
+                    break;
+                case 'Working':
+
+                    //$rootScope.showDebrief = true;
+                    //$rootScope.showTaskDetail = true;
+
+                    $scope.showStartWork = true;
                     $scope.showDebriefBtn = true;
                     $rootScope.showAccept = false;
-
+                    $rootScope.showWorkingBtn = false;
                     break;
 
                 default:

@@ -147,7 +147,7 @@
         service.getLanguage = getLanguage;
         service.setDebriefChanged = setDebriefChanged;
         service.getDebriefChanged = getDebriefChanged
-
+        service.startWorking = startWorking;
         service.syncData = syncData;
 
         return service;
@@ -950,7 +950,29 @@
                 });
             });
         };
+        function startWorking(taskid, calback)
+        {
+            var formData = {
+                "taskid": taskId,
+                "taskstatus": "Working"
+            };
+            cloudService.updateAcceptTask(formData, function (response) {
 
+                console.log(JSON.stringify(response));
+                calback(response);
+                //var taskObject = {
+                //    Task_Status: "Accepted",
+                //    Task_Number: taskId,
+                //    Submit_Status: "A",
+                //    Date: new Date()
+                //};
+
+                //localService.updateTaskSubmitStatus(taskObject, function (result) {
+
+                //    callback(result);
+                //});
+            });
+        }
         function acceptTask(taskId, callback) {
 
             var formData = {

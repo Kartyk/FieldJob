@@ -41,6 +41,7 @@
                 </button>
                 <!--  <a class="debrief-btn md-button md-ink-ripple" ng-show="showDebriefBtn" ng-click="showTaskOrDebrief(4)" ng-disabled=true><span translate="Debrief"></span></a> -->
                 <button type="button" class="btn btn-default debrief-btn" ng-show="showDebriefBtn" ng-disabled="notFutureDate" ng-click="showTaskOrDebrief(4)" translate="Debrief" style="margin-left: 20px;"></button>
+               <!-- <button type="button" class="btn btn-default debrief-btn" ng-show="showWorkingBtn" ng-disabled="notFutureDate" ng-click="showTaskOrDebrief(3)" translate="Start Work" style="margin-left: 20px;"></button>-->
                 <button type="button" class="btn btn-default startwork-btn" ng-show="showStartWork" ui-sref="taskOverFlow" ng-click="showTaskOrDebrief(3)" style="margin-left: 20px;" translate="Field Job Details"></button>
             </div>
             <!-- </div> -->
@@ -135,7 +136,7 @@
                     </thead>
                     <tbody>
 
-                        <tr ng-repeat="task in myTaskDetails | filter: taskInput| filter: selectedTaskStatus" ng-if="task.Task_Status=='Assigned' || task.Task_Status=='Accepted' || task.Task_Status=='Field Job Completed' || task.Task_Status=='Completed'"
+                        <tr ng-repeat="task in myTaskDetails | filter: taskInput| filter: selectedTaskStatus" ng-if="task.Task_Status=='Assigned' || task.Task_Status=='Accepted' ||task.Task_Status=='Working' || task.Task_Status=='Field Job Completed' || task.Task_Status=='Completed'"
                             ng-click="onclickOfTask(task)" ng-class="{'rowSelected' : selectedTask == task}" class="fieldjob-body">
                             <td class="task-number">{{task.Task_Number}}</td>
                             <!-- <td md-cell>{{task.Job_Description}}</td> -->
