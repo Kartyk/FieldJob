@@ -282,9 +282,10 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
             'Login_Status': "0"
         };
 
-        localService.updateUser(userObject);
+        localService.updateUser(userObject, function (response) {
 
-        $state.go('login');
+            $state.go('login');
+        });
 
         // localService.deleteTaskList();
         // localService.deleteInternalList();
@@ -359,7 +360,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                 }
             };
 
-            localService.deleteUser();
+            // localService.deleteUser();
 
             cloudService.login(data, function (response) {
 
@@ -387,6 +388,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                             Work_Day: response[0].Work_Day,
                             Work_Hour: response[0].Work_Hour,
                             Login_Status: "1",
+                            Sync_Status: "0",
                             Last_updated: new Date(),
                             encrypt: authorizationValue
                         };
@@ -397,9 +399,17 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                             console.log("USER =====> " + JSON.stringify(response));
 
-                            constantService.setUser(response[0]);
+                            angular.forEach(response, function (item) {
 
-                            valueService.setUser(response[0]);
+                                if (item.Login_Status == "1") {
+
+                                    constantService.setUser(item);
+
+                                    valueService.setUser(item);
+
+                                    constantService.setLastUpdated(new Date(constantService.getUser().Last_Updated).getTime());
+                                }
+                            });
 
                             var data = {
                                 "resourceId": constantService.getUser().OFSCId,
@@ -435,7 +445,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                         'Login_Status': "1"
                     };
 
-                    localService.updateUserLogin(userObject, function (result) {
+                    localService.updateUser(userObject, function (result) {
 
                         localService.getUser(function (response) {
 
@@ -458,6 +468,8 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                                     valueService.setResourceId(constantService.getUser().ID);
 
                                     constantService.setResourceId(constantService.getUser().ID);
+
+                                    constantService.setLastUpdated(new Date(constantService.getUser().Last_Updated).getTime());
 
                                     if (constantService.getUser().Default_View == "My Task") {
 
@@ -816,6 +828,13 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                     console.log("LOGIN SUCCESS ALL");
 
+                    var userObject = {
+                        'ID': constantService.getUser().ID,
+                        'Sync_Status': "1"
+                    };
+
+                    localService.updateSyncStatus(userObject);
+
                     if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
 
                         $state.go($state.current, {}, {reload: true});
@@ -1149,7 +1168,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                             Attachment_Id: item.Attachment_Id
                         };
 
-                        localService.updateAttachmentStatus(updateObject);
+                        localService.updateAttachmentDownloadStatus(updateObject);
                     }
                 });
             });
@@ -1172,7 +1191,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                             Attachment_Id: item.Attachment_Id
                         };
 
-                        localService.updateAttachmentStatus(updateObject);
+                        localService.updateAttachmentDownloadStatus(updateObject);
                     }
                 });
             });

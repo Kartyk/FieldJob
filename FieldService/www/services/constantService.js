@@ -14,6 +14,8 @@
 
         var resourceId = null;
 
+        var lastUpdated = null;
+
         var timeZone = null;
 
         var contactsEmail = [];
@@ -107,6 +109,9 @@
         service.setUser = setUser;
         service.getUser = getUser;
 
+        service.setLastUpdated = setLastUpdated;
+        service.getLastUpdated = getLastUpdated;
+
         service.getStartDate = getStartDate;
         service.getEndDate = getEndDate;
 
@@ -169,6 +174,14 @@
 
         function getUser() {
             return userObject;
+        };
+
+        function setLastUpdated(lastUpdate) {
+            lastUpdated = lastUpdate;
+        };
+
+        function getLastUpdated() {
+            return lastUpdated;
         };
 
         function setTimeZone(zone) {
