@@ -908,7 +908,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Contact SET Customer_Name = ?, Contact_Name = ?, Home_Phone = ?, Mobile_Phone = ?, Fax_Phone = ?, Office_Phone = ?, Email = ?, Foreign_Key = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?, Default_Value = ?, Contacts_Preferences = ?, ResourceId = ?  WHERE Contact_ID = ? AND Task_Number = ?";
+                var sqlUpdate = "UPDATE Contact SET Customer_Name = ?, Contact_Name = ?, Home_Phone = ?, Mobile_Phone = ?, Fax_Phone = ?, Office_Phone = ?, Email = ?, Foreign_Key = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?, Default_value = ?, Contacts_Preferences = ?, ResourceId = ?  WHERE Contact_ID = ? AND Task_Number = ?";
 
                 insertValues.push(responseList.Customer_Name);
                 insertValues.push(responseList.Contact_Name);
@@ -922,7 +922,7 @@
                 insertValues.push(responseList.Assigned);
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.End_Date);
-                insertValues.push(responseList.Default_Value);
+                insertValues.push(responseList.Default_value);
                 insertValues.push(responseList.Contacts_Preferences);
                 insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.Contact_ID);
@@ -959,8 +959,6 @@
 
                 var sqlInsert = "INSERT INTO Contact VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-
-
                 insertValues.push(responseList.Contact_ID);
                 insertValues.push(responseList.Customer_Name);
                 insertValues.push(responseList.Contact_Name);
@@ -975,7 +973,7 @@
                 insertValues.push(responseList.Assigned);
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.End_Date);
-                insertValues.push(responseList.Default_Value);
+                insertValues.push(responseList.Default_value);
                 insertValues.push(responseList.Contacts_Preferences);
                 insertValues.push(constantService.getResourceId());
 

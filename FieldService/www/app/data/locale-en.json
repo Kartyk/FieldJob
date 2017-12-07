@@ -195,5 +195,7 @@
   "Charge\nType": "Charge Type",
   "Charge\nMethod": "Charge Method",
   "Customer Comments": "Customer Comments",
-  "I acknowledge that services have been performed as indicated.": "I acknowledge that services have been performed as indicated."
+  "I acknowledge that services have been performed as indicated.": "I acknowledge that services have been performed as indicated.",
+  "Clarity OT Code": "Clarity OT Code",
+  "Clarity Shift Code": "Clarity Shift Code"
 }

@@ -224,7 +224,9 @@
   "Please complete engineer signature on the 'Engineer Signature' tab.": "Veuillez compléter la signature de l'ingénieur sur l'onglet «Signature du technicien».",
   "Field Service Summary Report": "le rapport de synthèse de l'assistance sur site",
   "Customer Comments": "Customer Comments",
-  "I acknowledge that services have been performed as indicated.": "I acknowledge that services have been performed as indicated."
+  "I acknowledge that services have been performed as indicated.": "I acknowledge that services have been performed as indicated.",
+  "Clarity OT Code": "Clarity OT Code",
+  "Clarity Shift Code": "Clarity Shift Code"
 
 
 }

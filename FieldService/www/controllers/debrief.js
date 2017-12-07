@@ -244,7 +244,7 @@
                 title: "Description"
             },
             timeCode: {
-                title: "Time Code",
+                title: "Clarity OT Code",
                 values: $scope.overTimeArray
             },
             timeCodeT: {
@@ -252,7 +252,7 @@
                 value: ["OT1", "OT2", "OT3", "OS1", "OS2", "Standard"]
             },
             shiftCode: {
-                title: "Shift Code",
+                title: "Clarity Shift Code",
                 values: $scope.shiftCodeArray
             },
             Date: {
@@ -715,7 +715,7 @@
                         title: "Description"
                     },
                     timeCode: {
-                        title: "Time Code",
+                        title: "Clarity OT Code",
                         values: $scope.overTimeArray
                     },
                     timeCodeT: {
@@ -723,7 +723,7 @@
                         value: ["OT1", "OT2", "OT3", "OS1", "OS2", "Standard"]
                     },
                     shiftCode: {
-                        title: "Shift Code",
+                        title: "Clarity Shift Code",
                         values: $scope.shiftCodeArray
                     },
                     Date: {
@@ -2867,7 +2867,7 @@
     }
 
     $scope.reviewSummary = function () {
-        var promise = generatePDF();
+        //var promise = generatePDF();
         $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Customer Signature"
     )
 
