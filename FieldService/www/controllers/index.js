@@ -606,7 +606,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                         } else if (item.Task_Status == "Working") {
 
-                            valueService.acceptTask(item.Task_Number, function (result) {
+                            valueService.startWorking(item.Task_Number, function (result) {
 
                                 updateStatus = {
                                     "activity_id": item.Activity_Id,
@@ -639,7 +639,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                                 //    i++;
                                 //});
                             });
-                            
+
                         }
 
                         promises.push(deferred.promise);
