@@ -393,34 +393,38 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                             encrypt: authorizationValue
                         };
 
-                        localService.insertUser(userObject);
+                        localService.insertUserList(userObject, function (response) {
 
-                        localService.getUser(function (response) {
+                            console.log("USER >>>>>>> " + response);
 
-                            console.log("USER =====> " + JSON.stringify(response));
+                            localService.getUser(function (response) {
 
-                            angular.forEach(response, function (item) {
+                                console.log("USER =====> " + JSON.stringify(response));
 
-                                if (item.Login_Status == "1") {
+                                angular.forEach(response, function (item) {
 
-                                    constantService.setUser(item);
+                                    if (item.Login_Status == "1") {
 
-                                    valueService.setUser(item);
+                                        constantService.setUser(item);
 
-                                    constantService.setLastUpdated(new Date(constantService.getUser().Last_Updated).getTime());
-                                }
+                                        valueService.setUser(item);
+
+                                        constantService.setLastUpdated(new Date(constantService.getUser().Last_Updated).getTime());
+                                    }
+                                });
+
+                                var data = {
+                                    "resourceId": constantService.getUser().OFSCId,
+                                    "date": moment(new Date()).utcOffset(constantService.getTimeZone()).format('YYYY-MM-DD')
+                                };
+
+                                ofscService.activate_resource(data, function (response) {
+
+                                });
+
+                                syncSubmit("0");
                             });
 
-                            var data = {
-                                "resourceId": constantService.getUser().OFSCId,
-                                "date": moment(new Date()).utcOffset(constantService.getTimeZone()).format('YYYY-MM-DD')
-                            };
-
-                            ofscService.activate_resource(data, function (response) {
-
-                            });
-
-                            syncSubmit("0");
                         });
                     });
 
