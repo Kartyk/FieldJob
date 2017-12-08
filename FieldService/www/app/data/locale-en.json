@@ -160,7 +160,7 @@
   "Serial Number": "serial number",
   "item name": "item name",
   "Max": "Max",
-  "Service Engineer Signature": "Service Engineer Signature",
+  "Service Representative Signature": "Service Representative Signature",
   "Clear": "Clear",
   "Next": "Next",
   "Engineer Name": "Engineer Name",
@@ -197,5 +197,6 @@
   "Customer Comments": "Customer Comments",
   "I acknowledge that services have been performed as indicated.": "I acknowledge that services have been performed as indicated.",
   "Clarity OT Code": "Clarity OT Code",
-  "Clarity Shift Code": "Clarity Shift Code"
+  "Clarity Shift Code": "Clarity Shift Code",
+  "Service Representative": "Service Representative"
 }

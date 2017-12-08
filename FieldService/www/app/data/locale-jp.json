@@ -171,7 +171,7 @@
   "Serial Number": "序列号",
   "item name": "产品名称",
   "Max": "最大",
-  "Service Engineer Signature": "工程师签字",
+  "Service Representative Signature": "Service Representative Signature",
   "Clear": "清除",
   "Next": "下一步",
   "Engineer Name": "工程师名字",
@@ -208,5 +208,6 @@
   "Customer Comments": "Customer Comments",
   "I acknowledge that services have been performed as indicated.": "I acknowledge that services have been performed as indicated.",
   "Clarity OT Code": "Clarity OT Code",
-  "Clarity Shift Code": "Clarity Shift Code"
+  "Clarity Shift Code": "Clarity Shift Code",
+  "Service Representative": "Service Representative"
 }
