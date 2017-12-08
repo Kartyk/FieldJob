@@ -608,14 +608,9 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                             valueService.startWorking(item.Task_Number, function (result) {
 
-                                updateStatus = {
-                                    "activity_id": item.Activity_Id,
-                                    "XA_TASK_STATUS": "3"
-                                };
+                                cloudService.OfscActions(item.Activity_Id, true, function (response) {
 
-                                ofscService.updateStatus(updateStatus, function (response) {
-
-                                    $rootScope.showAccept = false;
+                                    $rootScope.showWorkingBtn = false;
 
                                     deferred.resolve("success");
 
@@ -624,20 +619,8 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                                     }
 
                                     i++;
+
                                 });
-
-                                //cloudService.OfscActions(item.Activity_Id, true, function (res) {
-
-                                //    $rootScope.showAccept = false;
-
-                                //    deferred.resolve("success");
-
-                                //    if ((response.length - 1) == i) {
-                                //        deferAccept.resolve("Accept");
-                                //    }
-
-                                //    i++;
-                                //});
                             });
 
                         }
