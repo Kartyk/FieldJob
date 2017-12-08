@@ -264,18 +264,45 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
         $scope.items.splice(this.$index, 1);
     };
+
     $scope.startWork = function () {
+
         if ($scope.selectedTask.Task_Status == 'Accepted') {
 
             if (valueService.getNetworkStatus()) {
+
                 $rootScope.dbCall = true;
+
                 valueService.startWorking(valueService.getTask().Task_Number, function () {
 
                     $scope.selectedTask.Task_Status = "Working";
+
                     cloudService.OfscActions($scope.selectedTask.Activity_Id, true, function (response) {
 
                         $rootScope.showWorkingBtn = false;
+
                         $rootScope.dbCall = false;
+                    });
+                });
+
+            } else {
+
+                var taskObject = {
+                    Task_Status: "Working",
+                    Task_Number: valueService.getTask().Task_Number,
+                    Submit_Status: "A",
+                    Date: new Date()
+                };
+
+                localService.updateTaskSubmitStatus(taskObject, function (result) {
+
+                    localService.getTaskList(function (response) {
+
+                        constantService.setTaskList(response);
+
+                        $state.go($state.current, {}, {reload: true});
+
+                        $rootScope.showWorkingBtn = false;
                     });
                 });
             }

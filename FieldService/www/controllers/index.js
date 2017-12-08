@@ -581,36 +581,66 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                         var deferred = $q.defer();
 
-                        valueService.acceptTask(item.Task_Number, function (result) {
-                            updateStatus = {
-                                "activity_id": item.Activity_Id,
-                                "XA_TASK_STATUS": "3"
-                            };
+                        if (item.Task_Status == "Accepted") {
 
-                            ofscService.updateStatus(updateStatus, function (response) {
-                                $rootScope.showAccept = false;
+                            valueService.acceptTask(item.Task_Number, function (result) {
 
-                                deferred.resolve("success");
+                                updateStatus = {
+                                    "activity_id": item.Activity_Id,
+                                    "XA_TASK_STATUS": "3"
+                                };
 
-                                if ((response.length - 1) == i) {
-                                    deferAccept.resolve("Accept");
-                                }
+                                ofscService.updateStatus(updateStatus, function (response) {
 
-                                i++;
+                                    $rootScope.showAccept = false;
+
+                                    deferred.resolve("success");
+
+                                    if ((response.length - 1) == i) {
+                                        deferAccept.resolve("Accept");
+                                    }
+
+                                    i++;
+                                });
                             });
-                            //cloudService.OfscActions(item.Activity_Id, true, function (res) {
 
-                            //    $rootScope.showAccept = false;
+                        } else if (item.Task_Status == "Working") {
 
-                            //    deferred.resolve("success");
+                            valueService.acceptTask(item.Task_Number, function (result) {
 
-                            //    if ((response.length - 1) == i) {
-                            //        deferAccept.resolve("Accept");
-                            //    }
+                                updateStatus = {
+                                    "activity_id": item.Activity_Id,
+                                    "XA_TASK_STATUS": "3"
+                                };
 
-                            //    i++;
-                            //});
-                        });
+                                ofscService.updateStatus(updateStatus, function (response) {
+
+                                    $rootScope.showAccept = false;
+
+                                    deferred.resolve("success");
+
+                                    if ((response.length - 1) == i) {
+                                        deferAccept.resolve("Accept");
+                                    }
+
+                                    i++;
+                                });
+
+                                //cloudService.OfscActions(item.Activity_Id, true, function (res) {
+
+                                //    $rootScope.showAccept = false;
+
+                                //    deferred.resolve("success");
+
+                                //    if ((response.length - 1) == i) {
+                                //        deferAccept.resolve("Accept");
+                                //    }
+
+                                //    i++;
+                                //});
+                            });
+                            
+                        }
 
                         promises.push(deferred.promise);
                     });
