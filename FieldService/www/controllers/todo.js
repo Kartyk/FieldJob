@@ -125,6 +125,13 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
                         $rootScope.showWorkingBtn = false;
 
                         $rootScope.dbCall = false;
+
+                        localService.getTaskList(function (response) {
+
+                            constantService.setTaskList(response);
+
+                            $state.go($state.current, {}, { reload: true });
+                        });
                     });
                 });
 

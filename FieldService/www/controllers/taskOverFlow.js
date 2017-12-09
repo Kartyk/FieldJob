@@ -282,6 +282,20 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                         $rootScope.showWorkingBtn = false;
 
                         $rootScope.dbCall = false;
+
+                        var taskObject = {
+                            Task_Status: "Working",
+                            Task_Number: valueService.getTask().Task_Number,
+                            Submit_Status: "I",
+                            Date: new Date()
+                        };
+
+                        localService.getTaskList(function (response) {
+
+                            constantService.setTaskList(response);
+
+                            $state.go($state.current, {}, { reload: true });
+                        });
                     });
                 });
 
