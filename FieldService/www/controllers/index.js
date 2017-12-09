@@ -587,12 +587,14 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                                 updateStatus = {
                                     "activity_id": item.Activity_Id,
-                                    "XA_TASK_STATUS": "3"
+                                    "XA_TASK_STATUS": "8"
                                 };
 
                                 ofscService.updateStatus(updateStatus, function (res) {
 
                                     $rootScope.showAccept = false;
+
+                                    $rootScope.showWorkingBtn = true;
 
                                     deferred.resolve("success");
 

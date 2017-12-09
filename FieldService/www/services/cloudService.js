@@ -1065,7 +1065,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getChargeBackId()
+                    "oracle-mobile-backend-id": constantService.getExpenseBackEndId()
                 }
 
             }).success(function (response) {
@@ -1525,7 +1525,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getChargeBackId()
+                    "oracle-mobile-backend-id": "16807770-ff88-468b-a729-059fc92b32f7"
                 },
                 data: expenseData
 
@@ -1991,27 +1991,27 @@
 
                     if (isWork) {
 
-                        updateStatus = {
-                            "activity_id": activateId,
-                            "XA_TASK_STATUS": "11"
-                        };
-                        //SIT
                         //updateStatus = {
                         //    "activity_id": activateId,
-                        //    "XA_TASK_STATUS": "10"
+                        //    "XA_TASK_STATUS": "11"
                         //};
+                        //SIT
+                        updateStatus = {
+                            "activity_id": activateId,
+                            "XA_TASK_STATUS": "10"
+                        };
 
                     } else {
                         //SIT
-                        //updateStatus = {
-                        //    "activity_id": activateId,
-                        //    "XA_TASK_STATUS": "2"
-                        //};
-                        //DEV
                         updateStatus = {
                             "activity_id": activateId,
-                            "XA_TASK_STATUS": "3"
+                            "XA_TASK_STATUS": "2"
                         };
+                        //DEV
+                        //updateStatus = {
+                        //    "activity_id": activateId,
+                        //    "XA_TASK_STATUS": "3"
+                        //};
                     }
 
                     ofscService.updateStatus(updateStatus, function (response) {
@@ -2054,15 +2054,15 @@
 
                                                 console.log("completeActivityDate " + complete.date);
                                                 //DEV
-                                                var updateTaskSegement = {
-                                                    "activity_id": startActivityData.activity_id,
-                                                    "XA_TASK_STATUS": "3"
-                                                };
-                                                //SIT
                                                 //var updateTaskSegement = {
                                                 //    "activity_id": startActivityData.activity_id,
-                                                //    "XA_TASK_STATUS": "2"
+                                                //    "XA_TASK_STATUS": "3"
                                                 //};
+                                                //SIT
+                                                var updateTaskSegement = {
+                                                    "activity_id": startActivityData.activity_id,
+                                                    "XA_TASK_STATUS": "2"
+                                                };
 
                                                 console.log("updateTaskSegment " + JSON.stringify(updateTaskSegement));
 
