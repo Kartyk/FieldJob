@@ -1,4 +1,4 @@
-app.controller('todoController', function ($scope, $http, $state, $rootScope, cloudService, valueService, localService) {
+app.controller('todoController', function ($scope, $http, $state, $rootScope, cloudService, valueService, localService, ofscService, constantService) {
 
     $scope.myVar = false;
 
@@ -107,18 +107,45 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
     $scope.mapClicked = function () {
         $scope.mapIsClicked = !$scope.mapIsClicked;
     }
+
     $scope.startWork = function () {
+
         if ($scope.selectedTask.Task_Status == 'Accepted') {
 
             if (valueService.getNetworkStatus()) {
+
                 $rootScope.dbCall = true;
+
                 valueService.startWorking(valueService.getTask().Task_Number, function () {
 
                     $scope.selectedTask.Task_Status = "Working";
+
                     cloudService.OfscActions($scope.selectedTask.Activity_Id, true, function (response) {
 
                         $rootScope.showWorkingBtn = false;
+
                         $rootScope.dbCall = false;
+                    });
+                });
+
+            } else {
+
+                var taskObject = {
+                    Task_Status: "Working",
+                    Task_Number: valueService.getTask().Task_Number,
+                    Submit_Status: "A",
+                    Date: new Date()
+                };
+
+                localService.updateTaskSubmitStatus(taskObject, function (result) {
+
+                    localService.getTaskList(function (response) {
+
+                        constantService.setTaskList(response);
+
+                        $state.go($state.current, {}, { reload: true });
+
+                        $rootScope.showWorkingBtn = false;
                     });
                 });
             }
@@ -151,6 +178,7 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
                     //};
 
                     ofscService.updateStatus(updateStatus, function (response) {
+
                         $rootScope.showAccept = false;
                         $rootScope.showWorkingBtn = true;
                         $rootScope.dbCall = false;
@@ -160,7 +188,7 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
 
                         constantService.setTaskList(response);
 
-                        $state.go($state.current, {}, {reload: true});
+                        $state.go($state.current, {}, { reload: true });
                     });
                 });
 
@@ -179,7 +207,7 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
 
                         constantService.setTaskList(response);
 
-                        $state.go($state.current, {}, {reload: true});
+                        $state.go($state.current, {}, { reload: true });
                     });
                 });
             }
