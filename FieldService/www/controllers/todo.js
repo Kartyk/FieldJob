@@ -110,6 +110,8 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
 
     $scope.startWork = function () {
 
+
+
         if ($scope.selectedTask.Task_Status == 'Accepted') {
 
             if (valueService.getNetworkStatus()) {
@@ -182,9 +184,9 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
 
                             constantService.setTaskList(response);
 
-                            $state.go($state.current, {}, { reload: true });
-
                             $rootScope.showWorkingBtn = false;
+
+                            $state.go($state.current, {}, { reload: true });
 
                         });
                     });
@@ -279,6 +281,12 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
                             });
 
                             constantService.setTaskList(response);
+
+                            $rootScope.showAccept = false;
+
+                            $rootScope.showWorkingBtn = true;
+
+                            $scope.selectedTask.Task_Status = "Accepted";
 
                             $state.go($state.current, {}, { reload: true });
 

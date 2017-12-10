@@ -271,7 +271,7 @@ app.controller('myTaskController', function ($translate, $scope, $compile, $time
                     var endDateTime = moment(item.End_Date).format("YYYY-MM-DDTHH:mm:ss");
                     // var endDateTime = endDate[0] + "T" + endDate[1];
 
-                    var customerInfo = item.Job_Description + "\n" + item.Customer_Name + "\n" + item.Address1 + "\n" + item.Contact_Name + "\n" + item.Work_Phone_Number + "\n" + item.Mobile_Phone_Number;
+                    var customerInfo = item.Task_Number + "\n" + item.Job_Description + "\n" + item.Customer_Name + "\n" + item.Contact_Name + "\n" + item.Work_Phone_Number + "\n" + item.Mobile_Phone_Number;
 
                     //  if (item.Task_Status == 'Accepted' || item.Task_Status == 'Assigned'||) {
                     eventsArray.push({

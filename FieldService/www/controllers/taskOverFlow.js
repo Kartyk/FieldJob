@@ -346,9 +346,9 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                             constantService.setTaskList(response);
 
-                            $state.go($state.current, {}, { reload: true });
-
                             $rootScope.showWorkingBtn = false;
+
+                            $state.go($state.current, {}, { reload: true });
 
                         });
                     });
@@ -443,8 +443,14 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                             constantService.setTaskList(response);
 
+                            $rootScope.showAccept = false;
+
+                            $rootScope.showWorkingBtn = true;
+
+                            $scope.selectedTask.Task_Status = "Accepted";
+
                             $state.go($state.current, {}, { reload: true });
-                            
+
                         });
                     });
                 });

@@ -2,7 +2,7 @@
     <div class="margintop30" ng-repeat="item in notesArray track by $index" id="note{{$index}}">
         
             <div class="card-childContainer  noBorder-radius" ng-class="{'newItemBorder': $index == addNoteObj && $index != 0,'copyItem': $index == copyNoteObj && $index != 0}">
-                <form class="form-horizontal row input-items" action="/action_page.php" form-on-change="formChange()">
+                <form class="form-horizontal row input-items" action="/action_page.php" form-on-change="formChange()" name="notesForm">
 
 
                     <div class="row" style="padding-left:15px;padding-right:15px;">
@@ -54,7 +54,10 @@
 
 
                             <textarea  class="form-control note-textarea-NC" style="height:40px;max-height:150px" id="justification"
-                                      ng-model="item.Notes"></textarea>
+                                      ng-model="item.Notes" ng-maxlength="255" name="notesComment"></textarea>
+                            <div style="color:red;text-transform:none" ng-show="notesForm.notesComment.$error.maxlength">
+                                Maximum allowed characters are 255
+                            </div>
 
                         </div>
 

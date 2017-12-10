@@ -154,7 +154,10 @@
                                             <div class="form-group noMarginPadding">
                                                 <label class="control-label marginbottom12 material-label" translate="{{item.materialDefault.serialIn.title}}"></label>
                                                 <input class="inputFieldsMaterial" id="SerialIn"
-                                                       ng-model="serial.in" name="ChargeType"></input>
+                                                       ng-model="serial.in" name="serialIn" ng-maxlength="30"></input>
+                                                <div style="color:red;text-transform:none" ng-show="materialForm.serialIn.$error.maxlength">
+                                                    Maximum allowed characters are 30
+                                                </div>
                                             </div>
                                         </div>
 
@@ -162,7 +165,10 @@
                                             <div class="form-group noMarginPadding">
                                                 <label class="control-label marginbottom12 material-label" translate="{{item.materialDefault.serialOut.title}}"></label>
                                                 <input class="inputFieldsMaterial" id="SerialOut"
-                                                       ng-model="serial.out" name="SerialNumber"></input>
+                                                       ng-model="serial.out" name="SerialNumber" ng-maxlength="30"></input>
+                                                <div style="color:red;text-transform:none" ng-show="materialForm.SerialNumber.$error.maxlength">
+                                                    Maximum allowed characters are 30
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -174,7 +180,10 @@
                                             <div class="form-group noMarginPadding" >
                                                 <label class="control-label marginbottom12 material-label" translate="{{item.materialDefault.serialNo.title}}"></label>
                                                 <input class="inputFieldsMaterial" id="SerialNo"
-                                                       ng-model="serial.number" name="SerialNo"></input>
+                                                       ng-model="serial.number" name="SerialNo" ng-maxlength="30"></input>
+                                                <span style="color:red;text-transform:none" ng-show="materialForm.SerialNo.$error.maxlength">
+                                                    Maximum allowed characters are 30
+                                                </span>
                                             </div>
                                        
                                        
