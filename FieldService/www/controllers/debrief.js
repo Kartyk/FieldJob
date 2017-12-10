@@ -3040,10 +3040,13 @@
     $scope.ChangeText = function () {
 
         $rootScope.customersignature = '';
+       
 
         if ($scope.engineerObject.isCustomerSignChecked) {
             $scope.customerCommentText = "Customer Comments";
         } else {
+
+            $scope.debriefClear();
             $scope.customerText = "Customer Signature";
         }
     };
