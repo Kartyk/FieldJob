@@ -128,9 +128,26 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
 
                         localService.getTaskList(function (response) {
 
-                            constantService.setTaskList(response);
+                            localService.getInternalList(function (internalresponse) {
 
-                            $state.go($state.current, {}, { reload: true });
+                                angular.forEach(internalresponse, function (item) {
+
+                                    var internalOFSCJSONObject = {};
+
+                                    internalOFSCJSONObject.Start_Date = item.Start_time;
+                                    internalOFSCJSONObject.End_Date = item.End_time;
+                                    internalOFSCJSONObject.Type = "INTERNAL";
+                                    internalOFSCJSONObject.Customer_Name = item.Activity_type;
+                                    internalOFSCJSONObject.Task_Number = item.Activity_Id;
+
+                                    response.push(internalOFSCJSONObject);
+                                });
+
+                                constantService.setTaskList(response);
+
+                                $state.go($state.current, {}, { reload: true });
+
+                            });
                         });
                     });
                 });
@@ -148,11 +165,28 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
 
                     localService.getTaskList(function (response) {
 
-                        constantService.setTaskList(response);
+                        localService.getInternalList(function (internalresponse) {
 
-                        $state.go($state.current, {}, { reload: true });
+                            angular.forEach(internalresponse, function (item) {
 
-                        $rootScope.showWorkingBtn = false;
+                                var internalOFSCJSONObject = {};
+
+                                internalOFSCJSONObject.Start_Date = item.Start_time;
+                                internalOFSCJSONObject.End_Date = item.End_time;
+                                internalOFSCJSONObject.Type = "INTERNAL";
+                                internalOFSCJSONObject.Customer_Name = item.Activity_type;
+                                internalOFSCJSONObject.Task_Number = item.Activity_Id;
+
+                                response.push(internalOFSCJSONObject);
+                            });
+
+                            constantService.setTaskList(response);
+
+                            $state.go($state.current, {}, { reload: true });
+
+                            $rootScope.showWorkingBtn = false;
+
+                        });
                     });
                 });
             }
@@ -193,9 +227,26 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
 
                     localService.getTaskList(function (response) {
 
-                        constantService.setTaskList(response);
+                        localService.getInternalList(function (internalresponse) {
 
-                        $state.go($state.current, {}, { reload: true });
+                            angular.forEach(internalresponse, function (item) {
+
+                                var internalOFSCJSONObject = {};
+
+                                internalOFSCJSONObject.Start_Date = item.Start_time;
+                                internalOFSCJSONObject.End_Date = item.End_time;
+                                internalOFSCJSONObject.Type = "INTERNAL";
+                                internalOFSCJSONObject.Customer_Name = item.Activity_type;
+                                internalOFSCJSONObject.Task_Number = item.Activity_Id;
+
+                                response.push(internalOFSCJSONObject);
+                            });
+
+                            constantService.setTaskList(response);
+
+                            $state.go($state.current, {}, { reload: true });
+
+                        });
                     });
                 });
 
@@ -212,9 +263,26 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
 
                     localService.getTaskList(function (response) {
 
-                        constantService.setTaskList(response);
+                        localService.getInternalList(function (internalresponse) {
 
-                        $state.go($state.current, {}, { reload: true });
+                            angular.forEach(internalresponse, function (item) {
+
+                                var internalOFSCJSONObject = {};
+
+                                internalOFSCJSONObject.Start_Date = item.Start_time;
+                                internalOFSCJSONObject.End_Date = item.End_time;
+                                internalOFSCJSONObject.Type = "INTERNAL";
+                                internalOFSCJSONObject.Customer_Name = item.Activity_type;
+                                internalOFSCJSONObject.Task_Number = item.Activity_Id;
+
+                                response.push(internalOFSCJSONObject);
+                            });
+
+                            constantService.setTaskList(response);
+
+                            $state.go($state.current, {}, { reload: true });
+
+                        });
                     });
                 });
             }

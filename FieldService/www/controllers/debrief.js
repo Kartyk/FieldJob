@@ -802,7 +802,7 @@
                 if (item != null && item != undefined) {
 
                     var newTimeObj = {
-                        Time_Id: $scope.taskId + "" + ($scope.timeArraySummary.length + 1),
+                        Time_Id: item.Time_Id,
                         Field_Job_Name: item.Field_Job_Name,
                         Field_Job_Name_Id: item.Field_Job_Name_Id,
                         Charge_Type: item.Charge_Type,
@@ -826,6 +826,10 @@
                         Comments: item.Comments,
                         Task_Number: $scope.taskId
                     };
+
+                    if (newTimeObj.Time_Id == undefined || newTimeObj.Time_Id == null) {
+                        newTimeObj.Time_Id = $scope.taskId + "" + ($scope.timeArraySummary.length + 1);
+                    } 
 
                     if ($scope.editTimeIndex == -1) {
 
@@ -900,7 +904,7 @@
                 if (item != undefined && item != null) {
 
                     var newObject = {
-                        Expense_Id: $scope.taskId + "" + ($scope.expenseArraySummary.length + 1),
+                        Expense_Id: item.Expense_Id,
                         Date: item.Date,
                         Expense_Type: item.Expense_Type,
                         Expense_Type_Id: item.Expense_Type_Id,
@@ -912,6 +916,10 @@
                         Justification: item.Justification,
                         Task_Number: $scope.taskId
                     };
+
+                    if (newObject.Expense_Id == undefined || newObject.Expense_Id == null) {
+                        newObject.Expense_Id = $scope.taskId + "" + ($scope.expenseArraySummary.length + 1);
+                    }
 
                     if ($scope.editExpenseIndex == -1) {
 
@@ -972,7 +980,7 @@
                 if (item != undefined && item != null) {
 
                     var newobj = {
-                        Notes_Id: $scope.taskId + "" + ($scope.notesArraySummary.length + 1),
+                        Notes_Id: item.Notes_Id,
                         Note_Type: item.Note_Type,
                         Note_Type_Id: item.Note_Type_Id,
                         Date: item.Date,
@@ -980,6 +988,10 @@
                         Notes: item.Notes,
                         Task_Number: $scope.taskId
                     };
+
+                    if (newobj.Notes_Id == undefined || newobj.Notes_Id == null) {
+                        newobj.Notes_Id = $scope.taskId + "" + ($scope.notesArraySummary.length + 1);
+                    }
 
                     if ($scope.editNoteIndex == -1) {
 
@@ -1051,7 +1063,7 @@
                 if (item != undefined && item != null) {
 
                     var newobj = {
-                        Material_Id: $scope.taskId + "" + ($scope.materialArraySummary.length + 1),
+                        Material_Id: item.Material_Id,
                         Charge_Type: item.Charge_Type,
                         Charge_Type_Id: item.Charge_Type_Id,
                         Description: item.Description,
@@ -1063,6 +1075,10 @@
                         Task_Number: $scope.taskId,
                         ItemName: item.ItemName
                     };
+
+                    if (newobj.Material_Id == undefined || newobj.Material_Id == null) {
+                        newobj.Material_Id = $scope.taskId + "" + ($scope.materialArraySummary.length + 1);
+                    }
 
                     if ($scope.editMaterialIndex == -1) {
 
