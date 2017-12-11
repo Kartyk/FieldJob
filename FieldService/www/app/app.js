@@ -628,6 +628,44 @@ app.directive("formOnChange", function ($parse) {
     }
 });
 
+app.directive('numbersOnly', function () {
+    return {
+        require: 'ngModel',
+        link: function (scope, element, attr, ngModelCtrl) {
+            function fromUser(text) {
+                if (text) {
+                    var transformedInput = text.replace(/[^0-9]/g, '');
+
+                    if (transformedInput !== text) {
+                        ngModelCtrl.$setViewValue(transformedInput);
+                        ngModelCtrl.$render();
+                    }
+                    return transformedInput;
+                }
+                return undefined;
+            }
+            ngModelCtrl.$parsers.push(fromUser);
+        }
+    };
+});
+
+app.directive('maxInput', function ($parse) {
+    return {
+        scope: {
+            inputMaxLength: '='
+        },
+        link: function (scope, elm, attrs) {
+
+            elm.bind('keypress', function (e) {
+
+                if (elm[0].value.length >= scope.inputMaxLength) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+        }
+    }
+});
 app.config(['$httpProvider', function ($httpProvider) {
 
     if (!$httpProvider.defaults.headers.get) {

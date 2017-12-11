@@ -109,6 +109,7 @@ app.controller('myTaskController', function ($translate, $scope, $compile, $time
                         $rootScope.showAccept = true;
                         $scope.showDebriefBtn = false;
                         $rootScope.showWorkingBtn = false;
+                       
                         $state.go('taskOverFlow');
 
                     } else if (event.Task_Status == 'Working'){// else if (event.Task_Status == 'Accepted') {
@@ -117,7 +118,8 @@ app.controller('myTaskController', function ($translate, $scope, $compile, $time
                         $scope.showDebriefBtn = true;
                         $rootScope.showAccept = false;
                         $rootScope.showWorkingBtn = false;
-
+                        $scope.notFutureDate = valueService.checkIfFutureDayTask(event);
+                        valueService.setIfFutureDateTask($scope.notFutureDate);
                         $state.go('taskOverFlow');
 
                     } else if (event.Task_Status == 'Accepted') {
@@ -125,6 +127,8 @@ app.controller('myTaskController', function ($translate, $scope, $compile, $time
                         $scope.showDebriefBtn = false;
                         $rootScope.showWorkingBtn = true;
                         $rootScope.showAccept = false;
+                        $scope.notFutureDate = valueService.checkIfFutureDayTask(event);
+                        valueService.setIfFutureDateTask($scope.notFutureDate);
                         $state.go('taskOverFlow');
                     }
                     else if (event.Type == 'INTERNAL') {
