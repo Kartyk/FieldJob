@@ -610,7 +610,7 @@
         });
     }
 
-    $scope.editTimeIndex = -1;
+    $scope.isEditTime = "0";
     $scope.editMaterialIndex = -1;
     $scope.editExpenseIndex = -1;
     $scope.editNoteIndex = -1;
@@ -691,12 +691,6 @@
 
                 $scope.timeArray[0] = Object.create(item);
 
-                // console.log("EDIT ID" + item.Time_Id);
-                //
-                // // setTimeValues(item);
-                //
-                // $scope.editTimeIndex = item.Time_Id;
-
                 angular.forEach($scope.timeArraySummary, function (response) {
 
                     console.log("EDIT " + JSON.stringify(response));
@@ -740,8 +734,6 @@
     };
 
     $scope.saveObject = function (stage, isButtonClick, item) {
-
-        var durationValue, duration, durationHours, durationMinutes;
 
         switch (stage) {
 
@@ -794,6 +786,11 @@
 
                     setDefaultTimeObject();
                 }
+
+                angular.forEach($scope.timeArraySummary, function (response) {
+
+                    console.log("SAVE " + JSON.stringify(response));
+                });
 
                 break;
 
@@ -855,10 +852,6 @@
                 angular.forEach($scope.timeArraySummary, function (response) {
 
                     console.log("ADD " + JSON.stringify(response));
-                    console.log("ADD " + response.DurationValue);
-                    console.log("ADD " + response.Duration);
-                    console.log("ADD " + response.DurationHours);
-                    console.log("ADD " + response.DurationMinutes);
                 });
 
                 break;
@@ -1095,8 +1088,6 @@
                     };
 
                     $scope.timeArraySummary.reverse();
-
-                    console.log("COPY ID " + newTimeObject.Time_Id);
 
                     $scope.timeArraySummary.push(newTimeObject);
 
