@@ -615,19 +615,87 @@
     $scope.editExpenseIndex = -1;
     $scope.editNoteIndex = -1;
 
+    function setDefaultTimeObject() {
+
+        var durationValue, duration, durationHours, durationMinutes;
+
+        if (valueService.getUserType().duration) {
+
+            var hours = parseInt(moment(valueService.getUserType().duration, 'HH').format('HH:mm').split(":")[0]);
+
+            var minutes = parseInt(moment(valueService.getUserType().duration, 'HH').format('HH:mm').split(":")[1]);
+
+            durationValue = new Date();
+
+            durationValue.setHours(hours);
+            durationValue.setMinutes(minutes);
+            durationValue.setSeconds(0);
+
+            duration = hours + ":" + minutes;
+            durationHours = hours;
+            durationMinutes = minutes;
+
+        } else {
+
+            durationValue = new Date();
+
+            durationValue.setHours(8);
+            durationValue.setMinutes(0);
+            durationValue.setSeconds(0);
+
+            duration = "08:00";
+            durationHours = 8;
+            durationMinutes = 0;
+        }
+
+        var timeObject = {
+            Time_Id: "",
+            timeDefault: timeDefault,
+            Field_Job_Name: "",
+            Field_Job_Name_Id: "",
+            Charge_Type: "",
+            Charge_Type_Id: "",
+            Charge_Method: $scope.taskObject.Labor_Method,
+            Charge_Method_Id: "",
+            Work_Type: "",
+            Work_Type_Id: "",
+            Item: "",
+            Item_Id: "",
+            Description: "",
+            Time_Code: "",
+            Time_Code_Id: "",
+            Shift_Code: "",
+            Shift_Code_Id: "",
+            Date: new Date(),
+            DurationValue: durationValue,
+            Duration: duration,
+            DurationHours: durationHours,
+            DurationMinutes: durationMinutes,
+            mins: 0,
+            Comments: "",
+            Task_Number: $scope.taskId
+        };
+
+        $scope.timeArray = [];
+
+        $scope.timeArray.push(timeObject);
+    }
+
     $scope.editObject = function (item, stage, index) {
 
         switch (stage) {
 
             case "Time":
 
-                setTimeValues(item);
-
-                console.log("EDIT ID" + item.Time_Id);
+                $scope.isEditTime = "1";
 
                 $scope.timeArray[0] = Object.create(item);
 
-                $scope.editTimeIndex = index;
+                // console.log("EDIT ID" + item.Time_Id);
+                //
+                // // setTimeValues(item);
+                //
+                // $scope.editTimeIndex = item.Time_Id;
 
                 angular.forEach($scope.timeArraySummary, function (response) {
 
@@ -671,7 +739,7 @@
         }
     };
 
-    $scope.addObject = function (stage, isButtonClick, item) {
+    $scope.saveObject = function (stage, isButtonClick, item) {
 
         var durationValue, duration, durationHours, durationMinutes;
 
@@ -679,77 +747,11 @@
 
             case "Time":
 
-                if (valueService.getUserType().duration) {
-
-                    var hours = parseInt(moment(valueService.getUserType().duration, 'HH').format('HH:mm').split(":")[0]);
-
-                    var minutes = parseInt(moment(valueService.getUserType().duration, 'HH').format('HH:mm').split(":")[1]);
-
-                    durationValue = new Date(0, 0, 0, hours, minutes, 0);
-
-                    duration = hours + ":" + minutes;
-                    durationHours = moment.duration(durationValue).hours();
-                    durationMinutes = moment.duration(durationValue).minutes();
-
-                } else {
-
-                    durationValue = new Date(0, 0, 0, 8, 0, 0);
-
-                    duration = "08:00";
-                    durationHours = 8;
-                    durationMinutes = 0;
-                }
-
-                var timeObject = {
-                    timeDefault: timeDefault,
-                    Time_Id: $scope.taskId + "" + ($scope.timeArraySummary.length + 1),
-                    Field_Job_Name: "",
-                    Field_Job_Name_Id: "",
-                    Charge_Type: "",
-                    Charge_Type_Id: "",
-                    Charge_Method: $scope.taskObject.Labor_Method,
-                    Charge_Method_Id: "",
-                    Work_Type: "",
-                    Work_Type_Id: "",
-                    Item: "",
-                    Item_Id: "",
-                    Description: "",
-                    Time_Code: "",
-                    Time_Code_Id: "",
-                    Shift_Code: "",
-                    Shift_Code_Id: "",
-                    Date: new Date(),
-                    DurationValue: durationValue,
-                    Duration: duration,
-                    DurationHours: durationHours,
-                    DurationMinutes: durationMinutes,
-                    mins: 0,
-                    Comments: "",
-                    Task_Number: $scope.taskId
-                };
-
-                angular.forEach(timeDefault.chargeMethod.values, function (key, value) {
-
-                    if (key.Value == $scope.taskObject.Labor_Method) {
-
-                        timeObject.Charge_Method = key;
-                        timeObject.Charge_Method_Id = key.ID;
-                    }
-                });
-
-                if ($scope.timeArray.length == 0) {
-                    console.log("ADD IF ID" + timeObject.Time_Id);
-                    $scope.timeArray.push(timeObject);
-                } else {
-                    console.log("ADD ELSE ID" + timeObject.Time_Id);
-                    $scope.timeArray[0] = timeObject;
-                }
-
-
                 if (item != null && item != undefined) {
 
                     var newTimeObject = {
                         Time_Id: item.Time_Id,
+                        timeDefault: timeDefault,
                         Field_Job_Name: item.Field_Job_Name,
                         Field_Job_Name_Id: item.Field_Job_Name_Id,
                         Charge_Type: item.Charge_Type,
@@ -775,33 +777,88 @@
                         Task_Number: $scope.taskId
                     };
 
-                    if (newTimeObject.Time_Id == undefined || newTimeObject.Time_Id == null) {
-                        newTimeObject.Time_Id = $scope.taskId + "" + ($scope.timeArraySummary.length + 1);
-                    } 
+                    $scope.tempTimeArray = [];
 
-                    if ($scope.editTimeIndex == -1) {
+                    angular.forEach($scope.timeArraySummary, function (timeObject) {
 
-                        console.log("ADD EDIT IF ID" + newTimeObject.Time_Id);
+                        if(item.Time_Id == timeObject.Time_Id) {
+                            timeObject = newTimeObject;
+                        }
 
-                        $scope.timeArraySummary.reverse();
+                        $scope.tempTimeArray.push(timeObject);
+                    });
 
-                        $scope.timeArraySummary.push(newTimeObject);
+                    $scope.timeArraySummary = $scope.tempTimeArray;
 
-                        $scope.timeArraySummary.reverse();
+                    $scope.isEditTime = "0";
 
-                    } else {
+                    setDefaultTimeObject();
+                }
 
-                        console.log("ADD EDIT ELSE ID" + newTimeObject.Time_Id);
+                break;
 
-                        $scope.timeArraySummary[$scope.editTimeIndex] = newTimeObject;
+            default:
+                break;
+        }
 
-                        $scope.editTimeIndex = -1;
-                    }
+        if (isButtonClick)
+            valueService.setDebriefChanged(true);
+    };
+
+    $scope.addObject = function (stage, isButtonClick, item) {
+
+        switch (stage) {
+
+            case "Time":
+
+                if (item != null && item != undefined) {
+
+                    var newTimeObject = {
+                        Time_Id: $scope.taskId + "" + ($scope.timeArraySummary.length + 1),
+                        timeDefault: timeDefault,
+                        Field_Job_Name: item.Field_Job_Name,
+                        Field_Job_Name_Id: item.Field_Job_Name_Id,
+                        Charge_Type: item.Charge_Type,
+                        Charge_Type_Id: item.Charge_Type_Id,
+                        Charge_Method: item.Charge_Method,
+                        Charge_Method_Id: item.Charge_Method_Id,
+                        Work_Type: item.Work_Type,
+                        Work_Type_Id: item.Work_Type_Id,
+                        Item: item.Item,
+                        Item_Id: item.Item_Id,
+                        Description: "",
+                        Time_Code: item.Time_Code,
+                        Time_Code_Id: item.Time_Code_Id,
+                        Shift_Code: item.Shift_Code,
+                        Shift_Code_Id: item.Shift_Code_Id,
+                        Date: item.Date,
+                        DurationValue: item.DurationValue,
+                        Duration: item.Duration,
+                        DurationHours: item.DurationHours,
+                        DurationMinutes: item.DurationMinutes,
+                        mins: 0,
+                        Comments: item.Comments,
+                        Task_Number: $scope.taskId
+                    };
+
+                    $scope.timeArraySummary.reverse();
+
+                    $scope.timeArraySummary.push(newTimeObject);
+
+                    $scope.timeArraySummary.reverse();
+
+                    $scope.isEditTime = "0";
+
+                    setDefaultTimeObject();
                 }
 
                 angular.forEach($scope.timeArraySummary, function (response) {
 
                     console.log("ADD " + JSON.stringify(response));
+                    console.log("ADD " + response.DurationValue);
+                    console.log("ADD " + response.Duration);
+                    console.log("ADD " + response.DurationHours);
+                    console.log("ADD " + response.DurationMinutes);
                 });
 
                 break;
@@ -1007,16 +1064,11 @@
 
             case "Time":
 
-                // $scope.editTimeIndex = -1;
-
                 if (item != null && item != undefined) {
 
-                    $scope.timeArraySummary.reverse();
-
-                    console.log("COPY ID" + $scope.taskId + "" + ($scope.timeArraySummary.length + 1));
-
-                    $scope.timeArraySummary.push({
+                    var newTimeObject = {
                         Time_Id: $scope.taskId + "" + ($scope.timeArraySummary.length + 1),
+                        timeDefault: timeDefault,
                         Field_Job_Name: item.Field_Job_Name,
                         Field_Job_Name_Id: item.Field_Job_Name_Id,
                         Charge_Type: item.Charge_Type,
@@ -1040,9 +1092,19 @@
                         mins: 0,
                         Comments: item.Comments,
                         Task_Number: $scope.taskId
-                    });
+                    };
 
                     $scope.timeArraySummary.reverse();
+
+                    console.log("COPY ID " + newTimeObject.Time_Id);
+
+                    $scope.timeArraySummary.push(newTimeObject);
+
+                    $scope.timeArraySummary.reverse();
+
+                    // $scope.isEditTime = "0";
+                    //
+                    // setDefaultTimeObject();
                 }
 
                 angular.forEach($scope.timeArraySummary, function (response) {
@@ -1155,10 +1217,20 @@
                     }
                 }
 
+                $scope.timeArraySummary.reverse();
+
+                var i = 1;
+
                 angular.forEach($scope.timeArraySummary, function (response) {
+
+                    response.Time_Id = $scope.taskId + "" + i;
+
+                    i++;
 
                     console.log("DELETE " + JSON.stringify(response));
                 });
+
+                $scope.timeArraySummary.reverse();
 
                 break;
 
@@ -1381,6 +1453,8 @@
 
     $rootScope.saveValues = function () {
 
+        console.log("LENGTH " + $scope.timeArraySummary.length);
+
         $scope.saveValues();
 
         valueService.saveValues();
@@ -1566,7 +1640,11 @@
 
             if ($scope.timeArray.length == 0) {
 
-                $scope.addObject(stage.title, false);
+                // $scope.addObject(stage.title, false);
+
+                $scope.isEditTime = "0";
+
+                setDefaultTimeObject();
 
                 if (timeDefault.chargeMethod.values != undefined && timeDefault.chargeMethod.values.length > 0) {
 
@@ -1755,7 +1833,7 @@
 
                 var subTotalTimeArray = [];
 
-                angular.forEach($scope.timeArray[0].timeDefault.timeCode.values, function (timecode, value) {
+                angular.forEach(timeDefault.timeCode.values, function (timecode, value) {
 
                     var codeobj = {};
 
@@ -1818,7 +1896,7 @@
 
                             subTotalTimeArray = [];
 
-                            angular.forEach($scope.timeArray[0].timeDefault.timeCode.values, function (timecode, value) {
+                            angular.forEach(timeDefault.timeCode.values, function (timecode, value) {
 
                                 var codeobj = {};
 
@@ -1898,7 +1976,7 @@
 
                     //var timecodearray = [];
 
-                    //angular.forEach($scope.timeArray[0].timeDefault.timeCode.values, function (timecode, value) {
+                    //angular.forEach(timeDefault.timeCode.values, function (timecode, value) {
 
                     //    var codeobj = {};
 
@@ -2655,9 +2733,7 @@
 
     $scope.setDurationHours = function (item) {
 
-        console.log("DURATION ===== > " + item.DurationValue);
-
-        // new Date(1970, 0, 1, 14, 57, 0);
+        console.log("DURATION ===== > " + JSON.stringify(item));
 
         var getHours = new Date(item.DurationValue).getHours();
 
@@ -3234,7 +3310,7 @@
 
                     if ($scope.userType == 'C') {
 
-                        //angular.forEach($scope.timeArray[0].timeDefault.timeCode.values, function (timecodeKey, value) {
+                        //angular.forEach(timeDefault.timeCode.values, function (timecodeKey, value) {
 
                         //    xTimeField1 = xTimeField1 + 50;
 
@@ -3301,7 +3377,7 @@
 
                         if ($scope.userType == 'C') {
 
-                            //angular.forEach($scope.timeArray[0].timeDefault.timeCode.values, function (timecodeKey, value) {
+                            //angular.forEach(timeDefault.timeCode.values, function (timecodeKey, value) {
 
                             //    angular.forEach($scope.summary.timeArray[j - 1].timecode, function (key, value) {
 
