@@ -103,7 +103,7 @@
                                 <div class="col-sm-12 col-md-12 col-lg-12 noMarginPadding">
                                     <div class="form-group noMarginPadding">
                                         <label class="control-label  marginbottom12 material-label" translate="item name"></label><span style="color:red">*</span>
-                                        <input type="text" ng-required="true" name="itemname" class=" inputFieldsMaterial" ng-model="item.ItemName" style="margin-bottom:0px"/>
+                                        <input type="text" ng-required="true" name="itemname" class=" inputFieldsMaterial" ng-model="item.ItemName" max-input style="margin-bottom:0px" input-max-length='20'/>
                                         <div style="color:red;text-transform:none" ng-show="materialForm.itemname.$error.required">
                                             Please enter item name
                                         </div>
@@ -154,7 +154,7 @@
                                             <div class="form-group noMarginPadding">
                                                 <label class="control-label marginbottom12 material-label" translate="{{item.materialDefault.serialIn.title}}"></label>
                                                 <input class="inputFieldsMaterial" id="SerialIn"
-                                                       ng-model="serial.in" name="serialIn" ></input>
+                                                       max-input ng-model="serial.in" name="serialIn" input-max-length='30'></input>
                                                 
                                             </div>
                                         </div>
@@ -163,7 +163,7 @@
                                             <div class="form-group noMarginPadding">
                                                 <label class="control-label marginbottom12 material-label" translate="{{item.materialDefault.serialOut.title}}"></label>
                                                 <input class="inputFieldsMaterial" id="SerialOut"
-                                                       ng-model="serial.out" name="SerialNumber" ></input>
+                                                       max-input ng-model="serial.out" name="SerialNumber" input-max-length='30'></input>
                                                 
                                             </div>
                                         </div>
@@ -176,7 +176,7 @@
                                             <div class="form-group noMarginPadding" >
                                                 <label class="control-label marginbottom12 material-label" translate="{{item.materialDefault.serialNo.title}}"></label>
                                                 <input class="inputFieldsMaterial" id="SerialNo"
-                                                       ng-model="serial.number" name="SerialNo"></input>
+                                                       max-input ng-model="serial.number" name="SerialNo" input-max-length='30'></input>
                                                 
                                             </div>
                                        

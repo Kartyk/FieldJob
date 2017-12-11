@@ -2956,7 +2956,7 @@
 
         setTimeout(function () {
 
-            if (valueService.getLanguage() == 'ch') {
+            if (valueService.getTask().Country == "People's Republic of China") {
 
                 var canvas = document.getElementById('canvas');
 

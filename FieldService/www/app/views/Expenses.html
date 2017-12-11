@@ -76,7 +76,7 @@
                             <div flex="100" style="max-width:24%;">
                                 <label flex="100" class="label-my" for="justification" translate="{{item.expenseDefault.justification.title}}"></label>
                                 <textarea class="form-control note-textarea-NC" style="height:40px;max-height:150px" rows="5" id="justification"
-                                          ng-model="item.Justification"></textarea>
+                                          max-input ng-model="item.Justification" input-max-length='255' ></textarea>
                             </div>
 
                         </div>
