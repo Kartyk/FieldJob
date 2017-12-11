@@ -97,6 +97,7 @@
                                style="text-align: left;">-</label>
                         <div flex="100">
                             <p class="input-group">
+
                                 <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
                                        ng-model="item.Date" is-open="item.calendarOpened"
                                        datepicker-options="dateOptions" ng-required="true" close-text="Close"
@@ -116,7 +117,13 @@
                     <div flex="20" class="debrief-items">
                         <label flex="100" class="  label-my" translate="{{item.timeDefault.duration.title}}"></label><span style="color:red">*</span>
                         <div flex="100">
-                            <input type="text" class="form-control" date-format ng-model="item.Duration" name="duration" ng-required="true" ng-change="setDurationHours(item)" ng-blur="checkDuration(item)" />
+                            <!--<input type="text" class="form-control" date-format ng-model="item.Duration" name="duration"-->
+                                   <!--ng-required="true" ng-change="setDurationHours(item)" ng-blur="checkDuration(item)"/>-->
+
+                            <input type="time" name="time" class="form-control" ng-model="item.Duration"
+                                   ng-required="true" close-text="Close"
+                                   pattern="^([0-1]?[0-9]|2[0-4]):([0-5][0-9])?$"
+                            />
 
                         </div>
                         <span style="color:red" ng-show="timeform.duration.$error.required">
@@ -165,8 +172,8 @@
                     <th class=" noborder padding-right" ng-if="userType=='C'"><span translate="Charge Type"></span></th>
                     <th class=" noborder padding-right" ng-if="userType=='C'"><span translate="Charge Method"></span></th>
                     <th class=" noborder padding-right"><span translate="Work Type"></span></th>
-                    <th class=" noborder padding-right" ng-if="userType=='C'"><span translate="Time Code"></th>
-                    <th class=" noborder padding-right" ng-if="userType=='C'"><span translate="Shift Code"></th>
+                    <th class=" noborder padding-right" ng-if="userType=='C'"><span translate="Time Code"></span></th>
+                    <th class=" noborder padding-right" ng-if="userType=='C'"><span translate="Shift Code"></span></th>
                     <th class="noborder padding-right"><span translate="Duration"></span></th>
                     <th class="noborder padding-right"><span translate="Item"></span></th>
                     <th class="noborder padding-right"><span translate="Comments"></span></th>

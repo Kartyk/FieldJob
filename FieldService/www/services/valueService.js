@@ -729,6 +729,26 @@
 
         function saveValues() {
 
+            if (debrief.time.length == 0) {
+                localService.deleteTime(debrief.task.Task_Number);
+            }
+
+            if (debrief.expense.length == 0) {
+                localService.deleteExpense(debrief.task.Task_Number);
+            }
+
+            if (debrief.material.length == 0) {
+                localService.deleteMaterial(debrief.task.Task_Number);
+            }
+
+            if (debrief.notes.length == 0) {
+                localService.deleteNotes(debrief.task.Task_Number);
+            }
+
+            if (debrief.attachment.length == 0) {
+                localService.deleteAttachment(debrief.task.Task_Number);
+            }
+
             if (debrief.time.length > 0) {
 
                 localService.deleteTime(debrief.task.Task_Number);
