@@ -12,11 +12,14 @@
                                    translate="{{item.noteDefault.noteType.title}}"></label>
 
                             <select class="form-control select-debrief" ng-model="item.Note_Type"
-                                    ng-options="x as x.Value | translate for x  in item.noteDefault.noteType.values track by x.ID" ng-change="setNoteType(item)">
+                                    ng-options="x as x.Value | translate for x  in item.noteDefault.noteType.values track by x.ID" name='noteType' ng-required="true" ng-change="setNoteType(item)">
                                 <option value="" disabled selected>Select Note Type</option>
                             </select>
-
+                            <span style="color:red" ng-show="notesForm.noteType.$error.required">
+                                Please select Notes Type
+                            </span>
                         </div>
+                        
 
                         <div class="col-sm-2 col-md-2 col-lg-2 ">
                             <label class="control-label  label-my"
