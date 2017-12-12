@@ -2797,7 +2797,7 @@
     };
 
     $scope.reviewSummary = function () {
-        //var promise = generatePDF();
+       // var promise = generatePDF();
         $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Customer Signature"
     )
 
@@ -3960,7 +3960,7 @@
                 }
                 var k = 0, xExpenseField = 25, yExpenseField = yTimeField + rectTimeHeight + 25, rectExpenseWidth = 660,
                     rectExpenseHeight = 22 * $scope.summary.expenseArray.length, yExpenseFieldName = yExpenseField + 25,
-                    yExpenseFieldValue;
+                    yExpenseFieldValue,xExpenseField1;
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 doc1.text(xExpenseField, yExpenseField + 5, $filter('translate')('Expenses'))
@@ -3980,8 +3980,8 @@
                 yExpenseFieldValue = yExpenseFieldName + 10;
                 while (k < $scope.summary.expenseArray.length) {
                     // yExpenseFieldName =  ;
-                    yExpenseFieldValue = yExpenseFieldName + 10 * ++k;
-
+                    yExpenseFieldValue = yExpenseFieldName + 15 * ++k;
+                    xExpenseField1 = xExpenseField + 450;
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
@@ -4000,13 +4000,21 @@
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
-                    if ($scope.summary.expenseArray[k - 1].Justification)
-                        doc1.text(xExpenseField + 470, yExpenseFieldValue, $filter('translate')($scope.summary.expenseArray[k - 1].Justification))
+                    //if ($scope.summary.expenseArray[k - 1].Justification)
+                    //    doc1.text(xExpenseField + 470, yExpenseFieldValue, $filter('translate')($scope.summary.expenseArray[k - 1].Justification))
+                    if ($scope.summary.expenseArray[k - 1].Justification) {
+                        var splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.expenseArray[k - 1].Justification), rectNotesWidth - xExpenseField1);
+                        doc1.text(xExpenseField1, yExpenseFieldValue, splitTitle)
+                        if (splitTitle.length > 1) {
+                            yExpenseFieldValue = yExpenseFieldValue + 5 * splitTitle.length;
+                            yExpenseFieldName = yExpenseFieldValue;
+                        }
+                    }
                 }
-                rectExpenseHeight = yExpenseFieldValue - yExpenseFieldName + 25;
+                rectExpenseHeight = yExpenseFieldName - yExpenseField  + 25;
                 doc1.rect(20, yExpenseField + 10, rectExpenseWidth, rectExpenseHeight);
 
-                var l = 0, xMaterialField = 25, yMaterialField = yExpenseField + rectExpenseHeight + 20,
+                var l = 0, xMaterialField = 25, yMaterialField = yExpenseFieldName + 40,
                     rectMaterialWidth = 660, rectMaterialHeight = 25 * $scope.summary.materialArray.length,
                     yMaterialFieldName = yMaterialField + 25, yMaterialFieldValue;
 
