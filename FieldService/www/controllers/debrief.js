@@ -61,7 +61,7 @@
             {title: "Material", templateUrl: "app/views/Material.html"},
             {title: "Notes", templateUrl: "app/views/Notes.html"},
             {title: "Attachments", templateUrl: "app/views/Attachments.html"},
-            {title: "Engineer Signature", templateUrl: "app/views/EngineerSignature.html"},
+            {title: "Service Representative Signature", templateUrl: "app/views/EngineerSignature.html"},
             {title: "Summary", templateUrl: "app/views/Summary.html"},
             {title: "Customer Signature", templateUrl: "app/views/CustomerSignature.html"}
         ];
@@ -2890,7 +2890,7 @@
     };
 
     $scope.reviewSummary = function () {
-       // var promise = generatePDF();
+        // var promise = generatePDF();
         $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Customer Signature"
     )
 
