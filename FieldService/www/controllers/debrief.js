@@ -679,6 +679,18 @@
         $scope.timeArray = [];
 
         $scope.timeArray.push(timeObject);
+
+        // if (timeDefault.chargeMethod.values != undefined && timeDefault.chargeMethod.values.length > 0) {
+        //
+        //     angular.forEach(timeDefault.chargeMethod.values, function (key, value) {
+        //
+        //         if (key.Value == $scope.taskObject.Labor_Method) {
+        //
+        //             $scope.timeArray[0].Charge_Method = key;
+        //             $scope.timeArray[0].Charge_Method_Id = key.ID;
+        //         }
+        //     });
+        // }
     }
 
     $scope.editObject = function (item, stage, index) {
@@ -1359,6 +1371,21 @@
 
     $scope.setWorkType = function (workType, timeObject) {
 
+        console.log("LABOUR "+$scope.taskObject.Labor_Method);
+        console.log("TRAVEL "+$scope.taskObject.Travel_Method);
+
+        if (timeDefault.chargeMethod.values != undefined && timeDefault.chargeMethod.values.length > 0) {
+
+            angular.forEach(timeDefault.chargeMethod.values, function (key, value) {
+
+                if (key.Value == $scope.taskObject.Labor_Method) {
+
+                    $scope.timeArray[0].Charge_Method = key;
+                    $scope.timeArray[0].Charge_Method_Id = key.ID;
+                }
+            });
+        }
+
         if (workType.Value == "Deputation" || workType.ID == 1) {
 
             timeObject.timeDefault.item.values = $scope.itemDeputation;
@@ -1366,6 +1393,18 @@
         } else if (workType.Value == "Travel" || workType.ID == 2) {
 
             timeObject.timeDefault.item.values = $scope.itemTravel;
+
+            if (timeDefault.chargeMethod.values != undefined && timeDefault.chargeMethod.values.length > 0) {
+
+                angular.forEach(timeDefault.chargeMethod.values, function (key, value) {
+
+                    if (key.Value == $scope.taskObject.Travel_Method) {
+
+                        $scope.timeArray[0].Charge_Method = key;
+                        $scope.timeArray[0].Charge_Method_Id = key.ID;
+                    }
+                });
+            }
 
         } else if (workType.Value == "Normal" || workType.ID == 3) {
 
@@ -1632,23 +1671,9 @@
 
             if ($scope.timeArray.length == 0) {
 
-                // $scope.addObject(stage.title, false);
-
                 $scope.isEditTime = "0";
 
                 setDefaultTimeObject();
-
-                if (timeDefault.chargeMethod.values != undefined && timeDefault.chargeMethod.values.length > 0) {
-
-                    angular.forEach(timeDefault.chargeMethod.values, function (key, value) {
-
-                        if (key.Value == $scope.taskObject.Labor_Method) {
-
-                            $scope.timeArray[0].Charge_Method = key;
-                            $scope.timeArray[0].Charge_Method_Id = key.ID;
-                        }
-                    });
-                }
             }
 
             $scope.currentTab = "time";
