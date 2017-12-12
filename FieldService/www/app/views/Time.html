@@ -1,9 +1,10 @@
-
 <div class="card-parentContainer margintop10">
 
     <div class="margintop30" ng-repeat="item in timeArray track by $index" id="time{{$index}}">
-        <div class="card-childContainer  noBorder-radius" ng-class="{'newItemBorder': $index == addTimeObj && $index != 0,'copyItem': $index == copyTimeObj && $index != 0}">
-            <form class="form-horizontal input-items" action="/action_page.php" ng-disabled="$root.completedTask" form-on-change="formChange()" name="timeform">
+        <div class="card-childContainer  noBorder-radius"
+             ng-class="{'newItemBorder': $index == addTimeObj && $index != 0,'copyItem': $index == copyTimeObj && $index != 0}">
+            <form class="form-horizontal input-items" action="/action_page.php" ng-disabled="$root.completedTask"
+                  form-on-change="formChange()" name="timeform">
                 <div layout="row" layout-wrap>
                     <div ng-if="userType=='C'" flex="30" class="debrief-items" style="max-width: 20%;">
                         <label flex="100" class="label-my"
@@ -11,7 +12,8 @@
                         <div flex="100">
                             <select style="width:100% !important" class="form-control  select-debrief-time-first-select"
                                     ng-model="item.Field_Job_Name"
-                                    ng-options="x as x.JobName for x in item.timeDefault.fieldJobName.values track by x.TaskCode" ng-change="setFieldName(item)">
+                                    ng-options="x as x.JobName for x in item.timeDefault.fieldJobName.values track by x.TaskCode"
+                                    ng-change="setFieldName(item)">
                                 <option value="" disabled selected>Select Clarity Task Name</option>
                             </select>
                         </div>
@@ -21,14 +23,16 @@
                         <label flex="100" class="label-my" translate="{{item.timeDefault.chargeType.title}}"></label>
                         <div flex="100">
                             <select class="form-control " ng-model="item.Charge_Type"
-                                    ng-options="x as x.Value | translate for x in item.timeDefault.chargeType.values track by x.ID" ng-change="setChargeType(item)">
+                                    ng-options="x as x.Value | translate for x in item.timeDefault.chargeType.values track by x.ID"
+                                    ng-change="setChargeType(item)">
                                 <option value="" disabled selected>Select Charge Type</option>
                             </select>
                         </div>
                     </div>
 
                     <div flex="20" class="debrief-items">
-                        <label flex="100" class=" label-my" translate="{{item.timeDefault.workType.title}}"></label><span style="color:red">*</span>
+                        <label flex="100" class=" label-my"
+                               translate="{{item.timeDefault.workType.title}}"></label><span style="color:red">*</span>
                         <div flex="100">
                             <select class="form-control" ng-model="item.Work_Type" name="worktype" ng-required="true"
                                     ng-options="x as x.Value | translate for x in item.timeDefault.workType.values track by x.ID"
@@ -42,20 +46,24 @@
                     </div>
 
                     <div ng-if="userType=='C'" flex="20" class="debrief-items">
-                        <label flex="100" class="  label-my" translate="{{item.timeDefault.chargeMethod.title}}"></label>
+                        <label flex="100" class="  label-my"
+                               translate="{{item.timeDefault.chargeMethod.title}}"></label>
                         <div flex="100">
                             <select class="form-control" ng-model="item.Charge_Method"
-                                    ng-options="x as x.Value | translate for x in item.timeDefault.chargeMethod.values track by x.ID" ng-change="setChargeMethod(item)">
+                                    ng-options="x as x.Value | translate for x in item.timeDefault.chargeMethod.values track by x.ID"
+                                    ng-change="setChargeMethod(item)">
                                 <option value="" disabled selected>Select Charge Method</option>
                             </select>
                         </div>
                     </div>
 
                     <div flex="20" class="debrief-items">
-                        <label flex="100" class="  label-my" translate="{{item.timeDefault.item.title}}"></label><span style="color:red">*</span>
+                        <label flex="100" class="  label-my" translate="{{item.timeDefault.item.title}}"></label><span
+                            style="color:red">*</span>
                         <div cflex="100">
                             <select class="form-control" ng-model="item.Item" name="itemtype" ng-required="true"
-                                    ng-options="x as x.Value | translate for x in item.timeDefault.item.values track by x.ID" ng-change="setItem(item)">
+                                    ng-options="x as x.Value | translate for x in item.timeDefault.item.values track by x.ID"
+                                    ng-change="setItem(item)">
                                 <option value="" disabled selected>Select Item</option>
                             </select>
                         </div>
@@ -75,7 +83,8 @@
                         <label flex="100" class="  label-my" translate="{{item.timeDefault.timeCode.title}}"></label>
                         <div flex="100">
                             <select class="form-control" ng-model="item.Time_Code"
-                                    ng-options="x as x.Overtimeshiftcode | translate for x in item.timeDefault.timeCode.values track by x.OverTime_Shift_Code_ID" ng-change="setTimeCode(item)">
+                                    ng-options="x as x.Overtimeshiftcode | translate for x in item.timeDefault.timeCode.values track by x.OverTime_Shift_Code_ID"
+                                    ng-change="setTimeCode(item)">
                                 <option value="" disabled selected>Select Time Code</option>
                             </select>
                         </div>
@@ -101,10 +110,11 @@
                                 <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
                                        ng-model="item.Date" is-open="item.calendarOpened"
                                        datepicker-options="dateOptions" ng-required="true" close-text="Close"
-                                       alt-input-formats="altInputFormats" ng-change="setDuration($index)" />
+                                       alt-input-formats="altInputFormats" ng-change="setDuration($index)"/>
 
                                 <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default custom-debrief-item" style="border-color:#ccc !important"
+                                    <button type="button" class="btn btn-default custom-debrief-item"
+                                            style="border-color:#ccc !important"
                                             ng-click="openCalendar(item,'Time')">
                                         <i class="glyphicon glyphicon-calendar"></i>
                                     </button>
@@ -115,15 +125,16 @@
                     </div>
 
                     <div flex="20" class="debrief-items">
-                        <label flex="100" class="  label-my" translate="{{item.timeDefault.duration.title}}"></label><span style="color:red">*</span>
+                        <label flex="100" class="  label-my"
+                               translate="{{item.timeDefault.duration.title}}"></label><span style="color:red">*</span>
                         <div flex="100">
                             <!--<input type="text" class="form-control" date-format ng-model="item.Duration" name="duration"-->
-                                   <!--ng-required="true" ng-change="setDurationHours(item)" ng-blur="checkDuration(item)"/>-->
+                            <!--ng-required="true" ng-change="setDurationHours(item)" ng-blur="checkDuration(item)"/>-->
 
                             <!--<input type="time" name="duration" class="form-control" date-format ng-model="item.DurationValue"-->
-                                   <!--ng-required="true" close-text="Close"-->
-                                   <!--pattern="^([0-1]?[0-9]|2[0-4]):([0-5][0-9])?$" ng-change="setDurationHours(item)"-->
-                                   <!--ng-blur="checkDuration(item)"-->
+                            <!--ng-required="true" close-text="Close"-->
+                            <!--pattern="^([0-1]?[0-9]|2[0-4]):([0-5][0-9])?$" ng-change="setDurationHours(item)"-->
+                            <!--ng-blur="checkDuration(item)"-->
                             <!--/>-->
 
                             <input type="time" name="duration" class="form-control"
@@ -153,56 +164,68 @@
             </form>
 
 
-
         </div>
         <section layout="row" layout-sm="column" layout-align="center center"
-                 layout-wrap class="time-btns" ng-class="{'newItemBorderSection': $index == addTimeObj && $index != 0,'copyItemSection': $index == copyTimeObj && $index != 0}">
+                 layout-wrap class="time-btns"
+                 ng-class="{'newItemBorderSection': $index == addTimeObj && $index != 0,'copyItemSection': $index == copyTimeObj && $index != 0}">
             <span flex></span>
             <span style="visibility:hidden">{{ $root.timeformValid = timeform.$valid}}</span>
-            <md-button ng-if = "isEditTime==0"class="time-font time-add summary-report-donebtn addbtn"  ng-click="addObject('Time',true,item)" ng-disabled="$root.completedTask || !$root.timeformValid " translate="Add"></md-button>
-            <md-button ng-if = "isEditTime==1" class="time-font time-add summary-report-donebtn addbtn" ng-click="saveObject('Time',true,item)"
+            <md-button ng-if="isEditTime==0" class="time-font time-add summary-report-donebtn addbtn"
+                       ng-click="addObject('Time',true,item)" ng-disabled="$root.completedTask || !$root.timeformValid "
+                       translate="Add"></md-button>
+            <md-button ng-if="isEditTime==1" class="time-font time-add summary-report-donebtn addbtn"
+                       ng-click="saveObject('Time',true,item)"
                        ng-disabled="$root.completedTask || !$root.timeformValid " translate="Save"></md-button>
             <!-- <md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Time')" ng-disabled="$root.completedTask" translate="delete"></md-button>-->
-            <md-button class="time-font time-copy summary-report-donebtn" ng-click="copyObject(item,'Time')" ng-disabled="$root.completedTask|| !$root.timeformValid" translate="copy"></md-button>
+            <md-button class="time-font time-copy summary-report-donebtn" ng-click="copyObject(item,'Time')"
+                       ng-disabled="$root.completedTask|| !$root.timeformValid" translate="copy"></md-button>
             <span flex></span>
-            <button class="time-font time-add summary-report-donebtn"  translate="NEXT" ng-click="Next('Time')"></button>
+            <button class="time-font time-add summary-report-donebtn" translate="NEXT" ng-click="Next('Time')"></button>
             <!--<md-button type="submit" ng-disabled="!timeformValid">TEST</md-button>-->
 
         </section>
 
     </div>
     <!-- <div class="margintop30" ng-repeat="item in timeArray track by $index" id="time{{$index}}">-->
-    <div class="card-childContainer marginbottom30" style="    overflow-x: auto;margin-top:20px" ng-if="timeArraySummary!=undefined && timeArraySummary.length>0">
+    <div class="card-childContainer marginbottom30" style="    overflow-x: auto;margin-top:20px"
+         ng-if="timeArraySummary!=undefined && timeArraySummary.length>0">
 
-        <table class="table no-marbottom noborder" >
+        <table class="table no-marbottom noborder">
             <thead>
-                <tr class="summary-tr">
-                    <th class="noborder padding-right"><span translate="Date"></span></th>
-                    <th class=" noborder padding-right" ng-if="userType=='C'"><span translate="Charge Type"></span></th>
-                    <th class=" noborder padding-right" ng-if="userType=='C'"><span translate="Charge Method"></span></th>
-                    <th class=" noborder padding-right"><span translate="Work Type"></span></th>
-                    <th class=" noborder padding-right" ng-if="userType=='C'"><span translate="Time Code"></span></th>
-                    <th class=" noborder padding-right" ng-if="userType=='C'"><span translate="Shift Code"></span></th>
-                    <th class="noborder padding-right"><span translate="Duration"></span></th>
-                    <th class="noborder padding-right"><span translate="Item"></span></th>
-                    <th class="noborder padding-right"><span translate="Comments"></span></th>
+            <tr class="summary-tr">
+                <th class="noborder padding-right"><span translate="Date"></span></th>
+                <th class=" noborder padding-right" ng-if="userType=='C'"><span translate="Charge Type"></span></th>
+                <th class=" noborder padding-right" ng-if="userType=='C'"><span translate="Charge Method"></span></th>
+                <th class=" noborder padding-right"><span translate="Work Type"></span></th>
+                <th class=" noborder padding-right" ng-if="userType=='C'"><span translate="Time Code"></span></th>
+                <th class=" noborder padding-right" ng-if="userType=='C'"><span translate="Shift Code"></span></th>
+                <th class="noborder padding-right"><span translate="Duration"></span></th>
+                <th class="noborder padding-right"><span translate="Item"></span></th>
+                <th class="noborder padding-right"><span translate="Comments"></span></th>
 
-                </tr>
+            </tr>
             </thead>
             <tbody>
-                <tr class="summary-tr" ng-repeat="time in  timeArraySummary">
-                    <td class="noborder bg-white padding-right">{{time.Date| timezonefilter }}</td>
-                    <td class="noborder bg-white padding-right" ng-if="userType=='C'">{{time.Charge_Type.Value| translate}}</td>
-                    <td class="noborder bg-white padding-right" ng-if="userType=='C'">{{time.Charge_Method.Value| translate}}</td>
-                    <td class="noborder bg-white padding-right">{{time.Work_Type.Value| translate}}</td>
-                    <td class="noborder bg-white padding-right" ng-if="userType=='C'">{{time.Time_Code.Overtimeshiftcode}} </td>
-                    <td class="noborder bg-white padding-right" ng-if="userType=='C'">{{time.Shift_Code.ShiftCodeName}} </td>
-                    <td class="noborder bg-white padding-right">{{time.Duration}}</td>
-                    <td class="noborder bg-white padding-right">{{time.Item.Value| translate}}</td>
-                    <td class="noborder bg-white padding-right">{{time.Comments}}</td>
-                    <td class="noborder bg-white " ><img  src="images/cancel.png" class="cancelInEquip delete" ng-click="deleteObject($index,'Time')" /></td>
-                    <td class="noborder bg-white "><img src="images/edit.png" class="cancelInEquip delete" ng-click="editObject(time,'Time',$index)" style="width:16px" /></td>
-                </tr>
+            <tr class="summary-tr" ng-repeat="time in  timeArraySummary">
+                <td class="noborder bg-white padding-right">{{time.Date| timezonefilter }}</td>
+                <td class="noborder bg-white padding-right" ng-if="userType=='C'">{{time.Charge_Type.Value|
+                    translate}}
+                </td>
+                <td class="noborder bg-white padding-right" ng-if="userType=='C'">{{time.Charge_Method.Value|
+                    translate}}
+                </td>
+                <td class="noborder bg-white padding-right">{{time.Work_Type.Value| translate}}</td>
+                <td class="noborder bg-white padding-right" ng-if="userType=='C'">{{time.Time_Code.Overtimeshiftcode}}
+                </td>
+                <td class="noborder bg-white padding-right" ng-if="userType=='C'">{{time.Shift_Code.ShiftCodeName}}</td>
+                <td class="noborder bg-white padding-right">{{time.Duration}}</td>
+                <td class="noborder bg-white padding-right">{{time.Item.Value| translate}}</td>
+                <td class="noborder bg-white padding-right">{{time.Comments}}</td>
+                <td class="noborder bg-white "><img src="images/cancel.png" class="cancelInEquip delete"
+                                                    ng-click="deleteObject($index,'Time')"/></td>
+                <td class="noborder bg-white "><img src="images/edit.png" class="cancelInEquip delete"
+                                                    ng-click="editObject(time,'Time',$index)" style="width:16px"/></td>
+            </tr>
             </tbody>
         </table>
 

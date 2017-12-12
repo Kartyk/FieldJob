@@ -112,10 +112,12 @@
                  ng-class="{'newItemBorderSection': $index == addTimeObj && $index != 0,'copyItemSection': $index == copyTimeObj && $index != 0}">
             <span flex></span>
             <span style="visibility:hidden">{{ $root.timeformValid = timeform.$valid}}</span>
-            <md-button ng-if = "isEditTime==0" class="time-font time-add summary-report-donebtn addbtn" ng-click="addObject('Time',true,item)"
+            <md-button ng-if="isEditTime==0" class="time-font time-add summary-report-donebtn addbtn"
+                       ng-click="addObject('Time',true,item)"
                        ng-disabled="$root.completedTask || !$root.timeformValid " translate="Add"></md-button>
 
-            <md-button ng-if = "isEditTime==1" class="time-font time-add summary-report-donebtn addbtn" ng-click="saveObject('Time',true,item)"
+            <md-button ng-if="isEditTime==1" class="time-font time-add summary-report-donebtn addbtn"
+                       ng-click="saveObject('Time',true,item)"
                        ng-disabled="$root.completedTask || !$root.timeformValid " translate="Save"></md-button>
 
             <!-- <md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Time')" ng-disabled="$root.completedTask" translate="delete"></md-button>-->

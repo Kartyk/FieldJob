@@ -1,104 +1,117 @@
 <div class="card-parentContainer margintop10">
     <div class="margintop30" ng-repeat="item in notesArray track by $index" id="note{{$index}}">
-        
-            <div class="card-childContainer  noBorder-radius" ng-class="{'newItemBorder': $index == addNoteObj && $index != 0,'copyItem': $index == copyNoteObj && $index != 0}">
-                <form class="form-horizontal row input-items" action="/action_page.php" form-on-change="formChange()" name="notesForm">
+
+        <div class="card-childContainer  noBorder-radius"
+             ng-class="{'newItemBorder': $index == addNoteObj && $index != 0,'copyItem': $index == copyNoteObj && $index != 0}">
+            <form class="form-horizontal row input-items" action="/action_page.php" form-on-change="formChange()"
+                  name="notesForm">
 
 
-                    <div class="row" style="padding-left:15px;padding-right:15px;">
+                <div class="row" style="padding-left:15px;padding-right:15px;">
 
-                        <div class="col-sm-3 col-md-3 col-lg-3 " style="width:20%;">
-                            <label class="control-label label-my"
-                                   translate="{{item.noteDefault.noteType.title}}"></label>
+                    <div class="col-sm-3 col-md-3 col-lg-3 " style="width:20%;">
+                        <label class="control-label label-my"
+                               translate="{{item.noteDefault.noteType.title}}"></label>
 
-                            <select class="form-control select-debrief" ng-model="item.Note_Type"
-                                    ng-options="x as x.Value | translate for x  in item.noteDefault.noteType.values track by x.ID" name='noteType' ng-required="true" ng-change="setNoteType(item)">
-                                <option value="" disabled selected>Select Note Type</option>
-                            </select>
-                            <span style="color:red" ng-show="notesForm.noteType.$error.required">
+                        <select class="form-control select-debrief" ng-model="item.Note_Type"
+                                ng-options="x as x.Value | translate for x  in item.noteDefault.noteType.values track by x.ID"
+                                name='noteType' ng-required="true" ng-change="setNoteType(item)">
+                            <option value="" disabled selected>Select Note Type</option>
+                        </select>
+                        <span style="color:red" ng-show="notesForm.noteType.$error.required">
                                 Please select Notes Type
                             </span>
-                        </div>
-                        
+                    </div>
 
-                        <div class="col-sm-2 col-md-2 col-lg-2 ">
-                            <label class="control-label  label-my"
-                                   translate="{{item.noteDefault.noteDate.title}}" style="text-align: left;"></label>
 
-                            <p class="input-group">
-                                <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
-                                       ng-model="item.Date" is-open="item.calendarOpened"
-                                       datepicker-options="dateOptions" ng-required="true" close-text="Close"
-                                       alt-input-formats="altInputFormats" ng-change="setDuration($index)"/>
+                    <div class="col-sm-2 col-md-2 col-lg-2 ">
+                        <label class="control-label  label-my"
+                               translate="{{item.noteDefault.noteDate.title}}" style="text-align: left;"></label>
 
-                                <span class="input-group-btn">
-					            <button type="button" style="border-color:#ccc !important" class="btn btn-default custom-debrief-item"
+                        <p class="input-group">
+                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                   ng-model="item.Date" is-open="item.calendarOpened"
+                                   datepicker-options="dateOptions" ng-required="true" close-text="Close"
+                                   alt-input-formats="altInputFormats" ng-change="setDuration($index)"/>
+
+                            <span class="input-group-btn">
+					            <button type="button" style="border-color:#ccc !important"
+                                        class="btn btn-default custom-debrief-item"
                                         ng-click="openCalendar(item,'Notes')"><i
                                         class="glyphicon glyphicon-calendar"></i></button>
 					          </span>
-                            </p>
-
-                        </div>
-
-
-                        <div class="col-sm-2 col-md-2 col-lg-2 ">
-
-                            <label class="control-label label-my"
-                                   translate="{{item.noteDefault.noteCreator.title}}"></label>
-
-                            <input type="text" class="form-control" id="sel1" ng-model="item.Created_By"/>
-
-                        </div>
-
-                        <div class="col-sm-5 col-md-5 col-lg-5 marginbottom30" style="width:46%;">
-
-                            <label class="control-label label-my" for="justification"
-                                   translate="{{item.noteDefault.notes.title}}"></label>
-
-
-                            <textarea  class="form-control note-textarea-NC" style="height:40px;max-height:150px" id="justification"
-                                    max-input  ng-model="item.Notes" input-max-length='255' ng-maxlength="255" name="notesComment"></textarea>
-                            <div style="color:red;text-transform:none" ng-show="notesForm.notesComment.$error.maxlength">
-                                Maximum allowed characters are 255
-                            </div>
-
-                        </div>
+                        </p>
 
                     </div>
 
 
-                    
+                    <div class="col-sm-2 col-md-2 col-lg-2 ">
 
-                </form>
-            </div>
-            <section  layout="row" layout-sm="column" layout-align="center center" layout-wrap class="time-btns" ng-class="{'newItemBorderSection': $index == addNoteObj && $index != 0,'copyItemSection': $index == copyNoteObj && $index != 0}">
-                <md-button class="time-font time-add summary-report-donebtn" translate="BACK" ng-click="goPreviousTab('Notes')"></md-button>
-                <span flex></span>
-                <md-button class="time-font time-add addbtn" ng-click="addObject('Notes',true,item)" translate="Add" ></md-button>
-                <!--<md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Notes')" translate="delete"></md-button>-->
-                <md-button class="time-font time-copy" ng-click="copyObject(item,'Notes')" translate="copy"></md-button>
-                <span flex></span>
-                <md-button class="time-font time-add summary-report-donebtn" translate="NEXT" ng-click="Next('Notes')"></md-button>
-            </section>
+                        <label class="control-label label-my"
+                               translate="{{item.noteDefault.noteCreator.title}}"></label>
 
-       
+                        <input type="text" class="form-control" id="sel1" ng-model="item.Created_By"/>
+
+                    </div>
+
+                    <div class="col-sm-5 col-md-5 col-lg-5 marginbottom30" style="width:46%;">
+
+                        <label class="control-label label-my" for="justification"
+                               translate="{{item.noteDefault.notes.title}}"></label>
+
+
+                        <textarea class="form-control note-textarea-NC" style="height:40px;max-height:150px"
+                                  id="justification"
+                                  max-input ng-model="item.Notes" input-max-length='255' ng-maxlength="255"
+                                  name="notesComment"></textarea>
+                        <div style="color:red;text-transform:none" ng-show="notesForm.notesComment.$error.maxlength">
+                            Maximum allowed characters are 255
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </form>
+        </div>
+        <section layout="row" layout-sm="column" layout-align="center center" layout-wrap class="time-btns"
+                 ng-class="{'newItemBorderSection': $index == addNoteObj && $index != 0,'copyItemSection': $index == copyNoteObj && $index != 0}">
+            <md-button class="time-font time-add summary-report-donebtn" translate="BACK"
+                       ng-click="goPreviousTab('Notes')"></md-button>
+            <span flex></span>
+            <md-button ng-if="isEditNote==0" class="time-font time-add addbtn" ng-click="addObject('Notes',true,item)"
+                       translate="Add"></md-button>
+            <md-button ng-if="isEditNote==1" class="time-font time-add addbtn" ng-click="saveObject('Notes',true,item)"
+                       translate="Save"></md-button>
+            <!--<md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Notes')" translate="delete"></md-button>-->
+            <md-button class="time-font time-copy" ng-click="copyObject(item,'Notes')" translate="copy"></md-button>
+            <span flex></span>
+            <md-button class="time-font time-add summary-report-donebtn" translate="NEXT"
+                       ng-click="Next('Notes')"></md-button>
+        </section>
+
+
     </div>
-    <div class="card-childContainer marginbottom30" style="margin-top:20px"  ng-if="notesArraySummary!=undefined && notesArraySummary.length>0">
+    <div class="card-childContainer marginbottom30" style="margin-top:20px"
+         ng-if="notesArraySummary!=undefined && notesArraySummary.length>0">
 
         <table class="table no-marbottom noborder">
             <thead>
-                <tr class="noborder">
-                    <th class="taskoverflow-tableTh noborder col-sm-4" translate="Note Type"></th>
-                    <th class="taskoverflow-tableTh noborder col-sm-8" translate="Note Description"> #</th>
-                </tr>
+            <tr class="noborder">
+                <th class="taskoverflow-tableTh noborder col-sm-4" translate="Note Type"></th>
+                <th class="taskoverflow-tableTh noborder col-sm-8" translate="Note Description"> #</th>
+            </tr>
             </thead>
             <tbody>
-                <tr class="noborder" ng-repeat="note in notesArraySummary">
-                    <td class="taskoverflow-tableTd noborder bg-white col-sm-4">{{note.Note_Type.Value| translate}}</td>
-                    <td class="taskoverflow-tableTd noborder bg-white col-sm-7" > {{note.Notes| translate}}</td>
-                    <td class="noborder bg-white col-sm-1 "><img src="images/cancel.png" class="cancelInEquip delete" ng-click="deleteObject($index,'Notes')" /></td>
-                    <td class="noborder bg-white "><img src="images/edit.png" class="cancelInEquip delete" ng-click="editObject(note,'Notes',$index)" style="width:16px" /></td>
-                </tr>
+            <tr class="noborder" ng-repeat="note in notesArraySummary">
+                <td class="taskoverflow-tableTd noborder bg-white col-sm-4">{{note.Note_Type.Value| translate}}</td>
+                <td class="taskoverflow-tableTd noborder bg-white col-sm-7"> {{note.Notes| translate}}</td>
+                <td class="noborder bg-white col-sm-1 "><img src="images/cancel.png" class="cancelInEquip delete"
+                                                             ng-click="deleteObject($index,'Notes')"/></td>
+                <td class="noborder bg-white "><img src="images/edit.png" class="cancelInEquip delete"
+                                                    ng-click="editObject(note,'Notes',$index)" style="width:16px"/></td>
+            </tr>
             </tbody>
 
         </table>
