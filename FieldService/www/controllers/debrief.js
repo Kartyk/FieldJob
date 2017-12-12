@@ -912,9 +912,9 @@
 
                     if ($scope.editExpenseIndex == -1) {
 
-                        $scope.expenseArraySummary.reverse();
+                        // $scope.expenseArraySummary.reverse();
                         $scope.expenseArraySummary.push(newObject);
-                        $scope.expenseArraySummary.reverse();
+                        // $scope.expenseArraySummary.reverse();
 
                     } else {
 
@@ -963,9 +963,9 @@
 
                     if ($scope.editNoteIndex == -1) {
 
-                        $scope.notesArraySummary.reverse();
+                        // $scope.notesArraySummary.reverse();
                         $scope.notesArraySummary.push(newobj);
-                        $scope.notesArraySummary.reverse();
+                        // $scope.notesArraySummary.reverse();
 
                     } else {
 
@@ -1029,9 +1029,9 @@
 
                     if ($scope.editMaterialIndex == -1) {
 
-                        $scope.materialArraySummary.reverse();
+                        // $scope.materialArraySummary.reverse();
                         $scope.materialArraySummary.push(newobj);
-                        $scope.materialArraySummary.reverse();
+                        // $scope.materialArraySummary.reverse();
 
                     } else {
 
@@ -1115,7 +1115,7 @@
 
                 if (item != null && item != undefined) {
 
-                    $scope.expenseArraySummary.reverse();
+                    // $scope.expenseArraySummary.reverse();
 
                     $scope.expenseArraySummary.push({
                         Expense_Id: $scope.taskId + "" + ($scope.expenseArraySummary.length + 1),
@@ -1131,7 +1131,7 @@
                         Task_Number: $scope.taskId
                     });
 
-                    $scope.expenseArraySummary.reverse();
+                    // $scope.expenseArraySummary.reverse();
                 }
 
                 break;
@@ -1142,7 +1142,7 @@
 
                 if (item != undefined && item != null) {
 
-                    $scope.notesArraySummary.reverse();
+                    // $scope.notesArraySummary.reverse();
 
                     $scope.notesArraySummary.push({
                         Notes_Id: $scope.taskId + "" + ($scope.notesArraySummary.length + 1),
@@ -1154,7 +1154,7 @@
                         Task_Number: $scope.taskId
                     });
 
-                    $scope.notesArraySummary.reverse();
+                    // $scope.notesArraySummary.reverse();
                 }
 
                 break;
@@ -1167,7 +1167,7 @@
 
                 if (item != undefined && item != null) {
 
-                    $scope.materialArraySummary.reverse();
+                    // $scope.materialArraySummary.reverse();
 
                     $scope.materialArraySummary.push({
                         Material_Id: $scope.taskId + "" + ($scope.materialArraySummary.length + 1),
@@ -1183,7 +1183,7 @@
                         ItemName: item.ItemName
                     });
 
-                    $scope.materialArraySummary.reverse()
+                    // $scope.materialArraySummary.reverse()
                 }
 
                 break;
@@ -1191,6 +1191,7 @@
             default:
                 break;
         }
+
         valueService.setDebriefChanged(true);
     };
 
