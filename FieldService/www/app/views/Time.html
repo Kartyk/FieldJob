@@ -120,9 +120,17 @@
                             <!--<input type="text" class="form-control" date-format ng-model="item.Duration" name="duration"-->
                                    <!--ng-required="true" ng-change="setDurationHours(item)" ng-blur="checkDuration(item)"/>-->
 
-                            <input type="time" name="time" class="form-control" ng-model="item.Duration"
-                                   ng-required="true" close-text="Close"
-                                   pattern="^([0-1]?[0-9]|2[0-4]):([0-5][0-9])?$"
+                            <!--<input type="time" name="duration" class="form-control" date-format ng-model="item.DurationValue"-->
+                                   <!--ng-required="true" close-text="Close"-->
+                                   <!--pattern="^([0-1]?[0-9]|2[0-4]):([0-5][0-9])?$" ng-change="setDurationHours(item)"-->
+                                   <!--ng-blur="checkDuration(item)"-->
+                            <!--/>-->
+
+                            <input type="time" name="duration" class="form-control"
+                                   ng-model="item.DurationValue"
+                                   ng-change="setDurationHours(item)"
+                                   ng-blur="checkDuration(item)"
+                                   required
                             />
 
                         </div>
@@ -151,8 +159,9 @@
                  layout-wrap class="time-btns" ng-class="{'newItemBorderSection': $index == addTimeObj && $index != 0,'copyItemSection': $index == copyTimeObj && $index != 0}">
             <span flex></span>
             <span style="visibility:hidden">{{ $root.timeformValid = timeform.$valid}}</span>
-            <md-button class="time-font time-add summary-report-donebtn addbtn"  ng-click="addObject('Time',true,item)" ng-disabled="$root.completedTask || !$root.timeformValid " translate="Add"></md-button>
-           
+            <md-button ng-if = "isEditTime==1"class="time-font time-add summary-report-donebtn addbtn"  ng-click="addObject('Time',true,item)" ng-disabled="$root.completedTask || !$root.timeformValid " translate="Add"></md-button>
+            <md-button ng-if = "isEditTime==1" class="time-font time-add summary-report-donebtn addbtn" ng-click="saveObject('Time',true,item)"
+                       ng-disabled="$root.completedTask || !$root.timeformValid " translate="Save"></md-button>
             <!-- <md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Time')" ng-disabled="$root.completedTask" translate="delete"></md-button>-->
             <md-button class="time-font time-copy summary-report-donebtn" ng-click="copyObject(item,'Time')" ng-disabled="$root.completedTask|| !$root.timeformValid" translate="copy"></md-button>
             <span flex></span>
