@@ -116,6 +116,11 @@
     var noteDefault = {};
     var materialDefault = {};
 
+    $scope.isEditTime = "0";
+    $scope.isEditExpense = "0";
+    $scope.isEditMaterial = "0";
+    $scope.isEditNote = "0";
+
     $scope.initializeDebrief = function () {
 
         $scope.taskObject = valueService.getTask();
@@ -633,11 +638,6 @@
             }
         });
     }
-
-    $scope.isEditTime = "0";
-    $scope.isEditExpense = "0";
-    $scope.isEditMaterial = "0";
-    $scope.isEditNote = "0";
 
     function setDefaultTimeObject() {
 
@@ -1384,109 +1384,123 @@
 
             case "Time":
 
-                for (var i = 0; i < $scope.timeArraySummary.length; i++) {
+                if (isEditTime == "0") {
 
-                    if (index == i) {
+                    for (var i = 0; i < $scope.timeArraySummary.length; i++) {
 
-                        $scope.timeArraySummary.splice(index, 1);
+                        if (index == i) {
+
+                            $scope.timeArraySummary.splice(index, 1);
+                        }
                     }
+
+                    $scope.timeArraySummary.reverse();
+
+                    var i = 1;
+
+                    angular.forEach($scope.timeArraySummary, function (response) {
+
+                        response.Time_Id = $scope.taskId + "" + i;
+
+                        i++;
+
+                        console.log("DELETE " + JSON.stringify(response));
+                    });
+
+                    $scope.timeArraySummary.reverse();
                 }
-
-                $scope.timeArraySummary.reverse();
-
-                var i = 1;
-
-                angular.forEach($scope.timeArraySummary, function (response) {
-
-                    response.Time_Id = $scope.taskId + "" + i;
-
-                    i++;
-
-                    console.log("DELETE " + JSON.stringify(response));
-                });
-
-                $scope.timeArraySummary.reverse();
 
                 break;
 
             case "Expenses":
 
-                for (var i = 0; i < $scope.expenseArraySummary.length; i++) {
+                if (isEditExpense == "0") {
 
-                    if (index == i) {
+                    for (var i = 0; i < $scope.expenseArraySummary.length; i++) {
 
-                        $scope.expenseArraySummary.splice(index, 1);
+                        if (index == i) {
+
+                            $scope.expenseArraySummary.splice(index, 1);
+                        }
                     }
+
+                    $scope.expenseArraySummary.reverse();
+
+                    var i = 1;
+
+                    angular.forEach($scope.expenseArraySummary, function (response) {
+
+                        response.Expense_Id = $scope.taskId + "" + i;
+
+                        i++;
+
+                        console.log("DELETE " + JSON.stringify(response));
+                    });
+
+                    $scope.expenseArraySummary.reverse();
                 }
-
-                $scope.expenseArraySummary.reverse();
-
-                var i = 1;
-
-                angular.forEach($scope.expenseArraySummary, function (response) {
-
-                    response.Expense_Id = $scope.taskId + "" + i;
-
-                    i++;
-
-                    console.log("DELETE " + JSON.stringify(response));
-                });
-
-                $scope.expenseArraySummary.reverse();
 
                 break;
 
             case "Material":
 
-                for (var i = 0; i < $scope.materialArraySummary.length; i++) {
+                if (isEditMaterial == "0") {
 
-                    if (index == i) {
+                    for (var i = 0; i < $scope.materialArraySummary.length; i++) {
 
-                        $scope.materialArraySummary.splice(index, 1);
+                        if (index == i) {
+
+                            $scope.materialArraySummary.splice(index, 1);
+                        }
                     }
+
+                    $scope.materialArraySummary.reverse();
+
+                    var i = 1;
+
+                    angular.forEach($scope.materialArraySummary, function (response) {
+
+                        response.Material_Id = $scope.taskId + "" + i;
+
+                        i++;
+
+                        // console.log("DELETE " + JSON.stringify(response));
+                    });
+
+                    $scope.materialArraySummary.reverse();
+
                 }
-
-                $scope.materialArraySummary.reverse();
-
-                var i = 1;
-
-                angular.forEach($scope.materialArraySummary, function (response) {
-
-                    response.Material_Id = $scope.taskId + "" + i;
-
-                    i++;
-
-                    // console.log("DELETE " + JSON.stringify(response));
-                });
-
-                $scope.materialArraySummary.reverse();
 
                 break;
 
             case "Notes":
 
-                for (var i = 0; i < $scope.notesArraySummary.length; i++) {
+                if (isEditNote == "0") {
 
-                    if (index == i) {
+                    for (var i = 0; i < $scope.notesArraySummary.length; i++) {
 
-                        $scope.notesArraySummary.splice(index, 1);
+                        if (index == i) {
+
+                            $scope.notesArraySummary.splice(index, 1);
+                        }
                     }
+
+                    $scope.notesArraySummary.reverse();
+
+                    var i = 1;
+
+                    angular.forEach($scope.notesArraySummary, function (response) {
+
+                        response.Notes_Id = $scope.taskId + "" + i;
+
+                        i++;
+
+                        // console.log("DELETE " + JSON.stringify(response));
+                    });
+
+                    $scope.notesArraySummary.reverse();
+
                 }
-
-                $scope.notesArraySummary.reverse();
-
-                var i = 1;
-
-                angular.forEach($scope.notesArraySummary, function (response) {
-
-                    response.Notes_Id = $scope.taskId + "" + i;
-
-                    i++;
-
-                    // console.log("DELETE " + JSON.stringify(response));
-                });
-
-                $scope.notesArraySummary.reverse();
 
                 break;
 
@@ -1496,23 +1510,61 @@
         valueService.setDebriefChanged(true);
     };
 
-    $rootScope.addMaterialItem = function () {
+    $scope.setDuration = function (index) {
 
-        $scope.dropDown = false;
+        var d = new Date();
 
-        $scope.materialArray.push({
-            materialDefault: materialDefault,
-            Material_Id: $scope.taskId + "" + ($scope.materialArray.length + 1),
-            Charge_Type: valueService.getWarrantyType().value,
-            Charge_Type_Id: valueService.getWarrantyType().id,
-            Description: $scope.description,
-            Product_Quantity: 1,
-            Serial_Type: [{"in": "", "out": "", "number": ""}],
-            Task_Number: $scope.taskId,
-            ItemName: ""
-        });
+        d.setHours(8, 0, 0);
 
-        $mdDialog.hide();
+        $scope.timeArray[index].Duration = moment(d).format("hh:mm");
+
+        $scope.timeArray[index].DurationHours = d.getHours()
+    };
+
+    $scope.setDurationHours = function (item) {
+
+        console.log("DURATION ===== > " + JSON.stringify(item));
+
+        var getHours = new Date(item.DurationValue).getHours();
+
+        var getMinutes = new Date(item.DurationValue).getMinutes();
+
+        if (item.DurationValue != undefined && item.DurationValue != "") {
+
+            item.DurationHours = getHours;
+
+            item.DurationMinutes = getMinutes;
+
+            var hour, minute;
+
+            if (getHours < 10) {
+                hour = "0" + getHours;
+            }
+
+            if (getMinutes < 10) {
+                minute = "0" + getMinutes;
+            }
+
+            item.Duration = hour + ":" + minute;
+        }
+    };
+
+    $scope.checkDuration = function (item) {
+
+        console.log("CHECK DURATION ===== > " + item.Duration);
+
+        if (item.Duration == "" || item.Duration == undefined || item.Duration == "0") {
+
+            item.Duration = "00:00";
+            item.DurationHours = 0;
+            item.DurationMinutes = 0;
+
+        } else if (item.Duration != undefined && item.Duration.trim() == ":") {
+
+            item.Duration = "00:00";
+            item.DurationHours = 0;
+            item.DurationMinutes = 0;
+        }
     };
 
     $scope.addSerialItem = function (index) {
@@ -1529,61 +1581,41 @@
         $scope.materialArray[index]["Serial_Type"].splice($scope.materialArray[index]["Serial_Type"].length - 1, 1);
     };
 
-    $scope.setMaterialSearchText = function (text) {
-        $scope.description = text;
+    $scope.serialNumber = function (serialArray) {
+
+        var serialNumberArray = [];
+
+        angular.forEach(serialArray, function (key, value) {
+
+            serialNumberArray.push(key.number);
+        });
+
+        return serialNumberArray;
     };
 
-    $scope.showDropDown = function (event, description) {
+    $scope.serialIn = function (serialArray) {
 
-        this.MaterialForm.descriptionValue.$setPristine();
+        var serialNumberArray = [];
 
-        this.MaterialForm.descriptionValue.$setPristine(true);
+        angular.forEach(serialArray, function (key, value) {
 
-        this.descriptionValue = '';
+            serialNumberArray.push(key.in);
+        });
 
-        if (description) {
-
-            $mdDialog.show({
-
-                controller: DialogController,
-                templateUrl: "app/views/Dialog.html",
-                parent: angular.element(document.body),
-                targetEvent: event,
-                clickOutsideToClose: true
-
-            }).then(function (selected) {
-
-                $scope.status = "You said the information was '" + selected + "'.";
-
-            }, function () {
-
-                $scope.status = "You cancelled the dialog.";
-            });
-        }
+        return serialNumberArray;
     };
 
-    function DialogController($scope, $mdDialog) {
+    $scope.serialOut = function (serialArray) {
 
-        $scope.selectedWarranty = null;
+        var serialNumberArray = [];
 
-        $scope.warrantyList = [{"id": 1, "value": "Billable"},
-            {"id": 137, "value": "Goodwill"},
-            {"id": 138, "value": "Warranty"},
-            {"id": 2, "value": "Concession"}];
+        angular.forEach(serialArray, function (key, value) {
 
-        $scope.selectedWarrantyType = function (warrantyType) {
+            serialNumberArray.push(key.out);
+        });
 
-            $scope.selectedWarranty = warrantyType;
-
-            valueService.setWarrantyType($scope.selectedWarranty);
-        }
-    }
-
-    $scope.hideDropDown = function () {
-        $scope.dropDown = false;
+        return serialNumberArray;
     };
-
-    $scope.initializeDebrief();
 
     $scope.setWorkType = function (workType, timeObject) {
 
@@ -1698,6 +1730,8 @@
     $scope.setNoteType = function (noteobj) {
         noteobj.Note_Type_Id = noteobj.Note_Type.ID;
     };
+
+    $scope.initializeDebrief();
 
     $rootScope.saveValues = function () {
 
@@ -2227,40 +2261,375 @@
         }
     }
 
-    $scope.serialNumber = function (serialArray) {
+    $scope.customersubmit = false;
 
-        var serialNumberArray = [];
+    $scope.customerSubmit = function () {
 
-        angular.forEach(serialArray, function (key, value) {
+        $scope.customersubmit = true;
 
-            serialNumberArray.push(key.number);
+        $scope.isSubmitted = true;
+
+        $rootScope.dbCall = true;
+
+        var promise = generatePDF();
+
+        promise.then(function () {
+
+            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+
+                fs.root.getFile("Report_" + $scope.summary.taskObject.Task_Number + ".pdf", {
+                    create: true,
+                    exclusive: false
+                }, function (fileEntry) {
+
+                    fileEntry.file(function (file) {
+
+                        var reader = new FileReader();
+
+                        reader.onloadend = function () {
+
+                            console.log("Successful file read: " + this.result);
+
+                            $scope.reportBase64 = this.result.split(",")[1];
+
+                            constantService.setCCEmailID(customerMail.value);
+
+                            var email = {"Email": customerMail.value, "Task_Number": $scope.taskId};
+
+                            localService.updateTaskEmail(email);
+
+                            $scope.saveValues();
+
+                            valueService.saveValues();
+
+                            if (valueService.getNetworkStatus()) {
+
+                                //  valueService.acceptTask(valueService.getTask().Task_Number, function () {
+                                var timeJSONData = [];
+                                var expenseJSONData = [];
+                                var materialJSONData = [];
+                                var noteJSONData = [];
+                                var attachmentJSONData = [];
+
+                                var timeArray = $scope.timeArraySummary;
+                                var expenseArray = $scope.expenseArraySummary;
+                                var materialArray = $scope.materialArraySummary;
+                                var notesArray = $scope.notesArraySummary;
+
+                                for (var i = 0; i < timeArray.length; i++) {
+                                    var chargemethod;
+                                    if ($scope.userType == 'C') {
+                                        chargemethod = timeArray[i].Charge_Method_Id;
+                                    }
+                                    else {
+                                        chargemethod = "";
+                                    }
+                                    var timeData = {
+                                        "task_id": timeArray[i].Task_Number,
+                                        "shift_code": timeArray[i].Shift_Code_Id,
+                                        "overtime_shiftcode": timeArray[i].Time_Code_Id,
+                                        "charge_type": timeArray[i].Charge_Type_Id,
+                                        "duration": timeArray[i].Duration,
+                                        "comments": timeArray[i].Comments,
+                                        "labor_item": timeArray[i].Item_Id,
+                                        "labor_description": timeArray[i].Description,
+                                        "work_type": timeArray[i].Work_Type_Id,
+                                        "start_date": moment.utc(timeArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                                        "end_date": moment.utc(timeArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                                        "charge_method": chargemethod,
+                                        "JobName": timeArray[i].Field_Job_Name_Id
+                                    }
+
+                                    timeJSONData.push(timeData);
+                                }
+
+                                for (var i = 0; i < expenseArray.length; i++) {
+
+                                    var expenseData = {
+                                        "taskId": expenseArray[i].Task_Number,
+                                        "comments": expenseArray[i].Justification,
+                                        "currency": expenseArray[i].Currency_Id.toString(),
+                                        "chargeMethod": expenseArray[i].Charge_Method_Id.toString(),
+                                        "ammount": expenseArray[i].Amount,
+                                        "date": moment.utc(expenseArray[i].Date).format("YYYY-MM-DD"),
+                                        "expenseItem": expenseArray[i].Expense_Type_Id.toString()
+                                    }
+
+                                    expenseJSONData.push(expenseData);
+                                }
+
+                                for (var i = 0; i < materialArray.length; i++) {
+
+                                    angular.forEach(materialArray[i].Serial_Type, function (key) {
+
+                                        var materialData = {
+                                            "charge_method": materialArray[i].Charge_Type_Id.toString(),
+                                            "task_id": materialArray[i].Task_Number,
+                                            "item_description": materialArray[i].Description,
+                                            "product_quantity": "1",
+                                            "comments": "",
+                                            "item": materialArray[i].ItemName,
+                                            "serialin": key.in,
+                                            "serialout": key.out,
+                                            "serial_number": key.number
+                                        }
+
+                                        materialJSONData.push(materialData);
+                                    });
+                                }
+
+                                for (var i = 0; i < notesArray.length; i++) {
+
+                                    var noteData = {
+                                        "Notes_type": notesArray[i].Note_Type_Id,
+                                        "notes_description": notesArray[i].Notes,
+                                        "task_id": notesArray[i].Task_Number,
+                                        "mobilecreatedDate": moment.utc(notesArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z")
+                                    };
+
+                                    noteJSONData.push(noteData);
+                                }
+
+                                for (var i = 0; i < $scope.files.length; i++) {
+
+                                    var attachmentObject = {
+                                        "Data": $scope.files[i].base64,
+                                        "FileName": $scope.files[i].filename,
+                                        "Description": $scope.files[i].fileDisc,
+                                        "Name": $scope.files[i].filename,
+                                        "taskId": $rootScope.selectedTask.Task_Number,
+                                        "contentType": $scope.files[i].contentType
+                                    };
+
+                                    attachmentJSONData.push(attachmentObject);
+                                }
+
+                                var timeUploadJSON = {
+                                    "Time": timeJSONData
+                                };
+
+                                var expenseUploadJSON = {
+                                    "expense": expenseJSONData
+                                };
+
+                                var notesUploadJSON = {
+                                    "Notes": noteJSONData
+                                };
+
+                                var materialUploadJSON = {
+                                    "Material": materialJSONData
+                                };
+
+                                var attachmentUploadJSON = {
+                                    "attachment": attachmentJSONData
+                                };
+
+                                cloudService.uploadTime(timeUploadJSON, function (response) {
+
+                                    console.log("Uploaded Time " + JSON.stringify(response));
+
+                                    cloudService.uploadExpense(expenseUploadJSON, function (response) {
+
+                                        console.log("Uploaded Expense " + JSON.stringify(response));
+
+                                        cloudService.uploadNote(notesUploadJSON, function (response) {
+
+                                            console.log("Uploaded Notes " + JSON.stringify(response));
+
+                                            cloudService.uploadMaterial(materialUploadJSON, function (response) {
+
+                                                console.log("Uploaded Material " + JSON.stringify(response));
+
+                                                if ($scope.files != undefined && $scope.files.length > 0) {
+
+                                                    cloudService.createAttachment(attachmentUploadJSON, function (response) {
+
+                                                        console.log("Uploaded Attachment " + JSON.stringify(response));
+
+                                                        var reportObject = {
+                                                            "Data": $scope.reportBase64,
+                                                            "FileName": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
+                                                            "Description": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
+                                                            "Name": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
+                                                            "taskId": $rootScope.selectedTask.Task_Number,
+                                                            "contentType": "application/pdf"
+                                                        }
+
+                                                        attachmentJSONData = [];
+
+                                                        attachmentJSONData.push(reportObject);
+
+                                                        var reportAttachmentUploadJSON = {
+                                                            "attachment": attachmentJSONData
+                                                        };
+
+                                                        cloudService.createAttachment(reportAttachmentUploadJSON, function (response) {
+                                                            setTimeout(function () {
+
+                                                                var formData = {
+                                                                    "taskid": $scope.taskId,
+                                                                    "taskstatus": "Completed",
+                                                                    "email": constantService.getCCEmailID(),
+                                                                    "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000+00:00"),
+                                                                    "followUp": $scope.engineerObject.followUp.toString(),
+                                                                    "salesQuote": $scope.engineerObject.salesQuote.toString(),
+                                                                    "salesVisit": $scope.engineerObject.salesVisit.toString(),
+                                                                    "salesLead": $scope.engineerObject.salesLead.toString(),
+                                                                    "followuptext": $scope.engineerObject.Follow_Up,
+                                                                    "sparequotetext": $scope.engineerObject.Spare_Quote,
+                                                                    "salesText": $scope.engineerObject.Sales_Visit,
+                                                                    "salesleadText": $scope.engineerObject.Sales_Head,
+                                                                    "denySignature": $scope.engineerObject.isCustomerSignChecked,
+                                                                    "signatureComments": $scope.engineerObject.customerComments
+                                                                };
+
+                                                                cloudService.updateAcceptTask(formData, function (response) {
+
+                                                                    console.log("Task Completed " + JSON.stringify(response));
+
+                                                                    var taskObject = {
+                                                                        Task_Status: "Completed",
+                                                                        Task_Number: $scope.taskId,
+                                                                        Date: new Date(),
+                                                                        Submit_Status: "I"
+                                                                    };
+
+                                                                    localService.updateTaskSubmitStatus(taskObject, function (result) {
+                                                                    });
+
+                                                                    cloudService.OfscActions($rootScope.selectedTask.Activity_Id, false, function (response) {
+                                                                        $rootScope.dbCall = false;
+                                                                        cloudService.getTaskList(function (response) {
+
+
+                                                                        });
+                                                                    });
+                                                                });
+
+                                                            }, 3000);
+                                                        })
+
+                                                    });
+
+                                                } else {
+
+                                                    var reportObject = {
+                                                        "Data": $scope.reportBase64,
+                                                        "FileName": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
+                                                        "Description": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
+                                                        "Name": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
+                                                        "taskId": $rootScope.selectedTask.Task_Number,
+                                                        "contentType": "application/pdf"
+                                                    }
+
+                                                    attachmentJSONData = [];
+
+                                                    attachmentJSONData.push(reportObject);
+
+                                                    var reportAttachmentUploadJSON = {
+                                                        "attachment": attachmentJSONData
+                                                    };
+
+                                                    cloudService.createAttachment(reportAttachmentUploadJSON, function (response) {
+
+                                                        setTimeout(function () {
+
+                                                            var formData = {
+                                                                "taskid": $scope.taskId,
+                                                                "taskstatus": "Completed",
+                                                                "email": constantService.getCCEmailID(),
+                                                                "requestDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000+00:00"),
+                                                                "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000+00:00"),
+                                                                "followUp": $scope.engineerObject.followUp.toString(),
+                                                                "salesQuote": $scope.engineerObject.salesQuote.toString(),
+                                                                "salesVisit": $scope.engineerObject.salesVisit.toString(),
+                                                                "salesLead": $scope.engineerObject.salesLead.toString(),
+                                                                "followuptext": $scope.engineerObject.Follow_Up,
+                                                                "sparequotetext": $scope.engineerObject.Spare_Quote,
+                                                                "salesText": $scope.engineerObject.Sales_Visit,
+                                                                "salesleadText": $scope.engineerObject.Sales_Head,
+                                                                "denySignature": $scope.engineerObject.isCustomerSignChecked,
+                                                                "signatureComments": $scope.engineerObject.customerComments
+                                                            };
+
+                                                            cloudService.updateAcceptTask(formData, function (response) {
+
+                                                                console.log("Task Completed " + JSON.stringify(response));
+
+                                                                var taskObject = {
+                                                                    Task_Status: "Completed",
+                                                                    Task_Number: $scope.taskId,
+                                                                    Date: new Date(),
+                                                                    Submit_Status: "I"
+                                                                };
+
+                                                                localService.updateTaskSubmitStatus(taskObject, function (result) {
+
+                                                                });
+
+                                                                cloudService.OfscActions($rootScope.selectedTask.Activity_Id, false, function (response) {
+                                                                    $rootScope.dbCall = false;
+                                                                    cloudService.getTaskList(function (response) {
+
+                                                                    });
+                                                                });
+                                                            });
+                                                        }, 3000)
+                                                    });
+                                                }
+                                            });
+                                        });
+                                    });
+                                });
+                                // });
+
+                            } else {
+
+                                var taskObject = {
+                                    Task_Status: "Completed",
+                                    Task_Number: valueService.getTask().Task_Number,
+                                    Date: new Date(),
+                                    Submit_Status: "P"
+                                };
+
+                                localService.updateTaskSubmitStatus(taskObject, function (result) {
+
+                                    localService.getTaskList(function (response) {
+
+                                        constantService.setTaskList(response);
+
+                                        $rootScope.dbCall = false;
+
+                                    });
+                                });
+                            }
+                        };
+
+                        reader.readAsDataURL(file);
+                    });
+                });
+            });
+
+        }, function (reason) {
+
         });
-
-        return serialNumberArray;
     };
 
-    $scope.serialIn = function (serialArray) {
+    $scope.SaveSign = function () {
 
-        var serialNumberArray = [];
+        console.log("Inside save sign");
 
-        angular.forEach(serialArray, function (key, value) {
+        console.log($rootScope.signature);
 
-            serialNumberArray.push(key.in);
-        });
+        $scope.summary.engineer = {};
 
-        return serialNumberArray;
-    };
+        $scope.summary.engineer.signature = $rootScope.signature;
 
-    $scope.serialOut = function (serialArray) {
 
-        var serialNumberArray = [];
-
-        angular.forEach(serialArray, function (key, value) {
-
-            serialNumberArray.push(key.out);
-        });
-
-        return serialNumberArray;
+        $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Summary"
+    )
+        ;
+        console.log($scope.selectedIndex);
     };
 
     $scope.calculateDuration = function (obj, key) {
@@ -2450,379 +2819,6 @@
         }, 1000);
     });
 
-    $scope.customersubmit = false;
-
-    $scope.customerSubmit = function () {
-
-        $scope.customersubmit = true;
-
-        $scope.isSubmitted = true;
-
-        $rootScope.dbCall = true;
-
-        var promise = generatePDF();
-
-        promise.then(function () {
-
-            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
-
-                fs.root.getFile("Report_" + $scope.summary.taskObject.Task_Number + ".pdf", {
-                    create: true,
-                    exclusive: false
-                }, function (fileEntry) {
-
-                    fileEntry.file(function (file) {
-
-                        var reader = new FileReader();
-
-                        reader.onloadend = function () {
-
-                            console.log("Successful file read: " + this.result);
-
-                            $scope.reportBase64 = this.result.split(",")[1];
-
-                            constantService.setCCEmailID(customerMail.value);
-
-                            var email = {"Email": customerMail.value, "Task_Number": $scope.taskId};
-
-                            localService.updateTaskEmail(email);
-
-                            $scope.saveValues();
-
-                            valueService.saveValues();
-
-                            if (valueService.getNetworkStatus()) {
-
-                              //  valueService.acceptTask(valueService.getTask().Task_Number, function () {
-                                    var timeJSONData = [];
-                                    var expenseJSONData = [];
-                                    var materialJSONData = [];
-                                    var noteJSONData = [];
-                                    var attachmentJSONData = [];
-
-                                    var timeArray = $scope.timeArraySummary;
-                                    var expenseArray = $scope.expenseArraySummary;
-                                    var materialArray = $scope.materialArraySummary;
-                                    var notesArray = $scope.notesArraySummary;
-
-                                    for (var i = 0; i < timeArray.length; i++) {
-                                        var chargemethod;
-                                        if ($scope.userType == 'C') {
-                                            chargemethod = timeArray[i].Charge_Method_Id;
-                                        }
-                                        else {
-                                            chargemethod = "";
-                                        }
-                                        var timeData = {
-                                            "task_id": timeArray[i].Task_Number,
-                                            "shift_code": timeArray[i].Shift_Code_Id,
-                                            "overtime_shiftcode": timeArray[i].Time_Code_Id,
-                                            "charge_type": timeArray[i].Charge_Type_Id,
-                                            "duration": timeArray[i].Duration,
-                                            "comments": timeArray[i].Comments,
-                                            "labor_item": timeArray[i].Item_Id,
-                                            "labor_description": timeArray[i].Description,
-                                            "work_type": timeArray[i].Work_Type_Id,
-                                            "start_date": moment.utc(timeArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                                            "end_date": moment.utc(timeArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                                            "charge_method": chargemethod,
-                                            "JobName": timeArray[i].Field_Job_Name_Id
-                                        }
-
-                                        timeJSONData.push(timeData);
-                                    }
-
-                                    for (var i = 0; i < expenseArray.length; i++) {
-
-                                        var expenseData = {
-                                            "taskId": expenseArray[i].Task_Number,
-                                            "comments": expenseArray[i].Justification,
-                                            "currency": expenseArray[i].Currency_Id.toString(),
-                                            "chargeMethod": expenseArray[i].Charge_Method_Id.toString(),
-                                            "ammount": expenseArray[i].Amount,
-                                            "date": moment.utc(expenseArray[i].Date).format("YYYY-MM-DD"),
-                                            "expenseItem": expenseArray[i].Expense_Type_Id.toString()
-                                        }
-
-                                        expenseJSONData.push(expenseData);
-                                    }
-
-                                    for (var i = 0; i < materialArray.length; i++) {
-
-                                        angular.forEach(materialArray[i].Serial_Type, function (key) {
-
-                                            var materialData = {
-                                                "charge_method": materialArray[i].Charge_Type_Id.toString(),
-                                                "task_id": materialArray[i].Task_Number,
-                                                "item_description": materialArray[i].Description,
-                                                "product_quantity": "1",
-                                                "comments": "",
-                                                "item": materialArray[i].ItemName,
-                                                "serialin": key.in,
-                                                "serialout": key.out,
-                                                "serial_number": key.number
-                                            }
-
-                                            materialJSONData.push(materialData);
-                                        });
-                                    }
-
-                                    for (var i = 0; i < notesArray.length; i++) {
-
-                                        var noteData = {
-                                            "Notes_type": notesArray[i].Note_Type_Id,
-                                            "notes_description": notesArray[i].Notes,
-                                            "task_id": notesArray[i].Task_Number,
-                                            "mobilecreatedDate": moment.utc(notesArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z")
-                                        };
-
-                                        noteJSONData.push(noteData);
-                                    }
-
-                                    for (var i = 0; i < $scope.files.length; i++) {
-
-                                        var attachmentObject = {
-                                            "Data": $scope.files[i].base64,
-                                            "FileName": $scope.files[i].filename,
-                                            "Description": $scope.files[i].fileDisc,
-                                            "Name": $scope.files[i].filename,
-                                            "taskId": $rootScope.selectedTask.Task_Number,
-                                            "contentType": $scope.files[i].contentType
-                                        };
-
-                                        attachmentJSONData.push(attachmentObject);
-                                    }
-
-                                    var timeUploadJSON = {
-                                        "Time": timeJSONData
-                                    };
-
-                                    var expenseUploadJSON = {
-                                        "expense": expenseJSONData
-                                    };
-
-                                    var notesUploadJSON = {
-                                        "Notes": noteJSONData
-                                    };
-
-                                    var materialUploadJSON = {
-                                        "Material": materialJSONData
-                                    };
-
-                                    var attachmentUploadJSON = {
-                                        "attachment": attachmentJSONData
-                                    };
-
-                                    cloudService.uploadTime(timeUploadJSON, function (response) {
-
-                                        console.log("Uploaded Time " + JSON.stringify(response));
-
-                                        cloudService.uploadExpense(expenseUploadJSON, function (response) {
-
-                                            console.log("Uploaded Expense " + JSON.stringify(response));
-
-                                            cloudService.uploadNote(notesUploadJSON, function (response) {
-
-                                                console.log("Uploaded Notes " + JSON.stringify(response));
-
-                                                cloudService.uploadMaterial(materialUploadJSON, function (response) {
-
-                                                    console.log("Uploaded Material " + JSON.stringify(response));
-
-                                                    if ($scope.files != undefined && $scope.files.length > 0) {
-
-                                                        cloudService.createAttachment(attachmentUploadJSON, function (response) {
-
-                                                            console.log("Uploaded Attachment " + JSON.stringify(response));
-
-                                                            var reportObject = {
-                                                                "Data": $scope.reportBase64,
-                                                                "FileName": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                                                                "Description": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                                                                "Name": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                                                                "taskId": $rootScope.selectedTask.Task_Number,
-                                                                "contentType": "application/pdf"
-                                                            }
-
-                                                            attachmentJSONData = [];
-
-                                                            attachmentJSONData.push(reportObject);
-
-                                                            var reportAttachmentUploadJSON = {
-                                                                "attachment": attachmentJSONData
-                                                            };
-
-                                                            cloudService.createAttachment(reportAttachmentUploadJSON, function (response) {
-                                                                setTimeout(function () {
-
-                                                                    var formData = {
-                                                                        "taskid": $scope.taskId,
-                                                                        "taskstatus": "Completed",
-                                                                        "email": constantService.getCCEmailID(),
-                                                                        "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000+00:00"),
-                                                                        "followUp": $scope.engineerObject.followUp.toString(),
-                                                                        "salesQuote": $scope.engineerObject.salesQuote.toString(),
-                                                                        "salesVisit": $scope.engineerObject.salesVisit.toString(),
-                                                                        "salesLead": $scope.engineerObject.salesLead.toString(),
-                                                                        "followuptext": $scope.engineerObject.Follow_Up,
-                                                                        "sparequotetext": $scope.engineerObject.Spare_Quote,
-                                                                        "salesText": $scope.engineerObject.Sales_Visit,
-                                                                        "salesleadText": $scope.engineerObject.Sales_Head,
-                                                                        "denySignature": $scope.engineerObject.isCustomerSignChecked,
-                                                                        "signatureComments": $scope.engineerObject.customerComments
-                                                                    };
-
-                                                                    cloudService.updateAcceptTask(formData, function (response) {
-
-                                                                        console.log("Task Completed " + JSON.stringify(response));
-
-                                                                        var taskObject = {
-                                                                            Task_Status: "Completed",
-                                                                            Task_Number: $scope.taskId,
-                                                                            Date: new Date(),
-                                                                            Submit_Status: "I"
-                                                                        };
-
-                                                                        localService.updateTaskSubmitStatus(taskObject, function (result) {
-                                                                        });
-
-                                                                        cloudService.OfscActions($rootScope.selectedTask.Activity_Id, false, function (response) {
-                                                                            $rootScope.dbCall = false;
-                                                                            cloudService.getTaskList(function (response) {
-
-
-                                                                            });
-                                                                        });
-                                                                    });
-
-                                                                }, 3000);
-                                                            })
-
-                                                        });
-
-                                                    } else {
-
-                                                        var reportObject = {
-                                                            "Data": $scope.reportBase64,
-                                                            "FileName": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                                                            "Description": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                                                            "Name": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                                                            "taskId": $rootScope.selectedTask.Task_Number,
-                                                            "contentType": "application/pdf"
-                                                        }
-
-                                                        attachmentJSONData = [];
-
-                                                        attachmentJSONData.push(reportObject);
-
-                                                        var reportAttachmentUploadJSON = {
-                                                            "attachment": attachmentJSONData
-                                                        };
-
-                                                        cloudService.createAttachment(reportAttachmentUploadJSON, function (response) {
-
-                                                            setTimeout(function () {
-
-                                                                var formData = {
-                                                                    "taskid": $scope.taskId,
-                                                                    "taskstatus": "Completed",
-                                                                    "email": constantService.getCCEmailID(),
-                                                                    "requestDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000+00:00"),
-                                                                    "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000+00:00"),
-                                                                    "followUp": $scope.engineerObject.followUp.toString(),
-                                                                    "salesQuote": $scope.engineerObject.salesQuote.toString(),
-                                                                    "salesVisit": $scope.engineerObject.salesVisit.toString(),
-                                                                    "salesLead": $scope.engineerObject.salesLead.toString(),
-                                                                    "followuptext": $scope.engineerObject.Follow_Up,
-                                                                    "sparequotetext": $scope.engineerObject.Spare_Quote,
-                                                                    "salesText": $scope.engineerObject.Sales_Visit,
-                                                                    "salesleadText": $scope.engineerObject.Sales_Head,
-                                                                    "denySignature": $scope.engineerObject.isCustomerSignChecked,
-                                                                    "signatureComments": $scope.engineerObject.customerComments
-                                                                };
-
-                                                                cloudService.updateAcceptTask(formData, function (response) {
-
-                                                                    console.log("Task Completed " + JSON.stringify(response));
-
-                                                                    var taskObject = {
-                                                                        Task_Status: "Completed",
-                                                                        Task_Number: $scope.taskId,
-                                                                        Date: new Date(),
-                                                                        Submit_Status: "I"
-                                                                    };
-
-                                                                    localService.updateTaskSubmitStatus(taskObject, function (result) {
-
-                                                                    });
-
-                                                                    cloudService.OfscActions($rootScope.selectedTask.Activity_Id, false, function (response) {
-                                                                        $rootScope.dbCall = false;
-                                                                        cloudService.getTaskList(function (response) {
-
-                                                                        });
-                                                                    });
-                                                                });
-                                                            }, 3000)
-                                                        });
-                                                    }
-                                                });
-                                            });
-                                        });
-                                    });
-                               // });
-
-                               
-
-                            } else {
-
-                                var taskObject = {
-                                    Task_Status: "Completed",
-                                    Task_Number: valueService.getTask().Task_Number,
-                                    Date: new Date(),
-                                    Submit_Status: "P"
-                                };
-
-                                localService.updateTaskSubmitStatus(taskObject, function (result) {
-
-                                    localService.getTaskList(function (response) {
-
-                                        constantService.setTaskList(response);
-
-                                        $rootScope.dbCall = false;
-                                                                               
-                                    });
-                                });
-                            }
-                        };
-
-                        reader.readAsDataURL(file);
-                    });
-                });
-            });
-
-        }, function (reason) {
-
-        });
-    }
-
-    $scope.SaveSign = function () {
-
-        console.log("Inside save sign");
-
-        console.log($rootScope.signature);
-
-        $scope.summary.engineer = {};
-
-        $scope.summary.engineer.signature = $rootScope.signature;
-
-
-        $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Summary"
-    )
-        ;
-        console.log($scope.selectedIndex);
-    }
-
 //Start Date Calendar functions
     $scope.today = function () {
         $scope.startDate = new Date();
@@ -2929,60 +2925,6 @@
         return "";
     }
 
-    $scope.setDuration = function (index) {
-
-        var d = new Date();
-
-        d.setHours(8, 0, 0);
-
-        $scope.timeArray[index].Duration = moment(d).format("hh:mm");
-
-        $scope.timeArray[index].DurationHours = d.getHours()
-    };
-
-    $scope.setDurationHours = function (item) {
-
-        console.log("DURATION ===== > " + JSON.stringify(item));
-
-        var getHours = new Date(item.DurationValue).getHours();
-
-        var getMinutes = new Date(item.DurationValue).getMinutes();
-
-        if (item.DurationValue != undefined && item.DurationValue != "") {
-
-            item.DurationHours = getHours;
-
-            item.DurationMinutes = getMinutes;
-
-            item.Duration = getHours + ":" + getMinutes;
-        }
-
-        // if (item.Duration != undefined && item.Duration != "") {
-        //
-        //     item.DurationHours = parseInt(item.Duration.split(":")[0]);
-        //
-        //     item.DurationMinutes = parseInt(item.Duration.split(":")[1]);
-        // }
-    };
-
-    $scope.checkDuration = function (item) {
-
-        console.log("CHECK DURATION ===== > " + item.Duration);
-
-        if (item.Duration == "" || item.Duration == undefined || item.Duration == "0") {
-
-            item.Duration = "00:00";
-            item.DurationHours = 0;
-            item.DurationMinutes = 0;
-
-        } else if (item.Duration != undefined && item.Duration.trim() == ":") {
-
-            item.Duration = "00:00";
-            item.DurationHours = 0;
-            item.DurationMinutes = 0;
-        }
-    };
-
     $scope.file = "";
 
     $scope.files = [];
@@ -2993,44 +2935,30 @@
 
         // if (file != null)
         //     $scope.image.push(file);
+
         if (file != null) {
+
             valueService.setDebriefChanged(true);
+
             var name = file.name.split(".")[0];
 
             var type = file.name.split(".")[1];
 
-            var fileobj = {"filename": file.name, "fileDisc": name, "file": file, "filetype": type, "data": ""};
-
-            var fileObject = null;
+            var fileObject = {"filename": file.name, "fileDisc": name, "file": file, "filetype": type, "data": ""};
 
             Upload.base64DataUrl(file).then(function (urls) {
 
                 console.log(urls);
 
-                fileobj.data = urls;
+                fileObject.data = urls;
 
-                fileobj.contentType = fileobj.data.split(",")[0].split(";")[0].split(":")[1];
+                fileObject.contentType = fileObject.data.split(",")[0].split(";")[0].split(":")[1];
 
-                fileobj.base64 = fileobj.data.split(",")[1];
+                fileObject.base64 = fileObject.data.split(",")[1];
 
-                $scope.image.push(fileobj);
+                $scope.image.push(fileObject);
 
                 console.log($scope.files);
-
-                //  var fileData=urls.split(",")[1];
-                //  console.log(fileData);
-                //  var contentTypeOfFile= urls.split(",")[0].split(";")[0];
-                //  console.log(contentTypeOfFile);
-                // fileObject ={
-                //   "Data":urls.split(",")[1],
-                //   "FileName":name,
-                //   "Description":name,
-                //   "Name":name,
-                //   "taskId":$rootScope.selectedTask.Task_Number,
-                //   "contentType":contentTypeOfFile
-                // };
-                //  $scope.files.push(fileObject);
-                //  console.log($scope.files);
             });
         }
     };
@@ -3043,9 +2971,7 @@
 
             var type = file.name.split(".")[1];
 
-            var fileobj = {"filename": file.name, "fileDisc": name, "file": file, "filetype": type, "data": ""};
-
-            var fileObject = null;
+            var fileObject = {"filename": file.name, "fileDisc": name, "file": file, "filetype": type, "data": ""};
 
             valueService.setDebriefChanged(true);
 
@@ -3053,30 +2979,16 @@
 
                 console.log(urls);
 
-                fileobj.data = urls;
+                fileObject.data = urls;
 
-                fileobj.contentType = fileobj.data.split(",")[0].split(";")[0].split(":")[1];
+                fileObject.contentType = fileObject.data.split(",")[0].split(";")[0].split(":")[1];
 
-                fileobj.base64 = fileobj.data.split(",")[1];
+                fileObject.base64 = fileObject.data.split(",")[1];
 
-                $scope.files.push(fileobj);
+                $scope.files.push(fileObject);
 
                 console.log($scope.files);
 
-                //  var fileData=urls.split(",")[1];
-                //  console.log(fileData);
-                //  var contentTypeOfFile= urls.split(",")[0].split(";")[0];
-                //  console.log(contentTypeOfFile);
-                // fileObject ={
-                //   "Data":urls.split(",")[1],
-                //   "FileName":name,
-                //   "Description":name,
-                //   "Name":name,
-                //   "taskId":$rootScope.selectedTask.Task_Number,
-                //   "contentType":contentTypeOfFile
-                // };
-                //  $scope.files.push(fileObject);
-                //  console.log($scope.files);
             });
         }
     };
@@ -4447,5 +4359,78 @@
 
 
     }
+
+    $rootScope.addMaterialItem = function () {
+
+        $scope.dropDown = false;
+
+        $scope.materialArray.push({
+            materialDefault: materialDefault,
+            Material_Id: $scope.taskId + "" + ($scope.materialArray.length + 1),
+            Charge_Type: valueService.getWarrantyType().value,
+            Charge_Type_Id: valueService.getWarrantyType().id,
+            Description: $scope.description,
+            Product_Quantity: 1,
+            Serial_Type: [{"in": "", "out": "", "number": ""}],
+            Task_Number: $scope.taskId,
+            ItemName: ""
+        });
+
+        $mdDialog.hide();
+    };
+
+    $scope.setMaterialSearchText = function (text) {
+        $scope.description = text;
+    };
+
+    $scope.showDropDown = function (event, description) {
+
+        this.MaterialForm.descriptionValue.$setPristine();
+
+        this.MaterialForm.descriptionValue.$setPristine(true);
+
+        this.descriptionValue = '';
+
+        if (description) {
+
+            $mdDialog.show({
+
+                controller: DialogController,
+                templateUrl: "app/views/Dialog.html",
+                parent: angular.element(document.body),
+                targetEvent: event,
+                clickOutsideToClose: true
+
+            }).then(function (selected) {
+
+                $scope.status = "You said the information was '" + selected + "'.";
+
+            }, function () {
+
+                $scope.status = "You cancelled the dialog.";
+            });
+        }
+    };
+
+    function DialogController($scope, $mdDialog) {
+
+        $scope.selectedWarranty = null;
+
+        $scope.warrantyList = [{"id": 1, "value": "Billable"},
+            {"id": 137, "value": "Goodwill"},
+            {"id": 138, "value": "Warranty"},
+            {"id": 2, "value": "Concession"}];
+
+        $scope.selectedWarrantyType = function (warrantyType) {
+
+            $scope.selectedWarranty = warrantyType;
+
+            valueService.setWarrantyType($scope.selectedWarranty);
+        }
+    }
+
+    $scope.hideDropDown = function () {
+        $scope.dropDown = false;
+    };
   
 });
