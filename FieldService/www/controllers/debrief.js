@@ -4208,13 +4208,12 @@
                         }
                     }
                 }
-                rectExpenseHeight = yExpenseFieldName - yExpenseField  + 25;
+                rectExpenseHeight = yExpenseFieldValue - yExpenseField ;
                 doc1.rect(20, yExpenseField + 10, rectExpenseWidth, rectExpenseHeight);
 
-                var l = 0, xMaterialField = 25, yMaterialField = yExpenseFieldName + 40,
+                var l = 0, xMaterialField = 25, yMaterialField = yExpenseField + rectExpenseHeight + 20;// yExpenseFieldName + 40,
                     rectMaterialWidth = 660, rectMaterialHeight = 25 * $scope.summary.materialArray.length,
                     yMaterialFieldName = yMaterialField + 25, yMaterialFieldValue;
-
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 doc1.text(xMaterialField, yMaterialField + 5, $filter('translate')('Materials'))
