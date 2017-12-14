@@ -9,12 +9,17 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
     $scope.ProductQuantity = 1;
 
     $scope.isFutureDate = valueService.getIfFutureDateTask();
+
     $rootScope.showDebrief = false;
+
     $rootScope.selectedCategory = 'Field Service';
+
     changeLanguage(valueService.getLanguage());
 
     function changeLanguage(lang) {
+
         valueService.setLanguage(lang);
+
         switch (lang) {
             case "en":
                 $translate.use('en').then(function () {
@@ -67,9 +72,52 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
             if (valueService.getNetworkStatus()) {
 
+                // var customerAddress = {
+                //     addressComponent: {
+                //         city: 'city name',
+                //         district: 'County name',
+                //         province: 'name of province',
+                //         street: 'street name',
+                //         streetNumber: 'house number'
+                //     },
+                //     cityCode: 'city code'
+                // };
+
+                // var customerAddress = "上海";
+
+                var customerAddress = $scope.taskDetails.Street_Address + "," + $scope.taskDetails.City;
+
                 var map = new BMap.Map("allmap");
 
-                map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
+                var geoCoder = new BMap.Geocoder();
+
+                var longitude = 118.807395;
+
+                var latitude = 32.065315;
+
+                console.log("POINT START ");
+
+                geoCoder.getPoint(customerAddress, function (point) {
+
+                    console.log("POINT " + JSON.stringify( point));
+
+                    if (point) {
+
+                        console.log("POINT " + JSON.stringify(point));
+
+                        longitude = point.lng;
+
+                        latitude = point.lat;
+                    }
+                });
+
+                var marker = new BMap.Marker(new BMap.Point(longitude, latitude));
+
+                map.addOverlay(marker);
+
+                map.centerAndZoom(new BMap.Point(longitude, latitude), 14);
+
+                // map.setCurrentCity("??");
 
                 map.addControl(new BMap.MapTypeControl({
                     mapTypes: [
@@ -78,10 +126,9 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                     ]
                 }));
 
-                map.setCurrentCity("??");
-
                 map.enableScrollWheelZoom(true);
             }
+
             $scope.chinaUser = true;
 
         } else {
@@ -101,7 +148,9 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
         $('#mapToggle').click(function () {
 
             if (firstload) {
+
                 if (valueService.getNetworkStatus()) {
+
                     map = new google.maps.Map(document.getElementById('map'), {
                         center: {lat: -34.397, lng: 150.644},
                         zoom: 8
@@ -116,7 +165,9 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
             if (mapClose) {
 
                 if ($scope.chinaUser == false) {
+
                     if (valueService.getNetworkStatus()) {
+
                         document.getElementById('map').style.display = "block";
 
                         google.maps.event.trigger(document.getElementById('map'), 'resize');
@@ -218,6 +269,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
     $scope.defaultTasks = ["1/2 SOCKET", "Cage Retainer Tool", "Power Torque Erench", "Plyers", "3/4 SOCKET"];
 
     $scope.goToBack = function () {
+
         if (valueService.getUserType().defaultView == "My Task") {
 
             $state.go("myFieldJob");
@@ -235,7 +287,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
     $scope.goToOnsiteReq = function () {
         $state.go('todo');
-    }
+    };
 
     $scope.add = function () {
 
@@ -462,19 +514,77 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
         $scope.mapIsClicked = !$scope.mapIsClicked;
     };
+
 });
 
-// angular.forEach(valueService.getContact(), function (key, value) {
+// var geocoder; //global variable for GEOCoder
 //
-//     var contactObj = {};
+// var map; //global variable for Baidu Map
 //
-//     contactObj.Contact_Name = key.Contact_Name;
-//     contactObj.Home_Phone = key.Home_Phone;
-//     contactObj.Mobile_Phone = key.Mobile_Phone;
-//     contactObj.Fax_Phone = key.Fax_Phone;
-//     contactObj.Office_Phone = key.Office_Phone;
-//     contactObj.Email = key.Email;
+// function initialize() {
 //
-//     contactArray.push(contactObj);
+//     //get map-canvas as Baidu Map painting area
 //
-// });
+//     map = new BMap.Map("map");
+//
+//     var point = newBMap.Point(116.30814954222, 40.056885091681);
+//
+//     map.centerAndZoom(point, 16); //you have centralize the map
+//
+//     map.addControl(newBMap.NavigationControl()); //add Navigation Controller
+//
+//     map.addControl(new BMap.MapTypeControl()); //add Map Type Controller
+//
+//     map.addControl(new BMap.OverviewMapControl()); //add Overview Map Controller
+//
+//     map.enableScrollWheelZoom(); //scroll wheel zoom is not working well in Mac book
+//
+//     map.removeControl(CopyrightControl);
+//
+//     map.addOverlay(new BMap.Marker(point)); //create new maker
+//
+//     geocoder = new BMap.Geocoder(); //create new GEO coder //add event listener depends on needs.
+//
+//     map.addEventListener('zoomend', function () {
+//
+//     });
+//
+//     //show content in InfoWindow
+//     function createInfoWindowContent(address, latlng) {
+//
+//         return [address, 'LatLng:' + latlng.lat + ',' + latlng.lng].join('');
+//     }
+//
+//     //Convert new address into Map Marker on Baidu Map
+//     function codeAddress() {
+//
+//     }
+//
+//     var address = "chennai";
+//
+//     geocoder.getPoint(address, function (point) {
+//
+//         alert(point.lat + point.lng);
+//
+//         //if the GEO coder error, then it will return null.
+//         if (point) {
+//
+//             map.centerAndZoom(point, 16);
+//
+//             var marker = new BMap.Marker(point);
+//
+//             map.addOverlay(marker);
+//
+//             var opts = {
+//                 width: 250,
+//                 height: 50
+//             };
+//
+//             var infoWindow = newBMap.InfoWindow(createInfoWindowContent(address, point), opts);
+//
+//             map.openInfoWindow(infoWindow, map.getCenter());
+//         }
+//     });
+// }
+//
+// initialize(); //Call initialize function
