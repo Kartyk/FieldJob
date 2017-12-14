@@ -2198,13 +2198,13 @@ md-select.md-default-theme ._md-select-value, md-select ._md-select-value{
     margin-bottom: 20px;
     padding: 10px !important;
 }
-.note-textarea-NC {
+.note-textarea-NC, .expenses-textarea-NC {
     background-color: #f0f0f0 !important;
     border: none !important;
     overflow-y: hidden;
     margin-bottom: 20px;
     padding: 10px !important;
-    height: 40px ;
+    height: 40px;
 }
 .noBorder-radius {
     padding-bottom: 0px !important;

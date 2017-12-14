@@ -810,7 +810,14 @@
                 $scope.isEditExpense = "1";
 
                 $scope.expenseArray[0] = Object.create(item);
+                setTimeout(function () {
 
+                    var height = $(".expenses-textarea-NC").css('max-height').substring(0, 3);
+
+                    while ($(".expenses-textarea-NC").outerHeight() < $(".expenses-textarea-NC").prop('scrollHeight') && $(".expenses-textarea-NC").prop('scrollHeight') < height) {
+                        $(".expenses-textarea-NC").height($(".expenses-textarea-NC").height() + 1);
+                    }
+                }, 300);
                 angular.forEach($scope.expenseArraySummary, function (response) {
 
                     console.log("EDIT " + JSON.stringify(response));
@@ -849,7 +856,7 @@
                     while ($(".note-textarea-NC").outerHeight() < $(".note-textarea-NC").prop('scrollHeight') && $(".note-textarea-NC").prop('scrollHeight') < height) {
                         $(".note-textarea-NC").height($(".note-textarea-NC").height() + 1);
                     }
-                }, 100);
+                }, 300);
 
                 break;
 
@@ -952,7 +959,7 @@
                     $scope.expenseArraySummary = $scope.tempArray;
 
                     $scope.isEditExpense = "0";
-
+                    $(".expenses-textarea-NC").height(20);
                     setDefaultExpenseObject();
                 }
 
@@ -1036,7 +1043,7 @@
                     $scope.notesArraySummary = $scope.tempArray;
 
                     $scope.isEditNote = "0";
-
+                    $(".note-textarea-NC").height(20);
                     setDefaultNoteObject();
                 }
 
@@ -1135,7 +1142,7 @@
                     $scope.expenseArraySummary.reverse();
 
                     $scope.isEditExpense = "0";
-
+                    $(".expenses-textarea-NC").height(20);
                     setDefaultExpenseObject();
                 }
 
@@ -1267,6 +1274,7 @@
                     $scope.timeArraySummary.push(newObject);
 
                     $scope.timeArraySummary.reverse();
+                    $scope.isEditTime = "0";
                 }
 
                 angular.forEach($scope.timeArraySummary, function (response) {
@@ -1300,6 +1308,8 @@
                     $scope.expenseArraySummary.push(newObject);
 
                     $scope.expenseArraySummary.reverse();
+                    $scope.isEditExpense = "0";
+                    $(".expenses-textarea-NC").height(20);
                 }
 
                 angular.forEach($scope.expenseArraySummary, function (response) {
@@ -1333,6 +1343,7 @@
                     $scope.materialArraySummary.push(newObject);
 
                     $scope.materialArraySummary.reverse();
+                    $scope.isEditMaterial = "0";
                 }
 
                 angular.forEach($scope.materialArraySummary, function (response) {
@@ -1362,6 +1373,8 @@
                     $scope.notesArraySummary.push(newObject);
 
                     $scope.notesArraySummary.reverse();
+                    $scope.isEditNote = "0";
+                    $(".note-textarea-NC").height(20);
                 }
 
                 angular.forEach($scope.notesArraySummary, function (response) {
