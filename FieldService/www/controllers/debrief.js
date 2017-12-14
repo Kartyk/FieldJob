@@ -1384,7 +1384,7 @@
 
             case "Time":
 
-                if (isEditTime == "0") {
+                if ($scope.isEditTime == "0") {
 
                     for (var i = 0; i < $scope.timeArraySummary.length; i++) {
 
@@ -1414,7 +1414,7 @@
 
             case "Expenses":
 
-                if (isEditExpense == "0") {
+                if ($scope.isEditExpense == "0") {
 
                     for (var i = 0; i < $scope.expenseArraySummary.length; i++) {
 
@@ -1444,7 +1444,7 @@
 
             case "Material":
 
-                if (isEditMaterial == "0") {
+                if ($scope.isEditMaterial == "0") {
 
                     for (var i = 0; i < $scope.materialArraySummary.length; i++) {
 
@@ -1475,7 +1475,7 @@
 
             case "Notes":
 
-                if (isEditNote == "0") {
+                if ($scope.isEditNote == "0") {
 
                     for (var i = 0; i < $scope.notesArraySummary.length; i++) {
 
@@ -2994,7 +2994,7 @@
     };
 
     $scope.reviewSummary = function () {
-        // var promise = generatePDF();
+        var promise = generatePDF();
         $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Customer Signature"
     )
 
