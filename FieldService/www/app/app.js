@@ -375,7 +375,7 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
 
                 switch (stagesSign.title) {
 
-                    case 'Engineer Signature':
+                    case 'Service Representative Signature':
                         $rootScope.Engsignature = $scope.dataurl;
                         break;
 
@@ -404,7 +404,7 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
 
                 switch (stagesSign.title) {
 
-                    case 'Engineer Signature':
+                    case 'Service Representative Signature':
                         $rootScope.engineerSignTime = new Date().toLocaleString();
                         break;
 
@@ -427,7 +427,7 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
 
                     switch (stagesSign.title) {
 
-                        case 'Engineer Signature':
+                        case 'Service Representative Signature':
                             $rootScope.Engsignature = $scope.dataurl;
                             break;
 
@@ -450,7 +450,7 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
 
                 switch (stagesTime.title) {
 
-                    case 'Engineer Signature':
+                    case 'Service Representative Signature':
                         $rootScope.engineerSignTime = '';
                         $rootScope.Engsignature = '';
                         break;
@@ -474,7 +474,7 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
 
                 switch (stagesTime.title) {
 
-                    case 'Engineer Signature':
+                    case 'Service Representative Signature':
                         $rootScope.engineerSignTime = '';
                         $rootScope.Engsignature = '';
                         break;

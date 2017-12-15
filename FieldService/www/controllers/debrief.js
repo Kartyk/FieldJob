@@ -61,7 +61,7 @@
             {title: "Material", templateUrl: "app/views/Material.html"},
             {title: "Notes", templateUrl: "app/views/Notes.html"},
             {title: "Attachments", templateUrl: "app/views/Attachments.html"},
-            {title: "Engineer Signature", templateUrl: "app/views/EngineerSignature.html"},
+            { title: "Service Representative Signature", templateUrl: "app/views/EngineerSignature.html"},
             {title: "Summary", templateUrl: "app/views/Summary.html"},
             {title: "Customer Signature", templateUrl: "app/views/CustomerSignature.html"}
         ];
@@ -1536,29 +1536,11 @@
 
     $scope.setDurationHours = function (item) {
 
-        console.log("DURATION ===== > " + JSON.stringify(item));
+        if (item.Duration != undefined && item.Duration != "") {
 
-        var getHours = new Date(item.DurationValue).getHours();
+            item.DurationHours = parseInt(item.Duration.split(":")[0]);
 
-        var getMinutes = new Date(item.DurationValue).getMinutes();
-
-        if (item.DurationValue != undefined && item.DurationValue != "") {
-
-            item.DurationHours = getHours;
-
-            item.DurationMinutes = getMinutes;
-
-            var hour, minute;
-
-            if (getHours < 10) {
-                hour = "0" + getHours;
-            }
-
-            if (getMinutes < 10) {
-                minute = "0" + getMinutes;
-            }
-
-            item.Duration = hour + ":" + minute;
+            item.DurationMinutes = parseInt(item.Duration.split(":")[1]);
         }
     };
 
@@ -3083,13 +3065,36 @@
             $scope.customerText = "Customer Signature";
         }
     };
-
+    var pageHeight;
+    function checkPdfHeight(ycord, height,yField,rectWidth,drawRect,rectHght)
+    {
+        var pdfsplit = false;
+        var pageCount = 1;
+        if (doc1.internal.pages.length > 2)
+        {
+            ycord = ycord * (doc1.internal.pages.length-1)
+        }
+        if (ycord >= height) {
+            var rectHeight = ycord - yField;
+            if (drawRect == undefined || drawRect == true)
+                if (rectHght)
+                {
+                    rectHeight = rectHght;
+                }
+            doc1.rect(20, yField + 10, rectWidth, rectHeight);
+            doc1.addPage(700, 850);
+            pageHeight = pageHeight + 850;
+            pdfsplit = true;
+           
+        }
+        return pdfsplit;
+    }
     function generatePDF() {
 
         var defer = $q.defer();
 
         setTimeout(function () {
-
+            pageHeight = doc1.internal.pageSize.height;
             if (valueService.getTask().Country == "People's Republic of China") {
 
                 var canvas = document.getElementById('canvas');
@@ -3195,7 +3200,7 @@
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
-                    ctx.fillText('To run the field', 530, 152 + custBigYvalue);
+                    ctx.fillText($scope.summary.taskObject.Job_Description, 530, 152 + custBigYvalue);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
@@ -3980,11 +3985,17 @@
                 while (i < $scope.summary.notesArray.length) {
                     xNotesField1 = xNotesField;
                     //yNotesField1 = yNotesField + 22;
-                    yNotesField1_val = yNotesField1 + 10 * ++i;
+                    ++i;
+                    yNotesField1_val = yNotesField1 + 20 ;
                     xNotesField2 = xNotesField1 + 325;
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
+                    var isAdded = checkPdfHeight(yNotesField1_val, pageHeight, yNotesField, rectNotesWidth);
+                    if (isAdded) {
+                        yNotesField1_val = 10;
+                        yNotesField = -10;
+                    }
                     if ($scope.summary.notesArray[i - 1].Note_Type)
                         doc1.text(xNotesField1, yNotesField1_val, $filter('translate')($scope.summary.notesArray[i - 1].Note_Type))
 
@@ -4009,6 +4020,11 @@
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 doc1.text(xAttachField, yAttachField, $filter('translate')('Attachments'))
+                var isAdded = checkPdfHeight(yAttachField + 5 + 50, pageHeight, yAttachField + 5, rectAttachWidth, true, rectAttachHeight);
+                if (isAdded) {
+                    yAttachField = -5;
+                    
+                }
                 doc1.rect(20, yAttachField + 5, rectAttachWidth, rectAttachHeight)
                 angular.forEach($scope.files, function (file, value) {
                     // setTimeout(function () {
@@ -4046,9 +4062,19 @@
 
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
+                var isAdded = checkPdfHeight(yTimeField, pageHeight, yMaterialField, rectMaterialWidth, false);
+                if (isAdded) {
+                    yTimeFieldName = 30;
+                    yTimeField = 10;
+                }
                 doc1.text(xTimeField, yTimeField, $filter('translate')('Time'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
+                var isAdded = checkPdfHeight(yTimeFieldName, pageHeight, yTimeField, rectMaterialWidth);
+                if (isAdded) {
+                    yTimeFieldName = 30;
+                    yTimeField = 5;
+                }
                 doc1.text(xTimeField, yTimeFieldName, $filter('translate')('Date'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
@@ -4085,8 +4111,7 @@
                 doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldName, $filter('translate')('Duration'))
                 doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldName, $filter('translate')('Item'))
                 //doc1.text(xTimeField+(timeWidth * (7)), yTimeFieldName, 'Description')
-
-                doc1.rect(20, yTimeField + 5, rectTimeWidth, rectTimeHeight+10)
+                               
                 while (j < $scope.summary.timeArray.length) {
                     coloumnNo = 1;
                     yTimeFieldName = yTimeField + 20 * ++j;
@@ -4095,6 +4120,11 @@
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
+                    var isAdded = checkPdfHeight(yTimeFieldValue, pageHeight, yTimeField + 15, rectTimeWidth);
+                    if (isAdded) {
+                        yTimeFieldValue = 10;
+                        yTimeField = -10;
+                    }
                     if ($scope.summary.timeArray[j - 1].Date)
                         doc1.text(xTimeField, yTimeFieldValue, $scope.summary.timeArray[j - 1].Date)
 
@@ -4168,71 +4198,92 @@
                     //    i++;
 
                 }
-                var k = 0, xExpenseField = 25, yExpenseField = yTimeField + rectTimeHeight + 25, rectExpenseWidth = 660,
-                    rectExpenseHeight = 22 * $scope.summary.expenseArray.length, yExpenseFieldName = yExpenseField + 25,
-                    yExpenseFieldValue,xExpenseField1;
-                doc1.setFontSize(22)
-                doc1.setFontType('bold')
-                doc1.text(xExpenseField, yExpenseField + 5, $filter('translate')('Expenses'))
-                // doc1.rect(20, yExpenseField + 10, rectExpenseWidth, rectExpenseHeight)
-                doc1.setFontSize(22)
-                doc1.setFontType('bold')
-                doc1.text(xExpenseField, yExpenseFieldName, $filter('translate')('Date'))
-                doc1.setFontSize(22)
-                doc1.setFontType('bold')
-                doc1.text(xExpenseField + 140, yExpenseFieldName, $filter('translate')('Expense Type'))
-                doc1.setFontSize(22)
-                doc1.setFontType('bold')
-                doc1.text(xExpenseField + 305, yExpenseFieldName, $filter('translate')('Charge Method'))
-                doc1.setFontSize(22)
-                doc1.setFontType('bold')
-                doc1.text(xExpenseField + 470, yExpenseFieldName, $filter('translate')('Justification'))
-                yExpenseFieldValue = yExpenseFieldName + 10;
-                while (k < $scope.summary.expenseArray.length) {
-                    // yExpenseFieldName =  ;
-                    yExpenseFieldValue = yExpenseFieldName + 15 * ++k;
-                    xExpenseField1 = xExpenseField + 450;
 
-                    doc1.setFontSize(22)
-                    doc1.setFontType('normal')
-                    if ($scope.summary.expenseArray[k - 1].Date)
-                        doc1.text(xExpenseField, yExpenseFieldValue, $scope.summary.expenseArray[k - 1].Date)
+                rectTimeHeight = yTimeFieldValue - yTimeField;
+                doc1.rect(20, yTimeField + 5, rectTimeWidth, rectTimeHeight + 10)
 
-                    doc1.setFontSize(22)
-                    doc1.setFontType('normal')
-                    if ($scope.summary.expenseArray[k - 1].Expense_Type)
-                        doc1.text(xExpenseField + 140, yExpenseFieldValue, $filter('translate')($scope.summary.expenseArray[k - 1].Expense_Type))
+                //var k = 0, xExpenseField = 25, yExpenseField = yTimeField + rectTimeHeight + 25, rectExpenseWidth = 660,
+                //    rectExpenseHeight = 22 * $scope.summary.expenseArray.length, yExpenseFieldName = yExpenseField + 25,
+                //    yExpenseFieldValue,xExpenseField1;
+                //doc1.setFontSize(22)
+                //doc1.setFontType('bold')
+                //doc1.text(xExpenseField, yExpenseField + 5, $filter('translate')('Expenses'))
+                //// doc1.rect(20, yExpenseField + 10, rectExpenseWidth, rectExpenseHeight)
+                //doc1.setFontSize(22)
+                //doc1.setFontType('bold')
+                //doc1.text(xExpenseField, yExpenseFieldName, $filter('translate')('Date'))
+                //doc1.setFontSize(22)
+                //doc1.setFontType('bold')
+                //doc1.text(xExpenseField + 140, yExpenseFieldName, $filter('translate')('Expense Type'))
+                //doc1.setFontSize(22)
+                //doc1.setFontType('bold')
+                //doc1.text(xExpenseField + 305, yExpenseFieldName, $filter('translate')('Charge Method'))
+                //doc1.setFontSize(22)
+                //doc1.setFontType('bold')
+                //doc1.text(xExpenseField + 470, yExpenseFieldName, $filter('translate')('Justification'))
+                //yExpenseFieldValue = yExpenseFieldName + 10;
+                //while (k < $scope.summary.expenseArray.length) {
+                //    // yExpenseFieldName =  ;
+                //    ++k;
+                //    yExpenseFieldValue = yExpenseFieldName + 20 ;
+                //    xExpenseField1 = xExpenseField + 450;
 
-                    doc1.setFontSize(22)
-                    doc1.setFontType('normal')
-                    if ($scope.summary.expenseArray[k - 1].Charge_Method)
-                        doc1.text(xExpenseField + 305, yExpenseFieldValue, $filter('translate')($scope.summary.expenseArray[k - 1].Charge_Method))
+                //    doc1.setFontSize(22)
+                //    doc1.setFontType('normal')
 
-                    doc1.setFontSize(22)
-                    doc1.setFontType('normal')
-                    //if ($scope.summary.expenseArray[k - 1].Justification)
-                    //    doc1.text(xExpenseField + 470, yExpenseFieldValue, $filter('translate')($scope.summary.expenseArray[k - 1].Justification))
-                    if ($scope.summary.expenseArray[k - 1].Justification) {
-                        var splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.expenseArray[k - 1].Justification), rectNotesWidth - xExpenseField1);
-                        doc1.text(xExpenseField1, yExpenseFieldValue, splitTitle)
-                        if (splitTitle.length > 1) {
-                            yExpenseFieldValue = yExpenseFieldValue + 5 * splitTitle.length;
-                            yExpenseFieldName = yExpenseFieldValue;
-                        }
-                    }
-                }
-                rectExpenseHeight = yExpenseFieldValue - yExpenseField ;
-                doc1.rect(20, yExpenseField + 10, rectExpenseWidth, rectExpenseHeight);
+                //    var isAdded = checkPdfHeight(yExpenseFieldValue, pageHeight, yExpenseField, rectExpenseWidth);
+                //    if (isAdded) {
+                //        yExpenseFieldValue = 10;
+                //        yExpenseField = -10;
+                //    }
+                //    if ($scope.summary.expenseArray[k - 1].Date)
+                //        doc1.text(xExpenseField, yExpenseFieldValue, $scope.summary.expenseArray[k - 1].Date)
+                //    doc1.setFontSize(22)
+                //    doc1.setFontType('normal')
 
-                var l = 0, xMaterialField = 25, yMaterialField = yExpenseField + rectExpenseHeight + 20;// yExpenseFieldName + 40,
+                //    if ($scope.summary.expenseArray[k - 1].Expense_Type)
+                //        doc1.text(xExpenseField + 140, yExpenseFieldValue, $filter('translate')($scope.summary.expenseArray[k - 1].Expense_Type))
+
+                //    doc1.setFontSize(22)
+                //    doc1.setFontType('normal')
+                //    if ($scope.summary.expenseArray[k - 1].Charge_Method)
+                //        doc1.text(xExpenseField + 305, yExpenseFieldValue, $filter('translate')($scope.summary.expenseArray[k - 1].Charge_Method))
+
+                //    doc1.setFontSize(22)
+                //    doc1.setFontType('normal')
+                //    //if ($scope.summary.expenseArray[k - 1].Justification)
+                //    //    doc1.text(xExpenseField + 470, yExpenseFieldValue, $filter('translate')($scope.summary.expenseArray[k - 1].Justification))
+                //    if ($scope.summary.expenseArray[k - 1].Justification) {
+                //        var splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.expenseArray[k - 1].Justification), rectNotesWidth - xExpenseField1);
+                //        doc1.text(xExpenseField1, yExpenseFieldValue, splitTitle)
+                //        if (splitTitle.length > 1) {
+                //            yExpenseFieldValue = yExpenseFieldValue + 5 * splitTitle.length;
+                //            yExpenseFieldName = yExpenseFieldValue;
+                //        }
+                //    }
+                //}
+                //rectExpenseHeight = yExpenseFieldValue - yExpenseField ;
+                //doc1.rect(20, yExpenseField + 10, rectExpenseWidth, rectExpenseHeight);
+
+                var l = 0, xMaterialField = 25, yMaterialField = yTimeField + rectTimeHeight + 25;// yExpenseFieldName + 40,
                     rectMaterialWidth = 660, rectMaterialHeight = 25 * $scope.summary.materialArray.length,
                     yMaterialFieldName = yMaterialField + 25, yMaterialFieldValue;
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
+                var isAdded = checkPdfHeight(yMaterialField + 5, pageHeight, yMaterialField, rectMaterialWidth, false);
+                if (isAdded) {
+                    yMaterialFieldName = 30;
+                    yMaterialField = 5;
+                }
                 doc1.text(xMaterialField, yMaterialField + 5, $filter('translate')('Materials'))
                 // doc1.rect(20, yMaterialField + 10, rectMaterialWidth, rectMaterialHeight)
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
+                var isAdded = checkPdfHeight(yMaterialFieldName, pageHeight, yMaterialField, rectMaterialWidth);
+                if (isAdded) {
+                    yMaterialFieldName = 10;
+                    yMaterialField = 5;
+                }
                 doc1.text(25, yMaterialFieldName, $filter('translate')('Charge\nType'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
@@ -4258,7 +4309,6 @@
                 yMaterialFieldValue = yMaterialFieldName + 20;
 
                 while (l < $scope.summary.materialArray.length) {
-                    // yMaterialFieldName =  ;
                     // yMaterialFieldValue = yMaterialFieldValue + 10 *
                     ++l;
                     doc1.setFontSize(22)
@@ -4266,6 +4316,11 @@
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
+                    var isAdded = checkPdfHeight(yMaterialFieldValue, pageHeight, yMaterialField, rectMaterialWidth);
+                    if (isAdded) {
+                        yMaterialFieldValue = 10;
+                        yMaterialField = -10;
+                    }
                     if ($scope.summary.materialArray[l - 1].Charge_Type)
                         doc1.text(25, yMaterialFieldValue, $filter('translate')($scope.summary.materialArray[l - 1].Charge_Type))
 
@@ -4291,7 +4346,6 @@
                     doc1.setFontType('normal')
                     if ($scope.summary.materialArray[l - 1].serialOut)
                         doc1.text(394, yMaterialFieldValue, $scope.summary.materialArray[l - 1].serialOut)
-                    // doc1.text(320, yMaterialFieldName, 'Serial Activity')
                     // doc1.text(320, yMaterialFieldValue, $scope.summary.materialArray[l-1].Charge_Type)
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
@@ -4314,7 +4368,7 @@
                     yMaterialFieldValue = yMaterialFieldValue + 10 * $scope.summary.materialArray[l - 1].Product_Quantity;
                 }
 
-                rectMaterialHeight = yMaterialFieldValue - yMaterialFieldName + 15;
+                rectMaterialHeight = yMaterialFieldValue - yMaterialField-5 ;
                 doc1.rect(20, yMaterialField + 10, rectMaterialWidth, rectMaterialHeight)
 
                 var xSignField = 25, ySignField = yMaterialField + rectMaterialHeight + 20, rectSignWidth = 660,
@@ -4322,12 +4376,22 @@
 
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
+                var isAdded = checkPdfHeight(ySignField +5, pageHeight, ySignField, rectSignWidth,false);
+                if (isAdded) {
+                    ySignField = 10;
+                }
                 doc1.text(xSignField, ySignField + 5, $filter('translate')('Signature'))
-                doc1.rect(20, ySignField + 10, rectSignWidth, rectSignHeight)
+                var isAdded = checkPdfHeight(ySignField +25, pageHeight, ySignField, rectSignWidth);
+                if (isAdded) {
+                    ySignField = 0;
+                }
                 doc1.text(50, ySignField + 25, $filter('translate')('Service Representative'))
                 doc1.text(250, ySignField + 25, $filter('translate')('Customer Name'))
                 doc1.text(50, ySignField + 35, $scope.engineerName);
-
+                var isAdded = checkPdfHeight(ySignField + 45, pageHeight, ySignField , rectSignWidth, rectSignHeight);
+                if (isAdded) {
+                    ySignField = -10;
+                }
                 if ($scope.summary.engineer != undefined && $scope.summary.engineer.signature)
                     doc1.addImage($scope.summary.engineer.signature, 'JPEG', 50, ySignField + 45, 75, 40, 'engsign', 'FAST');
                 doc1.text(250, ySignField + 35, $scope.summary.taskObject.Customer_Name);
@@ -4335,6 +4399,7 @@
                 if ($rootScope.customersignature)
                     doc1.addImage($rootScope.customersignature, 'JPEG', 250, ySignField + 45, 75, 40, 'custsign', 'FAST');
                 //                 doc1.save("Report_" + $scope.summary.taskObject.Task_Number + ".pdf");
+                doc1.rect(20, ySignField + 10, rectSignWidth, rectSignHeight)
             }
             if ($rootScope.local) {
 
