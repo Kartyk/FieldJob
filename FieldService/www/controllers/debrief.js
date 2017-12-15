@@ -61,7 +61,7 @@
             {title: "Material", templateUrl: "app/views/Material.html"},
             {title: "Notes", templateUrl: "app/views/Notes.html"},
             {title: "Attachments", templateUrl: "app/views/Attachments.html"},
-            { title: "Service Representative Signature", templateUrl: "app/views/EngineerSignature.html"},
+            { title: "Emerson Signature", templateUrl: "app/views/EngineerSignature.html"},
             {title: "Summary", templateUrl: "app/views/Summary.html"},
             {title: "Customer Signature", templateUrl: "app/views/CustomerSignature.html"}
         ];
@@ -438,29 +438,31 @@
         if (item.Date != undefined && item.Date != "")
             item.Date = new Date(item.Date);
 
-        var hours = 0;
+        //var hours = 0;
 
-        var minutes = 0;
+        //var minutes = 0;
 
-        if (item.Duration != undefined) {
+        //if (item.Duration != undefined) {
 
-            hours = parseInt(item.Duration.split(":")[0]);
+        //    hours = parseInt(item.Duration.split(":")[0]);
 
-            minutes = parseInt(item.Duration.split(":")[1]);
-        }
+        //    minutes = parseInt(item.Duration.split(":")[1]);
+        //}
 
-        var durationValue = new Date();
+        //var durationValue = new Date();
 
-        durationValue.setHours(hours);
-        durationValue.setMinutes(minutes);
-        durationValue.setSeconds(0);
+        //durationValue.setHours(hours);
+        //durationValue.setMinutes(minutes);
+        //durationValue.setSeconds(0);
 
-        item.DurationValue = durationValue;
+        //item.DurationValue = durationValue;
 
-        item.DurationHours = hours;
+        //item.DurationHours = hours;
 
-        item.DurationMinutes = minutes;
+        //item.DurationMinutes = minutes;
+        item.DurationHours = moment.duration(item.Duration).hours();
 
+        item.DurationMinutes = moment.duration(item.Duration).minutes();
         angular.forEach(item.timeDefault.chargeType.values, function (type) {
             if (type.ID == item.Charge_Type_Id) {
                 item.Charge_Type = type;

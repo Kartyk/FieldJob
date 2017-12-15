@@ -62,13 +62,19 @@
         padding: 20px;
         background-color: beige;
     }
-
-    
-
-    .fc button {
-        font-size: 14px;
+    .fc-view-container 
+    {
+        height:100% !important;
     }
-
+    /*.fc-month-view {
+        height: 100% !important;
+    }*/
+        .fc-month-view table, .fc-month-view tbody, .fc-month-view tr, .fc-month-view td {
+            height: 100% !important;
+        }
+            .fc-month-view table tbody tr td div.fc-scroller {
+                height: 100% !important;
+            }
    
 
     #calendar>div.fc-toolbar.fc-header-toolbar>div.fc-right>div>h2 {
@@ -142,9 +148,9 @@
    <md-button class="md-primary startwork-btn" ng-show="showStartWork" ng-click="startWork()">START WORK</md-button>
  <md-tab label="Calendar"> -->
 
-<div layout="row">
-    <div id='calendar'>
-        <div id="fullCalModal" class="modal fade">
+<div layout="row" style="height:100%">
+    <div id='calendar' style="height:100%">
+        <div id="fullCalModal" class="modal fade" >
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
