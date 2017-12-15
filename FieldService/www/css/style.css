@@ -2501,3 +2501,10 @@ td img.delete:hover
 .pushLeft{
     margin-left:40px;
 }
+.form-control.ng-invalid, .select-debrief.ng-invalid {
+    border-color: red !important;
+    border: 1px solid red !important;
+}
+.inputFieldsMaterial.ng-invalid {
+    border: 1px solid red !important;
+}
