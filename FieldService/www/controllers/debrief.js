@@ -687,7 +687,7 @@
             timeDefault: timeDefault,
             Field_Job_Name: "",
             Field_Job_Name_Id: "",
-            Charge_Type: "",
+            Charge_Type: $scope.taskObject.Charge_Type,
             Charge_Type_Id: "",
             Charge_Method: $scope.taskObject.Labor_Method,
             Charge_Method_Id: "",
@@ -715,6 +715,17 @@
         $scope.timeArray = [];
 
         $scope.timeArray.push(timeObject);
+        if (timeDefault.chargeType.values != undefined && timeDefault.chargeType.values.length > 0) {
+
+            angular.forEach(timeDefault.chargeType.values, function (key, value) {
+
+                if (key.Value == $scope.taskObject.Charge_Type) {
+
+                    $scope.timeArray[0].Charge_Type = key;
+                    $scope.timeArray[0].Charge_Type_Id = key.ID;
+                }
+            });
+        }
     }
 
     function setDefaultExpenseObject() {

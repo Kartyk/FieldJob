@@ -234,10 +234,15 @@
 
                 <div class="col-sm-12 col-md-12">
 
-                    <div class="ng-scope layout-row position" id="map" style="height:300px;display: none;" ng-hide="chinaUser">
+                    <!--<div class="ng-scope layout-row position" id="map" style="height:300px;display: none;" ng-hide="chinaUser">
                     </div>
 
-                    <div id="allmap" style="height:300px;display: none;" ng-show="chinaUser"></div>
+                    <div id="allmap" style="height:300px;display: none;" ng-show="chinaUser"></div>-->
+
+                    <div style="width:100%;height:340px;border:1px solid gray" id="googleMap" ng-show="!isChina && isVisible">
+                    </div>
+
+                    <div style="width:100%;height:340px;border:1px solid gray" id="chinaMap" ng-show="isChina && isVisible"></div>
 
                 </div>
 
