@@ -305,7 +305,7 @@
             }).success(function (response) {
 
                 console.log("TASK DETAILS RESPONSE END ======> " + new Date());
-
+                var temp = JSON.stringify(response);
                 console.log("Task Details Response " + JSON.stringify(response));
 
                 var promises = [];
