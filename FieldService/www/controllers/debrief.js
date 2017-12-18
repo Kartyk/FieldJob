@@ -110,6 +110,7 @@
     $scope.workTypeArray = [];
     $scope.itemArray = [];
     $scope.currencyArray = [];
+    $scope.UOMArray = [];
 
     var timeDefault = {};
     var expenseDefault = {};
@@ -194,7 +195,7 @@
         $scope.workTypeArray = valueService.getWorkType();
         $scope.itemArray = valueService.getItem();
         $scope.currencyArray = valueService.getCurrency();
-
+        $scope.UOMArray = [{ "ID": "1", "Value": "KM" }, { "ID": "2", "Value": "Miles" }]
         $scope.itemValue = [];
         $scope.itemTravel = [];
         $scope.itemDeputation = [];
@@ -295,7 +296,8 @@
                 title: "Distance"
             },
             uom: {
-                title: "UOM"
+                title: "UOM",
+                values: $scope.UOMArray
             },
             currency: {
                 title: "Currency",
@@ -1751,6 +1753,9 @@
 
     $scope.setCurrency = function (expenseObject) {
         expenseObject.Currency_Id = expenseObject.Currency.ID;
+    };
+    $scope.setUOM = function (expenseObject) {
+        expenseObject.UOM_Id = expenseObject.UOM.ID;
     };
 
     $scope.setExpenseItem = function (expenseObject) {
