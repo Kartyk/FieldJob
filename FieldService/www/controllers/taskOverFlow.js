@@ -96,55 +96,47 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                 map.centerAndZoom(new BMap.Point(longitude, latitude), 15);
 
-                map.enableScrollWheelZoom(true);                 
+                map.enableScrollWheelZoom(true);
 
-                map.enableKeyboard();                         
+                map.enableKeyboard();
 
                 map.disableDoubleClickZoom();
 
                 map.addControl(new BMap.NavigationControl());
-                                
+
                 console.log("POINT START " + customerAddress);
 
-                geoCoder.getPoint(customerAddress, function (point) {
-
-                    console.log("POINT " + JSON.stringify(point));
-
-                    if (point) {
-                     
-                        longitude = point.lng;
-
-                        latitude = point.lat;
-                    } 
-                });
-
-                var marker = new BMap.Marker(new BMap.Point(longitude, latitude));
-
-                map.addOverlay(marker);
-
-                map.centerAndZoom(new BMap.Point(longitude, latitude), 15);
-
-                map.enableScrollWheelZoom();     
+                // geoCoder.getPoint(customerAddress, function (point) {
+                //
+                //     console.log("POINT " + JSON.stringify(point));
+                //
+                //     if (point) {
+                //
+                //         longitude = point.lng;
+                //
+                //         latitude = point.lat;
+                //     }
+                // });
 
             } else {
 
                 $scope.isChina = false;
 
                 map = new google.maps.Map(document.getElementById('googleMap'), {
-                    center: { lat: -34.397, lng: 150.644 },
+                    center: {lat: -34.397, lng: 150.644},
                     zoom: 8
                 });
+            }
 
-                codeAddress($scope.taskDetails.Zip_Code, map);
-            }       
-        } 
+            addMarker($scope.taskDetails.Zip_Code, map);
+        }
     }
 
-    function codeAddress(address, map) {
+    function addMarker(address, map) {
 
-        var geocoder = new google.maps.Geocoder();
+        var geoCoder = new google.maps.Geocoder();
 
-        geocoder.geocode({
+        geoCoder.geocode({
             'address': address
         }, function (results, status) {
 
@@ -154,16 +146,27 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                 var longitude = results[0].geometry.location.lng();
 
-                var latlng = new google.maps.LatLng(latitude, longitude);
+                if ($scope.isChina) {
 
-                map.setCenter(latlng);
+                    var marker = new BMap.Marker(new BMap.Point(longitude, latitude));
 
-                //map.setCenter(results[0].geometry.location);
+                    map.addOverlay(marker);
 
-                var marker = new google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location
-                });
+                    map.centerAndZoom(new BMap.Point(longitude, latitude), 15);
+
+                } else {
+
+                    var latlng = new google.maps.LatLng(latitude, longitude);
+
+                    map.setCenter(latlng);
+
+                    //map.setCenter(results[0].geometry.location);
+
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location
+                    });
+                }
 
             } else {
 
@@ -303,7 +306,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                                 constantService.setTaskList(response);
 
-                                $state.go($state.current, {}, { reload: true });
+                                $state.go($state.current, {}, {reload: true});
 
                             });
                         });
@@ -342,7 +345,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                             $rootScope.showWorkingBtn = false;
 
-                            $state.go($state.current, {}, { reload: true });
+                            $state.go($state.current, {}, {reload: true});
 
                         });
                     });
@@ -402,7 +405,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                             constantService.setTaskList(response);
 
-                            $state.go($state.current, {}, { reload: true });
+                            $state.go($state.current, {}, {reload: true});
                         });
                     });
                 });
@@ -443,7 +446,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                             $scope.selectedTask.Task_Status = "Accepted";
 
-                            $state.go($state.current, {}, { reload: true });
+                            $state.go($state.current, {}, {reload: true});
 
                         });
                     });
@@ -535,14 +538,14 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 // }
 //
 // initialize(); //Call initialize function
-  // var customerAddress = {
-                //     addressComponent: {
-                //         city: 'city name',
-                //         district: 'County name',
-                //         province: 'name of province',
-                //         street: 'street name',
-                //         streetNumber: 'house number'
-                //     },
-                //     cityCode: 'city code'
-                // };
+// var customerAddress = {
+//     addressComponent: {
+//         city: 'city name',
+//         district: 'County name',
+//         province: 'name of province',
+//         street: 'street name',
+//         streetNumber: 'house number'
+//     },
+//     cityCode: 'city code'
+// };
 //google.maps.event.trigger(document.getElementById('map'), 'resize');
