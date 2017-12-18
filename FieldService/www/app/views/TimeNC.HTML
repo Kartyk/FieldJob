@@ -7,7 +7,18 @@
                   form-on-change="formChange()" name="timeform">
                 <div layout="row" layout-wrap>
 
-
+                    <!--<div flex="20" class="debrief-items-NC" style="max-width:15%;">
+                        <label flex="100" class=" label-my"
+                               translate="{{item.timeDefault.chargeType.title}}"></label>
+                        <div flex="100">
+                            <select class="form-control select-debrief " ng-model="item.Charge_Type" ng-required="true"
+                                    ng-options="x as x.Value | translate for x in item.timeDefault.chargeType.values track by x.ID"
+                                    ng-change="setChargeType(item)">
+                                <option value="" disabled selected>Select Charge Type</option>
+                            </select>
+                        </div>
+                      
+                    </div>-->
                     <div flex="20" class="debrief-items-NC" style="max-width:15%;">
                         <label flex="100" class=" label-my"
                                translate="{{item.timeDefault.workType.title}}"></label><span style="color:red">*</span>
@@ -24,7 +35,7 @@
                         </span>-->
                     </div>
 
-
+                    
                     <div flex="20" class="debrief-items-NC" style="max-width:20%;">
                         <label flex="100" class="  label-my" translate="{{item.timeDefault.item.title}}"></label><span
                             style="color:red">*</span>

@@ -1051,11 +1051,19 @@
 
                             chargeMethod = "";
                         }
-
+                        var shiftcode = "", timecode = "";
+                        if (timeArray[i].Time_Code_Value != undefined) {
+                            timecode = timeArray[i].Time_Code_Value;
+                        }
+                        if (timeArray[i].Shift_Code_Value != undefined) {
+                            shiftcode = timeArray[i].Shift_Code_Value;
+                        }
                         var timeData = {
                             "task_id": timeArray[i].Task_Number,
                             "shift_code": timeArray[i].Shift_Code_Id,
                             "overtime_shiftcode": timeArray[i].Time_Code_Id,
+                            "shiftCodevalue": shiftcode,
+                            "overTimeShiftCodevalue": timecode,
                             "charge_type": timeArray[i].Charge_Type_Id,
                             "duration": timeArray[i].Duration,
                             "comments": timeArray[i].Comments,

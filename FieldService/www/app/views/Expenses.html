@@ -49,6 +49,7 @@
 
                                 </div>
                             </div>
+                            
 
 
                             <div flex="20" class="debrief-items-NC" style="max-width:12%;">
@@ -80,7 +81,30 @@
                             </div>
 
                         </div>
+                    <div layout="row" layout-wrap>
+                        <div flex="60" style="margin-left:36%">
+                            <div flex="20" class="debrief-items-NC" style="display:inline-block;padding-right:0px !important" ng-show="item.Expense_Type.Value=='Mileage'">
+                                <label flex="100" class="label-my" translate="{{item.expenseDefault.distance.title}}"></label>
+                                <div flex="85">
+                                    <input type="text" class="form-control" ng-model="item.Distance" valid-amount />
 
+                                </div>
+                            </div>
+                            <div flex="20" class="debrief-items-NC" style="display:inline-block" ng-show="item.Expense_Type.Value=='Mileage'">
+                                <label flex="100" class="label-my" translate="{{item.expenseDefault.uom.title}}"></label>
+                                <div flex="100">
+                                    <select class="form-control select-debrief" ng-model="item.UOM"
+                                            ng-options="x as x.Value for x in item.expenseDefault.uom.values track by x.ID" ng-change="setCurrency(item)">
+                                        <option value="" disabled selected>Select</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                          
+                            
+                        </div>
+                    </div>
 
                         <!--</div>-->
 

@@ -160,7 +160,7 @@
 
                         <div class="col-sm-12 col-md-12 noMarginPadding">
                             <div ng-repeat="serial in item.Serial_Type track by $index">
-                                <div ng-show="item.Charge_Type.Value == 'Warranty'">
+                                <div ng-if="item.Charge_Type.Value == 'Warranty'">
                                     <!--<div class="row" style="clear:both;padding-left:15px;">-->
                                     <div class="col-sm-3 col-md-3 noMarginPadding">
                                         <div class="form-group noMarginPadding">
@@ -187,7 +187,7 @@
                                 <!--</div>-->
 
                                 <div class="col-md-4 col-sm-4 col-lg-4 noMarginPadding"
-                                     ng-show="item.Charge_Type.Value == 'Billable' || item.Charge_Type.Value == 'Goodwill' || item.Charge_Type.Value == 'Concession' ">
+                                     ng-if="item.Charge_Type.Value == 'Billable' || item.Charge_Type.Value == 'Goodwill' || item.Charge_Type.Value == 'Concession' ">
 
 
                                     <div class="form-group noMarginPadding">
