@@ -291,6 +291,12 @@
             amount: {
                 title: "Amount"
             },
+            distance: {
+                title: "Distance"
+            },
+            uom: {
+                title: "UOM"
+            },
             currency: {
                 title: "Currency",
                 values: $scope.currencyArray
@@ -690,8 +696,10 @@
             Description: "",
             Time_Code: "",
             Time_Code_Id: "",
+            Time_Code_Value: "",
             Shift_Code: "",
             Shift_Code_Id: "",
+            Shift_Code_Value: "",
             Date: new Date(),
             DurationValue: durationValue,
             Duration: duration,
@@ -874,7 +882,13 @@
             case "Time":
 
                 if (item != null && item != undefined) {
-
+                    var shiftcode = "", timecode = "";
+                    if (item.Shift_Code != undefined) {
+                        shiftcode = item.Shift_Code.ShiftCodeName;
+                    }
+                    if (item.Time_Code != undefined) {
+                        timecode = item.Time_Code.Overtimeshiftcode;
+                    }
                     var newTimeObject = {
                         Time_Id: item.Time_Id,
                         timeDefault: timeDefault,
@@ -891,8 +905,10 @@
                         Description: "",
                         Time_Code: item.Time_Code,
                         Time_Code_Id: item.Time_Code_Id,
+                        Time_Code_Value: timecode,
                         Shift_Code: item.Shift_Code,
                         Shift_Code_Id: item.Shift_Code_Id,
+                        Shift_Code_Value: shiftcode,
                         Date: item.Date,
                         DurationValue: item.DurationValue,
                         Duration: item.Duration,
@@ -1071,7 +1087,13 @@
             case "Time":
 
                 if (item != null && item != undefined) {
-
+                    var shiftcode = "", timecode = "";
+                    if (item.Shift_Code != undefined) {
+                        shiftcode = item.Shift_Code.ShiftCodeName;
+                    }
+                    if (item.Time_Code != undefined) {
+                        timecode = item.Time_Code.Overtimeshiftcode;
+                    }
                     var newObject = {
                         Time_Id: $scope.taskId + "" + ($scope.timeArraySummary.length + 1),
                         timeDefault: timeDefault,
@@ -1088,8 +1110,10 @@
                         Description: "",
                         Time_Code: item.Time_Code,
                         Time_Code_Id: item.Time_Code_Id,
+                        Time_Code_Value: timecode,
                         Shift_Code: item.Shift_Code,
                         Shift_Code_Id: item.Shift_Code_Id,
+                        Shift_Code_Value: shiftcode,
                         Date: item.Date,
                         DurationValue: item.DurationValue,
                         Duration: item.Duration,
@@ -1129,6 +1153,8 @@
                         Expense_Type: item.Expense_Type,
                         Expense_Type_Id: item.Expense_Type_Id,
                         Amount: item.Amount,
+                        Distance: item.Distance,
+                        UOM:item.UOM,
                         Currency: item.Currency,
                         Currency_Id: item.Currency_Id,
                         Charge_Method: item.Charge_Method,
@@ -1242,7 +1268,13 @@
             case "Time":
 
                 if (item != null && item != undefined) {
-
+                    var shiftcode = "", timecode = "";
+                    if (item.Shift_Code != undefined) {
+                        shiftcode = item.Shift_Code.ShiftCodeName;
+                    }
+                    if (item.Time_Code != undefined) {
+                        timecode = item.Time_Code.Overtimeshiftcode;
+                    }
                     var newObject = {
                         Time_Id: $scope.taskId + "" + ($scope.timeArraySummary.length + 1),
                         timeDefault: timeDefault,
@@ -1257,10 +1289,11 @@
                         Item: item.Item,
                         Item_Id: item.Item_Id,
                         Description: "",
-                        Time_Code: item.Time_Code,
                         Time_Code_Id: item.Time_Code_Id,
+                        Time_Code_Value: timecode,
                         Shift_Code: item.Shift_Code,
                         Shift_Code_Id: item.Shift_Code_Id,
+                        Shift_Code_Value: shiftcode,
                         Date: item.Date,
                         DurationValue: item.DurationValue,
                         Duration: item.Duration,
@@ -1297,6 +1330,8 @@
                         Expense_Type: item.Expense_Type,
                         Expense_Type_Id: item.Expense_Type_Id,
                         Amount: item.Amount,
+                        Distance: item.Distance,
+                        UOM: item.UOM,
                         Currency: item.Currency,
                         Currency_Id: item.Currency_Id,
                         Charge_Method: item.Charge_Method,
@@ -1698,10 +1733,12 @@
 
     $scope.setShiftCode = function (timeObject) {
         timeObject.Shift_Code_Id = timeObject.Shift_Code.Shift_Code_ID;
+        timeObject.Shift_Code_Value = timeObject.Time_Code.ShiftCodeName;
     };
 
     $scope.setTimeCode = function (timeObject) {
         timeObject.Time_Code_Id = timeObject.Time_Code.OverTime_Shift_Code_ID;
+        timeObject.Time_Code_Value = timeObject.Time_Code.Overtimeshiftcode;
     };
 
     $scope.setChargeMethod = function (timeObject) {
@@ -2321,10 +2358,20 @@
                                     else {
                                         chargemethod = "";
                                     }
+                                    var shiftcode="", timecode="";
+                                    if (timeArray[i].Shift_Code != undefined)
+                                    {
+                                        shiftcode = timeArray[i].Shift_Code.ShiftCodeName;
+                                    }
+                                    if (timeArray[i].Time_Code != undefined) {
+                                        timecode = timeArray[i].Time_Code.Overtimeshiftcode;
+                                    }
                                     var timeData = {
                                         "task_id": timeArray[i].Task_Number,
                                         "shift_code": timeArray[i].Shift_Code_Id,
                                         "overtime_shiftcode": timeArray[i].Time_Code_Id,
+                                        "shiftCodevalue": shiftcode,
+                                        "overTimeShiftCodevalue": timecode,
                                         "charge_type": timeArray[i].Charge_Type_Id,
                                         "duration": timeArray[i].Duration,
                                         "comments": timeArray[i].Comments,
@@ -2991,7 +3038,7 @@
     };
 
     $scope.reviewSummary = function () {
-        var promise = generatePDF();
+       // var promise = generatePDF();
         $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Customer Signature"
     )
 
@@ -3573,60 +3620,60 @@
                         rectExpenseHeight = 22 * $scope.summary.expenseArray.length, yExpenseFieldName = yExpenseField + 25,
                         yExpenseFieldValue;
 
-                    ctx.fillStyle = "#000";
-                    ctx.font = '15px sans-serif ';
-                    ctx.fillText('费用', 20, yExpenseField + 5);
+                    //ctx.fillStyle = "#000";
+                    //ctx.font = '15px sans-serif ';
+                    //ctx.fillText('费用', 20, yExpenseField + 5);
 
-                    ctx.fillStyle = "#000";
-                    ctx.font = 'bold 12px sans-serif ';
-                    ctx.fillText('日期', 30, yExpenseFieldName);
+                    //ctx.fillStyle = "#000";
+                    //ctx.font = 'bold 12px sans-serif ';
+                    //ctx.fillText('日期', 30, yExpenseFieldName);
 
-                    ctx.fillStyle = "#000";
-                    ctx.font = 'bold 12px sans-serif ';
-                    ctx.fillText('费用种类', 280, yExpenseFieldName);
+                    //ctx.fillStyle = "#000";
+                    //ctx.font = 'bold 12px sans-serif ';
+                    //ctx.fillText('费用种类', 280, yExpenseFieldName);
 
-                    ctx.fillStyle = "#000";
-                    ctx.font = 'bold 12px sans-serif ';
-                    ctx.fillText('结算方式', 530, yExpenseFieldName);
+                    //ctx.fillStyle = "#000";
+                    //ctx.font = 'bold 12px sans-serif ';
+                    //ctx.fillText('结算方式', 530, yExpenseFieldName);
 
-                    ctx.fillStyle = "#000";
-                    ctx.font = 'bold 12px sans-serif ';
-                    ctx.fillText('阐述', 780, yExpenseFieldName);
+                    //ctx.fillStyle = "#000";
+                    //ctx.font = 'bold 12px sans-serif ';
+                    //ctx.fillText('阐述', 780, yExpenseFieldName);
 
-                    while (k < $scope.summary.expenseArray.length) {
+                    //while (k < $scope.summary.expenseArray.length) {
 
-                        yExpenseFieldValue = yExpenseFieldName + 15 * ++k;
-
-
-                        ctx.fillStyle = "#000";
-                        ctx.font = '13px sans-serif ';
-                        if ($scope.summary.expenseArray[k - 1].Date)
-                            ctx.fillText($scope.summary.expenseArray[k - 1].Date, 30, yExpenseFieldValue);
-
-                        ctx.fillStyle = "#000";
-                        ctx.font = '13px sans-serif ';
-                        if ($scope.summary.expenseArray[k - 1].Expense_Type)
-                            ctx.fillText($filter('translate')($scope.summary.expenseArray[k - 1].Expense_Type), 280, yExpenseFieldValue);
+                    //    yExpenseFieldValue = yExpenseFieldName + 15 * ++k;
 
 
-                        ctx.fillStyle = "#000";
-                        ctx.font = '13px sans-serif ';
-                        if ($scope.summary.expenseArray[k - 1].Charge_Method)
-                            ctx.fillText($filter('translate')($scope.summary.expenseArray[k - 1].Charge_Method), 530, yExpenseFieldValue);
+                    //    ctx.fillStyle = "#000";
+                    //    ctx.font = '13px sans-serif ';
+                    //    if ($scope.summary.expenseArray[k - 1].Date)
+                    //        ctx.fillText($scope.summary.expenseArray[k - 1].Date, 30, yExpenseFieldValue);
+
+                    //    ctx.fillStyle = "#000";
+                    //    ctx.font = '13px sans-serif ';
+                    //    if ($scope.summary.expenseArray[k - 1].Expense_Type)
+                    //        ctx.fillText($filter('translate')($scope.summary.expenseArray[k - 1].Expense_Type), 280, yExpenseFieldValue);
 
 
-                        ctx.fillStyle = "#000";
-                        ctx.font = '13px sans-serif ';
-                        if ($scope.summary.expenseArray[k - 1].Justification)
-                            ctx.fillText($filter('translate')($scope.summary.expenseArray[k - 1].Justification), 780, yExpenseFieldValue);
-                    }
-                    rectExpenseHeight = yExpenseFieldValue - yExpenseFieldName + 20;
-
-                    ctx.fillStyle = "#000";
-                    ctx.strokeRect(20, yExpenseField + 10, 1090, rectExpenseHeight);
+                    //    ctx.fillStyle = "#000";
+                    //    ctx.font = '13px sans-serif ';
+                    //    if ($scope.summary.expenseArray[k - 1].Charge_Method)
+                    //        ctx.fillText($filter('translate')($scope.summary.expenseArray[k - 1].Charge_Method), 530, yExpenseFieldValue);
 
 
-                    var l = 0, xMaterialField = 25, yMaterialField = yExpenseField + rectExpenseHeight + 25,
+                    //    ctx.fillStyle = "#000";
+                    //    ctx.font = '13px sans-serif ';
+                    //    if ($scope.summary.expenseArray[k - 1].Justification)
+                    //        ctx.fillText($filter('translate')($scope.summary.expenseArray[k - 1].Justification), 780, yExpenseFieldValue);
+                    //}
+                    //rectExpenseHeight = yExpenseFieldValue - yExpenseFieldName + 20;
+
+                    //ctx.fillStyle = "#000";
+                    //ctx.strokeRect(20, yExpenseField + 10, 1090, rectExpenseHeight);
+
+
+                    var l = 0, xMaterialField = 25, yMaterialField = yTimeField + rectTimeHeight + 25 ,
                         rectMaterialWidth = 660, rectMaterialHeight = 25 * $scope.summary.materialArray.length,
                         yMaterialFieldName = yMaterialField + 25, yMaterialFieldValue;
 
@@ -3988,7 +4035,7 @@
                     xNotesField1 = xNotesField;
                     //yNotesField1 = yNotesField + 22;
                     ++i;
-                    yNotesField1_val = yNotesField1 + 20 ;
+                    yNotesField1_val = yNotesField1_val + 20 ;
                     xNotesField2 = xNotesField1 + 325;
 
                     doc1.setFontSize(22)

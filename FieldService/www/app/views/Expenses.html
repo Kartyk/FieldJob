@@ -49,6 +49,20 @@
 
                                 </div>
                             </div>
+                            <div flex="20" class="debrief-items-NC" style="max-width:10%;" ng-show="item.Expense_Type.Value=='Mileage'">
+                                <label flex="100" class="label-my" translate="{{item.expenseDefault.distance.title}}"></label>
+                                <div flex="100">
+                                    <input type="text" class="form-control" ng-model="item.Distance" valid-amount />
+
+                                </div>
+                            </div>
+                            <div flex="20" class="debrief-items-NC" style="max-width:10%;"  ng-show="item.Expense_Type.Value=='Mileage'">
+                                <label flex="100" class="label-my" translate="{{item.expenseDefault.uom.title}}"></label>
+                                <div flex="100">
+                                    <input type="text" class="form-control" ng-model="item.UOM" valid-amount />
+
+                                </div>
+                            </div>
 
 
                             <div flex="20" class="debrief-items-NC" style="max-width:12%;">
