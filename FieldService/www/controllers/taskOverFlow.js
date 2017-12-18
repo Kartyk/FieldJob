@@ -62,173 +62,115 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
     valueService.setTaskId($scope.taskDetails.Task_Number);
 
-    displayMap();
+    $scope.isVisible = false;
 
-    function displayMap() {
+    loadMap();
 
-        console.log(valueService.getTask());
+    console.log("TASK " + JSON.stringify(valueService.getTask()));
 
-        if (valueService.getTask().Country == "People's Republic of China") {
+    var map = null;
 
-            if (valueService.getNetworkStatus()) {
+    var geoCoder = null;
 
-                // var customerAddress = {
-                //     addressComponent: {
-                //         city: 'city name',
-                //         district: 'County name',
-                //         province: 'name of province',
-                //         street: 'street name',
-                //         streetNumber: 'house number'
-                //     },
-                //     cityCode: 'city code'
-                // };
+    function loadMap() {
+
+        if (valueService.getNetworkStatus()) {
+
+            if (valueService.getTask().Country == "People's Republic of China") {
+
+                $scope.isChina = true;
 
                 // var customerAddress = "上海";
 
                 var customerAddress = $scope.taskDetails.Street_Address + "," + $scope.taskDetails.City;
 
-                var map = new BMap.Map("allmap");
+                map = new BMap.Map("chinaMap");
 
-                var geoCoder = new BMap.Geocoder();
+                geoCoder = new BMap.Geocoder();
 
                 var longitude = 118.807395;
 
                 var latitude = 32.065315;
 
-                console.log("POINT START ");
+                var contextMenu = new BMap.ContextMenu();
+
+                map.centerAndZoom(new BMap.Point(longitude, latitude), 15);
+
+                map.enableScrollWheelZoom(true);                 
+
+                map.enableKeyboard();                         
+
+                map.disableDoubleClickZoom();
+
+                map.addControl(new BMap.NavigationControl());
+                                
+                console.log("POINT START " + customerAddress);
 
                 geoCoder.getPoint(customerAddress, function (point) {
 
-                    console.log("POINT " + JSON.stringify( point));
+                    console.log("POINT " + JSON.stringify(point));
 
                     if (point) {
-
-                        console.log("POINT " + JSON.stringify(point));
-
+                     
                         longitude = point.lng;
 
                         latitude = point.lat;
-                    }
+                    } 
                 });
 
                 var marker = new BMap.Marker(new BMap.Point(longitude, latitude));
 
                 map.addOverlay(marker);
 
-                map.centerAndZoom(new BMap.Point(longitude, latitude), 14);
+                map.centerAndZoom(new BMap.Point(longitude, latitude), 15);
 
-                // map.setCurrentCity("??");
-
-                map.addControl(new BMap.MapTypeControl({
-                    mapTypes: [
-                        BMAP_NORMAL_MAP,
-                        BMAP_HYBRID_MAP
-                    ]
-                }));
-
-                map.enableScrollWheelZoom(true);
-            }
-
-            $scope.chinaUser = true;
-
-        } else {
-
-            $scope.chinaUser = false;
-        }
-    }
-
-    $(function () {
-
-        var mapClose = true;
-
-        var firstload = true;
-
-        var map;
-
-        $('#mapToggle').click(function () {
-
-            if (firstload) {
-
-                if (valueService.getNetworkStatus()) {
-
-                    map = new google.maps.Map(document.getElementById('map'), {
-                        center: {lat: -34.397, lng: 150.644},
-                        zoom: 8
-                    });
-
-                    firstload = false;
-
-                    codeAddress($scope.taskDetails.Zip_Code);
-                }
-            }
-
-            if (mapClose) {
-
-                if ($scope.chinaUser == false) {
-
-                    if (valueService.getNetworkStatus()) {
-
-                        document.getElementById('map').style.display = "block";
-
-                        google.maps.event.trigger(document.getElementById('map'), 'resize');
-
-                        mapClose = false;
-                    }
-
-                } else {
-
-                    document.getElementById('allmap').style.display = "block";
-
-                    mapClose = false;
-                }
+                map.enableScrollWheelZoom();     
 
             } else {
 
-                if ($scope.chinaUser == false) {
+                $scope.isChina = false;
 
-                    document.getElementById('map').style.display = "none";
+                map = new google.maps.Map(document.getElementById('googleMap'), {
+                    center: { lat: -34.397, lng: 150.644 },
+                    zoom: 8
+                });
 
-                    mapClose = true;
+                codeAddress($scope.taskDetails.Zip_Code, map);
+            }       
+        } 
+    }
 
-                } else {
+    function codeAddress(address, map) {
 
-                    document.getElementById('allmap').style.display = "none";
+        var geocoder = new google.maps.Geocoder();
 
-                    mapClose = true;
-                }
+        geocoder.geocode({
+            'address': address
+        }, function (results, status) {
+
+            if (status == google.maps.GeocoderStatus.OK) {
+
+                var latitude = results[0].geometry.location.lat();
+
+                var longitude = results[0].geometry.location.lng();
+
+                var latlng = new google.maps.LatLng(latitude, longitude);
+
+                map.setCenter(latlng);
+
+                //map.setCenter(results[0].geometry.location);
+
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+
+            } else {
+
+                /*alert("Geocode was not successful for the following reason: " + status);*/
             }
         });
-
-        function codeAddress(address) {
-
-            var geocoder = new google.maps.Geocoder();
-
-            geocoder.geocode({
-                'address': address
-            }, function (results, status) {
-
-                if (status == google.maps.GeocoderStatus.OK) {
-
-                    var latitude = results[0].geometry.location.lat();
-
-                    var longitude = results[0].geometry.location.lng();
-
-                    var latlng = new google.maps.LatLng(latitude, longitude);
-
-                    map.setCenter(latlng);
-
-                    //map.setCenter(results[0].geometry.location);
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        position: results[0].geometry.location
-                    });
-
-                } else {
-                    /*alert("Geocode was not successful for the following reason: " + status);*/
-                }
-            });
-        }
-    });
+    }
 
     var contactArray = valueService.getContact();
 
@@ -512,7 +454,12 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
     $scope.mapClicked = function () {
 
-        $scope.mapIsClicked = !$scope.mapIsClicked;
+        if (valueService.getNetworkStatus()) {
+
+            $scope.isVisible = !$scope.isVisible;
+
+            $scope.mapIsClicked = !$scope.mapIsClicked;
+        }
     };
 
 });
@@ -588,3 +535,14 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 // }
 //
 // initialize(); //Call initialize function
+  // var customerAddress = {
+                //     addressComponent: {
+                //         city: 'city name',
+                //         district: 'County name',
+                //         province: 'name of province',
+                //         street: 'street name',
+                //         streetNumber: 'house number'
+                //     },
+                //     cityCode: 'city code'
+                // };
+//google.maps.event.trigger(document.getElementById('map'), 'resize');
