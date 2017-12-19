@@ -1334,7 +1334,7 @@
                                                                     "sparequotetext": response.Spare_Quote,
                                                                     "salesText": response.Sales_Visit,
                                                                     "salesleadText": response.Sales_Head,
-                                                                    "denySignature": response.isCustomerSignChecked,
+                                                                    "denySignature": response.isCustomerSignChecked + "",
                                                                     "signatureComments": response.customerComments
                                                                 };
 

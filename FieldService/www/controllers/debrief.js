@@ -2646,7 +2646,7 @@
                                                                 "sparequotetext": $scope.engineerObject.Spare_Quote,
                                                                 "salesText": $scope.engineerObject.Sales_Visit,
                                                                 "salesleadText": $scope.engineerObject.Sales_Head,
-                                                                "denySignature": $scope.engineerObject.isCustomerSignChecked,
+                                                                "denySignature": $scope.engineerObject.isCustomerSignChecked.toString(),
                                                                 "signatureComments": $scope.engineerObject.customerComments
                                                             };
 
