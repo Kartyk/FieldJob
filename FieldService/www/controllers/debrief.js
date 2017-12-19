@@ -3081,7 +3081,7 @@
     };
 
     $scope.reviewSummary = function () {
-       // var promise = generatePDF();
+        var promise = generatePDF();
         $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Customer Signature"
     )
 
@@ -3375,7 +3375,7 @@
                     while (i < $scope.summary.notesArray.length) {
 
                         xNotesField1 = xNotesField;
-
+                        
                         yNotesField1_val = yNotesField1 + 14 * ++i;
                         xNotesField2 = xNotesField1 + 150;
 
@@ -3385,7 +3385,21 @@
 
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
-                        ctx.fillText($filter('translate')($scope.summary.notesArray[i - 1].Notes), 530, yNotesField1_val);
+                        var splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.notesArray[i - 1].Notes), rectNotesWidth - xNotesField2-150);
+                        
+                        //doc1.text(xNotesField2, yNotesField1_val, splitTitle)
+                        var lineheight = 15;
+                        if (splitTitle.length > 1) {
+                            for (var l= 0; l < splitTitle.length; l++)
+                                ctx.fillText(splitTitle[l], 530, yNotesField1_val + (l * lineheight));
+                            yNotesField1_val = yNotesField1_val + lineheight * (splitTitle.length-1);
+                            yNotesField1 = yNotesField1_val;
+                        }
+                        else
+                        {
+                            ctx.fillText($filter('translate')($scope.summary.notesArray[i - 1].Notes), 530, yNotesField1_val);
+                        }
+                        
                     }
 
                     rectNotesHeight = yNotesField1_val - yNotesField + 10;
@@ -4098,7 +4112,7 @@
                         doc1.text(xNotesField2, yNotesField1_val, splitTitle)
                         if (splitTitle.length > 1)
                         {
-                            yNotesField1_val = yNotesField1_val + 5 * splitTitle.length;
+                            yNotesField1_val = yNotesField1_val + 9 * splitTitle.length;
                             yNotesField1 = yNotesField1_val;
                         }
                     }
@@ -4450,7 +4464,7 @@
                         var splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.materialArray[l - 1].Description), rectMaterialWidth - 586);
                         doc1.text(586, yMaterialFieldValue, splitTitle)
                         if (splitTitle.length > 1) {
-                            yMaterialFieldValue = yMaterialFieldValue + 7 * splitTitle.length;
+                            yMaterialFieldValue = yMaterialFieldValue + 8 * splitTitle.length;
                             //yNotesField1 = yNotesField1_val;
                         }
                     }
@@ -4479,6 +4493,10 @@
                 }
                 doc1.text(50, ySignField + 25, $filter('translate')('Service Representative'))
                 doc1.text(250, ySignField + 25, $filter('translate')('Customer Name'))
+                var isAdded = checkPdfHeight(ySignField + 45, pageHeight, ySignField, rectSignWidth, rectSignHeight);
+                if (isAdded) {
+                    ySignField = -10;
+                }
                 doc1.text(50, ySignField + 35, $scope.engineerName);
                 var isAdded = checkPdfHeight(ySignField + 45, pageHeight, ySignField , rectSignWidth, rectSignHeight);
                 if (isAdded) {
