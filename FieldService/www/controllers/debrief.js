@@ -195,7 +195,7 @@
         $scope.workTypeArray = valueService.getWorkType();
         $scope.itemArray = valueService.getItem();
         $scope.currencyArray = valueService.getCurrency();
-        $scope.UOMArray = [{ "ID": "1", "Value": "KM" }, { "ID": "2", "Value": "Miles" }]
+        $scope.UOMArray = valueService.getUOM();
         $scope.itemValue = [];
         $scope.itemTravel = [];
         $scope.itemDeputation = [];
@@ -468,9 +468,11 @@
         //item.DurationHours = hours;
 
         //item.DurationMinutes = minutes;
+
         item.DurationHours = moment.duration(item.Duration).hours();
 
         item.DurationMinutes = moment.duration(item.Duration).minutes();
+
         angular.forEach(item.timeDefault.chargeType.values, function (type) {
             if (type.ID == item.Charge_Type_Id) {
                 item.Charge_Type = type;
@@ -548,6 +550,12 @@
         angular.forEach(item.expenseDefault.expenseType.values, function (type) {
             if (type.ID == item.Expense_Type_Id) {
                 item.Expense_Type = type;
+            }
+        });
+
+        angular.forEach(item.expenseDefault.uom.values, function (type) {
+            if (type.ID == item.UOM_Id) {
+                item.UOM = type;
             }
         });
     }
@@ -739,6 +747,9 @@
             Amount: "",
             Currency: "",
             Currency_Id: "",
+            Distance: "",
+            UOM: "",
+            UOM_Id: "",
             Charge_Method: $scope.taskObject.Expense_Method,
             Charge_Method_Id: "",
             Justification: "",
@@ -833,6 +844,7 @@
                 $scope.isEditExpense = "1";
 
                 $scope.expenseArray[0] = Object.create(item);
+
                 setTimeout(function () {
 
                     var height = $(".expenses-textarea-NC").css('max-height').substring(0, 3);
@@ -841,6 +853,7 @@
                         $(".expenses-textarea-NC").height($(".expenses-textarea-NC").height() + 1);
                     }
                 }, 300);
+
                 angular.forEach($scope.expenseArraySummary, function (response) {
 
                     console.log("EDIT " + JSON.stringify(response));
@@ -895,13 +908,17 @@
             case "Time":
 
                 if (item != null && item != undefined) {
+
                     var shiftcode = "", timecode = "";
+
                     if (item.Shift_Code != undefined) {
                         shiftcode = item.Shift_Code.ShiftCodeName;
                     }
+
                     if (item.Time_Code != undefined) {
                         timecode = item.Time_Code.Overtimeshiftcode;
                     }
+
                     var newTimeObject = {
                         Time_Id: item.Time_Id,
                         timeDefault: timeDefault,
@@ -970,6 +987,9 @@
                         Amount: item.Amount,
                         Currency: item.Currency,
                         Currency_Id: item.Currency_Id,
+                        Distance: item.Distance,
+                        UOM: item.UOM,
+                        UOM_Id: item.UOM_Id,
                         Charge_Method: item.Charge_Method,
                         Charge_Method_Id: item.Charge_Method_Id,
                         Justification: item.Justification,
@@ -1170,6 +1190,9 @@
                         UOM:item.UOM,
                         Currency: item.Currency,
                         Currency_Id: item.Currency_Id,
+                        Distance: item.Distance,
+                        UOM: item.UOM,
+                        UOM_Id: item.UOM_Id,
                         Charge_Method: item.Charge_Method,
                         Charge_Method_Id: item.Charge_Method_Id,
                         Justification: item.Justification,
@@ -1345,6 +1368,7 @@
                         Amount: item.Amount,
                         Distance: item.Distance,
                         UOM: item.UOM,
+                        UOM_Id: item.UOM_Id,
                         Currency: item.Currency,
                         Currency_Id: item.Currency_Id,
                         Charge_Method: item.Charge_Method,
@@ -1765,6 +1789,7 @@
     $scope.setCurrency = function (expenseObject) {
         expenseObject.Currency_Id = expenseObject.Currency.ID;
     };
+
     $scope.setUOM = function (expenseObject) {
         expenseObject.UOM_Id = expenseObject.UOM.ID;
     };
@@ -2409,6 +2434,8 @@
                                         "taskId": expenseArray[i].Task_Number,
                                         "comments": expenseArray[i].Justification,
                                         "currency": expenseArray[i].Currency_Id.toString(),
+                                        "distance": expenseArray[i].Distance,
+                                        "unitofmeasurement": expenseArray[i].UOM_Id,
                                         "chargeMethod": expenseArray[i].Charge_Method_Id.toString(),
                                         "ammount": expenseArray[i].Amount,
                                         "date": moment.utc(expenseArray[i].Date).format("YYYY-MM-DD"),

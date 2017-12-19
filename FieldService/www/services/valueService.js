@@ -43,14 +43,15 @@
             engineer: {},
             overTime: [],
             shiftCode: [],
-            chargeType: [],
-            chargeMethod: [],
             fieldName: [],
+            chargeMethod: [],
+            chargeType: [],
+            expenseType: [],
+            noteType: [],
             workType: [],
             item: [],
             currency: [],
-            expenseType: [],
-            noteType: []
+            UOM: []
         };
 
         var userType = {
@@ -119,6 +120,7 @@
         service.getWorkType = getWorkType;
         service.getItem = getItem;
         service.getCurrency = getCurrency;
+        service.getUOM = getUOM;
 
         service.getExpenseType = getExpenseType;
         service.getNoteType = getNoteType;
@@ -440,6 +442,19 @@
 
             promiseArray.push(deferCurrency.promise);
 
+            var deferUOM = $q.defer();
+
+            localService.getUOMList(function (response) {
+
+                debrief.UOM = response;
+
+                deferUOM.resolve("success");
+
+                console.log("UOM");
+            });
+
+            promiseArray.push(deferUOM.promise);
+
             var deferTime = $q.defer();
 
             localService.getTimeList(taskObject.Task_Number, function (response) {
@@ -700,6 +715,11 @@
         function getCurrency() {
 
             return debrief.currency;
+        };
+
+        function getUOM() {
+
+            return debrief.UOM;
         };
 
         function getExpenseType() {
@@ -1091,6 +1111,8 @@
                                     "taskId": expenseArray[i].Task_Number,
                                     "comments": expenseArray[i].Justification,
                                     "currency": expenseArray[i].Currency_Id.toString(),
+                                    "distance": expenseArray[i].Distance,
+                                    "unitofmeasurement": expenseArray[i].UOM_Id,
                                     "chargeMethod": expenseArray[i].Charge_Method_Id.toString(),
                                     "ammount": expenseArray[i].Amount,
                                     "date": moment.utc(new Date(expenseArray[i].Date)).format("YYYY-MM-DD"),

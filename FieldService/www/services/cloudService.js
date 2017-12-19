@@ -610,6 +610,20 @@
 
                         promises.push(deferCurrency.promise);
                     }
+
+                    if (item.UnitsOfMeasurement && item.UnitsOfMeasurement.length > 0) {
+
+                        var deferUOM = $q.defer();
+
+                        localService.insertCurrencyList(item.UnitsOfMeasurement, function (result) {
+
+                            deferUOM.resolve("success");
+
+                            console.log("UOM");
+                        });
+
+                        promises.push(deferUOM.promise);
+                    }
                 });
 
                 console.log("LENGTH LOV " + promises.length);

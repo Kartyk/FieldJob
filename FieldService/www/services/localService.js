@@ -49,6 +49,7 @@
         service.insertWorkTypeList = insertWorkTypeList;
         service.insertItemList = insertItemList;
         service.insertCurrencyList = insertCurrencyList;
+        service.insertUOMList = insertUOMList;
 
         service.insertTimeList = insertTimeList;
         service.insertExpenseList = insertExpenseList;
@@ -80,6 +81,7 @@
         service.getWorkTypeList = getWorkTypeList;
         service.getItemList = getItemList;
         service.getCurrencyList = getCurrencyList;
+        service.getUOMList = getUOMList;
 
         service.getTimeList = getTimeList;
         service.getExpenseList = getExpenseList;
@@ -2771,6 +2773,137 @@
             });
         };
 
+        function insertUOMList(response, callback) {
+
+            var responseList = response;
+
+            var promises = [];
+
+            for (var i = 0; i < responseList.length; i++) {
+
+                (function (i) {
+
+                    var deferred = $q.defer();
+
+                    db.transaction(function (transaction) {
+
+                        var sqlSelect = "SELECT * FROM UOM WHERE ID = " + responseList[i].ID;
+
+                        // console.log("UOM  ====> " + sqlSelect);
+
+                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+
+                            var rowLength = res.rows.length;
+
+                            // console.log("UOM LENGTH ====> " + rowLength);
+
+                            if (rowLength > 0) {
+
+                                updateUOM(responseList[i], deferred);
+
+                            } else {
+
+                                insertUOM(responseList[i], deferred);
+                            }
+
+                        }, function (tx, error) {
+
+                            // console.log("UOM SELECT ERROR: " + error.message);
+
+                            deferred.reject(error);
+                        });
+
+                    }, function (error) {
+
+                        // console.log("UOM SELECT TRANSACTION ERROR: " + error.message);
+
+                        deferred.reject(error);
+                    });
+
+                    // console.log("UOM OBJECT =====> " + JSON.stringify(responseList[i]));
+
+                    promises.push(deferred.promise);
+
+                })(i);
+            }
+
+            $q.all(promises).then(
+                function (response) {
+                    callback("SUCCESS");
+                },
+
+                function (error) {
+                    callback("ERROR");
+                }
+            );
+        };
+
+        function updateUOM(responseList, defer) {
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlUpdate = "UPDATE UOM SET Value = ?, ResourceId = ?  WHERE ID = ?";
+
+                insertValues.push(responseList.Value);
+                insertValues.push(constantService.getResourceId());
+                insertValues.push(responseList.ID);
+
+                transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
+
+                    defer.resolve(res);
+
+                    // console.log("UOM ROW AFFECTED: " + res.rowsAffected);
+
+                }, function (tx, error) {
+
+                    // console.log("UOM UPDATE ERROR: " + error.message);
+
+                    defer.reject(error);
+                });
+
+            }, function (error) {
+
+                // console.log("UOM UPDATE TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
+            });
+        };
+
+        function insertUOM(responseList, defer) {
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlInsert = "INSERT INTO UOM VALUES (?, ?, ?)";
+
+                insertValues.push(responseList.ID);
+                insertValues.push(responseList.Value);
+                insertValues.push(constantService.getResourceId());
+
+                transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
+
+                    defer.resolve(res);
+
+                    // console.log("UOM INSERT ID: " + res.insertId);
+
+                }, function (tx, error) {
+
+                    // console.log("UOM INSERT ERROR: " + error.message);
+
+                    defer.reject(error);
+                });
+
+            }, function (error) {
+
+                // console.log("UOM INSERT TRANSACTION ERROR: " + error.message);
+
+                defer.reject(error);
+            });
+        };
+
         function insertTimeList(response, callback) {
 
             var responseList = response;
@@ -3015,7 +3148,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Expense SET expenseDefault = ?, Date = ?, Expense_Type = ?, Expense_Type_Id = ?, Amount = ?, Currency = ?, Currency_Id = ?, Charge_Method = ?, Charge_Method_Id = ?, Justification = ?, ResourceId = ? WHERE Expense_Id = ? AND Task_Number = ?";
+                var sqlUpdate = "UPDATE Expense SET expenseDefault = ?, Date = ?, Expense_Type = ?, Expense_Type_Id = ?, Amount = ?, Currency = ?, Currency_Id = ?, Distance = ?, UOM = ?, UOM_Id = ?, Charge_Method = ?, Charge_Method_Id = ?, Justification = ?, ResourceId = ? WHERE Expense_Id = ? AND Task_Number = ?";
 
                 insertValues.push(responseList.expenseDefault);
                 insertValues.push(responseList.Date);
@@ -3024,6 +3157,9 @@
                 insertValues.push(responseList.Amount);
                 insertValues.push(responseList.Currency);
                 insertValues.push(responseList.Currency_Id);
+                insertValues.push(responseList.Distance);
+                insertValues.push(responseList.UOM);
+                insertValues.push(responseList.UOM_Id);
                 insertValues.push(responseList.Charge_Method);
                 insertValues.push(responseList.Charge_Method_Id);
                 insertValues.push(responseList.Justification);
@@ -3058,7 +3194,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Expense VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Expense VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Expense_Id);
                 insertValues.push(responseList.expenseDefault);
@@ -3068,6 +3204,9 @@
                 insertValues.push(responseList.Amount);
                 insertValues.push(responseList.Currency);
                 insertValues.push(responseList.Currency_Id);
+                insertValues.push(responseList.Distance);
+                insertValues.push(responseList.UOM);
+                insertValues.push(responseList.UOM_Id);
                 insertValues.push(responseList.Charge_Method);
                 insertValues.push(responseList.Charge_Method_Id);
                 insertValues.push(responseList.Justification);
@@ -4626,6 +4765,40 @@
             }, function (error) {
 
                 // console.log("GET CURRENCY TRANSACTION ERROR: " + error.message);
+
+                callback(value);
+            });
+        };
+
+        function getUOMList(callback) {
+
+            var value = [];
+
+            return db.transaction(function (transaction) {
+
+                transaction.executeSql("SELECT * FROM UOM WHERE ResourceId = ?", [constantService.getResourceId()], function (tx, res) {
+
+                    var rowLength = res.rows.length;
+
+                    for (var i = 0; i < rowLength; i++) {
+
+                        value.push(res.rows.item(i));
+                    }
+
+                    // console.log("GET UOM DB ==========> " + JSON.stringify(value));
+
+                    callback(value);
+
+                }, function (tx, error) {
+
+                    // console.log("GET UOM SELECT ERROR: " + error.message);
+
+                    callback(value);
+                });
+
+            }, function (error) {
+
+                // console.log("GET UOM TRANSACTION ERROR: " + error.message);
 
                 callback(value);
             });
