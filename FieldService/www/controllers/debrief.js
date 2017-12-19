@@ -689,13 +689,15 @@
             durationHours = 8;
             durationMinutes = 0;
         }
-
+        var chargeType = "";
+        if ($scope.taskObject.Charge_Type != null)
+            chargeType = $scope.taskObject.Charge_Type
         var timeObject = {
             Time_Id: "",
             timeDefault: timeDefault,
             Field_Job_Name: "",
             Field_Job_Name_Id: "",
-            Charge_Type: $scope.taskObject.Charge_Type,
+            Charge_Type: chargeType,
             Charge_Type_Id: "",
             Charge_Method: $scope.taskObject.Labor_Method,
             Charge_Method_Id: "",
@@ -900,7 +902,13 @@
                 break;
         }
     };
-
+    $scope.checkMaxChar = function (text,limit)
+    {
+        if (text != null && text.length > limit)
+        {
+            text = text.slice(0, limit);
+        }
+    }
     $scope.saveObject = function (stage, isButtonClick, item) {
 
         switch (stage) {
