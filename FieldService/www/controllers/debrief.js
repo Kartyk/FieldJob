@@ -907,7 +907,10 @@
         if (text != null && text.length > limit)
         {
             text = text.slice(0, limit);
+            console.log(text);
+
         }
+        return text;
     }
     $scope.saveObject = function (stage, isButtonClick, item) {
 
