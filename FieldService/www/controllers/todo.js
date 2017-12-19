@@ -70,7 +70,7 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
 
     $scope.tasks = [];
 
-    $scope.defaultTasks = ["1/2 SOCKET", "Cage Retainer Tool", "Power Torque Erench", "Plyers", "3/4 SOCKET"];
+    $scope.defaultTasks = [];
 
     $scope.goToBack = function () {
         $state.go('myTask');
