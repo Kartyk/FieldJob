@@ -125,8 +125,8 @@
                                 <div class="form-group noMarginPadding">
                                     <label class="control-label  marginbottom12 material-label"
                                            translate="{{item.materialDefault.description.title}}"></label>
-                                    <input type="text" name="description" class="inputFieldsMaterial"
-                                           ng-model="item.Description"/>
+                                    <input type="text" name="description" class="inputFieldsMaterial" max-input
+                                           input-max-length='255'  ng-model="item.Description"/>
 
                                     <!-- <div>{{item.Description}}</div> -->
                                 </div>
