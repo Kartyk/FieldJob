@@ -56,14 +56,14 @@
                     <div class="button  attachplaceholder" ngf-select="uploadFiles($file)"
                          ngf-multiple="true" ng-model="file" name="file"
                          ngf-size="{width: 20, height: 20, quality: 0.9}"
-                         ngf-max-size="2MB" ngf-min-height="100"
+                         ngf-max-size="20MB" ngf-min-height="100"
                          ngf-resize="{width: 100, height: 100}">
 
 
                         <img src="images/Layer 18.png" alt="">
                          
                     </div>
-                    <div class="max-size">(<span translate="Max"></span> 2MB)</div>
+                    <div class="max-size">(<span translate="Max"></span> 20MB)</div>
                     </div>
                     <div ng-repeat="file1 in files" class="col-sm-2 width110 attachment-spacing">
                         <div class="attachmentDiv" ng-if="file1.contentType.indexOf('image') > -1">

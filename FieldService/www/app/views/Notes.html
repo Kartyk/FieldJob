@@ -62,10 +62,10 @@
 
                         <textarea class="form-control note-textarea-NC" style="height:40px;max-height:150px"
                                   id="justification"
-                                  max-input ng-model="item.Notes" input-max-length='255' ng-maxlength="255"
+                                  max-input ng-model="item.Notes" input-max-length='2000' ng-maxlength="255"
                                   name="notesComment"></textarea>
                         <div style="color:red;text-transform:none" ng-show="notesForm.notesComment.$error.maxlength">
-                            Maximum allowed characters are 255
+                            Maximum allowed characters are 2000
                         </div>
 
                     </div>
