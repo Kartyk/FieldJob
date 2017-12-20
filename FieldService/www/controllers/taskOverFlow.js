@@ -66,7 +66,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
     loadMap();
 
-    console.log("TASK " + JSON.stringify(valueService.getTask()));
+   // console.log("TASK " + JSON.stringify(valueService.getTask()));
 
     var map = null;
 

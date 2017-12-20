@@ -1336,6 +1336,7 @@
                         Item: item.Item,
                         Item_Id: item.Item_Id,
                         Description: "",
+                        Time_Code: item.Time_Code,
                         Time_Code_Id: item.Time_Code_Id,
                         Time_Code_Value: timecode,
                         Shift_Code: item.Shift_Code,
@@ -2446,7 +2447,7 @@
                                         "comments": expenseArray[i].Justification,
                                         "currency": expenseArray[i].Currency_Id.toString(),
                                         "distance": expenseArray[i].Distance,
-                                        "unitofmeasurement": expenseArray[i].UOM_Id,
+                                        "unitofmeasurement": expenseArray[i].UOM_Id+"",
                                         "chargeMethod": expenseArray[i].Charge_Method_Id.toString(),
                                         "ammount": expenseArray[i].Amount,
                                         "date": moment.utc(expenseArray[i].Date).format("YYYY-MM-DD"),
@@ -2566,7 +2567,7 @@
 
                                                                 var formData = {
                                                                     "taskid": $scope.taskId,
-                                                                    "taskstatus": "Completed",
+                                                                    "taskstatus": "Completed-Awaiting Review",
                                                                     "email": constantService.getCCEmailID(),
                                                                     "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000+00:00"),
                                                                     "followUp": $scope.engineerObject.followUp.toString(),
@@ -2577,7 +2578,7 @@
                                                                     "sparequotetext": $scope.engineerObject.Spare_Quote,
                                                                     "salesText": $scope.engineerObject.Sales_Visit,
                                                                     "salesleadText": $scope.engineerObject.Sales_Head,
-                                                                    "denySignature": $scope.engineerObject.isCustomerSignChecked,
+                                                                    "denySignature": $scope.engineerObject.isCustomerSignChecked.toString(),
                                                                     "signatureComments": $scope.engineerObject.customerComments
                                                                 };
 
@@ -3092,7 +3093,7 @@
     };
 
     $scope.reviewSummary = function () {
-        var promise = generatePDF();
+       // var promise = generatePDF();
         $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Customer Signature"
     )
 
