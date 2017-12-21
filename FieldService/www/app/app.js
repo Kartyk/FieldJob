@@ -279,7 +279,7 @@ app.directive('dateFormat', function ($filter) {
 
                 // var transformedInput = viewValue.replace(/(\:{1,3}[^0-9])/g, '');
 
-                var transformedInput = viewValue.replace(/([^0-9 :])/g, '');
+                var transformedInput = viewValue.replace(/([^0-9:])/g, '');
 
                 // transformedInput = transformedInput.replace(/:{2,4}/g, '');
 
@@ -296,7 +296,7 @@ app.directive('dateFormat', function ($filter) {
 
                 if (transformedInput !== undefined && transformedInput !== "") {
 
-                    if (transformedInput.length == 2 && transformedInput.indexOf(':') == -1) {
+                    if (transformedInput.length == 2 && transformedInput.indexOf(':') == -1 && ctrl.$modelValue.indexOf(':') == -1) {
 
                         transformedInput = transformedInput + ":";
 
