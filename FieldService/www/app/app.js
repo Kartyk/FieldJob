@@ -279,7 +279,7 @@ app.directive('dateFormat', function ($filter) {
 
                 // var transformedInput = viewValue.replace(/(\:{1,3}[^0-9])/g, '');
 
-                var transformedInput = viewValue.replace(/([^0-9:])/g, '');
+                var transformedInput = viewValue.replace(/([^0-9 :])/g, '');
 
                 // transformedInput = transformedInput.replace(/:{2,4}/g, '');
 
