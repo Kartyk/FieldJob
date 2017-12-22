@@ -158,7 +158,7 @@
                                translate="{{item.timeDefault.comments.title}}"></label>
                         <div flex="100">
                             <textarea class="form-control debrief-textarea" rows="5" id="comment"
-                                      max-input ng-model="item.Comments" input-max-length='255'></textarea>
+                                      max-input ng-model="item.Comments" input-max-length='255'  ng-change="item.Comments=checkMaxChar(item.Comments,255)"></textarea>
                         </div>
                     </div>
                 </div>

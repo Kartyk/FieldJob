@@ -148,7 +148,8 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
         $rootScope.tabClicked = true;
 
         $rootScope.columnclass = "col-sm-11";
-
+        valueService.setEnggSignTime("");
+        valueService.setCustSignTime();
         if (valueService.getDebriefChanged()) {
 
             $mdDialog.show({

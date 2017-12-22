@@ -2316,10 +2316,20 @@ md-select.md-default-theme ._md-select-value, md-select ._md-select-value{
 {
     width:16%;
 }
+.width10 {
+    width: 10%;
+}
+.width25 
+{
+    width:25%;
+}
+.width20 {
+    width: 20%;
+}
 .summary-reviewBtn {
-    margin:0;
-    padding:0;
-    float:right;
+    margin: 0;
+    padding: 0;
+    float: right;
     width: 180px;
     height: 40px;
     background-color: #00aa7e !important;

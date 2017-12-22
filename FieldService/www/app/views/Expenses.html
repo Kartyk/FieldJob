@@ -1,3 +1,7 @@
+
+<!--<md-button class="time-font time-add summary-report-donebtn" translate="BACK" ng-click="goPreviousTab('Expenses')" style="margin-top:15px;margin-right:50px;visibility:hidden"></md-button>
+<md-button class="time-font time-add summary-report-donebtn" translate="BACK" ng-click="goPreviousTab('Expenses')" style="margin-top:15px;margin-right:50px;float:right;"></md-button>
+<md-button class="time-font time-add summary-report-donebtn" translate="NEXT" ng-click="Next('Expenses')" style="margin-top:15px;float:right"></md-button>-->
 <div class="card-parentContainer margintop10">
     <div class="margintop30" ng-repeat="item in expenseArray track by $index" id="expense{{$index}}">
 
@@ -135,22 +139,26 @@
         <table class="table no-marbottom noborder">
             <thead>
                 <tr class="summary-tr">
-                    <th class="noborder width15"><span translate="Date"></span></th>
+                    <th class="noborder width10"><span translate="Date"></span></th>
                     <th class="noborder width15" ><span translate="Expense Type"></span></th>
-                    <th class="noborder width15" ><span translate="Amount"></span></th>
-                    <th class="noborder width15"><span translate="Currency"></span></th>
+                    <th class="noborder width10" ><span translate="Amount"></span></th>
+                    <th class="noborder width10"><span translate="Distance"></span></th>
+                    <th class="noborder width10"><span translate="UOM"></span></th>
+                    <th class="noborder width10"><span translate="Currency"></span></th>
                     <th class="noborder width15" ><span translate="Charge Method"></span></th>
-                    <th class="noborder width15" ><span translate="Justification"></span></th>
+                    <th class="noborder width20" ><span translate="Justification"></span></th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="summary-tr" ng-repeat="expense in expenseArraySummary">
-                    <td class="noborder bg-white width15" >{{expense.Date|timezonefilter}}</td>
+                    <td class="noborder bg-white width10" >{{expense.Date|timezonefilter}}</td>
                     <td class="noborder bg-white width15" >{{expense.Expense_Type.Value | translate}}</td>
-                    <td class="noborder bg-white width15" >{{expense.Amount | translate}}</td>
-                    <td class="noborder bg-white width15" >{{expense.Currency.Value | translate}}</td>
+                    <td class="noborder bg-white width10" >{{expense.Amount | translate}}</td>
+                    <td class="noborder bg-white width10">{{expense.Distance | translate}}</td>
+                    <td class="noborder bg-white width10">{{expense.UOM.Value | translate}}</td>
+                    <td class="noborder bg-white width10" >{{expense.Currency.Value | translate}}</td>
                     <td class="noborder bg-white width15" >{{expense.Charge_Method.Value |translate}}</td>
-                    <td class="noborder bg-white width15" ><div class="summary-description" >{{expense.Justification}}</div></td>
+                    <td class="noborder bg-white width20" ><div class="summary-description" >{{expense.Justification}}</div></td>
                     <td class="noborder bg-white "><img src="images/cancel.png" class="cancelInEquip delete" ng-click="deleteObject($index,'Expenses')" /></td>
                     <td class="noborder bg-white "><img src="images/edit.png" class="cancelInEquip delete" ng-click="editObject(expense,'Expenses',$index)" style="width:16px" /></td>
                 </tr>

@@ -2278,26 +2278,26 @@
                        
                         var newTimecode = true;
 
-                        angular.forEach($scope.summary.timeArray, function (summaryTime) {
+                        //angular.forEach($scope.summary.timeArray, function (summaryTime) {
 
-                            if ($scope.userType == 'C') {
+                        //    if ($scope.userType == 'C') {
 
-                                if (summaryTime.Charge_Method == key.Charge_Method.Value && summaryTime.Charge_Type == key.Charge_Type.Value && summaryTime.Shift_Code == key.Shift_Code.ShiftCodeName && summaryTime.Date == moment(key.Date).format('DD-MMM-YYYY') && summaryTime.Time_Code == key.Time_Code.Overtimeshiftcode && summaryTime.Work_Type == key.Work_Type.Value && summaryTime.Item == key.Item.Value) {
-                                    summaryTime.Duration = $scope.calculateDuration(summaryTime, key);
-                                    summaryTime.Duration = formatDuration(summaryTime.Duration);
-                                    newTimecode = false;
-                                }
+                        //        if (summaryTime.Charge_Method == key.Charge_Method.Value && summaryTime.Charge_Type == key.Charge_Type.Value && summaryTime.Shift_Code == key.Shift_Code.ShiftCodeName && summaryTime.Date == moment(key.Date).format('DD-MMM-YYYY') && summaryTime.Time_Code == key.Time_Code.Overtimeshiftcode && summaryTime.Work_Type == key.Work_Type.Value && summaryTime.Item == key.Item.Value) {
+                        //            summaryTime.Duration = $scope.calculateDuration(summaryTime, key);
+                        //            summaryTime.Duration = formatDuration(summaryTime.Duration);
+                        //            newTimecode = false;
+                        //        }
 
-                            } else {
+                        //    } else {
 
-                                if (summaryTime.Date == moment(key.Date).format('DD-MMM-YYYY') && summaryTime.Work_Type == key.Work_Type.Value && summaryTime.Item == key.Item.Value)
-                                {
-                                    summaryTime.Duration = $scope.calculateDuration(summaryTime, key);
-                                    summaryTime.Duration = formatDuration(summaryTime.Duration);
-                                    newTimecode = false;
-                                }
-                            }
-                        });
+                        //        if (summaryTime.Date == moment(key.Date).format('DD-MMM-YYYY') && summaryTime.Work_Type == key.Work_Type.Value && summaryTime.Item == key.Item.Value)
+                        //        {
+                        //            summaryTime.Duration = $scope.calculateDuration(summaryTime, key);
+                        //            summaryTime.Duration = formatDuration(summaryTime.Duration);
+                        //            newTimecode = false;
+                        //        }
+                        //    }
+                        //});
 
                         if (newTimecode) {
 
