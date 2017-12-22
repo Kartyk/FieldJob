@@ -191,8 +191,6 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
     $scope.mapClicked = function () {
 
         if (valueService.getNetworkStatus()) {
-            if (firstLoad)
-                {}
             console.log("CLICK " + map);
 
             if (map != null) {
