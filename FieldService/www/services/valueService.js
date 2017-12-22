@@ -1254,6 +1254,8 @@
                                                         attachmentObject.Description = attachment.File_Name.split(".")[0];
                                                         attachmentObject.Name = attachment.File_Name.split(".")[0];
 
+                                                        console.log("START " + new Date());
+
                                                         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 
                                                             fs.root.getFile(attachment.File_Name, {
@@ -1266,6 +1268,8 @@
                                                                     var reader = new FileReader();
 
                                                                     reader.onloadend = function () {
+
+                                                                        console.log("END " + new Date());
 
                                                                         attachmentObject.Data = this.result.split(",")[1];
 
@@ -1308,7 +1312,7 @@
                                                                     "Name": "Report_" + taskId + ".pdf",
                                                                     "taskId": taskId,
                                                                     "contentType": "application/pdf"
-                                                                }
+                                                                };
 
                                                                 deferred.resolve(reportObject);
                                                             };
@@ -1371,7 +1375,11 @@
 
                                                                     if (attachmentUploadJSON.attachment != undefined && attachmentUploadJSON.attachment.length > 0) {
 
+                                                                        console.log("START API "+ new Date());
+
                                                                         cloudService.createAttachment(attachmentUploadJSON, function (response) {
+
+                                                                            console.log("END API "+ new Date());
 
                                                                             cloudService.updateOFSCStatus(statusData, function (response) {
 
