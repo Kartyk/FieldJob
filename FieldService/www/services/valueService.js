@@ -1341,7 +1341,7 @@
                                                                     "TaskId": taskId,
                                                                     "Activity_Id": taskObject.Activity_Id,
                                                                     "XA_TASK_STATUS": "3",
-                                                                    "taskstatus": "Completed",
+                                                                    "taskstatus": "Completed-Awaiting Review",
                                                                     "email": taskObject.Email,
                                                                     "completeDate": moment.utc(new Date(taskObject.Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),
                                                                     "followUp": response.followUp + "",
