@@ -74,7 +74,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
         if (valueService.getNetworkStatus()) {
 
-            if (valueService.getTask().Country == "People's Republic of China") {
+            if (valueService.getTask().Country == "People's Republic of China" || valueService.getTask().Country.toLowerCase() == "china") {
 
                 $scope.isChina = true;
 

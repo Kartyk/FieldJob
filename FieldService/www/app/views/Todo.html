@@ -135,48 +135,45 @@
     <!-- End of References -->
 
     <!-- Tools and Equipments -->
-    <div ng-show="!$root.showAccept">
-        <label class="header-labeles" translate="Tools and Equipment"></label>
+    <label class="header-labeles" translate="Tools and Equipment"></label>
 
-        <div class="marginbottom30">
+    <div class="marginbottom30">
 
-            <div ng-repeat="t in defaultTasks track by $index" class="tool-items">
-                <label>
-                    {{t}}
-                </label>
-            </div>
+        <div ng-repeat="t in defaultTasks track by $index" class="tool-items">
+            <label>
+                {{t}}
+            </label>
+        </div>
 
-            <div ng-repeat="t in tasks track by $index" class="tool-items">
-                <label>
-                    {{t}}
-                </label>
-                <img src="images/cancel.png" class="cancelInEquip" ng-click="delete()" />
-
-            </div>
-
+        <div ng-repeat="t in tasks track by $index" class="tool-items">
+            <label>
+                {{t}}</label>
+            <img src="images/cancel.png" class="cancelInEquip" ng-click="delete()"/>
 
         </div>
-        <!-- End of Tools and Equipments -->
-        <!-- Add Equipmets/Tools -->
 
-        <div class="marginbottom30" ng-show="!$root.showAccept">
-            <div class="patternImg" style="height: 147px;">
-                <form name="TodoForm" class="addEquip">
-                    <label class="note-type-label" translate="Add Equipment/Tools"></label>
-                    <div>
-                        <div class="input-group">
 
-                            <input class="form-control" style="border-radius: 0px;" id="fieldTool"
-                                   ng-model="title" name="title" type="text" required />
-                            <span class="input-group-addon addlist-btn" ng-click="add()" translate="Add List"></span>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-        </div>
     </div>
-    
+    <!-- End of Tools and Equipments -->
+
+    <!-- Add Equipmets/Tools -->
+
+    <div class="marginbottom30" >
+        <div class="patternImg" style="height: 147px;">
+            <form name="TodoForm" class="addEquip">
+                <label class="note-type-label" translate="Add Equipment/Tools"></label>
+                <div>
+                    <div class="input-group">
+
+                        <input class="form-control" style="border-radius: 0px;" id="fieldTool"
+                               ng-model="title" name="title" type="text" required/>
+                        <button class="input-group-addon addlist-btn" ng-click="add()" ng-disabled="$root.showAccept" translate="Add List"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
 
 
     <!-- End of Add Equipmets/Tools -->

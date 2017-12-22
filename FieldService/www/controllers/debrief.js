@@ -3172,7 +3172,7 @@
         }
         setTimeout(function () {
             pageHeight = doc1.internal.pageSize.height;
-            if (valueService.getTask().Country == "People's Republic of China") {
+            if (valueService.getTask().Country == "People's Republic of China" || valueService.getTask().Country.toLowerCase() == "china") {
 
                 var canvas = document.getElementById('canvas');
 
