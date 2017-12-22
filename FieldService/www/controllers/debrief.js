@@ -3,7 +3,7 @@
     $scope.currentTab = "time";
 
     $rootScope.Islogin = true;
-
+    $scope.customerName ;
     $scope.userType = valueService.getUserType().clarityType;
 
     $scope.engineerName = valueService.getUserType().name;
@@ -11,9 +11,13 @@
     $rootScope.headerName = "Debrief";
 
     $scope.isCustomerSignChecked = false;
-
+    $scope.contactorCustname;
     changeLanguage(valueService.getLanguage());
-
+    $scope.custName = function (name)
+    {
+        console.log(name);
+        $scope.contactorCustname = name;
+    }
     function changeLanguage (lang) {
 
         valueService.setLanguage(lang);
@@ -83,7 +87,7 @@
     $scope.taskObject = {};
 
     $scope.installBaseArray = [];
-
+    $scope.contactArray = [];
     $scope.timeArray = [];
     $scope.timeArraySummary = [];
 
@@ -129,7 +133,7 @@
         $scope.taskId = $scope.taskObject.Task_Number;
 
         $scope.installBaseArray = valueService.getInstallBase();
-
+        $scope.contactArray = valueService.getContact();;
         $scope.timeArraySummary = valueService.getTime();
         $scope.expenseArraySummary = valueService.getExpense();
         $scope.materialArraySummary = valueService.getMaterial();
@@ -2065,7 +2069,8 @@
         }
 
         if (stage.title == "Summary") {
-
+            $scope.engTime = valueService.getEnggSignTime();
+            $scope.custTime = valueService.getCustSignTime();
             console.log($rootScope.timeformValid);
 
             $scope.summary.timeArray = [];
@@ -2273,26 +2278,26 @@
                        
                         var newTimecode = true;
 
-                        angular.forEach($scope.summary.timeArray, function (summaryTime) {
+                        //angular.forEach($scope.summary.timeArray, function (summaryTime) {
 
-                            if ($scope.userType == 'C') {
+                        //    if ($scope.userType == 'C') {
 
-                                if (summaryTime.Charge_Method == key.Charge_Method.Value && summaryTime.Charge_Type == key.Charge_Type.Value && summaryTime.Shift_Code == key.Shift_Code.ShiftCodeName && summaryTime.Date == moment(key.Date).format('DD-MMM-YYYY') && summaryTime.Time_Code == key.Time_Code.Overtimeshiftcode && summaryTime.Work_Type == key.Work_Type.Value && summaryTime.Item == key.Item.Value) {
-                                    summaryTime.Duration = $scope.calculateDuration(summaryTime, key);
-                                    summaryTime.Duration = formatDuration(summaryTime.Duration);
-                                    newTimecode = false;
-                                }
+                        //        if (summaryTime.Charge_Method == key.Charge_Method.Value && summaryTime.Charge_Type == key.Charge_Type.Value && summaryTime.Shift_Code == key.Shift_Code.ShiftCodeName && summaryTime.Date == moment(key.Date).format('DD-MMM-YYYY') && summaryTime.Time_Code == key.Time_Code.Overtimeshiftcode && summaryTime.Work_Type == key.Work_Type.Value && summaryTime.Item == key.Item.Value) {
+                        //            summaryTime.Duration = $scope.calculateDuration(summaryTime, key);
+                        //            summaryTime.Duration = formatDuration(summaryTime.Duration);
+                        //            newTimecode = false;
+                        //        }
 
-                            } else {
+                        //    } else {
 
-                                if (summaryTime.Date == moment(key.Date).format('DD-MMM-YYYY') && summaryTime.Work_Type == key.Work_Type.Value && summaryTime.Item == key.Item.Value)
-                                {
-                                    summaryTime.Duration = $scope.calculateDuration(summaryTime, key);
-                                    summaryTime.Duration = formatDuration(summaryTime.Duration);
-                                    newTimecode = false;
-                                }
-                            }
-                        });
+                        //        if (summaryTime.Date == moment(key.Date).format('DD-MMM-YYYY') && summaryTime.Work_Type == key.Work_Type.Value && summaryTime.Item == key.Item.Value)
+                        //        {
+                        //            summaryTime.Duration = $scope.calculateDuration(summaryTime, key);
+                        //            summaryTime.Duration = formatDuration(summaryTime.Duration);
+                        //            newTimecode = false;
+                        //        }
+                        //    }
+                        //});
 
                         if (newTimecode) {
 
@@ -3156,7 +3161,15 @@
     function generatePDF() {
 
         var defer = $q.defer();
-
+        if ($scope.contactorCustname == undefined || $scope.contactorCustname == "") {
+            if ($scope.contactArray != undefined && $scope.contactArray.length > 0) {
+                angular.forEach($scope.contactArray, function (key) {
+                    if (key.Contacts_Preferences = "Primary") {
+                        $scope.contactorCustname = key.Contact_Name;
+                    }
+                })
+            }
+        }
         setTimeout(function () {
             pageHeight = doc1.internal.pageSize.height;
             if (valueService.getTask().Country == "People's Republic of China") {
@@ -3836,7 +3849,7 @@
 
 
                     var xSignField = 25, ySignField = yMaterialFieldValue + 20, rectSignWidth = 660,
-                        rectSignHeight = 80;
+                        rectSignHeight = 110;
 
 
                     ctx.fillStyle = "#000";
@@ -3848,25 +3861,33 @@
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('工程师名字', 70, ySignField + 25);
+                    ctx.fillText($filter('translate')('emerson'), 70, ySignField + 25);
+
+                    ctx.fillStyle = "#000";
+                    ctx.font = 'bold 13px sans-serif ';
+                    ctx.fillText($filter('translate')('Conatct Name') + ": " + $scope.contactorCustname, 400, ySignField + 40);
+                   // ctx.fillText($scope.contactorCustname, 450, ySignField + 25);
+
+                    //ctx.fillStyle = "#000";
+                    //ctx.font = 'bold 13px sans-serif ';
+                    //ctx.fillText('工程师名字', 70, ySignField + 40);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
                     ctx.fillText('客户名', 400, ySignField + 25);
 
                     ctx.fillStyle = "#000";
-                    ctx.font = '13px sans-serif ';
-                    ctx.fillText($scope.engineerName, 70, ySignField + 40);
+                    ctx.font = 'bold 13px sans-serif ';
+                    ctx.fillText($filter('translate')('Service Representative') + ": "+$scope.engineerName, 70, ySignField + 40);
 
-                    ctx.fillStyle = "#000";
-                    ctx.font = '13px sans-serif ';
-                    ctx.fillText($scope.summary.taskObject.Customer_Name, 400, ySignField + 40);
+                    ctx.fillText($scope.engTime, 70, ySignField + 60);
+                    ctx.fillText($scope.custTime, 400, ySignField + 60);
 
                     var engineerSignature = document.getElementById('engineerSignature');
 
                     var callback1 = function (image) {
                         if (!image) image = this;
-                        ctx.drawImage(image, 70, ySignField + 50, 75, 40);
+                        ctx.drawImage(image, 70, ySignField + 75, 75, 40);
                     }
                     if (engineerSignature.complete) {
                         callback1(engineerSignature);
@@ -3877,7 +3898,7 @@
 
                     var callback1 = function (image) {
                         if (!image) image = this;
-                        ctx.drawImage(image, 400, ySignField + 50, 75, 40);
+                        ctx.drawImage(image, 400, ySignField + 75, 75, 40);
                     }
                     if (customerSignature.complete) {
                         callback1(customerSignature);
@@ -4515,23 +4536,42 @@
                 if (isAdded) {
                     ySignField = 0;
                 }
-                doc1.text(50, ySignField + 25, $filter('translate')('Service Representative'))
-                doc1.text(250, ySignField + 25, $filter('translate')('Customer Name'))
-                var isAdded = checkPdfHeight(ySignField + 45, pageHeight, ySignField, rectSignWidth, rectSignHeight);
+
+
+                doc1.text(50, ySignField + 25, $filter('translate')('emerson'))
+                doc1.text(300, ySignField + 25, $scope.summary.taskObject.Customer_Name);
+
+
+                var isAdded = checkPdfHeight(ySignField + 35, pageHeight, ySignField, rectSignWidth);
+                if (isAdded) {
+                    ySignField = 0;
+                }
+                doc1.text(50, ySignField + 35, $filter('translate')('Service Representative') + ": " + $scope.engineerName)
+               
+                
+                doc1.text(300, ySignField + 35, $filter('translate')('Conatct Name') + ": " + $scope.contactorCustname)
+                
+
+                var isAdded = checkPdfHeight(ySignField + 55, pageHeight, ySignField , rectSignWidth, rectSignHeight);
                 if (isAdded) {
                     ySignField = -10;
                 }
-                doc1.text(50, ySignField + 35, $scope.engineerName);
-                var isAdded = checkPdfHeight(ySignField + 45, pageHeight, ySignField , rectSignWidth, rectSignHeight);
-                if (isAdded) {
-                    ySignField = -10;
-                }
+
                 if ($scope.summary.engineer != undefined && $scope.summary.engineer.signature)
-                    doc1.addImage($scope.summary.engineer.signature, 'JPEG', 50, ySignField + 45, 75, 40, 'engsign', 'FAST');
-                doc1.text(250, ySignField + 35, $scope.summary.taskObject.Customer_Name);
+                    doc1.addImage($scope.summary.engineer.signature, 'JPEG', 50, ySignField + 35, 75, 40, 'engsign', 'FAST');
+
+
+                var isAdded = checkPdfHeight(ySignField + 45 + 40, pageHeight, ySignField, rectSignWidth, rectSignHeight);
+                if (isAdded) {
+                    ySignField = -10;
+                }
+                doc1.setFontType('normal')
+                doc1.text(50, ySignField + 45 + 40, valueService.getEnggSignTime());
+                doc1.text(300, ySignField + 45 + 40, valueService.getCustSignTime());
+                
 
                 if ($rootScope.customersignature)
-                    doc1.addImage($rootScope.customersignature, 'JPEG', 250, ySignField + 45, 75, 40, 'custsign', 'FAST');
+                    doc1.addImage($rootScope.customersignature, 'JPEG', 300, ySignField + 35, 75, 40, 'custsign', 'FAST');
                 //                 doc1.save("Report_" + $scope.summary.taskObject.Task_Number + ".pdf");
                 doc1.rect(20, ySignField + 10, rectSignWidth, rectSignHeight)
             }
@@ -4643,5 +4683,13 @@
     $scope.hideDropDown = function () {
         $scope.dropDown = false;
     };
+    $scope.updateTime = function (stage)
+    {
+        console.log("");
+        if(stage=='engg')
+            $scope.engTime = valueService.getEnggSignTime();
+        else if (stage == 'cust')
+        $scope.custTime = valueService.getCustSignTime();
+    }
   
 });

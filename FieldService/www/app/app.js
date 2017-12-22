@@ -345,7 +345,7 @@ app.directive('dateFormat', function ($filter) {
     };
 });
 
-app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope', 'constantService', function ($interval, $timeout, $window, $rootScope, constantService) {
+app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope', 'constantService', 'valueService' , function ($interval, $timeout, $window, $rootScope, constantService,valueService) {
 
     'use strict';
 
@@ -363,6 +363,7 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
             dataurl: '=?',
             height: '@',
             width: '@',
+
             notifyDrawing: '&onDrawing',
         },
         controller: ['$scope', function ($scope) {
@@ -405,11 +406,11 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
                 switch (stagesSign.title) {
 
                     case 'Emerson Signature':
-                        $rootScope.engineerSignTime = new Date().toLocaleString();
+                        valueService.setEnggSignTime(moment(new Date()).format("DD-MMM-YYYY HH:mm:ss"));
                         break;
 
                     case 'Customer Signature':
-                        $rootScope.customerSignTime = new Date().toLocaleString();
+                        valueService.setCustSignTime(moment(new Date()).format("DD-MMM-YYYY HH:mm:ss")); 
                         break;
 
                     default:
