@@ -1,3 +1,9 @@
+<style>
+    button[disabled]
+    {
+        opacity:0.6;
+    }
+</style>
 <nav class="navbar navbar-default navbar-fixed-top nav-noLeft sub-navbar" ng-class="{'nav-left' : hideNavLeft}">
 
     <div class="navbar-header">
@@ -167,7 +173,7 @@
 
                         <input class="form-control" style="border-radius: 0px;" id="fieldTool"
                                ng-model="title" name="title" type="text" required/>
-                        <button class="input-group-addon addlist-btn" ng-click="add()" ng-disabled="$root.showAccept" translate="Add List"></button>
+                        <button class="input-group-addon addlist-btn summary-report-donebtn" ng-click="add()" ng-disabled="$root.showAccept" translate="Add List"></button>
                     </div>
                 </div>
             </form>
