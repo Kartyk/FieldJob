@@ -220,8 +220,8 @@
             return userType;
         };
 
-        function setHeader(header) {
-            header = header;
+        function setHeader(headerValue) {
+            header = headerValue;
         };
 
         function getHeader() {

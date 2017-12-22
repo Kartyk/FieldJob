@@ -932,7 +932,7 @@
                 "masteractivityId": formData.Activity_Id + "",
                 "XA_TASK_STATUS": formData.XA_TASK_STATUS,
                 "resourceId": constantService.getResourceId() + "",
-                "OFSCdate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                "OFSCdate": moment.utc(new Date()).format("YYYY-MM-DD HH:mm:ss"),
                 "TaskId": formData.TaskId + "",
                 "email": formData.email != undefined ? formData.email : "",
                 "CompletedDateOSC": formData.completeDate != undefined ? formData.completeDate : "",

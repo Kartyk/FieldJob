@@ -64,13 +64,11 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
     $scope.isVisible = false;
 
-    loadMap();
-
-   // console.log("TASK " + JSON.stringify(valueService.getTask()));
-
     var map = null;
 
     var geoCoder = null;
+
+    loadMap();
 
     function loadMap() {
 
@@ -106,20 +104,26 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                     map.addControl(new BMap.NavigationControl());
 
-                    console.log("POINT START " + customerAddress);
-                }
+                    console.log("CHINESE ADDRESS" + customerAddress);
 
-                // geoCoder.getPoint(customerAddress, function (point) {
-                //
-                //     console.log("POINT " + JSON.stringify(point));
-                //
-                //     if (point) {
-                //
-                //         longitude = point.lng;
-                //
-                //         latitude = point.lat;
-                //     }
-                // });
+                    geoCoder.getPoint(customerAddress, function (point) {
+
+                        console.log("POINT " + JSON.stringify(point));
+
+                        if (point) {
+
+                            longitude = point.lng;
+
+                            latitude = point.lat;
+
+                            var marker = new BMap.Marker(new BMap.Point(longitude, latitude));
+
+                            map.addOverlay(marker);
+
+                            map.centerAndZoom(new BMap.Point(longitude, latitude), 14);
+                        }
+                    });
+                }
 
             } else {
 
@@ -131,10 +135,10 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                         center: {lat: -34.397, lng: 150.644},
                         zoom: 8
                     });
+
+                    addMarker($scope.taskDetails.Zip_Code, map);
                 }
             }
-
-            addMarker($scope.taskDetails.Zip_Code, map);
         }
     }
 
@@ -183,6 +187,21 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
             });
         }
     }
+
+    $scope.mapClicked = function () {
+
+        if (valueService.getNetworkStatus()) {
+
+            console.log("CLICK " + map);
+
+            if (map != null) {
+
+                $scope.isVisible = !$scope.isVisible;
+
+                $scope.mapIsClicked = !$scope.mapIsClicked;
+            }
+        }
+    };
 
     var contactArray = valueService.getContact();
 
@@ -402,20 +421,6 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
             }
         }
     };
-
-    $scope.mapClicked = function () {
-
-        if (valueService.getNetworkStatus()) {
-
-            if (map != null) {
-
-                $scope.isVisible = !$scope.isVisible;
-
-                $scope.mapIsClicked = !$scope.mapIsClicked;
-            }
-        }
-    };
-
 });
 
 // var geocoder; //global variable for GEOCoder
