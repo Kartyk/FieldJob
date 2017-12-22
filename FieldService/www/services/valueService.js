@@ -25,9 +25,10 @@
         var networkStatus = false;
 
         var language = "";
-
+       
         var debriefChanged = false;
-
+        var enggTime = "";
+        var custTime = "";
         var debrief = {
             task: {},
             taskList: [],
@@ -149,6 +150,10 @@
         service.getLanguage = getLanguage;
         service.setDebriefChanged = setDebriefChanged;
         service.getDebriefChanged = getDebriefChanged
+        service.setEnggSignTime = setEnggSignTime;
+        service.setCustSignTime = setCustSignTime;
+        service.getEnggSignTime = getEnggSignTime;
+        service.getCustSignTime = getCustSignTime;
         service.startWorking = startWorking;
         service.syncData = syncData;
 
@@ -1488,5 +1493,20 @@
             cloudService.getNoteType();
 
         };
+        function setEnggSignTime(time)
+        {
+            enggTime = time;
+        }
+        function setCustSignTime(time) {
+            custTime = time;
+        }
+        function getEnggSignTime()
+        {
+            return enggTime;
+        }
+        function getCustSignTime() {
+            return custTime;
+        }
+        
     }
 })();

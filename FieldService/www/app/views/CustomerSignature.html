@@ -85,7 +85,7 @@
                 <div class="col-md-12">
                     <div class="col-md-4 col-lg-4">
                         <div class="mylabel font-size" translate="ENTER CUSTOMER PRINT NAME"></div>
-                        <input class="inputFieldsMaterial" id="customerName" ng-model="customerName" name="customerName" ng-disabled="isSubmitted" />
+                        <input class="inputFieldsMaterial" id="customerName" ng-model="customerName" name="customerName" ng-disabled="isSubmitted" ng-change="custName(customerName)"/>
                     </div>
 
                     <div class="col-md-4 col-lg-4">
@@ -117,8 +117,8 @@
             
 
             <div style="height: 220px;width:100%" ng-if="!engineerObject.isCustomerSignChecked">
-                <signature-pad accept="accept" clear="clear" height="220" width="1050" dataurl="dataurl" disabled="isSubmitted || $root.completedTask"></signature-pad>
-                 <label ng-bind="$root.customerSignTime"></label>
+                <signature-pad accept="accept" clear="clear" height="220" width="1050" dataurl="dataurl" ng-mouseup="updateTime('cust')" disabled="isSubmitted || $root.completedTask"></signature-pad>
+                 <label ng-bind="custTime"></label>
             </div>
             <hr>
             <div class="layout-row">
