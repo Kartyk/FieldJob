@@ -2526,7 +2526,7 @@
                                     "TaskId": $scope.taskId,
                                     "Activity_Id": $scope.taskObject.Activity_Id,
                                     "XA_TASK_STATUS": "3",
-                                    "taskstatus": "Completed",
+                                    "taskstatus": "Completed-Awaiting Review",
                                     "email": constantService.getCCEmailID(),
                                     "completeDate": moment.utc(new Date($scope.taskObject.Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),
                                     "followUp": $scope.engineerObject.followUp + "",
@@ -3172,7 +3172,7 @@
         }
         setTimeout(function () {
             pageHeight = doc1.internal.pageSize.height;
-            if (valueService.getTask().Country == "People's Republic of China") {
+            if (valueService.getTask().Country == "People's Republic of China" || valueService.getTask().Country.toLowerCase() == "china") {
 
                 var canvas = document.getElementById('canvas');
 

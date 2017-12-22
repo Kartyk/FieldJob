@@ -158,16 +158,16 @@
 
     <!-- Add Equipmets/Tools -->
 
-    <div class="marginbottom30">
+    <div class="marginbottom30" >
         <div class="patternImg" style="height: 147px;">
             <form name="TodoForm" class="addEquip">
-                <label class="note-type-label" translate="Add Equipments/Tools"></label>
+                <label class="note-type-label" translate="Add Equipment/Tools"></label>
                 <div>
                     <div class="input-group">
 
                         <input class="form-control" style="border-radius: 0px;" id="fieldTool"
                                ng-model="title" name="title" type="text" required/>
-                        <span class="input-group-addon addlist-btn" ng-click="add()" translate="Add List"></span>
+                        <button class="input-group-addon addlist-btn" ng-click="add()" ng-disabled="$root.showAccept" translate="Add List"></button>
                     </div>
                 </div>
             </form>
