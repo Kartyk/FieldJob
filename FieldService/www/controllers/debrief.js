@@ -4555,23 +4555,28 @@
                 if (isAdded) {
                     ySignField = 0;
                 }
-                doc1.text(50, ySignField + 25, $filter('translate')('Service Representative'))
-                doc1.text(250, ySignField + 25, $filter('translate')('Customer Name'))
+                doc1.text(50, ySignField + 25, $filter('translate')('emerson'))
+                var isAdded = checkPdfHeight(ySignField + 25, pageHeight, ySignField, rectSignWidth);
+                if (isAdded) {
+                    ySignField = 0;
+                }
+                doc1.text(50, ySignField + 35, $filter('translate')('Service Representative'))
+                doc1.text(250, ySignField + 35, $filter('translate')('Customer Name'))
                 var isAdded = checkPdfHeight(ySignField + 45, pageHeight, ySignField, rectSignWidth, rectSignHeight);
                 if (isAdded) {
                     ySignField = -10;
                 }
-                doc1.text(50, ySignField + 35, $scope.engineerName);
-                var isAdded = checkPdfHeight(ySignField + 45, pageHeight, ySignField , rectSignWidth, rectSignHeight);
+                doc1.text(50, ySignField + 45, $scope.engineerName);
+                var isAdded = checkPdfHeight(ySignField + 55, pageHeight, ySignField , rectSignWidth, rectSignHeight);
                 if (isAdded) {
                     ySignField = -10;
                 }
                 if ($scope.summary.engineer != undefined && $scope.summary.engineer.signature)
-                    doc1.addImage($scope.summary.engineer.signature, 'JPEG', 50, ySignField + 45, 75, 40, 'engsign', 'FAST');
-                doc1.text(250, ySignField + 35, $scope.summary.taskObject.Customer_Name);
+                    doc1.addImage($scope.summary.engineer.signature, 'JPEG', 50, ySignField + 55, 75, 40, 'engsign', 'FAST');
+                doc1.text(250, ySignField + 45, $scope.summary.taskObject.Customer_Name);
 
                 if ($rootScope.customersignature)
-                    doc1.addImage($rootScope.customersignature, 'JPEG', 250, ySignField + 45, 75, 40, 'custsign', 'FAST');
+                    doc1.addImage($rootScope.customersignature, 'JPEG', 250, ySignField + 55, 75, 40, 'custsign', 'FAST');
                 //                 doc1.save("Report_" + $scope.summary.taskObject.Task_Number + ".pdf");
                 doc1.rect(20, ySignField + 10, rectSignWidth, rectSignHeight)
             }
