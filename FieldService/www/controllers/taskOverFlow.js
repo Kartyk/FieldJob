@@ -131,12 +131,12 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                 if (google != undefined) {
 
-                    //map = new google.maps.Map(document.getElementById('googleMap'), {
-                    //    center: {lat: -34.397, lng: 150.644},
-                    //    zoom: 8
-                    //});
+                    map = new google.maps.Map(document.getElementById('googleMap'), {
+                        center: {lat: -34.397, lng: 150.644},
+                        zoom: 8
+                    });
 
-                    //addMarker($scope.taskDetails.Zip_Code, map);
+                    addMarker($scope.taskDetails.Zip_Code, map);
                 }
             }
         }
@@ -191,31 +191,15 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
     $scope.mapClicked = function () {
 
         if (valueService.getNetworkStatus()) {
-            if ( $scope.firstLoad)
-            {
-                map = new google.maps.Map(document.getElementById('googleMap'), {
-                    center: { lat: -34.397, lng: 150.644 },
-                    zoom: 8
-                });
+            if (firstLoad)
+                {}
+            console.log("CLICK " + map);
 
-                addMarker($scope.taskDetails.Zip_Code, map);
-                $scope.firstLoad = false;
-                if (map != null) {
+            if (map != null) {
 
-                    $scope.isVisible = !$scope.isVisible;
+                $scope.isVisible = !$scope.isVisible;
 
-                    $scope.mapIsClicked = !$scope.mapIsClicked;
-                }
-            }
-           // console.log("CLICK " + map);
-            else
-            {
-                if (map != null) {
-
-                    $scope.isVisible = !$scope.isVisible;
-
-                    $scope.mapIsClicked = !$scope.mapIsClicked;
-                }
+                $scope.mapIsClicked = !$scope.mapIsClicked;
             }
         }
     };
