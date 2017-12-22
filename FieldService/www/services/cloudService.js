@@ -1123,7 +1123,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getInternalBackId()
+                    "oracle-mobile-backend-id": constantService.getNewBackEndId()
                 }
 
             }).success(function (response) {
@@ -1587,7 +1587,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getTimeDataBackId()
+                    "oracle-mobile-backend-id": constantService.getNewBackEndId()
                 },
                 data: timedata
 
@@ -1608,7 +1608,7 @@
         function uploadExpense(expenseData, callback) {
 
             console.log("Expense Data " + JSON.stringify(expenseData));
-
+            //SIT 16807770-ff88-468b-a729-059fc92b32f7
             return $http({
 
                 method: 'POST',
@@ -1616,7 +1616,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": "16807770-ff88-468b-a729-059fc92b32f7"
+                    "oracle-mobile-backend-id": "02593e79-7fe6-4296-baf6-ea2a1448638c"
                 },
                 data: expenseData
 
@@ -1676,7 +1676,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getChargeBackId()
+                    "oracle-mobile-backend-id": constantService.getNewBackEndId()
                 },
                 data: noteData
 

@@ -296,7 +296,7 @@ app.directive('dateFormat', function ($filter) {
 
                 if (transformedInput !== undefined && transformedInput !== "") {
 
-                    if (transformedInput.length == 2 && transformedInput.indexOf(':') == -1) {
+                    if (transformedInput.length == 2 && transformedInput.indexOf(':') == -1 && ctrl.$modelValue.indexOf(':') == -1) {
 
                         transformedInput = transformedInput + ":";
 

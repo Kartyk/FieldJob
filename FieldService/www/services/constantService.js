@@ -93,6 +93,8 @@
          //
          // var combinedBackEndId = "d8ba9d1b-20c9-4586-9037-5846804a002a";
 
+         var newBackEndId = "02593e79-7fe6-4296-baf6-ea2a1448638c";
+
         var stagesArray = {};
 
         var startDate = new Date();
@@ -139,6 +141,7 @@
         service.getTimeDataBackId = getTimeDataBackId;
         service.getUpdateStatusBackId = getUpdateStatusBackId;
         service.getExpenseBackEndId = service.getExpenseBackEndId;
+        service.getNewBackEndId = service.getNewBackEndId;
 
         service.setUserEmailId = setUserEmailId;
         service.getUserEmailId = getUserEmailId;
@@ -219,6 +222,11 @@
         function getCCEmailID() {
 
             return contactsCCEmail;
+        };
+
+        function getNewBackEndId() {
+
+            return newBackEndId;
         };
 
         function getStartDate() {

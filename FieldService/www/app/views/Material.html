@@ -126,7 +126,7 @@
                                     <label class="control-label  marginbottom12 material-label"
                                            translate="{{item.materialDefault.description.title}}"></label>
                                     <input type="text" name="description" class="inputFieldsMaterial" max-input
-                                           input-max-length='255'  ng-model="item.Description"/>
+                                           input-max-length='255' ng-change="item.Description=checkMaxChar(item.Description,255)"  ng-model="item.Description"/>
 
                                     <!-- <div>{{item.Description}}</div> -->
                                 </div>

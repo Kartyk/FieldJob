@@ -62,8 +62,8 @@
 
                         <textarea class="form-control note-textarea-NC" style="height:40px;max-height:150px"
                                   id="justification"
-                                  max-input ng-model="item.Notes" input-max-length='2000' ng-maxlength="2000"
-                                  name="notesComment"></textarea>
+                                  max-input ng-model="item.Notes" input-max-length='2000' 
+                                  name="notesComment" ng-change="item.Notes=checkMaxChar(item.Notes,2000)"></textarea>
                         <div style="color:red;text-transform:none" ng-show="notesForm.notesComment.$error.maxlength">
                             Maximum allowed characters are 2000
                         </div>
@@ -81,7 +81,7 @@
                        ng-click="goPreviousTab('Notes')"></md-button>
             <span style="visibility:hidden">{{ $root.noteFormValid = notesForm.$valid}}</span>
             <span flex></span>
-            <md-button ng-if="isEditNote==0" class="time-font time-add addbtn" ng-click="addObject('Notes',true,item)"
+            <md-button ng-if="isEditNote==0" class="time-font time-add summary-report-donebtn addbtn" ng-click="addObject('Notes',true,item)"
                        translate="Add"  ng-disabled="$root.completedTask || !$root.noteFormValid "></md-button>
             <md-button ng-if="isEditNote==1" class="time-font time-add addbtn" ng-click="saveObject('Notes',true,item)"
                        translate="Save" ></md-button>
