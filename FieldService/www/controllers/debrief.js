@@ -4566,7 +4566,9 @@
                     ySignField = -10;
                 }
                 doc1.setFontType('normal')
+                if (valueService.getEnggSignTime() != undefined)
                 doc1.text(50, ySignField + 45 + 40, valueService.getEnggSignTime());
+                if (valueService.getCustSignTime() != undefined)
                 doc1.text(300, ySignField + 45 + 40, valueService.getCustSignTime());
                 
 
