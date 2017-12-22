@@ -583,46 +583,34 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                         if (item.Task_Status == "Accepted") {
 
-                            valueService.acceptTask(item.Task_Number, function (result) {
+                            valueService.acceptTask(item, function (result) {
 
-                                updateStatus = {
-                                    "activity_id": item.Activity_Id,
-                                    "XA_TASK_STATUS": "8"
-                                };
+                                $rootScope.showAccept = false;
 
-                                ofscService.updateStatus(updateStatus, function (res) {
+                                $rootScope.showWorkingBtn = true;
 
-                                    $rootScope.showAccept = false;
+                                deferred.resolve("success");
 
-                                    $rootScope.showWorkingBtn = true;
+                                if ((response.length - 1) == i) {
+                                    deferAccept.resolve("Accept");
+                                }
 
-                                    deferred.resolve("success");
-
-                                    if ((response.length - 1) == i) {
-                                        deferAccept.resolve("Accept");
-                                    }
-
-                                    i++;
-                                });
+                                i++;
                             });
 
                         } else if (item.Task_Status == "Working") {
 
-                            valueService.startWorking(item.Task_Number, function (result) {
+                            valueService.startWorking(item, function (result) {
 
-                                cloudService.OfscActions(item.Activity_Id, true, function (res) {
+                                $rootScope.showWorkingBtn = false;
 
-                                    $rootScope.showWorkingBtn = false;
+                                deferred.resolve("success");
 
-                                    deferred.resolve("success");
+                                if ((response.length - 1) == i) {
+                                    deferAccept.resolve("Accept");
+                                }
 
-                                    if ((response.length - 1) == i) {
-                                        deferAccept.resolve("Accept");
-                                    }
-
-                                    i++;
-
-                                });
+                                i++;
                             });
                         }
 
@@ -816,27 +804,30 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
             } else {
 
-                var deferSRNotes = $q.defer();
+                if (srNumberArray.length > 0) {
 
-                cloudService.getSRNotesList(srNumberArray, function (response) {
+                    var deferSRNotes = $q.defer();
 
-                    console.log("SRNOTES");
+                    cloudService.getSRNotesList(srNumberArray, function (response) {
 
-                    deferSRNotes.resolve("success");
-                });
+                        console.log("SRNOTES");
 
-                var deferSRAttachment = $q.defer();
+                        deferSRNotes.resolve("success");
+                    });
+              
+                    var deferSRAttachment = $q.defer();
 
-                cloudService.getSRAttachmentList(srNumberArray, function (response) {
+                    cloudService.getSRAttachmentList(srNumberArray, function (response) {
 
-                    console.log("SRATTACHMENT");
+                        console.log("SRATTACHMENT");
 
-                    deferSRAttachment.resolve("success");
-                });
+                        deferSRAttachment.resolve("success");
+                    });
 
-                promiseArray.push(deferSRNotes.promise);
+                    promiseArray.push(deferSRNotes.promise);
 
-                promiseArray.push(deferSRAttachment.promise);
+                    promiseArray.push(deferSRAttachment.promise);
+                }
             }
 
             console.log("LENGTH LOGIN " + promiseArray.length);

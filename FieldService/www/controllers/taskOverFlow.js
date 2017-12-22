@@ -84,27 +84,30 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                 var customerAddress = $scope.taskDetails.Street_Address + "," + $scope.taskDetails.City;
 
-                map = new BMap.Map("chinaMap");
+                if (BMap != undefined) {
 
-                geoCoder = new BMap.Geocoder();
+                    map = new BMap.Map("chinaMap");
 
-                var longitude = 118.807395;
+                    geoCoder = new BMap.Geocoder();
 
-                var latitude = 32.065315;
+                    var longitude = 118.807395;
 
-                var contextMenu = new BMap.ContextMenu();
+                    var latitude = 32.065315;
 
-                map.centerAndZoom(new BMap.Point(longitude, latitude), 15);
+                    var contextMenu = new BMap.ContextMenu();
 
-                map.enableScrollWheelZoom(true);
+                    map.centerAndZoom(new BMap.Point(longitude, latitude), 14);
 
-                map.enableKeyboard();
+                    map.enableScrollWheelZoom(true);
 
-                map.disableDoubleClickZoom();
+                    map.enableKeyboard();
 
-                map.addControl(new BMap.NavigationControl());
+                    map.disableDoubleClickZoom();
 
-                console.log("POINT START " + customerAddress);
+                    map.addControl(new BMap.NavigationControl());
+
+                    console.log("POINT START " + customerAddress);
+                }
 
                 // geoCoder.getPoint(customerAddress, function (point) {
                 //
@@ -122,10 +125,13 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                 $scope.isChina = false;
 
-                map = new google.maps.Map(document.getElementById('googleMap'), {
-                    center: {lat: -34.397, lng: 150.644},
-                    zoom: 8
-                });
+                if (google != undefined) {
+
+                    map = new google.maps.Map(document.getElementById('googleMap'), {
+                        center: {lat: -34.397, lng: 150.644},
+                        zoom: 8
+                    });
+                }
             }
 
             addMarker($scope.taskDetails.Zip_Code, map);
@@ -134,45 +140,48 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
     function addMarker(address, map) {
 
-        var geoCoder = new google.maps.Geocoder();
+        if (map != null) {
 
-        geoCoder.geocode({
-            'address': address
-        }, function (results, status) {
+            var geoCoder = new google.maps.Geocoder();
 
-            if (status == google.maps.GeocoderStatus.OK) {
+            geoCoder.geocode({
+                'address': address
+            }, function (results, status) {
 
-                var latitude = results[0].geometry.location.lat();
+                if (status == google.maps.GeocoderStatus.OK) {
 
-                var longitude = results[0].geometry.location.lng();
+                    var latitude = results[0].geometry.location.lat();
 
-                if ($scope.isChina) {
+                    var longitude = results[0].geometry.location.lng();
 
-                    var marker = new BMap.Marker(new BMap.Point(longitude, latitude));
+                    if ($scope.isChina) {
 
-                    map.addOverlay(marker);
+                        var marker = new BMap.Marker(new BMap.Point(longitude, latitude));
 
-                    map.centerAndZoom(new BMap.Point(longitude, latitude), 15);
+                        map.addOverlay(marker);
+
+                        map.centerAndZoom(new BMap.Point(longitude, latitude), 14);
+
+                    } else {
+
+                        var latlng = new google.maps.LatLng(latitude, longitude);
+
+                        map.setCenter(latlng);
+
+                        //map.setCenter(results[0].geometry.location);
+
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            position: results[0].geometry.location
+                        });
+                    }
 
                 } else {
 
-                    var latlng = new google.maps.LatLng(latitude, longitude);
-
-                    map.setCenter(latlng);
-
-                    //map.setCenter(results[0].geometry.location);
-
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        position: results[0].geometry.location
-                    });
+                    /*alert("Geocode was not successful for the following reason: " + status);*/
                 }
-
-            } else {
-
-                /*alert("Geocode was not successful for the following reason: " + status);*/
-            }
-        });
+            });
+        }
     }
 
     var contactArray = valueService.getContact();
@@ -270,46 +279,17 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                 $rootScope.dbCall = true;
 
-                valueService.startWorking(valueService.getTask().Task_Number, function () {
+                valueService.startWorking(valueService.getTask(), function () {
 
                     $scope.selectedTask.Task_Status = "Working";
 
-                    cloudService.OfscActions($scope.selectedTask.Activity_Id, true, function (response) {
+                    $rootScope.showWorkingBtn = false;
 
-                        $rootScope.showWorkingBtn = false;
+                    $rootScope.dbCall = false;
 
-                        $rootScope.dbCall = false;
+                    cloudService.getTaskInternalList("0", function (response) {
 
-                        var taskObject = {
-                            Task_Status: "Working",
-                            Task_Number: valueService.getTask().Task_Number,
-                            Submit_Status: "I",
-                            Date: new Date()
-                        };
-
-                        localService.getTaskList(function (response) {
-
-                            localService.getInternalList(function (internalresponse) {
-
-                                angular.forEach(internalresponse, function (item) {
-
-                                    var internalOFSCJSONObject = {};
-
-                                    internalOFSCJSONObject.Start_Date = item.Start_time;
-                                    internalOFSCJSONObject.End_Date = item.End_time;
-                                    internalOFSCJSONObject.Type = "INTERNAL";
-                                    internalOFSCJSONObject.Customer_Name = item.Activity_type;
-                                    internalOFSCJSONObject.Task_Number = item.Activity_Id;
-
-                                    response.push(internalOFSCJSONObject);
-                                });
-
-                                constantService.setTaskList(response);
-
-                                $state.go($state.current, {}, {reload: true});
-
-                            });
-                        });
+                        $state.go($state.current, {}, {reload: true});
                     });
                 });
 
@@ -352,7 +332,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                 });
             }
         }
-    }
+    };
 
     $scope.accept = function () {
 
@@ -364,49 +344,17 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                 $rootScope.dbCall = true;
 
-                valueService.acceptTask(valueService.getTask().Task_Number, function () {
+                valueService.acceptTask(valueService.getTask(), function (result) {
 
-                    $scope.selectedTask.Task_Status = "Accepted";
+                    $rootScope.showAccept = false;
 
-                    updateStatus = {
-                        "activity_id": $scope.selectedTask.Activity_Id,
-                        "XA_TASK_STATUS": "8"
-                    };
+                    $rootScope.showWorkingBtn = true;
 
-                    //SIT
-                    //updateStatus = {
-                    //    "activity_id": $scope.selectedTask.Activity_Id,
-                    //    "XA_TASK_STATUS": "8"
-                    //};
+                    $rootScope.dbCall = false;
 
-                    ofscService.updateStatus(updateStatus, function (response) {
+                    cloudService.getTaskInternalList("0", function (response) {
 
-                        $rootScope.showAccept = false;
-                        $rootScope.showWorkingBtn = true;
-                        $rootScope.dbCall = false;
-                    });
-
-                    localService.getTaskList(function (response) {
-
-                        localService.getInternalList(function (internalresponse) {
-
-                            angular.forEach(internalresponse, function (item) {
-
-                                var internalOFSCJSONObject = {};
-
-                                internalOFSCJSONObject.Start_Date = item.Start_time;
-                                internalOFSCJSONObject.End_Date = item.End_time;
-                                internalOFSCJSONObject.Type = "INTERNAL";
-                                internalOFSCJSONObject.Customer_Name = item.Activity_type;
-                                internalOFSCJSONObject.Task_Number = item.Activity_Id;
-
-                                response.push(internalOFSCJSONObject);
-                            });
-
-                            constantService.setTaskList(response);
-
-                            $state.go($state.current, {}, {reload: true});
-                        });
+                        $state.go($state.current, {}, {reload: true});
                     });
                 });
 
@@ -459,9 +407,12 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
         if (valueService.getNetworkStatus()) {
 
-            $scope.isVisible = !$scope.isVisible;
+            if (map != null) {
 
-            $scope.mapIsClicked = !$scope.mapIsClicked;
+                $scope.isVisible = !$scope.isVisible;
+
+                $scope.mapIsClicked = !$scope.mapIsClicked;
+            }
         }
     };
 

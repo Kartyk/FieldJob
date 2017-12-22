@@ -110,47 +110,23 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
 
     $scope.startWork = function () {
 
-
-
         if ($scope.selectedTask.Task_Status == 'Accepted') {
 
             if (valueService.getNetworkStatus()) {
 
                 $rootScope.dbCall = true;
 
-                valueService.startWorking(valueService.getTask().Task_Number, function () {
+                valueService.startWorking(valueService.getTask(), function () {
 
                     $scope.selectedTask.Task_Status = "Working";
 
-                    cloudService.OfscActions($scope.selectedTask.Activity_Id, true, function (response) {
+                    $rootScope.showWorkingBtn = false;
 
-                        $rootScope.showWorkingBtn = false;
+                    $rootScope.dbCall = false;
 
-                        $rootScope.dbCall = false;
+                    cloudService.getTaskInternalList("0", function (response) {
 
-                        localService.getTaskList(function (response) {
-
-                            localService.getInternalList(function (internalresponse) {
-
-                                angular.forEach(internalresponse, function (item) {
-
-                                    var internalOFSCJSONObject = {};
-
-                                    internalOFSCJSONObject.Start_Date = item.Start_time;
-                                    internalOFSCJSONObject.End_Date = item.End_time;
-                                    internalOFSCJSONObject.Type = "INTERNAL";
-                                    internalOFSCJSONObject.Customer_Name = item.Activity_type;
-                                    internalOFSCJSONObject.Task_Number = item.Activity_Id;
-
-                                    response.push(internalOFSCJSONObject);
-                                });
-
-                                constantService.setTaskList(response);
-
-                                $state.go($state.current, {}, { reload: true });
-
-                            });
-                        });
+                        $state.go($state.current, {}, {reload: true});
                     });
                 });
 
@@ -205,51 +181,18 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
 
                 $rootScope.dbCall = true;
 
-                valueService.acceptTask(valueService.getTask().Task_Number, function () {
+                valueService.acceptTask(valueService.getTask(), function (result) {
 
-                    $scope.selectedTask.Task_Status = "Accepted";
+                    $rootScope.showAccept = false;
 
-                    updateStatus = {
-                        "activity_id": $scope.selectedTask.Activity_Id,
-                        "XA_TASK_STATUS": "8"
-                    };
+                    $rootScope.showWorkingBtn = true;
 
-                    //SIT
-                    //updateStatus = {
-                    //    "activity_id": $scope.selectedTask.Activity_Id,
-                    //    "XA_TASK_STATUS": "8"
-                    //};
+                    $rootScope.dbCall = false;
 
-                    ofscService.updateStatus(updateStatus, function (response) {
+                    //cloudService.getTaskInternalList("0", function (response) {
 
-                        $rootScope.showAccept = false;
-                        $rootScope.showWorkingBtn = true;
-                        $rootScope.dbCall = false;
-                    });
-
-                    localService.getTaskList(function (response) {
-
-                        localService.getInternalList(function (internalresponse) {
-
-                            angular.forEach(internalresponse, function (item) {
-
-                                var internalOFSCJSONObject = {};
-
-                                internalOFSCJSONObject.Start_Date = item.Start_time;
-                                internalOFSCJSONObject.End_Date = item.End_time;
-                                internalOFSCJSONObject.Type = "INTERNAL";
-                                internalOFSCJSONObject.Customer_Name = item.Activity_type;
-                                internalOFSCJSONObject.Task_Number = item.Activity_Id;
-
-                                response.push(internalOFSCJSONObject);
-                            });
-
-                            constantService.setTaskList(response);
-
-                            $state.go($state.current, {}, { reload: true });
-
-                        });
-                    });
+                    //    $state.go($state.current, {}, {reload: true});
+                    //});
                 });
 
             } else {

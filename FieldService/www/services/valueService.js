@@ -991,20 +991,25 @@
             });
         };
 
-        function startWorking(taskId, callback) {
+        function startWorking(item, callback) {
 
-            var formData = {
-                "taskid": taskId,
-                "taskstatus": "Working"
+            var statusData = {
+                "TaskId": item.Task_Number,
+                "Activity_Id": item.Activity_Id,
+                "XA_TASK_STATUS": "11",
+                // "XA_TASK_STATUS": "10",
+                "taskStatus": "Working"
             };
 
-            cloudService.updateAcceptTask(formData, function (response) {
+            cloudService.updateOFSCStatus(statusData, function (response) {
+
+                console.log("Task Working " + JSON.stringify(response));
 
                 var taskObject = {
                     Task_Status: "Working",
-                    Task_Number: taskId,
-                    Submit_Status: "I",
-                    Date: new Date()
+                    Task_Number: item.Task_Number,
+                    Date: new Date(),
+                    Submit_Status: "I"
                 };
 
                 localService.updateTaskSubmitStatus(taskObject, function (result) {
@@ -1014,22 +1019,24 @@
             });
         };
 
-        function acceptTask(taskId, callback) {
+        function acceptTask(item, callback) {
 
-            var formData = {
-                "taskid": taskId,
-                "taskstatus": "Accepted"
+            var statusData = {
+                "TaskId": item.Task_Number,
+                "Activity_Id": item.Activity_Id,
+                "XA_TASK_STATUS": "8",
+                "taskStatus": "Accepted"
             };
 
-            cloudService.updateAcceptTask(formData, function (response) {
+            cloudService.updateOFSCStatus(statusData, function (response) {
 
-                console.log(JSON.stringify(response));
+                console.log("Task Accepted " + JSON.stringify(response));
 
                 var taskObject = {
                     Task_Status: "Accepted",
-                    Task_Number: taskId,
-                    Submit_Status: "I",
-                    Date: new Date()
+                    Task_Number: item.Task_Number,
+                    Date: new Date(),
+                    Submit_Status: "I"
                 };
 
                 localService.updateTaskSubmitStatus(taskObject, function (result) {
@@ -1071,13 +1078,17 @@
 
                             chargeMethod = "";
                         }
+
                         var shiftcode = "", timecode = "";
+
                         if (timeArray[i].Time_Code_Value != undefined) {
                             timecode = timeArray[i].Time_Code_Value;
                         }
+
                         if (timeArray[i].Shift_Code_Value != undefined) {
                             shiftcode = timeArray[i].Shift_Code_Value;
                         }
+
                         var timeData = {
                             "task_id": timeArray[i].Task_Number,
                             "shift_code": timeArray[i].Shift_Code_Id,
@@ -1094,7 +1105,7 @@
                             "end_date": moment.utc(new Date(timeArray[i].Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),
                             "charge_method": chargeMethod,
                             "JobName": timeArray[i].Field_Job_Name_Id
-                        }
+                        };
 
                         timeJSONData.push(timeData);
                     }
@@ -1117,7 +1128,7 @@
                                     "ammount": expenseArray[i].Amount,
                                     "date": moment.utc(new Date(expenseArray[i].Date)).format("YYYY-MM-DD"),
                                     "expenseItem": expenseArray[i].Expense_Type_Id.toString()
-                                }
+                                };
 
                                 expenseJSONData.push(expenseData);
                             }
@@ -1321,11 +1332,13 @@
 
                                                             if (response != undefined) {
 
-                                                                var formData = {
-                                                                    "taskid": taskId,
+                                                                var statusData = {
+                                                                    "TaskId": taskId,
+                                                                    "Activity_Id": taskObject.Activity_Id,
+                                                                    "XA_TASK_STATUS": "3",
                                                                     "taskstatus": "Completed",
                                                                     "email": taskObject.Email,
-                                                                    "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                                                                    "completeDate": moment.utc(new Date(taskObject.Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),
                                                                     "followUp": response.followUp + "",
                                                                     "salesQuote": response.salesQuote + "",
                                                                     "salesVisit": response.salesVisit + "",
@@ -1334,108 +1347,71 @@
                                                                     "sparequotetext": response.Spare_Quote,
                                                                     "salesText": response.Sales_Visit,
                                                                     "salesleadText": response.Sales_Head,
-                                                                    "denySignature": response.isCustomerSignChecked,
+                                                                    "denySignature": response.isCustomerSignChecked + "",
                                                                     "signatureComments": response.customerComments
                                                                 };
 
-                                                                var timeUploadJSON = {
-                                                                    "Time": timeJSONData
-                                                                };
-
-                                                                var expenseUploadJSON = {
-                                                                    "expense": expenseJSONData
-                                                                };
-
-                                                                var notesUploadJSON = {
+                                                                var formData = {
+                                                                    "Time": timeJSONData,
+                                                                    "expense": expenseJSONData,
+                                                                    "Material": materialJSONData,
                                                                     "Notes": noteJSONData
-                                                                };
-
-                                                                var materialUploadJSON = {
-                                                                    "Material": materialJSONData
                                                                 };
 
                                                                 var attachmentUploadJSON = {
                                                                     "attachment": attachmentJSONData
                                                                 };
 
-                                                                cloudService.uploadTime(timeUploadJSON, function (response) {
+                                                                cloudService.updateDebrief(formData, function (response) {
 
-                                                                    console.log("Uploaded Time " + JSON.stringify(response));
+                                                                    if (attachmentUploadJSON.attachment != undefined && attachmentUploadJSON.attachment.length > 0) {
 
-                                                                    cloudService.uploadExpense(expenseUploadJSON, function (response) {
+                                                                        cloudService.createAttachment(attachmentUploadJSON, function (response) {
 
-                                                                        console.log("Uploaded Expense " + JSON.stringify(response));
+                                                                            cloudService.updateOFSCStatus(statusData, function (response) {
 
-                                                                        cloudService.uploadNote(notesUploadJSON, function (response) {
+                                                                                console.log("Task Completed " + JSON.stringify(response));
 
-                                                                            console.log("Uploaded Notes " + JSON.stringify(response));
+                                                                                var taskObject = {
+                                                                                    Task_Status: "Completed",
+                                                                                    Task_Number: taskId,
+                                                                                    Submit_Status: "I"
+                                                                                };
 
-                                                                            cloudService.uploadMaterial(materialUploadJSON, function (response) {
+                                                                                localService.updateTaskSubmitStatus(taskObject, function (result) {
 
-                                                                                console.log("Uploaded Material " + JSON.stringify(response));
+                                                                                    callback("Success Submit");
+                                                                                });
 
-                                                                                if (attachmentUploadJSON.attachment != undefined && attachmentUploadJSON.attachment.length > 0) {
-
-                                                                                    cloudService.createAttachment(attachmentUploadJSON, function (response) {
-
-                                                                                        console.log("Uploaded Attachment " + JSON.stringify(response));
-
-                                                                                        //if (reportAttachmentUploadJSON != undefined && reportAttachmentUploadJSON.attachment != undefined) {
-
-                                                                                        //    console.log(JSON.stringify(reportAttachmentUploadJSON));
-
-                                                                                        //    cloudService.createAttachment(reportAttachmentUploadJSON, function (response) {
-
-                                                                                        //        console.log("Uploaded FSR Attachment " + JSON.stringify(response));
-                                                                                        //    });
-                                                                                        //}
-
-                                                                                        cloudService.updateAcceptTask(formData, function (response) {
-
-                                                                                            console.log("Task Completed " + JSON.stringify(response));
-
-                                                                                            var taskObject = {
-                                                                                                Task_Status: "Completed",
-                                                                                                Task_Number: taskId,
-                                                                                                Submit_Status: "I"
-                                                                                            };
-
-                                                                                            localService.updateTaskSubmitStatus(taskObject, function (result) {
-
-                                                                                                callback("Success Submit");
-                                                                                            });
-
-                                                                                        });
-                                                                                    });
-
-                                                                                } else {
-
-                                                                                    if (reportAttachmentUploadJSON != undefined && reportAttachmentUploadJSON.attachment != undefined) {
-
-                                                                                        cloudService.createAttachment(reportAttachmentUploadJSON, function (response) {
-
-                                                                                        });
-                                                                                    }
-
-                                                                                    cloudService.updateAcceptTask(formData, function (response) {
-
-                                                                                        console.log("Task Completed " + JSON.stringify(response));
-
-                                                                                        var taskObject = {
-                                                                                            Task_Status: "Completed",
-                                                                                            Task_Number: taskId,
-                                                                                            Submit_Status: "I"
-                                                                                        };
-
-                                                                                        localService.updateTaskSubmitStatus(taskObject, function (result) {
-
-                                                                                            callback("Success Submit");
-                                                                                        });
-                                                                                    });
-                                                                                }
                                                                             });
                                                                         });
-                                                                    });
+
+                                                                    } else {
+
+                                                                        if (reportAttachmentUploadJSON != undefined && reportAttachmentUploadJSON.attachment != undefined) {
+
+                                                                            cloudService.createAttachment(reportAttachmentUploadJSON, function (response) {
+
+                                                                                console.log("Uploaded FSR " + JSON.stringify(response));
+                                                                            });
+                                                                        }
+
+                                                                        cloudService.updateOFSCStatus(statusData, function (response) {
+
+                                                                            console.log("Task Completed " + JSON.stringify(response));
+
+                                                                            var taskObject = {
+                                                                                Task_Status: "Completed",
+                                                                                Task_Number: taskId,
+                                                                                Submit_Status: "I"
+                                                                            };
+
+                                                                            localService.updateTaskSubmitStatus(taskObject, function (result) {
+
+                                                                                callback("Success Submit");
+                                                                            });
+                                                                        });
+                                                                    }
                                                                 });
                                                             }
                                                         });

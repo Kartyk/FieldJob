@@ -94,7 +94,7 @@
                                 <label flex="100" class="label-my" translate="{{item.expenseDefault.uom.title}}"></label>
                                 <div flex="100">
                                     <select class="form-control select-debrief" ng-model="item.UOM"
-                                            ng-options="x as x.Value for x in item.expenseDefault.uom.values track by x.ID" ng-change="setCurrency(item)">
+                                            ng-options="x as x.Value for x in item.expenseDefault.uom.values track by x.ID" ng-change="setUOM(item)">
                                         <option value="" disabled selected>Select</option>
                                     </select>
 
