@@ -68,6 +68,8 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
     var geoCoder = null;
 
+    var customerAddress = null;
+
     loadMap();
 
     function loadMap() {
@@ -80,7 +82,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                 // var customerAddress = "上海";
 
-                var customerAddress = $scope.taskDetails.Street_Address + "," + $scope.taskDetails.City;
+                customerAddress = $scope.taskDetails.Street_Address + "," + $scope.taskDetails.City;
 
                 if (BMap != undefined) {
 
@@ -96,13 +98,22 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                     map.centerAndZoom(new BMap.Point(longitude, latitude), 14);
 
-                    map.enableScrollWheelZoom(true);
+                    map.enableScrollWheelZoom();
 
                     map.enableKeyboard();
 
                     map.disableDoubleClickZoom();
 
                     map.addControl(new BMap.NavigationControl());
+
+                    map.addControl(new BMap.MapTypeControl({
+                        mapTypes: [
+                            BMAP_NORMAL_MAP,
+                            BMAP_HYBRID_MAP
+                        ]
+                    }));
+
+                    map.setCurrentCity($scope.taskDetails.City);
 
                     console.log("CHINESE ADDRESS" + customerAddress);
 
@@ -116,11 +127,15 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                             latitude = point.lat;
 
-                            var marker = new BMap.Marker(new BMap.Point(longitude, latitude));
+                            var pointer = new BMap.Point(longitude, latitude);
+
+                            var marker = new BMap.Marker(pointer);
 
                             map.addOverlay(marker);
 
-                            map.centerAndZoom(new BMap.Point(longitude, latitude), 14);
+                            map.centerAndZoom(pointer, 14);
+
+
                         }
                     });
                 }
@@ -191,6 +206,9 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
     $scope.mapClicked = function () {
 
         if (valueService.getNetworkStatus()) {
+
+            
+
             console.log("CLICK " + map);
 
             if (map != null) {
@@ -198,6 +216,32 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                 $scope.isVisible = !$scope.isVisible;
 
                 $scope.mapIsClicked = !$scope.mapIsClicked;
+            }
+
+            if ($scope.isChina) {
+
+                geoCoder.getPoint(customerAddress, function (point) {
+
+                    console.log("POINT " + JSON.stringify(point));
+
+                    if (point) {
+
+                        longitude = point.lng;
+
+                        latitude = point.lat;
+
+                        var pointer = new BMap.Point(longitude, latitude);
+
+                        var marker = new BMap.Marker(pointer);
+
+                        map.addOverlay(marker);
+
+                        map.centerAndZoom(pointer, 14);
+
+
+                    }
+                });
+
             }
         }
     };
