@@ -29,6 +29,9 @@
         service.createAttachment = createAttachment;
         service.downloadAttachment = downloadAttachment;
 
+        service.updateDebrief = updateDebrief;
+        service.updateOFSCStatus = updateOFSCStatus;
+
         service.getTaskList = getTaskList;
         service.getInternalList = getInternalList;
 
@@ -249,7 +252,6 @@
                             });
                         });
                     });
-
                 });
 
             }).error(function (error) {
@@ -761,7 +763,6 @@
             });
         };
 
-
         function updateAcceptTask(formData, callback) {
 
             console.log("Accept Task Data", JSON.stringify(formData));
@@ -815,7 +816,6 @@
                 callback(error);
             });
         };
-
 
         function createAttachment(attachment, callback) {
 
@@ -897,6 +897,83 @@
             });
         };
 
+        function updateDebrief(formData, callback) {
+
+            console.log("Debrief Update Request " + JSON.stringify(formData));
+            
+            $http({
+
+                method: 'POST',
+                url: url + 'combine_update/combine_update',
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getCombinedBackId()
+                },
+                data: formData
+
+            }).success(function (response) {
+
+                console.log("Debrief Update Response " + JSON.stringify(response));
+
+                callback(response);
+
+            }).error(function (error) {
+
+                console.log("Debrief Update Error " + JSON.stringify(error));
+
+                callback(error);
+            });
+        };
+
+        function updateOFSCStatus(formData, callback) {
+
+            var data = {
+                "masteractivityId": formData.Activity_Id + "",
+                "XA_TASK_STATUS": formData.XA_TASK_STATUS,
+                "resourceId": constantService.getResourceId() + "",
+                "OFSCdate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                "TaskId": formData.TaskId + "",
+                "email": formData.email != undefined ? formData.email : "",
+                "CompletedDateOSC": formData.completeDate != undefined ? formData.completeDate : "",
+                "followUp": formData.followUp != undefined ? formData.followUp : "",
+                "salesQuote": formData.salesQuote != undefined ? formData.salesQuote : "",
+                "salesVisit": formData.salesVisit != undefined ? formData.salesVisit : "",
+                "salesLead": formData.salesLead != undefined ? formData.salesLead : "",
+                "followuptext": formData.followuptext != undefined ? formData.followuptext : "",
+                "sparequotetext": formData.sparequotetext != undefined ? formData.sparequotetext : "",
+                "salesText": formData.salesText != undefined ? formData.salesText : "",
+                "salesleadText": formData.salesleadText != undefined ? formData.salesleadText : "",
+                "denySignature": formData.denySignature != undefined ? formData.denySignature : "",
+                "signatureComments": formData.signatureComments != undefined ? formData.signatureComments : ""
+            };
+
+            console.log("OFSC Update Request " + JSON.stringify(data));
+         
+            $http({
+
+                method: 'POST',
+                url: url + 'OFSC_Workflow/test_ofsc',
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getCombinedBackId()
+                },
+                data: data
+
+            }).success(function (response) {
+
+                console.log("OFSC Update Response " + JSON.stringify(response));
+
+                callback(response);
+
+            }).error(function (error) {
+
+                console.log("OFSC Update Error " + JSON.stringify(error));
+
+                callback(error);
+            });
+        };
 
         function getTaskList(callback) {
 
