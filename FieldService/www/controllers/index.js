@@ -666,6 +666,12 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                 } else {
 
                     deferSubmit.resolve("Submit");
+
+                    if (isLogin == "0") {
+                        fetchData(isLogin);
+                    } else if (isLogin == "1") {
+                        syncData(isLogin);
+                    }
                 }
             });
 
