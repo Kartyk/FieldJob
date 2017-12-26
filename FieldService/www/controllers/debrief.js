@@ -2154,11 +2154,22 @@
                         install.Serial_Number = key.Serial_Number;
                         install.TagNumber = key.TagNumber;
                         install.Original_PO_Number = key.Original_PO_Number;
+                        install.Item_Number = key.Item_Number;
+                        install.Description = key.Description;
 
                         $scope.summary.taskObject.InstallBase.push(install);
                     });
                 }
+                //var install = {};
+                //$scope.summary.taskObject.InstallBase = [];
+                //install.Product_Line ="343545467134354546713435454671343545467134354546713435454671";
+                //install.Serial_Number = "343545467134354546713435454671343545467134354546713435454671";
+                //install.Item_Number = "343545467134354546713435454671343545467134354546713435454671";
+                //install.Description = "343545467134354546713435454671343545467134354546713435454671";
+                //install.TagNumber = "343545467134354546713435454671343545467134354546713435454671";
+                //install.Original_PO_Number = "343545467134354546713435454671343545467134354546713435454671";
 
+                //$scope.summary.taskObject.InstallBase.push(install);
                 $scope.summary.taskObject.times = [];
 
                 $scope.summary.taskObject.times.push({
@@ -3058,7 +3069,7 @@
     };
 
     $scope.reviewSummary = function () {
-        var promise = generatePDF();
+        //var promise = generatePDF();
         $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Customer Signature"
     )
 
@@ -3306,59 +3317,101 @@
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('产品系列', 30, 182 + custBigYvalue);
+                    ctx.fillText($filter('translate')('Item Name'), 30, 182 + custBigYvalue);
+                    ctx.fillText($filter('translate')('Item Description'), 250, 182 + custBigYvalue);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('系统序列号/产品序列号', 280, 182 + custBigYvalue);
+                    ctx.fillText('系统序列号/产品序列号', 460, 182 + custBigYvalue);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('标签#', 530, 182 + custBigYvalue);
+                    ctx.fillText('标签#', 680, 182 + custBigYvalue);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('原始订单号#', 810, 182 + custBigYvalue);
+                    ctx.fillText('原始订单号#', 890, 182 + custBigYvalue);
 
                     var ibyvalue = 196 + custBigYvalue;
 
                     if ($scope.summary.taskObject.InstallBase) {
-
+                       
                         angular.forEach($scope.summary.taskObject.InstallBase, function (key) {
-
+                            var splitIN = splitPL = splitSL = splitTN = splitOPO = ""
+                            var ibIN = ibID = ibSL = ibTN = ibOPO = ibyvalue;
                             ctx.fillStyle = "#000";
                             ctx.font = '13px sans-serif ';
 
-                            if (key.Product_Line)
-                                ctx.fillText(key.Product_Line, 30, ibyvalue);
+                            if (key.Item_Number)
+                            {
+                                splitIN = doc1.splitTextToSize(key.Item_Number, 90);
+                                angular.forEach(splitIN, function (key)
+                                {
+                                    ctx.fillText(key, 30, ibIN);
+                                    ibIN += 15;
+                                })
+                                
+                            }
                             else
                                 ctx.fillText('NO VALUE', 30, ibyvalue);
+                            if (key.Item_Number)
+                            {
+                                splitPL = doc1.splitTextToSize(key.Description, 90);
+                                angular.forEach(splitPL, function (key) {
+                                    ctx.fillText(key, 250, ibID);
+                                    ibID += 15;
+                                })
+                                //ctx.fillText(key.Description, 180, ibyvalue);
+                            }
+                            else
+                                ctx.fillText('NO VALUE', 250, ibyvalue);
 
                             ctx.fillStyle = "#000";
                             ctx.font = '13px sans-serif ';
 
                             if (key.Serial_Number)
-                                ctx.fillText(key.Serial_Number, 280, ibyvalue);
+                            {
+                                splitSL = doc1.splitTextToSize(key.Serial_Number, 90);
+                                angular.forEach(splitSL, function (key) {
+                                    ctx.fillText(key, 460, ibSL);
+                                    ibSL += 15;
+                                })
+                                //ctx.fillText(key.Serial_Number, 380, ibyvalue);
+                            }
                             else
-                                ctx.fillText('NO VALUE', 280, ibyvalue);
+                                ctx.fillText('NO VALUE', 460, ibyvalue);
 
                             ctx.fillStyle = "#000";
                             ctx.font = '13px sans-serif ';
 
                             if (key.TagNumber)
-                                ctx.fillText(key.TagNumber, 530, ibyvalue);
+                            {
+                                splitTN = doc1.splitTextToSize(key.TagNumber, 90);
+                                angular.forEach(splitTN, function (key) {
+                                    ctx.fillText(key, 680, ibTN);
+                                    ibTN += 15;
+                                })
+                               // ctx.fillText(key.TagNumber, 530, ibyvalue);
+                            }
                             else
-                                ctx.fillText('NO VALUE', 530, ibyvalue);
+                                ctx.fillText('NO VALUE', 680, ibyvalue);
 
                             ctx.fillStyle = "#000";
                             ctx.font = '13px sans-serif ';
 
                             if (key.Original_PO_Number)
-                                ctx.fillText(key.Original_PO_Number, 810, ibyvalue);
+                            {
+                                splitOPO = doc1.splitTextToSize(key.Original_PO_Number, 90);
+                                angular.forEach(splitOPO, function (key) {
+                                    ctx.fillText(key, 890, ibOPO);
+                                    ibOPO += 15;
+                                })
+                                //ctx.fillText(key.Original_PO_Number, 810, ibyvalue);
+                            }
                             else
-                                ctx.fillText('NO VALUE', 810, ibyvalue);
+                                ctx.fillText('NO VALUE', 890, ibyvalue);
 
-                            ibyvalue = ibyvalue + 14;
+                            ibyvalue = Math.max(ibIN, ibID, ibSL, ibTN, ibOPO);
                         });
                     }
                     ctx.fillStyle = "#000";
@@ -3385,7 +3438,7 @@
                     ctx.fillStyle = "#000";
                     ctx.font = '15px sans-serif ';
                     ctx.fillText('备注', 20, yNotesField);
-
+                    yNotesField1_val = yNotesField1;
                     while (i < $scope.summary.notesArray.length) {
 
                         xNotesField1 = xNotesField;
@@ -3572,11 +3625,11 @@
                     }
                     ctx.fillStyle = "#000";
                     ctx.font = '15px sans-serif ';
-                    ctx.fillText($filter('translate')('Time'), 20, yTimeField);
+                    ctx.fillText('时间', 20, yTimeField);
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText($filter('translate')('Date'), 30, yTimeFieldName);
+                    ctx.fillText('日期', 30, yTimeFieldName);
 
                     if ($scope.userType == 'C') {
 
@@ -4123,47 +4176,74 @@
                     doc1.text(345, 135 + custBigYvalue, $scope.summary.taskObject.Job_Description)
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(25, 150 + custBigYvalue, $filter('translate')('Product Line'))
+                doc1.text(25, 150 + custBigYvalue, $filter('translate')('Item Name'))
+                doc1.text(130, 150 + custBigYvalue, $filter('translate')('Item Description'));
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(180, 150 + custBigYvalue, $filter('translate')('System ID / Serial')+'#')
+                doc1.text(260, 150 + custBigYvalue, $filter('translate')('System ID / Serial')+'#')
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(345, 150 + custBigYvalue, $filter('translate')('Tag #'))
+                doc1.text(390, 150 + custBigYvalue, $filter('translate')('Tag #'))
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(510, 150 + custBigYvalue, $filter('translate')('Original PO') + '#')
+                doc1.text(520, 150 + custBigYvalue, $filter('translate')('Original PO') + '#')
                 var ibyvalue = 160 + custBigYvalue;
                 angular.forEach($scope.summary.taskObject.InstallBase, function (key) {
+                    var splitIN=splitPL=splitSL=splitTN=splitOPO=""
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
-                    if (key.Product_Line)
-                        doc1.text(25, ibyvalue, $filter('translate')(key.Product_Line))
+                    if (key.Item_Number)
+                    {
+                         splitIN = doc1.splitTextToSize($filter('translate')(key.Item_Number), 120 - 25);
+                        doc1.text(25, ibyvalue, splitIN)
+                    }
                     else
                         doc1.text(25, ibyvalue, $filter('translate')('NO VALUE'))
+                    if (key.Description) {
+                         splitPL = doc1.splitTextToSize($filter('translate')(key.Description), 250 - 130);
+                        doc1.text(130, ibyvalue, splitPL)
+                    }
+                    else
+                        doc1.text(130, ibyvalue, $filter('translate')('NO VALUE'))
 
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if (key.Serial_Number)
-                        doc1.text(180, ibyvalue, $filter('translate')(key.Serial_Number))
+                    {
+                         splitSL = doc1.splitTextToSize($filter('translate')(key.Serial_Number), 385 - 260);
+                        doc1.text(260, ibyvalue, splitSL)
+                    }
                     else
-                        doc1.text(180, ibyvalue, $filter('translate')('NO VALUE'))
+                        doc1.text(260, ibyvalue, $filter('translate')('NO VALUE'))
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if (key.TagNumber)
-                        doc1.text(345, ibyvalue, $filter('translate')(key.TagNumber))
+                    {
+                         splitTN = doc1.splitTextToSize($filter('translate')(key.TagNumber), 510 - 390);
+                        doc1.text(390, ibyvalue, splitTN)
+                    }
+                        //doc1.text(345, ibyvalue, $filter('translate')(key.TagNumber))
                     else
-                        doc1.text(345, ibyvalue, $filter('translate')('NO VALUE'))
+                        doc1.text(390, ibyvalue, $filter('translate')('NO VALUE'))
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if (key.Original_PO_Number)
-                        doc1.text(510, ibyvalue, $filter('translate')(key.Original_PO_Number))
+                         {
+                             splitOPO = doc1.splitTextToSize($filter('translate')(key.Original_PO_Number), 650 - 520);
+                            doc1.text(520, ibyvalue, splitOPO)
+                        }
+                        //doc1.text(510, ibyvalue, $filter('translate')(key.Original_PO_Number))
                     else
-                        doc1.text(510, ibyvalue, $filter('translate')('NO VALUE'))
-                    ibyvalue = ibyvalue + 10;
+                        doc1.text(520, ibyvalue, $filter('translate')('NO VALUE'))
+                    if ((splitIN != undefined && splitIN.length > 1) || (splitPL != undefined && splitPL.length > 1) || (splitSL != undefined && splitSL.length > 1) || (splitTN != undefined && splitTN.length > 1) || (splitOPO != undefined && splitOPO.length > 1))
+                    {
+                        ibyvalue = ibyvalue+10 * Math.max(splitIN.length, splitPL.length, splitSL.length, splitTN.length, splitOPO.length)
+                    }
+                    else
+                        ibyvalue = ibyvalue + 10;
                 })
                 var customerRectHeight = ibyvalue - 85;
                 doc1.rect(20, 85, 660, customerRectHeight)

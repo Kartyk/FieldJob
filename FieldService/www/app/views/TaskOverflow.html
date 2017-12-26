@@ -126,35 +126,46 @@
             <div class="margintop30 no-marbottom">
 
                 <div layout="row">
-                    <div flex="25" class="mylabel padding-right15">
+                    <!--<div flex="25" class="mylabel padding-right15">
                         <span translate="Product Line"></span>
                             <span> #</span>
+                    </div>-->
+                    <div flex="20" class="mylabel padding-right15">
+                        <span translate="Item Name"></span>
+                        
                     </div>
-                    <div flex="25" class="mylabel padding-right15">
+                    <div flex="20" class="mylabel padding-right15">
+                        <span translate="Item Description"></span>
+                       
+                    </div>
+                    <div flex="20" class="mylabel padding-right15">
                         <span translate="System ID / Serial"></span>
                             <span> #</span>
                     </div>
-                    <div flex="25" class="mylabel">
+                    <div flex="20" class="mylabel">
                         <span translate="TAG"></span>
                              <span> #</span>
                     </div>
-                    <div flex="25" class="mylabel">
+                    <div flex="20" class="mylabel">
                          <span translate="ORIGINAL PO"></span>
                               <span>#</span>
                     </div>
                 </div>
                
                 <div layout="row" ng-repeat="install in taskDetails.InstallBase">
-                    <div flex="25" class="myvalue" style="word-wrap:break-word;margin-right:5px;">
-                        <div>{{install.Product_Line|| "NO VALUE"}}</div>
+                    <div flex="20" class="myvalue" style="word-wrap:break-word;margin-right:5px;">
+                        <div>{{install.Item_Number|| "NO VALUE"}}</div>
                     </div>
-                    <div flex="25" class="myvalue" style="word-wrap:break-word;margin-right:5px;">
+                    <div flex="20" class="myvalue" style="word-wrap:break-word;margin-right:5px;">
+                        <div>{{install.Description|| "NO VALUE"}}</div>
+                    </div>
+                    <div flex="20" class="myvalue" style="word-wrap:break-word;margin-right:5px;">
                         <div>{{install.Serial_Number|| "NO VALUE"}}</div>
                     </div>
-                    <div flex="25" class="myvalue" style="word-wrap:break-word;margin-right:5px;">
+                    <div flex="20" class="myvalue" style="word-wrap:break-word;margin-right:5px;">
                         <div>{{install.tagNo|| "NO VALUE"}}</div>
                     </div>
-                    <div flex="25" class="myvalue" style="word-wrap:break-word">
+                    <div flex="20" class="myvalue" style="word-wrap:break-word">
                         <div>{{install.orginalNo|| "NO VALUE"}}</div>
                     </div>
                 </div>

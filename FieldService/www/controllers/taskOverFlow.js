@@ -264,6 +264,8 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
             install.Serial_Number = key.Serial_Number;
             install.tagNo = key.TagNumber;
             install.orginalNo = key.Original_PO_Number;
+            install.Item_Number = key.Item_Number;
+            install.Description = key.Description;
 
             $scope.taskDetails.InstallBase.push(install);
 

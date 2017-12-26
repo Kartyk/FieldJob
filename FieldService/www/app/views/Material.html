@@ -247,24 +247,25 @@
                 <th class="noborder width10"><span translate="Serial In"></span></th>
                 <th class="noborder width10"><span translate="Serial Out"></span></th>
                 <th class="noborder width14"><span translate="item name"></span></th>
-                <th class="noborder width22"><span translate="Item Description"></span></th>
+                <th class="noborder width24"><span translate="Item Description"></span></th>
+                
             </tr>
             </thead>
             <tbody>
             <tr class="summary-tr" ng-repeat="material in materialArraySummary">
                 <td class="noborder bg-white width10">{{material.Charge_Type.Value| translate}}</td>
                 <td class="noborder bg-white width10">{{material.Product_Quantity}}</td>
-                <td class="noborder bg-white width10" style="word-wrap:break-word">
-                        <span style="word-wrap:break-word" ng-repeat="serailno in material.serialNumber track by $index">
+                <td class="noborder bg-white width10" style="word-wrap:break-word;word-break:break-all">
+                        <span  style="word-wrap:break-word;word-break:break-all" ng-repeat="serailno in material.serialNumber track by $index">
                             {{serailno}}<br/>
                         </span>
                 </td>
-                <td class="noborder bg-white width10"><span style="word-wrap:break-word" ng-repeat="serailin in material.serialIn track by $index">{{serailin}}<br/></span>
+                <td  style="word-wrap:break-word;word-break:break-all" class="noborder bg-white width10"><span  style="word-wrap:break-word;word-break:break-all" ng-repeat="serailin in material.serialIn track by $index">{{serailin}}<br/></span>
                 </td>
-                <td class="noborder bg-white width10"><span style="word-wrap:break-word" ng-repeat="serailout in material.serialOut track by $index">{{serailout}}<br/></span>
+                <td  style="word-wrap:break-word;word-break:break-all" class="noborder bg-white width10"><span  style="word-wrap:break-word;word-break:break-all" ng-repeat="serailout in material.serialOut track by $index">{{serailout}}<br/></span>
                 </td>
                 <td class="noborder bg-white width14">{{material.ItemName}}</td>
-                <td class="noborder bg-white width22">{{material.Description}}</td>
+                <td class="noborder bg-white width24">{{material.Description}}</td>
                 <td class="noborder bg-white "><img src="images/cancel.png" class="cancelInEquip delete"
                                                     ng-click="deleteObject($index,'Material')"/></td>
                 <td class="noborder bg-white "><img src="images/edit.png" class="cancelInEquip delete"
