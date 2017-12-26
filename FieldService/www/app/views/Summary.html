@@ -76,35 +76,42 @@
                 </div> -->
                 <div>
                     <div layout="row">
-                        <div flex="25" class="mylabel">
-                            <span translate="Product Line"></span>
-                                <span> #</span>
+                        <div flex="20" class="mylabel">
+                            <span translate="Item Name"></span>
+                               
                         </div>
-                        <div flex="25" class="mylabel">
+                        <div flex="20" class="mylabel padding-right15">
+                            <span translate="Item Description"></span>
+
+                        </div>
+                        <div flex="20" class="mylabel">
                             <span translate="System ID / Serial"></span>
                                 <span> #</span>
                         </div>
-                        <div flex="25" class="mylabel">
+                        <div flex="20" class="mylabel">
                             <span translate="TAG"></span>
                                  <span> #</span>
                         </div>
-                        <div flex="25" class="mylabel">
+                        <div flex="20" class="mylabel">
                              <span translate="ORIGINAL PO"></span>
                                   <span>#</span>
                         </div>
                     </div>
                    
                     <div layout="row" ng-repeat="install in summary.taskObject.InstallBase">
-                        <div flex="25" class="myvalue">
-                            <div>{{install.Product_Line|| "NO VALUE"}}</div>
+                        <div flex="20" class="myvalue" style="word-wrap:break-word">
+                            <div>{{install.Item_Number|| "NO VALUE"}}</div>
                         </div>
-                        <div flex="25" class="myvalue">
+                        <div flex="20" class="myvalue" style="word-wrap:break-word;margin-right:5px;">
+                            <div>{{install.Description|| "NO VALUE"}}</div>
+                        </div>
+                        <div flex="20" class="myvalue" style="word-wrap:break-word;margin-right:5px;">
                             <div>{{install.Serial_Number|| "NO VALUE"}}</div>
                         </div>
-                        <div flex="25" class="myvalue">
+                        <div flex="20" class="myvalue" style="word-wrap:break-word;margin-right:5px;">
                             <div>{{install.TagNumber|| "NO VALUE"}}</div>
                         </div>
-                        <div flex="25" class="myvalue" style="word-wrap:break-word">
+                        <div flex="20" class="myvalue" style="word-wrap:break-word">
                             <div>{{install.Original_PO_Number|| "NO VALUE"}}</div>
                         </div>
                     </div>
@@ -128,7 +135,7 @@
                         <tbody >
                             <tr class="noborder" ng-repeat="note in summary.notesArray" >
                                 <td class="taskoverflow-tableTd noborder bg-white col-sm-3">{{note.Note_Type| translate}}</td>
-                                <td class="taskoverflow-tableTd noborder bg-white col-sm-9"> {{note.Notes| translate}}</td>
+                                <td class="taskoverflow-tableTd noborder bg-white col-sm-9" style="padding-bottom:10px !important"> {{note.Notes| translate}}</td>
                             </tr>
                         </tbody>
 
@@ -293,13 +300,13 @@
                     <tr class="summary-tr" ng-repeat="material in summary.materialArray">
                         <td class="noborder bg-white width14">{{material.Charge_Type| translate}}</td>
                         <td class="noborder bg-white width14">{{material.Product_Quantity}}</td>
-                        <td class="noborder bg-white width14">
+                        <td class="noborder bg-white width14" style="word-wrap:break-word;word-break:break-all">
                             <span ng-repeat="serailno in material.serialNumber track by $index">
                                 {{serailno}}<br />
                             </span>
                         </td>
-                        <td class="noborder bg-white width14"><span ng-repeat="serailin in material.serialIn track by $index">{{serailin}}<br /></span></td>
-                        <td class="noborder bg-white width14"><span ng-repeat="serailout in material.serialOut track by $index">{{serailout}}<br /></span></td>
+                        <td class="noborder bg-white width14" style="word-wrap:break-word;word-break:break-all"><span ng-repeat="serailin in material.serialIn track by $index">{{serailin}}<br /></span></td>
+                        <td class="noborder bg-white width14" style="word-wrap:break-word;word-break:break-all"><span ng-repeat="serailout in material.serialOut track by $index">{{serailout}}<br /></span></td>
                         <td class="noborder bg-white width14">{{material.ItemName}}</td>
                         <td class="noborder bg-white width14">{{material.Description}}</td>
                     </tr>

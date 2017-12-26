@@ -875,7 +875,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE InstallBase SET Product_Line = ?, Serial_Number = ?, TagNumber = ?, Original_PO_Number =?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?, ResourceId = ?  WHERE Installed_Base_ID = ? AND Task_Number = ?";
+                var sqlUpdate = "UPDATE InstallBase SET Product_Line = ?, Serial_Number = ?, TagNumber = ?, Original_PO_Number =?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?, ResourceId = ?, Item_Number=?, Description=?  WHERE Installed_Base_ID = ? AND Task_Number = ?";
 
                 insertValues.push(responseList.Product_Line);
                 insertValues.push(responseList.Serial_Number);
@@ -886,6 +886,8 @@
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.End_Date);
                 insertValues.push(constantService.getResourceId());
+                insertValues.push(responseList.Item_Number);
+                insertValues.push(responseList.Description);
                 insertValues.push(responseList.Installed_Base_ID);
                 insertValues.push(responseList.Task_Number);
 
@@ -918,7 +920,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO InstallBase VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO InstallBase VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
 
                 insertValues.push(responseList.Installed_Base_ID);
                 insertValues.push(responseList.Product_Line);
@@ -931,6 +933,8 @@
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.End_Date);
                 insertValues.push(constantService.getResourceId());
+                insertValues.push(responseList.Item_Number);
+                insertValues.push(responseList.Description);
 
                 // console.log("INSTALLBASE INSERT VALUES =====> " + insertValues);
 
