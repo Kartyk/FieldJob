@@ -871,8 +871,8 @@
 
                 $scope.isEditMaterial = "1";
 
-                $scope.materialArray[0] = Object.create(item);
-                $scope.materialArray[0].Serial_Type = $scope.materialArray[0].Serial_Type.slice();
+                $scope.materialArray[0] = JSON.parse(JSON.stringify(item));
+                //$scope.materialArray[0].Serial_Type = $scope.materialArray[0].Serial_Type.slice();
 
                 angular.forEach($scope.materialArraySummary, function (response) {
 
