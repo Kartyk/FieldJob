@@ -147,7 +147,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                 if (google != undefined) {
 
                     map = new google.maps.Map(document.getElementById('googleMap'), {
-                        center: {lat: -34.397, lng: 150.644},
+                        center: { lat: -34.397, lng: 150.644 },
                         zoom: 8
                     });
 
@@ -207,7 +207,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
         if (valueService.getNetworkStatus()) {
 
-            
+
 
             console.log("CLICK " + map);
 
@@ -278,8 +278,8 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
     });
 
     $scope.contacts = [
-        {name: "Santiago Munez", No: "+(832)534678", email: "Santiago.munex@rolce.com"},
-        {name: "Munex Montanio", No: "+(832)534678", email: "Santiago.munex@rolce.com"}
+        { name: "Santiago Munez", No: "+(832)534678", email: "Santiago.munex@rolce.com" },
+        { name: "Munex Montanio", No: "+(832)534678", email: "Santiago.munex@rolce.com" }
     ];
 
     $scope.tasks = [];
@@ -353,7 +353,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                     cloudService.getTaskInternalList("0", function (response) {
 
-                        $state.go($state.current, {}, {reload: true});
+                        $state.go($state.current, {}, { reload: true });
                     });
                 });
 
@@ -389,7 +389,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                             $rootScope.showWorkingBtn = false;
 
-                            $state.go($state.current, {}, {reload: true});
+                            $state.go($state.current, {}, { reload: true });
 
                         });
                     });
@@ -418,7 +418,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                     cloudService.getTaskInternalList("0", function (response) {
 
-                        $state.go($state.current, {}, {reload: true});
+                        $state.go($state.current, {}, { reload: true });
                     });
                 });
 
@@ -458,7 +458,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                             $scope.selectedTask.Task_Status = "Accepted";
 
-                            $state.go($state.current, {}, {reload: true});
+                            $state.go($state.current, {}, { reload: true });
 
                         });
                     });
