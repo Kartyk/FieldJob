@@ -1420,7 +1420,7 @@
             case "Material":
 
                 if (item != null && item != undefined) {
-
+                    var serialtyype = item.Serial_Type.slice();// Array.from(item.Serial_Type);//{ "in": item.Serial_Type.} item.Serial_Type;
                     var newObject = {
                         Material_Id: $scope.taskId + "" + ($scope.materialArraySummary.length + 1),
                         materialDefault: materialDefault,
@@ -1428,7 +1428,7 @@
                         Charge_Type_Id: item.Charge_Type_Id,
                         Description: item.Description,
                         Product_Quantity: item.Product_Quantity,
-                        Serial_Type: item.Serial_Type,
+                        Serial_Type: serialtyype,
                         serialNumber: $scope.serialNumber(item.Serial_Type),
                         serialIn: $scope.serialIn(item.Serial_Type),
                         serialOut: $scope.serialOut(item.Serial_Type),
@@ -3069,7 +3069,7 @@
     };
 
     $scope.reviewSummary = function () {
-        //var promise = generatePDF();
+        var promise = generatePDF();
         $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Customer Signature"
     )
 
@@ -3439,6 +3439,7 @@
                     ctx.font = '15px sans-serif ';
                     ctx.fillText('备注', 20, yNotesField);
                     yNotesField1_val = yNotesField1;
+                    var isPageAdded = false;
                     while (i < $scope.summary.notesArray.length) {
 
                         xNotesField1 = xNotesField;
@@ -3446,6 +3447,21 @@
                         yNotesField1_val = yNotesField1 + 14 * ++i;
                         xNotesField2 = xNotesField1 + 150;
 
+                        if (yNotesField1_val > canvas.height) {
+                            rectNotesHeight = yNotesField1_val - yNotesField + 10;
+                            ctx.strokeRect(20, yNotesField + 5, 1090, rectNotesHeight)
+                            if (isPageAdded) {
+                                doc1.addPage();
+                            }
+                            var count = doc1.internal.pages.length - 1
+                            var imgData = canvas.toDataURL("image/png", 1.0);
+                            doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST');
+                            ctx.clearRect(0, 0, canvas.width, canvas.height);
+                            yNotesField1_val = 10;
+                            yNotesField = 0;
+                            isPageAdded = true;
+                           
+                        }
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
                         ctx.fillText($filter('translate')($scope.summary.notesArray[i - 1].Note_Type), 30, yNotesField1_val);
@@ -3455,11 +3471,27 @@
                         var splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.notesArray[i - 1].Notes), rectNotesWidth - 420);
                         
                         //doc1.text(xNotesField2, yNotesField1_val, splitTitle)
-                        var lineheight = 15;
+                        var lineheight = 15,lineno=1;
                         if (splitTitle.length > 1) {
-                            for (var l= 0; l < splitTitle.length; l++)
-                                ctx.fillText(splitTitle[l], 530, yNotesField1_val + (l * lineheight));
-                            yNotesField1_val = yNotesField1_val + lineheight * (splitTitle.length-1);
+                            for (var l = 0; l < splitTitle.length; l++) {
+                                if (yNotesField1_val + (lineno * lineheight) > canvas.height) {
+                                    rectNotesHeight = yNotesField1_val + (l * lineheight) - yNotesField + 10;
+                                    ctx.strokeRect(20, yNotesField + 5, 1090, rectNotesHeight)
+                                    if (isPageAdded) {
+                                        doc1.addPage();
+                                    }
+                                    var count = doc1.internal.pages.length - 1
+                                    var imgData = canvas.toDataURL("image/png", 1.0);
+                                    doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST');
+                                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                                    yNotesField1_val = 0;
+                                    yNotesField = -10;
+                                    isPageAdded = true;
+                                    lineno = 1;
+                                }
+                                ctx.fillText(splitTitle[l], 530, yNotesField1_val + (lineno++ * lineheight));
+                            }
+                            yNotesField1_val = yNotesField1_val + lineheight * (lineno);
                             yNotesField1 = yNotesField1_val;
                         }
                         else
@@ -3474,7 +3506,20 @@
                     ctx.strokeRect(20, yNotesField + 5, 1090, rectNotesHeight)
                     var xAttachField = 30, yAttachField = yNotesField1_val + 30, rectAttachWidth = 660,
                         rectAttachHeight = 135, xAttachField1 = 30;
+                   
 
+                    if (rectAttachHeight + yAttachField + 10 > canvas.height) {
+                        if (isPageAdded) {
+                            doc1.addPage();
+                        }
+                        var count = doc1.internal.pages.length - 1
+                        var imgData = canvas.toDataURL("image/png", 1.0);
+                        doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST');
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        yAttachField = 10;
+                        isPageAdded = true;
+                        ctx.strokeRect(20, yAttachField + 10, 1090, rectAttachHeight);
+                    }
                     ctx.fillStyle = "#000";
                     ctx.font = '15px sans-serif ';
                     ctx.fillText('附件', 20, yAttachField);
@@ -3482,7 +3527,7 @@
                     ctx.fillStyle = "#000";
                     ctx.strokeRect(20, yAttachField + 10, 1090, rectAttachHeight);
 
-                    var isPageAdded = false;
+                    
                     if (rectAttachHeight + yAttachField+10 > canvas.height) {
                         if (isPageAdded) {
                             doc1.addPage();
@@ -3691,6 +3736,8 @@
                             yTimeField = 0;
                             index = 0;
                             rectTimeHeight = 29 * ($scope.summary.timeArray.length - j);
+                            if (j == $scope.summary.timeArray.length)
+                                rectTimeHeight = 29;
                             ctx.strokeRect(20, -1, 1090, rectTimeHeight);
                             isPageAdded = true;
 
@@ -3857,7 +3904,7 @@
                     while (l < $scope.summary.materialArray.length) {
                         var m = 0, n = 0, o = 0;
                         ++l;
-
+                        var yMaterialSerialNo = yMaterialSerialIn = yMaterialSerialOut = yItemVal = 0;
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
                         if (yMaterialFieldValue + 30 > canvas.height) {
@@ -3938,7 +3985,7 @@
                         ctx.font = ' 13px sans-serif ';
                         if ($scope.summary.materialArray[l - 1].ItemName) {
                             var itemname = doc1.splitTextToSize($filter('translate')($scope.summary.materialArray[l - 1].ItemName), 50)
-                            var yItemVal = yMaterialFieldValue;
+                             yItemVal = yMaterialFieldValue;
                             angular.forEach(itemname, function (key) {
                                 ctx.fillText(key, 600, yItemVal);
                                 yItemVal += 15;
@@ -3957,7 +4004,7 @@
                            
                            
                         }
-                           
+                        yMaterialFieldValue = Math.max(yMaterialFieldValue, yItemVal, yMaterialSerialOut, yMaterialSerialIn, yMaterialSerialNo)   
                         if ((splitTitle != undefined && splitTitle.length > 1) || (splitserialin != undefined && splitserialin.length > 1) || (splitserialout != undefined && splitserialout.length > 1)) {
                             length = 0;
                             if (splitTitle != undefined && splitTitle.length > 1)
@@ -4029,14 +4076,14 @@
                     ctx.font = 'bold 13px sans-serif ';
                     ctx.fillText($filter('translate')('Service Representative') + ": "+$scope.engineerName, 70, ySignField + 40);
 
-                    ctx.fillText($scope.engTime, 70, ySignField + 60);
-                    ctx.fillText($scope.custTime, 400, ySignField + 60);
+                    ctx.fillText($scope.engTime, 70, ySignField + 60+40);
+                    ctx.fillText($scope.custTime, 400, ySignField + 60+40);
 
                     var engineerSignature = document.getElementById('engineerSignature');
 
                     var callback1 = function (image) {
                         if (!image) image = this;
-                        ctx.drawImage(image, 70, ySignField + 75, 75, 40);
+                        ctx.drawImage(image, 70, ySignField + 60, 75, 40);
                     }
                     if (engineerSignature.complete) {
                         callback1(engineerSignature);
@@ -4047,7 +4094,7 @@
 
                     var callback1 = function (image) {
                         if (!image) image = this;
-                        ctx.drawImage(image, 400, ySignField + 75, 75, 40);
+                        ctx.drawImage(image, 400, ySignField + 60, 75, 40);
                     }
                     if (customerSignature.complete) {
                         callback1(customerSignature);
