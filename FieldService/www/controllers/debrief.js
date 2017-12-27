@@ -3540,6 +3540,7 @@
                         isPageAdded = true;
                         ctx.strokeRect(20, yAttachField + 10, 1090, rectAttachHeight);
                     }
+                    var index = 0;
                     angular.forEach($scope.files, function (file, value) {
 
                         var attachfile = document.getElementById(index++);
