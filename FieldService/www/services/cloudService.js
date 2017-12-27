@@ -96,9 +96,11 @@
 
             }).error(function (error) {
 
+                callback(error);
+
                 console.log('Login Error', JSON.stringify(error));
 
-                callback(error);
+
             });
         };
 
@@ -122,9 +124,10 @@
 
             }).error(function (error) {
 
+                callback(error);
+
                 console.log('Technician Error', JSON.stringify(error));
 
-                callback(error);
             });
         };
 
@@ -153,9 +156,9 @@
                 };
             }
 
-            console.log("TASK REQUEST ======> " + JSON.stringify(data));
+            console.log("TASK REQUEST " + JSON.stringify(data));
 
-            console.log("START TASK ======> " + new Date());
+            console.log("START TASK " + new Date());
 
             $http({
 
@@ -170,7 +173,7 @@
 
             }).success(function (response) {
 
-                console.log("END TASK ======> " + new Date());
+                console.log("END TASK " + new Date());
 
                 console.log("TASK RESPONSE " + JSON.stringify(response));
 
@@ -247,7 +250,7 @@
 
                                     callback(taskInternalList);
 
-                                    console.log("TASK INTERNAL END ======> " + new Date());
+                                    console.log("TASK INTERNAL END " + new Date());
                                 });
                             });
                         });
@@ -256,11 +259,11 @@
 
             }).error(function (error) {
 
-                console.log("END TASK ======> " + new Date());
-
-                console.log("TASK ERROR " + JSON.stringify(error));
+                console.log("END TASK ERROR " + new Date());
 
                 callback(error);
+
+                console.log("TASK ERROR " + JSON.stringify(error));
             });
         };
 
@@ -280,7 +283,7 @@
 
             var endDateISOFormat = moment(endDate).format('YYYY-MM-DD');
 
-            console.log("START INTERNAL ======> " + new Date());
+            console.log("START INTERNAL " + new Date());
 
             $http({
 
@@ -299,7 +302,7 @@
 
             }).success(function (response) {
 
-                console.log("END INTERNAL ======> " + new Date());
+                console.log("END INTERNAL " + new Date());
 
                 console.log("INTERNAL RESPONSE " + JSON.stringify(response.activities));
 
@@ -316,9 +319,9 @@
 
                 console.log("END INTERNAL ERROR======> " + new Date());
 
-                console.log("INTERNAL ERROR " + JSON.stringify(error));
-
                 callback(internalList);
+
+                console.log("INTERNAL ERROR " + JSON.stringify(error));
             });
         };
 
@@ -347,9 +350,9 @@
                 };
             }
 
-            console.log("TASK DETAIL REQUEST ======> " + JSON.stringify(data));
+            console.log("TASK DETAIL REQUEST " + JSON.stringify(data));
 
-            console.log("START TASK DETAIL ======> " + new Date());
+            console.log("START TASK DETAIL " + new Date());
 
             $http({
 
@@ -364,7 +367,7 @@
 
             }).success(function (response) {
 
-                console.log("END TASK DETAIL ======> " + new Date());
+                console.log("END TASK DETAIL " + new Date());
 
                 console.log("TASK DETAIL RESPONSE " + JSON.stringify(response));
 
@@ -459,7 +462,7 @@
 
                         callback("success");
 
-                        console.log("TASK DETAILS INSERT END ======> " + new Date());
+                        console.log("END TASK DETAILS INSERT " + new Date());
                     },
 
                     function (error) {
@@ -468,25 +471,25 @@
 
                         callback("failure");
 
-                        console.log("TASK DETAILS INSERT END ======> " + new Date());
+                        console.log("END TASK DETAILS INSERT END " + new Date());
                     }
                 );
 
             }).error(function (error) {
 
-                console.log("END TASK DETAIL ERROR ======> " + new Date());
-
-                console.log("TASK DETAIL ERROR " + JSON.stringify(error));
+                console.log("END TASK DETAIL ERROR " + new Date());
 
                 callback(error);
+
+                console.log("TASK DETAIL ERROR " + JSON.stringify(error));
             });
         };
 
         function getProjectDetails(projectArray, callback) {
 
-            console.log("START PROJECT ======> " + new Date());
+            console.log("START PROJECT " + new Date());
 
-            console.log("PROJECT REQUEST ======> " + projectArray);
+            console.log("PROJECT REQUEST " + projectArray);
 
             $http({
 
@@ -501,7 +504,7 @@
 
             }).success(function (response) {
 
-                console.log("END PROJECT ======> " + new Date());
+                console.log("END PROJECT " + new Date());
 
                 console.log("PROJECT RESPONSE " + JSON.stringify(response));
 
@@ -523,7 +526,7 @@
                         promises.push(deferOverTime.promise);
                     }
 
-                    if (item.ShiftCode && item.ShiftCode.length > 0) {  
+                    if (item.ShiftCode && item.ShiftCode.length > 0) {
 
                         var deferShiftCode = $q.defer();
 
@@ -561,7 +564,7 @@
 
                         callback("success");
 
-                        console.log("PROJECT DETAILS INSERT END ======> " + new Date());
+                        console.log("END PROJECT DETAILS INSERT " + new Date());
                     },
 
                     function (error) {
@@ -570,17 +573,17 @@
 
                         callback("failure");
 
-                        console.log("PROJECT DETAILS INSERT END ======> " + new Date());
+                        console.log("END PROJECT DETAILS INSERT " + new Date());
                     }
                 );
 
             }).error(function (error) {
 
-                console.log("END PROJECT ERROR ======> " + new Date());
-
-                console.log("PROJECT ERROR " + JSON.stringify(error));
+                console.log("END PROJECT ERROR " + new Date());
 
                 callback("error");
+
+                console.log("PROJECT ERROR " + JSON.stringify(error));
             });
 
         };
@@ -610,9 +613,9 @@
                 };
             }
 
-            console.log("LOV REQUEST ======> " + JSON.stringify(data));
+            console.log("LOV REQUEST " + JSON.stringify(data));
 
-            console.log("START LOV ======> " + new Date());
+            console.log("START LOV " + new Date());
 
             $http({
 
@@ -626,7 +629,7 @@
 
             }).success(function (response) {
 
-                console.log("END LOV ======> " + new Date());
+                console.log("END LOV " + new Date());
 
                 console.log("LOV RESPONSE " + JSON.stringify(response));
 
@@ -756,7 +759,7 @@
 
                         callback("success");
 
-                        console.log("LOV INSERT END ======> " + new Date());
+                        console.log("END LOV INSERT " + new Date());
                     },
 
                     function (error) {
@@ -765,23 +768,25 @@
 
                         callback("failure");
 
-                        console.log("LOV INSERT END ======> " + new Date());
+                        console.log("END LOV INSERT " + new Date());
                     }
                 );
 
             }).error(function (error) {
 
-                console.log("END LOV ERROR ======> " + new Date());
-
-                console.log("LOV ERROR " + JSON.stringify(error));
+                console.log("END LOV ERROR " + new Date());
 
                 callback(error);
+
+                console.log("LOV ERROR " + JSON.stringify(error));
             });
         };
 
         function getSRNotesList(srNumberArray, callback) {
 
-            console.log("SR NUMBER " + JSON.stringify({ "SRNum": srNumberArray }));
+            console.log("SR NOTES REQUEST" + JSON.stringify({ "SRNum": srNumberArray }));
+
+            console.log("START SR NOTES " + new Date());
 
             $http({
 
@@ -796,9 +801,9 @@
 
             }).success(function (response) {
 
-                console.log("SR Notes Response " + JSON.stringify(response));
+                console.log("END SR NOTES " + new Date());
 
-                $rootScope.apicall = true;
+                console.log("SR NOTES RESPONSE " + JSON.stringify(response));
 
                 var noteArray = [];
 
@@ -817,15 +822,19 @@
 
             }).error(function (error) {
 
-                console.log("SR Notes Error " + JSON.stringify(error));
+                console.log("END SR NOTES ERROR " + new Date());
 
                 callback("error");
+
+                console.log("SR NOTES ERROR " + JSON.stringify(error));
             });
         };
 
         function getSRAttachmentList(srNumberArray, callback) {
 
-            console.log("SR NUMBER " + JSON.stringify({ "SRID": srNumberArray }));
+            console.log("SR ATTACHMENT REQUEST " + JSON.stringify({ "SRID": srNumberArray }));
+
+            console.log("START SR ATTACHMENT " + new Date());
 
             $http({
 
@@ -840,7 +849,9 @@
 
             }).success(function (response) {
 
-                console.log("SR Attachment Response " + JSON.stringify(response));
+                console.log("END SR ATTACHMENT " + new Date());
+
+                console.log("SR ATTACHMENT RESPONSE " + JSON.stringify(response));
 
                 $rootScope.apicall = true;
 
@@ -875,13 +886,17 @@
 
             }).error(function (error) {
 
-                console.log("SR Attachment Error " + JSON.stringify(error));
+                console.log("END SR ATTACHMENT ERROR " + new Date());
 
                 callback("error");
+
+                console.log("SR ATTACHMENT ERROR " + JSON.stringify(error));
             });
         };
 
         function createAttachment(attachment, callback) {
+
+            console.log("START CREATE ATTACHMENT " + new Date());
 
             $http({
 
@@ -896,15 +911,19 @@
 
             }).success(function (response) {
 
-                console.log("Create Attachment Response " + JSON.stringify(response));
+                console.log("END CREATE ATTACHMENT " + new Date());
+
+                console.log("CREATE ATTACHMENT RESPONSE " + JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                console.log("Create Attachment Error " + JSON.stringify(error));
+                console.log("END CREATE ATTACHMENT ERROR " + new Date());
 
                 callback(error);
+
+                console.log("CREATE ATTACHMENT ERROR " + JSON.stringify(error));
             });
         };
 
@@ -931,7 +950,9 @@
                 };
             }
 
-            console.log("DATA " + JSON.stringify(data));
+            console.log("START DOWNLOAD ATTACHMENT " + + new Date());
+
+            console.log("DOWNLOAD ATTACHMENT REQUEST " + JSON.stringify(data));
 
             $http({
 
@@ -946,24 +967,30 @@
 
             }).success(function (response) {
 
-                // console.log("DownloadAttachment Response " + JSON.stringify(response));
+                console.log("END DOWNLOAD ATTACHMENT " + + new Date());
+
+                // console.log("DOWNLOAD ATTACHMENT RESPONSE " + JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                if (error != undefined) {
-
-                    console.log("DownloadAttachment Error " + JSON.stringify(error));
-                }
+                console.log("END DOWNLOAD ATTACHMENT ERROR " + + new Date());
 
                 callback(error);
+
+                if (error != undefined) {
+
+                    console.log("DOWNLOAD ATTACHMENT ERROR " + JSON.stringify(error));
+                }
             });
         };
 
         function updateDebrief(formData, callback) {
 
-            console.log("Debrief Update Request " + JSON.stringify(formData));
+            console.log("START DEBRIEF " + + new Date());
+
+            console.log("DEBRIEF REQUEST " + JSON.stringify(formData));
 
             $http({
 
@@ -978,15 +1005,19 @@
 
             }).success(function (response) {
 
-                console.log("Debrief Update Response " + JSON.stringify(response));
+                console.log("END DEBRIEF " + + new Date());
+
+                console.log("DEBRIEF RESPONSE " + JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                console.log("Debrief Update Error " + JSON.stringify(error));
+                console.log("END DEBRIEF ERROR " + + new Date());
 
                 callback(error);
+
+                console.log("DEBRIEF ERROR " + JSON.stringify(error));
             });
         };
 
@@ -1012,7 +1043,9 @@
                 "signatureComments": formData.signatureComments != undefined ? formData.signatureComments : ""
             };
 
-            console.log("OFSC Update Request " + JSON.stringify(data));
+            console.log("START OFSC " + + new Date());
+
+            console.log("OFSC REQUEST " + JSON.stringify(data));
 
             $http({
 
@@ -1027,15 +1060,19 @@
 
             }).success(function (response) {
 
-                console.log("OFSC Update Response " + JSON.stringify(response));
+                console.log("END OFSC " + + new Date());
+
+                console.log("OFSC RESPONSE " + JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                console.log("OFSC Update Error " + JSON.stringify(error));
+                console.log("END OFSC ERROR " + + new Date());
 
                 callback(error);
+
+                console.log("OFSC ERROR " + JSON.stringify(error));
             });
         };
 
