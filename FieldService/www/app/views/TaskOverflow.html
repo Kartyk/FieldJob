@@ -252,10 +252,11 @@
 
                     <div id="allmap" style="height:300px;display: none;" ng-show="chinaUser"></div>-->
 
-                    <div style="width:100%;height:340px;border:1px solid gray" id="googleMap" ng-show="!isChina && isVisible">
+                    <div style="width:100%;height:340px;border:1px solid gray" id="googleMap" ng-show="!isChina && isVisible && !isChinaQuest">
                     </div>
 
                     <div style="width:100%;height:340px;border:1px solid gray" id="chinaMap" ng-show="isChina && isVisible"></div>
+                    <div id="map" style="width: 100%; height: 340px;" ng-show="isChinaQuest && isVisible"></div>
 
                 </div>
 
