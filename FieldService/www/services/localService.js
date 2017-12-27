@@ -3434,7 +3434,7 @@
                         deferred.reject(error);
                     });
 
-                     console.log("NOTES OBJECT =====> " + JSON.stringify(responseList[i]));
+                    console.log("NOTES OBJECT =====> " + JSON.stringify(responseList[i]));
 
                     promises.push(deferred.promise);
 
@@ -5467,4 +5467,4 @@
     }
 
 })
-();
+    ();

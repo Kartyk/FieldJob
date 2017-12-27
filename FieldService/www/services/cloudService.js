@@ -663,7 +663,7 @@
 
         function getSRNotesList(srNumberArray, callback) {
 
-            console.log("SR NUMBER " + JSON.stringify({"SRNum": srNumberArray}));
+            console.log("SR NUMBER " + JSON.stringify({ "SRNum": srNumberArray }));
 
             $http({
 
@@ -674,7 +674,7 @@
                     "Authorization": constantService.getAuthor(),
                     "oracle-mobile-backend-id": constantService.getSRBackId()
                 },
-                data: {"SRNum": srNumberArray}
+                data: { "SRNum": srNumberArray }
 
             }).success(function (response) {
 
@@ -707,7 +707,7 @@
 
         function getSRAttachmentList(srNumberArray, callback) {
 
-            console.log("SR NUMBER " + JSON.stringify({"SRID": srNumberArray}));
+            console.log("SR NUMBER " + JSON.stringify({ "SRID": srNumberArray }));
 
             $http({
 
@@ -718,7 +718,7 @@
                     "Authorization": constantService.getAuthor(),
                     "oracle-mobile-backend-id": constantService.getSRBackId()
                 },
-                data: {"SRID": srNumberArray}
+                data: { "SRID": srNumberArray }
 
             }).success(function (response) {
 
@@ -900,7 +900,7 @@
         function updateDebrief(formData, callback) {
 
             console.log("Debrief Update Request " + JSON.stringify(formData));
-            
+
             $http({
 
                 method: 'POST',
@@ -949,7 +949,7 @@
             };
 
             console.log("OFSC Update Request " + JSON.stringify(data));
-         
+
             $http({
 
                 method: 'POST',
@@ -1082,7 +1082,7 @@
 
                 console.log("Internal Response " + JSON.stringify(response.activities));
 
-                if (response && response.activities){
+                if (response && response.activities) {
 
                     callback(response.activities);
 

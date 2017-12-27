@@ -1,9 +1,9 @@
-﻿app.controller("debriefController", function ($translate,$scope, $state, $rootScope, $window, $timeout, $filter, $http, $q, cloudService, $mdDialog, valueService, localService, Upload, constantService, $anchorScroll, $location) {
+﻿app.controller("debriefController", function ($translate, $scope, $state, $rootScope, $window, $timeout, $filter, $http, $q, cloudService, $mdDialog, valueService, localService, Upload, constantService, $anchorScroll, $location) {
 
     $scope.currentTab = "time";
 
     $rootScope.Islogin = true;
-    $scope.customerName ;
+    $scope.customerName;
     $scope.userType = valueService.getUserType().clarityType;
 
     $scope.engineerName = valueService.getUserType().name;
@@ -13,29 +13,28 @@
     $scope.isCustomerSignChecked = false;
     $scope.contactorCustname;
     changeLanguage(valueService.getLanguage());
-    $scope.custName = function (name)
-    {
+    $scope.custName = function (name) {
         console.log(name);
         $scope.contactorCustname = name;
     }
-    function changeLanguage (lang) {
+    function changeLanguage(lang) {
 
         valueService.setLanguage(lang);
 
         switch (lang) {
             case "en":
-               $translate.use('en').then(function () {
+                $translate.use('en').then(function () {
                     console.log('English Used');
                 });
                 break;
             case "fr":
                 $translate.use('fr').then(function () {
-                    console.log('french Used');                
+                    console.log('french Used');
                 });
                 break;
             case "ch":
                 $translate.use('jp').then(function () {
-                    console.log('Chinese Used');                   
+                    console.log('Chinese Used');
                 });
                 break;
             case "":
@@ -60,25 +59,25 @@
     if (!$rootScope.completedTask) {
 
         $scope.stages = [
-            {title: "Time", templateUrl: $scope.userType == 'C' ? "app/views/Time.html" : "app/views/TimeNC.html"},
-            {title: "Expenses", templateUrl: "app/views/Expenses.html"},
-            {title: "Material", templateUrl: "app/views/Material.html"},
-            {title: "Notes", templateUrl: "app/views/Notes.html"},
-            {title: "Attachments", templateUrl: "app/views/Attachments.html"},
-            { title: "Emerson Signature", templateUrl: "app/views/EngineerSignature.html"},
-            {title: "Summary", templateUrl: "app/views/Summary.html"},
-            {title: "Customer Signature", templateUrl: "app/views/CustomerSignature.html"}
+            { title: "Time", templateUrl: $scope.userType == 'C' ? "app/views/Time.html" : "app/views/TimeNC.html" },
+            { title: "Expenses", templateUrl: "app/views/Expenses.html" },
+            { title: "Material", templateUrl: "app/views/Material.html" },
+            { title: "Notes", templateUrl: "app/views/Notes.html" },
+            { title: "Attachments", templateUrl: "app/views/Attachments.html" },
+            { title: "Emerson Signature", templateUrl: "app/views/EngineerSignature.html" },
+            { title: "Summary", templateUrl: "app/views/Summary.html" },
+            { title: "Customer Signature", templateUrl: "app/views/CustomerSignature.html" }
         ];
 
     } else {
 
         $scope.stages = [
-            {title: "Summary", templateUrl: "app/views/Summary.html"},
-            {title: "Customer Signature", templateUrl: "app/views/CustomerSignature.html"}
+            { title: "Summary", templateUrl: "app/views/Summary.html" },
+            { title: "Customer Signature", templateUrl: "app/views/CustomerSignature.html" }
         ];
     }
 
-    $scope.datePicker = {startDate: null, endDate: null};
+    $scope.datePicker = { startDate: null, endDate: null };
 
     $scope.summary = {};
 
@@ -152,7 +151,7 @@
 
             window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 
-                fs.root.getFile(attachment.File_Name, {create: true, exclusive: false}, function (fileEntry) {
+                fs.root.getFile(attachment.File_Name, { create: true, exclusive: false }, function (fileEntry) {
 
                     fileEntry.file(function (file) {
 
@@ -788,7 +787,7 @@
             Charge_Type_Id: "",
             Description: "",
             Product_Quantity: 1,
-            Serial_Type: [{"in": "", "out": "", "number": ""}],
+            Serial_Type: [{ "in": "", "out": "", "number": "" }],
             Task_Number: $scope.taskId,
             ItemName: ""
         };
@@ -907,10 +906,8 @@
                 break;
         }
     };
-    $scope.checkMaxChar = function (text,limit)
-    {
-        if (text != null && text.length > limit)
-        {
+    $scope.checkMaxChar = function (text, limit) {
+        if (text != null && text.length > limit) {
             text = text.slice(0, limit);
             console.log(text);
 
@@ -1665,7 +1662,7 @@
 
         $scope.materialArray[index].Product_Quantity++;
 
-        $scope.materialArray[index]["Serial_Type"].push({"in": "", "out": "", "number": ""});
+        $scope.materialArray[index]["Serial_Type"].push({ "in": "", "out": "", "number": "" });
     };
 
     $scope.deleteSerialItem = function (index) {
@@ -1713,9 +1710,9 @@
 
     $scope.setWorkType = function (workType, timeObject) {
 
-        console.log("LABOUR "+$scope.taskObject.Labor_Method);
+        console.log("LABOUR " + $scope.taskObject.Labor_Method);
 
-        console.log("TRAVEL "+$scope.taskObject.Travel_Method);
+        console.log("TRAVEL " + $scope.taskObject.Travel_Method);
 
         if (timeDefault.chargeMethod.values != undefined && timeDefault.chargeMethod.values.length > 0) {
 
@@ -1838,7 +1835,7 @@
         $scope.saveValues();
 
         valueService.saveValues();
-     
+
     };
 
     $scope.saveValues = function () {
@@ -1932,7 +1929,7 @@
 
     $scope.goPreviousTab = function (stage) {
 
-        $scope.selectedIndex = $scope.stages.findIndex(x => x.title == stage) -1;
+        $scope.selectedIndex = $scope.stages.findIndex(x => x.title == stage) - 1;
     };
 
     $scope.Next = function (stage) {
@@ -1984,7 +1981,7 @@
 
         valueService.saveValues();
 
-        $scope.selectedIndex = $scope.stages.findIndex(x => x.title == stage) +1;
+        $scope.selectedIndex = $scope.stages.findIndex(x => x.title == stage) + 1;
     };
 
     $scope.tabChange = function (stage) {
@@ -2004,7 +2001,7 @@
         } else if ($scope.currentTab == "attachments") {
 
         } else if ($scope.currentTab == "engineer signature") {
-           
+
         }
 
         $scope.saveValues();
@@ -2180,7 +2177,7 @@
                 });
             }
 
-            if ($scope.timeArraySummary != undefined && $scope.timeArraySummary.length>0) {
+            if ($scope.timeArraySummary != undefined && $scope.timeArraySummary.length > 0) {
 
                 var length = $scope.timeArraySummary.length, i = 0;
 
@@ -2204,7 +2201,7 @@
 
                 });
 
-                var grandtimeObject = $scope.getTimenewObj("GRAND \n TOTAL", "", "", "", "", "", "", 0,"","",true);
+                var grandtimeObject = $scope.getTimenewObj("GRAND \n TOTAL", "", "", "", "", "", "", 0, "", "", true);
 
                 var subtotalObject = $scope.getTimenewObj("", "SUB TOTAL", "", "", "", "", "", 0);
 
@@ -2230,7 +2227,7 @@
 
                                     newWorkType = false;
 
-                                  //  $scope.populateTimeCodeArray(subTotalTimeArray, key);
+                                    //  $scope.populateTimeCodeArray(subTotalTimeArray, key);
 
                                     subtotalObj.Duration = $scope.calculateDuration(subtotalObj, key);
 
@@ -2287,7 +2284,7 @@
                     }
 
                     if ($scope.summary.timeArray.length > 0) {
-                       
+
                         var newTimecode = true;
 
                         //angular.forEach($scope.summary.timeArray, function (summaryTime) {
@@ -2406,7 +2403,7 @@
 
                             constantService.setCCEmailID(customerMail.value);
 
-                            var email = {"Email": customerMail.value, "Task_Number": $scope.taskId};
+                            var email = { "Email": customerMail.value, "Task_Number": $scope.taskId };
 
                             localService.updateTaskEmail(email);
 
@@ -2440,7 +2437,7 @@
                                         chargemethod = "";
                                     }
 
-                                    var shiftcode="", timecode="";
+                                    var shiftcode = "", timecode = "";
 
                                     if (timeArray[i].Shift_Code != undefined) {
                                         shiftcode = timeArray[i].Shift_Code.ShiftCodeName;
@@ -2478,7 +2475,7 @@
                                         "comments": expenseArray[i].Justification,
                                         "currency": expenseArray[i].Currency_Id.toString(),
                                         "distance": expenseArray[i].Distance,
-                                        "unitofmeasurement": expenseArray[i].UOM_Id+"",
+                                        "unitofmeasurement": expenseArray[i].UOM_Id + "",
                                         "chargeMethod": expenseArray[i].Charge_Method_Id.toString(),
                                         "ammount": expenseArray[i].Amount,
                                         "date": moment.utc(expenseArray[i].Date).format("YYYY-MM-DD"),
@@ -2701,10 +2698,8 @@
 
         $scope.summary.engineer.signature = $rootScope.signature;
 
+        $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Summary");
 
-        $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Summary"
-    )
-        ;
         console.log($scope.selectedIndex);
     };
 
@@ -2787,7 +2782,7 @@
         if (isGrandtotal)
             weight = "bold";
         else
-            weight="normal";
+            weight = "normal";
 
         var timeObj =
             {
@@ -2808,7 +2803,7 @@
 
         return timeObj;
     };
-   
+
     $(function () {
 
         $("#datetimepickerStartDate").datetimepicker();
@@ -2835,8 +2830,7 @@
                 var height = $(this).css('max-height').substring(0, 3);
                 var temp = $(".note-textarea-NC").prop('scrollHeight');
                 var temp1 = $(".note-textarea-NC").outerHeight();
-                while ($(this).outerHeight() < this.scrollHeight && this.scrollHeight < height)
-                {
+                while ($(this).outerHeight() < this.scrollHeight && this.scrollHeight < height) {
                     $(this).height($(this).height() + 1);
                 }
             })
@@ -2895,7 +2889,7 @@
         }, 1000);
     });
 
-//Start Date Calendar functions
+    //Start Date Calendar functions
     $scope.today = function () {
         $scope.startDate = new Date();
     };
@@ -2916,7 +2910,7 @@
         startingDay: 1
     };
 
-// Disable weekend selection
+    // Disable weekend selection
     function disabled(data) {
         var date = data.date,
             mode = data.mode;
@@ -2970,7 +2964,7 @@
         $scope.startDate = new Date(year, month, day);
     };
 
-    $scope.formats = ["dd-MMMM-yyyy", "yyyy/MM/dd", "dd/MM/yyyy", "shortDate","dd-MMM-yyyy"];
+    $scope.formats = ["dd-MMMM-yyyy", "yyyy/MM/dd", "dd/MM/yyyy", "shortDate", "dd-MMM-yyyy"];
 
     $scope.format = $scope.formats[4];
 
@@ -3020,7 +3014,7 @@
 
             var type = file.name.split(".")[1];
 
-            var fileObject = {"filename": file.name, "fileDisc": name, "file": file, "filetype": type, "data": ""};
+            var fileObject = { "filename": file.name, "fileDisc": name, "file": file, "filetype": type, "data": "" };
 
             Upload.base64DataUrl(file).then(function (urls) {
 
@@ -3047,7 +3041,7 @@
 
             var type = file.name.split(".")[1];
 
-            var fileObject = {"filename": file.name, "fileDisc": name, "file": file, "filetype": type, "data": ""};
+            var fileObject = { "filename": file.name, "fileDisc": name, "file": file, "filetype": type, "data": "" };
 
             valueService.setDebriefChanged(true);
 
@@ -3070,9 +3064,10 @@
     };
 
     $scope.reviewSummary = function () {
+
         var promise = generatePDF();
-        $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Customer Signature"
-    )
+
+        $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Customer Signature");
 
     };
 
@@ -3136,7 +3131,7 @@
     $scope.ChangeText = function () {
 
         $rootScope.customersignature = '';
-       
+
 
         if ($scope.engineerObject.isCustomerSignChecked) {
             $scope.customerCommentText = "Customer Comments";
@@ -3147,26 +3142,23 @@
         }
     };
     var pageHeight;
-    function checkPdfHeight(ycord, height,yField,rectWidth,drawRect,rectHght)
-    {
+    function checkPdfHeight(ycord, height, yField, rectWidth, drawRect, rectHght) {
         var pdfsplit = false;
         var pageCount = 1;
-        if (doc1.internal.pages.length > 2)
-        {
-            ycord = ycord * (doc1.internal.pages.length-1)
+        if (doc1.internal.pages.length > 2) {
+            ycord = ycord * (doc1.internal.pages.length - 1)
         }
         if (ycord >= height) {
             var rectHeight = ycord - yField;
             if (drawRect == undefined || drawRect == true)
-                if (rectHght)
-                {
+                if (rectHght) {
                     rectHeight = rectHght;
                 }
             doc1.rect(20, yField + 10, rectWidth, rectHeight);
             doc1.addPage(700, 850);
             pageHeight = pageHeight + 850;
             pdfsplit = true;
-           
+
         }
         return pdfsplit;
     }
@@ -3233,7 +3225,7 @@
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
-                    var c=0,isCustBig = false;
+                    var c = 0, isCustBig = false;
                     var name = $scope.summary.taskObject.Customer_Name.match(/(.{1,25})/g);
                     if (name.length == 1)
                         ctx.fillText(name[0], 30, 112);
@@ -3336,27 +3328,24 @@
                     var ibyvalue = 196 + custBigYvalue;
 
                     if ($scope.summary.taskObject.InstallBase) {
-                       
+
                         angular.forEach($scope.summary.taskObject.InstallBase, function (key) {
                             var splitIN = splitPL = splitSL = splitTN = splitOPO = ""
                             var ibIN = ibID = ibSL = ibTN = ibOPO = ibyvalue;
                             ctx.fillStyle = "#000";
                             ctx.font = '13px sans-serif ';
 
-                            if (key.Item_Number)
-                            {
+                            if (key.Item_Number) {
                                 splitIN = doc1.splitTextToSize(key.Item_Number, 90);
-                                angular.forEach(splitIN, function (key)
-                                {
+                                angular.forEach(splitIN, function (key) {
                                     ctx.fillText(key, 30, ibIN);
                                     ibIN += 15;
                                 })
-                                
+
                             }
                             else
                                 ctx.fillText('NO VALUE', 30, ibyvalue);
-                            if (key.Item_Number)
-                            {
+                            if (key.Item_Number) {
                                 splitPL = doc1.splitTextToSize(key.Description, 90);
                                 angular.forEach(splitPL, function (key) {
                                     ctx.fillText(key, 250, ibID);
@@ -3370,8 +3359,7 @@
                             ctx.fillStyle = "#000";
                             ctx.font = '13px sans-serif ';
 
-                            if (key.Serial_Number)
-                            {
+                            if (key.Serial_Number) {
                                 splitSL = doc1.splitTextToSize(key.Serial_Number, 90);
                                 angular.forEach(splitSL, function (key) {
                                     ctx.fillText(key, 460, ibSL);
@@ -3385,14 +3373,13 @@
                             ctx.fillStyle = "#000";
                             ctx.font = '13px sans-serif ';
 
-                            if (key.TagNumber)
-                            {
+                            if (key.TagNumber) {
                                 splitTN = doc1.splitTextToSize(key.TagNumber, 90);
                                 angular.forEach(splitTN, function (key) {
                                     ctx.fillText(key, 680, ibTN);
                                     ibTN += 15;
                                 })
-                               // ctx.fillText(key.TagNumber, 530, ibyvalue);
+                                // ctx.fillText(key.TagNumber, 530, ibyvalue);
                             }
                             else
                                 ctx.fillText('NO VALUE', 680, ibyvalue);
@@ -3400,8 +3387,7 @@
                             ctx.fillStyle = "#000";
                             ctx.font = '13px sans-serif ';
 
-                            if (key.Original_PO_Number)
-                            {
+                            if (key.Original_PO_Number) {
                                 splitOPO = doc1.splitTextToSize(key.Original_PO_Number, 90);
                                 angular.forEach(splitOPO, function (key) {
                                     ctx.fillText(key, 890, ibOPO);
@@ -3418,8 +3404,8 @@
                     ctx.fillStyle = "#000";
                     ctx.strokeRect(20, 80, 1090, ibyvalue - 60);
 
-                    
-                   
+
+
 
                     var i = 0, xNotesField = 20, yNotesField = ibyvalue + 35, rectNotesWidth = 660,
                         rectNotesHeight = 22 * $scope.summary.notesArray.length,
@@ -3444,7 +3430,7 @@
                     while (i < $scope.summary.notesArray.length) {
 
                         xNotesField1 = xNotesField;
-                        
+
                         yNotesField1_val = yNotesField1 + 14 * ++i;
                         xNotesField2 = xNotesField1 + 150;
 
@@ -3461,7 +3447,7 @@
                             yNotesField1_val = 10;
                             yNotesField = 0;
                             isPageAdded = true;
-                           
+
                         }
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
@@ -3470,9 +3456,9 @@
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
                         var splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.notesArray[i - 1].Notes), rectNotesWidth - 420);
-                        
+
                         //doc1.text(xNotesField2, yNotesField1_val, splitTitle)
-                        var lineheight = 15,lineno=0;
+                        var lineheight = 15, lineno = 0;
                         if (splitTitle.length > 1) {
                             for (var l = 0; l < splitTitle.length; l++) {
                                 if (yNotesField1_val + (lineno * lineheight) > canvas.height) {
@@ -3495,11 +3481,10 @@
                             yNotesField1_val = yNotesField1_val + lineheight * (lineno);
                             yNotesField1 = yNotesField1_val;
                         }
-                        else
-                        {
+                        else {
                             ctx.fillText($filter('translate')($scope.summary.notesArray[i - 1].Notes), 530, yNotesField1_val);
                         }
-                        
+
                     }
 
                     rectNotesHeight = yNotesField1_val - yNotesField + 10;
@@ -3507,7 +3492,7 @@
                     ctx.strokeRect(20, yNotesField + 5, 1090, rectNotesHeight)
                     var xAttachField = 30, yAttachField = yNotesField1_val + 30, rectAttachWidth = 660,
                         rectAttachHeight = 135, xAttachField1 = 30;
-                   
+
 
                     if (yAttachField > canvas.height) {
                         if (isPageAdded) {
@@ -3539,10 +3524,10 @@
                         ctx.strokeRect(20, yAttachField + 10, 1090, rectAttachHeight);
                     }
                     else
-                    ctx.strokeRect(20, yAttachField + 10, 1090, rectAttachHeight);
+                        ctx.strokeRect(20, yAttachField + 10, 1090, rectAttachHeight);
 
-                    
-                    
+
+
                     var index = 0;
                     angular.forEach($scope.files, function (file, value) {
 
@@ -3655,9 +3640,8 @@
                     var j = 0, xTimeField = 25, yTimeField = yAttachField + rectAttachHeight + 25, rectTimeWidth = 660,
                         rectTimeHeight = 29 * $scope.summary.timeArray.length, yTimeFieldName = yTimeField + 20,
                         yTimeFieldValue = yTimeField;
-                 
-                    if (yTimeField > canvas.height)
-                    {
+
+                    if (yTimeField > canvas.height) {
                         if (isPageAdded) {
                             doc1.addPage();
                         }
@@ -3668,7 +3652,7 @@
                         yTimeFieldName = 40;
                         yTimeField = 20;
                         index = 0;
-                       // rectTimeHeight = 29 * ($scope.summary.timeArray.length - j);
+                        // rectTimeHeight = 29 * ($scope.summary.timeArray.length - j);
                         //ctx.strokeRect(20, -1, 1090, rectTimeHeight);
                         isPageAdded = true;
                     }
@@ -3716,7 +3700,7 @@
 
 
                     ctx.fillStyle = "#000";
-                    ctx.strokeRect(20, yTimeFieldName-20 + 5, 1090, rectTimeHeight);
+                    ctx.strokeRect(20, yTimeFieldName - 20 + 5, 1090, rectTimeHeight);
                     var index = 0;
                     while (j < $scope.summary.timeArray.length) {
                         ++j;
@@ -3725,10 +3709,8 @@
 
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
-                        if (yTimeFieldValue > canvas.height)
-                        {
-                            if (isPageAdded)
-                            {
+                        if (yTimeFieldValue > canvas.height) {
+                            if (isPageAdded) {
                                 doc1.addPage();
                             }
                             var count = doc1.internal.pages.length - 1
@@ -3781,15 +3763,15 @@
                             ctx.fillStyle = "#000";
                             ctx.font = '13px sans-serif ';
                             if (($scope.summary.timeArray[j - 1].Time_Code) != undefined)
-                                ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Time_Code),  580, yTimeFieldValue);
+                                ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Time_Code), 580, yTimeFieldValue);
                             else
-                                doc1.text( "", xTimeField1 - 50, yTimeFieldValue);
+                                doc1.text("", xTimeField1 - 50, yTimeFieldValue);
                             ctx.fillStyle = "#000";
                             ctx.font = '13px sans-serif ';
                             if ($scope.summary.timeArray[j - 1].Shift_Code != undefined)
                                 ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Shift_Code), 730, yTimeFieldValue);
                             else
-                                ctx.fillText( "", xTimeField1 - 50, yTimeFieldValue);
+                                ctx.fillText("", xTimeField1 - 50, yTimeFieldValue);
                         }
 
                         ctx.fillStyle = "#000";
@@ -3868,7 +3850,7 @@
                     //ctx.strokeRect(20, yExpenseField + 10, 1090, rectExpenseHeight);
 
 
-                    var l = 0, xMaterialField = 25, yMaterialField = yTimeField + rectTimeHeight + 25 ,
+                    var l = 0, xMaterialField = 25, yMaterialField = yTimeField + rectTimeHeight + 25,
                         rectMaterialWidth = 660, rectMaterialHeight = 25 * $scope.summary.materialArray.length,
                         yMaterialFieldName = yMaterialField + 25, yMaterialFieldValue;
 
@@ -3912,14 +3894,14 @@
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
                         if (yMaterialFieldValue + 30 > canvas.height) {
-                            ctx.strokeRect(20, yMaterialField+10, 1090, yMaterialFieldValue - yMaterialField);
+                            ctx.strokeRect(20, yMaterialField + 10, 1090, yMaterialFieldValue - yMaterialField);
                             if (isPageAdded)
                                 doc1.addPage();
                             var count = doc1.internal.pages.length - 1
                             var imgData = canvas.toDataURL("image/png", 1.0);
                             doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST');
                             ctx.clearRect(0, 0, canvas.width, canvas.height);
-                            
+
                             yMaterialFieldValue = 15;
                             yMaterialFieldName = 0
                             yMaterialField = -20;
@@ -3927,7 +3909,7 @@
                             //yTimeField = 0;
                             //index = 0;
                             //rectSignHeight = 29 * ($scope.summary.timeArray.length - j);
-                           
+
 
                         }
                         if ($scope.summary.materialArray[l - 1].Charge_Type)
@@ -3947,7 +3929,7 @@
                                 yMaterialSerialNo = yMaterialFieldValue + 15 * m;
                                 splitserialno = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialNumber[m++], 50)
                                 angular.forEach(splitserialno, function (key) {
-                                    ctx.fillText(key,280, yMaterialSerialNo);
+                                    ctx.fillText(key, 280, yMaterialSerialNo);
                                     yMaterialSerialNo += 15;
                                 })
                                 //ctx.fillText($scope.summary.materialArray[l - 1].serialNumber[m++], 280, yMaterialSerialNo);
@@ -3966,7 +3948,7 @@
                                     ctx.fillText(key, 350, yMaterialSerialIn);
                                     yMaterialSerialIn += 15;
                                 })
-                               // ctx.fillText($scope.summary.materialArray[l - 1].serialIn[n++], 350, yMaterialSerialIn);
+                                // ctx.fillText($scope.summary.materialArray[l - 1].serialIn[n++], 350, yMaterialSerialIn);
                             }
                         }
 
@@ -3976,12 +3958,12 @@
                             while (o < $scope.summary.materialArray[l - 1].serialOut.length) {
                                 ctx.textAlign = "start";
                                 yMaterialSerialOut = yMaterialFieldValue + 15 * o;
-                                splitserialout = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialOut[o++],50)
+                                splitserialout = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialOut[o++], 50)
                                 angular.forEach(splitserialout, function (key) {
                                     ctx.fillText(key, 500, yMaterialSerialOut);
                                     yMaterialSerialOut += 15;
                                 })
-                               // ctx.fillText($scope.summary.materialArray[l - 1].serialOut[o++], 450, yMaterialSerialOut);
+                                // ctx.fillText($scope.summary.materialArray[l - 1].serialOut[o++], 450, yMaterialSerialOut);
                             }
                         }
 
@@ -3989,7 +3971,7 @@
                         ctx.font = ' 13px sans-serif ';
                         if ($scope.summary.materialArray[l - 1].ItemName) {
                             var itemname = doc1.splitTextToSize($filter('translate')($scope.summary.materialArray[l - 1].ItemName), 50)
-                             yItemVal = yMaterialFieldValue;
+                            yItemVal = yMaterialFieldValue;
                             angular.forEach(itemname, function (key) {
                                 ctx.fillText(key, 600, yItemVal);
                                 yItemVal += 15;
@@ -3998,17 +3980,16 @@
                         }
                         ctx.fillStyle = "#000";
                         ctx.font = ' 13px sans-serif ';
-                        if ($scope.summary.materialArray[l - 1].Description)
-                        {
+                        if ($scope.summary.materialArray[l - 1].Description) {
                             splitTitle = doc1.splitTextToSize($scope.summary.materialArray[l - 1].Description, 250);
                             angular.forEach(splitTitle, function (key) {
                                 ctx.fillText(key, 700, yMaterialFieldValue);
                                 yMaterialFieldValue = yMaterialFieldValue + 15;
                             });
-                           
-                           
+
+
                         }
-                        yMaterialFieldValue = Math.max(yMaterialFieldValue, yItemVal, yMaterialSerialOut, yMaterialSerialIn, yMaterialSerialNo)   
+                        yMaterialFieldValue = Math.max(yMaterialFieldValue, yItemVal, yMaterialSerialOut, yMaterialSerialIn, yMaterialSerialNo)
                         if ((splitTitle != undefined && splitTitle.length > 1) || (splitserialin != undefined && splitserialin.length > 1) || (splitserialout != undefined && splitserialout.length > 1)) {
                             length = 0;
                             if (splitTitle != undefined && splitTitle.length > 1)
@@ -4043,21 +4024,20 @@
                     ctx.fillStyle = "#000";
                     ctx.strokeRect(20, ySignField + 10, 1090, rectSignHeight);
 
-                    if (ySignField + 30 > canvas.height)
-                    {
+                    if (ySignField + 30 > canvas.height) {
                         if (isPageAdded)
                             doc1.addPage();
                         var count = doc1.internal.pages.length - 1
                         var imgData = canvas.toDataURL("image/png", 1.0);
                         doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST');
                         ctx.clearRect(0, 0, canvas.width, canvas.height);
-                        ySignField =0;
+                        ySignField = 0;
                         //yTimeFieldName = 0;
                         //yTimeField = 0;
                         //index = 0;
                         //rectSignHeight = 29 * ($scope.summary.timeArray.length - j);
                         ctx.strokeRect(20, -1, 1090, rectSignHeight);
-                       
+
                     }
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
@@ -4066,7 +4046,7 @@
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
                     ctx.fillText($filter('translate')('Conatct Name') + ": " + $scope.contactorCustname, 400, ySignField + 40);
-                   // ctx.fillText($scope.contactorCustname, 450, ySignField + 25);
+                    // ctx.fillText($scope.contactorCustname, 450, ySignField + 25);
 
                     //ctx.fillStyle = "#000";
                     //ctx.font = 'bold 13px sans-serif ';
@@ -4078,10 +4058,10 @@
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText($filter('translate')('Service Representative') + ": "+$scope.engineerName, 70, ySignField + 40);
+                    ctx.fillText($filter('translate')('Service Representative') + ": " + $scope.engineerName, 70, ySignField + 40);
 
-                    ctx.fillText($scope.engTime, 70, ySignField + 60+40);
-                    ctx.fillText($scope.custTime, 400, ySignField + 60+40);
+                    ctx.fillText($scope.engTime, 70, ySignField + 60 + 40);
+                    ctx.fillText($scope.custTime, 400, ySignField + 60 + 40);
 
                     var engineerSignature = document.getElementById('engineerSignature');
 
@@ -4106,13 +4086,13 @@
                         customerSignature.onload = callback1;
                     }
 
-                    
+
 
 
                     var imgData = canvas.toDataURL("image/png", 1.0);
-                    if(isPageAdded)
+                    if (isPageAdded)
                         doc1.addPage();
-                    var count = doc1.internal.pages.length-1;
+                    var count = doc1.internal.pages.length - 1;
                     doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST');
 
                     //  doc1.save("Report_" + $scope.summary.taskObject.Task_Number + ".pdf");
@@ -4137,7 +4117,7 @@
                 doc1.setFontType('bold')
                 doc1.text(205, 35, $filter('translate')('Field Service Summary Report'))
                 if ($scope.summary.taskObject.Task_Number.toString())
-                    doc1.text(255, 50, $filter('translate')('Field Job')+'#' + $scope.summary.taskObject.Task_Number)
+                    doc1.text(255, 50, $filter('translate')('Field Job') + '#' + $scope.summary.taskObject.Task_Number)
                 doc1.setFontSize(20)
                 doc1.setFontType('normal')
                 if (valueService.getLanguage() == 'fr') {
@@ -4231,7 +4211,7 @@
                 doc1.text(130, 150 + custBigYvalue, $filter('translate')('Item Description'));
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(260, 150 + custBigYvalue, $filter('translate')('System ID / Serial')+'#')
+                doc1.text(260, 150 + custBigYvalue, $filter('translate')('System ID / Serial') + '#')
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 doc1.text(390, 150 + custBigYvalue, $filter('translate')('Tag #'))
@@ -4240,18 +4220,17 @@
                 doc1.text(520, 150 + custBigYvalue, $filter('translate')('Original PO') + '#')
                 var ibyvalue = 160 + custBigYvalue;
                 angular.forEach($scope.summary.taskObject.InstallBase, function (key) {
-                    var splitIN=splitPL=splitSL=splitTN=splitOPO=""
+                    var splitIN = splitPL = splitSL = splitTN = splitOPO = ""
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
-                    if (key.Item_Number)
-                    {
-                         splitIN = doc1.splitTextToSize($filter('translate')(key.Item_Number), 120 - 25);
+                    if (key.Item_Number) {
+                        splitIN = doc1.splitTextToSize($filter('translate')(key.Item_Number), 120 - 25);
                         doc1.text(25, ibyvalue, splitIN)
                     }
                     else
                         doc1.text(25, ibyvalue, $filter('translate')('NO VALUE'))
                     if (key.Description) {
-                         splitPL = doc1.splitTextToSize($filter('translate')(key.Description), 250 - 130);
+                        splitPL = doc1.splitTextToSize($filter('translate')(key.Description), 250 - 130);
                         doc1.text(130, ibyvalue, splitPL)
                     }
                     else
@@ -4260,9 +4239,8 @@
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
-                    if (key.Serial_Number)
-                    {
-                         splitSL = doc1.splitTextToSize($filter('translate')(key.Serial_Number), 385 - 260);
+                    if (key.Serial_Number) {
+                        splitSL = doc1.splitTextToSize($filter('translate')(key.Serial_Number), 385 - 260);
                         doc1.text(260, ibyvalue, splitSL)
                     }
                     else
@@ -4270,28 +4248,25 @@
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
-                    if (key.TagNumber)
-                    {
-                         splitTN = doc1.splitTextToSize($filter('translate')(key.TagNumber), 510 - 390);
+                    if (key.TagNumber) {
+                        splitTN = doc1.splitTextToSize($filter('translate')(key.TagNumber), 510 - 390);
                         doc1.text(390, ibyvalue, splitTN)
                     }
-                        //doc1.text(345, ibyvalue, $filter('translate')(key.TagNumber))
+                    //doc1.text(345, ibyvalue, $filter('translate')(key.TagNumber))
                     else
                         doc1.text(390, ibyvalue, $filter('translate')('NO VALUE'))
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
-                    if (key.Original_PO_Number)
-                         {
-                             splitOPO = doc1.splitTextToSize($filter('translate')(key.Original_PO_Number), 650 - 520);
-                            doc1.text(520, ibyvalue, splitOPO)
-                        }
-                        //doc1.text(510, ibyvalue, $filter('translate')(key.Original_PO_Number))
+                    if (key.Original_PO_Number) {
+                        splitOPO = doc1.splitTextToSize($filter('translate')(key.Original_PO_Number), 650 - 520);
+                        doc1.text(520, ibyvalue, splitOPO)
+                    }
+                    //doc1.text(510, ibyvalue, $filter('translate')(key.Original_PO_Number))
                     else
                         doc1.text(520, ibyvalue, $filter('translate')('NO VALUE'))
-                    if ((splitIN != undefined && splitIN.length > 1) || (splitPL != undefined && splitPL.length > 1) || (splitSL != undefined && splitSL.length > 1) || (splitTN != undefined && splitTN.length > 1) || (splitOPO != undefined && splitOPO.length > 1))
-                    {
-                        ibyvalue = ibyvalue+10 * Math.max(splitIN.length, splitPL.length, splitSL.length, splitTN.length, splitOPO.length)
+                    if ((splitIN != undefined && splitIN.length > 1) || (splitPL != undefined && splitPL.length > 1) || (splitSL != undefined && splitSL.length > 1) || (splitTN != undefined && splitTN.length > 1) || (splitOPO != undefined && splitOPO.length > 1)) {
+                        ibyvalue = ibyvalue + 10 * Math.max(splitIN.length, splitPL.length, splitSL.length, splitTN.length, splitOPO.length)
                     }
                     else
                         ibyvalue = ibyvalue + 10;
@@ -4311,7 +4286,7 @@
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
 
-                doc1.text(xNotesField2, yNotesField1, $filter('translate')('Note Description') );
+                doc1.text(xNotesField2, yNotesField1, $filter('translate')('Note Description'));
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 doc1.text(xNotesField, yNotesField, $filter('translate')('Notes'))
@@ -4321,7 +4296,7 @@
                     xNotesField1 = xNotesField;
                     //yNotesField1 = yNotesField + 22;
                     ++i;
-                    yNotesField1_val = yNotesField1_val + 20 ;
+                    yNotesField1_val = yNotesField1_val + 20;
                     xNotesField2 = xNotesField1 + 325;
 
                     doc1.setFontSize(22)
@@ -4339,15 +4314,14 @@
                     if ($scope.summary.notesArray[i - 1].Notes) {
                         var splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.notesArray[i - 1].Notes), rectNotesWidth - xNotesField2);
                         doc1.text(xNotesField2, yNotesField1_val, splitTitle)
-                        if (splitTitle.length > 1)
-                        {
+                        if (splitTitle.length > 1) {
                             yNotesField1_val = yNotesField1_val + 9 * splitTitle.length;
                             yNotesField1 = yNotesField1_val;
                         }
                     }
                 }
-                rectNotesHeight = yNotesField1_val - yNotesField ;
-                doc1.rect(20, yNotesField + 5, rectNotesWidth, rectNotesHeight+5)
+                rectNotesHeight = yNotesField1_val - yNotesField;
+                doc1.rect(20, yNotesField + 5, rectNotesWidth, rectNotesHeight + 5)
 
 
                 var xAttachField = 25, yAttachField = yNotesField1_val + 25, rectAttachWidth = 660,
@@ -4358,7 +4332,7 @@
                 var isAdded = checkPdfHeight(yAttachField + 5 + 50, pageHeight, yAttachField + 5, rectAttachWidth, true, rectAttachHeight);
                 if (isAdded) {
                     yAttachField = -5;
-                    
+
                 }
                 doc1.rect(20, yAttachField + 5, rectAttachWidth, rectAttachHeight)
                 angular.forEach($scope.files, function (file, value) {
@@ -4385,7 +4359,7 @@
                     xAttachField1 += 60;
                 })
                 var j = 0, xTimeField = 25, yTimeField = yAttachField + rectAttachHeight + 20, rectTimeWidth = 660,
-                    rectTimeHeight = 23 * $scope.summary.timeArray.length+10, yTimeFieldName = yTimeField + 20,
+                    rectTimeHeight = 23 * $scope.summary.timeArray.length + 10, yTimeFieldName = yTimeField + 20,
                     yTimeFieldValue = yTimeField;
                 var columns;
                 if ($scope.userType == "C") {
@@ -4393,7 +4367,7 @@
                 }
                 else
                     columns = 4;
-                var timeWidth = (660 / columns) ;
+                var timeWidth = (660 / columns);
 
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
@@ -4446,11 +4420,11 @@
                 doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldName, $filter('translate')('Duration'))
                 doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldName, $filter('translate')('Item'))
                 //doc1.text(xTimeField+(timeWidth * (7)), yTimeFieldName, 'Description')
-                               
+
                 while (j < $scope.summary.timeArray.length) {
                     coloumnNo = 1;
                     yTimeFieldName = yTimeField + 20 * ++j;
-                    yTimeFieldValue = yTimeFieldName +20;
+                    yTimeFieldValue = yTimeFieldName + 20;
                     // doc1.text(xTimeField, yTimeFieldName, 'Date')
 
                     doc1.setFontSize(22)
@@ -4601,7 +4575,7 @@
                 //doc1.rect(20, yExpenseField + 10, rectExpenseWidth, rectExpenseHeight);
 
                 var l = 0, xMaterialField = 25, yMaterialField = yTimeField + rectTimeHeight + 25;// yExpenseFieldName + 40,
-                    rectMaterialWidth = 660, rectMaterialHeight = 25 * $scope.summary.materialArray.length,
+                rectMaterialWidth = 660, rectMaterialHeight = 25 * $scope.summary.materialArray.length,
                     yMaterialFieldName = yMaterialField + 25, yMaterialFieldValue;
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
@@ -4675,9 +4649,9 @@
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.materialArray[l - 1].serialIn) {
-                       splitserialin = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialIn, 394 - 298)
+                        splitserialin = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialIn, 394 - 298)
                         doc1.text(298, yMaterialFieldValue, splitserialin)
-                        
+
                     }
 
                     doc1.setFontSize(22)
@@ -4685,7 +4659,7 @@
                     if ($scope.summary.materialArray[l - 1].serialOut) {
                         splitserialout = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialOut, 490 - 394)
                         doc1.text(394, yMaterialFieldValue, splitserialout)
-                        
+
                     }
                     // doc1.text(320, yMaterialFieldValue, $scope.summary.materialArray[l-1].Charge_Type)
                     doc1.setFontSize(22)
@@ -4700,11 +4674,11 @@
                     if ($scope.summary.materialArray[l - 1].Description) {
                         splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.materialArray[l - 1].Description), rectMaterialWidth - 586);
                         doc1.text(586, yMaterialFieldValue, splitTitle)
-                        
+
                     }
-                    if ((splitTitle != undefined && splitTitle.length > 1) || (splitserialin != undefined && splitserialin.length > 1) || (splitserialout != undefined && splitserialout.length > 1) || (splitItemname != undefined && splitItemname.length>1)) {
+                    if ((splitTitle != undefined && splitTitle.length > 1) || (splitserialin != undefined && splitserialin.length > 1) || (splitserialout != undefined && splitserialout.length > 1) || (splitItemname != undefined && splitItemname.length > 1)) {
                         length = 0;
-                        if (splitTitle != undefined && splitTitle.length>1)
+                        if (splitTitle != undefined && splitTitle.length > 1)
                             length += splitTitle.length;
                         if (splitserialin != undefined && splitserialin.length > 1 && splitserialin.length > splitTitle.length)
                             length += (splitserialin.length - length);
@@ -4720,7 +4694,7 @@
                     yMaterialFieldValue = yMaterialFieldValue + 10 * $scope.summary.materialArray[l - 1].Product_Quantity;
                 }
 
-                rectMaterialHeight = yMaterialFieldValue - yMaterialField-5 ;
+                rectMaterialHeight = yMaterialFieldValue - yMaterialField - 5;
                 doc1.rect(20, yMaterialField + 10, rectMaterialWidth, rectMaterialHeight)
 
                 var xSignField = 25, ySignField = yMaterialField + rectMaterialHeight + 20, rectSignWidth = 660,
@@ -4728,12 +4702,12 @@
 
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                var isAdded = checkPdfHeight(ySignField +5, pageHeight, ySignField, rectSignWidth,false);
+                var isAdded = checkPdfHeight(ySignField + 5, pageHeight, ySignField, rectSignWidth, false);
                 if (isAdded) {
                     ySignField = 10;
                 }
                 doc1.text(xSignField, ySignField + 5, $filter('translate')('Signature'))
-                var isAdded = checkPdfHeight(ySignField +25, pageHeight, ySignField, rectSignWidth);
+                var isAdded = checkPdfHeight(ySignField + 25, pageHeight, ySignField, rectSignWidth);
                 if (isAdded) {
                     ySignField = 0;
                 }
@@ -4748,12 +4722,12 @@
                     ySignField = 0;
                 }
                 doc1.text(50, ySignField + 35, $filter('translate')('Service Representative') + ": " + $scope.engineerName)
-               
-                
-                doc1.text(300, ySignField + 35, $filter('translate')('Conatct Name') + ": " + $scope.contactorCustname)
-                
 
-                var isAdded = checkPdfHeight(ySignField + 55, pageHeight, ySignField , rectSignWidth, rectSignHeight);
+
+                doc1.text(300, ySignField + 35, $filter('translate')('Conatct Name') + ": " + $scope.contactorCustname)
+
+
+                var isAdded = checkPdfHeight(ySignField + 55, pageHeight, ySignField, rectSignWidth, rectSignHeight);
                 if (isAdded) {
                     ySignField = -10;
                 }
@@ -4768,10 +4742,10 @@
                 }
                 doc1.setFontType('normal')
                 if (valueService.getEnggSignTime() != undefined)
-                doc1.text(50, ySignField + 45 + 40, valueService.getEnggSignTime());
+                    doc1.text(50, ySignField + 45 + 40, valueService.getEnggSignTime());
                 if (valueService.getCustSignTime() != undefined)
-                doc1.text(300, ySignField + 45 + 40, valueService.getCustSignTime());
-                
+                    doc1.text(300, ySignField + 45 + 40, valueService.getCustSignTime());
+
 
                 if ($rootScope.customersignature)
                     doc1.addImage($rootScope.customersignature, 'JPEG', 300, ySignField + 35, 75, 40, 'custsign', 'FAST');
@@ -4825,7 +4799,7 @@
             Charge_Type_Id: valueService.getWarrantyType().id,
             Description: $scope.description,
             Product_Quantity: 1,
-            Serial_Type: [{"in": "", "out": "", "number": ""}],
+            Serial_Type: [{ "in": "", "out": "", "number": "" }],
             Task_Number: $scope.taskId,
             ItemName: ""
         });
@@ -4870,10 +4844,10 @@
 
         $scope.selectedWarranty = null;
 
-        $scope.warrantyList = [{"id": 1, "value": "Billable"},
-            {"id": 137, "value": "Goodwill"},
-            {"id": 138, "value": "Warranty"},
-            {"id": 2, "value": "Concession"}];
+        $scope.warrantyList = [{ "id": 1, "value": "Billable" },
+        { "id": 137, "value": "Goodwill" },
+        { "id": 138, "value": "Warranty" },
+        { "id": 2, "value": "Concession" }];
 
         $scope.selectedWarrantyType = function (warrantyType) {
 
@@ -4886,13 +4860,12 @@
     $scope.hideDropDown = function () {
         $scope.dropDown = false;
     };
-    $scope.updateTime = function (stage)
-    {
+    $scope.updateTime = function (stage) {
         console.log("");
-        if(stage=='engg')
+        if (stage == 'engg')
             $scope.engTime = valueService.getEnggSignTime();
         else if (stage == 'cust')
-        $scope.custTime = valueService.getCustSignTime();
+            $scope.custTime = valueService.getCustSignTime();
     }
-  
+
 });
