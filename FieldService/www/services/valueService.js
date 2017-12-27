@@ -317,7 +317,7 @@
 
             var deferOverTime = $q.defer();
 
-            localService.getOverTimeList(taskObject.Task_Number, function (response) {
+            localService.getOverTimeList(taskObject.Project_Number, function (response) {
 
                 debrief.overTime = response;
 
@@ -331,7 +331,7 @@
 
             var deferShiftCode = $q.defer();
 
-            localService.getShiftCodeList(taskObject.Task_Number, function (response) {
+            localService.getShiftCodeList(taskObject.Project_Number, function (response) {
 
                 debrief.shiftCode = response;
 
@@ -344,7 +344,7 @@
 
             var deferFieldJob = $q.defer();
 
-            localService.getFieldJobNameList(taskObject.Task_Number, function (response) {
+            localService.getFieldJobNameList(taskObject.Project_Number, function (response) {
 
                 debrief.fieldName = response;
 

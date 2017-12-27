@@ -549,7 +549,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Task SET Job_Description = ?, Duration = ?, Task_Status = ?, Customer_Name =?, Street_Address = ?, City = ?, State = ?, Country = ?, Zip_Code = ?, Expense_Method = ?, Labor_Method = ?, Travel_Method = ?, Material_Method = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?, Activity_Id = ?, Work_Phone_Number = ?, Mobile_Phone_Number = ?, Address1 = ?, SR_ID = ?, Name = ?, Contact_Name = ?, ResourceId = ?,Charge_Type=? WHERE Task_Number = ?";
+                var sqlUpdate = "UPDATE Task SET Job_Description = ?, Duration = ?, Task_Status = ?, Customer_Name =?, Street_Address = ?, City = ?, State = ?, Country = ?, Zip_Code = ?, Expense_Method = ?, Labor_Method = ?, Travel_Method = ?, Material_Method = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?, Activity_Id = ?, Work_Phone_Number = ?, Mobile_Phone_Number = ?, Address1 = ?, SR_ID = ?, Name = ?, Contact_Name = ?, ResourceId = ?, Charge_Type = ?, Project_Number = ? WHERE Task_Number = ?";
 
                 insertValues.push(responseList.Job_Description);
                 insertValues.push(responseList.Duration);
@@ -577,6 +577,7 @@
                 insertValues.push(responseList.Contact_Name);
                 insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.Charge_Type);
+                insertValues.push(responseList.Project_Number);
                 insertValues.push(responseList.Task_Number);
 
                 // console.log("TASK UPDATE VALUES =====> " + insertValues);
@@ -608,7 +609,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Task VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+                var sqlInsert = "INSERT INTO Task VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Task_Number);
                 insertValues.push(responseList.Job_Description);
@@ -641,6 +642,7 @@
                 insertValues.push(responseList.Contact_Name);
                 insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.Charge_Type);
+                insertValues.push(responseList.Project_Number);
 
                 // console.log("TASK INSERT VALUES =====> " + insertValues);
 
@@ -1172,7 +1174,7 @@
                         deferred.reject(error);
                     });
 
-                    console.log("NOTE OBJECT =====> " + JSON.stringify(responseList[i]));
+                    // console.log("NOTE OBJECT =====> " + JSON.stringify(responseList[i]));
 
                     promises.push(deferred.promise);
 
@@ -1445,7 +1447,7 @@
 
                         var insertValues = [];
 
-                        var sqlSelect = "SELECT * FROM OverTime WHERE OverTime_Shift_Code_ID = " + responseList[i].OverTime_Shift_Code_ID + " AND Task = " + responseList[i].Task;
+                        var sqlSelect = "SELECT * FROM OverTime WHERE OverTime_Shift_Code_ID = " + responseList[i].OverTime_Shift_Code_ID + " AND Project_Number = " + responseList[i].Project_Number;
 
                         // console.log("OVERTIME  ====> " + sqlSelect);
 
@@ -1502,7 +1504,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE OverTime SET Overtimeshiftcode = ?, Technician_ID = ?, Field_Job_ID = ?, Project = ?, Start_Date = ?, Date_Completed = ?, ResourceId = ?  WHERE OverTime_Shift_Code_ID = ? AND Task = ?";
+                var sqlUpdate = "UPDATE OverTime SET Overtimeshiftcode = ?, Technician_ID = ?, Field_Job_ID = ?, Project = ?, Start_Date = ?, Date_Completed = ?, ResourceId = ?  WHERE OverTime_Shift_Code_ID = ? AND Project_Number = ?";
 
                 insertValues.push(responseList.Overtimeshiftcode);
                 insertValues.push(responseList.Technician_ID);
@@ -1512,7 +1514,7 @@
                 insertValues.push(responseList.Date_Completed);
                 insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.OverTime_Shift_Code_ID);
-                insertValues.push(responseList.Task);
+                insertValues.push(responseList.Project_Number);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
@@ -1545,7 +1547,7 @@
 
                 insertValues.push(responseList.OverTime_Shift_Code_ID);
                 insertValues.push(responseList.Overtimeshiftcode);
-                insertValues.push(responseList.Task);
+                insertValues.push(responseList.Project_Number);
                 insertValues.push(responseList.Technician_ID);
                 insertValues.push(responseList.Field_Job_ID);
                 insertValues.push(responseList.Project);
@@ -1588,7 +1590,7 @@
 
                     db.transaction(function (transaction) {
 
-                        var sqlSelect = "SELECT * FROM ShiftCode WHERE Shift_Code_ID = " + responseList[i].Shift_Code_ID + " AND TaskNumber = " + responseList[i].TaskNumber;
+                        var sqlSelect = "SELECT * FROM ShiftCode WHERE Shift_Code_ID = " + responseList[i].Shift_Code_ID + " AND Project_Number = " + responseList[i].Project_Number;
 
                         // console.log("SHIFTCODE  ====> " + sqlSelect);
 
@@ -1645,7 +1647,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE ShiftCode SET ShiftCodeName = ?, Technician_ID = ?, Field_Job_ID = ?, Start_Date = ?, Date_Completed = ?, Project = ?, ResourceId = ?  WHERE Shift_Code_ID = ? AND TaskNumber = ?";
+                var sqlUpdate = "UPDATE ShiftCode SET ShiftCodeName = ?, Technician_ID = ?, Field_Job_ID = ?, Start_Date = ?, Date_Completed = ?, Project = ?, ResourceId = ?  WHERE Shift_Code_ID = ? AND Project_Number = ?";
 
                 insertValues.push(responseList.ShiftCodeName);
                 insertValues.push(responseList.Technician_ID);
@@ -1655,7 +1657,7 @@
                 insertValues.push(responseList.Project);
                 insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.Shift_Code_ID);
-                insertValues.push(responseList.TaskNumber);
+                insertValues.push(responseList.Project_Number);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
@@ -1688,7 +1690,7 @@
 
                 insertValues.push(responseList.Shift_Code_ID);
                 insertValues.push(responseList.ShiftCodeName);
-                insertValues.push(responseList.TaskNumber);
+                insertValues.push(responseList.Project_Number);
                 insertValues.push(responseList.Technician_ID);
                 insertValues.push(responseList.Field_Job_ID);
                 insertValues.push(responseList.Start_Date);
@@ -1723,53 +1725,48 @@
 
             var promises = [];
 
-            for (var i = 0; i < responseList.length; i++) {
+            angular.forEach(responseList, function (item) {
 
-                (function (i) {
+                var deferred = $q.defer();
 
-                    var deferred = $q.defer();
+                db.transaction(function (transaction) {
 
-                    db.transaction(function (transaction) {
+                    var sqlSelect = "SELECT * FROM FieldJobName WHERE TaskCode = ? AND Project_Number = ?";
+             
+                    transaction.executeSql(sqlSelect, [item.TaskCode, item.Project_Number], function (tx, res) {
 
-                        var sqlSelect = "SELECT * FROM FieldJobName WHERE TaskCode = " + responseList[i].TaskCode + " AND Task = " + responseList[i].Task;
+                        var rowLength = res.rows.length;
 
-                        // console.log("FIELDJOBNAME  ====> " + sqlSelect);
+                        // console.log("FIELDJOBNAME LENGTH ====> " + rowLength);
 
-                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+                        if (rowLength > 0) {
 
-                            var rowLength = res.rows.length;
+                            updateFieldJobName(item, deferred);
 
-                            // console.log("FIELDJOBNAME LENGTH ====> " + rowLength);
+                        } else {
 
-                            if (rowLength > 0) {
+                            insertFieldJobName(item, deferred);
+                        }
 
-                                updateFieldJobName(responseList[i], deferred);
+                    }, function (tx, error) {
 
-                            } else {
+                        // console.log("FIELDJOBNAME SELECT ERROR: " + error.message);
 
-                                insertFieldJobName(responseList[i], deferred);
-                            }
-
-                        }, function (tx, error) {
-
-                            // console.log("FIELDJOBNAME SELECT ERROR: " + error.message);
-
-                            deferred.reject(error);
-                        });
-
-                    }, function (error) {
-
-                        // console.log("FIELDJOBNAME SELECT TRANSACTION ERROR: " + error.message);
-
-                        deferred.reject(error);
+                        deferred.resolve(error);
                     });
 
-                    // console.log("FIELDJOBNAME OBJECT =====> " + JSON.stringify(responseList[i]));
+                }, function (error) {
 
-                    promises.push(deferred.promise);
+                    // console.log("FIELDJOBNAME SELECT TRANSACTION ERROR: " + error.message);
 
-                })(i);
-            }
+                    deferred.resolve(error);
+                });
+
+                // console.log("FIELDJOBNAME OBJECT =====> " + JSON.stringify(item));
+
+                promises.push(deferred.promise);
+
+            });
 
             $q.all(promises).then(
                 function (response) {
@@ -1782,13 +1779,13 @@
             );
         };
 
-        function updateFieldJobName(responseList, defer) {
+        function updateFieldJobName(responseList, defer, i) {
 
             db.transaction(function (transaction) {
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE FieldJobName SET JobName = ?, Technician_ID = ?, Project = ?, Start_Date = ?, Date_Completed = ?, ResourceId = ?  WHERE TaskCode = ? AND Task = ?";
+                var sqlUpdate = "UPDATE FieldJobName SET JobName = ?, Technician_ID = ?, Project = ?, Start_Date = ?, Date_Completed = ?, ResourceId = ?  WHERE TaskCode = ? AND Project_Number = ?";
 
                 insertValues.push(responseList.JobName);
                 insertValues.push(responseList.Technician_ID);
@@ -1797,7 +1794,7 @@
                 insertValues.push(responseList.Date_Completed);
                 insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.TaskCode);
-                insertValues.push(responseList.Task);
+                insertValues.push(responseList.Project_Number);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
@@ -1809,18 +1806,18 @@
 
                     // console.log("FIELDJOBNAME UPDATE ERROR: " + error.message);
 
-                    defer.reject(error);
+                    defer.resolve(error);
                 });
 
             }, function (error) {
 
                 // console.log("FIELDJOBNAME UPDATE TRANSACTION ERROR: " + error.message);
 
-                defer.reject(error);
+                defer.resolve(error);
             });
         };
 
-        function insertFieldJobName(responseList, defer) {
+        function insertFieldJobName(responseList, defer, i) {
 
             db.transaction(function (transaction) {
 
@@ -1830,7 +1827,7 @@
 
                 insertValues.push(responseList.TaskCode);
                 insertValues.push(responseList.JobName);
-                insertValues.push(responseList.Task);
+                insertValues.push(responseList.Project_Number);
                 insertValues.push(responseList.Technician_ID);
                 insertValues.push(responseList.Project);
                 insertValues.push(responseList.Start_Date);
@@ -1847,14 +1844,14 @@
 
                     // console.log("FIELDJOBNAME INSERT ERROR: " + error.message);
 
-                    defer.reject(error);
+                    defer.resolve(error);
                 });
 
             }, function (error) {
 
                 // console.log("FIELDJOBNAME INSERT TRANSACTION ERROR: " + error.message);
 
-                defer.reject(error);
+                defer.resolve(error);
             });
         };
 
@@ -3434,7 +3431,7 @@
                         deferred.reject(error);
                     });
 
-                    console.log("NOTES OBJECT =====> " + JSON.stringify(responseList[i]));
+                    // console.log("NOTES OBJECT =====> " + JSON.stringify(responseList[i]));
 
                     promises.push(deferred.promise);
 
@@ -4440,7 +4437,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM OverTime WHERE Task = ? AND ResourceId = ?", [taskId, constantService.getResourceId()], function (tx, res) {
+                transaction.executeSql("SELECT * FROM OverTime WHERE Project_Number = ? AND ResourceId = ?", [taskId, constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4474,7 +4471,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM ShiftCode  WHERE TaskNumber = ? AND ResourceId = ?", [taskId, constantService.getResourceId()], function (tx, res) {
+                transaction.executeSql("SELECT * FROM ShiftCode  WHERE Project_Number = ? AND ResourceId = ?", [taskId, constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4508,7 +4505,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM FieldJobName WHERE Task = ? AND ResourceId = ?", [taskNumber, constantService.getResourceId()], function (tx, res) {
+                transaction.executeSql("SELECT * FROM FieldJobName WHERE Project_Number = ? AND ResourceId = ?", [taskNumber, constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4823,6 +4820,8 @@
                         value.push(res.rows.item(i));
                     }
 
+                    value.reverse();
+
                     // console.log("GET TIME DB ==========> " + JSON.stringify(value));
 
                     callback(value);
@@ -4856,6 +4855,8 @@
 
                         value.push(res.rows.item(i));
                     }
+
+                    value.reverse();
 
                     // console.log("GET EXPENSE DB ==========> " + JSON.stringify(value));
 
@@ -4891,6 +4892,8 @@
                         value.push(res.rows.item(i));
                     }
 
+                    value.reverse();
+
                     // console.log("GET MATERIAL DB ==========> " + JSON.stringify(value));
 
                     callback(value);
@@ -4924,6 +4927,8 @@
 
                         value.push(res.rows.item(i));
                     }
+
+                    value.reverse();
 
                     // console.log("GET NOTES DB ==========> " + JSON.stringify(value));
 

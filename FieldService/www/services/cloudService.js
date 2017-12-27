@@ -19,6 +19,7 @@
         service.getTaskInternalList = getTaskInternalList;
         service.getTaskDetails = getTaskDetails;
         service.getLOVDetails = getLOVDetails;
+        service.getProjectDetails = getProjectDetails;
 
         service.getSRNotesList = getSRNotesList;
         service.getSRAttachmentList = getSRAttachmentList;
@@ -110,7 +111,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getFieldBackId()
+                    "oracle-mobile-backend-id": constantService.getTechBackId()
                 }
 
             }).success(function (response) {
@@ -126,7 +127,6 @@
                 callback(error);
             });
         };
-
 
         function getTaskInternalList(isLogin, callback) {
 
@@ -153,9 +153,9 @@
                 };
             }
 
-            console.log("TASK INTERNAL LIST REQUEST DATA ======> " + JSON.stringify(data));
+            console.log("TASK REQUEST ======> " + JSON.stringify(data));
 
-            console.log("TASK INTERNAL LIST RESPONSE START ======> " + new Date());
+            console.log("START TASK ======> " + new Date());
 
             $http({
 
@@ -170,9 +170,9 @@
 
             }).success(function (response) {
 
-                console.log("TASK INTERNAL LIST RESPONSE END ======> " + new Date());
+                console.log("END TASK ======> " + new Date());
 
-                console.log("Task Internal List Response " + JSON.stringify(response));
+                console.log("TASK RESPONSE " + JSON.stringify(response));
 
                 var taskList = [];
 
@@ -247,7 +247,7 @@
 
                                     callback(taskInternalList);
 
-                                    console.log("TASK INTERNAL LIST INSERT END ======> " + new Date());
+                                    console.log("TASK INTERNAL END ======> " + new Date());
                                 });
                             });
                         });
@@ -256,11 +256,69 @@
 
             }).error(function (error) {
 
-                console.log("END ======> " + new Date());
+                console.log("END TASK ======> " + new Date());
 
-                console.log("Task Internal List Error " + JSON.stringify(error));
+                console.log("TASK ERROR " + JSON.stringify(error));
 
                 callback(error);
+            });
+        };
+
+        function getInternalList(callback) {
+
+            var internalList = [];
+
+            var startDate = new Date();
+
+            startDate.setDate(startDate.getDate() + 15);
+
+            var startDateISOFormat = moment(startDate).format('YYYY-MM-DD');
+
+            var endDate = new Date();
+
+            endDate.setDate(endDate.getDate() + 45);
+
+            var endDateISOFormat = moment(endDate).format('YYYY-MM-DD');
+
+            console.log("START INTERNAL ======> " + new Date());
+
+            $http({
+
+                method: 'POST',
+                url: url + 'Internal_OFSC/get_ids',
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getInternalBackId()
+                },
+                data: {
+                    "resourceId": constantService.getResourceId(),
+                    "fromDate": startDateISOFormat,
+                    "toDate": endDateISOFormat
+                }
+
+            }).success(function (response) {
+
+                console.log("END INTERNAL ======> " + new Date());
+
+                console.log("INTERNAL RESPONSE " + JSON.stringify(response.activities));
+
+                if (response && response.activities) {
+
+                    callback(response.activities);
+
+                } else {
+
+                    callback(internalList);
+                }
+
+            }).error(function (error) {
+
+                console.log("END INTERNAL ERROR======> " + new Date());
+
+                console.log("INTERNAL ERROR " + JSON.stringify(error));
+
+                callback(internalList);
             });
         };
 
@@ -289,9 +347,9 @@
                 };
             }
 
-            console.log("TASK DETAILS REQUEST DATA ======> " + JSON.stringify(data));
+            console.log("TASK DETAIL REQUEST ======> " + JSON.stringify(data));
 
-            console.log("TASK DETAILS RESPONSE START ======> " + new Date());
+            console.log("START TASK DETAIL ======> " + new Date());
 
             $http({
 
@@ -306,9 +364,9 @@
 
             }).success(function (response) {
 
-                console.log("TASK DETAILS RESPONSE END ======> " + new Date());
-                var temp = JSON.stringify(response);
-                console.log("Task Details Response " + JSON.stringify(response));
+                console.log("END TASK DETAIL ======> " + new Date());
+
+                console.log("TASK DETAIL RESPONSE " + JSON.stringify(response));
 
                 var promises = [];
 
@@ -354,48 +412,6 @@
                         });
 
                         promises.push(deferNotes.promise);
-                    }
-
-                    if (item.OverTImeShiftCode && item.OverTImeShiftCode.length > 0) {
-
-                        var deferOverTime = $q.defer();
-
-                        localService.insertOverTimeList(item.OverTImeShiftCode, function (result) {
-
-                            deferOverTime.resolve("success");
-
-                            console.log("OVER TIME");
-                        });
-
-                        promises.push(deferOverTime.promise);
-                    }
-
-                    if (item.ShiftCode && item.ShiftCode.length > 0) {
-
-                        var deferShiftCode = $q.defer();
-
-                        localService.insertShiftCodeList(item.ShiftCode, function (result) {
-
-                            deferShiftCode.resolve("success");
-
-                            console.log("SHIFT CODE");
-                        });
-
-                        promises.push(deferShiftCode.promise);
-                    }
-
-                    if (item.TaskName && item.TaskName.length > 0) {
-
-                        var deferFieldJob = $q.defer();
-
-                        localService.insertFieldJobNameList(item.TaskName, function (result) {
-
-                            deferFieldJob.resolve("success");
-
-                            console.log("FIELD JOB");
-                        });
-
-                        promises.push(deferFieldJob.promise);
                     }
 
                     if (item.FileID && item.FileID.length > 0) {
@@ -458,12 +474,115 @@
 
             }).error(function (error) {
 
-                console.log("END ======> " + new Date());
+                console.log("END TASK DETAIL ERROR ======> " + new Date());
 
-                console.log("Task Details Error " + JSON.stringify(error));
+                console.log("TASK DETAIL ERROR " + JSON.stringify(error));
 
                 callback(error);
             });
+        };
+
+        function getProjectDetails(projectArray, callback) {
+
+            console.log("START PROJECT ======> " + new Date());
+
+            console.log("PROJECT REQUEST ======> " + projectArray);
+
+            $http({
+
+                method: 'POST',
+                url: url + 'getProjectDetails/Project_Number',
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getProjectBackId()
+                },
+                data: { "projectNumber": projectArray }
+
+            }).success(function (response) {
+
+                console.log("END PROJECT ======> " + new Date());
+
+                console.log("PROJECT RESPONSE " + JSON.stringify(response));
+
+                var promises = [];
+
+                angular.forEach(response.ProjectDetails, function (item) {
+
+                    if (item.OverTImeShiftCode && item.OverTImeShiftCode.length > 0) {
+
+                        var deferOverTime = $q.defer();
+
+                        localService.insertOverTimeList(item.OverTImeShiftCode, function (result) {
+
+                            deferOverTime.resolve("success");
+
+                            console.log("OVER TIME");
+                        });
+
+                        promises.push(deferOverTime.promise);
+                    }
+
+                    if (item.ShiftCode && item.ShiftCode.length > 0) {  
+
+                        var deferShiftCode = $q.defer();
+
+                        localService.insertShiftCodeList(item.ShiftCode, function (result) {
+
+                            deferShiftCode.resolve("success");
+
+                            console.log("SHIFT CODE");
+                        });
+
+                        promises.push(deferShiftCode.promise);
+                    }
+
+                    if (item.TaskName && item.TaskName.length > 0) {
+
+                        var deferFieldJob = $q.defer();
+
+                        localService.insertFieldJobNameList(item.TaskName, function (result) {
+
+                            deferFieldJob.resolve("success");
+
+                            console.log("FIELD JOB");
+                        });
+
+                        promises.push(deferFieldJob.promise);
+                    }
+                });
+
+                console.log("LENGTH PROJECT DETAILS " + promises.length);
+
+                $q.all(promises).then(
+                    function (response) {
+
+                        console.log("PROJECT DETAILS INSERT SUCCESS");
+
+                        callback("success");
+
+                        console.log("PROJECT DETAILS INSERT END ======> " + new Date());
+                    },
+
+                    function (error) {
+
+                        console.log("PROJECT DETAILS INSERT FAILURE");
+
+                        callback("failure");
+
+                        console.log("PROJECT DETAILS INSERT END ======> " + new Date());
+                    }
+                );
+
+            }).error(function (error) {
+
+                console.log("END PROJECT ERROR ======> " + new Date());
+
+                console.log("PROJECT ERROR " + JSON.stringify(error));
+
+                callback("error");
+            });
+
         };
 
         function getLOVDetails(isLogin, callback) {
@@ -491,9 +610,9 @@
                 };
             }
 
-            console.log("LOV REQUEST DATA ======> " + JSON.stringify(data));
+            console.log("LOV REQUEST ======> " + JSON.stringify(data));
 
-            console.log("LOV RESPONSE START ======> " + new Date());
+            console.log("START LOV ======> " + new Date());
 
             $http({
 
@@ -507,9 +626,9 @@
 
             }).success(function (response) {
 
-                console.log("LOV RESPONSE END ======> " + new Date());
+                console.log("END LOV ======> " + new Date());
 
-                console.log("LOV Response " + JSON.stringify(response));
+                console.log("LOV RESPONSE " + JSON.stringify(response));
 
                 var promises = [];
 
@@ -652,14 +771,13 @@
 
             }).error(function (error) {
 
-                console.log("END ======> " + new Date());
+                console.log("END LOV ERROR ======> " + new Date());
 
-                console.log("LOV Error " + JSON.stringify(error));
+                console.log("LOV ERROR " + JSON.stringify(error));
 
                 callback(error);
             });
         };
-
 
         function getSRNotesList(srNumberArray, callback) {
 
@@ -763,60 +881,6 @@
             });
         };
 
-        function updateAcceptTask(formData, callback) {
-
-            console.log("Accept Task Data", JSON.stringify(formData));
-
-            return $http({
-
-                method: 'POST',
-                url: url + 'UpdateTaskDetails/update',
-                headers: {
-                    "Content-Type": constantService.getContentType(),
-                    "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getUpdateStatusBackId()
-                },
-                data: formData
-
-            }).success(function (response) {
-
-                console.log("AcceptTask Response " + JSON.stringify(response));
-
-                callback(response);
-
-            }).error(function (error) {
-
-                console.log("AcceptTask Error " + JSON.stringify(error));
-
-                callback(error);
-            });
-        };
-
-        function startTask(formData, callback) {
-
-            console.log("Start Task Data", JSON.stringify(formData));
-
-            return $http({
-
-                method: 'POST',
-                url: url + 'StartworkAPI/to_startwork?taskId=' + formData.taskId
-                + '&taskStatus=' + formData.taskStatus,
-                headers: formData.header
-
-            }).success(function (response) {
-
-                console.log("Start Task Response " + JSON.stringify(response));
-
-                callback(response);
-
-            }).error(function (error) {
-
-                console.log("Start Task Error " + JSON.stringify(error));
-
-                callback(error);
-            });
-        };
-
         function createAttachment(attachment, callback) {
 
             $http({
@@ -826,7 +890,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getChargeBackId()
+                    "oracle-mobile-backend-id": constantService.getCreateBackId()
                 },
                 data: attachment
 
@@ -975,6 +1039,62 @@
             });
         };
 
+
+
+        function updateAcceptTask(formData, callback) {
+
+            console.log("Accept Task Data", JSON.stringify(formData));
+
+            return $http({
+
+                method: 'POST',
+                url: url + 'UpdateTaskDetails/update',
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getUpdateStatusBackId()
+                },
+                data: formData
+
+            }).success(function (response) {
+
+                console.log("AcceptTask Response " + JSON.stringify(response));
+
+                callback(response);
+
+            }).error(function (error) {
+
+                console.log("AcceptTask Error " + JSON.stringify(error));
+
+                callback(error);
+            });
+        };
+
+        function startTask(formData, callback) {
+
+            console.log("Start Task Data", JSON.stringify(formData));
+
+            return $http({
+
+                method: 'POST',
+                url: url + 'StartworkAPI/to_startwork?taskId=' + formData.taskId
+                + '&taskStatus=' + formData.taskStatus,
+                headers: formData.header
+
+            }).success(function (response) {
+
+                console.log("Start Task Response " + JSON.stringify(response));
+
+                callback(response);
+
+            }).error(function (error) {
+
+                console.log("Start Task Error " + JSON.stringify(error));
+
+                callback(error);
+            });
+        };
+
         function getTaskList(callback) {
 
             var taskArray = [];
@@ -1046,71 +1166,6 @@
                 callback(error);
             });
         };
-
-        function getInternalList(callback) {
-
-            var internalList = [];
-
-            var startDate = new Date();
-
-            startDate.setDate(startDate.getDate() + 15);
-
-            var startDateISOFormat = moment(startDate).format('YYYY-MM-DD');
-
-            var endDate = new Date();
-
-            endDate.setDate(endDate.getDate() + 45);
-
-            var endDateISOFormat = moment(endDate).format('YYYY-MM-DD');
-
-            $http({
-
-                method: 'POST',
-                url: url + 'Internal_OFSC/get_ids',
-                headers: {
-                    "Content-Type": constantService.getContentType(),
-                    "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getNewOfscBackId()
-                },
-                data: {
-                    "resourceId": constantService.getResourceId(),
-                    "fromDate": startDateISOFormat,
-                    "toDate": endDateISOFormat
-                }
-
-            }).success(function (response) {
-
-                console.log("Internal Response " + JSON.stringify(response.activities));
-
-                if (response && response.activities) {
-
-                    callback(response.activities);
-
-                } else {
-
-                    callback(internalList);
-                }
-
-                // localService.insertInternalList(response.activities, function (result) {
-                //
-                //     console.log("INTERNAL");
-                //
-                //     localService.getInternalList(function (res) {
-                //
-                //         callback(res);
-                //     });
-                // });
-
-            }).error(function (error) {
-
-                console.log("Internal Error " + JSON.stringify(error));
-
-                var response = [];
-
-                callback(response);
-            });
-        };
-
 
         function getInstallBaseList(callback) {
 
@@ -1355,7 +1410,6 @@
                 callback("error");
             });
         };
-
 
         function getChargeMethod(callback) {
 
@@ -1693,7 +1747,6 @@
                 callback(error);
             });
         };
-
 
         function getTaskListCloud(formData, callback) {
 

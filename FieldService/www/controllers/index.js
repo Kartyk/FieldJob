@@ -153,7 +153,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
         if (valueService.getDebriefChanged()) {
 
             $mdDialog.show({
-                locals: {dataToPass: item},
+                locals: { dataToPass: item },
                 controller: DialogController,
                 templateUrl: "app/views/Dialog.html",
                 parent: angular.element(document.body),
@@ -414,15 +414,6 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                                     }
                                 });
 
-                                var data = {
-                                    "resourceId": constantService.getUser().OFSCId,
-                                    "date": moment(new Date()).utcOffset(constantService.getTimeZone()).format('YYYY-MM-DD')
-                                };
-
-                                ofscService.activate_resource(data, function (response) {
-
-                                });
-
                                 syncSubmit("0");
                             });
 
@@ -666,12 +657,6 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                 } else {
 
                     deferSubmit.resolve("Submit");
-
-                    //if (isLogin == "0") {
-                    //    fetchData(isLogin);
-                    //} else if (isLogin == "1") {
-                    //    syncData(isLogin);
-                    //}
                 }
             });
 
@@ -729,11 +714,33 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
             promiseArray.push(deferLOV.promise);
 
+            var projectNumberArray = [];
+
+            angular.forEach(constantService.getTaskList(), function (item) {
+
+                if (item.Project_Number != undefined && item.Project_Number != null && item.Project_Number != '') {
+
+                    if (projectNumberArray.indexOf(item.Project_Number) === -1) {
+
+                        projectNumberArray.push(item.Project_Number + "");
+                    }
+                }
+            });
+
+            var deferProject = $q.defer();
+
+            cloudService.getProjectDetails(projectNumberArray, function (result) {
+
+                deferProject.resolve("success");
+            });
+
+            promiseArray.push(deferProject.promise);
+
             var srNumberArray = [];
 
             angular.forEach(constantService.getTaskList(), function (item) {
 
-                if (item.SR_ID != undefined) {
+                if (item.SR_ID != undefined && item.SR_ID != null && item.SR_ID != '') {
 
                     if (srNumberArray.indexOf(item.SR_ID) === -1) {
 
@@ -823,7 +830,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                         deferSRNotes.resolve("success");
                     });
-              
+
                     var deferSRAttachment = $q.defer();
 
                     cloudService.getSRAttachmentList(srNumberArray, function (response) {
@@ -855,7 +862,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                     if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
 
-                        $state.go($state.current, {}, {reload: true});
+                        $state.go($state.current, {}, { reload: true });
 
                     } else if ($state.current.name == "login") {
 
@@ -880,7 +887,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                         valueService.setTask(valueService.getTask(), function () {
 
-                            $state.go($state.current, {}, {reload: true});
+                            $state.go($state.current, {}, { reload: true });
 
                         });
                     }
@@ -896,7 +903,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                     if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
 
-                        $state.go($state.current, {}, {reload: true});
+                        $state.go($state.current, {}, { reload: true });
 
                     } else if ($state.current.name == "login") {
 
@@ -921,14 +928,14 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                         valueService.setTask(valueService.getTask(), function () {
 
-                            $state.go($state.current, {}, {reload: true});
+                            $state.go($state.current, {}, { reload: true });
 
                         });
                     }
 
                     $rootScope.dbCall = false;
 
-                    getAttachments();
+                    //getAttachments();
                 }
             );
         });
@@ -957,6 +964,28 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
             });
 
             promiseArray.push(deferLOV.promise);
+
+            var projectNumberArray = [];
+
+            angular.forEach(constantService.getTaskList(), function (item) {
+
+                if (item.Project_Number != undefined && item.Project_Number != null && item.Project_Number != '') {
+
+                    if (projectNumberArray.indexOf(item.Project_Number) === -1) {
+
+                        projectNumberArray.push(item.Project_Number + "");
+                    }
+                }
+            });
+
+            var deferProject = $q.defer();
+
+            cloudService.getProjectDetails(projectNumberArray, function (result) {
+
+                deferProject.resolve("success");
+            });
+
+            promiseArray.push(deferProject.promise);
 
             var srNumberArray = [];
 
@@ -1081,7 +1110,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                     if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
 
-                        $state.go($state.current, {}, {reload: true});
+                        $state.go($state.current, {}, { reload: true });
 
                     } else if ($state.current.name == "login") {
 
@@ -1106,7 +1135,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                         valueService.setTask(valueService.getTask(), function () {
 
-                            $state.go($state.current, {}, {reload: true});
+                            $state.go($state.current, {}, { reload: true });
 
                         });
                     }
@@ -1129,7 +1158,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                     if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
 
-                        $state.go($state.current, {}, {reload: true});
+                        $state.go($state.current, {}, { reload: true });
 
                     } else if ($state.current.name == "login") {
 
@@ -1154,7 +1183,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                         valueService.setTask(valueService.getTask(), function () {
 
-                            $state.go($state.current, {}, {reload: true});
+                            $state.go($state.current, {}, { reload: true });
 
                         });
                     }
@@ -1492,7 +1521,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                     if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
 
-                        $state.go($state.current, {}, {reload: true});
+                        $state.go($state.current, {}, { reload: true });
 
                     } else if ($state.current.name == "login") {
 
@@ -1517,7 +1546,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                         valueService.setTask(valueService.getTask(), function () {
 
-                            $state.go($state.current, {}, {reload: true});
+                            $state.go($state.current, {}, { reload: true });
 
                         });
                     }
@@ -1533,7 +1562,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                     if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
 
-                        $state.go($state.current, {}, {reload: true});
+                        $state.go($state.current, {}, { reload: true });
 
                     } else if ($state.current.name == "login") {
 
@@ -1558,7 +1587,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                         valueService.setTask(valueService.getTask(), function () {
 
-                            $state.go($state.current, {}, {reload: true});
+                            $state.go($state.current, {}, { reload: true });
 
                         });
                     }
