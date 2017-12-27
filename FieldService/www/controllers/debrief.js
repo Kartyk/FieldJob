@@ -3530,7 +3530,7 @@
 
                     var index = 0;
                     angular.forEach($scope.files, function (file, value) {
-
+                        var yfilename = yAttachField;
                         var attachfile = document.getElementById(index++);
 
                         var callback = function (image) {
@@ -3539,16 +3539,26 @@
 
                             ctx.drawImage(attachfile, xAttachField1, yAttachField + 15);
 
-                            if (file.filename.length >= 18) {
+                            if (file.fileDisc.length >= 18) {
 
                                 ctx.fillStyle = "#000";
                                 ctx.font = '15px sans-serif ';
-                                ctx.fillText($filter('translate')(file.filename.substr(0, 16)) + '..', xAttachField1, yAttachField + 125);
+                                var splitAttchname = doc1.splitTextToSize($filter('translate')(file.fileDisc.substr(0, 16)) + '..', 45);
+                                angular.forEach(splitAttchname, function (key) {
+                                    ctx.fillText(key, xAttachField1, yfilename + 100);
+                                    yfilename += 15;
+                                })
+                              
                             } else {
 
                                 ctx.fillStyle = "#000";
                                 ctx.font = '15px sans-serif ';
-                                ctx.fillText($filter('translate')(file.filename), xAttachField1, yAttachField + 125);
+                                var splitAttchname = doc1.splitTextToSize($filter('translate')(file.fileDisc) , 45);
+                                angular.forEach(splitAttchname, function (key) {
+                                    ctx.fillText(key, xAttachField1, yfilename + 100);
+                                    yfilename += 15;
+                                })
+                                //ctx.fillText($filter('translate')(file.fileDisc), xAttachField1, yAttachField + 125);
                             }
 
                             xAttachField1 += 120;
@@ -3924,9 +3934,10 @@
                         ctx.fillStyle = "#000";
                         ctx.font = ' 13px sans-serif ';
                         if ($scope.summary.materialArray[l - 1].serialNumber[m] != "") {
+                            yMaterialSerialNo = yMaterialFieldValue;
                             while (m < $scope.summary.materialArray[l - 1].serialNumber.length) {
                                 ctx.textAlign = "start";
-                                yMaterialSerialNo = yMaterialFieldValue + 15 * m;
+                               // yMaterialSerialNo = yMaterialFieldValue + 15 * m;
                                 splitserialno = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialNumber[m++], 50)
                                 angular.forEach(splitserialno, function (key) {
                                     ctx.fillText(key, 280, yMaterialSerialNo);
@@ -3940,9 +3951,10 @@
                         ctx.fillStyle = "#000";
                         ctx.font = ' 13px sans-serif ';
                         if ($scope.summary.materialArray[l - 1].serialIn[n] != "") {
+                            yMaterialSerialIn = yMaterialFieldValue 
                             while (n < $scope.summary.materialArray[l - 1].serialIn.length) {
                                 ctx.textAlign = "start";
-                                yMaterialSerialIn = yMaterialFieldValue + 15 * n;
+                               // yMaterialSerialIn = yMaterialFieldValue + 15 * n;
                                 splitserialin = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialIn[n++], 50)
                                 angular.forEach(splitserialin, function (key) {
                                     ctx.fillText(key, 350, yMaterialSerialIn);
@@ -3955,9 +3967,10 @@
                         ctx.fillStyle = "#000";
                         ctx.font = ' 13px sans-serif ';
                         if ($scope.summary.materialArray[l - 1].serialOut[o] != "") {
+                            yMaterialSerialOut = yMaterialFieldValue 
                             while (o < $scope.summary.materialArray[l - 1].serialOut.length) {
                                 ctx.textAlign = "start";
-                                yMaterialSerialOut = yMaterialFieldValue + 15 * o;
+                                //yMaterialSerialOut = yMaterialFieldValue + 15 * o;
                                 splitserialout = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialOut[o++], 50)
                                 angular.forEach(splitserialout, function (key) {
                                     ctx.fillText(key, 500, yMaterialSerialOut);
@@ -4313,11 +4326,22 @@
                     doc1.setFontType('normal')
                     if ($scope.summary.notesArray[i - 1].Notes) {
                         var splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.notesArray[i - 1].Notes), rectNotesWidth - xNotesField2);
-                        doc1.text(xNotesField2, yNotesField1_val, splitTitle)
-                        if (splitTitle.length > 1) {
-                            yNotesField1_val = yNotesField1_val + 9 * splitTitle.length;
+                        angular.forEach(splitTitle, function (key)
+                        {
+                            var isAdded = checkPdfHeight(yNotesField1_val, pageHeight, yNotesField, rectNotesWidth);
+                            if (isAdded) {
+                                yNotesField1_val = 10;
+                                yNotesField = -10;
+                            }
+                            doc1.text(xNotesField2, yNotesField1_val, key)
+                            yNotesField1_val += 10;
                             yNotesField1 = yNotesField1_val;
-                        }
+                        })
+                        
+                        //if (splitTitle.length > 1) {
+                        //    yNotesField1_val = yNotesField1_val + 9 * splitTitle.length;
+                        //    yNotesField1 = yNotesField1_val;
+                        //}
                     }
                 }
                 rectNotesHeight = yNotesField1_val - yNotesField;
@@ -4328,6 +4352,11 @@
                     rectAttachHeight = 70, xAttachField1 = 25;
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
+                var isAdded = checkPdfHeight(yAttachField , pageHeight, yAttachField + 5, rectAttachWidth, false);
+                if (isAdded) {
+                    yAttachField = 10;
+
+                }
                 doc1.text(xAttachField, yAttachField, $filter('translate')('Attachments'))
                 var isAdded = checkPdfHeight(yAttachField + 5 + 50, pageHeight, yAttachField + 5, rectAttachWidth, true, rectAttachHeight);
                 if (isAdded) {
@@ -4643,9 +4672,12 @@
                     }
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
-                    if ($scope.summary.materialArray[l - 1].serialNumber)
-                        doc1.text(202, yMaterialFieldValue, $scope.summary.materialArray[l - 1].serialNumber)
-                    var splitserialin, splitserialout, splitTitle, splitItemname;
+                    var splitserialin = splitserialout = splitTitle = splitItemname = splitserialno = "";
+                    if ($scope.summary.materialArray[l - 1].serialNumber) {
+                        splitserialno = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialNumber, 298 - 202)
+                        doc1.text(202, yMaterialFieldValue, splitserialno)
+                    }
+                    
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.materialArray[l - 1].serialIn) {
@@ -4676,18 +4708,20 @@
                         doc1.text(586, yMaterialFieldValue, splitTitle)
 
                     }
-                    if ((splitTitle != undefined && splitTitle.length > 1) || (splitserialin != undefined && splitserialin.length > 1) || (splitserialout != undefined && splitserialout.length > 1) || (splitItemname != undefined && splitItemname.length > 1)) {
-                        length = 0;
-                        if (splitTitle != undefined && splitTitle.length > 1)
-                            length += splitTitle.length;
-                        if (splitserialin != undefined && splitserialin.length > 1 && splitserialin.length > splitTitle.length)
-                            length += (splitserialin.length - length);
-                        if (splitserialout != undefined && splitserialin.length > 1 && splitserialin.length < splitserialout.length)
-                            length += (splitserialout.length - splitserialin.length);
+                    length = Math.max(splitTitle.length, splitserialin.length, splitserialout.length, splitItemname.length, splitserialno.length)
+                    yMaterialFieldValue = yMaterialFieldValue + 8 * length;
+                    //if ((splitTitle != undefined && splitTitle.length > 1) || (splitserialin != undefined && splitserialin.length > 1) || (splitserialout != undefined && splitserialout.length > 1) || (splitItemname != undefined && splitItemname.length > 1)) {
+                    //    length = 0;
+                    //    if (splitTitle != undefined && splitTitle.length > 1)
+                    //        length += splitTitle.length;
+                    //    if (splitserialin != undefined && splitserialin.length > 1 && splitserialin.length > splitTitle.length)
+                    //        length += (splitserialin.length - length);
+                    //    if (splitserialout != undefined && splitserialin.length > 1 && splitserialin.length < splitserialout.length)
+                    //        length += (splitserialout.length - splitserialin.length);
 
-                        yMaterialFieldValue = yMaterialFieldValue + 8 * length;
-                        //yNotesField1 = yNotesField1_val;
-                    }
+                    //    yMaterialFieldValue = yMaterialFieldValue + 8 * length;
+                    //    //yNotesField1 = yNotesField1_val;
+                    //}
 
                     // doc1.text(460, yMaterialFieldName, 'Comments')
                     // doc1.text(460, yMaterialFieldValue, $scope.summary.materialArray[l-1].Charge_Type)
