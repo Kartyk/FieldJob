@@ -872,6 +872,7 @@
                 $scope.isEditMaterial = "1";
 
                 $scope.materialArray[0] = Object.create(item);
+                $scope.materialArray[0].Serial_Type = $scope.materialArray[0].Serial_Type.slice();
 
                 angular.forEach($scope.materialArraySummary, function (response) {
 
@@ -3471,7 +3472,7 @@
                         var splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.notesArray[i - 1].Notes), rectNotesWidth - 420);
                         
                         //doc1.text(xNotesField2, yNotesField1_val, splitTitle)
-                        var lineheight = 15,lineno=1;
+                        var lineheight = 15,lineno=0;
                         if (splitTitle.length > 1) {
                             for (var l = 0; l < splitTitle.length; l++) {
                                 if (yNotesField1_val + (lineno * lineheight) > canvas.height) {
@@ -3508,7 +3509,7 @@
                         rectAttachHeight = 135, xAttachField1 = 30;
                    
 
-                    if (rectAttachHeight + yAttachField + 10 > canvas.height) {
+                    if (yAttachField > canvas.height) {
                         if (isPageAdded) {
                             doc1.addPage();
                         }
@@ -3525,10 +3526,7 @@
                     ctx.fillText('附件', 20, yAttachField);
 
                     ctx.fillStyle = "#000";
-                    ctx.strokeRect(20, yAttachField + 10, 1090, rectAttachHeight);
-
-                    
-                    if (rectAttachHeight + yAttachField+10 > canvas.height) {
+                    if (rectAttachHeight + yAttachField + 10 > canvas.height) {
                         if (isPageAdded) {
                             doc1.addPage();
                         }
@@ -3536,10 +3534,15 @@
                         var imgData = canvas.toDataURL("image/png", 1.0);
                         doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST');
                         ctx.clearRect(0, 0, canvas.width, canvas.height);
-                        yAttachField = -20;
+                        yAttachField = 0;
                         isPageAdded = true;
                         ctx.strokeRect(20, yAttachField + 10, 1090, rectAttachHeight);
                     }
+                    else
+                    ctx.strokeRect(20, yAttachField + 10, 1090, rectAttachHeight);
+
+                    
+                    
                     var index = 0;
                     angular.forEach($scope.files, function (file, value) {
 
