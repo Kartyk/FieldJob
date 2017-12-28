@@ -973,13 +973,15 @@
                     angular.forEach($scope.timeArraySummary, function (tempObject) {
 
                         if (item.Time_Id == tempObject.Time_Id) {
-                            tempObject = newTimeObject;
+                           // tempObject = newTimeObject;// JSON.parse(JSON.stringify(newTimeObject))
+                            $scope.timeArraySummary[$scope.timeArraySummary.indexOf(tempObject)] = newTimeObject;
+                           // tempObject = newTimeObject;
                         }
 
-                        $scope.tempArray.push(tempObject);
+                       // $scope.tempArray.push(tempObject);
                     });
 
-                    $scope.timeArraySummary = $scope.tempArray;
+                  //  $scope.timeArraySummary = $scope.tempArray;
 
                     $scope.isEditTime = "0";
 
@@ -1015,18 +1017,19 @@
                         Task_Number: $scope.taskId
                     };
 
-                    $scope.tempArray = [];
+                    //$scope.tempArray = [];
 
                     angular.forEach($scope.expenseArraySummary, function (tempObject) {
 
                         if (item.Expense_Id == tempObject.Expense_Id) {
-                            tempObject = newObject;
+                            //tempObject = newObject;
+                            $scope.expenseArraySummary[$scope.expenseArraySummary.indexOf(tempObject)] = newObject;
                         }
 
-                        $scope.tempArray.push(tempObject);
+                       // $scope.tempArray.push(tempObject);
                     });
 
-                    $scope.expenseArraySummary = $scope.tempArray;
+                   // $scope.expenseArraySummary = $scope.tempArray;
 
                     $scope.isEditExpense = "0";
 
@@ -1061,18 +1064,19 @@
                         ItemName: item.ItemName
                     };
 
-                    $scope.tempArray = [];
+                    //$scope.tempArray = [];
 
                     angular.forEach($scope.materialArraySummary, function (tempObject) {
 
                         if (item.Material_Id == tempObject.Material_Id) {
-                            tempObject = newObject;
+                           // tempObject = newObject;
+                            $scope.materialArraySummary[$scope.materialArraySummary.indexOf(tempObject)] = newObject;
                         }
 
-                        $scope.tempArray.push(tempObject);
+                       // $scope.tempArray.push(tempObject);
                     });
 
-                    $scope.materialArraySummary = $scope.tempArray;
+                   // $scope.materialArraySummary = $scope.tempArray;
 
                     $scope.isEditMaterial = "0";
 
@@ -1101,18 +1105,19 @@
                         Task_Number: $scope.taskId
                     };
 
-                    $scope.tempArray = [];
+                   // $scope.tempArray = [];
 
                     angular.forEach($scope.notesArraySummary, function (tempObject) {
 
                         if (item.Notes_Id == tempObject.Notes_Id) {
-                            tempObject = newObject;
+                           // tempObject = newObject;
+                            $scope.notesArraySummary[$scope.notesArraySummary.indexOf(tempObject)] = newObject;
                         }
 
-                        $scope.tempArray.push(tempObject);
+                       // $scope.tempArray.push(tempObject);
                     });
 
-                    $scope.notesArraySummary = $scope.tempArray;
+                  //  $scope.notesArraySummary = $scope.tempArray;
 
                     $scope.isEditNote = "0";
 
