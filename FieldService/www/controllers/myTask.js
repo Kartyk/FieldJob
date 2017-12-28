@@ -303,7 +303,8 @@ app.controller('myTaskController', function ($translate, $scope, $compile, $time
                         Zip_Code: item.Zip_Code,
                         Activity_Id: item.Activity_Id,
                         SR_ID: item.SR_ID,
-                        Country:item.Country
+                        Country: item.Country,
+                        Project_Number: item.Project_Number
                     });
 
                 } else {
