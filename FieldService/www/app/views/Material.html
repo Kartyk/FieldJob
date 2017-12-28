@@ -115,7 +115,7 @@
                                            translate="item name"></label><span style="color:red">*</span>
                                     <input type="text" ng-required="true" name="itemname" class=" inputFieldsMaterial"
                                            ng-model="item.ItemName" max-input style="margin-bottom:0px"
-                                           input-max-length='20'/>
+                                           input-max-length='30'/>
                                     <!--<div style="color:red;text-transform:none"
                                          ng-show="materialForm.itemname.$error.required">
                                         Please enter item name
@@ -129,8 +129,8 @@
                                 <div class="form-group noMarginPadding">
                                     <label class="control-label  marginbottom12 material-label"
                                            translate="{{item.materialDefault.description.title}}"></label>
-                                    <input type="text" name="description" class="inputFieldsMaterial" max-input
-                                           input-max-length='255' ng-change="item.Description=checkMaxChar(item.Description,255)"  ng-model="item.Description"/>
+                                    <input type="text" name="description" max-input class="inputFieldsMaterial" 
+                                           input-max-length='50' ng-change="item.Description=checkMaxChar(item.Description,50)"  ng-model="item.Description"/>
 
                                     <!-- <div>{{item.Description}}</div> -->
                                 </div>

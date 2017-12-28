@@ -1248,11 +1248,15 @@
 
                                                         var attachmentObject = {};
 
+                                                        var fileName = attachment.File_Name.split(".")[0];
+                                                        var attachFileName = fileName.trim(0, 34);
+                                                 
+
                                                         attachmentObject.taskId = attachment.Task_Number;
                                                         attachmentObject.contentType = attachment.File_Type;
-                                                        attachmentObject.FileName = attachment.File_Name.split(".")[0];
+                                                        attachmentObject.FileName = attachFileName + '.' + attachment.File_Name.split(".")[1];
                                                         attachmentObject.Description = attachment.File_Name.split(".")[0];
-                                                        attachmentObject.Name = attachment.File_Name.split(".")[0];
+                                                        attachmentObject.Name = attachFileName + '.' + attachment.File_Name.split(".")[1];
 
                                                         console.log("START " + new Date());
 

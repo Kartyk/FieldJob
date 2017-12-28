@@ -47,23 +47,23 @@
         <div class="margintop30" ng-show="engineerObject.followUp">
                 <label class="engSign-label" translate="Additional Information on Follow-Up"></label>
                 <textarea class="engSign-textarea" id="followUpInfo"
-                          ng-model="engineerObject.Follow_Up"
-                          name="followUpInfo"></textarea></div>
+                          ng-model="engineerObject.Follow_Up" max-input
+                          name="followUpInfo" input-max-length='4000'></textarea></div>
             <div class="margintop30" ng-show="engineerObject.salesQuote">
                 <label class="engSign-label" translate="Additional Information on Spare Quote"></label>
                 <textarea class="engSign-textarea" id="spareQuoteInfo"
-                          ng-model="engineerObject.Spare_Quote"
-                          name="spareQuoteInfo"></textarea></div>
+                          ng-model="engineerObject.Spare_Quote" max-input
+                          name="spareQuoteInfo" input-max-length='4000'></textarea></div>
             <div class="margintop30" ng-show="engineerObject.salesVisit">
                 <label class="engSign-label" translate="Additional Information on Sales Visit"></label>
                 <textarea class="engSign-textarea" id="salesVisitInfo"
-                          ng-model="engineerObject.Sales_Visit"
-                          name="salesVisitInfo"></textarea></div>
+                          ng-model="engineerObject.Sales_Visit" max-input
+                          name="salesVisitInfo" input-max-length='4000'></textarea></div>
             <div class="margintop30" ng-show="engineerObject.salesLead">
                 <label class="engSign-label" translate="Additional Information on Sales Lead"></label>
                 <textarea class="engSign-textarea" id="salesLeadInfo"
-                          ng-model="engineerObject.Sales_Head"
-                          name="salesLeadInfo"></textarea></div>
+                          ng-model="engineerObject.Sales_Head" max-input
+                          name="salesLeadInfo" input-max-length='4000'></textarea></div>
     
     </div>
 

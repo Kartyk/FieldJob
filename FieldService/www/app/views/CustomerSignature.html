@@ -111,8 +111,8 @@
             
            
                 
-                <textarea ng-if="engineerObject.isCustomerSignChecked" class="form-control text-area margintop25" rows="5" id="customerSign"
-                          ng-model="engineerObject.customerComments"></textarea>
+                <textarea ng-if="engineerObject.isCustomerSignChecked" class="form-control text-area margintop25" rows="5" id="customerSign" max-input
+                          ng-model="engineerObject.customerComments" input-max-length='4000'></textarea>
             
             
 
