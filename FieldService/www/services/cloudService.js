@@ -19,6 +19,7 @@
         service.getTaskInternalList = getTaskInternalList;
         service.getTaskDetails = getTaskDetails;
         service.getLOVDetails = getLOVDetails;
+        service.getProjectDetails = getProjectDetails;
 
         service.getSRNotesList = getSRNotesList;
         service.getSRAttachmentList = getSRAttachmentList;
@@ -79,7 +80,7 @@
 
         function login(formData, callback) {
 
-            console.log('Login Data', JSON.stringify(formData));
+            console.log('REQUEST LOGIN ', JSON.stringify(formData));
 
             return $http({
 
@@ -89,15 +90,15 @@
 
             }).success(function (response) {
 
-                console.log('Login Response', JSON.stringify(response));
+                console.log('RESPONSE LOGIN ', JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                console.log('Login Error', JSON.stringify(error));
-
                 callback(error);
+
+                console.log('ERROR LOGIN ', JSON.stringify(error));
             });
         };
 
@@ -110,23 +111,23 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getFieldBackId()
+                    "oracle-mobile-backend-id": constantService.getTechBackId()
                 }
 
             }).success(function (response) {
 
-                console.log('Technician Response', JSON.stringify(response));
+                console.log('RESPONSE TECHNICIAN ', JSON.stringify(response));
 
                 callback(response.technicianProfile);
 
             }).error(function (error) {
 
-                console.log('Technician Error', JSON.stringify(error));
-
                 callback(error);
+
+                console.log('ERROR TECHNICIAN ', JSON.stringify(error));
+
             });
         };
-
 
         function getTaskInternalList(isLogin, callback) {
 
@@ -153,9 +154,9 @@
                 };
             }
 
-            console.log("TASK INTERNAL LIST REQUEST DATA ======> " + JSON.stringify(data));
+            console.log("REQUEST TASK " + JSON.stringify(data));
 
-            console.log("TASK INTERNAL LIST RESPONSE START ======> " + new Date());
+            console.log("START TASK " + new Date());
 
             $http({
 
@@ -170,9 +171,9 @@
 
             }).success(function (response) {
 
-                console.log("TASK INTERNAL LIST RESPONSE END ======> " + new Date());
+                console.log("END TASK " + new Date());
 
-                console.log("Task Internal List Response " + JSON.stringify(response));
+                console.log("RESPONSE TASK " + JSON.stringify(response));
 
                 var taskList = [];
 
@@ -241,13 +242,11 @@
                                         taskInternalList.push(internalOFSCJSONObject);
                                     });
 
-                                    console.log("TASK INTERNAL LIST INSERT SUCCESS");
-
                                     constantService.setTaskList(taskInternalList);
 
                                     callback(taskInternalList);
 
-                                    console.log("TASK INTERNAL LIST INSERT END ======> " + new Date());
+                                    console.log("END TASK INTERNAL " + new Date());
                                 });
                             });
                         });
@@ -256,11 +255,69 @@
 
             }).error(function (error) {
 
-                console.log("END ======> " + new Date());
-
-                console.log("Task Internal List Error " + JSON.stringify(error));
+                console.log("END TASK ERROR " + new Date());
 
                 callback(error);
+
+                console.log("ERROR TASK " + JSON.stringify(error));
+            });
+        };
+
+        function getInternalList(callback) {
+
+            var internalList = [];
+
+            var startDate = new Date();
+
+            startDate.setDate(startDate.getDate() + 15);
+
+            var startDateISOFormat = moment(startDate).format('YYYY-MM-DD');
+
+            var endDate = new Date();
+
+            endDate.setDate(endDate.getDate() + 45);
+
+            var endDateISOFormat = moment(endDate).format('YYYY-MM-DD');
+
+            console.log("START INTERNAL " + new Date());
+
+            $http({
+
+                method: 'POST',
+                url: url + 'Internal_OFSC/get_ids',
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getInternalBackId()
+                },
+                data: {
+                    "resourceId": constantService.getResourceId(),
+                    "fromDate": startDateISOFormat,
+                    "toDate": endDateISOFormat
+                }
+
+            }).success(function (response) {
+
+                console.log("END INTERNAL " + new Date());
+
+                console.log("RESPONSE INTERNAL " + JSON.stringify(response));
+
+                if (response && response.activities) {
+
+                    callback(response.activities);
+
+                } else {
+
+                    callback(internalList);
+                }
+
+            }).error(function (error) {
+
+                console.log("END INTERNAL ERROR " + new Date());
+
+                callback(internalList);
+
+                console.log("ERROR INTERNAL " + JSON.stringify(error));
             });
         };
 
@@ -289,9 +346,9 @@
                 };
             }
 
-            console.log("TASK DETAILS REQUEST DATA ======> " + JSON.stringify(data));
+            console.log("REQUEST TASK DETAIL " + JSON.stringify(data));
 
-            console.log("TASK DETAILS RESPONSE START ======> " + new Date());
+            console.log("START TASK DETAIL " + new Date());
 
             $http({
 
@@ -306,9 +363,9 @@
 
             }).success(function (response) {
 
-                console.log("TASK DETAILS RESPONSE END ======> " + new Date());
-                var temp = JSON.stringify(response);
-                console.log("Task Details Response " + JSON.stringify(response));
+                console.log("END TASK DETAIL " + new Date());
+
+                console.log("RESPONSE TASK DETAIL " + JSON.stringify(response));
 
                 var promises = [];
 
@@ -356,6 +413,101 @@
                         promises.push(deferNotes.promise);
                     }
 
+                    if (item.FileID && item.FileID.length > 0) {
+
+                        var attachmentArray = [];
+
+                        var filePath = cordova.file.dataDirectory;
+
+                        angular.forEach(item.FileID, function (item) {
+
+                            var attachmentObject = {
+                                Attachment_Id: item.Attachments_Id,
+                                File_Path: filePath,
+                                File_Name: item.User_File_Name,
+                                File_Type: item.Content_type,
+                                Type: "O",
+                                AttachmentType: "O",
+                                Created_Date: item.Date_Created,
+                                Task_Number: item.Task_Number,
+                                SRID: ""
+                            };
+
+                            attachmentArray.push(attachmentObject);
+                        });
+
+                        var deferAttachment = $q.defer();
+
+                        localService.insertAttachmentList(attachmentArray, function (result) {
+
+                            deferAttachment.resolve("success");
+
+                            console.log("ATTACHMENTS");
+                        });
+
+                        promises.push(deferAttachment.promise);
+                    }
+                });
+
+                console.log("LENGTH TASK DETAIL " + promises.length);
+
+                $q.all(promises).then(
+                    function (response) {
+
+                        console.log("SUCCESS PROMISE TASK DETAIL");
+
+                        callback("success");
+
+                        console.log("END TASK DETAIL INSERT " + new Date());
+                    },
+
+                    function (error) {
+
+                        console.log("FAILURE PROMISE TASK DETAIL");
+
+                        callback("failure");
+
+                        console.log("END TASK DETAIL INSERT " + new Date());
+                    }
+                );
+
+            }).error(function (error) {
+
+                console.log("END TASK DETAIL ERROR " + new Date());
+
+                callback(error);
+
+                console.log("ERROR TASK DETAIL " + JSON.stringify(error));
+            });
+        };
+
+        function getProjectDetails(projectArray, callback) {
+
+            console.log("START PROJECT " + new Date());
+
+            console.log("REQUEST PROJECT " + JSON.stringify({ "projectNumber": projectArray }));
+
+            $http({
+
+                method: 'POST',
+                url: url + 'getProjectDetails/Project_Number',
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getProjectBackId()
+                },
+                data: { "projectNumber": projectArray }
+
+            }).success(function (response) {
+
+                console.log("END PROJECT " + new Date());
+
+                console.log("RESPONSE PROJECT " + JSON.stringify(response));
+
+                var promises = [];
+
+                angular.forEach(response.ProjectDetails, function (item) {
+
                     if (item.OverTImeShiftCode && item.OverTImeShiftCode.length > 0) {
 
                         var deferOverTime = $q.defer();
@@ -397,73 +549,39 @@
 
                         promises.push(deferFieldJob.promise);
                     }
-
-                    if (item.FileID && item.FileID.length > 0) {
-
-                        var attachmentArray = [];
-
-                        var filePath = cordova.file.dataDirectory;
-
-                        angular.forEach(item.FileID, function (item) {
-
-                            var attachmentObject = {
-                                Attachment_Id: item.Attachments_Id,
-                                File_Path: filePath,
-                                File_Name: item.User_File_Name,
-                                File_Type: item.Content_type,
-                                Type: "O",
-                                AttachmentType: "O",
-                                Created_Date: item.Date_Created,
-                                Task_Number: item.Task_Number,
-                                SRID: ""
-                            };
-
-                            attachmentArray.push(attachmentObject);
-                        });
-
-                        var deferAttachment = $q.defer();
-
-                        localService.insertAttachmentList(attachmentArray, function (result) {
-
-                            deferAttachment.resolve("success");
-
-                            console.log("ATTACHMENTS");
-                        });
-
-                        promises.push(deferAttachment.promise);
-                    }
                 });
 
-                console.log("LENGTH TASK DETAILS " + promises.length);
+                console.log("LENGTH PROJECT DETAIL " + promises.length);
 
                 $q.all(promises).then(
                     function (response) {
 
-                        console.log("TASK DETAILS INSERT SUCCESS");
+                        console.log("SUCCESS PROMISE PROJECT DETAIL");
 
                         callback("success");
 
-                        console.log("TASK DETAILS INSERT END ======> " + new Date());
+                        console.log("END PROJECT DETAIL INSERT " + new Date());
                     },
 
                     function (error) {
 
-                        console.log("TASK DETAILS INSERT FAILURE");
+                        console.log("FAILURE PROMISE PROJECT DETAIL");
 
                         callback("failure");
 
-                        console.log("TASK DETAILS INSERT END ======> " + new Date());
+                        console.log("END PROJECT DETAIL INSERT " + new Date());
                     }
                 );
 
             }).error(function (error) {
 
-                console.log("END ======> " + new Date());
+                console.log("END PROJECT ERROR " + new Date());
 
-                console.log("Task Details Error " + JSON.stringify(error));
+                callback("error");
 
-                callback(error);
+                console.log("ERROR PROJECT " + JSON.stringify(error));
             });
+
         };
 
         function getLOVDetails(isLogin, callback) {
@@ -491,9 +609,9 @@
                 };
             }
 
-            console.log("LOV REQUEST DATA ======> " + JSON.stringify(data));
+            console.log("REQUEST LOV " + JSON.stringify(data));
 
-            console.log("LOV RESPONSE START ======> " + new Date());
+            console.log("START LOV " + new Date());
 
             $http({
 
@@ -507,9 +625,9 @@
 
             }).success(function (response) {
 
-                console.log("LOV RESPONSE END ======> " + new Date());
+                console.log("END LOV " + new Date());
 
-                console.log("LOV Response " + JSON.stringify(response));
+                console.log("RESPONSE LOV " + JSON.stringify(response));
 
                 var promises = [];
 
@@ -633,37 +751,38 @@
                 $q.all(promises).then(
                     function (response) {
 
-                        console.log("LOV INSERT SUCCESS");
+                        console.log("SUCCESS PROMISE LOV");
 
                         callback("success");
 
-                        console.log("LOV INSERT END ======> " + new Date());
+                        console.log("END LOV INSERT " + new Date());
                     },
 
                     function (error) {
 
-                        console.log("LOV INSERT FAILURE");
+                        console.log("FAILURE PROMISE LOV");
 
                         callback("failure");
 
-                        console.log("LOV INSERT END ======> " + new Date());
+                        console.log("END LOV INSERT " + new Date());
                     }
                 );
 
             }).error(function (error) {
 
-                console.log("END ======> " + new Date());
-
-                console.log("LOV Error " + JSON.stringify(error));
+                console.log("END LOV ERROR " + new Date());
 
                 callback(error);
+
+                console.log("ERROR LOV " + JSON.stringify(error));
             });
         };
 
-
         function getSRNotesList(srNumberArray, callback) {
 
-            console.log("SR NUMBER " + JSON.stringify({ "SRNum": srNumberArray }));
+            console.log("REQUEST SR NOTES " + JSON.stringify({ "SRNum": srNumberArray }));
+
+            console.log("START SR NOTES " + new Date());
 
             $http({
 
@@ -678,9 +797,9 @@
 
             }).success(function (response) {
 
-                console.log("SR Notes Response " + JSON.stringify(response));
+                console.log("END SR NOTES " + new Date());
 
-                $rootScope.apicall = true;
+                console.log("RESPONSE SR NOTES " + JSON.stringify(response));
 
                 var noteArray = [];
 
@@ -699,15 +818,19 @@
 
             }).error(function (error) {
 
-                console.log("SR Notes Error " + JSON.stringify(error));
+                console.log("END SR NOTES ERROR " + new Date());
 
                 callback("error");
+
+                console.log("ERROR SR NOTES " + JSON.stringify(error));
             });
         };
 
         function getSRAttachmentList(srNumberArray, callback) {
 
-            console.log("SR NUMBER " + JSON.stringify({ "SRID": srNumberArray }));
+            console.log("REQUEST SR ATTACHMENT " + JSON.stringify({ "SRID": srNumberArray }));
+
+            console.log("START SR ATTACHMENT " + new Date());
 
             $http({
 
@@ -722,7 +845,9 @@
 
             }).success(function (response) {
 
-                console.log("SR Attachment Response " + JSON.stringify(response));
+                console.log("END SR ATTACHMENT " + new Date());
+
+                console.log("RESPONSE SR ATTACHMENT " + JSON.stringify(response));
 
                 $rootScope.apicall = true;
 
@@ -757,11 +882,197 @@
 
             }).error(function (error) {
 
-                console.log("SR Attachment Error " + JSON.stringify(error));
+                console.log("END SR ATTACHMENT ERROR " + new Date());
 
                 callback("error");
+
+                console.log("ERROR SR ATTACHMENT " + JSON.stringify(error));
             });
         };
+
+        function createAttachment(attachment, callback) {
+
+            console.log("START CREATE ATTACHMENT " + new Date());
+
+            $http({
+
+                method: 'POST',
+                url: url + 'Create_Attachment/attachment_create',
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getCreateBackId()
+                },
+                data: attachment
+
+            }).success(function (response) {
+
+                console.log("END CREATE ATTACHMENT " + new Date());
+
+                console.log("RESPONSE CREATE ATTACHMENT " + JSON.stringify(response));
+
+                callback(response);
+
+            }).error(function (error) {
+
+                console.log("END CREATE ATTACHMENT ERROR " + new Date());
+
+                callback(error);
+
+                console.log("CREATE ATTACHMENT ERROR " + JSON.stringify(error));
+            });
+        };
+
+        function downloadAttachment(attachmentObject, callback) {
+
+            var data = {};
+
+            if (attachmentObject.Task_Number != undefined && attachmentObject.Task_Number != null && attachmentObject.Task_Number != "") {
+
+                data = {
+                    "path": "/tasks",
+                    "TaskID": attachmentObject.Task_Number,
+                    "IncidentID": "",
+                    "FileAttachmentID": attachmentObject.Attachment_Id
+                };
+
+            } else if (attachmentObject.SRID != undefined && attachmentObject.SRID != null && attachmentObject.SRID != "") {
+
+                data = {
+                    "path": "/incidents",
+                    "TaskID": "",
+                    "IncidentID": attachmentObject.SRID,
+                    "FileAttachmentID": attachmentObject.Attachment_Id
+                };
+            }
+
+            console.log("START DOWNLOAD ATTACHMENT " + new Date());
+
+            console.log("REQUEST DOWNLOAD ATTACHMENT " + JSON.stringify(data));
+
+            $http({
+
+                method: 'POST',
+                url: url + 'download_Attachment/download_attachments',
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getSRBackId()
+                },
+                data: data
+
+            }).success(function (response) {
+
+                console.log("END DOWNLOAD ATTACHMENT " + new Date());
+
+                // console.log("RESPONSE DOWNLOAD ATTACHMENT " + JSON.stringify(response));
+
+                callback(response);
+
+            }).error(function (error) {
+
+                console.log("END DOWNLOAD ATTACHMENT ERROR " + new Date());
+
+                callback(error);
+
+                if (error != undefined) {
+
+                    console.log("ERROR DOWNLOAD ATTACHMENT " + JSON.stringify(error));
+                }
+            });
+        };
+
+        function updateDebrief(formData, callback) {
+
+            console.log("START DEBRIEF " + new Date());
+
+            console.log("REQUEST DEBRIEF " + JSON.stringify(formData));
+
+            $http({
+
+                method: 'POST',
+                url: url + 'combine_update/combine_update',
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getCombinedBackId()
+                },
+                data: formData
+
+            }).success(function (response) {
+
+                console.log("END DEBRIEF " + new Date());
+
+                console.log("RESPONSE DEBRIEF " + JSON.stringify(response));
+
+                callback(response);
+
+            }).error(function (error) {
+
+                console.log("END DEBRIEF ERROR " + new Date());
+
+                callback(error);
+
+                console.log("ERROR DEBRIEF " + JSON.stringify(error));
+            });
+        };
+
+        function updateOFSCStatus(formData, callback) {
+
+            var data = {
+                "masteractivityId": formData.Activity_Id + "",
+                "XA_TASK_STATUS": formData.XA_TASK_STATUS,
+                "resourceId": constantService.getResourceId() + "",
+                "OFSCdate": moment.utc(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+                "TaskId": formData.TaskId + "",
+                "email": formData.email != undefined ? formData.email : "",
+                "CompletedDateOSC": formData.completeDate != undefined ? formData.completeDate : "",
+                "followUp": formData.followUp != undefined ? formData.followUp : "",
+                "salesQuote": formData.salesQuote != undefined ? formData.salesQuote : "",
+                "salesVisit": formData.salesVisit != undefined ? formData.salesVisit : "",
+                "salesLead": formData.salesLead != undefined ? formData.salesLead : "",
+                "followuptext": formData.followuptext != undefined ? formData.followuptext : "",
+                "sparequotetext": formData.sparequotetext != undefined ? formData.sparequotetext : "",
+                "salesText": formData.salesText != undefined ? formData.salesText : "",
+                "salesleadText": formData.salesleadText != undefined ? formData.salesleadText : "",
+                "denySignature": formData.denySignature != undefined ? formData.denySignature : "",
+                "signatureComments": formData.signatureComments != undefined ? formData.signatureComments : ""
+            };
+
+            console.log("START OFSC " + new Date());
+
+            console.log("REQUEST OFSC " + JSON.stringify(data));
+
+            $http({
+
+                method: 'POST',
+                url: url + 'OFSC_Workflow/test_ofsc',
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getCombinedBackId()
+                },
+                data: data
+
+            }).success(function (response) {
+
+                console.log("END OFSC " + new Date());
+
+                console.log("RESPONSE OFSC " + JSON.stringify(response));
+
+                callback(response);
+
+            }).error(function (error) {
+
+                console.log("END OFSC ERROR " + new Date());
+
+                callback(error);
+
+                console.log("ERROR OFSC " + JSON.stringify(error));
+            });
+        };
+
+
 
         function updateAcceptTask(formData, callback) {
 
@@ -812,164 +1123,6 @@
             }).error(function (error) {
 
                 console.log("Start Task Error " + JSON.stringify(error));
-
-                callback(error);
-            });
-        };
-
-        function createAttachment(attachment, callback) {
-
-            $http({
-
-                method: 'POST',
-                url: url + 'Create_Attachment/attachment_create',
-                headers: {
-                    "Content-Type": constantService.getContentType(),
-                    "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getChargeBackId()
-                },
-                data: attachment
-
-            }).success(function (response) {
-
-                console.log("Create Attachment Response " + JSON.stringify(response));
-
-                callback(response);
-
-            }).error(function (error) {
-
-                console.log("Create Attachment Error " + JSON.stringify(error));
-
-                callback(error);
-            });
-        };
-
-        function downloadAttachment(attachmentObject, callback) {
-
-            var data = {};
-
-            if (attachmentObject.Task_Number != undefined && attachmentObject.Task_Number != null && attachmentObject.Task_Number != "") {
-
-                data = {
-                    "path": "/tasks",
-                    "TaskID": attachmentObject.Task_Number,
-                    "IncidentID": "",
-                    "FileAttachmentID": attachmentObject.Attachment_Id
-                };
-
-            } else if (attachmentObject.SRID != undefined && attachmentObject.SRID != null && attachmentObject.SRID != "") {
-
-                data = {
-                    "path": "/incidents",
-                    "TaskID": "",
-                    "IncidentID": attachmentObject.SRID,
-                    "FileAttachmentID": attachmentObject.Attachment_Id
-                };
-            }
-
-            console.log("DATA " + JSON.stringify(data));
-
-            $http({
-
-                method: 'POST',
-                url: url + 'download_Attachment/download_attachments',
-                headers: {
-                    "Content-Type": constantService.getContentType(),
-                    "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getSRBackId()
-                },
-                data: data
-
-            }).success(function (response) {
-
-                // console.log("DownloadAttachment Response " + JSON.stringify(response));
-
-                callback(response);
-
-            }).error(function (error) {
-
-                if (error != undefined) {
-
-                    console.log("DownloadAttachment Error " + JSON.stringify(error));
-                }
-
-                callback(error);
-            });
-        };
-
-        function updateDebrief(formData, callback) {
-
-            console.log("Debrief Update Request " + JSON.stringify(formData));
-
-            $http({
-
-                method: 'POST',
-                url: url + 'combine_update/combine_update',
-                headers: {
-                    "Content-Type": constantService.getContentType(),
-                    "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getCombinedBackId()
-                },
-                data: formData
-
-            }).success(function (response) {
-
-                console.log("Debrief Update Response " + JSON.stringify(response));
-
-                callback(response);
-
-            }).error(function (error) {
-
-                console.log("Debrief Update Error " + JSON.stringify(error));
-
-                callback(error);
-            });
-        };
-
-        function updateOFSCStatus(formData, callback) {
-
-            var data = {
-                "masteractivityId": formData.Activity_Id + "",
-                "XA_TASK_STATUS": formData.XA_TASK_STATUS,
-                "resourceId": constantService.getResourceId() + "",
-                "OFSCdate": moment.utc(new Date()).format("YYYY-MM-DD HH:mm:ss"),
-                "TaskId": formData.TaskId + "",
-                "email": formData.email != undefined ? formData.email : "",
-                "CompletedDateOSC": formData.completeDate != undefined ? formData.completeDate : "",
-                "followUp": formData.followUp != undefined ? formData.followUp : "",
-                "salesQuote": formData.salesQuote != undefined ? formData.salesQuote : "",
-                "salesVisit": formData.salesVisit != undefined ? formData.salesVisit : "",
-                "salesLead": formData.salesLead != undefined ? formData.salesLead : "",
-                "followuptext": formData.followuptext != undefined ? formData.followuptext : "",
-                "sparequotetext": formData.sparequotetext != undefined ? formData.sparequotetext : "",
-                "salesText": formData.salesText != undefined ? formData.salesText : "",
-                "salesleadText": formData.salesleadText != undefined ? formData.salesleadText : "",
-                "denySignature": formData.denySignature != undefined ? formData.denySignature : "",
-                "signatureComments": formData.signatureComments != undefined ? formData.signatureComments : ""
-            };
-
-            console.log("OFSC Update Request " + JSON.stringify(data));
-
-            $http({
-
-                method: 'POST',
-                url: url + 'OFSC_Workflow/test_ofsc',
-                headers: {
-                    "Content-Type": constantService.getContentType(),
-                    "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getCombinedBackId()
-                },
-                data: data
-
-            }).success(function (response) {
-
-                console.log("OFSC Update Response " + JSON.stringify(response));
-
-                callback(response);
-
-            }).error(function (error) {
-
-                console.log("OFSC Update Error " + JSON.stringify(error));
 
                 callback(error);
             });
@@ -1046,71 +1199,6 @@
                 callback(error);
             });
         };
-
-        function getInternalList(callback) {
-
-            var internalList = [];
-
-            var startDate = new Date();
-
-            startDate.setDate(startDate.getDate() + 15);
-
-            var startDateISOFormat = moment(startDate).format('YYYY-MM-DD');
-
-            var endDate = new Date();
-
-            endDate.setDate(endDate.getDate() + 45);
-
-            var endDateISOFormat = moment(endDate).format('YYYY-MM-DD');
-
-            $http({
-
-                method: 'POST',
-                url: url + 'Internal_OFSC/get_ids',
-                headers: {
-                    "Content-Type": constantService.getContentType(),
-                    "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getNewOfscBackId()
-                },
-                data: {
-                    "resourceId": constantService.getResourceId(),
-                    "fromDate": startDateISOFormat,
-                    "toDate": endDateISOFormat
-                }
-
-            }).success(function (response) {
-
-                console.log("Internal Response " + JSON.stringify(response.activities));
-
-                if (response && response.activities) {
-
-                    callback(response.activities);
-
-                } else {
-
-                    callback(internalList);
-                }
-
-                // localService.insertInternalList(response.activities, function (result) {
-                //
-                //     console.log("INTERNAL");
-                //
-                //     localService.getInternalList(function (res) {
-                //
-                //         callback(res);
-                //     });
-                // });
-
-            }).error(function (error) {
-
-                console.log("Internal Error " + JSON.stringify(error));
-
-                var response = [];
-
-                callback(response);
-            });
-        };
-
 
         function getInstallBaseList(callback) {
 
@@ -1355,7 +1443,6 @@
                 callback("error");
             });
         };
-
 
         function getChargeMethod(callback) {
 
@@ -1693,7 +1780,6 @@
                 callback(error);
             });
         };
-
 
         function getTaskListCloud(formData, callback) {
 

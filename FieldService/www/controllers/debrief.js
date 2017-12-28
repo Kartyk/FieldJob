@@ -827,6 +827,18 @@
         $scope.notesArray.push(noteObject);
     }
 
+    $scope.checkMaxChar = function (text, limit) {
+
+        if (text != null && text.length > limit) {
+
+            text = text.slice(0, limit);
+
+            console.log(text);
+        }
+
+        return text;
+    };
+
     $scope.editObject = function (item, stage, index) {
 
         switch (stage) {
@@ -906,14 +918,8 @@
                 break;
         }
     };
-    $scope.checkMaxChar = function (text, limit) {
-        if (text != null && text.length > limit) {
-            text = text.slice(0, limit);
-            console.log(text);
 
-        }
-        return text;
-    }
+   
     $scope.saveObject = function (stage, isButtonClick, item) {
 
         switch (stage) {
@@ -1023,7 +1029,9 @@
                     $scope.expenseArraySummary = $scope.tempArray;
 
                     $scope.isEditExpense = "0";
+
                     $(".expenses-textarea-NC").height(20);
+
                     setDefaultExpenseObject();
                 }
 
@@ -1107,7 +1115,9 @@
                     $scope.notesArraySummary = $scope.tempArray;
 
                     $scope.isEditNote = "0";
+
                     $(".note-textarea-NC").height(20);
+
                     setDefaultNoteObject();
                 }
 
@@ -1223,7 +1233,9 @@
                     $scope.expenseArraySummary.reverse();
 
                     $scope.isEditExpense = "0";
+
                     $(".expenses-textarea-NC").height(20);
+
                     setDefaultExpenseObject();
                 }
 
@@ -1367,6 +1379,7 @@
                     $scope.timeArraySummary.push(newObject);
 
                     $scope.timeArraySummary.reverse();
+
                     $scope.isEditTime = "0";
                 }
 
@@ -1404,7 +1417,9 @@
                     $scope.expenseArraySummary.push(newObject);
 
                     $scope.expenseArraySummary.reverse();
+
                     $scope.isEditExpense = "0";
+
                     $(".expenses-textarea-NC").height(20);
                 }
 
@@ -1418,7 +1433,9 @@
             case "Material":
 
                 if (item != null && item != undefined) {
+
                     var serialtyype = item.Serial_Type.slice();// Array.from(item.Serial_Type);//{ "in": item.Serial_Type.} item.Serial_Type;
+
                     var newObject = {
                         Material_Id: $scope.taskId + "" + ($scope.materialArraySummary.length + 1),
                         materialDefault: materialDefault,
@@ -1439,6 +1456,7 @@
                     $scope.materialArraySummary.push(newObject);
 
                     $scope.materialArraySummary.reverse();
+
                     $scope.isEditMaterial = "0";
                 }
 
@@ -1469,7 +1487,9 @@
                     $scope.notesArraySummary.push(newObject);
 
                     $scope.notesArraySummary.reverse();
+
                     $scope.isEditNote = "0";
+
                     $(".note-textarea-NC").height(20);
                 }
 
@@ -1573,7 +1593,7 @@
 
                         i++;
 
-                        // console.log("DELETE " + JSON.stringify(response));
+                        console.log("DELETE " + JSON.stringify(response));                   
                     });
 
                     $scope.materialArraySummary.reverse();
@@ -1604,7 +1624,7 @@
 
                         i++;
 
-                        // console.log("DELETE " + JSON.stringify(response));
+                        console.log("DELETE " + JSON.stringify(response));
                     });
 
                     $scope.notesArraySummary.reverse();
@@ -1616,6 +1636,7 @@
             default:
                 break;
         }
+
         valueService.setDebriefChanged(true);
     };
 
