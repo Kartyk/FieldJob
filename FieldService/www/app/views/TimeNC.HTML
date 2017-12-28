@@ -1,3 +1,7 @@
+<section layout="row" style="margin-bottom:-20px">
+    <span flex></span>
+    <button class="time-font time-add summary-report-donebtn" translate="NEXT" ng-click="Next('Time')" style="margin-top:15px;float:right;margin-right:50px;"></button>
+</section>
 <div class="card-parentContainer margintop10">
 
     <div class="margintop30" ng-repeat="item in timeArray track by $index" id="time{{$index}}">
@@ -135,7 +139,7 @@
             <md-button class="time-font time-copy summary-report-donebtn" ng-click="copyObject(item,'Time')"
                        ng-disabled="$root.completedTask|| !$root.timeformValid" translate="copy"></md-button>
             <span flex></span>
-            <button class="time-font time-add summary-report-donebtn" translate="NEXT" ng-click="Next('Time')"></button>
+            <!--<button class="time-font time-add summary-report-donebtn" translate="NEXT" ng-click="Next('Time')"></button>-->
             <!--<md-button type="submit" ng-disabled="!timeformValid">TEST</md-button>-->
 
         </section>

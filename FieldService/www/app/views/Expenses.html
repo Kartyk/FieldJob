@@ -1,8 +1,11 @@
 
-<!--<md-button class="time-font time-add summary-report-donebtn" translate="BACK" ng-click="goPreviousTab('Expenses')" style="margin-top:15px;margin-right:50px;visibility:hidden"></md-button>
-<md-button class="time-font time-add summary-report-donebtn" translate="BACK" ng-click="goPreviousTab('Expenses')" style="margin-top:15px;margin-right:50px;float:right;"></md-button>
-<md-button class="time-font time-add summary-report-donebtn" translate="NEXT" ng-click="Next('Expenses')" style="margin-top:15px;float:right"></md-button>-->
-<div class="card-parentContainer margintop10">
+<section layout="row"  style="margin-bottom:-20px">
+    <span flex></span>
+    <md-button class="time-font time-add summary-report-donebtn" translate="BACK" ng-click="goPreviousTab('Expenses')" style="margin-top:15px;float:right;"></md-button>
+    <md-button class="time-font time-add summary-report-donebtn" translate="NEXT" ng-click="Next('Expenses')" style="margin-top:15px;float:right;margin-right:50px;"></md-button>
+</section>
+
+<div class="card-parentContainer ">
     <div class="margintop30" ng-repeat="item in expenseArray track by $index" id="expense{{$index}}">
 
             <div class="card-childContainer  noBorder-radius" ng-class="{'newItemBorder': $index == addExpenseObj && $index != 0,'copyItem': $index == copyExpenseObj && $index != 0}">
@@ -118,7 +121,7 @@
             <section  layout="row" layout-sm="column"
                          layout-wrap class="time-btns" ng-class="{'newItemBorderSection': $index == addExpenseObj && $index != 0,'copyItemSection': $index == copyExpenseObj && $index != 0}">
 
-                <md-button class="time-font time-add summary-report-donebtn" translate="BACK" ng-click="goPreviousTab('Expenses')"></md-button>
+                <!--<md-button class="time-font time-add summary-report-donebtn" translate="BACK" ng-click="goPreviousTab('Expenses')"></md-button>-->
                 <span style="visibility:hidden">{{ $root.expenseformValid = expeseform.$valid}}</span>
                 <span flex></span>
                 <md-button ng-if = "isEditExpense==0" class="time-font  time-add summary-report-donebtn addbtn" ng-click="addObject('Expenses',true,item)" ng-disabled="$root.completedTask || !$root.expenseformValid " translate="Add"></md-button>
@@ -128,7 +131,7 @@
                 </md-button>-->
                 <md-button class="time-font  time-copy summary-report-donebtn" ng-click="copyObject(item,'Expenses')" translate="copy" ng-disabled="$root.completedTask || !$root.expenseformValid "></md-button>
                 <span flex></span>
-                <md-button class="time-font time-add summary-report-donebtn" translate="NEXT" ng-click="Next('Expenses')"></md-button>
+                <!--<md-button class="time-font time-add summary-report-donebtn" translate="NEXT" ng-click="Next('Expenses')"></md-button>-->
             </section>
 
 
