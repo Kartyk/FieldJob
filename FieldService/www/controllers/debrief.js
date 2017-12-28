@@ -2545,11 +2545,14 @@
 
                                 for (var i = 0; i < $scope.files.length; i++) {
 
+                                    var fileName = $scope.files[i].filename.split('.')[0];
+                                    var attachmentfileName = fileName.trim(0, 34);
+
                                     var attachmentObject = {
                                         "Data": $scope.files[i].base64,
-                                        "FileName": $scope.files[i].filename,
+                                        "FileName": attachmentfileName + '.' + $scope.files[i].filename.split('.')[1],
                                         "Description": $scope.files[i].fileDisc,
-                                        "Name": $scope.files[i].filename,
+                                        "Name": attachmentfileName + '.' + $scope.files[i].filename.split('.')[1],
                                         "taskId": $rootScope.selectedTask.Task_Number,
                                         "contentType": $scope.files[i].contentType
                                     };
@@ -3091,7 +3094,7 @@
 
     $scope.reviewSummary = function () {
 
-        var promise = generatePDF();
+       // var promise = generatePDF();
 
         $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Customer Signature");
 
