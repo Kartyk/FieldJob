@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="button col-sm-2" ngf-select="uploadImage($file)" ngf-multiple="true" ng-model="file"
                      name="image" ngf-pattern="'image/*'" ngf-size="{width: 20, height: 20, quality: 0.9}"
-                     ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"
+                     ngf-accept="'image/*'" ngf-max-size="5MB" ngf-min-height="100"
                      ngf-resize="{width: 100, height: 100}" style="margin-right:30px;">
                     <md-button>UPLOAD</md-button>
                 </div>
@@ -24,7 +24,7 @@
                     <div class="button col-sm-2 attachplaceholder" ngf-select="uploadImage($file)" ngf-multiple="true"
                          ng-model="file" name="image" ngf-pattern="'image/*'"
                          ngf-size="{width: 20, height: 20, quality: 0.9}"
-                         ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"
+                         ngf-accept="'image/*'" ngf-max-size="5MB" ngf-min-height="100"
                          ngf-resize="{width: 100, height: 100}"><img src="images/Layer 17.png" alt=""></div>
 
                     <div ng-repeat="file1 in image" class="col-sm-2 attachmentDiv">
@@ -68,7 +68,7 @@
                         <img src="images/Layer 18.png" alt="">
                          
                     </div>
-                    <div class="max-size">(<span translate="Max"></span> 20MB)</div>
+                    <div class="max-size">(<span translate="Max"></span> 5MB)</div>
                     </div>
                     <div ng-repeat="file1 in files" class="col-sm-2 width110 attachment-spacing">
                         <div class="attachmentDiv" ng-if="file1.contentType.indexOf('image') > -1">
