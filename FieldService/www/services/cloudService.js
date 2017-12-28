@@ -80,7 +80,7 @@
 
         function login(formData, callback) {
 
-            console.log('Login Data', JSON.stringify(formData));
+            console.log('REQUEST LOGIN ', JSON.stringify(formData));
 
             return $http({
 
@@ -90,7 +90,7 @@
 
             }).success(function (response) {
 
-                console.log('Login Response', JSON.stringify(response));
+                console.log('RESPONSE LOGIN ', JSON.stringify(response));
 
                 callback(response);
 
@@ -98,9 +98,7 @@
 
                 callback(error);
 
-                console.log('Login Error', JSON.stringify(error));
-
-
+                console.log('ERROR LOGIN ', JSON.stringify(error));
             });
         };
 
@@ -118,7 +116,7 @@
 
             }).success(function (response) {
 
-                console.log('Technician Response', JSON.stringify(response));
+                console.log('RESPONSE TECHNICIAN ', JSON.stringify(response));
 
                 callback(response.technicianProfile);
 
@@ -126,7 +124,7 @@
 
                 callback(error);
 
-                console.log('Technician Error', JSON.stringify(error));
+                console.log('ERROR TECHNICIAN ', JSON.stringify(error));
 
             });
         };
@@ -156,7 +154,7 @@
                 };
             }
 
-            console.log("TASK REQUEST " + JSON.stringify(data));
+            console.log("REQUEST TASK " + JSON.stringify(data));
 
             console.log("START TASK " + new Date());
 
@@ -175,7 +173,7 @@
 
                 console.log("END TASK " + new Date());
 
-                console.log("TASK RESPONSE " + JSON.stringify(response));
+                console.log("RESPONSE TASK " + JSON.stringify(response));
 
                 var taskList = [];
 
@@ -244,13 +242,11 @@
                                         taskInternalList.push(internalOFSCJSONObject);
                                     });
 
-                                    console.log("TASK INTERNAL LIST INSERT SUCCESS");
-
                                     constantService.setTaskList(taskInternalList);
 
                                     callback(taskInternalList);
 
-                                    console.log("TASK INTERNAL END " + new Date());
+                                    console.log("END TASK INTERNAL " + new Date());
                                 });
                             });
                         });
@@ -263,7 +259,7 @@
 
                 callback(error);
 
-                console.log("TASK ERROR " + JSON.stringify(error));
+                console.log("ERROR TASK " + JSON.stringify(error));
             });
         };
 
@@ -304,7 +300,7 @@
 
                 console.log("END INTERNAL " + new Date());
 
-                console.log("INTERNAL RESPONSE " + JSON.stringify(response.activities));
+                console.log("RESPONSE INTERNAL " + JSON.stringify(response));
 
                 if (response && response.activities) {
 
@@ -317,11 +313,11 @@
 
             }).error(function (error) {
 
-                console.log("END INTERNAL ERROR======> " + new Date());
+                console.log("END INTERNAL ERROR " + new Date());
 
                 callback(internalList);
 
-                console.log("INTERNAL ERROR " + JSON.stringify(error));
+                console.log("ERROR INTERNAL " + JSON.stringify(error));
             });
         };
 
@@ -350,7 +346,7 @@
                 };
             }
 
-            console.log("TASK DETAIL REQUEST " + JSON.stringify(data));
+            console.log("REQUEST TASK DETAIL " + JSON.stringify(data));
 
             console.log("START TASK DETAIL " + new Date());
 
@@ -369,7 +365,7 @@
 
                 console.log("END TASK DETAIL " + new Date());
 
-                console.log("TASK DETAIL RESPONSE " + JSON.stringify(response));
+                console.log("RESPONSE TASK DETAIL " + JSON.stringify(response));
 
                 var promises = [];
 
@@ -453,25 +449,25 @@
                     }
                 });
 
-                console.log("LENGTH TASK DETAILS " + promises.length);
+                console.log("LENGTH TASK DETAIL " + promises.length);
 
                 $q.all(promises).then(
                     function (response) {
 
-                        console.log("TASK DETAILS INSERT SUCCESS");
+                        console.log("SUCCESS PROMISE TASK DETAIL");
 
                         callback("success");
 
-                        console.log("END TASK DETAILS INSERT " + new Date());
+                        console.log("END TASK DETAIL INSERT " + new Date());
                     },
 
                     function (error) {
 
-                        console.log("TASK DETAILS INSERT FAILURE");
+                        console.log("FAILURE PROMISE TASK DETAIL");
 
                         callback("failure");
 
-                        console.log("END TASK DETAILS INSERT END " + new Date());
+                        console.log("END TASK DETAIL INSERT " + new Date());
                     }
                 );
 
@@ -481,7 +477,7 @@
 
                 callback(error);
 
-                console.log("TASK DETAIL ERROR " + JSON.stringify(error));
+                console.log("ERROR TASK DETAIL " + JSON.stringify(error));
             });
         };
 
@@ -489,7 +485,7 @@
 
             console.log("START PROJECT " + new Date());
 
-            console.log("PROJECT REQUEST " + projectArray);
+            console.log("REQUEST PROJECT " + JSON.stringify({ "projectNumber": projectArray }));
 
             $http({
 
@@ -506,7 +502,7 @@
 
                 console.log("END PROJECT " + new Date());
 
-                console.log("PROJECT RESPONSE " + JSON.stringify(response));
+                console.log("RESPONSE PROJECT " + JSON.stringify(response));
 
                 var promises = [];
 
@@ -555,25 +551,25 @@
                     }
                 });
 
-                console.log("LENGTH PROJECT DETAILS " + promises.length);
+                console.log("LENGTH PROJECT DETAIL " + promises.length);
 
                 $q.all(promises).then(
                     function (response) {
 
-                        console.log("PROJECT DETAILS INSERT SUCCESS");
+                        console.log("SUCCESS PROMISE PROJECT DETAIL");
 
                         callback("success");
 
-                        console.log("END PROJECT DETAILS INSERT " + new Date());
+                        console.log("END PROJECT DETAIL INSERT " + new Date());
                     },
 
                     function (error) {
 
-                        console.log("PROJECT DETAILS INSERT FAILURE");
+                        console.log("FAILURE PROMISE PROJECT DETAIL");
 
                         callback("failure");
 
-                        console.log("END PROJECT DETAILS INSERT " + new Date());
+                        console.log("END PROJECT DETAIL INSERT " + new Date());
                     }
                 );
 
@@ -583,7 +579,7 @@
 
                 callback("error");
 
-                console.log("PROJECT ERROR " + JSON.stringify(error));
+                console.log("ERROR PROJECT " + JSON.stringify(error));
             });
 
         };
@@ -613,7 +609,7 @@
                 };
             }
 
-            console.log("LOV REQUEST " + JSON.stringify(data));
+            console.log("REQUEST LOV " + JSON.stringify(data));
 
             console.log("START LOV " + new Date());
 
@@ -631,7 +627,7 @@
 
                 console.log("END LOV " + new Date());
 
-                console.log("LOV RESPONSE " + JSON.stringify(response));
+                console.log("RESPONSE LOV " + JSON.stringify(response));
 
                 var promises = [];
 
@@ -755,7 +751,7 @@
                 $q.all(promises).then(
                     function (response) {
 
-                        console.log("LOV INSERT SUCCESS");
+                        console.log("SUCCESS PROMISE LOV");
 
                         callback("success");
 
@@ -764,7 +760,7 @@
 
                     function (error) {
 
-                        console.log("LOV INSERT FAILURE");
+                        console.log("FAILURE PROMISE LOV");
 
                         callback("failure");
 
@@ -778,13 +774,13 @@
 
                 callback(error);
 
-                console.log("LOV ERROR " + JSON.stringify(error));
+                console.log("ERROR LOV " + JSON.stringify(error));
             });
         };
 
         function getSRNotesList(srNumberArray, callback) {
 
-            console.log("SR NOTES REQUEST" + JSON.stringify({ "SRNum": srNumberArray }));
+            console.log("REQUEST SR NOTES " + JSON.stringify({ "SRNum": srNumberArray }));
 
             console.log("START SR NOTES " + new Date());
 
@@ -803,7 +799,7 @@
 
                 console.log("END SR NOTES " + new Date());
 
-                console.log("SR NOTES RESPONSE " + JSON.stringify(response));
+                console.log("RESPONSE SR NOTES " + JSON.stringify(response));
 
                 var noteArray = [];
 
@@ -826,13 +822,13 @@
 
                 callback("error");
 
-                console.log("SR NOTES ERROR " + JSON.stringify(error));
+                console.log("ERROR SR NOTES " + JSON.stringify(error));
             });
         };
 
         function getSRAttachmentList(srNumberArray, callback) {
 
-            console.log("SR ATTACHMENT REQUEST " + JSON.stringify({ "SRID": srNumberArray }));
+            console.log("REQUEST SR ATTACHMENT " + JSON.stringify({ "SRID": srNumberArray }));
 
             console.log("START SR ATTACHMENT " + new Date());
 
@@ -851,7 +847,7 @@
 
                 console.log("END SR ATTACHMENT " + new Date());
 
-                console.log("SR ATTACHMENT RESPONSE " + JSON.stringify(response));
+                console.log("RESPONSE SR ATTACHMENT " + JSON.stringify(response));
 
                 $rootScope.apicall = true;
 
@@ -890,7 +886,7 @@
 
                 callback("error");
 
-                console.log("SR ATTACHMENT ERROR " + JSON.stringify(error));
+                console.log("ERROR SR ATTACHMENT " + JSON.stringify(error));
             });
         };
 
@@ -913,7 +909,7 @@
 
                 console.log("END CREATE ATTACHMENT " + new Date());
 
-                console.log("CREATE ATTACHMENT RESPONSE " + JSON.stringify(response));
+                console.log("RESPONSE CREATE ATTACHMENT " + JSON.stringify(response));
 
                 callback(response);
 
@@ -950,9 +946,9 @@
                 };
             }
 
-            console.log("START DOWNLOAD ATTACHMENT " + + new Date());
+            console.log("START DOWNLOAD ATTACHMENT " + new Date());
 
-            console.log("DOWNLOAD ATTACHMENT REQUEST " + JSON.stringify(data));
+            console.log("REQUEST DOWNLOAD ATTACHMENT " + JSON.stringify(data));
 
             $http({
 
@@ -967,30 +963,30 @@
 
             }).success(function (response) {
 
-                console.log("END DOWNLOAD ATTACHMENT " + + new Date());
+                console.log("END DOWNLOAD ATTACHMENT " + new Date());
 
-                // console.log("DOWNLOAD ATTACHMENT RESPONSE " + JSON.stringify(response));
+                // console.log("RESPONSE DOWNLOAD ATTACHMENT " + JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                console.log("END DOWNLOAD ATTACHMENT ERROR " + + new Date());
+                console.log("END DOWNLOAD ATTACHMENT ERROR " + new Date());
 
                 callback(error);
 
                 if (error != undefined) {
 
-                    console.log("DOWNLOAD ATTACHMENT ERROR " + JSON.stringify(error));
+                    console.log("ERROR DOWNLOAD ATTACHMENT " + JSON.stringify(error));
                 }
             });
         };
 
         function updateDebrief(formData, callback) {
 
-            console.log("START DEBRIEF " + + new Date());
+            console.log("START DEBRIEF " + new Date());
 
-            console.log("DEBRIEF REQUEST " + JSON.stringify(formData));
+            console.log("REQUEST DEBRIEF " + JSON.stringify(formData));
 
             $http({
 
@@ -1005,19 +1001,19 @@
 
             }).success(function (response) {
 
-                console.log("END DEBRIEF " + + new Date());
+                console.log("END DEBRIEF " + new Date());
 
-                console.log("DEBRIEF RESPONSE " + JSON.stringify(response));
+                console.log("RESPONSE DEBRIEF " + JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                console.log("END DEBRIEF ERROR " + + new Date());
+                console.log("END DEBRIEF ERROR " + new Date());
 
                 callback(error);
 
-                console.log("DEBRIEF ERROR " + JSON.stringify(error));
+                console.log("ERROR DEBRIEF " + JSON.stringify(error));
             });
         };
 
@@ -1043,9 +1039,9 @@
                 "signatureComments": formData.signatureComments != undefined ? formData.signatureComments : ""
             };
 
-            console.log("START OFSC " + + new Date());
+            console.log("START OFSC " + new Date());
 
-            console.log("OFSC REQUEST " + JSON.stringify(data));
+            console.log("REQUEST OFSC " + JSON.stringify(data));
 
             $http({
 
@@ -1060,19 +1056,19 @@
 
             }).success(function (response) {
 
-                console.log("END OFSC " + + new Date());
+                console.log("END OFSC " + new Date());
 
-                console.log("OFSC RESPONSE " + JSON.stringify(response));
+                console.log("RESPONSE OFSC " + JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                console.log("END OFSC ERROR " + + new Date());
+                console.log("END OFSC ERROR " + new Date());
 
                 callback(error);
 
-                console.log("OFSC ERROR " + JSON.stringify(error));
+                console.log("ERROR OFSC " + JSON.stringify(error));
             });
         };
 
