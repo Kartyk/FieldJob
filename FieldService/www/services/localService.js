@@ -1732,7 +1732,7 @@
                 db.transaction(function (transaction) {
 
                     var sqlSelect = "SELECT * FROM FieldJobName WHERE TaskCode = ? AND Project_Number = ?";
-             
+
                     transaction.executeSql(sqlSelect, [item.TaskCode, item.Project_Number], function (tx, res) {
 
                         var rowLength = res.rows.length;

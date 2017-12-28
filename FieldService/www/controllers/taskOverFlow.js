@@ -70,148 +70,178 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
     var customerAddress = null;
 
-    loadMap();
+    setValues();
 
-    function loadMap() {
+    function setValues() {
 
         if (valueService.getNetworkStatus()) {
-            var temp = valueService.getTask();
+
             if (valueService.getTask().Country == "People's Republic of China" || valueService.getTask().Country.toLowerCase() == "china") {
-                if (valueService.getTask().Address1.match(/[\u3400-\u9FBF]/))
-                {
-                    $scope.isChina = true;
-                    customerAddress = $scope.taskDetails.Street_Address + "," + $scope.taskDetails.City;
 
-                    if (BMap != undefined) {
+                $scope.isChina = true;
 
-                        map = new BMap.Map("chinaMap");
+                customerAddress = $scope.taskDetails.Street_Address + "," + $scope.taskDetails.City;
 
-                        geoCoder = new BMap.Geocoder();
+                if (valueService.getTask().Address1.match(/[\u3400-\u9FBF]/)) {
 
-                        var longitude = 118.807395;
+                    $scope.isBaidu = true;
 
-                        var latitude = 32.065315;
+                } else {
 
-                        var contextMenu = new BMap.ContextMenu();
-
-                        map.centerAndZoom(new BMap.Point(longitude, latitude), 14);
-
-                        map.enableScrollWheelZoom();
-
-                        map.enableKeyboard();
-
-                        map.disableDoubleClickZoom();
-
-                        map.addControl(new BMap.NavigationControl());
-
-                        map.addControl(new BMap.MapTypeControl({
-                            mapTypes: [
-                                BMAP_NORMAL_MAP,
-                                BMAP_HYBRID_MAP
-                            ]
-                        }));
-
-                        map.setCurrentCity($scope.taskDetails.City);
-
-                        console.log("CHINESE ADDRESS" + customerAddress);
-
-                        geoCoder.getPoint(customerAddress, function (point) {
-
-                            console.log("POINT " + JSON.stringify(point));
-
-                            if (point) {
-
-                                longitude = point.lng;
-
-                                latitude = point.lat;
-
-                                var pointer = new BMap.Point(longitude, latitude);
-
-                                var marker = new BMap.Marker(pointer);
-
-                                map.addOverlay(marker);
-
-                                map.centerAndZoom(pointer, 14);
-
-
-                            }
-                        });
-                    }
+                    $scope.isBaidu = false;
                 }
-                else
-                {
-                    $scope.isChina = false;
-                    $scope.isChinaQuest = true;
-                    customerAddress = $scope.taskDetails.Street_Address + "," + $scope.taskDetails.City;
-                    if (L != undefined) {
-                        L.mapquest.key = 'E1jRKUfN0osMSzrInmuAH2glsmHmneU3';
-                        L.mapquest.geocoding().geocode(customerAddress, createMap);
-                        function createMap(error, response) {
-                            var location = response.results[0].locations[0];
-                            var latLng = location.displayLatLng;
-                            map = L.mapquest.map('map', {
-                                center: latLng,
-                                layers: L.mapquest.tileLayer('map'),
-                                zoom: 14
-                            });
-                            var customIcon = L.mapquest.icons.circle({
-                                primaryColor: '#3b5998'
-                            });
-
-                            L.marker(latLng, { icon: customIcon }).addTo(map);
-                        }
-                    }
-                   
-                }
-
-                // var customerAddress = "上海";
-
-               
 
             } else {
 
                 $scope.isChina = false;
-                $scope.isChinaQuest = false;
-                if ($rootScope.firstLoad!= undefined && !$rootScope.firstLoad) {
-                    if (google != undefined) {
 
-                        map = new google.maps.Map(document.getElementById('googleMap'), {
-                            center: { lat: -34.397, lng: 150.644 },
-                            zoom: 8
-                        });
-
-                        addMarker($scope.taskDetails.Zip_Code, map);
-                    }
-                }
+                $scope.first = true;
             }
         }
     }
 
-    function addMarker(address, map) {
+    $scope.mapClicked = function () {
 
-        if (map != null) {
+        if (valueService.getNetworkStatus()) {
 
-            var geoCoder = new google.maps.Geocoder();
+            console.log("CLICK " + map);
 
-            geoCoder.geocode({
-                'address': address
-            }, function (results, status) {
+            $scope.isVisible = !$scope.isVisible;
 
-                if (status == google.maps.GeocoderStatus.OK) {
+            $scope.mapIsClicked = !$scope.mapIsClicked;
 
-                    var latitude = results[0].geometry.location.lat();
+            visibleMap();
+        }
+    };
 
-                    var longitude = results[0].geometry.location.lng();
+    function visibleMap() {
 
-                    if ($scope.isChina) {
+        if ($scope.isChina) {
 
-                        var marker = new BMap.Marker(new BMap.Point(longitude, latitude));
+            if ($scope.isBaidu) {
 
-                        map.addOverlay(marker);
+                baiduMap();
 
-                        map.centerAndZoom(new BMap.Point(longitude, latitude), 14);
+            } else {
 
-                    } else {
+                questMap();
+            }
+
+        } else {
+
+            if ($scope.first) {
+
+                googleMap();
+
+                $scope.first = false;
+            }
+        }
+    }
+
+    function baiduMap() {
+
+        console.log("CUSTOMER ADDRESS" + customerAddress);
+
+        if (BMap != undefined) {
+
+            map = new BMap.Map("baiduMap");
+
+            geoCoder = new BMap.Geocoder();
+
+            var longitude = 118.807395;
+
+            var latitude = 32.065315;
+
+            var contextMenu = new BMap.ContextMenu();
+           
+            map.enableScrollWheelZoom();
+
+            map.enableKeyboard();
+
+            map.disableDoubleClickZoom();
+
+            map.addControl(new BMap.NavigationControl());
+
+            map.addControl(new BMap.MapTypeControl({
+                mapTypes: [
+                    BMAP_NORMAL_MAP,
+                    BMAP_HYBRID_MAP
+                ]
+            }));
+
+            geoCoder.getPoint(customerAddress, function (point) {
+
+                console.log("POINT " + JSON.stringify(point));
+
+                if (point) {
+
+                    longitude = point.lng;
+
+                    latitude = point.lat;                
+                }
+
+                var pointer = new BMap.Point(longitude, latitude);
+
+                var marker = new BMap.Marker(pointer);
+
+                map.addOverlay(marker);
+
+                map.centerAndZoom(pointer, 14);
+            });
+        }
+    }
+
+    function questMap() {
+
+        if (L != undefined) {
+
+            L.mapquest.key = 'E1jRKUfN0osMSzrInmuAH2glsmHmneU3';
+
+            L.mapquest.geocoding().geocode(customerAddress, createMap);
+
+            function createMap(error, response) {
+
+                var location = response.results[0].locations[0];
+
+                var latLng = location.displayLatLng;
+
+                map = L.mapquest.map('map', {
+                    center: latLng,
+                    layers: L.mapquest.tileLayer('map'),
+                    zoom: 14
+                });
+
+                var customIcon = L.mapquest.icons.circle({
+                    primaryColor: '#3b5998'
+                });
+
+                L.marker(latLng, { icon: customIcon }).addTo(map);
+            }
+        }
+    }
+
+    function googleMap() {
+
+        if (google != undefined) {
+
+            map = new google.maps.Map(document.getElementById('googleMap'), {
+                center: { lat: -34.397, lng: 150.644 },
+                zoom: 8
+            });
+
+            if (map != null) {
+
+                geoCoder = new google.maps.Geocoder();
+
+                geoCoder.geocode({
+                    'address': $scope.taskDetails.Zip_Code
+                }, function (results, status) {
+
+                    if (status == google.maps.GeocoderStatus.OK) {
+
+                        var latitude = results[0].geometry.location.lat();
+
+                        var longitude = results[0].geometry.location.lng();
 
                         var latlng = new google.maps.LatLng(latitude, longitude);
 
@@ -223,72 +253,17 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                             map: map,
                             position: results[0].geometry.location
                         });
-                    }
 
-                } else {
+                    } else {
 
-                    /*alert("Geocode was not successful for the following reason: " + status);*/
-                }
-            });
-        }
-    }
-    //$scope.firstLoad = true;
-    $scope.mapClicked = function () {
-
-        if (valueService.getNetworkStatus()) {
-
-
-
-            console.log("CLICK " + map);
-            if ($rootScope.firstLoad || $rootScope.firstLoad==undefined)
-            {
-                if (google != undefined) {
-
-                    map = new google.maps.Map(document.getElementById('googleMap'), {
-                        center: { lat: -34.397, lng: 150.644 },
-                        zoom: 8
-                    });
-
-                    addMarker($scope.taskDetails.Zip_Code, map);
-                    google.maps.event.trigger(document.getElementById('googleMap'), 'resize');
-                }
-                $rootScope.firstLoad = false
-            }
-
-            if (map != null) {
-
-                $scope.isVisible = !$scope.isVisible;
-
-                $scope.mapIsClicked = !$scope.mapIsClicked;
-            }
-
-            if ($scope.isChina) {
-
-                geoCoder.getPoint(customerAddress, function (point) {
-
-                    console.log("POINT " + JSON.stringify(point));
-
-                    if (point) {
-
-                        longitude = point.lng;
-
-                        latitude = point.lat;
-
-                        var pointer = new BMap.Point(longitude, latitude);
-
-                        var marker = new BMap.Marker(pointer);
-
-                        map.addOverlay(marker);
-
-                        map.centerAndZoom(pointer, 14);
-
-
+                        console.log("GOOGLE GEOCODER ERROR");
                     }
                 });
 
+                google.maps.event.trigger(document.getElementById('googleMap'), 'resize');
             }
         }
-    };
+    }
 
     var contactArray = valueService.getContact();
 

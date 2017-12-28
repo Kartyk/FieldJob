@@ -3,7 +3,9 @@
     $scope.currentTab = "time";
 
     $rootScope.Islogin = true;
+
     $scope.customerName;
+
     $scope.userType = valueService.getUserType().clarityType;
 
     $scope.engineerName = valueService.getUserType().name;
@@ -11,12 +13,16 @@
     $rootScope.headerName = "Debrief";
 
     $scope.isCustomerSignChecked = false;
+
     $scope.contactorCustname;
+
     changeLanguage(valueService.getLanguage());
+
     $scope.custName = function (name) {
         console.log(name);
         $scope.contactorCustname = name;
-    }
+    };
+
     function changeLanguage(lang) {
 
         valueService.setLanguage(lang);
@@ -87,6 +93,26 @@
 
     $scope.installBaseArray = [];
     $scope.contactArray = [];
+
+    $scope.overTimeArray = [];
+    $scope.shiftCodeArray = [];
+    $scope.fieldJobArray = [];
+
+    $scope.chargeMethodArray = [];
+    $scope.chargeTypeArray = [];
+    $scope.expenseTypeArray = [];
+    $scope.noteTypeArray = [];
+    $scope.workTypeArray = [];
+    $scope.itemArray = [];
+    $scope.currencyArray = [];
+    $scope.UOMArray = [];
+
+    $scope.itemValue = [];
+    $scope.itemTravel = [];
+    $scope.itemDeputation = [];
+    $scope.itemNormal = [];
+    $scope.itemNightShift = [];
+
     $scope.timeArray = [];
     $scope.timeArraySummary = [];
 
@@ -101,19 +127,6 @@
 
     $scope.attachmentArray = [];
     $scope.engineerObject = {};
-
-    $scope.overTimeArray = [];
-    $scope.shiftCodeArray = [];
-    $scope.fieldJobArray = [];
-
-    $scope.chargeMethodArray = [];
-    $scope.chargeTypeArray = [];
-    $scope.expenseTypeArray = [];
-    $scope.noteTypeArray = [];
-    $scope.workTypeArray = [];
-    $scope.itemArray = [];
-    $scope.currencyArray = [];
-    $scope.UOMArray = [];
 
     var timeDefault = {};
     var expenseDefault = {};
@@ -132,7 +145,21 @@
         $scope.taskId = $scope.taskObject.Task_Number;
 
         $scope.installBaseArray = valueService.getInstallBase();
-        $scope.contactArray = valueService.getContact();;
+        $scope.contactArray = valueService.getContact();
+
+        $scope.overTimeArray = valueService.getOverTime();
+        $scope.shiftCodeArray = valueService.getShiftCode();
+        $scope.fieldJobArray = valueService.getFieldJob();
+
+        $scope.chargeMethodArray = valueService.getChargeMethod();
+        $scope.chargeTypeArray = valueService.getChargeType();
+        $scope.expenseTypeArray = valueService.getExpenseType();
+        $scope.noteTypeArray = valueService.getNoteType();
+        $scope.workTypeArray = valueService.getWorkType();
+        $scope.itemArray = valueService.getItem();
+        $scope.currencyArray = valueService.getCurrency();
+        $scope.UOMArray = valueService.getUOM();
+
         $scope.timeArraySummary = valueService.getTime();
         $scope.expenseArraySummary = valueService.getExpense();
         $scope.materialArraySummary = valueService.getMaterial();
@@ -159,7 +186,7 @@
 
                         reader.onloadend = function () {
 
-                            console.log("Successful file read: " + this.result);
+                            console.log("READ FILE" + this.result);
 
                             attachmentObject.base64 = this.result.split(",")[1];
 
@@ -186,24 +213,6 @@
         });
 
         $scope.engineerObject = valueService.getEngineer();
-
-        $scope.overTimeArray = valueService.getOverTime();
-        $scope.shiftCodeArray = valueService.getShiftCode();
-        $scope.fieldJobArray = valueService.getFieldJob();
-
-        $scope.chargeMethodArray = valueService.getChargeMethod();
-        $scope.chargeTypeArray = valueService.getChargeType();
-        $scope.expenseTypeArray = valueService.getExpenseType();
-        $scope.noteTypeArray = valueService.getNoteType();
-        $scope.workTypeArray = valueService.getWorkType();
-        $scope.itemArray = valueService.getItem();
-        $scope.currencyArray = valueService.getCurrency();
-        $scope.UOMArray = valueService.getUOM();
-        $scope.itemValue = [];
-        $scope.itemTravel = [];
-        $scope.itemDeputation = [];
-        $scope.itemNormal = [];
-        $scope.itemNightShift = [];
 
         angular.forEach($scope.itemArray, function (item) {
 
@@ -232,7 +241,6 @@
         $scope.setDropDownValues();
 
         $scope.setDefaultValues();
-
     };
 
     $scope.setDropDownValues = function () {
@@ -448,29 +456,6 @@
 
         if (item.Date != undefined && item.Date != "")
             item.Date = new Date(item.Date);
-
-        //var hours = 0;
-
-        //var minutes = 0;
-
-        //if (item.Duration != undefined) {
-
-        //    hours = parseInt(item.Duration.split(":")[0]);
-
-        //    minutes = parseInt(item.Duration.split(":")[1]);
-        //}
-
-        //var durationValue = new Date();
-
-        //durationValue.setHours(hours);
-        //durationValue.setMinutes(minutes);
-        //durationValue.setSeconds(0);
-
-        //item.DurationValue = durationValue;
-
-        //item.DurationHours = hours;
-
-        //item.DurationMinutes = minutes;
 
         item.DurationHours = moment.duration(item.Duration).hours();
 
@@ -692,9 +677,12 @@
             durationHours = 8;
             durationMinutes = 0;
         }
+
         var chargeType = "";
+
         if ($scope.taskObject.Charge_Type != null)
-            chargeType = $scope.taskObject.Charge_Type
+            chargeType = $scope.taskObject.Charge_Type;
+
         var timeObject = {
             Time_Id: "",
             timeDefault: timeDefault,
@@ -728,6 +716,7 @@
         $scope.timeArray = [];
 
         $scope.timeArray.push(timeObject);
+
         if (timeDefault.chargeType.values != undefined && timeDefault.chargeType.values.length > 0) {
 
             angular.forEach(timeDefault.chargeType.values, function (key, value) {
@@ -883,7 +872,6 @@
                 $scope.isEditMaterial = "1";
 
                 $scope.materialArray[0] = JSON.parse(JSON.stringify(item));
-                //$scope.materialArray[0].Serial_Type = $scope.materialArray[0].Serial_Type.slice();
 
                 angular.forEach($scope.materialArraySummary, function (response) {
 
@@ -919,7 +907,6 @@
         }
     };
 
-   
     $scope.saveObject = function (stage, isButtonClick, item) {
 
         switch (stage) {
@@ -973,15 +960,15 @@
                     angular.forEach($scope.timeArraySummary, function (tempObject) {
 
                         if (item.Time_Id == tempObject.Time_Id) {
-                           // tempObject = newTimeObject;// JSON.parse(JSON.stringify(newTimeObject))
+
                             $scope.timeArraySummary[$scope.timeArraySummary.indexOf(tempObject)] = newTimeObject;
-                           // tempObject = newTimeObject;
+                            // tempObject = newTimeObject;
                         }
 
-                       // $scope.tempArray.push(tempObject);
+                        // $scope.tempArray.push(tempObject);
                     });
 
-                  //  $scope.timeArraySummary = $scope.tempArray;
+                    //  $scope.timeArraySummary = $scope.tempArray;
 
                     $scope.isEditTime = "0";
 
@@ -1026,10 +1013,10 @@
                             $scope.expenseArraySummary[$scope.expenseArraySummary.indexOf(tempObject)] = newObject;
                         }
 
-                       // $scope.tempArray.push(tempObject);
+                        // $scope.tempArray.push(tempObject);
                     });
 
-                   // $scope.expenseArraySummary = $scope.tempArray;
+                    // $scope.expenseArraySummary = $scope.tempArray;
 
                     $scope.isEditExpense = "0";
 
@@ -1069,14 +1056,14 @@
                     angular.forEach($scope.materialArraySummary, function (tempObject) {
 
                         if (item.Material_Id == tempObject.Material_Id) {
-                           // tempObject = newObject;
+                            // tempObject = newObject;
                             $scope.materialArraySummary[$scope.materialArraySummary.indexOf(tempObject)] = newObject;
                         }
 
-                       // $scope.tempArray.push(tempObject);
+                        // $scope.tempArray.push(tempObject);
                     });
 
-                   // $scope.materialArraySummary = $scope.tempArray;
+                    // $scope.materialArraySummary = $scope.tempArray;
 
                     $scope.isEditMaterial = "0";
 
@@ -1105,19 +1092,19 @@
                         Task_Number: $scope.taskId
                     };
 
-                   // $scope.tempArray = [];
+                    // $scope.tempArray = [];
 
                     angular.forEach($scope.notesArraySummary, function (tempObject) {
 
                         if (item.Notes_Id == tempObject.Notes_Id) {
-                           // tempObject = newObject;
+                            // tempObject = newObject;
                             $scope.notesArraySummary[$scope.notesArraySummary.indexOf(tempObject)] = newObject;
                         }
 
-                       // $scope.tempArray.push(tempObject);
+                        // $scope.tempArray.push(tempObject);
                     });
 
-                  //  $scope.notesArraySummary = $scope.tempArray;
+                    //  $scope.notesArraySummary = $scope.tempArray;
 
                     $scope.isEditNote = "0";
 
@@ -1598,7 +1585,7 @@
 
                         i++;
 
-                        console.log("DELETE " + JSON.stringify(response));                   
+                        console.log("DELETE " + JSON.stringify(response));
                     });
 
                     $scope.materialArraySummary.reverse();
@@ -1861,7 +1848,6 @@
         $scope.saveValues();
 
         valueService.saveValues();
-
     };
 
     $scope.saveValues = function () {
@@ -2016,23 +2002,70 @@
 
         console.log("STAGE =====> " + JSON.stringify(stage));
 
+        $scope.saveValues();
+
         if ($scope.currentTab == "time") {
+
+            if ($scope.timeArraySummary.length > 0) {
+
+                localService.deleteTime($scope.taskId);
+                localService.insertTimeList($scope.timeArraySummary, function (result) {
+                    console.log("Time Success")
+                });
+            }
 
         } else if ($scope.currentTab == "expenses") {
 
+            if ($scope.expenseArraySummary.length > 0) {
+
+                localService.deleteExpense($scope.taskId);
+                localService.insertExpenseList($scope.expenseArraySummary, function (result) {
+                    console.log("Expense Success")
+                });
+            }
+
         } else if ($scope.currentTab == "material") {
+
+            if ($scope.materialArraySummary.length > 0) {
+
+                localService.deleteMaterial($scope.taskId);
+                localService.insertMaterialList($scope.materialArraySummary, function (result) {
+                    console.log("Material Success")
+                });
+            }
 
         } else if ($scope.currentTab == "notes") {
 
+            if ($scope.notesArraySummary.length > 0) {
+
+                localService.deleteNotes($scope.taskId);
+                localService.insertNotesList($scope.notesArraySummary, function (result) {
+                    console.log("Notes Success")
+                });
+            }
+
         } else if ($scope.currentTab == "attachments") {
 
-        } else if ($scope.currentTab == "engineer signature") {
+            if ($scope.attachmentArraydb.length > 0) {
 
+                localService.deleteAttachment($scope.taskId);
+                localService.insertAttachmentList($scope.attachmentArraydb, function (result) {
+                    console.log("Attachment Success")
+                });
+            }
+
+        } else if ($scope.currentTab == "emerson signature") {
+
+            if ($scope.engineerObject != undefined && $scope.engineerObject.Task_Number != null) {
+
+                localService.deleteEngineer($scope.taskId);
+                localService.insertEngineerList($scope.engineerObject, function (result) {
+                    console.log("Engineer Success")
+                });
+            }
         }
 
-        $scope.saveValues();
-
-        valueService.saveValues();
+        //valueService.saveValues();
 
         if (stage.title.toLowerCase() == "time") {
 
@@ -2087,14 +2120,17 @@
             $scope.currentTab = "attachments";
         }
 
-        if (stage.title.toLowerCase() == "engineer signature") {
+        if (stage.title.toLowerCase() == "emerson signature") {
 
-            $scope.currentTab = "engineer signature";
+            $scope.currentTab = "emerson signature";
         }
 
         if (stage.title == "Summary") {
+
             $scope.engTime = valueService.getEnggSignTime();
+
             $scope.custTime = valueService.getCustSignTime();
+
             console.log($rootScope.timeformValid);
 
             $scope.summary.timeArray = [];
@@ -2184,16 +2220,7 @@
                         $scope.summary.taskObject.InstallBase.push(install);
                     });
                 }
-                //var install = {};
-                //$scope.summary.taskObject.InstallBase = [];
-                //install.Product_Line ="343545467134354546713435454671343545467134354546713435454671";
-                //install.Serial_Number = "343545467134354546713435454671343545467134354546713435454671";
-                //install.Item_Number = "343545467134354546713435454671343545467134354546713435454671";
-                //install.Description = "343545467134354546713435454671343545467134354546713435454671";
-                //install.TagNumber = "343545467134354546713435454671343545467134354546713435454671";
-                //install.Original_PO_Number = "343545467134354546713435454671343545467134354546713435454671";
 
-                //$scope.summary.taskObject.InstallBase.push(install);
                 $scope.summary.taskObject.times = [];
 
                 $scope.summary.taskObject.times.push({
@@ -2423,7 +2450,7 @@
 
                         reader.onloadend = function () {
 
-                            console.log("Successful file read: " + this.result);
+                            console.log("READ REPORT FILE " + this.result);
 
                             $scope.reportBase64 = this.result.split(",")[1];
 
@@ -2614,10 +2641,11 @@
 
                                             cloudService.createAttachment(reportAttachmentUploadJSON, function (response) {
 
+                                                console.log("Uploaded FSR " + JSON.stringify(response));
+
                                                 cloudService.updateOFSCStatus(statusData, function (response) {
 
                                                     console.log("Task Completed " + JSON.stringify(response));
-
 
                                                     var taskObject = {
                                                         Task_Status: "Completed",
@@ -3574,12 +3602,12 @@
                                     ctx.fillText(key, xAttachField1, yfilename + 100);
                                     yfilename += 15;
                                 })
-                              
+
                             } else {
 
                                 ctx.fillStyle = "#000";
                                 ctx.font = '15px sans-serif ';
-                                var splitAttchname = doc1.splitTextToSize($filter('translate')(file.fileDisc) , 45);
+                                var splitAttchname = doc1.splitTextToSize($filter('translate')(file.fileDisc), 45);
                                 angular.forEach(splitAttchname, function (key) {
                                     ctx.fillText(key, xAttachField1, yfilename + 100);
                                     yfilename += 15;
@@ -3963,7 +3991,7 @@
                             yMaterialSerialNo = yMaterialFieldValue;
                             while (m < $scope.summary.materialArray[l - 1].serialNumber.length) {
                                 ctx.textAlign = "start";
-                               // yMaterialSerialNo = yMaterialFieldValue + 15 * m;
+                                // yMaterialSerialNo = yMaterialFieldValue + 15 * m;
                                 splitserialno = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialNumber[m++], 50)
                                 angular.forEach(splitserialno, function (key) {
                                     ctx.fillText(key, 280, yMaterialSerialNo);
@@ -3977,10 +4005,10 @@
                         ctx.fillStyle = "#000";
                         ctx.font = ' 13px sans-serif ';
                         if ($scope.summary.materialArray[l - 1].serialIn[n] != "") {
-                            yMaterialSerialIn = yMaterialFieldValue 
+                            yMaterialSerialIn = yMaterialFieldValue
                             while (n < $scope.summary.materialArray[l - 1].serialIn.length) {
                                 ctx.textAlign = "start";
-                               // yMaterialSerialIn = yMaterialFieldValue + 15 * n;
+                                // yMaterialSerialIn = yMaterialFieldValue + 15 * n;
                                 splitserialin = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialIn[n++], 50)
                                 angular.forEach(splitserialin, function (key) {
                                     ctx.fillText(key, 350, yMaterialSerialIn);
@@ -3993,7 +4021,7 @@
                         ctx.fillStyle = "#000";
                         ctx.font = ' 13px sans-serif ';
                         if ($scope.summary.materialArray[l - 1].serialOut[o] != "") {
-                            yMaterialSerialOut = yMaterialFieldValue 
+                            yMaterialSerialOut = yMaterialFieldValue
                             while (o < $scope.summary.materialArray[l - 1].serialOut.length) {
                                 ctx.textAlign = "start";
                                 //yMaterialSerialOut = yMaterialFieldValue + 15 * o;
@@ -4352,8 +4380,7 @@
                     doc1.setFontType('normal')
                     if ($scope.summary.notesArray[i - 1].Notes) {
                         var splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.notesArray[i - 1].Notes), rectNotesWidth - xNotesField2);
-                        angular.forEach(splitTitle, function (key)
-                        {
+                        angular.forEach(splitTitle, function (key) {
                             var isAdded = checkPdfHeight(yNotesField1_val, pageHeight, yNotesField, rectNotesWidth);
                             if (isAdded) {
                                 yNotesField1_val = 10;
@@ -4363,7 +4390,7 @@
                             yNotesField1_val += 10;
                             yNotesField1 = yNotesField1_val;
                         })
-                        
+
                         //if (splitTitle.length > 1) {
                         //    yNotesField1_val = yNotesField1_val + 9 * splitTitle.length;
                         //    yNotesField1 = yNotesField1_val;
@@ -4378,7 +4405,7 @@
                     rectAttachHeight = 70, xAttachField1 = 25;
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                var isAdded = checkPdfHeight(yAttachField , pageHeight, yAttachField + 5, rectAttachWidth, false);
+                var isAdded = checkPdfHeight(yAttachField, pageHeight, yAttachField + 5, rectAttachWidth, false);
                 if (isAdded) {
                     yAttachField = 10;
 
@@ -4703,7 +4730,7 @@
                         splitserialno = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialNumber, 298 - 202)
                         doc1.text(202, yMaterialFieldValue, splitserialno)
                     }
-                    
+
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.materialArray[l - 1].serialIn) {
