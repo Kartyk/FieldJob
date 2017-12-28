@@ -3122,7 +3122,7 @@
 
     $scope.reviewSummary = function () {
 
-       // var promise = generatePDF();
+        // var promise = generatePDF();
 
         $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Customer Signature");
 
@@ -3183,6 +3183,7 @@
 
     $scope.debriefClear = function () {
         $scope.engineerObject.customerComments = "";
+        $rootScope.customersignature = "";
     };
 
     $scope.ChangeText = function () {
@@ -3191,6 +3192,7 @@
 
 
         if ($scope.engineerObject.isCustomerSignChecked) {
+            $scope.debriefClear();
             $scope.customerCommentText = "Customer Comments";
         } else {
 
@@ -3602,7 +3604,7 @@
                                 ctx.font = '15px sans-serif ';
                                 var splitAttchname = doc1.splitTextToSize($filter('translate')(file.fileDisc.substr(0, 16)) + '..', 45);
                                 angular.forEach(splitAttchname, function (key) {
-                                    ctx.fillText(key, xAttachField1, yfilename + 100);
+                                    ctx.fillText(key, xAttachField1, yfilename + 125);
                                     yfilename += 15;
                                 })
 
@@ -3612,7 +3614,7 @@
                                 ctx.font = '15px sans-serif ';
                                 var splitAttchname = doc1.splitTextToSize($filter('translate')(file.fileDisc), 45);
                                 angular.forEach(splitAttchname, function (key) {
-                                    ctx.fillText(key, xAttachField1, yfilename + 100);
+                                    ctx.fillText(key, xAttachField1, yfilename + 125);
                                     yfilename += 15;
                                 })
                                 //ctx.fillText($filter('translate')(file.fileDisc), xAttachField1, yAttachField + 125);
@@ -3947,10 +3949,10 @@
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('产品名称', 600, yMaterialFieldName);
+                    ctx.fillText('产品名称', 630, yMaterialFieldName);
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText('具体描述', 700, yMaterialFieldName);
+                    ctx.fillText('具体描述', 750, yMaterialFieldName);
 
                     yMaterialFieldValue = yMaterialFieldName + 15;
 
@@ -4043,7 +4045,7 @@
                             var itemname = doc1.splitTextToSize($filter('translate')($scope.summary.materialArray[l - 1].ItemName), 50)
                             yItemVal = yMaterialFieldValue;
                             angular.forEach(itemname, function (key) {
-                                ctx.fillText(key, 600, yItemVal);
+                                ctx.fillText(key, 630, yItemVal);
                                 yItemVal += 15;
                             })
                             //ctx.fillText($filter('translate')($scope.summary.materialArray[l - 1].ItemName), 600, yMaterialFieldValue);
@@ -4053,7 +4055,7 @@
                         if ($scope.summary.materialArray[l - 1].Description) {
                             splitTitle = doc1.splitTextToSize($scope.summary.materialArray[l - 1].Description, 250);
                             angular.forEach(splitTitle, function (key) {
-                                ctx.fillText(key, 700, yMaterialFieldValue);
+                                ctx.fillText(key, 750, yMaterialFieldValue);
                                 yMaterialFieldValue = yMaterialFieldValue + 15;
                             });
 

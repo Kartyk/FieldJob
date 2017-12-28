@@ -82,7 +82,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                 customerAddress = $scope.taskDetails.Street_Address + "," + $scope.taskDetails.City;
 
-                if (valueService.getTask().Address1.match(/[\u3400-\u9FBF]/)) {
+                if (customerAddress.match(/[\u3400-\u9FBF]/)) {
 
                     $scope.isBaidu = true;
 
