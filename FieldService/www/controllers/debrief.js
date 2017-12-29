@@ -4145,8 +4145,10 @@
                     ctx.fillText($filter('translate')('Service Representative') + ": " + $scope.engineerName, 70, ySignField + 40);
 
                     ctx.fillText($scope.engTime, 70, ySignField + 60 + 40);
-                    ctx.fillText($scope.custTime, 400, ySignField + 60 + 40);
-
+                    if ($scope.engineerObject == undefined || $scope.engineerObject.isCustomerSignChecked == false) {
+                        if ($scope.custTime != undefined)
+                        ctx.fillText($scope.custTime, 400, ySignField + 60 + 40);
+                    }
                     var engineerSignature = document.getElementById('engineerSignature');
 
                     var callback1 = function (image) {
@@ -4158,18 +4160,19 @@
                     } else {
                         engineerSignature.onload = callback1;
                     }
-                    var customerSignature = document.getElementById('customerSignature');
+                    if ($scope.engineerObject == undefined || $scope.engineerObject.isCustomerSignChecked == false) {
+                        var customerSignature = document.getElementById('customerSignature');
 
-                    var callback1 = function (image) {
-                        if (!image) image = this;
-                        ctx.drawImage(image, 400, ySignField + 60, 75, 40);
+                        var callback1 = function (image) {
+                            if (!image) image = this;
+                            ctx.drawImage(image, 400, ySignField + 60, 75, 40);
+                        }
+                        if (customerSignature.complete) {
+                            callback1(customerSignature);
+                        } else {
+                            customerSignature.onload = callback1;
+                        }
                     }
-                    if (customerSignature.complete) {
-                        callback1(customerSignature);
-                    } else {
-                        customerSignature.onload = callback1;
-                    }
-
 
 
 
