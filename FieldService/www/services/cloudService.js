@@ -1047,7 +1047,7 @@
             $http({
 
                 method: 'POST',
-                url: url + 'OFSC_Workflow/test_ofsc',
+                url: url + 'OFSC_Workflow/workflow_OFSC',
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
