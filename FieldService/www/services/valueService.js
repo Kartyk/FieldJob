@@ -1001,8 +1001,8 @@
             var statusData = {
                 "TaskId": item.Task_Number,
                 "Activity_Id": item.Activity_Id,
-                "XA_TASK_STATUS": "11",
-                // "XA_TASK_STATUS": "10",
+                //"XA_TASK_STATUS": "11",
+                "XA_TASK_STATUS": "10",
                 "taskStatus": "Working"
             };
 
@@ -1348,7 +1348,8 @@
                                                             var statusData = {
                                                                 "TaskId": taskId,
                                                                 "Activity_Id": taskObject.Activity_Id,
-                                                                "XA_TASK_STATUS": "3",
+                                                                //"XA_TASK_STATUS": "3",
+                                                                "XA_TASK_STATUS": "2",
                                                                 "taskstatus": "Completed-Awaiting Review",
                                                                 "email": taskObject.Email,
                                                                 "completeDate": moment.utc(new Date(taskObject.Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),

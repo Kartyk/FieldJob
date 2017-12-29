@@ -165,7 +165,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getCombinedBackId()
+                    "oracle-mobile-backend-id": constantService.getTaskListBackId()
                 },
                 data: data
 
@@ -357,7 +357,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getCombinedBackId()
+                    "oracle-mobile-backend-id": constantService.getTaskDetailBackId()
                 },
                 data: data
 
@@ -490,7 +490,8 @@
             $http({
 
                 method: 'POST',
-                url: url + 'getProjectDetails/Project_Number',
+                //url: url + 'getProjectDetails/Project_Number',
+                url: url + 'getProjectDetails/Project',
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
@@ -620,7 +621,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getCombinedBackId()
+                    "oracle-mobile-backend-id": constantService.getLovBackId()
                 }
 
             }).success(function (response) {
@@ -995,7 +996,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getCombinedBackId()
+                    "oracle-mobile-backend-id": constantService.getDebriefBackId()
                 },
                 data: formData
 
@@ -1050,7 +1051,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getCombinedBackId()
+                    "oracle-mobile-backend-id": constantService.getStatusBackId()
                 },
                 data: data
 
