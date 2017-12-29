@@ -1941,7 +1941,19 @@
 
     $scope.goPreviousTab = function (stage) {
 
-        $scope.selectedIndex = $scope.stages.findIndex(x => x.title == stage) - 1;
+        if (!$rootScope.completedTask) {
+            $scope.selectedIndex = $scope.stages.findIndex(x => x.title == stage) - 1;
+        } else {
+            if (valueService.getUserType().defaultView == "My Task") {
+
+                $state.go("myFieldJob");
+
+            } else {
+
+                $state.go("myTask");
+            }
+        }
+       
     };
 
     $scope.Next = function (stage) {
