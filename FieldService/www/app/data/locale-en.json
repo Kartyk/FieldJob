@@ -202,6 +202,7 @@
   "emerson": "EMERSON",
   "Conatct Name": "Contact Name",
   "Distance": "Distance",
-  "Item Name":"Item Number"
+  "Item Name": "Item Number",
+  "Item Namematerial": "Item Name"
 
 }

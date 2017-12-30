@@ -2057,14 +2057,67 @@
             }
 
         } else if ($scope.currentTab == "attachments") {
+            if ($scope.files.length > 0 || $scope.image.length > 0)
+            {
+                $scope.attachmentArraydb = [];
 
-            if ($scope.attachmentArraydb.length > 0) {
+                i = 0;
 
-                localService.deleteAttachment($scope.taskId);
-                localService.insertAttachmentList($scope.attachmentArraydb, function (result) {
-                    console.log("Attachment Success")
+                angular.forEach($scope.files, function (attachment) {
+
+                    var filePath = cordova.file.dataDirectory;
+
+                    var base64Code = attachment.base64;
+
+                    valueService.saveBase64File(filePath, attachment.filename, base64Code, attachment.contentType);
+
+                    var attachmentObject = {
+                        Attachment_Id: $scope.taskId + "" + (i + 1),
+                        File_Path: filePath,
+                        File_Name: attachment.filename,
+                        File_Type: attachment.contentType,
+                        Type: "D",
+                        Task_Number: $scope.taskId,
+                        AttachmentType: "D"
+                    };
+
+                    $scope.attachmentArraydb.push(attachmentObject);
+
+                    i++;
                 });
+
+                angular.forEach($scope.image, function (attachment) {
+
+                    var filePath = cordova.file.dataDirectory;
+
+                    var base64Code = attachment.base64;
+
+                    valueService.saveBase64File(filePath, attachment.filename, base64Code, attachment.data.split(",")[0].split(";")[0].split(":")[1]);
+
+                    var attachmentObject = {
+                        Attachment_Id: $scope.taskId + "" + (i + 1),
+                        File_Path: filePath,
+                        File_Name: attachment.filename,
+                        File_Type: attachment.contentType,
+                        Type: "D",
+                        Task_Number: $scope.taskId,
+                        AttachmentType: "M"
+                    };
+
+                    $scope.attachmentArraydb.push(attachmentObject);
+
+                    i++;
+                });
+
+                if ($scope.attachmentArraydb.length > 0) {
+
+                    localService.deleteAttachment($scope.taskId);
+                    localService.insertAttachmentList($scope.attachmentArraydb, function (result) {
+                        console.log("Attachment Success")
+                    });
+                }
             }
+           
 
         } else if ($scope.currentTab == "emerson signature") {
 
@@ -3135,7 +3188,7 @@
 
     $scope.reviewSummary = function () {
 
-        // var promise = generatePDF();
+         //var promise = generatePDF();
 
         $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Customer Signature");
 
@@ -3746,7 +3799,8 @@
                     ctx.font = 'bold 13px sans-serif ';
                     ctx.fillText('日期', 30, yTimeFieldName);
 
-                    if ($scope.userType == 'C') {
+                   // if ($scope.userType == 'C')
+                    {
 
                         ctx.fillStyle = "#000";
                         ctx.font = 'bold 13px sans-serif ';
@@ -3829,6 +3883,33 @@
 
                             if ($scope.summary.timeArray[j - 1].Charge_Method)
                                 ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Charge_Method), 310, yTimeFieldValue);
+                        }
+                        else
+                        {
+                            ctx.fillStyle = "#000";
+                            ctx.font = '13px sans-serif ';
+                            if ($scope.summary.timeArray[j - 1].Date != "SUB TOTAL" && $scope.summary.timeArray[j - 1].grandTotal != "bold") {
+                                if ($scope.taskObject.Charge_Type != undefined && $scope.taskObject.Charge_Type != "") {
+                                    ctx.fillText($filter('translate')($scope.taskObject.Charge_Type), 160, yTimeFieldValue);
+                                }
+                                ctx.fillStyle = "#000";
+                                ctx.font = '13px sans-serif ';
+
+                                if ($scope.summary.timeArray[j - 1].Work_Type != undefined && $scope.summary.timeArray[j - 1].Work_Type != "") {
+                                    if ($scope.summary.timeArray[j - 1].Work_Type == "Travel") {
+                                        if ($scope.taskObject.Travel_Method != undefined && $scope.taskObject.Travel_Method != "") {
+                                            ctx.fillText($filter('translate')($scope.taskObject.Travel_Method), 310, yTimeFieldValue);
+                                        }
+                                    }
+                                    else {
+                                        if ($scope.taskObject.Labor_Method != undefined && $scope.taskObject.Labor_Method != "") {
+                                            ctx.fillText($filter('translate')($scope.taskObject.Labor_Method), 310, yTimeFieldValue);
+                                        }
+                                    }
+                                }
+                            }
+                            
+                               
                         }
 
                         ctx.fillStyle = "#000";
@@ -4469,7 +4550,7 @@
                     columns = 8
                 }
                 else
-                    columns = 4;
+                    columns = 6;
                 var timeWidth = (660 / columns);
 
                 doc1.setFontSize(22)
@@ -4491,7 +4572,8 @@
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 var coloumnNo = 1;
-                if ($scope.userType == "C") {
+                //if ($scope.userType == "C")
+                {
                     if (valueService.getLanguage() == 'fr')
                         doc1.text(xTimeField + timeWidth, yTimeFieldName, $filter('translate')('Charge\nType'))
                     else
@@ -4499,7 +4581,8 @@
                     coloumnNo++;
                 }
 
-                if ($scope.userType == "C") {
+                //if ($scope.userType == "C")
+                {
                     doc1.setFontSize(22)
                     doc1.setFontType('bold')
                     doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldName, $filter('translate')('Charge\nMethod'))
@@ -4558,6 +4641,42 @@
                             doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Charge_Method))
                         else
                             coloumnNo++
+                    }
+                    else {
+                        if ($scope.summary.timeArray[j - 1].Date != "SUB TOTAL" && $scope.summary.timeArray[j - 1].grandTotal != "bold") {
+                            if ($scope.taskObject.Charge_Type != undefined && $scope.taskObject.Charge_Type != "") {
+                                doc1.text(xTimeField + timeWidth, yTimeFieldValue, $filter('translate')($scope.taskObject.Charge_Type));
+                                coloumnNo++
+                            }
+                            else
+                                coloumnNo++
+                            if ($scope.summary.timeArray[j - 1].Work_Type != undefined && $scope.summary.timeArray[j - 1].Work_Type != "") {
+                                if ($scope.summary.timeArray[j - 1].Work_Type == "Travel") {
+                                    if ($scope.taskObject.Travel_Method != undefined && $scope.taskObject.Travel_Method != "") {
+                                        doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, $filter('translate')($scope.taskObject.Travel_Method));
+
+                                    }
+                                    else
+                                        coloumnNo++
+                                }
+                                else {
+                                    if ($scope.taskObject.Labor_Method != undefined && $scope.taskObject.Labor_Method != "") {
+                                        doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, $filter('translate')($scope.taskObject.Labor_Method));
+
+                                    }
+                                    else
+                                        coloumnNo++
+                                }
+                            }
+                            else {
+                                coloumnNo++
+                            }
+                        }
+                        else
+                        {
+                            coloumnNo++
+                        }
+                        //$scope.taskObject.Charge_Type
                     }
                     doc1.setFontSize(22)
 
@@ -4716,7 +4835,7 @@
                 doc1.setFontType('bold')
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(490, yMaterialFieldName, $filter('translate')('Item Name'))
+                doc1.text(490, yMaterialFieldName, $filter('translate')('Item Namematerial'))
                 doc1.text(586, yMaterialFieldName, 'Description')
                 yMaterialFieldValue = yMaterialFieldName + 20;
 
