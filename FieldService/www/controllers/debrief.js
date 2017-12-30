@@ -4729,6 +4729,8 @@
                 }
 
                 rectTimeHeight = yTimeFieldValue - yTimeField;
+                if (yTimeFieldValue == yTimeField)
+                    rectTimeHeight += 20;
                 doc1.rect(20, yTimeField + 5, rectTimeWidth, rectTimeHeight + 10)
 
                 //var k = 0, xExpenseField = 25, yExpenseField = yTimeField + rectTimeHeight + 25, rectExpenseWidth = 660,
