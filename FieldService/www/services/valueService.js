@@ -1069,384 +1069,368 @@
 
                 timeArray = response;
 
-                if (timeArray.length > 0) {
+                for (var i = 0; i < timeArray.length; i++) {
 
-                    for (var i = 0; i < timeArray.length; i++) {
+                    var chargeMethod;
 
-                        var chargeMethod;
+                    if (getUserType().clarityType == 'C') {
 
-                        if (getUserType().clarityType == 'C') {
+                        chargeMethod = timeArray[i].Charge_Method_Id;
 
-                            chargeMethod = timeArray[i].Charge_Method_Id;
+                    } else {
 
-                        } else {
-
-                            chargeMethod = "";
-                        }
-
-                        var shiftcode = "", timecode = "";
-
-                        if (timeArray[i].Time_Code_Value != undefined) {
-                            timecode = timeArray[i].Time_Code_Value;
-                        }
-
-                        if (timeArray[i].Shift_Code_Value != undefined) {
-                            shiftcode = timeArray[i].Shift_Code_Value;
-                        }
-
-                        var timeData = {
-                            "task_id": timeArray[i].Task_Number,
-                            "shift_code": timeArray[i].Shift_Code_Id,
-                            "overtime_shiftcode": timeArray[i].Time_Code_Id,
-                            "shiftCodevalue": shiftcode,
-                            "overTimeShiftCodevalue": timecode,
-                            "charge_type": timeArray[i].Charge_Type_Id,
-                            "duration": timeArray[i].Duration,
-                            "comments": timeArray[i].Comments,
-                            "labor_item": timeArray[i].Item_Id,
-                            "labor_description": timeArray[i].Description,
-                            "work_type": timeArray[i].Work_Type_Id,
-                            "start_date": moment.utc(new Date(timeArray[i].Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                            "end_date": moment.utc(new Date(timeArray[i].Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                            "charge_method": chargeMethod,
-                            "JobName": timeArray[i].Field_Job_Name_Id
-                        };
-
-                        timeJSONData.push(timeData);
+                        chargeMethod = "";
                     }
 
-                    localService.getExpenseList(taskId, function (response) {
+                    var shiftcode = "", timecode = "";
 
-                        expenseArray = response;
+                    if (timeArray[i].Time_Code_Value != undefined) {
+                        timecode = timeArray[i].Time_Code_Value;
+                    }
 
-                        if (expenseArray.length > 0) {
+                    if (timeArray[i].Shift_Code_Value != undefined) {
+                        shiftcode = timeArray[i].Shift_Code_Value;
+                    }
 
-                            for (var i = 0; i < expenseArray.length; i++) {
+                    var timeData = {
+                        "task_id": timeArray[i].Task_Number,
+                        "shift_code": timeArray[i].Shift_Code_Id,
+                        "overtime_shiftcode": timeArray[i].Time_Code_Id,
+                        "shiftCodevalue": shiftcode,
+                        "overTimeShiftCodevalue": timecode,
+                        "charge_type": timeArray[i].Charge_Type_Id,
+                        "duration": timeArray[i].Duration,
+                        "comments": timeArray[i].Comments,
+                        "labor_item": timeArray[i].Item_Id,
+                        "labor_description": timeArray[i].Description,
+                        "work_type": timeArray[i].Work_Type_Id,
+                        "start_date": moment.utc(new Date(timeArray[i].Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                        "end_date": moment.utc(new Date(timeArray[i].Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                        "charge_method": chargeMethod,
+                        "JobName": timeArray[i].Field_Job_Name_Id
+                    };
 
-                                var expenseData = {
-                                    "taskId": expenseArray[i].Task_Number,
-                                    "comments": expenseArray[i].Justification,
-                                    "currency": expenseArray[i].Currency_Id.toString(),
-                                    "distance": expenseArray[i].Distance,
-                                    "unitofmeasurement": expenseArray[i].UOM_Id,
-                                    "chargeMethod": expenseArray[i].Charge_Method_Id.toString(),
-                                    "ammount": expenseArray[i].Amount,
-                                    "date": moment.utc(new Date(expenseArray[i].Date)).format("YYYY-MM-DD"),
-                                    "expenseItem": expenseArray[i].Expense_Type_Id.toString()
-                                };
+                    timeJSONData.push(timeData);
+                }
 
-                                expenseJSONData.push(expenseData);
+                localService.getExpenseList(taskId, function (response) {
+
+                    expenseArray = response;
+
+                    for (var i = 0; i < expenseArray.length; i++) {
+
+                        var expenseData = {
+                            "taskId": expenseArray[i].Task_Number,
+                            "comments": expenseArray[i].Justification,
+                            "currency": expenseArray[i].Currency_Id.toString(),
+                            "distance": expenseArray[i].Distance,
+                            "unitofmeasurement": expenseArray[i].UOM_Id,
+                            "chargeMethod": expenseArray[i].Charge_Method_Id.toString(),
+                            "ammount": expenseArray[i].Amount,
+                            "date": moment.utc(new Date(expenseArray[i].Date)).format("YYYY-MM-DD"),
+                            "expenseItem": expenseArray[i].Expense_Type_Id.toString()
+                        };
+
+                        expenseJSONData.push(expenseData);
+                    }
+
+                    localService.getMaterialList(taskId, function (response) {
+
+                        materialArray = response;
+
+                        angular.forEach(materialArray, function (item) {
+
+                            var serialIn, serialOut, serialNo;
+
+                            if (item.Serial_In != undefined) {
+
+                                serialIn = item.Serial_In.split(",");
                             }
 
-                            localService.getMaterialList(taskId, function (response) {
+                            if (item.Serial_Out != undefined) {
 
-                                materialArray = response;
+                                serialOut = item.Serial_Out.split(",");
+                            }
 
-                                if (materialArray.length > 0) {
+                            if (item.Serial_Number != undefined) {
 
-                                    angular.forEach(materialArray, function (item) {
+                                serialNo = item.Serial_Number.split(",")
+                            }
 
-                                        var serialIn, serialOut, serialNo;
+                            item.Serial_Type = [];
 
-                                        if (item.Serial_In != undefined) {
+                            if (serialNo != undefined && serialNo.length > 0) {
 
-                                            serialIn = item.Serial_In.split(",");
-                                        }
+                                angular.forEach(serialNo, function (serail) {
 
-                                        if (item.Serial_Out != undefined) {
+                                    var serialTypeObject = {};
 
-                                            serialOut = item.Serial_Out.split(",");
-                                        }
+                                    serialTypeObject.in = "";
+                                    serialTypeObject.out = "";
+                                    serialTypeObject.number = serail;
 
-                                        if (item.Serial_Number != undefined) {
+                                    if (serialTypeObject.number != "")
+                                        item.Serial_Type.push(serialTypeObject);
+                                });
+                            }
 
-                                            serialNo = item.Serial_Number.split(",")
-                                        }
+                            if (serialIn != undefined && serialIn.length > 0 && serialOut != undefined && serialOut.length > 0) {
 
-                                        item.Serial_Type = [];
+                                var index = 0;
 
-                                        if (serialNo != undefined && serialNo.length > 0) {
+                                angular.forEach(serialIn, function (serial) {
 
-                                            angular.forEach(serialNo, function (serail) {
+                                    var serialTypeObject = {};
 
-                                                var serialTypeObject = {};
+                                    serialTypeObject.in = serial;
+                                    serialTypeObject.out = serialOut[index];
+                                    serialTypeObject.number = "";
 
-                                                serialTypeObject.in = "";
-                                                serialTypeObject.out = "";
-                                                serialTypeObject.number = serail;
+                                    if (serialTypeObject.in != "")
+                                        item.Serial_Type.push(serialTypeObject);
 
-                                                if (serialTypeObject.number != "")
-                                                    item.Serial_Type.push(serialTypeObject);
+                                    index++;
+                                });
+                            }
+
+                            angular.forEach(item.Serial_Type, function (key) {
+
+                                var materialData = {
+                                    "charge_method": item.Charge_Type_Id.toString(),
+                                    "task_id": item.Task_Number,
+                                    "item_description": item.Description,
+                                    "product_quantity": "1",
+                                    "comments": "",
+                                    "item": item.ItemName,
+                                    "serialin": key.in,
+                                    "serialout": key.out,
+                                    "serial_number": key.number
+                                }
+
+                                materialJSONData.push(materialData);
+                            });
+                        });
+
+                        localService.getNotesList(taskId, function (response) {
+
+                            notesArray = response;
+
+                            for (var i = 0; i < notesArray.length; i++) {
+
+                                var noteData = {
+                                    "Notes_type": notesArray[i].Note_Type_Id,
+                                    "notes_description": notesArray[i].Notes,
+                                    "task_id": notesArray[i].Task_Number,
+                                    "mobilecreatedDate": moment.utc(new Date(notesArray[i].Date)).format("YYYY-MM-DDTHH:mm:ss.000Z")
+                                };
+
+                                noteJSONData.push(noteData);
+                            }
+
+                            localService.getAttachmentList(taskId, "D", function (response) {
+
+                                attachmentArray = response;
+
+                                var promises = [];
+
+                                angular.forEach(attachmentArray, function (attachment) {
+
+                                    var deferred = $q.defer();
+
+                                    var attachmentObject = {};
+
+                                    var fileName = attachment.File_Name.split(".")[0];
+
+                                    var attachFileName = fileName.trim(0, 34);
+
+                                    attachmentObject.taskId = attachment.Task_Number;
+                                    attachmentObject.contentType = attachment.File_Type;
+                                    attachmentObject.FileName = attachFileName + '.' + attachment.File_Name.split(".")[1];
+                                    attachmentObject.Description = attachment.File_Name.split(".")[0];
+                                    attachmentObject.Name = attachFileName + '.' + attachment.File_Name.split(".")[1];
+
+                                    console.log("START " + new Date());
+
+                                    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+
+                                        fs.root.getFile(attachment.File_Name, {
+                                            create: true,
+                                            exclusive: false
+                                        }, function (fileEntry) {
+
+                                            fileEntry.file(function (file) {
+
+                                                var reader = new FileReader();
+
+                                                reader.onloadend = function () {
+
+                                                    console.log("END " + new Date());
+
+                                                    attachmentObject.Data = this.result.split(",")[1];
+
+                                                    attachmentJSONData.push(attachmentObject);
+
+                                                    deferred.resolve(attachmentObject);
+                                                };
+
+                                                reader.readAsDataURL(file);
                                             });
-                                        }
-
-                                        if (serialIn != undefined && serialIn.length > 0 && serialOut != undefined && serialOut.length > 0) {
-
-                                            var index = 0;
-
-                                            angular.forEach(serialIn, function (serial) {
-
-                                                var serialTypeObject = {};
-
-                                                serialTypeObject.in = serial;
-                                                serialTypeObject.out = serialOut[index];
-                                                serialTypeObject.number = "";
-
-                                                if (serialTypeObject.in != "")
-                                                    item.Serial_Type.push(serialTypeObject);
-
-                                                index++;
-                                            });
-                                        }
-                                        angular.forEach(item.Serial_Type, function (key) {
-
-                                            var materialData = {
-                                                "charge_method": item.Charge_Type_Id.toString(),
-                                                "task_id": item.Task_Number,
-                                                "item_description": item.Description,
-                                                "product_quantity": "1",
-                                                "comments": "",
-                                                "item": item.ItemName,
-                                                "serialin": key.in,
-                                                "serialout": key.out,
-                                                "serial_number": key.number
-                                            }
-
-                                            materialJSONData.push(materialData);
                                         });
                                     });
 
-                                    localService.getNotesList(taskId, function (response) {
+                                    promises.push(deferred.promise);
 
-                                        notesArray = response;
+                                });
 
-                                        if (notesArray.length > 0) {
+                                var deferred = $q.defer();
 
-                                            for (var i = 0; i < notesArray.length; i++) {
+                                var reportObject;
 
-                                                var noteData = {
-                                                    "Notes_type": notesArray[i].Note_Type_Id,
-                                                    "notes_description": notesArray[i].Notes,
-                                                    "task_id": notesArray[i].Task_Number,
-                                                    "mobilecreatedDate": moment.utc(new Date(notesArray[i].Date)).format("YYYY-MM-DDTHH:mm:ss.000Z")
+                                window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+
+                                    fs.root.getFile("Report_" + taskId + ".pdf", {
+                                        create: true,
+                                        exclusive: false
+                                    }, function (fileEntry) {
+
+                                        fileEntry.file(function (file) {
+
+                                            var reader = new FileReader();
+
+                                            reader.onloadend = function () {
+
+                                                reportObject = {
+                                                    "Data": this.result.split(",")[1],
+                                                    "FileName": "Report_" + taskId + ".pdf",
+                                                    "Description": "Report_" + taskId + ".pdf",
+                                                    "Name": "Report_" + taskId + ".pdf",
+                                                    "taskId": taskId,
+                                                    "contentType": "application/pdf"
                                                 };
 
-                                                noteJSONData.push(noteData);
-                                            }
+                                                deferred.resolve(reportObject);
+                                            };
 
-                                            localService.getAttachmentList(taskId, "D", function (response) {
+                                            reader.readAsDataURL(file);
+                                        });
+                                    });
+                                });
 
-                                                attachmentArray = response;
+                                promises.push(deferred.promise);
 
-                                                var promises = [];
+                                $q.all(promises).then(function (response) {
 
-                                                if (attachmentArray.length > 0) {
+                                    var reportAttachmentUploadJSON;
 
-                                                    angular.forEach(attachmentArray, function (attachment) {
+                                    if (reportObject != undefined) {
 
-                                                        var deferred = $q.defer();
+                                        attachmentJSONData.push(reportObject);
 
-                                                        var attachmentObject = {};
+                                        reportAttachmentUploadJSON = {
+                                            "attachment": reportObject
+                                        };
+                                    }
 
-                                                        var fileName = attachment.File_Name.split(".")[0];
-                                                        var attachFileName = fileName.trim(0, 34);
-                                                 
+                                    localService.getEngineer(taskId, function (response) {
 
-                                                        attachmentObject.taskId = attachment.Task_Number;
-                                                        attachmentObject.contentType = attachment.File_Type;
-                                                        attachmentObject.FileName = attachFileName + '.' + attachment.File_Name.split(".")[1];
-                                                        attachmentObject.Description = attachment.File_Name.split(".")[0];
-                                                        attachmentObject.Name = attachFileName + '.' + attachment.File_Name.split(".")[1];
+                                        if (response != undefined) {
 
-                                                        console.log("START " + new Date());
+                                            var statusData = {
+                                                "TaskId": taskId,
+                                                "Activity_Id": taskObject.Activity_Id,
+                                                //"XA_TASK_STATUS": "3",
+                                                "XA_TASK_STATUS": "2",
+                                                "taskstatus": "Completed-Awaiting Review",
+                                                "email": taskObject.Email,
+                                                "completeDate": moment.utc(new Date(taskObject.Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                                                "followUp": response.followUp + "",
+                                                "salesQuote": response.salesQuote + "",
+                                                "salesVisit": response.salesVisit + "",
+                                                "salesLead": response.salesLead + "",
+                                                "followuptext": response.Follow_Up,
+                                                "sparequotetext": response.Spare_Quote,
+                                                "salesText": response.Sales_Visit,
+                                                "salesleadText": response.Sales_Head,
+                                                "denySignature": response.isCustomerSignChecked + "",
+                                                "signatureComments": response.customerComments
+                                            };
 
-                                                        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+                                            var formData = {
+                                                "Time": timeJSONData,
+                                                "expense": expenseJSONData,
+                                                "Material": materialJSONData,
+                                                "Notes": noteJSONData
+                                            };
 
-                                                            fs.root.getFile(attachment.File_Name, {
-                                                                create: true,
-                                                                exclusive: false
-                                                            }, function (fileEntry) {
+                                            var attachmentUploadJSON = {
+                                                "attachment": attachmentJSONData
+                                            };
 
-                                                                fileEntry.file(function (file) {
+                                            cloudService.updateDebrief(formData, function (response) {
 
-                                                                    var reader = new FileReader();
+                                                if (attachmentUploadJSON.attachment != undefined && attachmentUploadJSON.attachment.length > 0) {
 
-                                                                    reader.onloadend = function () {
+                                                    console.log("START API " + new Date());
 
-                                                                        console.log("END " + new Date());
+                                                    cloudService.createAttachment(attachmentUploadJSON, function (response) {
 
-                                                                        attachmentObject.Data = this.result.split(",")[1];
+                                                        console.log("END API " + new Date());
 
-                                                                        attachmentJSONData.push(attachmentObject);
+                                                        cloudService.updateOFSCStatus(statusData, function (response) {
 
-                                                                        deferred.resolve(attachmentObject);
-                                                                    };
+                                                            console.log("Task Completed " + JSON.stringify(response));
 
-                                                                    reader.readAsDataURL(file);
-                                                                });
-                                                            });
-                                                        });
-
-                                                        promises.push(deferred.promise);
-
-                                                    });
-                                                }
-
-                                                var deferred = $q.defer();
-
-                                                var reportObject;
-
-                                                window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
-
-                                                    fs.root.getFile("Report_" + taskId + ".pdf", {
-                                                        create: true,
-                                                        exclusive: false
-                                                    }, function (fileEntry) {
-
-                                                        fileEntry.file(function (file) {
-
-                                                            var reader = new FileReader();
-
-                                                            reader.onloadend = function () {
-
-                                                                reportObject = {
-                                                                    "Data": this.result.split(",")[1],
-                                                                    "FileName": "Report_" + taskId + ".pdf",
-                                                                    "Description": "Report_" + taskId + ".pdf",
-                                                                    "Name": "Report_" + taskId + ".pdf",
-                                                                    "taskId": taskId,
-                                                                    "contentType": "application/pdf"
-                                                                };
-
-                                                                deferred.resolve(reportObject);
+                                                            var taskObject = {
+                                                                Task_Status: "Completed",
+                                                                Task_Number: taskId,
+                                                                Submit_Status: "I"
                                                             };
 
-                                                            reader.readAsDataURL(file);
+                                                            localService.updateTaskSubmitStatus(taskObject, function (result) {
+
+                                                                callback("Success Submit");
+                                                            });
+
                                                         });
                                                     });
-                                                });
 
-                                                promises.push(deferred.promise);
+                                                } else {
 
-                                                $q.all(promises).then(function (response) {
+                                                    if (reportAttachmentUploadJSON != undefined && reportAttachmentUploadJSON.attachment != undefined) {
 
-                                                    var reportAttachmentUploadJSON;
+                                                        cloudService.createAttachment(reportAttachmentUploadJSON, function (response) {
 
-                                                    if (reportObject != undefined) {
-
-                                                        attachmentJSONData.push(reportObject);
-
-                                                        reportAttachmentUploadJSON = {
-                                                            "attachment": reportObject
-                                                        };
+                                                            console.log("Uploaded FSR " + JSON.stringify(response));
+                                                        });
                                                     }
 
-                                                    localService.getEngineer(taskId, function (response) {
+                                                    cloudService.updateOFSCStatus(statusData, function (response) {
 
-                                                        if (response != undefined) {
+                                                        console.log("Task Completed " + JSON.stringify(response));
 
-                                                            var statusData = {
-                                                                "TaskId": taskId,
-                                                                "Activity_Id": taskObject.Activity_Id,
-                                                                //"XA_TASK_STATUS": "3",
-                                                                "XA_TASK_STATUS": "2",
-                                                                "taskstatus": "Completed-Awaiting Review",
-                                                                "email": taskObject.Email,
-                                                                "completeDate": moment.utc(new Date(taskObject.Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                                                                "followUp": response.followUp + "",
-                                                                "salesQuote": response.salesQuote + "",
-                                                                "salesVisit": response.salesVisit + "",
-                                                                "salesLead": response.salesLead + "",
-                                                                "followuptext": response.Follow_Up,
-                                                                "sparequotetext": response.Spare_Quote,
-                                                                "salesText": response.Sales_Visit,
-                                                                "salesleadText": response.Sales_Head,
-                                                                "denySignature": response.isCustomerSignChecked + "",
-                                                                "signatureComments": response.customerComments
-                                                            };
+                                                        var taskObject = {
+                                                            Task_Status: "Completed",
+                                                            Task_Number: taskId,
+                                                            Submit_Status: "I"
+                                                        };
 
-                                                            var formData = {
-                                                                "Time": timeJSONData,
-                                                                "expense": expenseJSONData,
-                                                                "Material": materialJSONData,
-                                                                "Notes": noteJSONData
-                                                            };
+                                                        localService.updateTaskSubmitStatus(taskObject, function (result) {
 
-                                                            var attachmentUploadJSON = {
-                                                                "attachment": attachmentJSONData
-                                                            };
-
-                                                            cloudService.updateDebrief(formData, function (response) {
-
-                                                                if (attachmentUploadJSON.attachment != undefined && attachmentUploadJSON.attachment.length > 0) {
-
-                                                                    console.log("START API " + new Date());
-
-                                                                    cloudService.createAttachment(attachmentUploadJSON, function (response) {
-
-                                                                        console.log("END API " + new Date());
-
-                                                                        cloudService.updateOFSCStatus(statusData, function (response) {
-
-                                                                            console.log("Task Completed " + JSON.stringify(response));
-
-                                                                            var taskObject = {
-                                                                                Task_Status: "Completed",
-                                                                                Task_Number: taskId,
-                                                                                Submit_Status: "I"
-                                                                            };
-
-                                                                            localService.updateTaskSubmitStatus(taskObject, function (result) {
-
-                                                                                callback("Success Submit");
-                                                                            });
-
-                                                                        });
-                                                                    });
-
-                                                                } else {
-
-                                                                    if (reportAttachmentUploadJSON != undefined && reportAttachmentUploadJSON.attachment != undefined) {
-
-                                                                        cloudService.createAttachment(reportAttachmentUploadJSON, function (response) {
-
-                                                                            console.log("Uploaded FSR " + JSON.stringify(response));
-                                                                        });
-                                                                    }
-
-                                                                    cloudService.updateOFSCStatus(statusData, function (response) {
-
-                                                                        console.log("Task Completed " + JSON.stringify(response));
-
-                                                                        var taskObject = {
-                                                                            Task_Status: "Completed",
-                                                                            Task_Number: taskId,
-                                                                            Submit_Status: "I"
-                                                                        };
-
-                                                                        localService.updateTaskSubmitStatus(taskObject, function (result) {
-
-                                                                            callback("Success Submit");
-                                                                        });
-                                                                    });
-                                                                }
-                                                            });
-                                                        }
+                                                            callback("Success Submit");
+                                                        });
                                                     });
-                                                },
-                                                    function (error) {
-
-                                                    });
+                                                }
                                             });
                                         }
                                     });
-                                }
-                            });
-                        }
-                    });
-                }
-            });
+                                }, function (error) {
 
+                                });
+                            });
+                        });
+                    });
+                });
+            });
         };
 
         function checkIfFutureDayTask(selTask) {
@@ -1506,15 +1490,19 @@
             cloudService.getNoteType();
 
         };
+
         function setEnggSignTime(time) {
             enggTime = time;
         }
+
         function setCustSignTime(time) {
             custTime = time;
         }
+
         function getEnggSignTime() {
             return enggTime;
         }
+
         function getCustSignTime() {
             return custTime;
         }

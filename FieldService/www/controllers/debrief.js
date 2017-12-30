@@ -1953,7 +1953,7 @@
                 $state.go("myTask");
             }
         }
-       
+
     };
 
     $scope.Next = function (stage) {
@@ -2057,8 +2057,9 @@
             }
 
         } else if ($scope.currentTab == "attachments") {
-            if ($scope.files.length > 0 || $scope.image.length > 0)
-            {
+
+            if ($scope.files.length > 0 || $scope.image.length > 0) {
+
                 $scope.attachmentArraydb = [];
 
                 i = 0;
@@ -2117,7 +2118,6 @@
                     });
                 }
             }
-           
 
         } else if ($scope.currentTab == "emerson signature") {
 
@@ -2234,7 +2234,7 @@
                         "serialOut": $scope.serialOut(key.Serial_Type),
                         "Description": key.Description,
                         "ItemName": key.ItemName
-                    }
+                    };
 
                     $scope.summary.materialArray.push(materialObject);
                 });
@@ -3188,7 +3188,7 @@
 
     $scope.reviewSummary = function () {
 
-         //var promise = generatePDF();
+        //var promise = generatePDF();
 
         $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Customer Signature");
 
@@ -3799,7 +3799,7 @@
                     ctx.font = 'bold 13px sans-serif ';
                     ctx.fillText('日期', 30, yTimeFieldName);
 
-                   // if ($scope.userType == 'C')
+                    // if ($scope.userType == 'C')
                     {
 
                         ctx.fillStyle = "#000";
@@ -3884,8 +3884,7 @@
                             if ($scope.summary.timeArray[j - 1].Charge_Method)
                                 ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Charge_Method), 310, yTimeFieldValue);
                         }
-                        else
-                        {
+                        else {
                             ctx.fillStyle = "#000";
                             ctx.font = '13px sans-serif ';
                             if ($scope.summary.timeArray[j - 1].Date != "SUB TOTAL" && $scope.summary.timeArray[j - 1].grandTotal != "bold") {
@@ -3908,8 +3907,8 @@
                                     }
                                 }
                             }
-                            
-                               
+
+
                         }
 
                         ctx.fillStyle = "#000";
@@ -4229,7 +4228,7 @@
                     ctx.fillText($scope.engTime, 70, ySignField + 60 + 40);
                     if ($scope.engineerObject == undefined || $scope.engineerObject.isCustomerSignChecked == false) {
                         if ($scope.custTime != undefined)
-                        ctx.fillText($scope.custTime, 400, ySignField + 60 + 40);
+                            ctx.fillText($scope.custTime, 400, ySignField + 60 + 40);
                     }
                     var engineerSignature = document.getElementById('engineerSignature');
 
@@ -4672,8 +4671,7 @@
                                 coloumnNo++
                             }
                         }
-                        else
-                        {
+                        else {
                             coloumnNo++
                         }
                         //$scope.taskObject.Charge_Type
