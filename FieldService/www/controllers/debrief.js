@@ -2659,7 +2659,7 @@
                                     "XA_TASK_STATUS": "2",
                                     "taskstatus": "Completed-Awaiting Review",
                                     "email": constantService.getCCEmailID(),
-                                    "completeDate": moment.utc(new Date($scope.taskObject.Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                                    "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
                                     "followUp": $scope.engineerObject.followUp + "",
                                     "salesQuote": $scope.engineerObject.salesQuote + "",
                                     "salesVisit": $scope.engineerObject.salesVisit + "",
