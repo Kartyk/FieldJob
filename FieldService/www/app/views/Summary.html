@@ -234,8 +234,8 @@
                                     <td class="noborder bg-white padding-right" ng-if="userType=='C'">{{time.Charge_Type| translate}}</td>
                                     <td class="noborder bg-white padding-right" ng-if="userType=='C'">{{time.Charge_Method| translate}}</td>
                                     <td class="noborder bg-white padding-right" ng-if="userType!='C'">{{taskObject.Charge_Type| translate}}</td>
-                                    <td class="noborder bg-white padding-right" ng-if="userType!='C' && time.Work_Type=='Travel' && time.grandTotal!='bold' && time.Date!='SUB TOTAL'">{{taskObject.Travel_Method| translate}}</td>
-                                    <td class="noborder bg-white padding-right" ng-if="userType!='C' && time.Work_Type!='Travel' && time.grandTotal!='bold' && time.Date!='SUB TOTAL'">{{taskObject.Labor_Method| translate}}</td>
+                                    <!--<td class="noborder bg-white padding-right" ng-if="userType!='C' && time.Work_Type=='Travel' && time.grandTotal!='bold' && time.Date!='SUB TOTAL'">{{taskObject.Travel_Method| translate}}</td>
+                                    <td class="noborder bg-white padding-right" ng-if="userType!='C' && time.Work_Type!='Travel' && time.grandTotal!='bold' && time.Date!='SUB TOTAL'">{{taskObject.Labor_Method| translate}}</td>-->
                                     <td class="noborder bg-white padding-right" ng-style="{'white-space':'pre','font-weight':time.grandTotal}">{{time.Work_Type| translate}}</td>
                                     <!-- <td md-cell>{{time.standard}}</td> -->
                                     <td class="noborder bg-white padding-right" ng-if="userType=='C'" >{{time.Time_Code}} </td>

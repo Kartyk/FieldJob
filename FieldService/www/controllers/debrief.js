@@ -3375,7 +3375,7 @@
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
-                    var start = moment.utc($scope.summary.taskObject.times[0].Start_Date).utcOffset(constantService.getTimeZone()).format("DD/MM/YYYY")
+                    var start = moment.utc($scope.summary.taskObject.times[0].Start_Date).utcOffset(constantService.getTimeZone()).format("DD-MMM-YYYY")
                     if (start)
                         ctx.fillText(start, 280, 112);
 
@@ -3389,7 +3389,7 @@
                     var enddate = " ";
 
                     if ($scope.summary.taskObject.times[0].End_Date != "" && $scope.summary.taskObject.times[0].End_Date != undefined) {
-                        enddate = moment.utc($scope.summary.taskObject.times[0].End_Date).utcOffset(constantService.getTimeZone()).format("DD/MM/YYYY");
+                        enddate = moment.utc($scope.summary.taskObject.times[0].End_Date).utcOffset(constantService.getTimeZone()).format("DD-MMM-YYYY");
                     }
                     ctx.fillText(enddate, 530, 112);
 
@@ -3799,7 +3799,7 @@
                     ctx.font = 'bold 13px sans-serif ';
                     ctx.fillText('日期', 30, yTimeFieldName);
 
-                    // if ($scope.userType == 'C')
+                     if ($scope.userType == 'C')
                     {
 
                         ctx.fillStyle = "#000";
@@ -3884,32 +3884,32 @@
                             if ($scope.summary.timeArray[j - 1].Charge_Method)
                                 ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Charge_Method), 310, yTimeFieldValue);
                         }
-                        else {
-                            ctx.fillStyle = "#000";
-                            ctx.font = '13px sans-serif ';
-                            if ($scope.summary.timeArray[j - 1].Date != "SUB TOTAL" && $scope.summary.timeArray[j - 1].grandTotal != "bold") {
-                                if ($scope.taskObject.Charge_Type != undefined && $scope.taskObject.Charge_Type != "") {
-                                    ctx.fillText($filter('translate')($scope.taskObject.Charge_Type), 160, yTimeFieldValue);
-                                }
-                                ctx.fillStyle = "#000";
-                                ctx.font = '13px sans-serif ';
+                        //else {
+                        //    ctx.fillStyle = "#000";
+                        //    ctx.font = '13px sans-serif ';
+                        //    if ($scope.summary.timeArray[j - 1].Date != "SUB TOTAL" && $scope.summary.timeArray[j - 1].grandTotal != "bold") {
+                        //        if ($scope.taskObject.Charge_Type != undefined && $scope.taskObject.Charge_Type != "") {
+                        //            ctx.fillText($filter('translate')($scope.taskObject.Charge_Type), 160, yTimeFieldValue);
+                        //        }
+                        //        ctx.fillStyle = "#000";
+                        //        ctx.font = '13px sans-serif ';
 
-                                if ($scope.summary.timeArray[j - 1].Work_Type != undefined && $scope.summary.timeArray[j - 1].Work_Type != "") {
-                                    if ($scope.summary.timeArray[j - 1].Work_Type == "Travel") {
-                                        if ($scope.taskObject.Travel_Method != undefined && $scope.taskObject.Travel_Method != "") {
-                                            ctx.fillText($filter('translate')($scope.taskObject.Travel_Method), 310, yTimeFieldValue);
-                                        }
-                                    }
-                                    else {
-                                        if ($scope.taskObject.Labor_Method != undefined && $scope.taskObject.Labor_Method != "") {
-                                            ctx.fillText($filter('translate')($scope.taskObject.Labor_Method), 310, yTimeFieldValue);
-                                        }
-                                    }
-                                }
-                            }
+                        //        if ($scope.summary.timeArray[j - 1].Work_Type != undefined && $scope.summary.timeArray[j - 1].Work_Type != "") {
+                        //            if ($scope.summary.timeArray[j - 1].Work_Type == "Travel") {
+                        //                if ($scope.taskObject.Travel_Method != undefined && $scope.taskObject.Travel_Method != "") {
+                        //                    ctx.fillText($filter('translate')($scope.taskObject.Travel_Method), 310, yTimeFieldValue);
+                        //                }
+                        //            }
+                        //            else {
+                        //                if ($scope.taskObject.Labor_Method != undefined && $scope.taskObject.Labor_Method != "") {
+                        //                    ctx.fillText($filter('translate')($scope.taskObject.Labor_Method), 310, yTimeFieldValue);
+                        //                }
+                        //            }
+                        //        }
+                        //    }
 
 
-                        }
+                        //}
 
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
@@ -4327,7 +4327,7 @@
                 doc1.text(180, 100, $filter('translate')('Start Date'))
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
-                var start = moment.utc($scope.summary.taskObject.times[0].Start_Date).utcOffset(constantService.getTimeZone()).format("DD/MM/YYYY")
+                var start = moment.utc($scope.summary.taskObject.times[0].Start_Date).utcOffset(constantService.getTimeZone()).format("DD-MMM-YYYY")
                 if (start)
                     doc1.text(180, 110, start)
                 doc1.setFontSize(22)
@@ -4337,7 +4337,7 @@
                 doc1.setFontType('normal')
                 var enddate = " ";
                 if ($scope.summary.taskObject.times[0].End_Date != "" && $scope.summary.taskObject.times[0].End_Date != undefined) {
-                    enddate = moment.utc($scope.summary.taskObject.times[0].End_Date).utcOffset(constantService.getTimeZone()).format("DD/MM/YYYY");
+                    enddate = moment.utc($scope.summary.taskObject.times[0].End_Date).utcOffset(constantService.getTimeZone()).format("DD-MMM-YYYY");
                 }
                 doc1.text(345, 110, enddate);
                 doc1.setFontSize(22)
@@ -4549,7 +4549,7 @@
                     columns = 8
                 }
                 else
-                    columns = 6;
+                    columns = 4;
                 var timeWidth = (660 / columns);
 
                 doc1.setFontSize(22)
@@ -4571,7 +4571,7 @@
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 var coloumnNo = 1;
-                //if ($scope.userType == "C")
+                if ($scope.userType == "C")
                 {
                     if (valueService.getLanguage() == 'fr')
                         doc1.text(xTimeField + timeWidth, yTimeFieldName, $filter('translate')('Charge\nType'))
@@ -4580,7 +4580,7 @@
                     coloumnNo++;
                 }
 
-                //if ($scope.userType == "C")
+                if ($scope.userType == "C")
                 {
                     doc1.setFontSize(22)
                     doc1.setFontType('bold')
@@ -4641,41 +4641,41 @@
                         else
                             coloumnNo++
                     }
-                    else {
-                        if ($scope.summary.timeArray[j - 1].Date != "SUB TOTAL" && $scope.summary.timeArray[j - 1].grandTotal != "bold") {
-                            if ($scope.taskObject.Charge_Type != undefined && $scope.taskObject.Charge_Type != "") {
-                                doc1.text(xTimeField + timeWidth, yTimeFieldValue, $filter('translate')($scope.taskObject.Charge_Type));
-                                coloumnNo++
-                            }
-                            else
-                                coloumnNo++
-                            if ($scope.summary.timeArray[j - 1].Work_Type != undefined && $scope.summary.timeArray[j - 1].Work_Type != "") {
-                                if ($scope.summary.timeArray[j - 1].Work_Type == "Travel") {
-                                    if ($scope.taskObject.Travel_Method != undefined && $scope.taskObject.Travel_Method != "") {
-                                        doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, $filter('translate')($scope.taskObject.Travel_Method));
+                    //else {
+                    //    if ($scope.summary.timeArray[j - 1].Date != "SUB TOTAL" && $scope.summary.timeArray[j - 1].grandTotal != "bold") {
+                    //        if ($scope.taskObject.Charge_Type != undefined && $scope.taskObject.Charge_Type != "") {
+                    //            doc1.text(xTimeField + timeWidth, yTimeFieldValue, $filter('translate')($scope.taskObject.Charge_Type));
+                    //            coloumnNo++
+                    //        }
+                    //        else
+                    //            coloumnNo++
+                    //        if ($scope.summary.timeArray[j - 1].Work_Type != undefined && $scope.summary.timeArray[j - 1].Work_Type != "") {
+                    //            if ($scope.summary.timeArray[j - 1].Work_Type == "Travel") {
+                    //                if ($scope.taskObject.Travel_Method != undefined && $scope.taskObject.Travel_Method != "") {
+                    //                    doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, $filter('translate')($scope.taskObject.Travel_Method));
 
-                                    }
-                                    else
-                                        coloumnNo++
-                                }
-                                else {
-                                    if ($scope.taskObject.Labor_Method != undefined && $scope.taskObject.Labor_Method != "") {
-                                        doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, $filter('translate')($scope.taskObject.Labor_Method));
+                    //                }
+                    //                else
+                    //                    coloumnNo++
+                    //            }
+                    //            else {
+                    //                if ($scope.taskObject.Labor_Method != undefined && $scope.taskObject.Labor_Method != "") {
+                    //                    doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, $filter('translate')($scope.taskObject.Labor_Method));
 
-                                    }
-                                    else
-                                        coloumnNo++
-                                }
-                            }
-                            else {
-                                coloumnNo++
-                            }
-                        }
-                        else {
-                            coloumnNo++
-                        }
-                        //$scope.taskObject.Charge_Type
-                    }
+                    //                }
+                    //                else
+                    //                    coloumnNo++
+                    //            }
+                    //        }
+                    //        else {
+                    //            coloumnNo++
+                    //        }
+                    //    }
+                    //    else {
+                    //        coloumnNo++
+                    //    }
+                    //    //$scope.taskObject.Charge_Type
+                    //}
                     doc1.setFontSize(22)
 
                     doc1.setFontType('normal');
