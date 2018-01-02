@@ -396,8 +396,6 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                         localService.insertUserList(userObject, function (response) {
 
-                            console.log("USER >>>>>>> " + response);
-
                             localService.getUser(function (response) {
 
                                 console.log("USER =====> " + JSON.stringify(response));

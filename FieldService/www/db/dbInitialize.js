@@ -64,6 +64,8 @@
 
         var sqlSRNotes = "CREATE TABLE IF NOT EXISTS SRNotes ('Notes_ID' INTEGER, 'Service_Request' TEXT, 'Notes' TEXT, 'Notes_type' TEXT, 'Note_Description' TEXT, 'Created_By' TEXT, 'MobileCreatedBy' TEXT, 'Start_Date' TEXT, 'Last_updated_date' TEXT, 'Incident' TEXT, 'ResourceId' TEXT)";
 
+        var sqlTool = "CREATE TABLE IF NOT EXISTS Tool ('ID' INTEGER PRIMARY KEY  NOT NULL, 'Tool_Name' TEXT, 'Task_Number' TEXT, 'ResourceId' TEXT)";
+
         db.transaction(function (tx) {
 
             tx.executeSql(sqlUser);
@@ -136,6 +138,9 @@
             //console.log('DB SUCCESS: NOTES');
 
             tx.executeSql(sqlEngineer);
+            //console.log('DB SUCCESS: ENGINEER');
+
+            tx.executeSql(sqlTool);
             //console.log('DB SUCCESS: ENGINEER');
 
         }, function (error) {
