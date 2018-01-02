@@ -27,8 +27,11 @@
         var language = "";
 
         var debriefChanged = false;
+
         var enggTime = "";
+
         var custTime = "";
+
         var debrief = {
             task: {},
             taskList: [],
@@ -52,7 +55,8 @@
             workType: [],
             item: [],
             currency: [],
-            UOM: []
+            UOM: [],
+            tool: []
         };
 
         var userType = {
@@ -122,6 +126,8 @@
         service.getItem = getItem;
         service.getCurrency = getCurrency;
         service.getUOM = getUOM;
+
+        service.getTool = getTool;
 
         service.getExpenseType = getExpenseType;
         service.getNoteType = getNoteType;
@@ -539,6 +545,19 @@
 
             promiseArray.push(deferEngineer.promise);
 
+            var deferTool = $q.defer();
+
+            localService.getToolList(taskObject.Task_Number, function (response) {
+
+                debrief.tool = response;
+
+                deferTool.resolve("success");
+
+                console.log("TOOL");
+            });
+
+            promiseArray.push(deferTool.promise);
+
             $q.all(promiseArray).then(
                 function (response) {
 
@@ -595,6 +614,11 @@
         function getTaskNotes() {
 
             return debrief.taskNotes;
+        };
+
+        function getTool() {
+
+            return debrief.tool;
         };
 
         function getTaskAttachment() {

@@ -8,14 +8,17 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
 
     $scope.ProductQuantity = 1;
 
-   // $scope.isFutureDateInTodo = valueService.getIfFutureDateTask();
+    // $scope.isFutureDateInTodo = valueService.getIfFutureDateTask();
     $scope.isFutureDate = valueService.getIfFutureDateTask();
+
     $scope.toggle = function () {
 
         $scope.myVar = !$scope.myVar;
     };
 
     $scope.noteArray = [];
+
+    $scope.taskId = valueService.getTask().Task_Number;
 
     $scope.noteArray = valueService.getTaskNotes();
 
@@ -29,7 +32,7 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
 
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 
-            fs.root.getFile(attachment.File_Name, {create: true, exclusive: false}, function (fileEntry) {
+            fs.root.getFile(attachment.File_Name, { create: true, exclusive: false }, function (fileEntry) {
 
                 fileEntry.file(function (file) {
 
@@ -64,8 +67,8 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
     };
 
     $scope.contacts = [
-        {name: "Santiago Munez", No: "+(832)534678", email: "Santiago.munex@rolce.com"},
-        {name: "Munex Montanio", No: "+(832)534678", email: "Santiago.munex@rolce.com"}
+        { name: "Santiago Munez", No: "+(832)534678", email: "Santiago.munex@rolce.com" },
+        { name: "Munex Montanio", No: "+(832)534678", email: "Santiago.munex@rolce.com" }
     ];
 
     $scope.tasks = [];
@@ -74,21 +77,57 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
 
     $scope.goToBack = function () {
         $state.go('myTask');
-    }
+    };
+
+    $scope.toolList = [];
+
+    $scope.toolList = valueService.getTool();
 
     $scope.add = function () {
 
         if ($scope.title != "") {
 
-            $scope.tasks.push($scope.title);
-            $scope.TodoForm.title.$setPristine();
-            $scope.TodoForm.title.$setPristine(true);
-            $scope.title = '';
+            var toolObject = {
+                ID: $scope.taskId + "" + ($scope.toolList.length + 1),
+                Tool_Name: $scope.title,
+                Task_Number: $scope.taskId
+            };
+
+            $scope.toolList.push(toolObject);
+
+            localService.deleteTool($scope.taskId);
+            localService.insertToolList($scope.toolList, function (response) {
+
+                $scope.TodoForm.title.$setPristine();
+                $scope.TodoForm.title.$setPristine(true);
+                $scope.title = '';
+            });  
         }
     };
 
     $scope.delete = function () {
-        $scope.tasks.splice(this.$index, 1);
+
+        $scope.toolList.splice(this.$index, 1);
+
+        var i = 1;
+
+        angular.forEach($scope.toolList, function (response) {
+
+            response.ID = $scope.taskId + "" + i;
+
+            i++;
+
+            console.log("DELETE " + JSON.stringify(response));
+        });
+
+        localService.deleteTool($scope.taskId);
+
+        localService.insertToolList($scope.toolList, function (response) {
+
+            $scope.TodoForm.title.$setPristine();
+            $scope.TodoForm.title.$setPristine(true);
+            $scope.title = '';
+        }); 
     };
 
     $scope.items = [];
@@ -126,7 +165,7 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
 
                     cloudService.getTaskInternalList("0", function (response) {
 
-                        $state.go($state.current, {}, {reload: true});
+                        $state.go($state.current, {}, { reload: true });
                     });
                 });
 

@@ -151,9 +151,9 @@
             </label>
         </div>
 
-        <div ng-repeat="t in tasks track by $index" class="tool-items">
+        <div ng-repeat="t in toolList track by $index" class="tool-items">
             <label>
-                {{t}}</label>
+                {{t.Tool_Name}}</label>
             <img src="images/cancel.png" class="cancelInEquip" ng-click="delete()"/>
 
         </div>
