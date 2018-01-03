@@ -167,19 +167,19 @@
 
         function setDebriefChanged(isChanged) {
             debriefChanged = isChanged;
-        }
+        };
 
         function getDebriefChanged() {
             return debriefChanged;
-        }
+        };
 
         function setLanguage(lang) {
             language = lang;
-        }
+        };
 
         function getLanguage() {
             return language;
-        }
+        };
 
         function setResourceId(id) {
             resourceId = id;
@@ -1273,8 +1273,6 @@
                                     attachmentObject.Description = attachment.File_Name.split(".")[0];
                                     attachmentObject.Name = attachFileName + '.' + attachment.File_Name.split(".")[1];
 
-                                    console.log("START " + new Date());
-
                                     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 
                                         fs.root.getFile(attachment.File_Name, {
@@ -1287,8 +1285,6 @@
                                                 var reader = new FileReader();
 
                                                 reader.onloadend = function () {
-
-                                                    console.log("END " + new Date());
 
                                                     attachmentObject.Data = this.result.split(",")[1];
 
@@ -1394,15 +1390,13 @@
 
                                                 if (attachmentUploadJSON.attachment != undefined && attachmentUploadJSON.attachment.length > 0) {
 
-                                                    console.log("START API " + new Date());
+                                                    console.log("START ATTACHMENT API " + new Date());
 
                                                     cloudService.createAttachment(attachmentUploadJSON, function (response) {
 
-                                                        console.log("END API " + new Date());
+                                                        console.log("END ATTACHMENT API " + new Date());
 
                                                         cloudService.updateOFSCStatus(statusData, function (response) {
-
-                                                            console.log("Task Completed " + JSON.stringify(response));
 
                                                             var taskObject = {
                                                                 Task_Status: "Completed",
@@ -1414,7 +1408,6 @@
 
                                                                 callback("Success Submit");
                                                             });
-
                                                         });
                                                     });
 
@@ -1422,16 +1415,16 @@
 
                                                     if (reportAttachmentUploadJSON != undefined && reportAttachmentUploadJSON.attachment != undefined) {
 
+                                                        console.log("START FSR API " + new Date());
+
                                                         cloudService.createAttachment(reportAttachmentUploadJSON, function (response) {
 
-                                                            console.log("Uploaded FSR " + JSON.stringify(response));
+                                                            console.log("END FSR API " + new Date());
                                                         });
                                                     }
 
                                                     cloudService.updateOFSCStatus(statusData, function (response) {
-
-                                                        console.log("Task Completed " + JSON.stringify(response));
-
+                             
                                                         var taskObject = {
                                                             Task_Status: "Completed",
                                                             Task_Number: taskId,
