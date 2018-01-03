@@ -1510,19 +1510,19 @@
 
         function setEnggSignTime(time) {
             enggTime = time;
-        }
+        };
 
         function setCustSignTime(time) {
             custTime = time;
-        }
+        };
 
         function getEnggSignTime() {
             return enggTime;
-        }
+        };
 
         function getCustSignTime() {
             return custTime;
-        }
+        };
 
     }
 })();
