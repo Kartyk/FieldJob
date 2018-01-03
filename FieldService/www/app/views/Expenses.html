@@ -83,7 +83,7 @@
 
                             <div flex="100" style="max-width:24%;">
                                 <label flex="100" class="label-my" for="justification" translate="{{item.expenseDefault.justification.title}}"></label>
-                                <textarea class="form-control expenses-textarea-NC" style="height:40px;max-height:150px" rows="5" id="justification"
+                                <textarea char-restrict class="form-control expenses-textarea-NC" style="height:40px;max-height:150px" rows="5" id="justification" 
                                           max-input ng-model="item.Justification" input-max-length='255' ng-change="item.Justification=checkMaxChar(item.Justification,255)"></textarea>
                             </div>
 

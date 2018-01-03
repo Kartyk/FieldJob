@@ -114,7 +114,7 @@
                                     <label class="control-label  marginbottom12 material-label"
                                            translate="item name"></label><span style="color:red">*</span>
                                     <input type="text" ng-required="true" name="itemname" class=" inputFieldsMaterial"
-                                           ng-model="item.ItemName" max-input style="margin-bottom:0px"
+                                           ng-model="item.ItemName" max-input style="margin-bottom:0px" char-restrict
                                            input-max-length='30'/>
                                     <!--<div style="color:red;text-transform:none"
                                          ng-show="materialForm.itemname.$error.required">
@@ -129,7 +129,7 @@
                                 <div class="form-group noMarginPadding">
                                     <label class="control-label  marginbottom12 material-label"
                                            translate="{{item.materialDefault.description.title}}"></label>
-                                    <input type="text" name="description" max-input class="inputFieldsMaterial" 
+                                    <input type="text" name="description" max-input class="inputFieldsMaterial"  char-restrict
                                            input-max-length='50' ng-change="item.Description=checkMaxChar(item.Description,50)"  ng-model="item.Description"/>
 
                                     <!-- <div>{{item.Description}}</div> -->
@@ -171,7 +171,7 @@
                                             <label class="control-label marginbottom12 material-label"
                                                    translate="{{item.materialDefault.serialIn.title}}"></label>
                                             <input class="inputFieldsMaterial" id="SerialIn" ng-required="true"
-                                                   max-input ng-model="serial.in" name="serialIn"
+                                                   max-input ng-model="serial.in" name="serialIn" char-restrict
                                                    input-max-length='30'></input>
 
                                         </div>
@@ -182,7 +182,7 @@
                                             <label class="control-label marginbottom12 material-label"
                                                    translate="{{item.materialDefault.serialOut.title}}"></label>
                                             <input class="inputFieldsMaterial" id="SerialOut" ng-required="true"
-                                                   max-input ng-model="serial.out" name="SerialNumber"
+                                                   max-input ng-model="serial.out" name="SerialNumber" char-restrict
                                                    input-max-length='30'></input>
 
                                         </div>
@@ -198,7 +198,7 @@
                                         <label class="control-label marginbottom12 material-label"
                                                translate="{{item.materialDefault.serialNo.title}}"></label>
                                         <input class="inputFieldsMaterial" id="SerialNo" ng-required="true"
-                                               max-input ng-model="serial.number" name="SerialNo"
+                                               max-input ng-model="serial.number" name="SerialNo" char-restrict
                                                input-max-length='30'></input>
 
                                     </div>
