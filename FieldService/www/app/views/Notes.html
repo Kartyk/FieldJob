@@ -87,11 +87,11 @@
             <span style="visibility:hidden">{{ $root.noteFormValid = notesForm.$valid}}</span>
             <span flex></span>
             <md-button ng-if="isEditNote==0" class="time-font time-add summary-report-donebtn addbtn" ng-click="addObject('Notes',true,item)"
-                       translate="Add"  ng-disabled="$root.completedTask || !$root.noteFormValid "></md-button>
+                       translate="Add"  ng-disabled="$root.completedTask || !notesForm.$valid "></md-button>
             <md-button ng-if="isEditNote==1" class="time-font time-add addbtn" ng-click="saveObject('Notes',true,item)"
                        translate="Save" ></md-button>
             <!--<md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Notes')" translate="delete"></md-button>-->
-            <md-button class="time-font time-copy" ng-click="copyObject(item,'Notes')" translate="copy"  ng-disabled="$root.completedTask || !$root.noteFormValid "></md-button>
+            <md-button class="time-font time-copy summary-report-donebtn" ng-click="copyObject(item,'Notes')" translate="copy"  ng-disabled="$root.completedTask || !notesForm.$valid "></md-button>
             <span flex></span>
             <!--<md-button class="time-font time-add summary-report-donebtn" translate="NEXT"
                        ng-click="Next('Notes')"></md-button>-->

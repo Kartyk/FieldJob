@@ -3062,7 +3062,9 @@
     function disabled(data) {
         var date = data.date,
             mode = data.mode;
-        return mode === "day" && (date.getDay() === 0 || date.getDay() === 6);
+        console.log(mode + "    " + date.getDay())
+        return false;
+       // return mode === "day" && (date.getDay() === 0 || date.getDay() === 8);
     }
 
     $scope.toggleMin = function () {
@@ -3213,7 +3215,7 @@
 
     $scope.reviewSummary = function () {
 
-        //var promise = generatePDF();
+        var promise = generatePDF();
 
         $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Customer Signature");
 
@@ -3644,7 +3646,7 @@
                         rectAttachHeight = 135, xAttachField1 = 30;
 
 
-                    if (yAttachField > canvas.height) {
+                    if (rectAttachHeight + yAttachField + 10 > canvas.height) {
                         if (isPageAdded) {
                             doc1.addPage();
                         }
@@ -3846,16 +3848,11 @@
 
                         ctx.fillText($filter('translate')('Time Code'), xTimeField1, yTimeFieldName);
                     }
-                    ctx.fillStyle = "#000";
-                    ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText($filter('translate')('Shift Code'), 730, yTimeFieldName);
-
-                    ctx.fillStyle = "#000";
-                    ctx.font = 'bold 13px sans-serif ';
+                    if ($scope.userType == 'C') {
+                        ctx.fillText($filter('translate')('Shift Code'), 730, yTimeFieldName);
+                    }
                     ctx.fillText('服务持续时间', 850, yTimeFieldName);
 
-                    ctx.fillStyle = "#000";
-                    ctx.font = 'bold 13px sans-serif ';
                     ctx.fillText('服务类别', 980, yTimeFieldName);
 
 

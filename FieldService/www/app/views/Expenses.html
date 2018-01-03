@@ -124,12 +124,12 @@
                 <!--<md-button class="time-font time-add summary-report-donebtn" translate="BACK" ng-click="goPreviousTab('Expenses')"></md-button>-->
                 <span style="visibility:hidden">{{ $root.expenseformValid = expeseform.$valid}}</span>
                 <span flex></span>
-                <md-button ng-if = "isEditExpense==0" class="time-font  time-add summary-report-donebtn addbtn" ng-click="addObject('Expenses',true,item)" ng-disabled="$root.completedTask || !$root.expenseformValid " translate="Add"></md-button>
-                <md-button ng-if="isEditExpense==1" class="time-font  time-add summary-report-donebtn addbtn" ng-click="saveObject('Expenses',true,item)" ng-disabled="$root.completedTask || !$root.expenseformValid " translate="Save"></md-button>
+                <md-button ng-if = "isEditExpense==0" class="time-font  time-add summary-report-donebtn addbtn" ng-click="addObject('Expenses',true,item)" ng-disabled="$root.completedTask || !expeseform.$valid " translate="Add"></md-button>
+                <md-button ng-if="isEditExpense==1" class="time-font  time-add summary-report-donebtn addbtn" ng-click="saveObject('Expenses',true,item)" ng-disabled="$root.completedTask || !expeseform.$valid " translate="Save"></md-button>
 
                 <!--<md-button class="time-font  time-delete" ng-click="deleteObject($index,item,'Expenses')" translate="delete">
                 </md-button>-->
-                <md-button class="time-font  time-copy summary-report-donebtn" ng-click="copyObject(item,'Expenses')" translate="copy" ng-disabled="$root.completedTask || !$root.expenseformValid "></md-button>
+                <md-button class="time-font  time-copy summary-report-donebtn" ng-click="copyObject(item,'Expenses')" translate="copy" ng-disabled="$root.completedTask || !expeseform.$valid "></md-button>
                 <span flex></span>
                 <!--<md-button class="time-font time-add summary-report-donebtn" translate="NEXT" ng-click="Next('Expenses')"></md-button>-->
             </section>

@@ -224,13 +224,13 @@
             <span flex></span>
             <md-button ng-if="isEditMaterial==0" class="time-font time-add summary-report-donebtn addbtn"
                        ng-click="addObject('Material',true,item)"
-                       ng-disabled="$root.completedTask || !$root.materialFormValid " translate="Add"></md-button>
+                       ng-disabled="$root.completedTask || !materialForm.$valid " translate="Add"></md-button>
             <md-button ng-if="isEditMaterial==1" class="time-font time-add summary-report-donebtn addbtn"
                        ng-click="saveObject('Material',true,item)"
-                       ng-disabled="$root.completedTask || !$root.materialFormValid " translate="Save"></md-button>
+                       ng-disabled="$root.completedTask || !materialForm.$valid " translate="Save"></md-button>
             <!-- <md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Material')" ng-disabled="$root.completedTask" translate="delete"></md-button>-->
             <md-button class="time-font time-copy summary-report-donebtn" ng-click="copyObject(item,'Material')"
-                       ng-disabled="$root.completedTask || !$root.materialFormValid " translate="copy"></md-button>
+                       ng-disabled="$root.completedTask || !materialForm.$valid " translate="copy"></md-button>
             <span flex></span>
             <!--<md-button class="time-font time-add summary-report-donebtn" translate="NEXT"
                        ng-click="Next('Material')"></md-button>-->
