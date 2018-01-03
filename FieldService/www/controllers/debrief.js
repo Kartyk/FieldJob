@@ -3643,7 +3643,7 @@
                     ctx.fillStyle = "#000";
                     ctx.strokeRect(20, yNotesField + 5, 1090, rectNotesHeight)
                     var xAttachField = 30, yAttachField = yNotesField1_val + 30, rectAttachWidth = 660,
-                        rectAttachHeight = 135, xAttachField1 = 30;
+                        rectAttachHeight = 140, xAttachField1 = 30;
 
 
                     if (rectAttachHeight + yAttachField + 10 > canvas.height) {
@@ -3697,7 +3697,7 @@
                                 ctx.font = '15px sans-serif ';
                                 var splitAttchname = doc1.splitTextToSize($filter('translate')(file.fileDisc.substr(0, 16)) + '..', 45);
                                 angular.forEach(splitAttchname, function (key) {
-                                    ctx.fillText(key, xAttachField1, yfilename + 125);
+                                    ctx.fillText(key, xAttachField1, yfilename + 130);
                                     yfilename += 15;
                                 })
 
@@ -3707,7 +3707,7 @@
                                 ctx.font = '15px sans-serif ';
                                 var splitAttchname = doc1.splitTextToSize($filter('translate')(file.fileDisc), 45);
                                 angular.forEach(splitAttchname, function (key) {
-                                    ctx.fillText(key, xAttachField1, yfilename + 125);
+                                    ctx.fillText(key, xAttachField1, yfilename + 130);
                                     yfilename += 15;
                                 })
                                 //ctx.fillText($filter('translate')(file.fileDisc), xAttachField1, yAttachField + 125);
