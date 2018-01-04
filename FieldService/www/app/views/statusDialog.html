@@ -12,23 +12,29 @@
 
             <div class="md-dialog-content material-dialog">
 
+                <div class="col-sm-12" style="text-align:center">
+                    <label>You are Offline</label>
+                </div>
                 <div class="row">
-                    <label>Task Accepted</label>
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-10"><button md-button class="debrief-btn" ng-click="ok()">OK</button>
+                    </div>
+                    
                 </div>
 
             </div>
 
         </md-dialog-content>
 
-        <md-dialog-actions>
+        <!--<md-dialog-actions>
 
-            <button md-button class="debrief-btn" ng-click="save()">SAVE</button>
+            <button md-button class="debrief-btn" ng-click="save()">OK</button>
 
             <span class="spacer"></span>
 
             <button md-button class="debrief-btn" ng-click="cancel()" style="background-color:#f0f0f0 !important;color:#283d3f !important;">CANCEL</button>
 
-        </md-dialog-actions>
+        </md-dialog-actions>-->
 
     </form>
 

@@ -4,9 +4,9 @@
 
     app.service('valueService', valueService);
 
-    valueService.$inject = ['$http', '$rootScope', '$window', '$location', '$q', 'localService', 'cloudService'];
+    valueService.$inject = ['$http', '$rootScope', '$window', '$location', '$q', 'localService', 'cloudService','$mdDialog'];
 
-    function valueService($http, $rootScope, $window, $location, $q, localService, cloudService) {
+    function valueService($http, $rootScope, $window, $location, $q, localService, cloudService, $mdDialog) {
 
         var futureTask;
 
@@ -162,7 +162,7 @@
         service.getCustSignTime = getCustSignTime;
         service.startWorking = startWorking;
         service.syncData = syncData;
-
+        service.showDialog = showDialog;
         return service;
 
         function setDebriefChanged(isChanged) {
@@ -1523,6 +1523,35 @@
         function getCustSignTime() {
             return custTime;
         };
+        function showDialog(item) {
 
+            $mdDialog.show({
+                locals: { dataToPass: item },
+                controller: DialogController,
+                templateUrl: "app/views/statusDialog.html",
+                parent: angular.element(document.body),
+                targetEvent: event,
+                clickOutsideToClose: false
+            }).then(function (selected) {
+
+                // $scope.status = "You said the information was '" + selected + "'.";
+
+            }, function () {
+
+                //$scope.status = "You cancelled the dialog.";
+            });
+            function DialogController($scope, $mdDialog, dataToPass) {
+
+                $scope.ok = function () {
+
+                    $mdDialog.hide();
+                }
+
+                $scope.cancel = function () {
+
+                    $mdDialog.hide();
+                }
+            }
+        }
     }
 })();

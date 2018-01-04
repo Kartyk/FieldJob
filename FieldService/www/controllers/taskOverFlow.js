@@ -413,6 +413,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                         });
                     });
                 });
+                valueService.showDialog("Accept");
             }
         }
     };
@@ -483,6 +484,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                         });
                     });
                 });
+                valueService.showDialog("Accept");
             }
         }
     };

@@ -2811,7 +2811,7 @@
                                     });
 
                                 } else {
-
+                                    valueService.showDialog("Complete");
                                     var taskObject = {
                                         Task_Status: "Completed",
                                         Task_Number: valueService.getTask().Task_Number,
@@ -4438,11 +4438,11 @@
             }
             else {
                 doc1.text(500, 20, $filter('translate')('Emerson Process Management'))
-                doc1.text(500, 28, $filter('translate')('(UNITED KINGDOM)'))
-                doc1.text(500, 36, $filter('translate')('Leicester'))
-                doc1.text(500, 44, $filter('translate')('United Kingdom'))
-                doc1.text(500, 52, $filter('translate')('Tel'))
-                doc1.text(500, 60, $filter('translate')('Fax: +44(0)122 2892896'))
+                doc1.text(500, 28, $filter('translate')('Meridian East, Leicester'))
+                doc1.text(500, 36, $filter('translate')('LE19 1UX'))
+                doc1.text(500, 44, $filter('translate')('Tel: + 44 (0) 116 282 2822'))
+                doc1.text(500, 52, $filter('translate')('Fax: +44 (0) 116 289 2896'))
+                //doc1.text(500, 60, $filter('translate')('Fax: +44(0)122 2892896'))
             }
         }
         doc1.setFontSize(22)

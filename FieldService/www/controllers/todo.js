@@ -206,6 +206,7 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
                         });
                     });
                 });
+                valueService.showDialog("Accept");
             }
         }
     }
@@ -242,7 +243,7 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
                     Submit_Status: "A",
                     Date: new Date()
                 };
-
+                valueService.showDialog("Accept");
                 localService.updateTaskSubmitStatus(taskObject, function (result) {
 
                     localService.getTaskList(function (response) {
@@ -272,7 +273,7 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
 
                             $state.go($state.current, {}, { reload: true });
 
-                            showDialog("Accept");
+                          
 
                         });
                     });
@@ -281,35 +282,7 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
         }
     };
 
-    function showDialog(item) {
+   
 
-        $mdDialog.show({
-            locals: { dataToPass: item },
-            controller: DialogController,
-            templateUrl: "app/views/statusDialog.html",
-            parent: angular.element(document.body),
-            targetEvent: event,
-            clickOutsideToClose: false
-        }).then(function (selected) {
-
-            // $scope.status = "You said the information was '" + selected + "'.";
-
-        }, function () {
-
-            //$scope.status = "You cancelled the dialog.";
-        });
-    }
-
-    function DialogController($scope, $mdDialog, dataToPass) {
-
-        $scope.saveData = function () {
-
-            $mdDialog.hide();
-        }
-
-        $scope.cancel = function () {
-
-            $mdDialog.hide();
-        }
-    }
+    
 });
