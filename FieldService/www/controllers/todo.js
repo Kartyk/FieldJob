@@ -101,7 +101,7 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
                 $scope.TodoForm.title.$setPristine();
                 $scope.TodoForm.title.$setPristine(true);
                 $scope.title = '';
-            });  
+            });
         }
     };
 
@@ -127,7 +127,7 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
             $scope.TodoForm.title.$setPristine();
             $scope.TodoForm.title.$setPristine(true);
             $scope.title = '';
-        }); 
+        });
     };
 
     $scope.items = [];
@@ -272,10 +272,44 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
 
                             $state.go($state.current, {}, { reload: true });
 
+                            showDialog("Accept");
+
                         });
                     });
                 });
             }
         }
     };
+
+    function showDialog(item) {
+
+        $mdDialog.show({
+            locals: { dataToPass: item },
+            controller: DialogController,
+            templateUrl: "app/views/statusDialog.html",
+            parent: angular.element(document.body),
+            targetEvent: event,
+            clickOutsideToClose: false
+        }).then(function (selected) {
+
+            // $scope.status = "You said the information was '" + selected + "'.";
+
+        }, function () {
+
+            //$scope.status = "You cancelled the dialog.";
+        });
+    }
+
+    function DialogController($scope, $mdDialog, dataToPass) {
+
+        $scope.saveData = function () {
+
+            $mdDialog.hide();
+        }
+
+        $scope.cancel = function () {
+
+            $mdDialog.hide();
+        }
+    }
 });
