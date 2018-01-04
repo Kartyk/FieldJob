@@ -1,5 +1,5 @@
 
-<section layout="row"  style="margin-bottom:-20px">
+<section layout="row" style="margin-bottom:-20px">
     <span flex></span>
     <md-button class="time-font time-add summary-report-donebtn" translate="BACK" ng-click="goPreviousTab('Expenses')" style="margin-top:15px;float:right;"></md-button>
     <md-button class="time-font time-add summary-report-donebtn" translate="NEXT" ng-click="Next('Expenses')" style="margin-top:15px;float:right;margin-right:50px;"></md-button>
@@ -8,160 +8,161 @@
 <div class="card-parentContainer ">
     <div class="margintop30" ng-repeat="item in expenseArray track by $index" id="expense{{$index}}">
 
-            <div class="card-childContainer  noBorder-radius" ng-class="{'newItemBorder': $index == addExpenseObj && $index != 0,'copyItem': $index == copyExpenseObj && $index != 0}">
-                <form class="form-horizontal input-items" action="/action_page.php" form-on-change="formChange()" name="expeseform">
-                    <!--<div class="row">-->
-                        <div layout="row" layout-wrap>
+        <div class="card-childContainer  noBorder-radius" ng-class="{'newItemBorder': $index == addExpenseObj && $index != 0,'copyItem': $index == copyExpenseObj && $index != 0}">
+            <form class="form-horizontal input-items" action="/action_page.php" form-on-change="formChange()" name="expeseform">
+                <!--<div class="row">-->
+                <div layout="row" layout-wrap>
 
-                            <div flex="20" class="debrief-items-NC" style="max-width:16%;">
-                                <label flex="100" class="label-my" translate="{{item.expenseDefault.date.title}}"></label>
+                    <div flex="20" class="debrief-items-NC" style="max-width:16%;">
+                        <label flex="100" class="label-my" translate="{{item.expenseDefault.date.title}}"></label>
 
-                                <div flex="100">
-                                    <div class='input-group date' id='datePickerDate' ng-model="item.date.value">
-                                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
-                                               ng-model="item.Date" is-open="item.calendarOpened"
-                                               datepicker-options="dateOptions" ng-required="true" close-text="Close"
-                                               alt-input-formats="altInputFormats" ng-change="setDuration($index)" />
-                                        <span class="input-group-btn">
-                                            <button type="button" class="btn btn-default custom-debrief-item" style="border-color:#ccc !important"
-                                                    ng-click="openCalendar(item,'Expenses')">
-                                                <i class="glyphicon glyphicon-calendar"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                </div>
+                        <div flex="100">
+                            <div class='input-group date' id='datePickerDate' ng-model="item.date.value">
+                                <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                       ng-model="item.Date" is-open="item.calendarOpened"
+                                       datepicker-options="dateOptions" ng-required="true" close-text="Close"
+                                       alt-input-formats="altInputFormats" ng-change="setDuration($index)" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default custom-debrief-item" style="border-color:#ccc !important"
+                                            ng-click="openCalendar(item,'Expenses')">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </span>
                             </div>
-
-                            <div flex="20" class="debrief-items-NC" style="max-width:20%;">
-
-                                <label flex="100" class="label-my" for="expense-type"
-                                       translate="{{item.expenseDefault.expenseType.title}}"></label><span style="color:red">*</span>
-                                <div flex="100">
-                                    <select class="form-control select-debrief" ng-required="true" name="expensetype"
-                                            id="expense-type"
-                                            ng-model="item.Expense_Type"
-                                            ng-options="x as x.Value | translate for x  in item.expenseDefault.expenseType.values track by x.ID" ng-change="setExpenseItem(item)">
-                                        <option value="" disabled selected>Select Expense Type</option>
-                                    </select>
-                                </div>
-                                <!--<span style="color:red" ng-show="expeseform.expensetype.$error.required">
-                                    Please select expense type
-                                </span>-->
-                            </div>
-
-                            <div flex="20" class="debrief-items-NC" style="max-width:10%;">
-                                <label flex="100" class="label-my" translate="{{item.expenseDefault.amount.title}}"></label>
-                                <div flex="100">
-                                    <input type="text"  class="form-control"  ng-model="item.Amount" valid-amount/>
-
-                                </div>
-                            </div>
-                            
-
-
-                            <div flex="20" class="debrief-items-NC" style="max-width:12%;">
-                                <label flex="100" class="label-my"
-                                       translate="{{item.expenseDefault.currency.title}}"></label>
-                                <div flex="100">
-                                    <select class="form-control select-debrief" ng-model="item.Currency"
-                                            ng-options="x as x.Value for x in item.expenseDefault.currency.values track by x.ID" ng-change="setCurrency(item)">
-                                        <option value="" disabled selected translate="Select"></option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div flex="20" class="debrief-items-NC" style="max-width:18%;">
-                                <label flex="100" class="label-my"
-                                       translate="{{item.expenseDefault.chargeMethod.title}}"></label>
-                                <div flex="100">
-                                    <select class="form-control select-debrief" ng-model="item.Charge_Method"
-                                            ng-options="x as x.Value | translate for x in item.expenseDefault.chargeMethod.values  track by x.ID" ng-change="setChargeMethodForExpense(item)">
-                                        <option value="" disabled selected>Select Charge Method</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div flex="100" style="max-width:24%;">
-                                <label flex="100" class="label-my" for="justification" translate="{{item.expenseDefault.justification.title}}"></label>
-                                <textarea char-restrict class="form-control expenses-textarea-NC" style="height:40px;max-height:150px" rows="5" id="justification" 
-                                          max-input ng-model="item.Justification" input-max-length='255' ng-change="item.Justification=checkMaxChar(item.Justification,255)"></textarea>
-                            </div>
-
-                        </div>
-                    <div layout="row" layout-wrap>
-                        <div flex="60" style="margin-left:36%">
-                            <div flex="20" class="debrief-items-NC" style="display:inline-block;padding-right:0px !important" ng-show="item.Expense_Type.Value=='Mileage'">
-                                <label flex="100" class="label-my" translate="{{item.expenseDefault.distance.title}}"></label>
-                                <div flex="70">
-                                    <input type="text" class="form-control" ng-model="item.Distance" valid-amount />
-
-                                </div>
-                            </div>
-                            <div flex="20" class="debrief-items-NC" style="display:inline-block" ng-show="item.Expense_Type.Value=='Mileage'">
-                                <label flex="100" class="label-my" translate="{{item.expenseDefault.uom.title}}"></label>
-                                <div flex="100">
-                                    <select class="form-control select-debrief" ng-model="item.UOM"
-                                            ng-options="x as x.Value for x in item.expenseDefault.uom.values track by x.ID" ng-change="setUOM(item)">
-                                        <option value="" disabled selected>Select</option>
-                                    </select>
-
-                                </div>
-                            </div>
-
-                          
-                            
                         </div>
                     </div>
 
-                        <!--</div>-->
+                    <div flex="20" class="debrief-items-NC" style="max-width:20%;">
 
-</form>
+                        <label flex="100" class="label-my" for="expense-type"
+                               translate="{{item.expenseDefault.expenseType.title}}"></label><span style="color:red">*</span>
+                        <div flex="100">
+                            <select class="form-control select-debrief" ng-required="true" name="expensetype"
+                                    id="expense-type"
+                                    ng-model="item.Expense_Type"
+                                    ng-options="x as x.Value | translate for x  in item.expenseDefault.expenseType.values track by x.ID" ng-change="setExpenseItem(item)">
+                                <option value="" disabled selected>Select Expense Type</option>
+                            </select>
+                        </div>
+                        <!--<span style="color:red" ng-show="expeseform.expensetype.$error.required">
+                            Please select expense type
+                        </span>-->
+                    </div>
 
-            </div>
-            <section  layout="row" layout-sm="column"
-                         layout-wrap class="time-btns" ng-class="{'newItemBorderSection': $index == addExpenseObj && $index != 0,'copyItemSection': $index == copyExpenseObj && $index != 0}">
+                    <div flex="20" class="debrief-items-NC" style="max-width:10%;">
+                        <label flex="100" class="label-my" translate="{{item.expenseDefault.amount.title}}"></label>
+                        <div flex="100">
+                            <input type="text" class="form-control" ng-model="item.Amount" valid-amount />
 
-                <!--<md-button class="time-font time-add summary-report-donebtn" translate="BACK" ng-click="goPreviousTab('Expenses')"></md-button>-->
-                <span style="visibility:hidden">{{ $root.expenseformValid = expeseform.$valid}}</span>
-                <span flex></span>
-                <md-button ng-if = "isEditExpense==0" class="time-font  time-add summary-report-donebtn addbtn" ng-click="addObject('Expenses',true,item)" ng-disabled="$root.completedTask || !expeseform.$valid " translate="Add"></md-button>
-                <md-button ng-if="isEditExpense==1" class="time-font  time-add summary-report-donebtn addbtn" ng-click="saveObject('Expenses',true,item)" ng-disabled="$root.completedTask || !expeseform.$valid " translate="Save"></md-button>
+                        </div>
+                    </div>
 
-                <!--<md-button class="time-font  time-delete" ng-click="deleteObject($index,item,'Expenses')" translate="delete">
-                </md-button>-->
-                <md-button class="time-font  time-copy summary-report-donebtn" ng-click="copyObject(item,'Expenses')" translate="copy" ng-disabled="$root.completedTask || !expeseform.$valid "></md-button>
-                <span flex></span>
-                <!--<md-button class="time-font time-add summary-report-donebtn" translate="NEXT" ng-click="Next('Expenses')"></md-button>-->
-            </section>
+
+
+                    <div flex="20" class="debrief-items-NC" style="max-width:12%;">
+                        <label flex="100" class="label-my"
+                               translate="{{item.expenseDefault.currency.title}}"></label>
+                        <div flex="100">
+                            <select class="form-control select-debrief" ng-model="item.Currency"
+                                    ng-options="x as x.Value for x in item.expenseDefault.currency.values track by x.ID" ng-change="setCurrency(item)">
+                                <option value="" disabled selected translate="Select"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div flex="20" class="debrief-items-NC" style="max-width:18%;">
+                        <label flex="100" class="label-my"
+                               translate="{{item.expenseDefault.chargeMethod.title}}"></label>
+                        <div flex="100">
+                            <select class="form-control select-debrief" ng-model="item.Charge_Method"
+                                    ng-options="x as x.Value | translate for x in item.expenseDefault.chargeMethod.values  track by x.ID" ng-change="setChargeMethodForExpense(item)">
+                                <option value="" disabled selected>Select Charge Method</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div flex="100" style="max-width:24%;">
+                        <label flex="100" class="label-my" for="justification" translate="{{item.expenseDefault.justification.title}}"></label>
+                        <textarea class="form-control expenses-textarea-NC" style="height:40px;max-height:150px" rows="5" id="justification"
+                                  max-input ng-model="item.Justification" input-max-length='255' ng-change="item.Justification=checkMaxChar(item.Justification,255)"></textarea>
+                    </div>
+
+                </div>
+                <div layout="row" layout-wrap>
+                    <div flex="60" style="margin-left:36%">
+                        <div flex="20" class="debrief-items-NC" style="display:inline-block;padding-right:0px !important" ng-show="item.Expense_Type.Value=='Mileage'">
+                            <label flex="100" class="label-my" translate="{{item.expenseDefault.distance.title}}"></label>
+                            <div flex="70">
+                                <input type="text" class="form-control" ng-model="item.Distance" valid-amount />
+
+                            </div>
+                        </div>
+                        <div flex="20" class="debrief-items-NC" style="display:inline-block" ng-show="item.Expense_Type.Value=='Mileage'">
+                            <label flex="100" class="label-my" translate="{{item.expenseDefault.uom.title}}"></label>
+                            <div flex="100">
+                                <select class="form-control select-debrief" ng-model="item.UOM"
+                                        ng-options="x as x.Value for x in item.expenseDefault.uom.values track by x.ID" ng-change="setUOM(item)">
+                                    <option value="" disabled selected>Select</option>
+                                </select>
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+                <!--</div>-->
+
+            </form>
+
+        </div>
+        <section layout="row" layout-sm="column"
+                 layout-wrap class="time-btns" ng-class="{'newItemBorderSection': $index == addExpenseObj && $index != 0,'copyItemSection': $index == copyExpenseObj && $index != 0}">
+
+            <!--<md-button class="time-font time-add summary-report-donebtn" translate="BACK" ng-click="goPreviousTab('Expenses')"></md-button>-->
+            <span flex></span>
+            <span style="visibility:hidden">{{ $root.expenseformValid = expeseform.$valid}}</span>
+          
+            <button style="margin-top:5px;" ng-if="isEditExpense==0" class="add-button" ng-click="addObject('Expenses',true,item)" ng-disabled="$root.completedTask || !expeseform.$valid " translate="Add"></button>
+            <button ng-if="isEditExpense==1" class="add-button" ng-click="saveObject('Expenses',true,item)" ng-disabled="$root.completedTask || !expeseform.$valid " translate="Save"></button>
+
+            <!--<md-button class="time-font  time-delete" ng-click="deleteObject($index,item,'Expenses')" translate="delete">
+            </md-button>-->
+            <md-button class="time-font  time-copy summary-report-donebtn" ng-click="copyObject(item,'Expenses')" translate="copy" ng-disabled="$root.completedTask || !expeseform.$valid "></md-button>
+            <span flex></span>
+            <!--<md-button class="time-font time-add summary-report-donebtn" translate="NEXT" ng-click="Next('Expenses')"></md-button>-->
+        </section>
 
 
     </div>
-    <div class="card-childContainer marginbottom30" style="margin-top:20px"  ng-if="expenseArraySummary!=undefined && expenseArraySummary.length>0">
+    <div class="card-childContainer marginbottom30" style="margin-top:20px" ng-if="expenseArraySummary!=undefined && expenseArraySummary.length>0">
 
 
         <table class="table no-marbottom noborder">
             <thead>
                 <tr class="summary-tr">
                     <th class="noborder width10"><span translate="Date"></span></th>
-                    <th class="noborder width15" ><span translate="Expense Type"></span></th>
-                    <th class="noborder width10" ><span translate="Amount"></span></th>
+                    <th class="noborder width15"><span translate="Expense Type"></span></th>
+                    <th class="noborder width10"><span translate="Amount"></span></th>
                     <th class="noborder width10"><span translate="Distance"></span></th>
                     <th class="noborder width10"><span translate="UOM"></span></th>
                     <th class="noborder width10"><span translate="Currency"></span></th>
-                    <th class="noborder width15" ><span translate="Charge Method"></span></th>
-                    <th class="noborder width20" ><span translate="Justification"></span></th>
+                    <th class="noborder width15"><span translate="Charge Method"></span></th>
+                    <th class="noborder width20"><span translate="Justification"></span></th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="summary-tr" ng-repeat="expense in expenseArraySummary">
-                    <td class="noborder bg-white width10" >{{expense.Date|timezonefilter}}</td>
-                    <td class="noborder bg-white width15" >{{expense.Expense_Type.Value | translate}}</td>
-                    <td class="noborder bg-white width10" >{{expense.Amount | translate}}</td>
+                    <td class="noborder bg-white width10">{{expense.Date|timezonefilter}}</td>
+                    <td class="noborder bg-white width15">{{expense.Expense_Type.Value | translate}}</td>
+                    <td class="noborder bg-white width10">{{expense.Amount | translate}}</td>
                     <td class="noborder bg-white width10">{{expense.Distance | translate}}</td>
                     <td class="noborder bg-white width10">{{expense.UOM.Value | translate}}</td>
-                    <td class="noborder bg-white width10" >{{expense.Currency.Value | translate}}</td>
-                    <td class="noborder bg-white width15" >{{expense.Charge_Method.Value |translate}}</td>
-                    <td class="noborder bg-white width20" ><div class="summary-description" >{{expense.Justification}}</div></td>
+                    <td class="noborder bg-white width10">{{expense.Currency.Value | translate}}</td>
+                    <td class="noborder bg-white width15">{{expense.Charge_Method.Value |translate}}</td>
+                    <td class="noborder bg-white width20"><div class="summary-description">{{expense.Justification}}</div></td>
                     <td class="noborder bg-white "><img src="images/cancel.png" class="cancelInEquip delete" ng-click="deleteObject($index,'Expenses')" /></td>
                     <td class="noborder bg-white "><img src="images/edit.png" class="cancelInEquip delete" ng-click="editObject(expense,'Expenses',$index)" style="width:16px" /></td>
                 </tr>
