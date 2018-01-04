@@ -67,7 +67,7 @@
 
 
                         <textarea class="form-control note-textarea-NC" style="height:40px;max-height:150px"
-                                  id="justification"
+                                  id="justification" char-restrict
                                   max-input ng-model="item.Notes" input-max-length='2000'
                                   name="notesComment" ng-change="item.Notes=checkMaxChar(item.Notes,2000)"></textarea>
                         <div style="color:red;text-transform:none" ng-show="notesForm.notesComment.$error.maxlength">
