@@ -1,0 +1,35 @@
+﻿<style>
+    .spacer {
+        flex: 1 1 auto;
+    }
+</style>
+
+<md-dialog class="dialog-border">
+
+    <form ng-cloak>
+
+        <md-dialog-content>
+
+            <div class="md-dialog-content material-dialog">
+
+                <div class="row">
+                    <label>Task Accepted</label>
+                </div>
+
+            </div>
+
+        </md-dialog-content>
+
+        <md-dialog-actions>
+
+            <button md-button class="debrief-btn" ng-click="save()">SAVE</button>
+
+            <span class="spacer"></span>
+
+            <button md-button class="debrief-btn" ng-click="cancel()" style="background-color:#f0f0f0 !important;color:#283d3f !important;">CANCEL</button>
+
+        </md-dialog-actions>
+
+    </form>
+
+</md-dialog>
