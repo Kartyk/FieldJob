@@ -2,8 +2,8 @@
 
 var conf = {
 
-   // apiUrl: 'https://emersonmobilecloud-a472144.mobileenv.us2.oraclecloud.com:443/mobile/custom/'
-      apiUrl: 'https://emersonmobiletestenv-a472144.mobileenv.us2.oraclecloud.com:443/mobile/custom/'
+    // apiUrl: 'https://emersonmobilecloud-a472144.mobileenv.us2.oraclecloud.com:443/mobile/custom/'
+    apiUrl: 'https://emersonmobiletestenv-a472144.mobileenv.us2.oraclecloud.com:443/mobile/custom/'
 };
 
 var app = angular.module('emerson', ['ngMaterial', 'ngLoadingSpinner', 'md.data.table', 'ui.router', 'ui.bootstrap', 'ui.calendar', 'pascalprecht.translate', 'ngFileUpload']);
@@ -101,64 +101,40 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
 
                     if (constantService.getUser().Login_Status == "1") {
 
-                        if (constantService.getUser().Default_View == "My Task") {
+                        localService.getTaskList(function (response) {
 
-                            $rootScope.selectedItem = 2;
+                            console.log("TASKLIST " + JSON.stringify(response));
 
-                            localService.getTaskList(function (response) {
+                            localService.getInternalList(function (internalresponse) {
 
-                                console.log("MY FIELD JOB =====> " + JSON.stringify(response));
+                                angular.forEach(internalresponse, function (item) {
 
-                                localService.getInternalList(function (internalresponse) {
+                                    var internalOFSCJSONObject = {};
 
-                                    angular.forEach(internalresponse, function (item) {
+                                    internalOFSCJSONObject.Start_Date = item.Start_time;
+                                    internalOFSCJSONObject.End_Date = item.End_time;
+                                    internalOFSCJSONObject.Type = "INTERNAL";
+                                    internalOFSCJSONObject.Customer_Name = item.Activity_type;
+                                    internalOFSCJSONObject.Task_Number = item.Activity_Id;
 
-                                        var internalOFSCJSONObject = {};
+                                    response.push(internalOFSCJSONObject);
+                                });
 
-                                        internalOFSCJSONObject.Start_Date = item.Start_time;
-                                        internalOFSCJSONObject.End_Date = item.End_time;
-                                        internalOFSCJSONObject.Type = "INTERNAL";
-                                        internalOFSCJSONObject.Customer_Name = item.Activity_type;
-                                        internalOFSCJSONObject.Task_Number = item.Activity_Id;
+                                constantService.setTaskList(response);
 
-                                        response.push(internalOFSCJSONObject);
-                                    });
+                                if (constantService.getUser().Default_View == "My Task") {
 
-                                    constantService.setTaskList(response);
+                                    $rootScope.selectedItem = 2;
 
                                     $state.go('myFieldJob');
 
-                                });
-                            });
-
-                        } else {
-
-                            localService.getTaskList(function (response) {
-
-                                console.log("MY CALENDAR =====> " + JSON.stringify(response));
-
-                                localService.getInternalList(function (internalresponse) {
-
-                                    angular.forEach(internalresponse, function (item) {
-
-                                        var internalOFSCJSONObject = {};
-
-                                        internalOFSCJSONObject.Start_Date = item.Start_time;
-                                        internalOFSCJSONObject.End_Date = item.End_time;
-                                        internalOFSCJSONObject.Type = "INTERNAL";
-                                        internalOFSCJSONObject.Customer_Name = item.Activity_type;
-                                        internalOFSCJSONObject.Task_Number = item.Activity_Id;
-
-                                        response.push(internalOFSCJSONObject);
-                                    });
-
-                                    constantService.setTaskList(response);
+                                } else {
 
                                     $state.go('myTask');
+                                }
 
-                                });
                             });
-                        }
+                        });
 
                     } else {
 
@@ -345,7 +321,7 @@ app.directive('dateFormat', function ($filter) {
     };
 });
 
-app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope', 'constantService', 'valueService' , function ($interval, $timeout, $window, $rootScope, constantService,valueService) {
+app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope', 'constantService', 'valueService', function ($interval, $timeout, $window, $rootScope, constantService, valueService) {
 
     'use strict';
 
@@ -410,7 +386,7 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
                         break;
 
                     case 'Customer Signature':
-                        valueService.setCustSignTime(moment(new Date()).format("DD-MMM-YYYY HH:mm:ss")); 
+                        valueService.setCustSignTime(moment(new Date()).format("DD-MMM-YYYY HH:mm:ss"));
                         break;
 
                     default:
@@ -441,7 +417,7 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
                     }
                 });
             };
-            $rootScope.clearcustomerSign =  function () {
+            $rootScope.clearcustomerSign = function () {
 
                 $scope.signaturePad.clear();
 
@@ -465,10 +441,10 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
                         break;
                 }
             };
-             $scope.clear = function () {
+            $scope.clear = function () {
 
                 $scope.signaturePad.clear();
-                
+
                 $scope.dataurl = EMPTY_IMAGE;
                 $scope.updateModel();
                 var stagesTime = constantService.getStagesArray();
