@@ -240,7 +240,42 @@ app.filter('timezonefilter', function (constantService) {
         return moment(date).format("DD-MMM-YYYY");
     }
 });
+app.directive('charRestrict', function ($filter) {
 
+    return {
+
+        require: '?ngModel',
+        link: function (scope, elem, attrs, ctrl) {
+
+            if (!ctrl)
+                return;
+
+            ctrl.$parsers.unshift(function (viewValue) {
+
+                // var transformedInput = viewValue.replace(/(\:{1,3}[^0-9])/g, '');
+
+                var transformedInput = viewValue.replace(/([& > <])/g, '');
+
+                // transformedInput = transformedInput.replace(/:{2,4}/g, '');
+
+                //transformedInput = transformedInput.replace(/:+/g, ':');
+
+                if (transformedInput !== viewValue) {
+
+                    ctrl.$setViewValue(transformedInput);
+
+                    ctrl.$render();
+                }
+
+                // return transformedInput;
+
+                
+
+                return transformedInput;
+            });
+        }
+    };
+});
 app.directive('dateFormat', function ($filter) {
 
     return {
