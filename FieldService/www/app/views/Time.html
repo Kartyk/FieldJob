@@ -180,8 +180,8 @@
                     ng-click="saveObject('Time',true,item)"
                     ng-disabled="$root.completedTask || !timeform.$valid " translate="Save"></button>
             <!-- <md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Time')" ng-disabled="$root.completedTask" translate="delete"></md-button>-->
-            <md-button class="time-font time-copy summary-report-donebtn" ng-click="copyObject(item,'Time')"
-                       ng-disabled="$root.completedTask|| !timeform.$valid" translate="copy"></md-button>
+            <button class="copy-button" ng-click="copyObject(item,'Time')"
+                       ng-disabled="$root.completedTask|| !timeform.$valid" translate="copy"></button>
             <span flex></span>
             <!--<button class="time-font time-add summary-report-donebtn" translate="NEXT" ng-click="Next('Time')"></button>-->
             <!--<md-button type="submit" ng-disabled="!timeformValid">TEST</md-button>-->

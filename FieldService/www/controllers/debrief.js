@@ -4438,7 +4438,7 @@
             }
             else {
                 doc1.text(500, 20, $filter('translate')('Emerson Process Management'))
-                doc1.text(500, 28, $filter('translate')('Meridian East, Leicester'))
+                doc1.text(500, 28, $filter('translate')('Meridian East, Leicester,United Kingdom'))
                 doc1.text(500, 36, $filter('translate')('LE19 1UX'))
                 doc1.text(500, 44, $filter('translate')('Tel: + 44 (0) 116 282 2822'))
                 doc1.text(500, 52, $filter('translate')('Fax: +44 (0) 116 289 2896'))
@@ -4711,11 +4711,11 @@
                 doc1.setFontSize(16)
                 doc1.setFontType('normal')
                 if (file.fileDisc.length >= 20)
-                    doc1.text(xAttachField1, yAttachField + 65, file.fileDisc.substr(0, 18) + '..')
+                    doc1.text(xAttachField1, yAttachField + 70, file.fileDisc.substr(0, 18) + '..')
                 else {
-                    doc1.text(xAttachField1, yAttachField + 65, file.fileDisc)
+                    doc1.text(xAttachField1, yAttachField + 70, file.fileDisc)
                 }
-                xAttachField1 += 60;
+                xAttachField1 += 70;
             })
             var j = 0, xTimeField = 25, yTimeField = yAttachField + rectAttachHeight + 20, rectTimeWidth = 660,
                 rectTimeHeight = 23 * $scope.summary.timeArray.length + 10, yTimeFieldName = yTimeField + 20,
@@ -5064,15 +5064,15 @@
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
                 if ($scope.summary.materialArray[l - 1].ItemName) {
-                    splitItemname = doc1.splitTextToSize($scope.summary.materialArray[l - 1].ItemName, 586 - 490)
+                    splitItemname = doc1.splitTextToSize($scope.summary.materialArray[l - 1].ItemName, 595 - 490)
                     doc1.text(490, yMaterialFieldValue, splitItemname)
                 }
 
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
                 if ($scope.summary.materialArray[l - 1].Description) {
-                    splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.materialArray[l - 1].Description), rectMaterialWidth - 586);
-                    doc1.text(586, yMaterialFieldValue, splitTitle)
+                    splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.materialArray[l - 1].Description), rectMaterialWidth - 595);
+                    doc1.text(595, yMaterialFieldValue, splitTitle)
 
                 }
                 length = Math.max(splitTitle.length, splitserialin.length, splitserialout.length, splitItemname.length, splitserialno.length)

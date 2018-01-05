@@ -75,7 +75,7 @@
 </div>-->
 <section layout="row" style="margin-bottom:-20px">
     <span flex></span>
-    <md-button class="time-font time-add summary-report-donebtn" translate="BACK" ng-click="goPreviousTab('Material')" style="margin-top:15px;float:right;"></md-button>
+    <button class="time-font time-add summary-report-donebtn" translate="BACK" ng-click="goPreviousTab('Material')" style="margin-top:15px;float:right;"></button>
     <md-button class="time-font time-add summary-report-donebtn" translate="NEXT" ng-click="Next('Material')" style="margin-top:15px;float:right;margin-right:50px;"></md-button>
 </section>
 <div class="card-parentContainer margintop10">
@@ -228,8 +228,8 @@
                     ng-click="saveObject('Material',true,item)"
                     ng-disabled="$root.completedTask || !materialForm.$valid " translate="Save"></button>
             <!-- <md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Material')" ng-disabled="$root.completedTask" translate="delete"></md-button>-->
-            <md-button class="time-font time-copy summary-report-donebtn" ng-click="copyObject(item,'Material')"
-                       ng-disabled="$root.completedTask || !materialForm.$valid " translate="copy"></md-button>
+            <button class="copy-button" ng-click="copyObject(item,'Material')"
+                       ng-disabled="$root.completedTask || !materialForm.$valid " translate="copy"></button>
             <span flex></span>
             <!--<md-button class="time-font time-add summary-report-donebtn" translate="NEXT"
                        ng-click="Next('Material')"></md-button>-->

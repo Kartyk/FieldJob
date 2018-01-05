@@ -2148,7 +2148,7 @@ md-select.md-default-theme ._md-select-value, md-select ._md-select-value {
     font-size: 12px;
     border: none !important;
     text-transform: uppercase;
-    background-color: white;
+    background-color: white !important;
     color: black !important;
     font-family: Open Sans;
     font-weight: bold;
@@ -2163,6 +2163,24 @@ md-select.md-default-theme ._md-select-value, md-select ._md-select-value {
 .add-button:disabled{
     background-color:#f0f0f0;
     opacity:0.5;
+}
+.copy-button {
+    height: 40px;
+    width: 100px;
+    font-family: OpenSans-Bold;
+    font-size: 12px;
+    border: none !important;
+    text-transform: uppercase;
+    background-color: #2d383f !important;
+    color: #ffffff !important;
+    font-family: Open Sans;
+    font-weight: bold;
+    border-radius: 3px;
+    margin-left: 10px;
+}
+
+.copy-button:disabled {
+    opacity: 0.5 !important;
 }
 .summary-report-btn {
     margin-top: 0px !important;

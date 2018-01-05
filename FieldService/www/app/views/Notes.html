@@ -1,6 +1,6 @@
 <section layout="row" style="margin-bottom:-20px">
     <span flex></span>
-    <md-button class="time-font time-add summary-report-donebtn" translate="BACK" ng-click="goPreviousTab('Notes')" style="margin-top:15px;float:right;"></md-button>
+    <button class="time-font time-add summary-report-donebtn" translate="BACK" ng-click="goPreviousTab('Notes')" style="margin-top:15px;float:right;"></button>
     <md-button class="time-font time-add summary-report-donebtn" translate="NEXT" ng-click="Next('Notes')" style="margin-top:15px;float:right;margin-right:50px;"></md-button>
 </section>
 <div class="card-parentContainer margintop10">
@@ -92,7 +92,7 @@
             <button ng-if="isEditNote==1" class="add-button" ng-click="saveObject('Notes',true,item)"
                     translate="Save"></button>
             <!--<md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Notes')" translate="delete"></md-button>-->
-            <md-button class="time-font time-copy summary-report-donebtn" ng-click="copyObject(item,'Notes')" translate="copy" ng-disabled="$root.completedTask || !notesForm.$valid "></md-button>
+            <button class="copy-button" ng-click="copyObject(item,'Notes')" translate="copy" ng-disabled="$root.completedTask || !notesForm.$valid "></button>
             <span flex></span>
             <!--<md-button class="time-font time-add summary-report-donebtn" translate="NEXT"
                        ng-click="Next('Notes')"></md-button>-->

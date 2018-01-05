@@ -85,7 +85,9 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
 
     $scope.add = function () {
 
-        if ($scope.title != "") {
+        console.log()
+
+        if ($scope.title != "" && $scope.title != undefined) {
 
             var toolObject = {
                 ID: $scope.taskId + "" + ($scope.toolList.length + 1),
