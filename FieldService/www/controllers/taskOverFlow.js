@@ -370,7 +370,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                     $rootScope.dbCall = false;
 
-                    cloudService.getTaskInternalList("0", function (response) {
+                    cloudService.getTaskInternalList("1", function (response) {
 
                         $state.go($state.current, {}, { reload: true });
                     });
@@ -413,7 +413,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                         });
                     });
                 });
-                valueService.showDialog("Accept");
+                //valueService.showDialog("Accept");
             }
         }
     };
@@ -435,10 +435,13 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                     $rootScope.showWorkingBtn = true;
 
                     $rootScope.dbCall = false;
+
                     $scope.selectedTask.Task_Status = "Accepted";
-                    cloudService.getTaskInternalList("0", function (response) {
+
+                    cloudService.getTaskInternalList("1", function (response) {
 
                         $state.go($state.current, {}, { reload: true });
+
                         $scope.selectedTask.Task_Status = "Accepted";
                     });
                 });
@@ -484,7 +487,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                         });
                     });
                 });
-                valueService.showDialog("Accept");
+               // valueService.showDialog("Accept");
             }
         }
     };

@@ -2811,7 +2811,7 @@
                                     });
 
                                 } else {
-                                    valueService.showDialog("Complete");
+                                   // valueService.showDialog("Complete");
                                     var taskObject = {
                                         Task_Status: "Completed",
                                         Task_Number: valueService.getTask().Task_Number,
@@ -4421,7 +4421,7 @@
         doc1.setFontType('normal')
         if (isChineese) {
             doc1.text(500, 20, $filter('translate')('EMERSON PROCESS MANAGEMENT CO. LTD.'))
-            doc1.text(500, 28, $filter('translate')('(No. 1277Xin Jingqiao Rd. Pudong,)'))
+            doc1.text(500, 28, $filter('translate')('No. 1277Xin Jingqiao Rd. Pudong,'))
             doc1.text(500, 36, $filter('translate')('Shanghai, 201206'))
             doc1.text(500, 44, $filter('translate')('T: 86-21-2892 9000'))
             doc1.text(500, 52, $filter('translate')('F:  86-21-2892 9001'))
