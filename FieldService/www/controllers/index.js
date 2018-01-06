@@ -521,12 +521,19 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
     $scope.syncFunctionality = function () {
 
-        cloudService.deleteAPI(function (response) {
+        console.log("NETWORK STATUS" + valueService.getNetworkStatus());
 
-            console.log("SUCCESS DELETE");
+        if (valueService.getNetworkStatus()) {
 
-            syncSubmit("1");
-        });
+            $rootScope.dbCall = true;
+
+            cloudService.deleteAPI(function (response) {
+
+                console.log("SUCCESS DELETE");
+
+                syncSubmit("1");
+            });
+        }
 
         //1-Delta
         //0- Full
@@ -534,139 +541,129 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
     function syncSubmit(isLogin) {
 
-        console.log("NETWORK " + valueService.getNetworkStatus());
-
         var promises = [];
 
-        if (valueService.getNetworkStatus()) {
+        var deferAccept = $q.defer();
 
-            $rootScope.dbCall = true;
+        localService.getAcceptTaskList(function (response) {
 
-            var deferAccept = $q.defer();
+            console.log("ACCEPT LENGTH " + response.length);
 
-            localService.getAcceptTaskList(function (response) {
+            if (response.length > 0) {
 
-                console.log("ACCEPT LENGTH " + response.length);
+                var i = 0;
 
-                if (response.length > 0) {
+                angular.forEach(response, function (item) {
 
-                    var i = 0;
+                    var deferred = $q.defer();
 
-                    angular.forEach(response, function (item) {
+                    if (item.Task_Status == "Accepted") {
 
-                        var deferred = $q.defer();
+                        valueService.acceptTask(item, function (result) {
 
-                        if (item.Task_Status == "Accepted") {
+                            $rootScope.showAccept = false;
 
-                            valueService.acceptTask(item, function (result) {
-
-                                $rootScope.showAccept = false;
-
-                                $rootScope.showWorkingBtn = true;
-
-                                deferred.resolve("success");
-
-                                if ((response.length - 1) == i) {
-                                    deferAccept.resolve("Accept");
-                                }
-
-                                i++;
-                            });
-
-                        } else if (item.Task_Status == "Working") {
-
-                            valueService.startWorking(item, function (result) {
-
-                                $rootScope.showWorkingBtn = false;
-
-                                deferred.resolve("success");
-
-                                if ((response.length - 1) == i) {
-                                    deferAccept.resolve("Working");
-                                }
-
-                                i++;
-                            });
-                        }
-
-                        promises.push(deferred.promise);
-                    });
-
-                } else {
-
-                    deferAccept.resolve("Accept");
-                }
-            });
-
-            promises.push(deferAccept.promise);
-
-            var deferSubmit = $q.defer();
-
-            localService.getPendingTaskList(function (response) {
-
-                console.log("SUBMIT LENGTH " + response.length);
-
-                if (response.length > 0) {
-
-                    var j = 0;
-
-                    angular.forEach(response, function (item) {
-
-                        var deferred = $q.defer();
-
-                        valueService.submitDebrief(item, item.Task_Number, function (result) {
-
-                            console.log("DEBRIEF UPDATED");
+                            $rootScope.showWorkingBtn = true;
 
                             deferred.resolve("success");
 
-                            if ((response.length - 1) == j) {
-                                deferSubmit.resolve("Submit");
+                            if ((response.length - 1) == i) {
+                                deferAccept.resolve("Accept");
                             }
 
-                            j++;
+                            i++;
                         });
 
-                        promises.push(deferred.promise);
+                    } else if (item.Task_Status == "Working") {
+
+                        valueService.startWorking(item, function (result) {
+
+                            $rootScope.showWorkingBtn = false;
+
+                            deferred.resolve("success");
+
+                            if ((response.length - 1) == i) {
+                                deferAccept.resolve("Working");
+                            }
+
+                            i++;
+                        });
+                    }
+
+                    promises.push(deferred.promise);
+                });
+
+            } else {
+
+                deferAccept.resolve("Accept");
+            }
+        });
+
+        promises.push(deferAccept.promise);
+
+        var deferSubmit = $q.defer();
+
+        localService.getPendingTaskList(function (response) {
+
+            console.log("SUBMIT LENGTH " + response.length);
+
+            if (response.length > 0) {
+
+                var j = 0;
+
+                angular.forEach(response, function (item) {
+
+                    var deferred = $q.defer();
+
+                    valueService.submitDebrief(item, item.Task_Number, function (result) {
+
+                        console.log("DEBRIEF UPDATED");
+
+                        deferred.resolve("success");
+
+                        if ((response.length - 1) == j) {
+                            deferSubmit.resolve("Submit");
+                        }
+
+                        j++;
                     });
 
-                } else {
+                    promises.push(deferred.promise);
+                });
 
-                    deferSubmit.resolve("Submit");
-                }
-            });
+            } else {
 
-            promises.push(deferSubmit.promise);
+                deferSubmit.resolve("Submit");
+            }
+        });
 
-            console.log("TOTAL LENGTH " + promises.length);
+        promises.push(deferSubmit.promise);
 
-            $q.all(promises).then(
-                function (response) {
+        console.log("TOTAL LENGTH " + promises.length);
 
-                    console.log("ACCEPT SUBMIT SUCCESS");
+        $q.all(promises).then(function (response) {
 
-                    if (isLogin == "0") {
-                        fetchData(isLogin);
-                    } else if (isLogin == "1") {
-                        syncData(isLogin);
-                    }
-                },
+            console.log("ACCEPT SUBMIT SUCCESS");
 
-                function (error) {
+            if (isLogin == "0") {
+                loginData(isLogin);
+            } else if (isLogin == "1") {
+                syncData(isLogin);
+            }
 
-                    console.log("ACCEPT SUBMIT FAILURE");
+        }, function (error) {
 
-                    if (isLogin == "0") {
-                        fetchData(isLogin);
-                    } else if (isLogin == "1") {
-                        syncData(isLogin);
-                    }
-                }
-            );
-        }
+            console.log("ACCEPT SUBMIT FAILURE");
+
+            if (isLogin == "0") {
+                loginData(isLogin);
+            } else if (isLogin == "1") {
+                syncData(isLogin);
+            }
+        });
     }
 
-    function fetchData(isLogin) {
+    function loginData(isLogin) {
 
         cloudService.getTaskInternalList(isLogin, function (response) {
 
@@ -742,95 +739,91 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
             console.log("LENGTH LOGIN " + promiseArray.length);
 
-            $q.all(promiseArray).then(
-                function (response) {
+            $q.all(promiseArray).then(function (response) {
 
-                    console.log("LOGIN SUCCESS ALL");
+                console.log("LOGIN SUCCESS ALL");
 
-                    var userObject = {
-                        'ID': constantService.getUser().ID,
-                        'Sync_Status': "1"
-                    };
+                var userObject = {
+                    'ID': constantService.getUser().ID,
+                    'Sync_Status': "1"
+                };
 
-                    localService.updateSyncStatus(userObject);
+                localService.updateSyncStatus(userObject);
 
-                    if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
+                if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
 
-                        $state.go($state.current, {}, { reload: true });
+                    $state.go($state.current, {}, { reload: true });
 
-                    } else if ($state.current.name == "login") {
+                } else if ($state.current.name == "login") {
 
-                        if (valueService.getUserType().defaultView == "My Task") {
+                    if (valueService.getUserType().defaultView == "My Task") {
 
-                            $state.go("myFieldJob");
+                        $state.go("myFieldJob");
 
-                            $rootScope.selectedItem = 2;
-                            $rootScope.showTaskDetail = false;
-                            $rootScope.showDebrief = false;
-
-                        } else {
-
-                            $state.go("myTask");
-
-                            $rootScope.selectedItem = 1;
-                            $rootScope.showTaskDetail = false;
-                            $rootScope.showDebrief = false;
-                        }
+                        $rootScope.selectedItem = 2;
+                        $rootScope.showTaskDetail = false;
+                        $rootScope.showDebrief = false;
 
                     } else {
 
-                        valueService.setTask(valueService.getTask(), function () {
+                        $state.go("myTask");
 
-                            $state.go($state.current, {}, { reload: true });
-                        });
+                        $rootScope.selectedItem = 1;
+                        $rootScope.showTaskDetail = false;
+                        $rootScope.showDebrief = false;
                     }
 
-                    $rootScope.dbCall = false;
+                } else {
 
-                    getAttachments();
-                },
-
-                function (error) {
-
-                    console.log("LOGIN FAILURE ALL");
-
-                    if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
+                    valueService.setTask(valueService.getTask(), function () {
 
                         $state.go($state.current, {}, { reload: true });
-
-                    } else if ($state.current.name == "login") {
-
-                        if (valueService.getUserType().defaultView == "My Task") {
-
-                            $state.go("myFieldJob");
-
-                            $rootScope.selectedItem = 2;
-                            $rootScope.showTaskDetail = false;
-                            $rootScope.showDebrief = false;
-
-                        } else {
-
-                            $state.go("myTask");
-
-                            $rootScope.selectedItem = 1;
-                            $rootScope.showTaskDetail = false;
-                            $rootScope.showDebrief = false;
-                        }
-
-                    } else {
-
-                        valueService.setTask(valueService.getTask(), function () {
-
-                            $state.go($state.current, {}, { reload: true });
-
-                        });
-                    }
-
-                    $rootScope.dbCall = false;
-
-                    //getAttachments();
+                    });
                 }
-            );
+
+                $rootScope.dbCall = false;
+
+                getAttachments();
+
+            }, function (error) {
+
+                console.log("LOGIN FAILURE ALL");
+
+                if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
+
+                    $state.go($state.current, {}, { reload: true });
+
+                } else if ($state.current.name == "login") {
+
+                    if (valueService.getUserType().defaultView == "My Task") {
+
+                        $state.go("myFieldJob");
+
+                        $rootScope.selectedItem = 2;
+                        $rootScope.showTaskDetail = false;
+                        $rootScope.showDebrief = false;
+
+                    } else {
+
+                        $state.go("myTask");
+
+                        $rootScope.selectedItem = 1;
+                        $rootScope.showTaskDetail = false;
+                        $rootScope.showDebrief = false;
+                    }
+
+                } else {
+
+                    valueService.setTask(valueService.getTask(), function () {
+
+                        $state.go($state.current, {}, { reload: true });
+                    });
+                }
+
+                $rootScope.dbCall = false;
+
+                //getAttachments();
+            });
         });
     }
 
@@ -910,102 +903,99 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
             console.log("LENGTH SYNC " + promiseArray.length);
 
-            $q.all(promiseArray).then(
-                function (response) {
+            $q.all(promiseArray).then(function (response) {
 
-                    var userObject = {
-                        'ID': constantService.getUser().ID,
-                        'Last_updated': new Date()
-                    };
+                var userObject = {
+                    'ID': constantService.getUser().ID,
+                    'Last_updated': new Date()
+                };
 
-                    localService.updateLastSync(userObject);
+                localService.updateLastSync(userObject);
 
-                    console.log("SYNC SUCCESS ALL");
+                console.log("SYNC SUCCESS ALL");
 
-                    if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
+                if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
 
-                        $state.go($state.current, {}, { reload: true });
+                    $state.go($state.current, {}, { reload: true });
 
-                    } else if ($state.current.name == "login") {
+                } else if ($state.current.name == "login") {
 
-                        if (valueService.getUserType().defaultView == "My Task") {
+                    if (valueService.getUserType().defaultView == "My Task") {
 
-                            $state.go("myFieldJob");
+                        $state.go("myFieldJob");
 
-                            $rootScope.selectedItem = 2;
-                            $rootScope.showTaskDetail = false;
-                            $rootScope.showDebrief = false;
-
-                        } else {
-
-                            $state.go("myTask");
-
-                            $rootScope.selectedItem = 1;
-                            $rootScope.showTaskDetail = false;
-                            $rootScope.showDebrief = false;
-                        }
+                        $rootScope.selectedItem = 2;
+                        $rootScope.showTaskDetail = false;
+                        $rootScope.showDebrief = false;
 
                     } else {
 
-                        valueService.setTask(valueService.getTask(), function () {
+                        $state.go("myTask");
 
-                            $state.go($state.current, {}, { reload: true });
-
-                        });
+                        $rootScope.selectedItem = 1;
+                        $rootScope.showTaskDetail = false;
+                        $rootScope.showDebrief = false;
                     }
 
-                    $rootScope.dbCall = false;
+                } else {
 
-                    getAttachments();
-                },
-
-                function (error) {
-
-                    var userObject = {
-                        'ID': constantService.getUser().ID,
-                        'Last_updated': new Date()
-                    };
-
-                    localService.updateLastSync(userObject);
-
-                    console.log("SYNC FAILURE ALL");
-
-                    if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
+                    valueService.setTask(valueService.getTask(), function () {
 
                         $state.go($state.current, {}, { reload: true });
 
-                    } else if ($state.current.name == "login") {
-
-                        if (valueService.getUserType().defaultView == "My Task") {
-
-                            $state.go("myFieldJob");
-
-                            $rootScope.selectedItem = 2;
-                            $rootScope.showTaskDetail = false;
-                            $rootScope.showDebrief = false;
-
-                        } else {
-
-                            $state.go("myTask");
-
-                            $rootScope.selectedItem = 1;
-                            $rootScope.showTaskDetail = false;
-                            $rootScope.showDebrief = false;
-                        }
-
-                    } else {
-
-                        valueService.setTask(valueService.getTask(), function () {
-
-                            $state.go($state.current, {}, { reload: true });
-                        });
-                    }
-
-                    $rootScope.dbCall = false;
-
-                    getAttachments();
+                    });
                 }
-            );
+
+                $rootScope.dbCall = false;
+
+                getAttachments();
+
+            }, function (error) {
+
+                var userObject = {
+                    'ID': constantService.getUser().ID,
+                    'Last_updated': new Date()
+                };
+
+                localService.updateLastSync(userObject);
+
+                console.log("SYNC FAILURE ALL");
+
+                if ($state.current.name == "myFieldJob" || $state.current.name == "myTask") {
+
+                    $state.go($state.current, {}, { reload: true });
+
+                } else if ($state.current.name == "login") {
+
+                    if (valueService.getUserType().defaultView == "My Task") {
+
+                        $state.go("myFieldJob");
+
+                        $rootScope.selectedItem = 2;
+                        $rootScope.showTaskDetail = false;
+                        $rootScope.showDebrief = false;
+
+                    } else {
+
+                        $state.go("myTask");
+
+                        $rootScope.selectedItem = 1;
+                        $rootScope.showTaskDetail = false;
+                        $rootScope.showDebrief = false;
+                    }
+
+                } else {
+
+                    valueService.setTask(valueService.getTask(), function () {
+
+                        $state.go($state.current, {}, { reload: true });
+                    });
+                }
+
+                $rootScope.dbCall = false;
+
+                getAttachments();
+            });
         });
     }
 

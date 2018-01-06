@@ -4,7 +4,7 @@
 
     app.service('valueService', valueService);
 
-    valueService.$inject = ['$http', '$rootScope', '$window', '$location', '$q', 'localService', 'cloudService','$mdDialog'];
+    valueService.$inject = ['$http', '$rootScope', '$window', '$location', '$q', 'localService', 'cloudService', '$mdDialog'];
 
     function valueService($http, $rootScope, $window, $location, $q, localService, cloudService, $mdDialog) {
 
@@ -284,7 +284,7 @@
 
                 deferNote.resolve("success");
 
-                console.log("NOTES");              
+                console.log("NOTES");
             });
 
             promiseArray.push(deferNote.promise);
@@ -835,6 +835,7 @@
                     console.log("Engineer Success")
                 });
             }
+
             setDebriefChanged(false);
         };
 
@@ -1414,7 +1415,7 @@
                                                     }
 
                                                     cloudService.updateOFSCStatus(statusData, function (response) {
-                             
+
                                                         var taskObject = {
                                                             Task_Status: "Completed",
                                                             Task_Number: taskId,
@@ -1513,6 +1514,7 @@
         function getCustSignTime() {
             return custTime;
         };
+
         function showDialog(item) {
 
             $mdDialog.show({
@@ -1530,6 +1532,7 @@
 
                 //$scope.status = "You cancelled the dialog.";
             });
+
             function DialogController($scope, $mdDialog, dataToPass) {
 
                 $scope.ok = function () {
