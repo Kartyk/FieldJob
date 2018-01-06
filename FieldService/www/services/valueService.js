@@ -163,6 +163,7 @@
         service.startWorking = startWorking;
         service.syncData = syncData;
         service.showDialog = showDialog;
+
         return service;
 
         function setDebriefChanged(isChanged) {
@@ -277,23 +278,13 @@
 
             var deferNote = $q.defer();
 
-            localService.getNoteList(taskObject.Task_Number, function (response) {
+            localService.getNoteList(taskObject.Service_Request, function (response) {
 
-                console.log("NOTES");
+                debrief.taskNotes = response;
 
-                localService.getSRNotesList(taskObject.Service_Request, function (result) {
+                deferNote.resolve("success");
 
-                    debrief.taskNotes = response;
-
-                    angular.forEach(result, function (item) {
-
-                        debrief.taskNotes.push(item);
-                    });
-
-                    deferNote.resolve("success");
-
-                    console.log("SR NOTES");
-                });
+                console.log("NOTES");              
             });
 
             promiseArray.push(deferNote.promise);
@@ -330,7 +321,6 @@
                 deferOverTime.resolve("success");
 
                 console.log("OVER TIME");
-
             });
 
             promiseArray.push(deferOverTime.promise);

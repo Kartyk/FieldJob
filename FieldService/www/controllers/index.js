@@ -357,7 +357,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                 header: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Basic ' + authorizationValue,
-                    'oracle-mobile-backend-id': constantService.getChargeBackId()
+                    'oracle-mobile-backend-id': constantService.getLoginBackId()
                 }
             };
 
@@ -465,62 +465,39 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                                     constantService.setLastUpdated(new Date(constantService.getUser().Last_Updated).getTime());
 
-                                    if (constantService.getUser().Default_View == "My Task") {
+                                    localService.getTaskList(function (response) {
 
-                                        $rootScope.selectedItem = 2;
+                                        console.log("TASKLIST " + JSON.stringify(response));
 
-                                        localService.getTaskList(function (response) {
+                                        localService.getInternalList(function (internalresponse) {
 
-                                            console.log("MY FIELD JOB =====> " + JSON.stringify(response));
+                                            angular.forEach(internalresponse, function (item) {
 
-                                            localService.getInternalList(function (internalresponse) {
+                                                var internalOFSCJSONObject = {};
 
-                                                angular.forEach(internalresponse, function (item) {
+                                                internalOFSCJSONObject.Start_Date = item.Start_time;
+                                                internalOFSCJSONObject.End_Date = item.End_time;
+                                                internalOFSCJSONObject.Type = "INTERNAL";
+                                                internalOFSCJSONObject.Customer_Name = item.Activity_type;
+                                                internalOFSCJSONObject.Task_Number = item.Activity_Id;
 
-                                                    var internalOFSCJSONObject = {};
+                                                response.push(internalOFSCJSONObject);
+                                            });
 
-                                                    internalOFSCJSONObject.Start_Date = item.Start_time;
-                                                    internalOFSCJSONObject.End_Date = item.End_time;
-                                                    internalOFSCJSONObject.Type = "INTERNAL";
-                                                    internalOFSCJSONObject.Customer_Name = item.Activity_type;
-                                                    internalOFSCJSONObject.Task_Number = item.Activity_Id;
+                                            constantService.setTaskList(response);
 
-                                                    response.push(internalOFSCJSONObject);
-                                                });
+                                            if (constantService.getUser().Default_View == "My Task") {
 
-                                                constantService.setTaskList(response);
+                                                $rootScope.selectedItem = 2;
 
                                                 $state.go('myFieldJob');
-                                            });
-                                        });
 
-                                    } else {
-
-                                        localService.getTaskList(function (response) {
-
-                                            console.log("MY CALENDAR =====> " + JSON.stringify(response));
-
-                                            localService.getInternalList(function (internalresponse) {
-
-                                                angular.forEach(internalresponse, function (item) {
-
-                                                    var internalOFSCJSONObject = {};
-
-                                                    internalOFSCJSONObject.Start_Date = item.Start_time;
-                                                    internalOFSCJSONObject.End_Date = item.End_time;
-                                                    internalOFSCJSONObject.Type = "INTERNAL";
-                                                    internalOFSCJSONObject.Customer_Name = item.Activity_type;
-                                                    internalOFSCJSONObject.Task_Number = item.Activity_Id;
-
-                                                    response.push(internalOFSCJSONObject);
-                                                });
-
-                                                constantService.setTaskList(response);
+                                            } else {
 
                                                 $state.go('myTask');
-                                            });
+                                            }
                                         });
-                                    }
+                                    });
 
                                 } else {
 
@@ -544,7 +521,13 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
     $scope.syncFunctionality = function () {
 
-        syncSubmit("1");
+        cloudService.deleteAPI(function (response) {
+
+            console.log("SUCCESS DELETE");
+
+            syncSubmit("1");
+        });
+
         //1-Delta
         //0- Full
     }
@@ -563,7 +546,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
             localService.getAcceptTaskList(function (response) {
 
-                console.log("SYNC ACCEPT");
+                console.log("ACCEPT LENGTH " + response.length);
 
                 if (response.length > 0) {
 
@@ -599,7 +582,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                                 deferred.resolve("success");
 
                                 if ((response.length - 1) == i) {
-                                    deferAccept.resolve("Accept");
+                                    deferAccept.resolve("Working");
                                 }
 
                                 i++;
@@ -621,7 +604,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
             localService.getPendingTaskList(function (response) {
 
-                console.log("SYNC SUBMIT");
+                console.log("SUBMIT LENGTH " + response.length);
 
                 if (response.length > 0) {
 
@@ -633,20 +616,15 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                         valueService.submitDebrief(item, item.Task_Number, function (result) {
 
-                            console.log("SUBMIT DEBRIEF");
+                            console.log("DEBRIEF UPDATED");
 
-                            cloudService.OfscActions(item.Activity_Id, false, function (res) {
+                            deferred.resolve("success");
 
-                                deferred.resolve("success");
+                            if ((response.length - 1) == j) {
+                                deferSubmit.resolve("Submit");
+                            }
 
-                                console.log("DEBRIEF SUCCESS");
-
-                                if ((response.length - 1) == j) {
-                                    deferSubmit.resolve("Submit");
-                                }
-
-                                j++;
-                            });
+                            j++;
                         });
 
                         promises.push(deferred.promise);
@@ -660,12 +638,12 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
             promises.push(deferSubmit.promise);
 
-            console.log("PENDING UPDATE LENGTH " + promises.length);
+            console.log("TOTAL LENGTH " + promises.length);
 
             $q.all(promises).then(
                 function (response) {
 
-                    console.log("SYNC DATA ACCEPT SUBMIT SUCCESS");
+                    console.log("ACCEPT SUBMIT SUCCESS");
 
                     if (isLogin == "0") {
                         fetchData(isLogin);
@@ -676,7 +654,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 function (error) {
 
-                    console.log("SYNC DATA ACCEPT SUBMIT FAILURE");
+                    console.log("ACCEPT SUBMIT FAILURE");
 
                     if (isLogin == "0") {
                         fetchData(isLogin);
@@ -725,14 +703,17 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                 }
             });
 
-            var deferProject = $q.defer();
+            if (projectNumberArray.length > 0) {
 
-            cloudService.getProjectDetails(projectNumberArray, function (result) {
+                var deferProject = $q.defer();
 
-                deferProject.resolve("success");
-            });
+                cloudService.getProjectDetails(isLogin, projectNumberArray, function (result) {
 
-            promiseArray.push(deferProject.promise);
+                    deferProject.resolve("success");
+                });
+
+                promiseArray.push(deferProject.promise);
+            }
 
             var srNumberArray = [];
 
@@ -747,101 +728,16 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                 }
             });
 
-            if (srNumberArray.length > 10) {
+            if (srNumberArray.length > 0) {
 
-                var strArray = [];
+                var deferSR = $q.defer();
 
-                var i = 1;
+                cloudService.getSR(isLogin, srNumberArray, function (result) {
 
-                angular.forEach(srNumberArray, function (item) {
-
-                    if (i <= srNumberArray.length) {
-
-                        strArray.push(item);
-
-                        if (i % 10 == 0) {
-
-                            var deferSRNotes = $q.defer();
-
-                            cloudService.getSRNotesList(strArray, function (response) {
-
-                                console.log("SRNOTES");
-
-                                deferSRNotes.resolve("success");
-                            });
-
-                            var deferSRAttachment = $q.defer();
-
-                            cloudService.getSRAttachmentList(strArray, function (response) {
-
-                                console.log("SRATTACHMENT");
-
-                                deferSRAttachment.resolve("success");
-                            });
-
-                            strArray = [];
-
-                            promiseArray.push(deferSRNotes.promise);
-
-                            promiseArray.push(deferSRAttachment.promise);
-
-                        } else if (i == srNumberArray.length) {
-
-                            var deferSRNotesFinal = $q.defer();
-
-                            cloudService.getSRNotesList(strArray, function (response) {
-
-                                console.log("SRNOTES");
-
-                                deferSRNotesFinal.resolve("success");
-                            });
-
-                            var deferSRAttachmentFinal = $q.defer();
-
-                            cloudService.getSRAttachmentList(strArray, function (response) {
-
-                                console.log("SRATTACHMENT");
-
-                                deferSRAttachmentFinal.resolve("success");
-                            });
-
-                            strArray = [];
-
-                            promiseArray.push(deferSRNotesFinal.promise);
-
-                            promiseArray.push(deferSRAttachmentFinal.promise);
-                        }
-
-                        i++;
-                    }
+                    deferSR.resolve("success");
                 });
 
-            } else {
-
-                if (srNumberArray.length > 0) {
-
-                    var deferSRNotes = $q.defer();
-
-                    cloudService.getSRNotesList(srNumberArray, function (response) {
-
-                        console.log("SRNOTES");
-
-                        deferSRNotes.resolve("success");
-                    });
-
-                    var deferSRAttachment = $q.defer();
-
-                    cloudService.getSRAttachmentList(srNumberArray, function (response) {
-
-                        console.log("SRATTACHMENT");
-
-                        deferSRAttachment.resolve("success");
-                    });
-
-                    promiseArray.push(deferSRNotes.promise);
-
-                    promiseArray.push(deferSRAttachment.promise);
-                }
+                promiseArray.push(deferSR.promise);
             }
 
             console.log("LENGTH LOGIN " + promiseArray.length);
@@ -886,7 +782,6 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                         valueService.setTask(valueService.getTask(), function () {
 
                             $state.go($state.current, {}, { reload: true });
-
                         });
                     }
 
@@ -976,20 +871,23 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                 }
             });
 
-            var deferProject = $q.defer();
+            if (projectNumberArray.length > 0) {
 
-            cloudService.getProjectDetails(projectNumberArray, function (result) {
+                var deferProject = $q.defer();
 
-                deferProject.resolve("success");
-            });
+                cloudService.getProjectDetails(isLogin, projectNumberArray, function (result) {
 
-            promiseArray.push(deferProject.promise);
+                    deferProject.resolve("success");
+                });
+
+                promiseArray.push(deferProject.promise);
+            }
 
             var srNumberArray = [];
 
             angular.forEach(constantService.getTaskList(), function (item) {
 
-                if (item.SR_ID != undefined) {
+                if (item.SR_ID != undefined && item.SR_ID != null && item.SR_ID != '') {
 
                     if (srNumberArray.indexOf(item.SR_ID) === -1) {
 
@@ -998,98 +896,16 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                 }
             });
 
-            if (srNumberArray.length > 10) {
+            if (srNumberArray.length > 0) {
 
-                var strArray = [];
+                var deferSR = $q.defer();
 
-                var i = 1;
+                cloudService.getSR(isLogin, srNumberArray, function (result) {
 
-                angular.forEach(srNumberArray, function (item) {
-
-                    if (i <= srNumberArray.length) {
-
-                        strArray.push(item);
-
-                        if (i % 10 == 0) {
-
-                            var deferSRNotes = $q.defer();
-
-                            cloudService.getSRNotesList(strArray, function (response) {
-
-                                console.log("SRNOTES");
-
-                                deferSRNotes.resolve("success");
-                            });
-
-                            var deferSRAttachment = $q.defer();
-
-                            cloudService.getSRAttachmentList(strArray, function (response) {
-
-                                console.log("SRATTACHMENT");
-
-                                deferSRAttachment.resolve("success");
-                            });
-
-                            strArray = [];
-
-                            promiseArray.push(deferSRNotes.promise);
-
-                            promiseArray.push(deferSRAttachment.promise);
-
-                        } else if (i == srNumberArray.length) {
-
-                            var deferSRNotesFinal = $q.defer();
-
-                            cloudService.getSRNotesList(strArray, function (response) {
-
-                                console.log("SRNOTES");
-
-                                deferSRNotesFinal.resolve("success");
-                            });
-
-                            var deferSRAttachmentFinal = $q.defer();
-
-                            cloudService.getSRAttachmentList(strArray, function (response) {
-
-                                console.log("SRATTACHMENT");
-
-                                deferSRAttachmentFinal.resolve("success");
-                            });
-
-                            strArray = [];
-
-                            promiseArray.push(deferSRNotesFinal.promise);
-
-                            promiseArray.push(deferSRAttachmentFinal.promise);
-                        }
-
-                        i++;
-                    }
+                    deferSR.resolve("success");
                 });
 
-            } else {
-
-                var deferSRNotes = $q.defer();
-
-                cloudService.getSRNotesList(srNumberArray, function (response) {
-
-                    console.log("SRNOTES");
-
-                    deferSRNotes.resolve("success");
-                });
-
-                var deferSRAttachment = $q.defer();
-
-                cloudService.getSRAttachmentList(srNumberArray, function (response) {
-
-                    console.log("SRATTACHMENT");
-
-                    deferSRAttachment.resolve("success");
-                });
-
-                promiseArray.push(deferSRNotes.promise);
-
-                promiseArray.push(deferSRAttachment.promise);
+                promiseArray.push(deferSR.promise);
             }
 
             console.log("LENGTH SYNC " + promiseArray.length);
@@ -1182,7 +998,6 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                         valueService.setTask(valueService.getTask(), function () {
 
                             $state.go($state.current, {}, { reload: true });
-
                         });
                     }
 

@@ -56,15 +56,11 @@
         service.insertMaterialList = insertMaterialList;
         service.insertNotesList = insertNotesList;
         service.insertEngineerList = insertEngineerList;
-
-        service.insertSRNotesList = insertSRNotesList;
-
         service.insertToolList = insertToolList;
 
         service.getTaskList = getTaskList;
         service.getInternalList = getInternalList;
 
-        service.getSRNotesList = getSRNotesList;
         service.getSRAttachmentList = getSRAttachmentList;
         service.getAttachmentListType = getAttachmentListType;
 
@@ -90,7 +86,6 @@
         service.getMaterialList = getMaterialList;
         service.getNotesList = getNotesList;
         service.getEngineer = getEngineer;
-
         service.getToolList = getToolList;
 
         service.getPendingTaskList = getPendingTaskList;
@@ -120,9 +115,6 @@
         service.deleteMaterialList = deleteMaterialList;
         service.deleteNotesList = deleteNotesList;
         service.deleteEngineerList = deleteEngineerList;
-
-        service.deleteSRNotesList = deleteSRNotesList;
-
         service.deleteToolList = deleteToolList;
 
         service.deleteTime = deleteTime;
@@ -131,8 +123,12 @@
         service.deleteNotes = deleteNotes;
         service.deleteAttachment = deleteAttachment;
         service.deleteEngineer = deleteEngineer;
-
         service.deleteTool = deleteTool;
+
+        service.deleteTaskRecord = deleteTaskRecord;
+        service.deleteInstallRecord = deleteInstallRecord;
+        service.deleteContactRecord = deleteContactRecord;
+        service.deleteNoteRecord = deleteNoteRecord;
 
         service.updateTaskSubmitStatus = updateTaskSubmitStatus;
         service.updateTaskEmail = updateTaskEmail;
@@ -1149,11 +1145,11 @@
 
                     db.transaction(function (transaction) {
 
-                        var sqlSelect = "SELECT * FROM Note WHERE ID = " + responseList[i].ID + " AND Task_Number = " + responseList[i].Task_Number;
+                        var sqlSelect = "SELECT * FROM Note WHERE Notes_ID = ? AND Service_Request = ?";
 
                         // console.log("NOTE  ====> " + sqlSelect);
 
-                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+                        transaction.executeSql(sqlSelect, [responseList[i].Notes_ID, responseList[i].Service_Request], function (tx, res) {
 
                             var rowLength = res.rows.length;
 
@@ -1206,22 +1202,23 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Note SET Notes = ?, Notes_type = ?, Note_Description = ?, Created_By = ?, MobileCreatedBy = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?, Last_updated_date = ?, SR_ID = ?, ResourceId = ?  WHERE ID = ? AND Task_Number =?";
+                var sqlUpdate = "UPDATE Note SET Notes = ?, Notes_type = ?, Note_Description = ?, Created_By = ?, MobileCreatedBy = ?, Task_Number = ?, Assigned = ?, Start_Date = ?, End_Date = ?, Last_updated_date = ?, Incident = ?, ResourceId = ?  WHERE Notes_ID = ? AND Service_Request =?";
 
                 insertValues.push(responseList.Notes);
                 insertValues.push(responseList.Notes_type);
                 insertValues.push(responseList.Note_Description);
                 insertValues.push(responseList.Created_By);
                 insertValues.push(responseList.MobileCreatedBy);
-                insertValues.push(responseList.Service_Request);
+                insertValues.push(responseList.Task_Number);
                 insertValues.push(responseList.Assigned);
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.End_Date);
                 insertValues.push(responseList.Last_updated_date);
-                insertValues.push(responseList.SR_ID);
+                insertValues.push(responseList.Incident);
                 insertValues.push(constantService.getResourceId());
-                insertValues.push(responseList.ID);
-                insertValues.push(responseList.Task_Number);
+                insertValues.push(responseList.Notes_ID);
+                insertValues.push(responseList.Service_Request);
+
 
                 // console.log("NOTE UPDATE VALUES =====> " + insertValues);
 
@@ -1254,7 +1251,7 @@
 
                 var sqlInsert = "INSERT INTO Note VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-                insertValues.push(responseList.ID);
+                insertValues.push(responseList.Notes_ID);
                 insertValues.push(responseList.Notes);
                 insertValues.push(responseList.Notes_type);
                 insertValues.push(responseList.Note_Description);
@@ -1266,7 +1263,7 @@
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.End_Date);
                 insertValues.push(responseList.Last_updated_date);
-                insertValues.push(responseList.SR_ID);
+                insertValues.push(responseList.Incident);
                 insertValues.push(constantService.getResourceId());
 
                 // console.log("NOTE INSERT VALUES =====> " + insertValues);
@@ -1455,11 +1452,11 @@
 
                         var insertValues = [];
 
-                        var sqlSelect = "SELECT * FROM OverTime WHERE OverTime_Shift_Code_ID = " + responseList[i].OverTime_Shift_Code_ID + " AND Project_Number = " + responseList[i].Project_Number;
+                        var sqlSelect = "SELECT * FROM OverTime WHERE OverTime_Shift_Code_ID = ? AND Project_Number = ?";
 
                         // console.log("OVERTIME  ====> " + sqlSelect);
 
-                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+                        transaction.executeSql(sqlSelect, [responseList[i].OverTime_Shift_Code_ID, responseList[i].Project_Number], function (tx, res) {
 
                             var rowLength = res.rows.length;
 
@@ -1598,11 +1595,11 @@
 
                     db.transaction(function (transaction) {
 
-                        var sqlSelect = "SELECT * FROM ShiftCode WHERE Shift_Code_ID = " + responseList[i].Shift_Code_ID + " AND Project_Number = " + responseList[i].Project_Number;
+                        var sqlSelect = "SELECT * FROM ShiftCode WHERE Shift_Code_ID = ? AND Project_Number = ?";
 
                         // console.log("SHIFTCODE  ====> " + sqlSelect);
 
-                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+                        transaction.executeSql(sqlSelect, [responseList[i].Shift_Code_ID, responseList[i].Project_Number], function (tx, res) {
 
                             var rowLength = res.rows.length;
 
@@ -3680,157 +3677,6 @@
             });
         };
 
-        function insertSRNotesList(response, callback) {
-
-            var responseList = response;
-
-            var promises = [];
-
-            for (var i = 0; i < responseList.length; i++) {
-
-                (function (i) {
-
-                    var deferred = $q.defer();
-
-                    db.transaction(function (transaction) {
-
-                        var sqlSelect = "SELECT * FROM SRNotes WHERE Notes_ID = " + responseList[i].Notes_ID + " AND Incident = " + responseList[i].Incident;
-
-                        // console.log("SRNOTES  ====> " + sqlSelect);
-
-                        transaction.executeSql(sqlSelect, [], function (tx, res) {
-
-                            var rowLength = res.rows.length;
-
-                            // console.log("SRNOTES LENGTH ====> " + rowLength);
-
-                            if (rowLength > 0) {
-
-                                updateSRNotes(responseList[i], deferred);
-
-                            } else {
-
-                                insertSRNotes(responseList[i], deferred);
-                            }
-
-                        }, function (tx, error) {
-
-                            // console.log("SRNOTES SELECT ERROR: " + error.message);
-
-                            deferred.reject(error);
-                        });
-
-                    }, function (error) {
-
-                        // console.log("SRNOTES SELECT TRANSACTION ERROR: " + error.message);
-
-                        deferred.reject(error);
-                    });
-
-                    // console.log("SRNOTES OBJECT =====> " + JSON.stringify(responseList[i]));
-
-                    promises.push(deferred.promise);
-
-                })(i);
-            }
-
-            $q.all(promises).then(
-                function (response) {
-                    callback("SUCCESS");
-                },
-
-                function (error) {
-                    callback("ERROR");
-                }
-            );
-        };
-
-        function updateSRNotes(responseList, defer) {
-
-            db.transaction(function (transaction) {
-
-                var insertValues = [];
-
-                var sqlUpdate = "UPDATE SRNotes SET Notes = ?, Notes_type = ?, Note_Description =?, Created_By = ?, MobileCreatedBy = ?, Start_Date = ?, Last_updated_date = ?, Service_Request = ?, ResourceId = ?  WHERE Notes_ID = ? AND Incident = ?";
-
-                insertValues.push(responseList.Notes);
-                insertValues.push(responseList.Notes_type);
-                insertValues.push(responseList.Note_Description);
-                insertValues.push(responseList.Created_By);
-                insertValues.push(responseList.MobileCreatedBy);
-                insertValues.push(responseList.Start_Date);
-                insertValues.push(responseList.Last_updated_date);
-                insertValues.push(responseList.Service_Request);
-                insertValues.push(constantService.getResourceId());
-                insertValues.push(responseList.Notes_ID);
-                insertValues.push(responseList.Incident);
-
-                // console.log("SRNOTES UPDATE VALUES =====> " + insertValues);
-
-                transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
-
-                    defer.resolve(res);
-
-                    // console.log("SRNOTES ROW AFFECTED: " + res.rowsAffected);
-
-                }, function (tx, error) {
-
-                    // console.log("SRNOTES UPDATE ERROR: " + error.message);
-
-                    defer.reject(error);
-                });
-
-            }, function (error) {
-
-                // console.log("SRNOTES UPDATE TRANSACTION ERROR: " + error.message);
-
-                defer.reject(error);
-            });
-        };
-
-        function insertSRNotes(responseList, defer) {
-
-            db.transaction(function (transaction) {
-
-                var insertValues = [];
-
-                var sqlInsert = "INSERT INTO SRNotes VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-                insertValues.push(responseList.Notes_ID);
-                insertValues.push(responseList.Service_Request);
-                insertValues.push(responseList.Notes);
-                insertValues.push(responseList.Notes_type);
-                insertValues.push(responseList.Note_Description);
-                insertValues.push(responseList.Created_By);
-                insertValues.push(responseList.MobileCreatedBy);
-                insertValues.push(responseList.Start_Date);
-                insertValues.push(responseList.Last_updated_date);
-                insertValues.push(responseList.Incident);
-                insertValues.push(constantService.getResourceId());
-
-                // console.log("SRNOTES INSERT VALUES =====> " + insertValues);
-
-                transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
-
-                    defer.resolve(res);
-
-                    // console.log("SRNOTES INSERT ID: " + res.insertId);
-
-                }, function (tx, error) {
-
-                    // console.log("SRNOTES INSERT ERROR: " + error.message);
-
-                    defer.reject(error);
-                });
-
-            }, function (error) {
-
-                // console.log("SRNOTES INSERT TRANSACTION ERROR: " + error.message);
-
-                defer.reject(error);
-            });
-        };
-
         function insertToolList(response, callback) {
 
             var responseList = response;
@@ -3908,7 +3754,7 @@
                 insertValues.push(responseList.Task_Number);
                 insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.ID);
-                
+
                 // console.log("TOOL UPDATE VALUES =====> " + insertValues);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
@@ -3944,7 +3790,7 @@
                 insertValues.push(responseList.Tool_Name);
                 insertValues.push(responseList.Task_Number);
                 insertValues.push(constantService.getResourceId());
-              
+
                 // console.log("TOOL INSERT VALUES =====> " + insertValues);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
@@ -4400,6 +4246,254 @@
             });
         };
 
+        function deleteTaskRecord(response) {
+
+            var responseList = response;
+
+            var promises = [];
+
+            angular.forEach(responseList, function (item) {
+
+                var deferred = $q.defer();
+
+                db.transaction(function (transaction) {
+
+                    var sqlSelect = "SELECT * FROM Task WHERE Task_Number = " + item.Record_ID;
+
+                    transaction.executeSql(sqlSelect, [], function (tx, res) {
+
+                        var rowLength = res.rows.length;
+
+                        if (rowLength > 0) {
+
+                            db.transaction(function (transaction) {
+
+                                var sqlDelete = "DELETE FROM Task WHERE Task_Number = " + item.Record_ID;
+
+                                transaction.executeSql(sqlDelete);
+
+                            }, function (error) {
+
+                                // console.log("TASK DELETE TRANSACTION ERROR: " + error.message);
+                            });
+                        }
+
+                    }, function (tx, error) {
+
+                        // console.log("TASK SELECT ERROR: " + error.message);
+
+                        deferred.reject(error);
+                    });
+
+                }, function (error) {
+
+                    // console.log("TASK SELECT TRANSACTION ERROR: " + error.message);
+
+                    deferred.reject(error);
+                });
+
+                // console.log("TASK OBJECT =====> " + JSON.stringify(responseList[i]));
+
+                promises.push(deferred.promise);
+            });
+
+            $q.all(promises).then(
+                function (response) {
+                    callback("SUCCESS TASK");
+                },
+
+                function (error) {
+                    callback("ERROR TASK");
+                }
+            );
+        };
+
+        function deleteInstallRecord(response) {
+
+            var responseList = response;
+
+            var promises = [];
+
+            angular.forEach(responseList, function (item) {
+
+                var deferred = $q.defer();
+
+                db.transaction(function (transaction) {
+
+                    var sqlSelect = "SELECT * FROM InstallBase WHERE Installed_Base_ID = " + item.Record_ID;
+
+                    transaction.executeSql(sqlSelect, [], function (tx, res) {
+
+                        var rowLength = res.rows.length;
+
+                        if (rowLength > 0) {
+
+                            db.transaction(function (transaction) {
+
+                                var sqlDelete = "DELETE FROM InstallBase WHERE Installed_Base_ID = " + item.Record_ID;
+
+                                transaction.executeSql(sqlDelete);
+
+                            }, function (error) {
+
+                                // console.log("INSTALL DELETE TRANSACTION ERROR: " + error.message);
+                            });
+                        }
+
+                    }, function (tx, error) {
+
+                        // console.log("INSTALL SELECT ERROR: " + error.message);
+
+                        deferred.reject(error);
+                    });
+
+                }, function (error) {
+
+                    // console.log("INSTALL SELECT TRANSACTION ERROR: " + error.message);
+
+                    deferred.reject(error);
+                });
+
+                // console.log("INSTALL OBJECT =====> " + JSON.stringify(responseList[i]));
+
+                promises.push(deferred.promise);
+            });
+
+            $q.all(promises).then(
+                function (response) {
+                    callback("SUCCESS INSTALL");
+                },
+
+                function (error) {
+                    callback("ERROR INSTALL");
+                }
+            );
+        };
+
+        function deleteContactRecord(response) {
+
+            var responseList = response;
+
+            var promises = [];
+
+            angular.forEach(responseList, function (item) {
+
+                var deferred = $q.defer();
+
+                db.transaction(function (transaction) {
+
+                    var sqlSelect = "SELECT * FROM Contact WHERE Contact_ID = " + item.Record_ID;
+
+                    transaction.executeSql(sqlSelect, [], function (tx, res) {
+
+                        var rowLength = res.rows.length;
+
+                        if (rowLength > 0) {
+
+                            db.transaction(function (transaction) {
+
+                                var sqlDelete = "DELETE FROM Contact WHERE Contact_ID = " + item.Record_ID;
+
+                                transaction.executeSql(sqlDelete);
+
+                            }, function (error) {
+
+                                // console.log("CONTACT DELETE TRANSACTION ERROR: " + error.message);
+                            });
+                        }
+
+                    }, function (tx, error) {
+
+                        // console.log("CONTACT SELECT ERROR: " + error.message);
+
+                        deferred.reject(error);
+                    });
+
+                }, function (error) {
+
+                    // console.log("CONTACT SELECT TRANSACTION ERROR: " + error.message);
+
+                    deferred.reject(error);
+                });
+
+                // console.log("CONTACT OBJECT =====> " + JSON.stringify(responseList[i]));
+
+                promises.push(deferred.promise);
+            });
+
+            $q.all(promises).then(
+                function (response) {
+                    callback("SUCCESS CONTACT");
+                },
+
+                function (error) {
+                    callback("ERROR CONTACT");
+                }
+            );
+        };
+
+        function deleteNoteRecord(response) {
+
+            var responseList = response;
+
+            var promises = [];
+
+            angular.forEach(responseList, function (item) {
+
+                var deferred = $q.defer();
+
+                db.transaction(function (transaction) {
+
+                    var sqlSelect = "SELECT * FROM Note WHERE Notes_ID = " + item.Record_ID;
+
+                    transaction.executeSql(sqlSelect, [], function (tx, res) {
+
+                        var rowLength = res.rows.length;
+
+                        if (rowLength > 0) {
+
+                            db.transaction(function (transaction) {
+
+                                var sqlDelete = "DELETE FROM Note WHERE Notes_ID = " + item.Record_ID;
+
+                                transaction.executeSql(sqlDelete);
+
+                            }, function (error) {
+
+                                // console.log("NOTE DELETE TRANSACTION ERROR: " + error.message);
+                            });
+                        }
+
+                    }, function (tx, error) {
+
+                        // console.log("NOTE SELECT ERROR: " + error.message);
+
+                        deferred.reject(error);
+                    });
+
+                }, function (error) {
+
+                    // console.log("NOTE SELECT TRANSACTION ERROR: " + error.message);
+
+                    deferred.reject(error);
+                });
+
+                // console.log("NOTE OBJECT =====> " + JSON.stringify(responseList[i]));
+
+                promises.push(deferred.promise);
+            });
+
+            $q.all(promises).then(
+                function (response) {
+                    callback("SUCCESS NOTE");
+                },
+
+                function (error) {
+                    callback("ERROR NOTE");
+                }
+            );
+        };
+
         function getTaskList(callback) {
 
             var value = [];
@@ -4542,7 +4636,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM Note WHERE Task_Number = ? AND ResourceId = ?", [taskId, constantService.getResourceId()], function (tx, res) {
+                transaction.executeSql("SELECT * FROM Note WHERE Service_Request = ? AND ResourceId = ?", [taskId, constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -5320,40 +5414,6 @@
             }, function (error) {
 
                 // console.log("GET TASK ACCEPT TRANSACTION ERROR: " + error.message);
-
-                callback(value);
-            });
-        };
-
-        function getSRNotesList(taskId, callback) {
-
-            var value = [];
-
-            return db.transaction(function (transaction) {
-
-                transaction.executeSql("SELECT * FROM SRNotes WHERE Service_Request = ? AND ResourceId = ?", [taskId, constantService.getResourceId()], function (tx, res) {
-
-                    var rowLength = res.rows.length;
-
-                    for (var i = 0; i < rowLength; i++) {
-
-                        value.push(res.rows.item(i));
-                    }
-
-                    // console.log("GET SRNOTES DB ==========> " + JSON.stringify(value));
-
-                    callback(value);
-
-                }, function (tx, error) {
-
-                    // console.log("GET SRNOTES SELECT ERROR: " + error.message);
-
-                    callback(value);
-                });
-
-            }, function (error) {
-
-                // console.log("GET SRNOTES TRANSACTION ERROR: " + error.message);
 
                 callback(value);
             });

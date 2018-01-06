@@ -23,7 +23,7 @@
 
         var sqlContact = "CREATE TABLE IF NOT EXISTS Contact ('Contact_ID' INTEGER, 'Customer_Name' TEXT, 'Contact_Name' TEXT, 'Home_Phone' TEXT, 'Mobile_Phone' TEXT, 'Fax_Phone' TEXT, 'Office_Phone' TEXT, 'Email' TEXT, 'Foreign_Key' TEXT, 'Task_Number' TEXT, 'Service_Request' TEXT, 'Assigned' TEXT, 'Start_Date' TEXT, 'End_Date' TEXT, 'Default_value' TEXT, 'Contacts_Preferences' TEXT, 'ResourceId' TEXT)";
 
-        var sqlNote = "CREATE TABLE IF NOT EXISTS Note ('ID' INTEGER, 'Notes' TEXT, 'Notes_type' TEXT, 'Note_Description' TEXT, 'Created_By' TEXT, 'MobileCreatedBy' TEXT, 'Task_Number' TEXT, 'Service_Request' TEXT, 'Assigned' TEXT, 'Start_Date' TEXT, 'End_Date' TEXT, 'Last_updated_date' TEXT, 'SR_ID' TEXT, 'ResourceId' TEXT)";
+        var sqlNote = "CREATE TABLE IF NOT EXISTS Note ('Notes_ID' INTEGER, 'Notes' TEXT, 'Notes_type' TEXT, 'Note_Description' TEXT, 'Created_By' TEXT, 'MobileCreatedBy' TEXT, 'Task_Number' TEXT, 'Service_Request' TEXT, 'Assigned' TEXT, 'Start_Date' TEXT, 'End_Date' TEXT, 'Last_updated_date' TEXT, 'Incident' TEXT, 'ResourceId' TEXT)";
 
         var sqlAttachment = "CREATE TABLE IF NOT EXISTS Attachment ('Attachment_Id' INTEGER PRIMARY KEY  NOT NULL, 'File_Name' TEXT, 'File_Type' TEXT, 'File_Path' TEXT, 'Type' TEXT, 'AttachmentType' TEXT, 'Created_Date' TEXT, 'Task_Number' TEXT, 'SRID' TEXT, 'Attachment_Status' TEXT, 'ResourceId' TEXT)";
 
@@ -61,9 +61,6 @@
 
         var sqlEngineer = "CREATE TABLE IF NOT EXISTS Engineer ('Engineer_Id' INTEGER PRIMARY KEY  NOT NULL, 'followUp' boolean, 'salesQuote' boolean, 'salesVisit' boolean, 'salesLead' boolean, 'Follow_Up' TEXT, 'Spare_Quote' TEXT, 'Sales_Visit' TEXT, 'Sales_Head' TEXT, 'Sign_File_Path' TEXT, 'File_Name' TEXT, 'Task_Number' TEXT, 'isCustomerSignChecked' TEXT, 'customerComments' TEXT, 'ResourceId' TEXT)";
 
-
-        var sqlSRNotes = "CREATE TABLE IF NOT EXISTS SRNotes ('Notes_ID' INTEGER, 'Service_Request' TEXT, 'Notes' TEXT, 'Notes_type' TEXT, 'Note_Description' TEXT, 'Created_By' TEXT, 'MobileCreatedBy' TEXT, 'Start_Date' TEXT, 'Last_updated_date' TEXT, 'Incident' TEXT, 'ResourceId' TEXT)";
-
         var sqlTool = "CREATE TABLE IF NOT EXISTS Tool ('ID' INTEGER PRIMARY KEY  NOT NULL, 'Tool_Name' TEXT, 'Task_Number' TEXT, 'ResourceId' TEXT)";
 
         db.transaction(function (tx) {
@@ -97,9 +94,6 @@
 
             tx.executeSql(sqlFieldJobName);
             //console.log('DB SUCCESS: FIELDJOBNAME');
-
-            tx.executeSql(sqlSRNotes);
-            //console.log('DB SUCCESS: SRNOTES');
 
             tx.executeSql(sqlChargeMethod);
             //console.log('DB SUCCESS: CHARGEMETHOD');
