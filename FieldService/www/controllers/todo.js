@@ -165,7 +165,7 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
 
                     $rootScope.dbCall = false;
 
-                    cloudService.getTaskInternalList("0", function (response) {
+                    cloudService.getTaskInternalList("1", function (response) {
 
                         $state.go($state.current, {}, { reload: true });
                     });
@@ -208,7 +208,7 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
                         });
                     });
                 });
-                valueService.showDialog("Accept");
+               // valueService.showDialog("Accept");
             }
         }
     }
@@ -231,10 +231,14 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
 
                     $rootScope.dbCall = false;
 
-                    //cloudService.getTaskInternalList("0", function (response) {
+                    $scope.selectedTask.Task_Status = "Accepted";
 
-                    //    $state.go($state.current, {}, {reload: true});
-                    //});
+                    cloudService.getTaskInternalList("1", function (response) {
+
+                        $state.go($state.current, {}, { reload: true });
+
+                        $scope.selectedTask.Task_Status = "Accepted";
+                    });
                 });
 
             } else {
@@ -245,7 +249,7 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
                     Submit_Status: "A",
                     Date: new Date()
                 };
-                valueService.showDialog("Accept");
+              //  valueService.showDialog("Accept");
                 localService.updateTaskSubmitStatus(taskObject, function (result) {
 
                     localService.getTaskList(function (response) {
