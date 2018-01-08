@@ -40,6 +40,7 @@ app.controller('myTaskController', function ($translate, $scope, $compile, $time
 
         $('#calendar').fullCalendar({
             customButtons: {
+              
                 monthButton: {
                     text: 'month',
                     click: function () {
@@ -70,6 +71,7 @@ app.controller('myTaskController', function ($translate, $scope, $compile, $time
                 center: 'agendaWeek,agendaDay,month'
             },
             locale: localeused,
+            fixedWeekCount: false,
             //defaultDate: '2017-09-12',
             defaultView: 'agendaWeek',
             navLinks: true,
