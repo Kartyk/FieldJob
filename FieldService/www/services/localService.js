@@ -4246,7 +4246,7 @@
             });
         };
 
-        function deleteTaskRecord(response) {
+        function deleteTaskRecord(response, callback) {
 
             var responseList = response;
 
@@ -4264,18 +4264,35 @@
 
                         var rowLength = res.rows.length;
 
+                        // console.log("TASK ROW LENGTH " + rowLength);
+
                         if (rowLength > 0) {
 
                             db.transaction(function (transaction) {
 
                                 var sqlDelete = "DELETE FROM Task WHERE Task_Number = " + item.Record_ID;
 
-                                transaction.executeSql(sqlDelete);
+                                transaction.executeSql(sqlDelete, [], function (tx, res) {
+
+                                    deferred.resolve(res);
+
+                                }, function (error) {
+
+                                    // console.log("TASK DELETE TRANSACTION ERROR: " + error.message);
+
+                                    deferred.reject(error);
+                                });
 
                             }, function (error) {
 
                                 // console.log("TASK DELETE TRANSACTION ERROR: " + error.message);
+
+                                deferred.reject(error);
                             });
+
+                        } else {
+
+                            deferred.resolve("success");
                         }
 
                     }, function (tx, error) {
@@ -4292,7 +4309,7 @@
                     deferred.reject(error);
                 });
 
-                // console.log("TASK OBJECT =====> " + JSON.stringify(responseList[i]));
+                // console.log("TASK OBJECT =====> " + JSON.stringify(item));
 
                 promises.push(deferred.promise);
             });
@@ -4308,7 +4325,7 @@
             );
         };
 
-        function deleteInstallRecord(response) {
+        function deleteInstallRecord(response, callback) {
 
             var responseList = response;
 
@@ -4326,18 +4343,35 @@
 
                         var rowLength = res.rows.length;
 
+                        // console.log("INSTALL ROW LENGTH " + rowLength);
+
                         if (rowLength > 0) {
 
                             db.transaction(function (transaction) {
 
                                 var sqlDelete = "DELETE FROM InstallBase WHERE Installed_Base_ID = " + item.Record_ID;
 
-                                transaction.executeSql(sqlDelete);
+                                transaction.executeSql(sqlDelete, [], function (tx, res) {
+
+                                    deferred.resolve(res);
+
+                                }, function (error) {
+
+                                    // console.log("INSTALL DELETE TRANSACTION ERROR: " + error.message);
+
+                                    deferred.reject(error);
+                                });
 
                             }, function (error) {
 
                                 // console.log("INSTALL DELETE TRANSACTION ERROR: " + error.message);
+
+                                deferred.reject(error);
                             });
+
+                        } else {
+
+                            deferred.resolve("success");
                         }
 
                     }, function (tx, error) {
@@ -4354,7 +4388,7 @@
                     deferred.reject(error);
                 });
 
-                // console.log("INSTALL OBJECT =====> " + JSON.stringify(responseList[i]));
+                // console.log("INSTALL OBJECT =====> " + JSON.stringify(item));
 
                 promises.push(deferred.promise);
             });
@@ -4370,7 +4404,7 @@
             );
         };
 
-        function deleteContactRecord(response) {
+        function deleteContactRecord(response, callback) {
 
             var responseList = response;
 
@@ -4388,18 +4422,35 @@
 
                         var rowLength = res.rows.length;
 
+                        // console.log("CONTACT ROW LENGTH " + rowLength);
+
                         if (rowLength > 0) {
 
                             db.transaction(function (transaction) {
 
                                 var sqlDelete = "DELETE FROM Contact WHERE Contact_ID = " + item.Record_ID;
 
-                                transaction.executeSql(sqlDelete);
+                                transaction.executeSql(sqlDelete, [], function (tx, res) {
+
+                                    deferred.resolve(res);
+
+                                }, function (error) {
+
+                                    // console.log("CONTACT DELETE TRANSACTION ERROR: " + error.message);
+
+                                    deferred.reject(error);
+                                });
 
                             }, function (error) {
 
                                 // console.log("CONTACT DELETE TRANSACTION ERROR: " + error.message);
+
+                                deferred.reject(error);
                             });
+
+                        } else {
+
+                            deferred.resolve("success");
                         }
 
                     }, function (tx, error) {
@@ -4416,7 +4467,7 @@
                     deferred.reject(error);
                 });
 
-                // console.log("CONTACT OBJECT =====> " + JSON.stringify(responseList[i]));
+                // console.log("CONTACT OBJECT =====> " + JSON.stringify(item));
 
                 promises.push(deferred.promise);
             });
@@ -4432,7 +4483,7 @@
             );
         };
 
-        function deleteNoteRecord(response) {
+        function deleteNoteRecord(response, callback) {
 
             var responseList = response;
 
@@ -4450,18 +4501,35 @@
 
                         var rowLength = res.rows.length;
 
+                        // console.log("NOTE ROW LENGTH " + rowLength);
+
                         if (rowLength > 0) {
 
                             db.transaction(function (transaction) {
 
                                 var sqlDelete = "DELETE FROM Note WHERE Notes_ID = " + item.Record_ID;
 
-                                transaction.executeSql(sqlDelete);
+                                transaction.executeSql(sqlDelete, [], function (tx, res) {
+
+                                    deferred.resolve(res);
+
+                                }, function (error) {
+
+                                    // console.log("NOTE DELETE TRANSACTION ERROR: " + error.message);
+
+                                    deferred.reject(error);
+                                });
 
                             }, function (error) {
 
                                 // console.log("NOTE DELETE TRANSACTION ERROR: " + error.message);
+
+                                deferred.reject(error);
                             });
+
+                        } else {
+
+                            deferred.resolve("success");
                         }
 
                     }, function (tx, error) {
@@ -4478,7 +4546,7 @@
                     deferred.reject(error);
                 });
 
-                // console.log("NOTE OBJECT =====> " + JSON.stringify(responseList[i]));
+                // console.log("NOTE OBJECT =====> " + JSON.stringify(item));
 
                 promises.push(deferred.promise);
             });

@@ -25,7 +25,7 @@
 
         service.updateDebrief = updateDebrief;
         service.updateOFSCStatus = updateOFSCStatus;
-     
+
         service.createAttachment = createAttachment;
         service.downloadAttachment = downloadAttachment;
 
@@ -766,14 +766,14 @@
 
             if (isLogin == "0") {
 
-                data = {                
+                data = {
                     "updateDate": "",
                     "SRID": srNumberArray
                 };
 
             } else {
 
-                data = {                 
+                data = {
                     "updateDate": new Date(constantService.getUser().Last_Updated).toISOString(),
                     "SRID": srNumberArray
                 };
@@ -782,7 +782,7 @@
             console.log("REQUEST SR " + JSON.stringify(data));
 
             console.log("START SR " + new Date());
-        
+
             $http({
 
                 method: 'POST',
@@ -883,7 +883,7 @@
                 console.log("ERROR SR " + JSON.stringify(error));
             });
         };
-          
+
         function updateDebrief(formData, callback) {
 
             console.log("REQUEST DEBRIEF " + JSON.stringify(formData));
@@ -1071,7 +1071,8 @@
 
             var data = {
                 "resourceId": constantService.getResourceId(),
-                "updateDate": new Date(constantService.getUser().Last_Updated).toISOString()
+                "updateDate": new Date("2017-12-24T06:59:59.202Z").toISOString()
+                //"updateDate": new Date(constantService.getUser().Last_Updated).toISOString()
             };
 
             console.log("REQUEST DELETE API " + JSON.stringify(data));
@@ -1194,6 +1195,16 @@
 
                     promises.push(deferNote.promise);
                 }
+
+                console.log("TASK " + taskArray.length);
+
+                console.log("CONTACT " + contactArray.length);
+
+                console.log("INSTALL " + installArray.length);
+
+                console.log("NOTE " + noteArray.length);
+
+                console.log("LENGTH " + promises.length);
 
                 $q.all(promises).then(
                     function (response) {
