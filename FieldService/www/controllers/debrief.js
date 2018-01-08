@@ -4607,6 +4607,34 @@
                         });
                     }
                 }))
+                if ($scope.contactorCustname != undefined && $scope.contactorCustname != "")
+                {
+                    promiseArray.push(new Promise(function (resolve) {
+                        {
+                            var temp1 = document.createElement("div");
+                            temp1.id = "temp1";
+                            temp1.style = "color: black;margin:0px;font-size:48px;font-weight: bold;background-color:white;word-wrap:break-word";
+                            phrase = splitTitle;
+                            temp1.innerHTML = $filter('translate')('Conatct Name') + ": "+ $scope.contactorCustname;
+                            //else {
+                            //    angular.forEach(phrase, function (key) {
+                            //        var div = document.createElement("div");
+                            //        div.innerHTML = key;
+                            //        temp.appendChild(div);
+                            //    })
+                            //}
+                            document.body.appendChild(temp1);
+                            html2canvas($("#temp1"), {
+                                onrendered: function (canvas) {
+
+                                    $("#temp1").remove();
+                                    resolve(canvas.toDataURL('image/png'));
+                                },
+                            });
+                        }
+                    }))
+                }
+                
                 
             }
         }
@@ -5250,8 +5278,10 @@
             }
             doc1.text(50, ySignField + 35, $filter('translate')('Service Representative') + ": " + $scope.engineerName)
 
-
-            doc1.text(300, ySignField + 35, $filter('translate')('Conatct Name') + ": " + $scope.contactorCustname)
+            if (!isChineese)
+                doc1.text(300, ySignField + 35, $filter('translate')('Conatct Name') + ": " + $scope.contactorCustname)
+            else
+                doc1.addImage(response[1], 'JPEG', 300, ySignField + 29, 210, 10, 'contactname', 'FAST')
 
 
             var isAdded = checkPdfHeight(ySignField + 55, pageHeight, ySignField, rectSignWidth, rectSignHeight);
