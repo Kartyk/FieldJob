@@ -1,8 +1,8 @@
 
 <section layout="row" style="margin-bottom:-20px">
     <span flex></span>
-    <button class="time-font time-add summary-report-donebtn" translate="BACK" ng-click="goPreviousTab('Expenses')" style="margin-top:15px;float:right;"></button>
-    <md-button class="time-font time-add summary-report-donebtn" translate="NEXT" ng-click="Next('Expenses')" style="margin-top:15px;float:right;margin-right:50px;"></md-button>
+    <button class="time-font time-add summary-report-donebtn rounded-border" translate="BACK" ng-click="goPreviousTab('Expenses')" style="margin-top:15px;float:right;margin-right:10px"></button>
+    <button class="time-font time-add summary-report-donebtn rounded-border" translate="NEXT" ng-click="Next('Expenses')" style="margin-top:15px;float:right;margin-right:50px;"></button>
 </section>
 
 <div class="card-parentContainer ">
@@ -126,7 +126,7 @@
             <span style="visibility:hidden">{{ $root.expenseformValid = expeseform.$valid}}</span>
           
             <button ng-if="isEditExpense==0" style="margin-top:5px;"  class="add-button" ng-click="addObject('Expenses',true,item)" ng-disabled="$root.completedTask || !expeseform.$valid " translate="Add"></button>
-            <button ng-if="isEditExpense==1" class="add-button" ng-click="saveObject('Expenses',true,item)" ng-disabled="$root.completedTask || !expeseform.$valid " translate="Save"></button>
+            <button ng-if="isEditExpense==1" style="margin-top:5px;" class="add-button" ng-click="saveObject('Expenses',true,item)" ng-disabled="$root.completedTask || !expeseform.$valid " translate="Save"></button>
 
             <!--<md-button class="time-font  time-delete" ng-click="deleteObject($index,item,'Expenses')" translate="delete">
             </md-button>-->

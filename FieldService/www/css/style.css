@@ -2178,7 +2178,9 @@ md-select.md-default-theme ._md-select-value, md-select ._md-select-value {
     border-radius: 3px;
     margin-left: 10px;
 }
-
+.rounded-border {
+    border-radius: 3px !important;
+}
 .copy-button:disabled {
     opacity: 0.5 !important;
 }
