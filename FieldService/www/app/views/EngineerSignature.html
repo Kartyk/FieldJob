@@ -70,7 +70,7 @@
 <div class="card-childContainer marginbottom30">
 <label class="engSign-label no-marbottom" translate="Service Representative Signature">:*</label>
             <div class="layout-row">
-                <signature-pad accept="accept" clear="clear" height="220" width="1050" ng-mouseup="updateTime('engg')" dataurl="dataurl"></signature-pad>
+                <signature-pad accept="accept" clear="clear" height="220" width="1050" ng-mouseup="updateTime('engg');updateEngSignature()" dataurl="dataurl"></signature-pad>
                 <br>
                 
             </div>
@@ -83,10 +83,10 @@
                     <md-button class="time-font time-add summary-report-donebtn " style="margin:0px" translate="BACK" ng-click="goPreviousTab('Emerson Signature')"></md-button>
                 </div>
                 <div class="col-sm-6 padding0" style="width:85% !important">
-                    <button class="serbtn" ng-click="clear()" translate="Clear" style="float:right"></button>
+                    <button class="serbtn" ng-click="clear();debriefEnggClear()" translate="Clear" style="float:right"></button>
                 </div>
                 <div class="col-sm-2 padding0">
-                    <button class="engSign-Next" ng-click="signature = accept(); SaveSign()" ng-disabled="$root.Engsignature=='' || $root.Engsignature==undefined " translate="Next"></button>
+                    <button class="engSign-Next" ng-click="signature = accept(); SaveSign()" ng-disabled="summary.engineer==undefined || summary.engineer.signature=='' || summary.engineer.signature==undefined " translate="Next"></button>
                 </div>
                 
                  

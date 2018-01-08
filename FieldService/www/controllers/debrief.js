@@ -3,7 +3,7 @@
     $scope.currentTab = "time";
 
     $rootScope.Islogin = true;
-
+    $scope.signature = "";
     $scope.customerName;
 
     $scope.userType = valueService.getUserType().clarityType;
@@ -3293,6 +3293,20 @@
         $scope.engineerObject.customerComments = "";
         $rootScope.customersignature = "";
     };
+    $scope.updateEngSignature = function () {
+        setTimeout(function () {
+            if ($scope.summary.engineer == undefined)
+                $scope.summary.engineer = {};
+
+            $scope.summary.engineer.signature = $rootScope.Engsignature;
+        }, 200);
+       
+       
+    };
+    $scope.debriefEnggClear = function ()
+    {
+        $scope.summary.engineer.signature = "";
+    }
 
     $scope.ChangeText = function () {
 
@@ -4458,7 +4472,12 @@
         var isCustBig = false;
         var promiseArray = [];
         if ($scope.summary.taskObject.Customer_Name) {
-            var splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.taskObject.Customer_Name), 150);
+            var splitTitle;
+            //年乗米動有済声是子実八協選電治権円玉先川題計民考満勇朝特銅援読合丹行案短毎容前慎博予暮制総男練変界定説
+            if (!isChineese)
+            splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.taskObject.Customer_Name), 150);
+           else
+                splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.taskObject.Customer_Name), 100);
             if (splitTitle.length > 1)
                 isCustBig = true;
             if (!isChineese)
@@ -4471,9 +4490,19 @@
                     {
                         var temp = document.createElement("div");
                         temp.id = "temp";
-                        temp.style = "color: black;margin:0px;font-size:40px;font-weight: lighter;background-color:transparent";
+                        temp.style = "color: black;margin:0px;font-size:40px;font-weight: 300;background-color:white;word-wrap:break-word";
                         phrase = splitTitle;
-                        temp.innerHTML = phrase;
+                        if (phrase.length==1)
+                            temp.innerHTML = phrase;
+                        else
+                        {
+                            angular.forEach(phrase, function (key)
+                            {
+                                var div = document.createElement("div");
+                                div.innerHTML = key;
+                                temp.appendChild(div);
+                            })
+                        }
                         document.body.appendChild(temp);
                         html2canvas($("#temp"), {
                             onrendered: function (canvas) {
