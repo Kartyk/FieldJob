@@ -1652,7 +1652,101 @@
             item.DurationMinutes = parseInt(item.Duration.split(":")[1]);
         }
     };
+    $scope.calcDuration = function (item,isStartTime)
+    {
+        console.log("CHECK DURATION ===== > " + item.startTime);
+        if (isStartTime)
+            {
+            if (item.startTime != "" && item.startTime != undefined) {
+                if (item.startTime.indexOf(':') > -1) {
+                    var second = item.startTime.split(":")[1];
+                    if (second == "" || second == undefined)
+                        second = "00";
+                    if (item.endTime != undefined && item.endTime != "") {
+                        if (item.endTime.indexOf(':') > -1) {
+                            var endsecond = item.endTime.split(":")[1];
+                            if (endsecond == "" || endsecond == undefined)
+                                endsecond = "00";
+                            item.Duration = (parseInt(item.endTime.split(":")[0]) + parseInt(item.startTime.split(":")[0])) +
+                                ":" + (parseInt(endsecond) + parseInt(second))
+                        }
+                        else {
+                            item.Duration = (parseInt(item.endTime) + parseInt(item.startTime.split(":")[0])) + ":" +
+                               second;
+                        }
 
+                    }
+                    else
+                        item.Duration = parseInt(item.startTime.split(":")[0]) + ":"+second;
+                }
+                else {
+                    if (item.endTime != undefined && item.endTime != "") {
+                        if (item.endTime.indexOf(':') > -1) {
+                            var endsecond = item.endTime.split(":")[1];
+                            if (endsecond == "" || endsecond == undefined)
+                                endsecond = "00";
+                            item.Duration = parseInt(item.endTime.split(":")[0]) + parseInt(item.startTime) + ":"
+                                + parseInt(endsecond)
+                        }
+                        else {
+                            item.Duration = parseInt(item.endTime) + parseInt(item.startTime) + ":00";
+                        }
+
+                    }
+                    else
+                        item.Duration = item.startTime + ":00";
+                }
+            }
+        }
+        else
+        {
+            if (item.endTime != "" && item.endTime != undefined) {
+                if (item.endTime.indexOf(':') > -1) {
+                    var second = item.endTime.split(":")[1];
+                    if (second == "" || second == undefined)
+                        second = "00";
+                    if (item.startTime != undefined && item.startTime != "") {
+                        if (item.startTime.indexOf(':') > -1) {
+                            var startsecond = item.startTime.split(":")[1];
+                            if (startsecond == "" || startsecond == undefined)
+                                startsecond = "00";
+                            item.Duration = (parseInt(item.startTime.split(":")[0]) + parseInt(item.endTime.split(":")[0])) + ":" +
+                                (parseInt(startsecond) + parseInt(second))
+                        }
+                        else {
+                            item.Duration = (parseInt(item.startTime) + parseInt(item.endTime.split(":")[0])) + ":"
+                                + second;
+                        }
+
+                    }
+                    else
+                        item.Duration = parseInt(item.endTime.split(":")[0]) + ":"+second;
+                    
+                }
+                else {
+                    if (item.startTime != undefined && item.startTime != "") {
+                        if (item.startTime.indexOf(':') > -1) {
+                            var startsecond = item.startTime.split(":")[1];
+                            if (startsecond == "" || startsecond == undefined)
+                                startsecond = "00";
+                            item.Duration = parseInt(item.startTime.split(":")[0]) + parseInt(item.endTime) + ":" +
+                                parseInt(startsecond)
+                        }
+                        else {
+                            item.Duration = parseInt(item.startTime) + parseInt(item.endTime) + ":00";
+                        }
+
+                    }
+                    else
+                        item.Duration = item.endTime + ":00";
+                }
+            }
+        }
+        item.Duration = formatDuration(item.Duration);
+      
+        $scope.setDurationHours(item);
+        //item.Duration = $scope.calculateDuration(item, item);
+    }
     $scope.checkDuration = function (item) {
 
         console.log("CHECK DURATION ===== > " + item.Duration);
@@ -4513,6 +4607,34 @@
                         });
                     }
                 }))
+                if ($scope.contactorCustname != undefined && $scope.contactorCustname != "")
+                {
+                    promiseArray.push(new Promise(function (resolve) {
+                        {
+                            var temp1 = document.createElement("div");
+                            temp1.id = "temp1";
+                            temp1.style = "color: black;margin:0px;font-size:48px;font-weight: bold;background-color:white;word-wrap:break-word";
+                            phrase = splitTitle;
+                            temp1.innerHTML = $filter('translate')('Conatct Name') + ": "+ $scope.contactorCustname;
+                            //else {
+                            //    angular.forEach(phrase, function (key) {
+                            //        var div = document.createElement("div");
+                            //        div.innerHTML = key;
+                            //        temp.appendChild(div);
+                            //    })
+                            //}
+                            document.body.appendChild(temp1);
+                            html2canvas($("#temp1"), {
+                                onrendered: function (canvas) {
+
+                                    $("#temp1").remove();
+                                    resolve(canvas.toDataURL('image/png'));
+                                },
+                            });
+                        }
+                    }))
+                }
+                
                 
             }
         }
@@ -5156,8 +5278,10 @@
             }
             doc1.text(50, ySignField + 35, $filter('translate')('Service Representative') + ": " + $scope.engineerName)
 
-
-            doc1.text(300, ySignField + 35, $filter('translate')('Conatct Name') + ": " + $scope.contactorCustname)
+            if (!isChineese)
+                doc1.text(300, ySignField + 35, $filter('translate')('Conatct Name') + ": " + $scope.contactorCustname)
+            else
+                doc1.addImage(response[1], 'JPEG', 300, ySignField + 29, 210, 10, 'contactname', 'FAST')
 
 
             var isAdded = checkPdfHeight(ySignField + 55, pageHeight, ySignField, rectSignWidth, rectSignHeight);

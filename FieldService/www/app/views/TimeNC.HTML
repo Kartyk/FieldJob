@@ -90,6 +90,32 @@
                         </div>
                     </div>
 
+                    
+
+                    <div flex="20" class="debrief-items-NC" style="max-width:15%;">
+                        <label flex="100" class="  label-my"
+                               translate="Start Time"></label>
+                        <div flex="100">
+
+                            <input type="text" class="form-control" name="duration"  date-format
+                                   ng-model="item.startTime"  min="00:00" max="23:59"
+                                   ng-blur="calcDuration(item,true)" />
+   
+                        </div>
+                     
+                    </div>
+                    <div flex="20" class="debrief-items-NC" style="max-width:15%;">
+                        <label flex="100" class="  label-my"
+                               translate="End Time"></label>
+                        <div flex="100">
+
+                            <input type="text" class="form-control" name="duration"  date-format
+                                   ng-model="item.endTime"  min="00:00" max="23:59"
+                                   ng-blur="calcDuration(item,false)" />
+
+                        </div>
+                        
+                    </div>
                     <div flex="20" class="debrief-items-NC" style="max-width:15%;">
                         <label flex="100" class="  label-my"
                                translate="{{item.timeDefault.duration.title}}"></label><span style="color:red">*</span>
@@ -100,18 +126,16 @@
                                    ng-blur="checkDuration(item)" />
 
                             <!--<input type="time" name="duration" class="form-control"
-                                   ng-model="item.DurationValue"
-                                   ng-change="setDurationHours(item)"
-                                   ng-blur="checkDuration(item)"
-                                   required
-                            />-->
+                   ng-model="item.DurationValue"
+                   ng-change="setDurationHours(item)"
+                   ng-blur="checkDuration(item)"
+                   required
+            />-->
                         </div>
                         <!--<span style="color:red" ng-show="timeform.duration.$error.required">
-                            Please enter duration
-                        </span>-->
+            Please enter duration
+        </span>-->
                     </div>
-
-
                     <div flex="100" style="max-width:34%;">
 
                         <label flex="100" class="label-my" for="comment"

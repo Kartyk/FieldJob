@@ -153,7 +153,30 @@
                         </span>-->
                     </div>
 
+                    <div flex="20" class="debrief-items-NC" style="max-width:15%;">
+                        <label flex="100" class="  label-my"
+                               translate="Start Time"></label>
+                        <div flex="100">
 
+                            <input type="text" class="form-control" name="duration" date-format
+                                   ng-model="item.startTime" min="00:00" max="23:59"
+                                   ng-blur="calcDuration(item,true)" />
+
+                        </div>
+
+                    </div>
+                    <div flex="20" class="debrief-items-NC" style="max-width:15%;">
+                        <label flex="100" class="  label-my"
+                               translate="End Time"></label>
+                        <div flex="100">
+
+                            <input type="text" class="form-control" name="duration" date-format
+                                   ng-model="item.endTime" min="00:00" max="23:59"
+                                   ng-blur="calcDuration(item,false)" />
+
+                        </div>
+
+                    </div>
                     <div flex="30" style="max-width: 18%;">
 
                         <label flex="100" class="label-my" for="comment"

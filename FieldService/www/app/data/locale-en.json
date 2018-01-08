@@ -203,6 +203,9 @@
   "Conatct Name": "Contact Name",
   "Distance": "Distance",
   "Item Name": "Item Number",
-  "Item Namematerial": "Item Name"
+  "Item Namematerial": "Item Name",
+  "End Time": "End Time",
+  "Start Time": "Start Time"
+
 
 }
