@@ -1071,8 +1071,8 @@
 
             var data = {
                 "resourceId": constantService.getResourceId(),
-                "updateDate": new Date("2017-12-24T06:59:59.202Z").toISOString()
-                //"updateDate": new Date(constantService.getUser().Last_Updated).toISOString()
+                //"updateDate": new Date("2017-12-24T06:59:59.202Z").toISOString()
+                "updateDate": new Date(constantService.getUser().Last_Updated).toISOString()
             };
 
             console.log("REQUEST DELETE API " + JSON.stringify(data));
