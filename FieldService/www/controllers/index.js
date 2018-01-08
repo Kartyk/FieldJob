@@ -521,7 +521,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
     $scope.syncFunctionality = function () {
 
-        console.log("NETWORK STATUS" + valueService.getNetworkStatus());
+        console.log("NETWORK STATUS " + valueService.getNetworkStatus());
 
         if (valueService.getNetworkStatus()) {
 
