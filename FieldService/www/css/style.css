@@ -2494,6 +2494,15 @@ md-select.md-default-theme ._md-select-value, md-select ._md-select-value {
 .padding-top10 {
     padding-top: 10px !important;
 }
+.timePicker {
+    min-width: 0px !important;
+    margin-top: 0px !important;
+    padding: 0px 10px !important;
+}
+.glyphicon-time:hover
+{
+    cursor:pointer;
+}
 
 
 .summary-description {

@@ -61,7 +61,7 @@
                                         {{ item.startTime | date:'HH:mm'}} <i class="glyphicon glyphicon-time" style="float:right"></i>
                                     </span>
                                     <!--<button type="button" class="btn btn-default dropdown-toggle" uib-dropdown-toggle><i class="glyphicon glyphicon-time"></i></button>-->
-                                    <ul class="dropdown-menu " uib-dropdown-menu>
+                                    <ul class="dropdown-menu timePicker" uib-dropdown-menu>
                                         <li><div uib-timepicker ng-model="item.startTime" ng-change="changed(item)" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div></li>
                                     </ul>
                                 </div>
@@ -86,7 +86,7 @@
                                         {{ item.endTime | date:'HH:mm'}} <i class="glyphicon glyphicon-time" style="float:right"></i>
                                     </span>
                                     <!--<button type="button" class="btn btn-default dropdown-toggle" uib-dropdown-toggle><i class="glyphicon glyphicon-time"></i></button>-->
-                                    <ul class="dropdown-menu " uib-dropdown-menu>
+                                    <ul class="dropdown-menu timePicker" uib-dropdown-menu>
                                         <li><div uib-timepicker ng-model="item.endTime" ng-change="changed(item)" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div></li>
                                     </ul>
                                 </div>
