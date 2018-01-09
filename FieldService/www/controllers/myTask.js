@@ -117,7 +117,7 @@ app.controller('myTaskController', function ($translate, $scope, $compile, $time
 
                     } else if (event.Task_Status == 'Working'){// else if (event.Task_Status == 'Accepted') {
 
-                        $scope.showStartWork = true;
+                        $scope.showStartWork = false;
                         $scope.showDebriefBtn = true;
                         $rootScope.showAccept = false;
                         $rootScope.showWorkingBtn = false;
@@ -126,9 +126,9 @@ app.controller('myTaskController', function ($translate, $scope, $compile, $time
                         $state.go('taskOverFlow');
 
                     } else if (event.Task_Status == 'Accepted') {
-                        $scope.showStartWork = true;
-                        $scope.showDebriefBtn = false;
-                        $rootScope.showWorkingBtn = true;
+                        $scope.showStartWork = false;
+                        $scope.showDebriefBtn = true;
+                        $rootScope.showWorkingBtn = false;
                         $rootScope.showAccept = false;
                         $scope.notFutureDate = valueService.checkIfFutureDayTask(event);
                         valueService.setIfFutureDateTask($scope.notFutureDate);

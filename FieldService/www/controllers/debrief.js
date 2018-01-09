@@ -4622,13 +4622,13 @@
         if ($scope.summary.taskObject.Customer_Name) {
             var splitTitle;
             //年乗米動有済声是子実八協選電治権円玉先川題計民考満勇朝特銅援読合丹行案短毎容前慎博予暮制総男練変界定説
-            if (!isChineese)
+            if (!$scope.summary.taskObject.Customer_Name.match(/[\u3400-\u9FBF]/))
             splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.taskObject.Customer_Name), 150);
            else
                 splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.taskObject.Customer_Name), 100);
             if (splitTitle.length > 1)
                 isCustBig = true;
-            if (!isChineese)
+            if (!$scope.summary.taskObject.Customer_Name.match(/[\u3400-\u9FBF]/))
                 doc1.text(25, 110, splitTitle);
             else {
                 promiseArray.push(new Promise(function (resolve) {
@@ -4661,8 +4661,9 @@
                         });
                     }
                 }))
-                if ($scope.contactorCustname != undefined && $scope.contactorCustname != "")
+                if ($scope.contactorCustname != undefined && $scope.contactorCustname != "" && $scope.contactorCustname.match(/[\u3400-\u9FBF]/))
                 {
+
                     promiseArray.push(new Promise(function (resolve) {
                         {
                             var temp1 = document.createElement("div");
@@ -5320,7 +5321,7 @@
 
 
             doc1.text(50, ySignField + 25, $filter('translate')('emerson'))
-            if (!isChineese)
+            if (!$scope.summary.taskObject.Customer_Name.match(/[\u3400-\u9FBF]/))
                 doc1.text(300, ySignField + 25, $scope.summary.taskObject.Customer_Name);
             else
                 doc1.addImage(response[0], 'JPEG', 300, ySignField + 15, 250, 10, 'custname1', 'FAST')
@@ -5332,10 +5333,17 @@
             }
             doc1.text(50, ySignField + 35, $filter('translate')('Service Representative') + ": " + $scope.engineerName)
 
-            if (!isChineese)
-                doc1.text(300, ySignField + 35, $filter('translate')('Conatct Name') + ": " + $scope.contactorCustname)
+            if ($scope.contactorCustname != undefined) {
+                if (!$scope.contactorCustname.match(/[\u3400-\u9FBF]/))
+                    doc1.text(300, ySignField + 35, $filter('translate')('Conatct Name') + ": " + $scope.contactorCustname)
+
+                else
+                    doc1.addImage(response[1], 'JPEG', 300, ySignField + 29, 210, 10, 'contactname', 'FAST')
+            }
             else
-                doc1.addImage(response[1], 'JPEG', 300, ySignField + 29, 210, 10, 'contactname', 'FAST')
+            {
+                doc1.text(300, ySignField + 35, $filter('translate')('Conatct Name') + ": " + $scope.contactorCustname)
+            }
 
 
             var isAdded = checkPdfHeight(ySignField + 55, pageHeight, ySignField, rectSignWidth, rectSignHeight);
