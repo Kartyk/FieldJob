@@ -108,13 +108,18 @@
                     "resourceId": constantService.getResourceId(),
                     "fromDate": constantService.getStartDate(),
                     "toDate": constantService.getEndDate(),
-                    "updateDate": new Date(constantService.getUser().Last_Updated).toISOString()
+                    "updateDate": new Date(constantService.getUser().Last_Updated_Task).toISOString()
                 };
             }
 
             console.log("REQUEST TASK " + JSON.stringify(data));
 
             console.log("START TASK " + new Date());
+
+            var userObject = {
+                'ID': constantService.getUser().ID,
+                'Last_Updated_Task': new Date()
+            };
 
             $http({
 
@@ -128,6 +133,8 @@
                 data: data
 
             }).success(function (response) {
+
+                localService.updateLastTask(userObject);
 
                 console.log("END TASK " + new Date());
 
@@ -229,13 +236,13 @@
 
             startDate.setDate(startDate.getDate() + 15);
 
-            var startDateISOFormat = moment(startDate).format('YYYY-MM-DD');
+            var startDateISOFormat = startDate.toISOString();
 
             var endDate = new Date();
 
             endDate.setDate(endDate.getDate() + 45);
 
-            var endDateISOFormat = moment(endDate).format('YYYY-MM-DD');
+            var endDateISOFormat = endDate.toISOString();
 
             var data = {
                 "resourceId": constantService.getResourceId(),
@@ -246,6 +253,11 @@
             console.log("REQUEST INTERNAL " + JSON.stringify(data));
 
             console.log("START INTERNAL " + new Date());
+
+            var userObject = {
+                'ID': constantService.getUser().ID,
+                'Last_Updated_Internal': new Date()
+            };
 
             $http({
 
@@ -259,6 +271,8 @@
                 data: data
 
             }).success(function (response) {
+
+                localService.updateLastInternal(userObject);
 
                 console.log("END INTERNAL " + new Date());
 
@@ -302,13 +316,18 @@
                     "resourceId": constantService.getResourceId(),
                     "fromDate": constantService.getStartDate(),
                     "toDate": constantService.getEndDate(),
-                    "updateDate": new Date(constantService.getUser().Last_Updated).toISOString()
+                    "updateDate": new Date(constantService.getUser().Last_Updated_Task_Detail).toISOString()
                 };
             }
 
             console.log("REQUEST TASK DETAIL " + JSON.stringify(data));
 
             console.log("START TASK DETAIL " + new Date());
+
+            var userObject = {
+                'ID': constantService.getUser().ID,
+                'Last_Updated_Task_Detail': new Date()
+            };
 
             $http({
 
@@ -322,6 +341,8 @@
                 data: data
 
             }).success(function (response) {
+
+                localService.updateLastTaskDetail(userObject);
 
                 console.log("END TASK DETAIL " + new Date());
 
@@ -461,7 +482,7 @@
                     "resourceId": constantService.getResourceId(),
                     "fromDate": constantService.getStartDate(),
                     "toDate": constantService.getEndDate(),
-                    "updateDate": new Date(constantService.getUser().Last_Updated).toISOString(),
+                    "updateDate": new Date(constantService.getUser().Last_Updated_Project).toISOString(),
                     "project_number": projectArray
                 };
             }
@@ -469,6 +490,11 @@
             console.log("REQUEST PROJECT " + JSON.stringify(data));
 
             console.log("START PROJECT " + new Date());
+
+            var userObject = {
+                'ID': constantService.getUser().ID,
+                'Last_Updated_Project': new Date()
+            };
 
             $http({
 
@@ -482,6 +508,8 @@
                 data: data
 
             }).success(function (response) {
+
+                localService.updateLastProject(userObject);
 
                 console.log("END PROJECT " + new Date());
 
@@ -587,13 +615,18 @@
                     "resourceId": constantService.getResourceId(),
                     "fromDate": constantService.getStartDate(),
                     "toDate": constantService.getEndDate(),
-                    "updateDate": new Date(constantService.getUser().Last_Updated).toISOString()
+                    "updateDate": new Date(constantService.getUser().Last_Updated_LOV).toISOString()
                 };
             }
 
             console.log("REQUEST LOV " + JSON.stringify(data));
 
             console.log("START LOV " + new Date());
+
+            var userObject = {
+                'ID': constantService.getUser().ID,
+                'Last_Updated_LOV': new Date()
+            };
 
             $http({
 
@@ -606,6 +639,8 @@
                 }
 
             }).success(function (response) {
+
+                localService.updateLastLOV(userObject);
 
                 console.log("END LOV " + new Date());
 
@@ -774,7 +809,7 @@
             } else {
 
                 data = {
-                    "updateDate": new Date(constantService.getUser().Last_Updated).toISOString(),
+                    "updateDate": new Date(constantService.getUser().Last_Updated_SR).toISOString(),
                     "SRID": srNumberArray
                 };
             }
@@ -782,6 +817,11 @@
             console.log("REQUEST SR " + JSON.stringify(data));
 
             console.log("START SR " + new Date());
+
+            var userObject = {
+                'ID': constantService.getUser().ID,
+                'Last_Updated_SR': new Date()
+            };
 
             $http({
 
@@ -795,6 +835,8 @@
                 data: data
 
             }).success(function (response) {
+
+                localService.updateLastSR(userObject);
 
                 console.log("END SR " + new Date());
 
@@ -1072,12 +1114,18 @@
             var data = {
                 "resourceId": constantService.getResourceId(),
                 //"updateDate": new Date("2017-12-24T06:59:59.202Z").toISOString()
-                "updateDate": new Date(constantService.getUser().Last_Updated).toISOString()
+                "updateDate": new Date(constantService.getUser().Last_Updated_Delete).toISOString(),
+                "taskId":""
             };
 
             console.log("REQUEST DELETE API " + JSON.stringify(data));
 
             console.log("START DELETE API " + new Date());
+
+            var userObject = {
+                'ID': constantService.getUser().ID,
+                'Last_Updated_Delete': new Date()
+            };
 
             $http({
 
@@ -1091,6 +1139,8 @@
                 data: data
 
             }).success(function (response) {
+
+                localService.updateLastDelete(userObject);
 
                 console.log("END DELETE API " + new Date());
 

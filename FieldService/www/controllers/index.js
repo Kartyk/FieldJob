@@ -390,7 +390,14 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                             Work_Hour: response[0].Work_Hour,
                             Login_Status: "1",
                             Sync_Status: "0",
-                            Last_updated: new Date(),
+                            Last_Updated: new Date(),
+                            Last_Updated_Task: new Date(),
+                            Last_Updated_Internal: new Date(),
+                            Last_Updated_Task_Detail: new Date(),
+                            Last_Updated_Project: new Date(),
+                            Last_Updated_LOV: new Date(),
+                            Last_Updated_SR: new Date(),
+                            Last_Updated_Delete: new Date(),
                             encrypt: authorizationValue
                         };
 
@@ -907,7 +914,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 var userObject = {
                     'ID': constantService.getUser().ID,
-                    'Last_updated': new Date()
+                    'Last_Updated': new Date()
                 };
 
                 localService.updateLastSync(userObject);
@@ -954,7 +961,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 var userObject = {
                     'ID': constantService.getUser().ID,
-                    'Last_updated': new Date()
+                    'Last_Updated': new Date()
                 };
 
                 localService.updateLastSync(userObject);

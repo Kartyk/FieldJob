@@ -25,6 +25,13 @@
         service.getUserLogin = getUserLogin;
         service.updateSyncStatus = updateSyncStatus;
         service.updateLastSync = updateLastSync;
+        service.updateLastTask = updateLastTask;
+        service.updateLastInternal = updateLastInternal;
+        service.updateLastTaskDetail = updateLastTaskDetail;
+        service.updateLastProject = updateLastProject;      
+        service.updateLastLOV = updateLastLOV;
+        service.updateLastSR = updateLastSR;
+        service.updateLastDelete = updateLastDelete;
 
         service.getUser = getUser;
         service.insertUserList = insertUserList;
@@ -215,9 +222,205 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE User SET Last_updated = ? WHERE ID = ?";
+                var sqlUpdate = "UPDATE User SET Last_Updated = ? WHERE ID = ?";
 
-                insertValues.push(userObject.Last_updated);
+                insertValues.push(userObject.Last_Updated);
+                insertValues.push(userObject.ID);
+
+                transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
+
+                    // console.log("USER ROW AFFECTED: " + res.rowsAffected);
+
+                }, function (tx, error) {
+
+                    // console.log("USER UPDATE ERROR: " + error.message);
+                });
+
+            }, function (error) {
+
+                // console.log("USER UPDATE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function updateLastTask(userObject) {
+
+            // console.log("USER UPDATE OBJECT =====> " + JSON.stringify(userObject));
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlUpdate = "UPDATE User SET Last_Updated_Task = ? WHERE ID = ?";
+
+                insertValues.push(userObject.Last_Updated_Task);
+                insertValues.push(userObject.ID);
+
+                transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
+
+                    // console.log("USER ROW AFFECTED: " + res.rowsAffected);
+
+                }, function (tx, error) {
+
+                    // console.log("USER UPDATE ERROR: " + error.message);
+                });
+
+            }, function (error) {
+
+                // console.log("USER UPDATE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function updateLastInternal(userObject) {
+
+            // console.log("USER UPDATE OBJECT =====> " + JSON.stringify(userObject));
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlUpdate = "UPDATE User SET Last_Updated_Internal = ? WHERE ID = ?";
+
+                insertValues.push(userObject.Last_Updated_Internal);
+                insertValues.push(userObject.ID);
+
+                transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
+
+                    // console.log("USER ROW AFFECTED: " + res.rowsAffected);
+
+                }, function (tx, error) {
+
+                    // console.log("USER UPDATE ERROR: " + error.message);
+                });
+
+            }, function (error) {
+
+                // console.log("USER UPDATE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function updateLastTaskDetail(userObject) {
+
+            // console.log("USER UPDATE OBJECT =====> " + JSON.stringify(userObject));
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlUpdate = "UPDATE User SET Last_Updated_Task_Detail = ? WHERE ID = ?";
+
+                insertValues.push(userObject.Last_Updated_Task_Detail);
+                insertValues.push(userObject.ID);
+
+                transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
+
+                    // console.log("USER ROW AFFECTED: " + res.rowsAffected);
+
+                }, function (tx, error) {
+
+                    // console.log("USER UPDATE ERROR: " + error.message);
+                });
+
+            }, function (error) {
+
+                // console.log("USER UPDATE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function updateLastProject(userObject) {
+
+            // console.log("USER UPDATE OBJECT =====> " + JSON.stringify(userObject));
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlUpdate = "UPDATE User SET Last_Updated_Project = ? WHERE ID = ?";
+
+                insertValues.push(userObject.Last_Updated_Project);
+                insertValues.push(userObject.ID);
+
+                transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
+
+                    // console.log("USER ROW AFFECTED: " + res.rowsAffected);
+
+                }, function (tx, error) {
+
+                    // console.log("USER UPDATE ERROR: " + error.message);
+                });
+
+            }, function (error) {
+
+                // console.log("USER UPDATE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function updateLastLOV(userObject) {
+
+            // console.log("USER UPDATE OBJECT =====> " + JSON.stringify(userObject));
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlUpdate = "UPDATE User SET Last_Updated_LOV = ? WHERE ID = ?";
+
+                insertValues.push(userObject.Last_Updated_LOV);
+                insertValues.push(userObject.ID);
+
+                transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
+
+                    // console.log("USER ROW AFFECTED: " + res.rowsAffected);
+
+                }, function (tx, error) {
+
+                    // console.log("USER UPDATE ERROR: " + error.message);
+                });
+
+            }, function (error) {
+
+                // console.log("USER UPDATE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function updateLastSR(userObject) {
+
+            // console.log("USER UPDATE OBJECT =====> " + JSON.stringify(userObject));
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlUpdate = "UPDATE User SET Last_Updated_SR = ? WHERE ID = ?";
+
+                insertValues.push(userObject.Last_Updated_SR);
+                insertValues.push(userObject.ID);
+
+                transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
+
+                    // console.log("USER ROW AFFECTED: " + res.rowsAffected);
+
+                }, function (tx, error) {
+
+                    // console.log("USER UPDATE ERROR: " + error.message);
+                });
+
+            }, function (error) {
+
+                // console.log("USER UPDATE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function updateLastDelete(userObject) {
+
+            // console.log("USER UPDATE OBJECT =====> " + JSON.stringify(userObject));
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlUpdate = "UPDATE User SET Last_Updated_Delete = ? WHERE ID = ?";
+
+                insertValues.push(userObject.Last_Updated_Delete);
                 insertValues.push(userObject.ID);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
@@ -335,7 +538,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO User VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO User VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(userObject.ID);
                 insertValues.push(userObject.ClarityID);
@@ -355,7 +558,14 @@
                 insertValues.push(userObject.Work_Hour);
                 insertValues.push(userObject.Login_Status);
                 insertValues.push(userObject.Sync_Status);
-                insertValues.push(userObject.Last_updated);
+                insertValues.push(userObject.Last_Updated);
+                insertValues.push(userObject.Last_Updated_Task);
+                insertValues.push(userObject.Last_Updated_Internal);
+                insertValues.push(userObject.Last_Updated_Task_Detail);
+                insertValues.push(userObject.Last_Updated_Project);
+                insertValues.push(userObject.Last_Updated_LOV);
+                insertValues.push(userObject.Last_Updated_SR);
+                insertValues.push(userObject.Last_Updated_Delete);
                 insertValues.push(userObject.encrypt);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
@@ -387,7 +597,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE User SET ClarityID = ?, Currency = ?, Default_View = ?, Email = ?, Language = ?, Name = ?, OFSCId = ?, Password = ?, Time_Zone = ?, Type = ?, User_Name = ?, Work_Day = ?, Work_Hour = ?, Login_Status = ?, Sync_Status = ?, Last_updated = ?, encrypt = ?  WHERE ID = ?";
+                var sqlUpdate = "UPDATE User SET ClarityID = ?, Currency = ?, Default_View = ?, Email = ?, Language = ?, Name = ?, OFSCId = ?, Password = ?, Time_Zone = ?, Type = ?, User_Name = ?, Work_Day = ?, Work_Hour = ?, Login_Status = ?, Sync_Status = ?, Last_Updated = ?, Last_Updated_Task = ?, Last_Updated_Internal = ?, Last_Updated_Task_Detail = ?, Last_Updated_Project = ?, Last_Updated_LOV = ?, Last_Updated_SR = ?, Last_Updated_Delete = ?, encrypt = ?  WHERE ID = ?";
 
                 insertValues.push(userObject.ClarityID);
                 insertValues.push(userObject.Currency);
@@ -406,7 +616,14 @@
                 insertValues.push(userObject.Work_Hour);
                 insertValues.push(userObject.Login_Status);
                 insertValues.push(userObject.Sync_Status);
-                insertValues.push(userObject.Last_updated);
+                insertValues.push(userObject.Last_Updated);
+                insertValues.push(userObject.Last_Updated_Task);
+                insertValues.push(userObject.Last_Updated_Internal);
+                insertValues.push(userObject.Last_Updated_Task_Detail);
+                insertValues.push(userObject.Last_Updated_Project);
+                insertValues.push(userObject.Last_Updated_LOV);
+                insertValues.push(userObject.Last_Updated_SR);
+                insertValues.push(userObject.Last_Updated_Delete);
                 insertValues.push(userObject.encrypt);
 
                 insertValues.push(userObject.ID);
