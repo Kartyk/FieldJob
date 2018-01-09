@@ -2491,6 +2491,9 @@ md-select.md-default-theme ._md-select-value, md-select ._md-select-value {
 .padding-right10 {
     padding-right: 10px !important;
 }
+.padding-top10 {
+    padding-top: 10px !important;
+}
 
 
 .summary-description {
