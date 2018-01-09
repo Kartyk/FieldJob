@@ -2366,7 +2366,7 @@ md-select.md-default-theme ._md-select-value, md-select ._md-select-value {
 .debrief-items {
     padding-right: 20px;
     margin-bottom: 30px;
-    max-width: 20% !important;
+    /*max-width: 20% !important;*/
 }
 
 
@@ -2488,6 +2488,10 @@ md-select.md-default-theme ._md-select-value, md-select ._md-select-value {
 .padding-right {
     padding-right: 30px !important;
 }
+.padding-right10 {
+    padding-right: 10px !important;
+}
+
 
 .summary-description {
     /*width: 110px;*/
@@ -2760,4 +2764,8 @@ td img.delete {
 
 .inputFieldsMaterial.ng-invalid {
     border: 1px solid red !important;
+}
+.error
+{
+    border:1px solid red !important;
 }

@@ -1,3 +1,4 @@
+
 <section layout="row" style="margin-bottom:-20px">
     <span flex></span>
     <button class="time-font time-add summary-report-donebtn rounded-border" translate="NEXT" ng-click="Next('Time')" style="margin-top:15px;float:right;margin-right:50px;"></button>
@@ -28,7 +29,7 @@
 
                     </div>-->
 
-                    <div flex="20" class="debrief-items-NC" style="max-width:15%;">
+                    <div flex="20" class="debrief-items-NC" >
                         <label flex="100" class=" label-my"
                                translate="{{item.timeDefault.workType.title}}"></label><span style="color:red">*</span>
                         <div flex="100">
@@ -68,7 +69,7 @@
                     </div>-->
 
 
-                    <div flex="20" class="debrief-items-NC" style="max-width:16%;">
+                    <div flex="15" class="debrief-items-NC" >
                         <label flex="100" class="  label-my" translate="{{item.timeDefault.Date.title}}"
                                style="text-align: left;">-</label>
                         <div flex="100">
@@ -90,33 +91,77 @@
                         </div>
                     </div>
 
-                    
+
 
                     <div flex="20" class="debrief-items-NC" style="max-width:15%;">
                         <label flex="100" class="  label-my"
                                translate="Start Time"></label>
                         <div flex="100">
 
-                            <input type="text" class="form-control" name="duration"  date-format
-                                   ng-model="item.startTime"  min="00:00" max="23:59"
-                                   ng-blur="calcDuration(item,true)" />
-   
+                            <!--<input type="text" class="form-control" name="duration" date-format
+                            ng-model="item.startTime" min="00:00" max="23:59"
+                            ng-blur="calcDuration(item,true)" />-->
+                            <!--<input type="time" name="startTime" class="form-control"
+                                   ng-model="item.startTime"
+                                   ng-blur="calcDuration(item,true)" />-->
+
+                            <!--<div class="col-sm-12">-->
+                                <!--<input type="text" size="1" name="hour" class="col-sm-4 padding0"/>
+                                <span class="col-sm-1" style="padding:5px 0px">:</span>
+                                <input type="text" size="1" name="mins" class="col-sm-4 padding0" />
+                                <select name="value" value="type" class="col-sm-3 ">
+                                    <option value="AM">AM</option>
+                                    <option value="PM">PM</option>
+                                </select>-->
+                               
+                            <div class="input-group">
+                                <!--<input type="text" class="form-control" uib-dropdown auto-close="outsideClick">-->
+                                <div class="input-group-btn" uib-dropdown auto-close="outsideClick">
+                                    
+                                    <span  uib-dropdown-toggle class="form-control" style="text-decoration:none;height:40px">
+                                        {{ item.startTime | date:'HH:mm'}} <i class="glyphicon glyphicon-time" style="float:right"></i>
+                                    </span>
+                                    <!--<button type="button" class="btn btn-default dropdown-toggle" uib-dropdown-toggle><i class="glyphicon glyphicon-time"></i></button>-->
+                                    <ul class="dropdown-menu " uib-dropdown-menu>
+                                        <li><div uib-timepicker ng-model="item.startTime" ng-change="changed(item)" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div></li>
+                                    </ul>
+                                </div>
+                                
+                            </div>
+                            
+                            
                         </div>
-                     
+
                     </div>
                     <div flex="20" class="debrief-items-NC" style="max-width:15%;">
                         <label flex="100" class="  label-my"
                                translate="End Time"></label>
                         <div flex="100">
 
-                            <input type="text" class="form-control" name="duration"  date-format
-                                   ng-model="item.endTime"  min="00:00" max="23:59"
-                                   ng-blur="calcDuration(item,false)" />
+                            <!--<input type="text" class="form-control" name="duration" date-format
+                            ng-model="item.endTime" min="00:00" max="23:59"
+                            ng-blur="calcDuration(item,false)" />-->
+                            <!--<input type="time" name="endTime" class="form-control"
+                                   ng-model="item.endTime"
+                                   ng-blur="calcDuration(item,false)" />-->
+                            <div class="input-group">
+                                <!--<input type="text" class="form-control" uib-dropdown auto-close="outsideClick">-->
+                                <div class="input-group-btn" uib-dropdown auto-close="outsideClick">
 
+                                    <span uib-dropdown-toggle class="form-control" style="text-decoration:none;height:40px" name="endTimeSpan" ng-class="{'error': isDateError == true}">
+                                        {{ item.endTime | date:'HH:mm'}} <i class="glyphicon glyphicon-time" style="float:right"></i>
+                                    </span>
+                                    <!--<button type="button" class="btn btn-default dropdown-toggle" uib-dropdown-toggle><i class="glyphicon glyphicon-time"></i></button>-->
+                                    <ul class="dropdown-menu " uib-dropdown-menu>
+                                        <li><div uib-timepicker ng-model="item.endTime" ng-change="changed(item)" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div></li>
+                                    </ul>
+                                </div>
+
+                            </div>
                         </div>
-                        
+
                     </div>
-                    <div flex="20" class="debrief-items-NC" style="max-width:15%;">
+                    <div flex="20" class="debrief-items-NC" style="max-width:15%;padding-right:0px">
                         <label flex="100" class="  label-my"
                                translate="{{item.timeDefault.duration.title}}"></label><span style="color:red">*</span>
                         <div flex="100">
@@ -126,15 +171,15 @@
                                    ng-blur="checkDuration(item)" />
 
                             <!--<input type="time" name="duration" class="form-control"
-                   ng-model="item.DurationValue"
-                   ng-change="setDurationHours(item)"
-                   ng-blur="checkDuration(item)"
-                   required
-            />-->
+                                   ng-model="item.DurationValue"
+                                   ng-change="setDurationHours(item)"
+                                   ng-blur="checkDuration(item)"
+                                   required
+                            />-->
                         </div>
                         <!--<span style="color:red" ng-show="timeform.duration.$error.required">
-            Please enter duration
-        </span>-->
+                            Please enter duration
+                        </span>-->
                     </div>
                     <div flex="100" style="max-width:34%;">
 
@@ -153,27 +198,27 @@
         <section layout="row" layout-sm="column" layout-align="center center"
                  layout-wrap class="time-btns"
                  ng-class="{'newItemBorderSection': $index == addTimeObj && $index != 0,'copyItemSection': $index == copyTimeObj && $index != 0}">
+           
             <span flex></span>
             <span style="visibility:hidden">{{ $root.timeformValid = timeform.$valid}}</span>
 
             <!--<span>{{$root.completedTask}}</span>
 
             <span>{{$root.timeformValid}}</span>-->
-
             <!--<md-button ng-show="isEditTime==0" class="add-button"
                        ng-click="addObject('Time',true,item)"
                        ng-disabled="$root.completedTask || !$root.timeformValid " translate="Add"></md-button>-->
             <button ng-if="isEditTime==0" class="add-button"
                     ng-click="addObject('Time',true,item)"
-                    ng-disabled="$root.completedTask || !$root.timeformValid " translate="Add"></button>
+                    ng-disabled="$root.completedTask || !$root.timeformValid || isDateError " translate="Add"></button>
 
             <button ng-if="isEditTime==1" class="add-button"
                     ng-click="saveObject('Time',true,item)"
-                    ng-disabled="$root.completedTask || !$root.timeformValid " translate="Save"></button>
+                    ng-disabled="$root.completedTask || !$root.timeformValid || isDateError" translate="Save"></button>
 
             <!-- <md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Time')" ng-disabled="$root.completedTask" translate="delete"></md-button>-->
             <button class="copy-button" ng-click="copyObject(item,'Time')"
-                       ng-disabled="$root.completedTask|| !$root.timeformValid" translate="copy"></button>
+                    ng-disabled="$root.completedTask|| !$root.timeformValid || isDateError" translate="copy"></button>
             <span flex></span>
             <!--<button class="time-font time-add summary-report-donebtn" translate="NEXT" ng-click="Next('Time')"></button>-->
             <!--<md-button type="submit" ng-disabled="!timeformValid">TEST</md-button>-->
@@ -188,7 +233,7 @@
         <table class="table no-marbottom noborder">
             <thead>
                 <tr class="summary-tr">
-                    <th class="noborder padding-right"><span translate="Date"></span></th>
+                    <th class="noborder padding-right"><span translate="Service Date"></span></th>
                     <th class=" noborder padding-right" ng-if="userType=='C'"><span translate="Charge Type"></span></th>
                     <th class=" noborder padding-right" ng-if="userType=='C'"><span translate="Charge Method"></span></th>
                     <th class=" noborder padding-right"><span translate="Work Type"></span></th>
@@ -236,3 +281,5 @@ time.Charge_Method.Value|
     </div>
 
 </div>
+
+

@@ -1,12 +1,56 @@
 ﻿app.controller("debriefController", function ($translate, $scope, $state, $rootScope, $window, $timeout, $filter, $http, $q, cloudService, $mdDialog, valueService, localService, Upload, constantService, $anchorScroll, $location) {
+    $scope.mytime = new Date();
 
+    $scope.hstep = 1;
+    $scope.mstep = 1;
+
+    $scope.options = {
+        hstep: [1, 2, 3],
+        mstep: [1, 5, 10, 15, 25, 30]
+    };
+
+    $scope.ismeridian = false;
+    $scope.toggleMode = function () {
+        $scope.ismeridian = !$scope.ismeridian;
+    };
+
+    $scope.update = function () {
+        var d = new Date();
+        d.setHours(14);
+        d.setMinutes(0);
+        $scope.mytime = d;
+    };
+    $scope.isError = false;
+    $scope.changed = function (item) {
+        if (item.endTime < item.startTime)
+        {
+            //timeform.endTimeSpan.$setValidity("error", false)
+            $scope.isDateError = true;
+        }
+        else
+        {
+            $scope.isDateError = false;
+            var hour = item.endTime.getHours() - item.startTime.getHours();
+            var min = Math.abs( item.endTime.getMinutes() - item.startTime.getMinutes());
+            item.Duration = hour + ":" + min;
+
+
+        }
+        item.Duration = formatDuration(item.Duration);
+        $scope.setDurationHours(item);
+    };
+
+    $scope.clear = function () {
+        $scope.mytime = null;
+    };
+    
     $scope.currentTab = "time";
 
     $rootScope.Islogin = true;
     $scope.signature = "";
     $scope.customerName;
 
-    $scope.userType = valueService.getUserType().clarityType;
+    $scope.userType = valueService.getUserType().clarityType;//"C";// valueService.getUserType().clarityType;
 
     $scope.engineerName = valueService.getUserType().name;
 
@@ -282,7 +326,7 @@
                 values: $scope.shiftCodeArray
             },
             Date: {
-                title: "Date"
+                title: "Service Date"
             },
             duration: {
                 title: "Duration (HH:MM)"
@@ -460,7 +504,7 @@
         item.DurationHours = moment.duration(item.Duration).hours();
 
         item.DurationMinutes = moment.duration(item.Duration).minutes();
-
+       
         angular.forEach(item.timeDefault.chargeType.values, function (type) {
             if (type.ID == item.Charge_Type_Id) {
                 item.Charge_Type = type;
@@ -647,7 +691,7 @@
 
     function setDefaultTimeObject() {
 
-        var durationValue, duration, durationHours, durationMinutes;
+        var durationValue, duration, durationHours, durationMinutes,endDate;
 
         if (valueService.getUserType().duration) {
 
@@ -664,6 +708,9 @@
             duration = hours + ":" + minutes;
             durationHours = hours;
             durationMinutes = minutes;
+            endDate = new Date();
+            //endDate.setHours(endDate.getHours() + hours);
+            //endDate.setMinutes(endDate.getMinutes() + minutes);
 
         } else {
 
@@ -676,6 +723,11 @@
             duration = "08:00";
             durationHours = 8;
             durationMinutes = 0;
+            endDate = new Date();
+            //var temphours = endDate.getHours();
+            //var tempMins = endDate.getMinutes() +0
+            //endDate.setHours(temphours+8);
+            //endDate.setMinutes(tempMins);
         }
 
         var chargeType = "";
@@ -704,6 +756,8 @@
             Shift_Code_Id: "",
             Shift_Code_Value: "",
             Date: new Date(),
+            startTime: "",
+            endTime: "",
             DurationValue: durationValue,
             Duration: duration,
             DurationHours: durationHours,
@@ -4041,7 +4095,7 @@
 
             ctx.fillStyle = "#000";
             ctx.font = 'bold 13px sans-serif ';
-            ctx.fillText('日期', 30, yTimeFieldName);
+            ctx.fillText($filter('translate')('Service Date'), 30, yTimeFieldName);
 
             if ($scope.userType == 'C') {
 
@@ -4894,7 +4948,7 @@
                 yTimeFieldName = 30;
                 yTimeField = 5;
             }
-            doc1.text(xTimeField, yTimeFieldName, $filter('translate')('Date'))
+            doc1.text(xTimeField, yTimeFieldName, $filter('translate')('Service Date'))
             doc1.setFontSize(22)
             doc1.setFontType('bold')
             var coloumnNo = 1;
