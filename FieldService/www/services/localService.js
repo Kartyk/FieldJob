@@ -1271,7 +1271,7 @@
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.End_Date);
                 insertValues.push(responseList.Default_value);
-                insertValues.push(responseList.Contacts_Preferences);
+                insertValues.push(responseList.Contact_Preference);
                 insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.Contact_ID);
                 insertValues.push(responseList.Task_Number);
@@ -1322,7 +1322,7 @@
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.End_Date);
                 insertValues.push(responseList.Default_value);
-                insertValues.push(responseList.Contacts_Preferences);
+                insertValues.push(responseList.Contact_Preference);
                 insertValues.push(constantService.getResourceId());
 
                 // console.log("CONTACT INSERT VALUES =====> " + insertValues);

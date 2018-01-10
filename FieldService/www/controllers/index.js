@@ -391,12 +391,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                             Login_Status: "1",
                             Sync_Status: "0",
                             Last_Updated: new Date(),
-                            Last_Updated_Task: new Date(),
                             Last_Updated_Internal: new Date(),
-                            Last_Updated_Task_Detail: new Date(),
-                            Last_Updated_Project: new Date(),
-                            Last_Updated_LOV: new Date(),
-                            Last_Updated_SR: new Date(),
                             Last_Updated_Delete: new Date(),
                             encrypt: authorizationValue
                         };

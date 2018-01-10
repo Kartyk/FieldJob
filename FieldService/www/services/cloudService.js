@@ -91,7 +91,7 @@
 
             var data = {};
 
-            if (isLogin == "0") {
+            if (isLogin == "0" || constantService.getUser().Last_Updated_Task == undefined || constantService.getUser().Last_Updated_Task == null) {
 
                 data = {
                     "isLogin": isLogin,
@@ -301,7 +301,7 @@
 
             var data = {};
 
-            if (isLogin == "0") {
+            if (isLogin == "0" || constantService.getUser().Last_Updated_Task_Detail == undefined || constantService.getUser().Last_Updated_Task_Detail == null) {
 
                 data = {
                     "resourceId": constantService.getResourceId(),
@@ -466,7 +466,7 @@
 
             var data = {};
 
-            if (isLogin == "0") {
+            if (isLogin == "0" || constantService.getUser().Last_Updated_Project == undefined || constantService.getUser().Last_Updated_Project == null) {
 
                 data = {
                     "resourceId": constantService.getResourceId(),
@@ -598,7 +598,7 @@
 
             var data = {};
 
-            if (isLogin == "0") {
+            if (isLogin == "0" || constantService.getUser().Last_Updated_LOV == undefined || constantService.getUser().Last_Updated_LOV == null) {
 
                 data = {
                     "isLogin": isLogin,
@@ -799,7 +799,7 @@
 
             var data = {};
 
-            if (isLogin == "0") {
+            if (isLogin == "0" || constantService.getUser().Last_Updated_SR == undefined || constantService.getUser().Last_Updated_SR == null) {
 
                 data = {
                     "updateDate": "",
