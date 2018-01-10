@@ -58,7 +58,7 @@
 
     $scope.isCustomerSignChecked = false;
 
-    $scope.contactorCustname;
+    $scope.contactorCustname="";
 
     changeLanguage(valueService.getLanguage());
 
@@ -4936,7 +4936,7 @@
 
             doc1.setFontSize(22)
             doc1.setFontType('bold')
-            var isAdded = checkPdfHeight(yTimeField, pageHeight, yTimeField, rectTimeWidth, false);
+            var isAdded = checkPdfHeight(yTimeField+40, pageHeight, yTimeField+40, rectTimeWidth, false);
             if (isAdded) {
                 yTimeFieldName = 30;
                 yTimeField = 10;
@@ -4985,19 +4985,21 @@
             doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldName, $filter('translate')('Duration'))
             doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldName, $filter('translate')('Item'))
             //doc1.text(xTimeField+(timeWidth * (7)), yTimeFieldName, 'Description')
-
+            var indexTime=0
             while (j < $scope.summary.timeArray.length) {
                 coloumnNo = 1;
-                yTimeFieldName = yTimeField + 20 * ++j;
+                ++j;
+                yTimeFieldName = yTimeField + 20 * ++indexTime;
                 yTimeFieldValue = yTimeFieldName + 20;
                 // doc1.text(xTimeField, yTimeFieldName, 'Date')
 
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
-                var isAdded = checkPdfHeight(yTimeFieldValue, pageHeight, yTimeField + 15, rectTimeWidth);
+                var isAdded = checkPdfHeight(yTimeFieldValue, pageHeight, yTimeField , rectTimeWidth);
                 if (isAdded) {
                     yTimeFieldValue = 10;
                     yTimeField = -10;
+                    indexTime = 0;
                 }
                 if ($scope.summary.timeArray[j - 1].Date)
                     doc1.text(xTimeField, yTimeFieldValue, $scope.summary.timeArray[j - 1].Date)
@@ -5247,14 +5249,14 @@
                 doc1.setFontType('normal')
                 var splitserialin = splitserialout = splitTitle = splitItemname = splitserialno = "";
                 if ($scope.summary.materialArray[l - 1].serialNumber) {
-                    splitserialno = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialNumber, 298 - 202)
+                    splitserialno = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialNumber, 290 - 202)
                     doc1.text(202, yMaterialFieldValue, splitserialno)
                 }
 
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
                 if ($scope.summary.materialArray[l - 1].serialIn) {
-                    splitserialin = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialIn, 394 - 298)
+                    splitserialin = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialIn, 388 - 298)
                     doc1.text(298, yMaterialFieldValue, splitserialin)
 
                 }
@@ -5262,7 +5264,7 @@
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
                 if ($scope.summary.materialArray[l - 1].serialOut) {
-                    splitserialout = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialOut, 490 - 394)
+                    splitserialout = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialOut, 484 - 394)
                     doc1.text(394, yMaterialFieldValue, splitserialout)
 
                 }
@@ -5270,7 +5272,7 @@
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
                 if ($scope.summary.materialArray[l - 1].ItemName) {
-                    splitItemname = doc1.splitTextToSize($scope.summary.materialArray[l - 1].ItemName, 595 - 490)
+                    splitItemname = doc1.splitTextToSize($scope.summary.materialArray[l - 1].ItemName, 590 - 490)
                     doc1.text(490, yMaterialFieldValue, splitItemname)
                 }
 
@@ -5305,7 +5307,7 @@
             doc1.rect(20, yMaterialField + 10, rectMaterialWidth, rectMaterialHeight)
 
             var xSignField = 25, ySignField = yMaterialField + rectMaterialHeight + 20, rectSignWidth = 660,
-                rectSignHeight = 80;
+                rectSignHeight = 100;
 
             doc1.setFontSize(22)
             doc1.setFontType('bold')
@@ -5352,22 +5354,22 @@
             }
 
             if ($scope.summary.engineer != undefined && $scope.summary.engineer.signature)
-                doc1.addImage($scope.summary.engineer.signature, 'JPEG', 50, ySignField + 35, 75, 40, 'engsign', 'FAST');
+                doc1.addImage($scope.summary.engineer.signature, 'JPEG', 50, ySignField + 45, 75, 40, 'engsign', 'FAST');
 
 
-            var isAdded = checkPdfHeight(ySignField + 45 + 40, pageHeight, ySignField, rectSignWidth, rectSignHeight);
+            var isAdded = checkPdfHeight(ySignField + 55 + 40, pageHeight, ySignField, rectSignWidth, rectSignHeight);
             if (isAdded) {
                 ySignField = -10;
             }
             doc1.setFontType('normal')
             if (valueService.getEnggSignTime() != undefined)
-                doc1.text(50, ySignField + 45 + 40, valueService.getEnggSignTime());
+                doc1.text(50, ySignField + 55 + 40, valueService.getEnggSignTime());
             if (valueService.getCustSignTime() != undefined)
-                doc1.text(300, ySignField + 45 + 40, valueService.getCustSignTime());
+                doc1.text(300, ySignField + 55 + 40, valueService.getCustSignTime());
 
 
             if ($rootScope.customersignature)
-                doc1.addImage($rootScope.customersignature, 'JPEG', 300, ySignField + 35, 75, 40, 'custsign', 'FAST');
+                doc1.addImage($rootScope.customersignature, 'JPEG', 300, ySignField + 45, 75, 40, 'custsign', 'FAST');
             //                 doc1.save("Report_" + $scope.summary.taskObject.Task_Number + ".pdf");
             doc1.rect(20, ySignField + 10, rectSignWidth, rectSignHeight)
            // resolve();
