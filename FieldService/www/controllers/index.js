@@ -787,6 +787,21 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 getAttachments();
 
+                localService.getUser(function (response) {
+
+                    console.log("USER =====> " + JSON.stringify(response));
+
+                    angular.forEach(response, function (item) {
+
+                        if (item.Login_Status == "1") {
+
+                            constantService.setUser(item);
+
+                            valueService.setUser(item);
+                        }
+                    });
+                });
+
             }, function (error) {
 
                 console.log("LOGIN FAILURE ALL");
@@ -825,6 +840,21 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                 $rootScope.dbCall = false;
 
                 //getAttachments();
+
+                localService.getUser(function (response) {
+
+                    console.log("USER =====> " + JSON.stringify(response));
+
+                    angular.forEach(response, function (item) {
+
+                        if (item.Login_Status == "1") {
+
+                            constantService.setUser(item);
+
+                            valueService.setUser(item);
+                        }
+                    });
+                });
             });
         });
     }
@@ -952,6 +982,21 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 getAttachments();
 
+                localService.getUser(function (response) {
+
+                    console.log("USER =====> " + JSON.stringify(response));
+
+                    angular.forEach(response, function (item) {
+
+                        if (item.Login_Status == "1") {
+
+                            constantService.setUser(item);
+
+                            valueService.setUser(item);
+                        }
+                    });
+                });
+
             }, function (error) {
 
                 var userObject = {
@@ -997,6 +1042,21 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                 $rootScope.dbCall = false;
 
                 getAttachments();
+
+                localService.getUser(function (response) {
+
+                    console.log("USER =====> " + JSON.stringify(response));
+
+                    angular.forEach(response, function (item) {
+
+                        if (item.Login_Status == "1") {
+
+                            constantService.setUser(item);
+
+                            valueService.setUser(item);
+                        }
+                    });
+                });
             });
         });
     }
