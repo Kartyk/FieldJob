@@ -2675,309 +2675,309 @@
         if (promise != undefined) {
             promise.then(function () {
                 $rootScope.dbCall = false;
-                //window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+                window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 
-                //    fs.root.getFile("Report_" + $scope.summary.taskObject.Task_Number + ".pdf", {
-                //        create: true,
-                //        exclusive: false
-                //    }, function (fileEntry) {
+                    fs.root.getFile("Report_" + $scope.summary.taskObject.Task_Number + ".pdf", {
+                        create: true,
+                        exclusive: false
+                    }, function (fileEntry) {
 
-                //        fileEntry.file(function (file) {
+                        fileEntry.file(function (file) {
 
-                //            var reader = new FileReader();
+                            var reader = new FileReader();
 
-                //            reader.onloadend = function () {
+                            reader.onloadend = function () {
 
-                //                console.log("READ REPORT FILE " + this.result);
+                                console.log("READ REPORT FILE " + this.result);
 
-                //                $scope.reportBase64 = this.result.split(",")[1];
+                                $scope.reportBase64 = this.result.split(",")[1];
 
-                //                constantService.setCCEmailID(customerMail.value);
+                                constantService.setCCEmailID(customerMail.value);
 
-                //                var email = { "Email": customerMail.value, "Task_Number": $scope.taskId };
+                                var email = { "Email": customerMail.value, "Task_Number": $scope.taskId };
 
-                //                localService.updateTaskEmail(email);
+                                localService.updateTaskEmail(email);
 
-                //                $scope.saveValues();
+                                $scope.saveValues();
 
-                //                valueService.saveValues();
+                                valueService.saveValues();
 
-                //                if (valueService.getNetworkStatus()) {
+                                if (valueService.getNetworkStatus()) {
 
-                //                    var timeJSONData = [];
-                //                    var expenseJSONData = [];
-                //                    var materialJSONData = [];
-                //                    var noteJSONData = [];
-                //                    var attachmentJSONData = [];
+                                    var timeJSONData = [];
+                                    var expenseJSONData = [];
+                                    var materialJSONData = [];
+                                    var noteJSONData = [];
+                                    var attachmentJSONData = [];
 
-                //                    var timeArray = $scope.timeArraySummary;
-                //                    var expenseArray = $scope.expenseArraySummary;
-                //                    var materialArray = $scope.materialArraySummary;
-                //                    var notesArray = $scope.notesArraySummary;
+                                    var timeArray = $scope.timeArraySummary;
+                                    var expenseArray = $scope.expenseArraySummary;
+                                    var materialArray = $scope.materialArraySummary;
+                                    var notesArray = $scope.notesArraySummary;
 
-                //                    for (var i = 0; i < timeArray.length; i++) {
+                                    for (var i = 0; i < timeArray.length; i++) {
 
-                //                        var chargemethod;
+                                        var chargemethod;
 
-                //                        if ($scope.userType == 'C') {
+                                        if ($scope.userType == 'C') {
 
-                //                            chargemethod = timeArray[i].Charge_Method_Id;
+                                            chargemethod = timeArray[i].Charge_Method_Id;
 
-                //                        } else {
+                                        } else {
 
-                //                            chargemethod = "";
-                //                        }
+                                            chargemethod = "";
+                                        }
 
-                //                        var shiftcode = "", timecode = "";
+                                        var shiftcode = "", timecode = "";
 
-                //                        if (timeArray[i].Shift_Code != undefined) {
-                //                            shiftcode = timeArray[i].Shift_Code.ShiftCodeName;
-                //                        }
+                                        if (timeArray[i].Shift_Code != undefined) {
+                                            shiftcode = timeArray[i].Shift_Code.ShiftCodeName;
+                                        }
 
-                //                        if (timeArray[i].Time_Code != undefined) {
-                //                            timecode = timeArray[i].Time_Code.Overtimeshiftcode;
-                //                        }
-
-                //                        var timeData = {
-                //                            "task_id": timeArray[i].Task_Number,
-                //                            "shift_code": timeArray[i].Shift_Code_Id,
-                //                            "overtime_shiftcode": timeArray[i].Time_Code_Id,
-                //                            "shiftCodevalue": shiftcode,
-                //                            "overTimeShiftCodevalue": timecode,
-                //                            "charge_type": timeArray[i].Charge_Type_Id,
-                //                            "duration": timeArray[i].Duration,
-                //                            "comments": timeArray[i].Comments,
-                //                            "labor_item": timeArray[i].Item_Id,
-                //                            "labor_description": timeArray[i].Description,
-                //                            "work_type": timeArray[i].Work_Type_Id,
-                //                            "start_date": moment.utc(timeArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                //                            "end_date": moment.utc(timeArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                //                            "charge_method": chargemethod,
-                //                            "JobName": timeArray[i].Field_Job_Name_Id
-                //                        }
-
-                //                        timeJSONData.push(timeData);
-                //                    }
-
-                //                    for (var i = 0; i < expenseArray.length; i++) {
-
-                //                        var expenseData = {
-                //                            "taskId": expenseArray[i].Task_Number,
-                //                            "comments": expenseArray[i].Justification,
-                //                            "currency": expenseArray[i].Currency_Id.toString(),
-                //                            "distance": expenseArray[i].Distance,
-                //                            "unitofmeasurement": expenseArray[i].UOM_Id + "",
-                //                            "chargeMethod": expenseArray[i].Charge_Method_Id.toString(),
-                //                            "ammount": expenseArray[i].Amount,
-                //                            "date": moment.utc(expenseArray[i].Date).format("YYYY-MM-DD"),
-                //                            "expenseItem": expenseArray[i].Expense_Type_Id.toString()
-                //                        }
-
-                //                        expenseJSONData.push(expenseData);
-                //                    }
-
-                //                    for (var i = 0; i < materialArray.length; i++) {
-
-                //                        angular.forEach(materialArray[i].Serial_Type, function (key) {
-
-                //                            var materialData = {
-                //                                "charge_method": materialArray[i].Charge_Type_Id.toString(),
-                //                                "task_id": materialArray[i].Task_Number,
-                //                                "item_description": materialArray[i].Description,
-                //                                "product_quantity": "1",
-                //                                "comments": "",
-                //                                "item": materialArray[i].ItemName,
-                //                                "serialin": key.in,
-                //                                "serialout": key.out,
-                //                                "serial_number": key.number
-                //                            }
-
-                //                            materialJSONData.push(materialData);
-                //                        });
-                //                    }
-
-                //                    for (var i = 0; i < notesArray.length; i++) {
-
-                //                        var noteData = {
-                //                            "Notes_type": notesArray[i].Note_Type_Id,
-                //                            "notes_description": notesArray[i].Notes,
-                //                            "task_id": notesArray[i].Task_Number,
-                //                            "mobilecreatedDate": moment.utc(notesArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z")
-                //                        };
-
-                //                        noteJSONData.push(noteData);
-                //                    }
-
-                //                    for (var i = 0; i < $scope.files.length; i++) {
-
-                //                        var fileName = $scope.files[i].filename.split('.')[0];
-                //                        var attachmentfileName = fileName.trim(0, 34);
-
-                //                        var attachmentObject = {
-                //                            "Data": $scope.files[i].base64,
-                //                            "FileName": attachmentfileName + '.' + $scope.files[i].filename.split('.')[1],
-                //                            "Description": $scope.files[i].fileDisc,
-                //                            "Name": attachmentfileName + '.' + $scope.files[i].filename.split('.')[1],
-                //                            "taskId": $rootScope.selectedTask.Task_Number,
-                //                            "contentType": $scope.files[i].contentType
-                //                        };
-
-                //                        attachmentJSONData.push(attachmentObject);
-                //                    }
-
-                //                    var statusData = {
-                //                        "TaskId": $scope.taskId,
-                //                        "Activity_Id": $scope.taskObject.Activity_Id,
-                //                        //"XA_TASK_STATUS": "3",
-                //                        "XA_TASK_STATUS": "2",
-                //                        "taskstatus": "Completed-Awaiting Review",
-                //                        "email": constantService.getCCEmailID(),
-                //                        "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                //                        "followUp": $scope.engineerObject.followUp + "",
-                //                        "salesQuote": $scope.engineerObject.salesQuote + "",
-                //                        "salesVisit": $scope.engineerObject.salesVisit + "",
-                //                        "salesLead": $scope.engineerObject.salesLead + "",
-                //                        "followuptext": $scope.engineerObject.Follow_Up,
-                //                        "sparequotetext": $scope.engineerObject.Spare_Quote,
-                //                        "salesText": $scope.engineerObject.Sales_Visit,
-                //                        "salesleadText": $scope.engineerObject.Sales_Head,
-                //                        "denySignature": $scope.engineerObject.isCustomerSignChecked + "",
-                //                        "signatureComments": $scope.engineerObject.customerComments
-                //                    };
-
-                //                    var formData = {
-                //                        "Time": timeJSONData,
-                //                        "expense": expenseJSONData,
-                //                        "Material": materialJSONData,
-                //                        "Notes": noteJSONData
-                //                    };
-
-                //                    var attachmentUploadJSON = {
-                //                        "attachment": attachmentJSONData
-                //                    };
-
-                //                    cloudService.updateDebrief(formData, function (response) {
-
-                //                        if ($scope.files != undefined && $scope.files.length > 0) {
-
-                //                            cloudService.createAttachment(attachmentUploadJSON, function (response) {
-
-                //                                console.log("Uploaded Attachment " + JSON.stringify(response));
-
-                //                                var reportObject = {
-                //                                    "Data": $scope.reportBase64,
-                //                                    "FileName": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                //                                    "Description": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                //                                    "Name": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                //                                    "taskId": $rootScope.selectedTask.Task_Number,
-                //                                    "contentType": "application/pdf"
-                //                                };
-
-                //                                attachmentJSONData = [];
+                                        if (timeArray[i].Time_Code != undefined) {
+                                            timecode = timeArray[i].Time_Code.Overtimeshiftcode;
+                                        }
+
+                                        var timeData = {
+                                            "task_id": timeArray[i].Task_Number,
+                                            "shift_code": timeArray[i].Shift_Code_Id,
+                                            "overtime_shiftcode": timeArray[i].Time_Code_Id,
+                                            "shiftCodevalue": shiftcode,
+                                            "overTimeShiftCodevalue": timecode,
+                                            "charge_type": timeArray[i].Charge_Type_Id,
+                                            "duration": timeArray[i].Duration,
+                                            "comments": timeArray[i].Comments,
+                                            "labor_item": timeArray[i].Item_Id,
+                                            "labor_description": timeArray[i].Description,
+                                            "work_type": timeArray[i].Work_Type_Id,
+                                            "start_date": moment.utc(timeArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                                            "end_date": moment.utc(timeArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                                            "charge_method": chargemethod,
+                                            "JobName": timeArray[i].Field_Job_Name_Id
+                                        }
+
+                                        timeJSONData.push(timeData);
+                                    }
+
+                                    for (var i = 0; i < expenseArray.length; i++) {
+
+                                        var expenseData = {
+                                            "taskId": expenseArray[i].Task_Number,
+                                            "comments": expenseArray[i].Justification,
+                                            "currency": expenseArray[i].Currency_Id.toString(),
+                                            "distance": expenseArray[i].Distance,
+                                            "unitofmeasurement": expenseArray[i].UOM_Id + "",
+                                            "chargeMethod": expenseArray[i].Charge_Method_Id.toString(),
+                                            "ammount": expenseArray[i].Amount,
+                                            "date": moment.utc(expenseArray[i].Date).format("YYYY-MM-DD"),
+                                            "expenseItem": expenseArray[i].Expense_Type_Id.toString()
+                                        }
+
+                                        expenseJSONData.push(expenseData);
+                                    }
+
+                                    for (var i = 0; i < materialArray.length; i++) {
+
+                                        angular.forEach(materialArray[i].Serial_Type, function (key) {
+
+                                            var materialData = {
+                                                "charge_method": materialArray[i].Charge_Type_Id.toString(),
+                                                "task_id": materialArray[i].Task_Number,
+                                                "item_description": materialArray[i].Description,
+                                                "product_quantity": "1",
+                                                "comments": "",
+                                                "item": materialArray[i].ItemName,
+                                                "serialin": key.in,
+                                                "serialout": key.out,
+                                                "serial_number": key.number
+                                            }
+
+                                            materialJSONData.push(materialData);
+                                        });
+                                    }
+
+                                    for (var i = 0; i < notesArray.length; i++) {
+
+                                        var noteData = {
+                                            "Notes_type": notesArray[i].Note_Type_Id,
+                                            "notes_description": notesArray[i].Notes,
+                                            "task_id": notesArray[i].Task_Number,
+                                            "mobilecreatedDate": moment.utc(notesArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z")
+                                        };
+
+                                        noteJSONData.push(noteData);
+                                    }
+
+                                    for (var i = 0; i < $scope.files.length; i++) {
+
+                                        var fileName = $scope.files[i].filename.split('.')[0];
+                                        var attachmentfileName = fileName.trim(0, 34);
+
+                                        var attachmentObject = {
+                                            "Data": $scope.files[i].base64,
+                                            "FileName": attachmentfileName + '.' + $scope.files[i].filename.split('.')[1],
+                                            "Description": $scope.files[i].fileDisc,
+                                            "Name": attachmentfileName + '.' + $scope.files[i].filename.split('.')[1],
+                                            "taskId": $rootScope.selectedTask.Task_Number,
+                                            "contentType": $scope.files[i].contentType
+                                        };
+
+                                        attachmentJSONData.push(attachmentObject);
+                                    }
+
+                                    var statusData = {
+                                        "TaskId": $scope.taskId,
+                                        "Activity_Id": $scope.taskObject.Activity_Id,
+                                        //"XA_TASK_STATUS": "3",
+                                        "XA_TASK_STATUS": "2",
+                                        "taskstatus": "Completed-Awaiting Review",
+                                        "email": constantService.getCCEmailID(),
+                                        "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                                        "followUp": $scope.engineerObject.followUp + "",
+                                        "salesQuote": $scope.engineerObject.salesQuote + "",
+                                        "salesVisit": $scope.engineerObject.salesVisit + "",
+                                        "salesLead": $scope.engineerObject.salesLead + "",
+                                        "followuptext": $scope.engineerObject.Follow_Up,
+                                        "sparequotetext": $scope.engineerObject.Spare_Quote,
+                                        "salesText": $scope.engineerObject.Sales_Visit,
+                                        "salesleadText": $scope.engineerObject.Sales_Head,
+                                        "denySignature": $scope.engineerObject.isCustomerSignChecked + "",
+                                        "signatureComments": $scope.engineerObject.customerComments
+                                    };
+
+                                    var formData = {
+                                        "Time": timeJSONData,
+                                        "expense": expenseJSONData,
+                                        "Material": materialJSONData,
+                                        "Notes": noteJSONData
+                                    };
+
+                                    var attachmentUploadJSON = {
+                                        "attachment": attachmentJSONData
+                                    };
+
+                                    cloudService.updateDebrief(formData, function (response) {
+
+                                        if ($scope.files != undefined && $scope.files.length > 0) {
+
+                                            cloudService.createAttachment(attachmentUploadJSON, function (response) {
+
+                                                console.log("Uploaded Attachment " + JSON.stringify(response));
+
+                                                var reportObject = {
+                                                    "Data": $scope.reportBase64,
+                                                    "FileName": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
+                                                    "Description": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
+                                                    "Name": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
+                                                    "taskId": $rootScope.selectedTask.Task_Number,
+                                                    "contentType": "application/pdf"
+                                                };
+
+                                                attachmentJSONData = [];
 
-                //                                attachmentJSONData.push(reportObject);
-
-                //                                var reportAttachmentUploadJSON = {
-                //                                    "attachment": attachmentJSONData
-                //                                };
-
-                //                                cloudService.createAttachment(reportAttachmentUploadJSON, function (response) {
-
-                //                                    console.log("Uploaded FSR " + JSON.stringify(response));
-
-                //                                    cloudService.updateOFSCStatus(statusData, function (response) {
-
-                //                                        console.log("Task Completed " + JSON.stringify(response));
-
-                //                                        var taskObject = {
-                //                                            Task_Status: "Completed",
-                //                                            Task_Number: $scope.taskId,
-                //                                            Date: new Date(),
-                //                                            Submit_Status: "I"
-                //                                        };
-
-                //                                        localService.updateTaskSubmitStatus(taskObject, function (result) {
-
-                //                                            cloudService.getTaskInternalList("0", function (response) {
-
-                //                                                $rootScope.dbCall = false;
-                //                                            });
-                //                                        });
-                //                                    });
-                //                                });
-                //                            });
-
-                //                        } else {
-
-                //                            var reportObject = {
-                //                                "Data": $scope.reportBase64,
-                //                                "FileName": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                //                                "Description": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                //                                "Name": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                //                                "taskId": $rootScope.selectedTask.Task_Number,
-                //                                "contentType": "application/pdf"
-                //                            };
-
-                //                            attachmentJSONData = [];
-
-                //                            attachmentJSONData.push(reportObject);
-
-                //                            var reportAttachmentUploadJSON = {
-                //                                "attachment": attachmentJSONData
-                //                            };
-
-                //                            cloudService.createAttachment(reportAttachmentUploadJSON, function (response) {
-
-                //                                cloudService.updateOFSCStatus(statusData, function (response) {
-
-                //                                    console.log("Task Completed " + JSON.stringify(response));
-
-                //                                    var taskObject = {
-                //                                        Task_Status: "Completed",
-                //                                        Task_Number: $scope.taskId,
-                //                                        Date: new Date(),
-                //                                        Submit_Status: "I"
-                //                                    };
-
-                //                                    localService.updateTaskSubmitStatus(taskObject, function (result) {
-
-                //                                        cloudService.getTaskInternalList("0", function (response) {
-
-                //                                            $rootScope.dbCall = false;
-
-                //                                        });
-                //                                    });
-                //                                });
-                //                            });
-                //                        }
-                //                    });
-
-                //                } else {
-                //                    // valueService.showDialog("Complete");
-                //                    var taskObject = {
-                //                        Task_Status: "Completed",
-                //                        Task_Number: valueService.getTask().Task_Number,
-                //                        Date: new Date(),
-                //                        Submit_Status: "P"
-                //                    };
-
-                //                    localService.updateTaskSubmitStatus(taskObject, function (result) {
-
-                //                        localService.getTaskList(function (response) {
-
-                //                            constantService.setTaskList(response);
-
-                //                            $rootScope.dbCall = false;
-
-                //                        });
-                //                    });
-                //                }
-                //            };
-
-                //            reader.readAsDataURL(file);
-                //        });
-                //    });
-                //});
+                                                attachmentJSONData.push(reportObject);
+
+                                                var reportAttachmentUploadJSON = {
+                                                    "attachment": attachmentJSONData
+                                                };
+
+                                                cloudService.createAttachment(reportAttachmentUploadJSON, function (response) {
+
+                                                    console.log("Uploaded FSR " + JSON.stringify(response));
+
+                                                    cloudService.updateOFSCStatus(statusData, function (response) {
+
+                                                        console.log("Task Completed " + JSON.stringify(response));
+
+                                                        var taskObject = {
+                                                            Task_Status: "Completed",
+                                                            Task_Number: $scope.taskId,
+                                                            Date: new Date(),
+                                                            Submit_Status: "I"
+                                                        };
+
+                                                        localService.updateTaskSubmitStatus(taskObject, function (result) {
+
+                                                            cloudService.getTaskInternalList("0", function (response) {
+
+                                                                $rootScope.dbCall = false;
+                                                            });
+                                                        });
+                                                    });
+                                                });
+                                            });
+
+                                        } else {
+
+                                            var reportObject = {
+                                                "Data": $scope.reportBase64,
+                                                "FileName": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
+                                                "Description": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
+                                                "Name": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
+                                                "taskId": $rootScope.selectedTask.Task_Number,
+                                                "contentType": "application/pdf"
+                                            };
+
+                                            attachmentJSONData = [];
+
+                                            attachmentJSONData.push(reportObject);
+
+                                            var reportAttachmentUploadJSON = {
+                                                "attachment": attachmentJSONData
+                                            };
+
+                                            cloudService.createAttachment(reportAttachmentUploadJSON, function (response) {
+
+                                                cloudService.updateOFSCStatus(statusData, function (response) {
+
+                                                    console.log("Task Completed " + JSON.stringify(response));
+
+                                                    var taskObject = {
+                                                        Task_Status: "Completed",
+                                                        Task_Number: $scope.taskId,
+                                                        Date: new Date(),
+                                                        Submit_Status: "I"
+                                                    };
+
+                                                    localService.updateTaskSubmitStatus(taskObject, function (result) {
+
+                                                        cloudService.getTaskInternalList("0", function (response) {
+
+                                                            $rootScope.dbCall = false;
+
+                                                        });
+                                                    });
+                                                });
+                                            });
+                                        }
+                                    });
+
+                                } else {
+                                    // valueService.showDialog("Complete");
+                                    var taskObject = {
+                                        Task_Status: "Completed",
+                                        Task_Number: valueService.getTask().Task_Number,
+                                        Date: new Date(),
+                                        Submit_Status: "P"
+                                    };
+
+                                    localService.updateTaskSubmitStatus(taskObject, function (result) {
+
+                                        localService.getTaskList(function (response) {
+
+                                            constantService.setTaskList(response);
+
+                                            $rootScope.dbCall = false;
+
+                                        });
+                                    });
+                                }
+                            };
+
+                            reader.readAsDataURL(file);
+                        });
+                    });
+                });
 
             }, function (reason) {
 
