@@ -126,7 +126,7 @@ app.controller('myTaskController', function ($translate, $scope, $compile, $time
                         $state.go('taskOverFlow');
 
                     } else if (event.Task_Status == 'Accepted') {
-                        $scope.showStartWork = false;
+                        $scope.showStartWork = true;
                         $scope.showDebriefBtn = true;
                         $rootScope.showWorkingBtn = false;
                         $rootScope.showAccept = false;
@@ -509,9 +509,9 @@ app.controller('myTaskController', function ($translate, $scope, $compile, $time
                     //$rootScope.showTaskDetail = true;
 
                     $scope.showStartWork = true;
-                    $scope.showDebriefBtn = false;
+                    $scope.showDebriefBtn = true;
                     $rootScope.showAccept = false;
-                    $rootScope.showWorkingBtn = true;
+                    $rootScope.showWorkingBtn = false;
                     break;
                 case 'Working':
 
