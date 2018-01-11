@@ -2825,6 +2825,10 @@
 
                                         attachmentJSONData.push(attachmentObject);
                                     }
+                                    if ($rootScope.customersignature == "" || $rootScope.customersignature == undefined)
+                                    {
+                                        $scope.engineerObject.isCustomerSignChecked = true;
+                                    }
 
                                     var statusData = {
                                         "TaskId": $scope.taskId,
