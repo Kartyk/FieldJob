@@ -261,15 +261,16 @@
 
             $http({
 
-                method: 'POST',
-                url: url + 'Internal_OFSC/get_ids',
+                method: 'GET',
+                url: url + "Internal_OFSC/get_ids?resourceId=" + constantService.getResourceId()
+                + "fromDate=" + startDateISOFormat
+                + "toDate=" + endDateISOFormat,
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
                     "oracle-mobile-backend-id": constantService.getInternalBackId()
-                },
-                data: data
-
+                }
+            
             }).success(function (response) {
 
                 localService.updateLastInternal(userObject);
@@ -1115,7 +1116,7 @@
                 "resourceId": constantService.getResourceId(),
                 //"updateDate": new Date("2017-12-24T06:59:59.202Z").toISOString()
                 "updateDate": new Date(constantService.getUser().Last_Updated_Delete).toISOString(),
-                "taskId":""
+                "taskId": ""
             };
 
             console.log("REQUEST DELETE API " + JSON.stringify(data));

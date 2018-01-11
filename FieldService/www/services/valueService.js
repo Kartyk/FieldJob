@@ -1262,7 +1262,7 @@
                                     attachmentObject.contentType = attachment.File_Type;
                                     attachmentObject.FileName = attachFileName + '.' + attachment.File_Name.split(".")[1];
                                     attachmentObject.Description = attachment.File_Name.split(".")[0];
-                                    attachmentObject.Name = attachFileName + '.' + attachment.File_Name.split(".")[1];
+                                    attachmentObject.Name = "";
 
                                     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 

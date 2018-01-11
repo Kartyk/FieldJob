@@ -2818,7 +2818,7 @@
                                             "Data": $scope.files[i].base64,
                                             "FileName": attachmentfileName + '.' + $scope.files[i].filename.split('.')[1],
                                             "Description": $scope.files[i].fileDisc,
-                                            "Name": attachmentfileName + '.' + $scope.files[i].filename.split('.')[1],
+                                            "Name": "",
                                             "taskId": $rootScope.selectedTask.Task_Number,
                                             "contentType": $scope.files[i].contentType
                                         };
