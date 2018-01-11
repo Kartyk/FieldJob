@@ -2674,7 +2674,6 @@
     function submit(promise) {
         if (promise != undefined) {
             promise.then(function () {
-                $rootScope.dbCall = false;
                 window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 
                     fs.root.getFile("Report_" + $scope.summary.taskObject.Task_Number + ".pdf", {
