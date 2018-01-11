@@ -1,6 +1,6 @@
 ﻿app.controller("debriefController", function ($translate, $scope, $state, $rootScope, $window, $timeout, $filter, $http, $q, cloudService, $mdDialog, valueService, localService, Upload, constantService, $anchorScroll, $location) {
     $scope.mytime = new Date();
-
+    $scope.isReviewed = false;
     $scope.hstep = 1;
     $scope.mstep = 1;
 
@@ -107,14 +107,14 @@
     if (!$rootScope.completedTask) {
 
         $scope.stages = [
-            { title: "Time", templateUrl: $scope.userType == 'C' ? "app/views/Time.html" : "app/views/TimeNC.html" },
-            { title: "Expenses", templateUrl: "app/views/Expenses.html" },
-            { title: "Material", templateUrl: "app/views/Material.html" },
-            { title: "Notes", templateUrl: "app/views/Notes.html" },
-            { title: "Attachments", templateUrl: "app/views/Attachments.html" },
-            { title: "Emerson Signature", templateUrl: "app/views/EngineerSignature.html" },
-            { title: "Summary", templateUrl: "app/views/Summary.html" },
-            { title: "Customer Signature", templateUrl: "app/views/CustomerSignature.html" }
+            { title: "Time", templateUrl: $scope.userType == 'C' ? "app/views/Time.html" : "app/views/TimeNC.html", showTab:true},
+            { title: "Expenses", templateUrl: "app/views/Expenses.html", showTab: true},
+            { title: "Material", templateUrl: "app/views/Material.html", showTab: true},
+            { title: "Notes", templateUrl: "app/views/Notes.html", showTab: true},
+            { title: "Attachments", templateUrl: "app/views/Attachments.html", showTab: true},
+            { title: "Emerson Signature", templateUrl: "app/views/EngineerSignature.html", showTab: true},
+            { title: "Summary", templateUrl: "app/views/Summary.html", showTab: true},
+            { title: "Customer Signature", templateUrl: "app/views/CustomerSignature.html", showTab: true}
         ];
 
     } else {
@@ -2158,7 +2158,8 @@
         console.log("STAGE =====> " + JSON.stringify(stage));
 
         $scope.saveValues();
-
+       
+       
         if ($scope.currentTab == "time") {
 
             if ($scope.timeArraySummary.length > 0) {
@@ -2622,6 +2623,7 @@
         if (stage.title.toLowerCase() == "customer signature") {
 
             $scope.summary.noteType = false;
+            
 
             angular.forEach($scope.notesArraySummary, function (key, value) {
                 if (key.Note_Type.Value == "Action Taken") {
@@ -2937,7 +2939,12 @@
                                                         Date: new Date(),
                                                         Submit_Status: "I"
                                                     };
-
+                                                    angular.forEach($scope.stages, function (key) {
+                                                        if (key.title != 'Summary' && key.title != 'Customer Signature')
+                                                        {
+                                                            key.showTab = false;
+                                                        }
+                                                    });
                                                     localService.updateTaskSubmitStatus(taskObject, function (result) {
 
                                                         cloudService.getTaskInternalList("0", function (response) {
@@ -3427,7 +3434,7 @@
     $scope.reviewSummary = function () {
 
         // var promise = generatePDF();
-
+        $scope.isReviewed = true;
         $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Customer Signature");
 
     };

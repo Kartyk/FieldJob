@@ -125,19 +125,19 @@
             <span flex></span>
             <span style="visibility:hidden">{{ $root.expenseformValid = expeseform.$valid}}</span>
           
-            <button ng-if="isEditExpense==0" style="margin-top:5px;"  class="add-button" ng-click="addObject('Expenses',true,item)" ng-disabled="$root.completedTask || !expeseform.$valid " translate="Add"></button>
-            <button ng-if="isEditExpense==1" style="margin-top:5px;" class="add-button" ng-click="saveObject('Expenses',true,item)" ng-disabled="$root.completedTask || !expeseform.$valid " translate="Save"></button>
+            <button ng-if="isEditExpense==0" style="margin-top:5px;"  class="add-button" ng-click="addObject('Expenses',true,item)" ng-disabled="$root.completedTask || !expeseform.$valid ||isReviewed" translate="Add"></button>
+            <button ng-if="isEditExpense==1" style="margin-top:5px;" class="add-button" ng-click="saveObject('Expenses',true,item)" ng-disabled="$root.completedTask || !expeseform.$valid ||isReviewed" translate="Save"></button>
 
             <!--<md-button class="time-font  time-delete" ng-click="deleteObject($index,item,'Expenses')" translate="delete">
             </md-button>-->
-            <button  class="copy-button" style="margin-top:5px;" ng-click="copyObject(item,'Expenses')" translate="copy" ng-disabled="$root.completedTask || !expeseform.$valid "></button>
+            <button  class="copy-button" style="margin-top:5px;" ng-click="copyObject(item,'Expenses')" translate="copy" ng-disabled="$root.completedTask || !expeseform.$valid ||isReviewed"></button>
             <span flex></span>
             <!--<md-button class="time-font time-add summary-report-donebtn" translate="NEXT" ng-click="Next('Expenses')"></md-button>-->
         </section>
 
 
     </div>
-    <div class="card-childContainer marginbottom30" style="margin-top:20px" ng-if="expenseArraySummary!=undefined && expenseArraySummary.length>0">
+    <div class="card-childContainer marginbottom30" ng-show="!isReviewed" style="margin-top:20px" ng-if="expenseArraySummary!=undefined && expenseArraySummary.length>0">
 
 
         <table class="table no-marbottom noborder">
