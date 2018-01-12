@@ -239,6 +239,8 @@
                     <th class=" noborder padding-right"><span translate="Work Type"></span></th>
                     <th class=" noborder padding-right" ng-if="userType=='C'"><span translate="Time Code"></th>
                     <th class=" noborder padding-right" ng-if="userType=='C'"><span translate="Shift Code"></th>
+                    <th class="noborder padding-right"><span translate="Start Time"></span></th>
+                    <th class="noborder padding-right"><span translate="End Time"></span></th>
                     <th class="noborder padding-right"><span translate="Duration"></span></th>
                     <th class="noborder padding-right"><span translate="Item"></span></th>
                     <th class="noborder padding-right"><span translate="Comments"></span></th>
@@ -263,6 +265,8 @@ time.Charge_Method.Value|
                     <td class="noborder bg-white padding-right">{{time.Work_Type.Value| translate}}</td>
                     <td class="noborder bg-white padding-right" ng-if="userType=='C'">{{time.Time_Code.Value}}</td>
                     <td class="noborder bg-white padding-right" ng-if="userType=='C'">{{time.Shift_Code.Value}}</td>
+                    <td class="noborder bg-white padding-right">{{time.startTime|date:'HH:mm'}}</td>
+                    <td class="noborder bg-white padding-right">{{time.endTime|date:'HH:mm'}}</td>
                     <td class="noborder bg-white padding-right">{{time.Duration}}</td>
                     <td class="noborder bg-white padding-right">{{time.Item.Value| translate}}</td>
                     <td class="noborder bg-white padding-right">{{time.Comments}}</td>

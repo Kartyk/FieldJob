@@ -251,6 +251,8 @@
                     <th class=" noborder padding-right10"><span translate="Work Type"></span></th>
                     <th class=" noborder padding-right10" ng-if="userType=='C'"><span translate="Time Code"></span></th>
                     <th class=" noborder padding-right10" ng-if="userType=='C'"><span translate="Shift Code"></span></th>
+                    <th class="noborder padding-right10"><span translate="Start Time"></span></th>
+                    <th class="noborder padding-right10"><span translate="End Time"></span></th>
                     <th class="noborder padding-right10"><span translate="Duration"></span></th>
                     <th class="noborder padding-right10"><span translate="Item"></span></th>
                     <th class="noborder padding-right10"><span translate="Comments"></span></th>
@@ -277,6 +279,8 @@ time.Charge_Method.Value|
                         {{time.Time_Code.Overtimeshiftcode}}
                     </td>
                     <td class="noborder bg-white padding-right10" ng-if="userType=='C'">{{time.Shift_Code.ShiftCodeName}}</td>
+                    <td class="noborder bg-white padding-right10">{{time.startTime|date:'HH:mm'}}</td>
+                    <td class="noborder bg-white padding-right10">{{time.endTime|date:'HH:mm'}}</td>
                     <td class="noborder bg-white padding-right10">{{time.Duration}}</td>
                     <td class="noborder bg-white padding-right10">{{time.Item.Value| translate}}</td>
                     <td class="noborder bg-white padding-right10">{{time.Comments}}</td>

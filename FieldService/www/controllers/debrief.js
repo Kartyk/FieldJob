@@ -22,6 +22,8 @@
     };
     $scope.isError = false;
     $scope.changed = function (item) {
+        if (item.endTime == undefined)
+            item.endTime = "";
         if (item.endTime < item.startTime) {
             //timeform.endTimeSpan.$setValidity("error", false)
             $scope.isDateError = true;
@@ -1000,6 +1002,8 @@
                         Date: item.Date,
                         DurationValue: item.DurationValue,
                         Duration: item.Duration,
+                        startTime: item.startTime,
+                        endTime:item.endTime,
                         DurationHours: item.DurationHours,
                         DurationMinutes: item.DurationMinutes,
                         mins: 0,
@@ -1223,6 +1227,8 @@
                         Date: item.Date,
                         DurationValue: item.DurationValue,
                         Duration: item.Duration,
+                        startTime: item.startTime,
+                        endTime: item.endTime,
                         DurationHours: item.DurationHours,
                         DurationMinutes: item.DurationMinutes,
                         mins: 0,
@@ -1411,6 +1417,8 @@
                         Date: item.Date,
                         DurationValue: item.DurationValue,
                         Duration: item.Duration,
+                        startTime: item.startTime,
+                        endTime: item.endTime,
                         DurationHours: item.DurationHours,
                         DurationMinutes: item.DurationMinutes,
                         mins: 0,
@@ -2463,7 +2471,7 @@
 
                 });
 
-                var grandtimeObject = $scope.getTimenewObj("GRAND \n TOTAL", "", "", "", "", "", "", 0, "", "", true);
+                var grandtimeObject = $scope.getTimenewObj("GRAND \n TOTAL", "", "", "", "", "", "", 0, "", "","","", true);
 
                 var subtotalObject = $scope.getTimenewObj("", "SUB TOTAL", "", "", "", "", "", 0);
 
@@ -2572,7 +2580,7 @@
 
                         if (newTimecode) {
 
-                            var timeObject = $scope.getTimenewObj(key.Work_Type.Value, moment(key.Date).format('DD-MMM-YYYY'), key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration, key.Time_Code.Overtimeshiftcode, key.Shift_Code.ShiftCodeName);
+                            var timeObject = $scope.getTimenewObj(key.Work_Type.Value, moment(key.Date).format('DD-MMM-YYYY'), key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration, key.Time_Code.Overtimeshiftcode, key.Shift_Code.ShiftCodeName, key.startTime, key.endTime);
 
                             timeObject.Duration = $scope.calculateDuration(timeObject, key);
                             timeObject.Duration = formatDuration(timeObject.Duration);
@@ -2581,7 +2589,7 @@
 
                     } else {
 
-                        var timeObject = $scope.getTimenewObj(key.Work_Type.Value, moment(key.Date).format('DD-MMM-YYYY'), key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration, key.Time_Code.Overtimeshiftcode, key.Shift_Code.ShiftCodeName);
+                        var timeObject = $scope.getTimenewObj(key.Work_Type.Value, moment(key.Date).format('DD-MMM-YYYY'), key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration, key.Time_Code.Overtimeshiftcode, key.Shift_Code.ShiftCodeName, key.startTime, key.endTime);
 
                         timeObject.Duration = $scope.calculateDuration(timeObject, key);
                         timeObject.Duration = formatDuration(timeObject.Duration)
@@ -3089,7 +3097,7 @@
         });
     };
 
-    $scope.getTimenewObj = function (worktype, date, chargetype, chargemethod, item, desc, commets, duration, timecode, shiftcode, isGrandtotal = false) {
+    $scope.getTimenewObj = function (worktype, date, chargetype, chargemethod, item, desc, commets, duration, timecode, shiftcode,startTime,endTime, isGrandtotal = false) {
 
         var weight;
 
@@ -3112,7 +3120,9 @@
                 "hours": 0,
                 "Time_Code": timecode,
                 "Shift_Code": shiftcode,
-                "grandTotal": weight
+                "grandTotal": weight,
+                "startTime": startTime,
+                "endTime": endTime
             };
 
         return timeObj;
