@@ -1327,7 +1327,44 @@
                                     });
                                 });
 
-                                promises.push(deferred.promise);
+                                if (taskObject.Country == "People's Republic of China" || taskObject.Country.toLowerCase() == "china") {
+
+                                    var deferredCh = $q.defer();
+
+                                    var reportObjectCh = "";
+
+                                    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+
+                                        fs.root.getFile("Report_" + taskId + "_ch.pdf", {
+                                            create: true,
+                                            exclusive: false
+                                        }, function (fileEntry) {
+
+                                            fileEntry.file(function (file) {
+
+                                                var reader = new FileReader();
+
+                                                reader.onloadend = function () {
+
+                                                    reportObjectCh = {
+                                                        "Data": this.result.split(",")[1],
+                                                        "FileName": "Report_" + taskId + "_ch.pdf",
+                                                        "Description": "Report_" + taskId + "_ch.pdf",
+                                                        "Name": "Report_" + taskId + "_ch.pdf",
+                                                        "taskId": taskId,
+                                                        "contentType": "application/pdf"
+                                                    };
+
+                                                    deferredCh.resolve(reportObjectCh);
+                                                };
+
+                                                reader.readAsDataURL(file);
+                                            });
+                                        });
+                                    });
+
+                                    promises.push(deferredCh.promise);
+                                }
 
                                 $q.all(promises).then(function (response) {
 
@@ -1336,6 +1373,10 @@
                                     if (reportObject != undefined) {
 
                                         attachmentJSONData.push(reportObject);
+
+                                        if (taskObject.Country == "People's Republic of China" || taskObject.Country.toLowerCase() == "china") {
+                                            attachmentJSONData.push(reportObjectCh);
+                                        }
 
                                         reportAttachmentUploadJSON = {
                                             "attachment": reportObject
@@ -1349,8 +1390,8 @@
                                             var statusData = {
                                                 "TaskId": taskId,
                                                 "Activity_Id": taskObject.Activity_Id,
-                                                "XA_TASK_STATUS": "3",
-                                                //"XA_TASK_STATUS": "2",
+                                                //"XA_TASK_STATUS": "3",
+                                                "XA_TASK_STATUS": "2",
                                                 "taskstatus": "Completed-Awaiting Review",
                                                 "email": taskObject.Email,
                                                 "completeDate": moment.utc(new Date(taskObject.Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),
