@@ -122,8 +122,8 @@
     } else {
 
         $scope.stages = [
-            { title: "Summary", templateUrl: "app/views/Summary.html" },
-            { title: "Customer Signature", templateUrl: "app/views/CustomerSignature.html" }
+            { title: "Summary", templateUrl: "app/views/Summary.html", showTab: true },
+            { title: "Customer Signature", templateUrl: "app/views/CustomerSignature.html", showTab: true}
         ];
     }
 
@@ -2841,8 +2841,8 @@
                                     var statusData = {
                                         "TaskId": $scope.taskId,
                                         "Activity_Id": $scope.taskObject.Activity_Id,
-                                        //"XA_TASK_STATUS": "3",
-                                        "XA_TASK_STATUS": "2",
+                                        "XA_TASK_STATUS": "3",
+                                        //"XA_TASK_STATUS": "2",
                                         "taskstatus": "Completed-Awaiting Review",
                                         "email": constantService.getCCEmailID(),
                                         "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
@@ -3500,14 +3500,22 @@
         var file = "app://local/" + filename;
 
         var compatibleAttachment = base64parts + base64;
-
-        cordova.plugins.email.open({
-            to: constantService.getUserEmailId(),
-            cc: constantService.getCCEmailID(),
-            subject: 'Report',
-            body: '',
-            attachments: [compatibleAttachment]
-        });
+        if (constantService.getCCEmailID() != null && constantService.getCCEmailID() != "")
+            cordova.plugins.email.open({
+                to: constantService.getUserEmailId(),
+                cc: constantService.getCCEmailID(),
+                subject: 'Report',
+                body: '',
+                attachments: [compatibleAttachment]
+            });
+        else {
+            cordova.plugins.email.open({
+                to: constantService.getUserEmailId(),
+                subject: 'Report',
+                body: '',
+                attachments: [compatibleAttachment]
+            });
+        }
     }
     $scope.deleteAttachment = function () {
         $scope.files.splice(this.$index, 1);
