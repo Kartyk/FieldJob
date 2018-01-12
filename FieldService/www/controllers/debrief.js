@@ -2877,96 +2877,12 @@
 
                                                 console.log("Uploaded Attachment " + JSON.stringify(response));
 
-                                                var reportObject = {
-                                                    "Data": $scope.reportBase64,
-                                                    "FileName": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                                                    "Description": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                                                    "Name": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                                                    "taskId": $rootScope.selectedTask.Task_Number,
-                                                    "contentType": "application/pdf"
-                                                };
-
-                                                attachmentJSONData = [];
-
-                                                attachmentJSONData.push(reportObject);
-
-                                                var reportAttachmentUploadJSON = {
-                                                    "attachment": attachmentJSONData
-                                                };
-
-                                                cloudService.createAttachment(reportAttachmentUploadJSON, function (response) {
-
-                                                    console.log("Uploaded FSR " + JSON.stringify(response));
-
-                                                    cloudService.updateOFSCStatus(statusData, function (response) {
-
-                                                        console.log("Task Completed " + JSON.stringify(response));
-
-                                                        var taskObject = {
-                                                            Task_Status: "Completed",
-                                                            Task_Number: $scope.taskId,
-                                                            Date: new Date(),
-                                                            Submit_Status: "I"
-                                                        };
-
-                                                        localService.updateTaskSubmitStatus(taskObject, function (result) {
-
-                                                            cloudService.getTaskInternalList("0", function (response) {
-
-                                                                $rootScope.dbCall = false;
-                                                            });
-                                                        });
-                                                    });
-                                                });
+                                                uplaodFSRANDCompleteJob(statusData);
                                             });
 
                                         } else {
-
-                                            var reportObject = {
-                                                "Data": $scope.reportBase64,
-                                                "FileName": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                                                "Description": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                                                "Name": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                                                "taskId": $rootScope.selectedTask.Task_Number,
-                                                "contentType": "application/pdf"
-                                            };
-
-                                            attachmentJSONData = [];
-
-                                            attachmentJSONData.push(reportObject);
-
-                                            var reportAttachmentUploadJSON = {
-                                                "attachment": attachmentJSONData
-                                            };
-
-                                            cloudService.createAttachment(reportAttachmentUploadJSON, function (response) {
-
-                                                cloudService.updateOFSCStatus(statusData, function (response) {
-
-                                                    console.log("Task Completed " + JSON.stringify(response));
-
-                                                    var taskObject = {
-                                                        Task_Status: "Completed",
-                                                        Task_Number: $scope.taskId,
-                                                        Date: new Date(),
-                                                        Submit_Status: "I"
-                                                    };
-                                                    angular.forEach($scope.stages, function (key) {
-                                                        if (key.title != 'Summary' && key.title != 'Customer Signature')
-                                                        {
-                                                            key.showTab = false;
-                                                        }
-                                                    });
-                                                    localService.updateTaskSubmitStatus(taskObject, function (result) {
-
-                                                        cloudService.getTaskInternalList("0", function (response) {
-
-                                                            $rootScope.dbCall = false;
-
-                                                        });
-                                                    });
-                                                });
-                                            });
+                                            uplaodFSRANDCompleteJob(statusData);
+                                            
                                         }
                                     });
 
@@ -3002,6 +2918,108 @@
             });
         }
     }
+    function uplaodFSRANDCompleteJob(statusData)
+    {
+        var chineseFsr = null;
+        var promiseArray = [];
+        if (valueService.getTask().Country == "People's Republic of China" || valueService.getTask().Country.toLowerCase() == "china") {
+            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+
+                fs.root.getFile("Report_" + $scope.summary.taskObject.Task_Number + "_ch.pdf", {
+                    create: true,
+                    exclusive: false
+                }, function (fileEntry) {
+
+                    fileEntry.file(function (file) {
+
+                        var reader = new FileReader();
+                       
+                        reader.onloadend = function () {
+                            chineseFsr = this.result.split(",")[1];
+                            var reportObject = {
+                                "Data": chineseFsr,
+                                "FileName": "Report_" + $scope.summary.taskObject.Task_Number + "_ch.pdf",
+                                "Description": "Report_" + $scope.summary.taskObject.Task_Number + "_ch.pdf",
+                                "Name": "Report_" + $scope.summary.taskObject.Task_Number + "_ch.pdf",
+                                "taskId": $rootScope.selectedTask.Task_Number,
+                                "contentType": "application/pdf"
+                            };
+
+                            var attachmentJSONData = [];
+
+                            attachmentJSONData.push(reportObject);
+
+                            var reportAttachmentUploadJSON = {
+                                "attachment": attachmentJSONData
+                            };
+                            var chDefer = $q.defer();
+                            promiseArray.push(chDefer.promise);
+                            cloudService.createAttachment(reportAttachmentUploadJSON, function (response) {
+                                chDefer.resolve();
+                            });
+                           
+                        }
+                        reader.readAsDataURL(file);
+                       
+                    });
+                });
+            })
+        }
+        
+            var reportObject = {
+                "Data": $scope.reportBase64,
+                "FileName": "Report_" + $scope.summary.taskObject.Task_Number + "_en.pdf",
+                "Description": "Report_" + $scope.summary.taskObject.Task_Number + "_en.pdf",
+                "Name": "Report_" + $scope.summary.taskObject.Task_Number + "_en.pdf",
+                "taskId": $rootScope.selectedTask.Task_Number,
+                "contentType": "application/pdf"
+            };
+
+            var attachmentJSONData = [];
+
+            attachmentJSONData.push(reportObject);
+
+            var reportAttachmentUploadJSON = {
+                "attachment": attachmentJSONData
+            };
+            var enDefer = $q.defer();
+            promiseArray.push(enDefer.promise);
+            cloudService.createAttachment(reportAttachmentUploadJSON, function (response) {
+                enDefer.resolve();
+
+            });
+            $q.all(promiseArray).then(function (response)
+            {
+                console.log("Uploaded FSR " + JSON.stringify(response));
+
+                cloudService.updateOFSCStatus(statusData, function (response) {
+
+                    console.log("Task Completed " + JSON.stringify(response));
+
+                    var taskObject = {
+                        Task_Status: "Completed",
+                        Task_Number: $scope.taskId,
+                        Date: new Date(),
+                        Submit_Status: "I"
+                    };
+                    angular.forEach($scope.stages, function (key) {
+                        if (key.title != 'Summary' && key.title != 'Customer Signature') {
+                            key.showTab = false;
+                        }
+                    });
+                    localService.updateTaskSubmitStatus(taskObject, function (result) {
+
+                        cloudService.getTaskInternalList("0", function (response) {
+
+                            $rootScope.dbCall = false;
+                        });
+                    });
+                });
+            })
+            
+        
+    }
+
     function PDFDialogController($scope, $mdDialog) {
         $scope.selectedLang = ""
         $scope.languages = [{ "ID": "en", "Value": "English" }, { "ID": "ch", "Value": "Chinese" }];
