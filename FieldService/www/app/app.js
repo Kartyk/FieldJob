@@ -269,7 +269,7 @@ app.directive('charRestrict', function ($filter) {
 
                 // return transformedInput;
 
-                
+
 
                 return transformedInput;
             });

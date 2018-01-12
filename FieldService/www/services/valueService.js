@@ -1295,11 +1295,13 @@
 
                                 var deferred = $q.defer();
 
+                                promises.push(deferred.promise);
+
                                 var reportObject;
 
                                 window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 
-                                    fs.root.getFile("Report_" + taskId + ".pdf", {
+                                    fs.root.getFile("Report_" + taskId + "_en.pdf", {
                                         create: true,
                                         exclusive: false
                                     }, function (fileEntry) {
@@ -1312,14 +1314,16 @@
 
                                                 reportObject = {
                                                     "Data": this.result.split(",")[1],
-                                                    "FileName": "Report_" + taskId + ".pdf",
-                                                    "Description": "Report_" + taskId + ".pdf",
-                                                    "Name": "Report_" + taskId + ".pdf",
+                                                    "FileName": "Report_" + taskId + "_en.pdf",
+                                                    "Description": "Report_" + taskId + "_en.pdf",
+                                                    "Name": "",
                                                     "taskId": taskId,
                                                     "contentType": "application/pdf"
                                                 };
 
-                                                deferred.resolve(reportObject);
+                                                deferred.resolve();
+
+                                                attachmentJSONData.push(reportObject);
                                             };
 
                                             reader.readAsDataURL(file);
@@ -1331,7 +1335,9 @@
 
                                     var deferredCh = $q.defer();
 
-                                    var reportObjectCh = "";
+                                    promises.push(deferredCh.promise);
+
+                                    var reportObjectCh;
 
                                     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 
@@ -1350,38 +1356,23 @@
                                                         "Data": this.result.split(",")[1],
                                                         "FileName": "Report_" + taskId + "_ch.pdf",
                                                         "Description": "Report_" + taskId + "_ch.pdf",
-                                                        "Name": "Report_" + taskId + "_ch.pdf",
+                                                        "Name": "",
                                                         "taskId": taskId,
                                                         "contentType": "application/pdf"
                                                     };
 
-                                                    deferredCh.resolve(reportObjectCh);
+                                                    deferredCh.resolve();
+
+                                                    attachmentJSONData.push(reportObjectCh);
                                                 };
 
                                                 reader.readAsDataURL(file);
                                             });
                                         });
-                                    });
-
-                                    promises.push(deferredCh.promise);
+                                    });                                  
                                 }
 
                                 $q.all(promises).then(function (response) {
-
-                                    var reportAttachmentUploadJSON;
-
-                                    if (reportObject != undefined) {
-
-                                        attachmentJSONData.push(reportObject);
-
-                                        if (taskObject.Country == "People's Republic of China" || taskObject.Country.toLowerCase() == "china") {
-                                            attachmentJSONData.push(reportObjectCh);
-                                        }
-
-                                        reportAttachmentUploadJSON = {
-                                            "attachment": reportObject
-                                        };
-                                    }
 
                                     localService.getEngineer(taskId, function (response) {
 
@@ -1390,8 +1381,8 @@
                                             var statusData = {
                                                 "TaskId": taskId,
                                                 "Activity_Id": taskObject.Activity_Id,
-                                                //"XA_TASK_STATUS": "3",
-                                                "XA_TASK_STATUS": "2",
+                                                "XA_TASK_STATUS": "3",
+                                                //"XA_TASK_STATUS": "2",
                                                 "taskstatus": "Completed-Awaiting Review",
                                                 "email": taskObject.Email,
                                                 "completeDate": moment.utc(new Date(taskObject.Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),
@@ -1420,40 +1411,11 @@
 
                                             cloudService.updateDebrief(formData, function (response) {
 
-                                                if (attachmentUploadJSON.attachment != undefined && attachmentUploadJSON.attachment.length > 0) {
+                                                console.log("START ATTACHMENT API " + new Date());
 
-                                                    console.log("START ATTACHMENT API " + new Date());
+                                                cloudService.createAttachment(attachmentUploadJSON, function (response) {
 
-                                                    cloudService.createAttachment(attachmentUploadJSON, function (response) {
-
-                                                        console.log("END ATTACHMENT API " + new Date());
-
-                                                        cloudService.updateOFSCStatus(statusData, function (response) {
-
-                                                            var taskObject = {
-                                                                Task_Status: "Completed",
-                                                                Task_Number: taskId,
-                                                                Submit_Status: "I"
-                                                            };
-
-                                                            localService.updateTaskSubmitStatus(taskObject, function (result) {
-
-                                                                callback("Success Submit");
-                                                            });
-                                                        });
-                                                    });
-
-                                                } else {
-
-                                                    if (reportAttachmentUploadJSON != undefined && reportAttachmentUploadJSON.attachment != undefined) {
-
-                                                        console.log("START FSR API " + new Date());
-
-                                                        cloudService.createAttachment(reportAttachmentUploadJSON, function (response) {
-
-                                                            console.log("END FSR API " + new Date());
-                                                        });
-                                                    }
+                                                    console.log("END ATTACHMENT API " + new Date());
 
                                                     cloudService.updateOFSCStatus(statusData, function (response) {
 
@@ -1468,7 +1430,7 @@
                                                             callback("Success Submit");
                                                         });
                                                     });
-                                                }
+                                                });                                              
                                             });
                                         }
                                     });
