@@ -218,8 +218,8 @@
                                 <th class=" noborder padding-right"><span translate="Work Type"></span></th>
                                 <th class=" noborder padding-right"  ng-if="userType=='C'" ><span translate="Time Code"></th>
                                 <th class=" noborder padding-right" ng-if="userType=='C'"><span translate="Shift Code"></th>
-                                <th class="noborder padding-right"><span translate="Start Time"></span></th>
-                                <th class="noborder padding-right"><span translate="End Time"></span></th>
+                                <!--<th class="noborder padding-right"><span translate="Start Time"></span></th>
+                                <th class="noborder padding-right"><span translate="End Time"></span></th>-->
                                 <th class="noborder padding-right"><span translate="Duration"></span></th>
                                 <th class="noborder padding-right"><span translate="Item"></span></th>
                                 </tr>
@@ -236,8 +236,8 @@
                                     <!-- <td md-cell>{{time.standard}}</td> -->
                                     <td class="noborder bg-white padding-right" ng-if="userType=='C'" >{{time.Time_Code}} </td>
                                     <td class="noborder bg-white padding-right" ng-if="userType=='C'">{{time.Shift_Code}} </td>
-                                    <td class="noborder bg-white padding-right">{{time.startTime|date:'HH:mm'}}</td>
-                                    <td class="noborder bg-white padding-right">{{time.endTime|date:'HH:mm'}}</td>
+                                    <!--<td class="noborder bg-white padding-right">{{time.startTime|date:'HH:mm'}}</td>
+                                    <td class="noborder bg-white padding-right">{{time.endTime|date:'HH:mm'}}</td>-->
                                     <td class="noborder bg-white padding-right" ng-style="{'font-weight':time.grandTotal}">{{time.Duration}}</td>
                                     <td class="noborder bg-white padding-right">{{time.Item| translate}}</td>
                                     </tr>

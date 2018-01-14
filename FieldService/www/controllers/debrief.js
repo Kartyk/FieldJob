@@ -41,8 +41,9 @@
         } else {
 
             $scope.isDateError = false;
-            var hour = item.endTime.getHours() - item.startTime.getHours();
-            var min = Math.abs(item.endTime.getMinutes() - item.startTime.getMinutes());
+            var time = new moment(item.endTime - item.startTime).format("HH:mm");
+            var hour = time.getHours();
+            var min = time.getMinutes();
             item.Duration = hour + ":" + min;
         }
 
