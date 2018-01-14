@@ -278,13 +278,25 @@
 
             var deferNote = $q.defer();
 
-            localService.getNoteList(taskObject.Service_Request, function (response) {
+            localService.getSRNoteList(taskObject.SR_ID, function (response) {
 
-                debrief.taskNotes = response;
+                console.log("SR Level");
 
-                deferNote.resolve("success");
+                localService.getNoteList(taskObject.Task_Number, function (result) {
 
-                console.log("NOTES");
+                    debrief.taskNotes = response;
+
+                    angular.forEach(result, function (item) {
+
+                        debrief.taskNotes.push(item);
+                    });
+
+                    deferNote.resolve("success");
+
+                    console.log("NOTES");
+                });
+                
+
             });
 
             promiseArray.push(deferNote.promise);
@@ -1381,8 +1393,8 @@
                                             var statusData = {
                                                 "TaskId": taskId,
                                                 "Activity_Id": taskObject.Activity_Id,
-                                                "XA_TASK_STATUS": "3",
-                                                //"XA_TASK_STATUS": "2",
+                                                //"XA_TASK_STATUS": "3",
+                                                "XA_TASK_STATUS": "2",
                                                 "taskstatus": "Completed-Awaiting Review",
                                                 "email": taskObject.Email,
                                                 "completeDate": moment.utc(new Date(taskObject.Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),

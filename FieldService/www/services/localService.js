@@ -74,6 +74,7 @@
         service.getInstallBaseList = getInstallBaseList;
         service.getContactList = getContactList;
         service.getNoteList = getNoteList;
+        service.getSRNoteList = getSRNoteList;
         service.getAttachmentList = getAttachmentList;
         service.getOverTimeList = getOverTimeList;
         service.getShiftCodeList = getShiftCodeList;
@@ -4924,13 +4925,13 @@
             });
         };
 
-        function getNoteList(taskId, callback) {
+        function getSRNoteList(taskId, callback) {
 
             var value = [];
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM Note WHERE Service_Request = ? AND ResourceId = ?", [taskId, constantService.getResourceId()], function (tx, res) {
+                transaction.executeSql("SELECT * FROM Note WHERE Incident = ? AND ResourceId = ?", [taskId, constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -4958,6 +4959,39 @@
             });
         };
 
+        function getNoteList(taskId, callback) {
+
+            var value = [];
+
+            return db.transaction(function (transaction) {
+
+                transaction.executeSql("SELECT * FROM Note WHERE Task_Number = ? AND ResourceId = ?", [taskId, constantService.getResourceId()], function (tx, res) {
+
+                    var rowLength = res.rows.length;
+
+                    for (var i = 0; i < rowLength; i++) {
+
+                        value.push(res.rows.item(i));
+                    }
+
+                    // console.log("GET NOTE DB ==========> " + JSON.stringify(value));
+
+                    callback(value);
+
+                }, function (tx, error) {
+
+                    // console.log("GET NOTE SELECT ERROR: " + error.message);
+
+                    callback(value);
+                });
+
+            }, function (error) {
+
+                // console.log("GET NOTE TRANSACTION ERROR: " + error.message);
+
+                callback(value);
+            });
+        };
         function getAttachmentList(taskId, type, callback) {
 
             var value = [];

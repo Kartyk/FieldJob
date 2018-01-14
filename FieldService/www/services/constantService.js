@@ -28,64 +28,64 @@
 
         // DEV
 
-        var authKey = "Basic QTQ3MjE0NF9FTUVSU09OTU9CSUxFQ0xPVURfTU9CSUxFX0FOT05ZTU9VU19BUFBJRDpZLm81amxkaHVtYzF2ZQ==";
+        //var authKey = "Basic QTQ3MjE0NF9FTUVSU09OTU9CSUxFQ0xPVURfTU9CSUxFX0FOT05ZTU9VU19BUFBJRDpZLm81amxkaHVtYzF2ZQ==";
 
-        var loginBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
+        //var loginBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
 
-        var techBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
+        //var techBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
 
-        var taskListBackEndId = "cb0399de-d185-4cf1-ac60-9012d20add71";
+        //var taskListBackEndId = "cb0399de-d185-4cf1-ac60-9012d20add71";
 
-        var internalBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
+        //var internalBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
 
-        var taskDetailBackEndId = "91276bb5-acb5-4bfc-8673-fadf21173a4f";
+        //var taskDetailBackEndId = "91276bb5-acb5-4bfc-8673-fadf21173a4f";
 
-        var projectBackEndId = "91276bb5-acb5-4bfc-8673-fadf21173a4f";
+        //var projectBackEndId = "91276bb5-acb5-4bfc-8673-fadf21173a4f";
 
-        var lovBackEndId = "cb0399de-d185-4cf1-ac60-9012d20add71";
+        //var lovBackEndId = "cb0399de-d185-4cf1-ac60-9012d20add71";
 
-        var srBackEndId = "91276bb5-acb5-4bfc-8673-fadf21173a4f";
+        //var srBackEndId = "91276bb5-acb5-4bfc-8673-fadf21173a4f";
 
-        var debriefBackEndId = "cb0399de-d185-4cf1-ac60-9012d20add71";
+        //var debriefBackEndId = "cb0399de-d185-4cf1-ac60-9012d20add71";
 
-        var statusBackEndId = "cb0399de-d185-4cf1-ac60-9012d20add71";
+        //var statusBackEndId = "cb0399de-d185-4cf1-ac60-9012d20add71";
 
-        var createBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
+        //var createBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
 
-        var downloadBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
+        //var downloadBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
 
-        var deleteBackEndId = "a0f02e4c-cc58-4aa7-bba9-78e57a000b59";
+        //var deleteBackEndId = "a0f02e4c-cc58-4aa7-bba9-78e57a000b59";
 
 
         //SIT
 
-        //var authKey = "Basic QTQ3MjE0NF9FTUVSU09OTU9CSUxFVEVTVEVOVl9NT0JJTEVfQU5PTllNT1VTX0FQUElEOm9ma3U1ZG4xUHZscS5t";
+        var authKey = "Basic QTQ3MjE0NF9FTUVSU09OTU9CSUxFVEVTVEVOVl9NT0JJTEVfQU5PTllNT1VTX0FQUElEOm9ma3U1ZG4xUHZscS5t";
 
-        //var loginBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
+        var loginBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
 
-        //var techBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
+        var techBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
 
-        //var taskListBackEndId = "d8ba9d1b-20c9-4586-9037-5846804a002a";
+        var taskListBackEndId = "d8ba9d1b-20c9-4586-9037-5846804a002a";
 
-        //var internalBackEndId = "69559620-94dc-4bdc-9054-85d42cef7f6a";
+        var internalBackEndId = "69559620-94dc-4bdc-9054-85d42cef7f6a";
 
-        //var taskDetailBackEndId = "4548d523-e5cb-419f-98a1-020a7de64f86";
+        var taskDetailBackEndId = "4548d523-e5cb-419f-98a1-020a7de64f86";
 
-        //var projectBackEndId = "4548d523-e5cb-419f-98a1-020a7de64f86";
+        var projectBackEndId = "4548d523-e5cb-419f-98a1-020a7de64f86";
 
-        //var lovBackEndId = "d8ba9d1b-20c9-4586-9037-5846804a002a";
+        var lovBackEndId = "d8ba9d1b-20c9-4586-9037-5846804a002a";
 
-        //var srBackEndId = "4548d523-e5cb-419f-98a1-020a7de64f86";
+        var srBackEndId = "4548d523-e5cb-419f-98a1-020a7de64f86";
 
-        //var debriefBackEndId = "86c8aa7b-193c-4dd7-bf3b-fb6fc11442e8";
+        var debriefBackEndId = "86c8aa7b-193c-4dd7-bf3b-fb6fc11442e8";
 
-        //var statusBackEndId = "69559620-94dc-4bdc-9054-85d42cef7f6a";
+        var statusBackEndId = "69559620-94dc-4bdc-9054-85d42cef7f6a";
 
-        //var createBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
+        var createBackEndId = "004aca03-a2a3-4b1f-98b6-d698837b1396";
 
-        //var downloadBackEndId = "fb4010a8-02b7-4e20-88d0-d7f4029f6bd0";
+        var downloadBackEndId = "fb4010a8-02b7-4e20-88d0-d7f4029f6bd0";
 
-        //var deleteBackEndId = "4548d523-e5cb-419f-98a1-020a7de64f86";
+        var deleteBackEndId = "4548d523-e5cb-419f-98a1-020a7de64f86";
 
 
         var stagesArray = {};

@@ -2856,8 +2856,8 @@
                     var statusData = {
                         "TaskId": $scope.taskId,
                         "Activity_Id": $scope.taskObject.Activity_Id,
-                        "XA_TASK_STATUS": "3",
-                        //"XA_TASK_STATUS": "2",
+                        //"XA_TASK_STATUS": "3",
+                        "XA_TASK_STATUS": "2",
                         "taskstatus": "Completed-Awaiting Review",
                         "email": constantService.getCCEmailID(),
                         "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
