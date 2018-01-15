@@ -5755,11 +5755,12 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Task SET Task_Status = ?, Submit_Status = ?, Date = ?  WHERE Task_Number = ?";
+                var sqlUpdate = "UPDATE Task SET Task_Status = ?, Submit_Status = ?, Date = ?, Sync_Status = ?  WHERE Task_Number = ?";
 
                 insertValues.push(responseList.Task_Status);
                 insertValues.push(responseList.Submit_Status);
                 insertValues.push(responseList.Date);
+                insertValues.push(responseList.Sync_Status);
                 insertValues.push(responseList.Task_Number);
 
                 // console.log("TASK UPDATE VALUES =====> " + insertValues);
