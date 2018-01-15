@@ -2909,7 +2909,8 @@
                         Task_Status: "Completed",
                         Task_Number: valueService.getTask().Task_Number,
                         Date: new Date(),
-                        Submit_Status: "P"
+                        Submit_Status: "P",
+                        Sync_Status: "PD"
                     };
 
                     localService.updateTaskSubmitStatus(taskObject, function (result) {

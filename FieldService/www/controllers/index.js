@@ -545,69 +545,13 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
         var promises = [];
 
-        var deferAccept = $q.defer();
+        var deferPending = $q.defer();
 
-        localService.getAcceptTaskList(function (response) {
-
-            console.log("ACCEPT LENGTH " + response.length);
-
-            if (response.length > 0) {
-
-                var i = 0;
-
-                angular.forEach(response, function (item) {
-
-                    var deferred = $q.defer();
-
-                    if (item.Task_Status == "Accepted") {
-
-                        valueService.acceptTask(item, function (result) {
-
-                            $rootScope.showAccept = false;
-
-                            $rootScope.showWorkingBtn = true;
-
-                            deferred.resolve("success");
-
-                            if ((response.length - 1) == i) {
-                                deferAccept.resolve("Accept");
-                            }
-
-                            i++;
-                        });
-
-                    } else if (item.Task_Status == "Working") {
-
-                        valueService.startWorking(item, function (result) {
-
-                            $rootScope.showWorkingBtn = false;
-
-                            deferred.resolve("success");
-
-                            if ((response.length - 1) == i) {
-                                deferAccept.resolve("Working");
-                            }
-
-                            i++;
-                        });
-                    }
-
-                    promises.push(deferred.promise);
-                });
-
-            } else {
-
-                deferAccept.resolve("Accept");
-            }
-        });
-
-        promises.push(deferAccept.promise);
-
-        var deferSubmit = $q.defer();
+        promises.push(deferPending.promise);
 
         localService.getPendingTaskList(function (response) {
 
-            console.log("SUBMIT LENGTH " + response.length);
+            console.log("PENDING LENGTH " + response.length);
 
             if (response.length > 0) {
 
@@ -617,35 +561,75 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                     var deferred = $q.defer();
 
-                    valueService.submitDebrief(item, item.Task_Number, function (result) {
+                    promises.push(deferred.promise);
 
-                        console.log("DEBRIEF UPDATED");
+                    if (item.Sync_Status == "PA") {
+
+                        valueService.acceptTask(item, function (result) {
+
+                            deferred.resolve("success");
+
+                            if ((response.length - 1) == j) {
+                                deferPending.resolve("success");
+                            }
+
+                            j++;
+                        });
+
+                    } else if (item.Sync_Status == "PD") {
+
+                        valueService.submitDebrief(item, item.Task_Number, function (result) {
+
+                            deferred.resolve("success");
+
+                            if ((response.length - 1) == j) {
+                                deferPending.resolve("success");
+                            }
+
+                            j++;
+                        });
+
+                    } else if (item.Sync_Status == "PU") {
+
+                        valueService.uploadAttachment(item, item.Task_Number, function (result) {
+
+                            deferred.resolve("success");
+
+                            if ((response.length - 1) == j) {
+                                deferPending.resolve("success");
+                            }
+
+                            j++;
+                        });
+
+                    } else if (item.Sync_Status == "PS") {
+
+                        valueService.uploadAttachment(item, item.Task_Number, function (result) {
+
+                            deferred.resolve("success");
+
+                            if ((response.length - 1) == j) {
+                                deferPending.resolve("success");
+                            }
+
+                            j++;
+                        });
+
+                    } else {
 
                         deferred.resolve("success");
-
-                        if ((response.length - 1) == j) {
-                            deferSubmit.resolve("Submit");
-                        }
-
-                        j++;
-                    });
-
-                    promises.push(deferred.promise);
+                    }
                 });
 
             } else {
 
-                deferSubmit.resolve("Submit");
+                deferPending.resolve("success");
             }
         });
 
-        promises.push(deferSubmit.promise);
-
-        console.log("TOTAL LENGTH " + promises.length);
-
         $q.all(promises).then(function (response) {
 
-            console.log("ACCEPT SUBMIT SUCCESS");
+            console.log("PENDING SUCCESS");
 
             if (isLogin == "0") {
                 loginData(isLogin);
@@ -655,7 +639,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
         }, function (error) {
 
-            console.log("ACCEPT SUBMIT FAILURE");
+            console.log("PENDING FAILURE");
 
             if (isLogin == "0") {
                 loginData(isLogin);

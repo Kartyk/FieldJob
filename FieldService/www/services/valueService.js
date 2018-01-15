@@ -295,8 +295,6 @@
 
                     console.log("NOTES");
                 });
-                
-
             });
 
             promiseArray.push(deferNote.promise);
@@ -1062,19 +1060,36 @@
 
             cloudService.updateOFSCStatus(statusData, function (response) {
 
-                console.log("Task Accepted " + JSON.stringify(response));
+                if (response == "success") {
 
-                var taskObject = {
-                    Task_Status: "Accepted",
-                    Task_Number: item.Task_Number,
-                    Date: new Date(),
-                    Submit_Status: "I"
-                };
+                    var taskObject = {
+                        Task_Status: "Accepted",
+                        Task_Number: item.Task_Number,
+                        Date: new Date(),
+                        Submit_Status: "I",
+                        Sync_Status: "I"
+                    };
 
-                localService.updateTaskSubmitStatus(taskObject, function (result) {
+                    localService.updateTaskSubmitStatus(taskObject, function (result) {
 
-                    callback(result);
-                });
+                        callback("success");
+                    });
+
+                } else {
+
+                    var taskObject = {
+                        Task_Status: "Accepted",
+                        Task_Number: item.Task_Number,
+                        Date: new Date(),
+                        Submit_Status: "P",
+                        Sync_Status: "PA"
+                    };
+
+                    localService.updateTaskSubmitStatus(taskObject, function (result) {
+
+                        callback("failure");
+                    });
+                }
             });
         };
 
@@ -1254,205 +1269,292 @@
                                 noteJSONData.push(noteData);
                             }
 
-                            localService.getAttachmentList(taskId, "D", function (response) {
+                            var formData = {
+                                "Time": timeJSONData,
+                                "expense": expenseJSONData,
+                                "Material": materialJSONData,
+                                "Notes": noteJSONData
+                            };
 
-                                attachmentArray = response;
+                            cloudService.updateDebrief(formData, function (response) {
 
-                                var promises = [];
+                                if (response == "success") {
 
-                                angular.forEach(attachmentArray, function (attachment) {
+                                    uploadAttachment(taskObject, taskId, callback);
 
-                                    var deferred = $q.defer();
+                                } else {
 
-                                    var attachmentObject = {};
+                                    var taskChangeObject = {
+                                        Task_Status: "Completed",
+                                        Task_Number: taskId,
+                                        Submit_Status: "P",
+                                        Sync_Status: "PD"
+                                    };
 
-                                    var fileName = attachment.File_Name.split(".")[0];
+                                    localService.updateTaskSubmitStatus(taskChangeObject, function (result) {
 
-                                    var attachFileName = fileName.trim(0, 34);
-
-                                    attachmentObject.taskId = attachment.Task_Number;
-                                    attachmentObject.contentType = attachment.File_Type;
-                                    attachmentObject.FileName = attachFileName + '.' + attachment.File_Name.split(".")[1];
-                                    attachmentObject.Description = attachment.File_Name.split(".")[0];
-                                    attachmentObject.Name = "";
-
-                                    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
-
-                                        fs.root.getFile(attachment.File_Name, {
-                                            create: true,
-                                            exclusive: false
-                                        }, function (fileEntry) {
-
-                                            fileEntry.file(function (file) {
-
-                                                var reader = new FileReader();
-
-                                                reader.onloadend = function () {
-
-                                                    attachmentObject.Data = this.result.split(",")[1];
-
-                                                    attachmentJSONData.push(attachmentObject);
-
-                                                    deferred.resolve(attachmentObject);
-                                                };
-
-                                                reader.readAsDataURL(file);
-                                            });
-                                        });
+                                        callback("failure");
                                     });
-
-                                    promises.push(deferred.promise);
-
-                                });
-
-                                var deferred = $q.defer();
-
-                                promises.push(deferred.promise);
-
-                                var reportObject;
-
-                                window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
-
-                                    fs.root.getFile("Report_" + taskId + "_en.pdf", {
-                                        create: true,
-                                        exclusive: false
-                                    }, function (fileEntry) {
-
-                                        fileEntry.file(function (file) {
-
-                                            var reader = new FileReader();
-
-                                            reader.onloadend = function () {
-
-                                                reportObject = {
-                                                    "Data": this.result.split(",")[1],
-                                                    "FileName": "Report_" + taskId + "_en.pdf",
-                                                    "Description": "Report_" + taskId + "_en.pdf",
-                                                    "Name": "",
-                                                    "taskId": taskId,
-                                                    "contentType": "application/pdf"
-                                                };
-
-                                                deferred.resolve();
-
-                                                attachmentJSONData.push(reportObject);
-                                            };
-
-                                            reader.readAsDataURL(file);
-                                        });
-                                    });
-                                });
-
-                                if (taskObject.Country == "People's Republic of China" || taskObject.Country.toLowerCase() == "china") {
-
-                                    var deferredCh = $q.defer();
-
-                                    promises.push(deferredCh.promise);
-
-                                    var reportObjectCh;
-
-                                    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
-
-                                        fs.root.getFile("Report_" + taskId + "_ch.pdf", {
-                                            create: true,
-                                            exclusive: false
-                                        }, function (fileEntry) {
-
-                                            fileEntry.file(function (file) {
-
-                                                var reader = new FileReader();
-
-                                                reader.onloadend = function () {
-
-                                                    reportObjectCh = {
-                                                        "Data": this.result.split(",")[1],
-                                                        "FileName": "Report_" + taskId + "_ch.pdf",
-                                                        "Description": "Report_" + taskId + "_ch.pdf",
-                                                        "Name": "",
-                                                        "taskId": taskId,
-                                                        "contentType": "application/pdf"
-                                                    };
-
-                                                    deferredCh.resolve();
-
-                                                    attachmentJSONData.push(reportObjectCh);
-                                                };
-
-                                                reader.readAsDataURL(file);
-                                            });
-                                        });
-                                    });                                  
                                 }
-
-                                $q.all(promises).then(function (response) {
-
-                                    localService.getEngineer(taskId, function (response) {
-
-                                        if (response != undefined) {
-
-                                            var statusData = {
-                                                "TaskId": taskId,
-                                                "Activity_Id": taskObject.Activity_Id,
-                                                //"XA_TASK_STATUS": "3",
-                                                "XA_TASK_STATUS": "2",
-                                                "taskstatus": "Completed-Awaiting Review",
-                                                "email": taskObject.Email,
-                                                "completeDate": moment.utc(new Date(taskObject.Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                                                "followUp": response.followUp + "",
-                                                "salesQuote": response.salesQuote + "",
-                                                "salesVisit": response.salesVisit + "",
-                                                "salesLead": response.salesLead + "",
-                                                "followuptext": response.Follow_Up,
-                                                "sparequotetext": response.Spare_Quote,
-                                                "salesText": response.Sales_Visit,
-                                                "salesleadText": response.Sales_Head,
-                                                "denySignature": response.isCustomerSignChecked + "",
-                                                "signatureComments": response.customerComments
-                                            };
-
-                                            var formData = {
-                                                "Time": timeJSONData,
-                                                "expense": expenseJSONData,
-                                                "Material": materialJSONData,
-                                                "Notes": noteJSONData
-                                            };
-
-                                            var attachmentUploadJSON = {
-                                                "attachment": attachmentJSONData
-                                            };
-
-                                            cloudService.updateDebrief(formData, function (response) {
-
-                                                console.log("START ATTACHMENT API " + new Date());
-
-                                                cloudService.createAttachment(attachmentUploadJSON, function (response) {
-
-                                                    console.log("END ATTACHMENT API " + new Date());
-
-                                                    cloudService.updateOFSCStatus(statusData, function (response) {
-
-                                                        var taskObject = {
-                                                            Task_Status: "Completed",
-                                                            Task_Number: taskId,
-                                                            Submit_Status: "I"
-                                                        };
-
-                                                        localService.updateTaskSubmitStatus(taskObject, function (result) {
-
-                                                            callback("Success Submit");
-                                                        });
-                                                    });
-                                                });                                              
-                                            });
-                                        }
-                                    });
-                                }, function (error) {
-
-                                });
                             });
                         });
                     });
                 });
+            });
+        };
+
+        function uploadAttachment(taskObject, taskId, callback) {
+
+            localService.getAttachmentList(taskId, "D", function (response) {
+
+                attachmentArray = response;
+
+                var promises = [];
+
+                angular.forEach(attachmentArray, function (attachment) {
+
+                    var deferred = $q.defer();
+
+                    var attachmentObject = {};
+
+                    var fileName = attachment.File_Name.split(".")[0];
+
+                    var attachFileName = fileName.trim(0, 34);
+
+                    attachmentObject.taskId = attachment.Task_Number;
+                    attachmentObject.contentType = attachment.File_Type;
+                    attachmentObject.FileName = attachFileName + '.' + attachment.File_Name.split(".")[1];
+                    attachmentObject.Description = attachment.File_Name.split(".")[0];
+                    attachmentObject.Name = "";
+
+                    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+
+                        fs.root.getFile(attachment.File_Name, {
+                            create: true,
+                            exclusive: false
+                        }, function (fileEntry) {
+
+                            fileEntry.file(function (file) {
+
+                                var reader = new FileReader();
+
+                                reader.onloadend = function () {
+
+                                    attachmentObject.Data = this.result.split(",")[1];
+
+                                    attachmentJSONData.push(attachmentObject);
+
+                                    deferred.resolve(attachmentObject);
+                                };
+
+                                reader.readAsDataURL(file);
+                            });
+                        });
+                    });
+
+                    promises.push(deferred.promise);
+                });
+
+                var deferred = $q.defer();
+
+                promises.push(deferred.promise);
+
+                var reportObject;
+
+                window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+
+                    fs.root.getFile("Report_" + taskId + "_en.pdf", {
+                        create: true,
+                        exclusive: false
+                    }, function (fileEntry) {
+
+                        fileEntry.file(function (file) {
+
+                            var reader = new FileReader();
+
+                            reader.onloadend = function () {
+
+                                reportObject = {
+                                    "Data": this.result.split(",")[1],
+                                    "FileName": "Report_" + taskId + "_en.pdf",
+                                    "Description": "Report_" + taskId + "_en.pdf",
+                                    "Name": "",
+                                    "taskId": taskId,
+                                    "contentType": "application/pdf"
+                                };
+
+                                deferred.resolve();
+
+                                attachmentJSONData.push(reportObject);
+                            };
+
+                            reader.readAsDataURL(file);
+                        });
+                    });
+                });
+
+                if (taskObject.Country == "People's Republic of China" || taskObject.Country.toLowerCase() == "china") {
+
+                    var deferredCh = $q.defer();
+
+                    promises.push(deferredCh.promise);
+
+                    var reportObjectCh;
+
+                    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+
+                        fs.root.getFile("Report_" + taskId + "_ch.pdf", {
+                            create: true,
+                            exclusive: false
+                        }, function (fileEntry) {
+
+                            fileEntry.file(function (file) {
+
+                                var reader = new FileReader();
+
+                                reader.onloadend = function () {
+
+                                    reportObjectCh = {
+                                        "Data": this.result.split(",")[1],
+                                        "FileName": "Report_" + taskId + "_ch.pdf",
+                                        "Description": "Report_" + taskId + "_ch.pdf",
+                                        "Name": "",
+                                        "taskId": taskId,
+                                        "contentType": "application/pdf"
+                                    };
+
+                                    deferredCh.resolve();
+
+                                    attachmentJSONData.push(reportObjectCh);
+                                };
+
+                                reader.readAsDataURL(file);
+                            });
+                        });
+                    });
+                }
+
+                $q.all(promises).then(function (response) {
+
+                    var attachmentUploadJSON = {
+                        "attachment": attachmentJSONData
+                    };
+
+                    console.log("START ATTACHMENT API " + new Date());
+
+                    cloudService.createAttachment(attachmentUploadJSON, function (response) {
+
+                        console.log("END ATTACHMENT API " + new Date());
+
+                        if (response == "success") {
+
+                            updateStatus(taskObject, taskId, callback);
+
+                        } else {
+
+                            var taskChangeObject = {
+                                Task_Status: "Completed",
+                                Task_Number: taskId,
+                                Submit_Status: "P",
+                                Sync_Status: "PU"
+                            };
+
+                            localService.updateTaskSubmitStatus(taskChangeObject, function (result) {
+
+                                callback("failure");
+                            });
+                        }
+                    });
+
+                }, function (error) {
+
+                    var taskChangeObject = {
+                        Task_Status: "Completed",
+                        Task_Number: taskId,
+                        Submit_Status: "P",
+                        Sync_Status: "PU"
+                    };
+
+                    localService.updateTaskSubmitStatus(taskChangeObject, function (result) {
+
+                        callback("failure");
+                    });
+                });
+            });
+        };
+
+        function updateStatus(taskObject, taskId, callback) {
+
+            localService.getEngineer(taskId, function (response) {
+
+                if (response != undefined) {
+
+                    var statusData = {
+                        "TaskId": taskId,
+                        "Activity_Id": taskObject.Activity_Id,
+                        //"XA_TASK_STATUS": "3",
+                        "XA_TASK_STATUS": "2",
+                        "taskstatus": "Completed-Awaiting Review",
+                        "email": taskObject.Email,
+                        "completeDate": moment.utc(new Date(taskObject.Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                        "followUp": response.followUp + "",
+                        "salesQuote": response.salesQuote + "",
+                        "salesVisit": response.salesVisit + "",
+                        "salesLead": response.salesLead + "",
+                        "followuptext": response.Follow_Up,
+                        "sparequotetext": response.Spare_Quote,
+                        "salesText": response.Sales_Visit,
+                        "salesleadText": response.Sales_Head,
+                        "denySignature": response.isCustomerSignChecked + "",
+                        "signatureComments": response.customerComments
+                    };
+
+                    cloudService.updateOFSCStatus(statusData, function (response) {
+
+                        if (response == "success") {
+
+                            var taskChangeObject = {
+                                Task_Status: "Completed",
+                                Task_Number: taskId,
+                                Submit_Status: "I",
+                                Sync_Status: "I"
+                            };
+
+                            localService.updateTaskSubmitStatus(taskChangeObject, function (result) {
+
+                                callback("success");
+                            });
+
+                        } else {
+
+                            var taskChangeObject = {
+                                Task_Status: "Completed",
+                                Task_Number: taskId,
+                                Submit_Status: "P",
+                                Sync_Status: "PS"
+                            };
+
+                            localService.updateTaskSubmitStatus(taskChangeObject, function (result) {
+
+                                callback("failure");
+                            });
+                        }
+                    });
+
+                } else {
+
+                    var taskChangeObject = {
+                        Task_Status: "Completed",
+                        Task_Number: taskId,
+                        Submit_Status: "P",
+                        Sync_Status: "PS"
+                    };
+
+                    localService.updateTaskSubmitStatus(taskChangeObject, function (result) {
+
+                        callback("failure");
+                    });
+                }
             });
         };
 
