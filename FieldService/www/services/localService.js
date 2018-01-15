@@ -28,7 +28,7 @@
         service.updateLastTask = updateLastTask;
         service.updateLastInternal = updateLastInternal;
         service.updateLastTaskDetail = updateLastTaskDetail;
-        service.updateLastProject = updateLastProject;      
+        service.updateLastProject = updateLastProject;
         service.updateLastLOV = updateLastLOV;
         service.updateLastSR = updateLastSR;
         service.updateLastDelete = updateLastDelete;
@@ -4925,7 +4925,7 @@
                 callback(value);
             });
         };
-     
+
         function getNoteList(taskId, callback) {
 
             var value = [];

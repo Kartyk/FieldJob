@@ -209,9 +209,9 @@
 
                                     constantService.setTaskList(taskInternalList);
 
-                                    callback(taskInternalList);
-
                                     console.log("END TASK INTERNAL " + new Date());
+
+                                    callback(taskInternalList);                                 
                                 });
                             });
                         });

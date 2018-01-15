@@ -146,6 +146,8 @@
         service.openFile = openFile;
 
         service.submitDebrief = submitDebrief;
+        service.uploadAttachment = uploadAttachment;
+        service.updateStatus = updateStatus;
         service.acceptTask = acceptTask;
 
         service.checkIfFutureDayTask = checkIfFutureDayTask;
@@ -278,11 +280,11 @@
 
             var deferNote = $q.defer();
 
-            localService.getSRNoteList(taskObject.SR_ID, function (response) {
+            localService.getNoteList(taskObject.Task_Number, function (response) {
 
-                console.log("SR Level");
+                console.log("NOTES");
 
-                localService.getNoteList(taskObject.Task_Number, function (result) {
+                localService.getSRNoteList(taskObject.SR_ID, function (result) {
 
                     debrief.taskNotes = response;
 
@@ -293,7 +295,7 @@
 
                     deferNote.resolve("success");
 
-                    console.log("NOTES");
+                    console.log("SR NOTES");
                 });
             });
 
@@ -1099,13 +1101,11 @@
             var expenseArray = [];
             var materialArray = [];
             var notesArray = [];
-            var attachmentArray = [];
 
             var timeJSONData = [];
             var expenseJSONData = [];
             var materialJSONData = [];
             var noteJSONData = [];
-            var attachmentJSONData = [];
 
             localService.getTimeList(taskId, function (response) {
 
@@ -1280,7 +1280,19 @@
 
                                 if (response == "success") {
 
-                                    uploadAttachment(taskObject, taskId, callback);
+                                    console.log("DEBRIEF");
+
+                                    var taskChangeObject = {
+                                        Task_Status: "Completed",
+                                        Task_Number: taskId,
+                                        Submit_Status: "P",
+                                        Sync_Status: "PU"
+                                    };
+
+                                    localService.updateTaskSubmitStatus(taskChangeObject, function (result) {
+
+                                        uploadAttachment(taskObject, taskId, callback);
+                                    });
 
                                 } else {
 
@@ -1307,11 +1319,11 @@
 
             localService.getAttachmentList(taskId, "D", function (response) {
 
-                attachmentArray = response;
-
                 var promises = [];
 
-                angular.forEach(attachmentArray, function (attachment) {
+                var attachmentJSONData = [];
+
+                angular.forEach(response, function (attachment) {
 
                     var deferred = $q.defer();
 
@@ -1359,8 +1371,6 @@
 
                 promises.push(deferred.promise);
 
-                var reportObject;
-
                 window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 
                     fs.root.getFile("Report_" + taskId + "_en.pdf", {
@@ -1374,7 +1384,7 @@
 
                             reader.onloadend = function () {
 
-                                reportObject = {
+                                var reportObject = {
                                     "Data": this.result.split(",")[1],
                                     "FileName": "Report_" + taskId + "_en.pdf",
                                     "Description": "Report_" + taskId + "_en.pdf",
@@ -1399,8 +1409,6 @@
 
                     promises.push(deferredCh.promise);
 
-                    var reportObjectCh;
-
                     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 
                         fs.root.getFile("Report_" + taskId + "_ch.pdf", {
@@ -1414,7 +1422,7 @@
 
                                 reader.onloadend = function () {
 
-                                    reportObjectCh = {
+                                    var reportObjectCh = {
                                         "Data": this.result.split(",")[1],
                                         "FileName": "Report_" + taskId + "_ch.pdf",
                                         "Description": "Report_" + taskId + "_ch.pdf",
@@ -1448,7 +1456,19 @@
 
                         if (response == "success") {
 
-                            updateStatus(taskObject, taskId, callback);
+                            console.log("ATTACHMENT");
+
+                            var taskChangeObject = {
+                                Task_Status: "Completed",
+                                Task_Number: taskId,
+                                Submit_Status: "P",
+                                Sync_Status: "PS"
+                            };
+
+                            localService.updateTaskSubmitStatus(taskChangeObject, function (result) {
+
+                                updateStatus(taskObject, taskId, callback);
+                            });
 
                         } else {
 
@@ -1512,6 +1532,8 @@
                     cloudService.updateOFSCStatus(statusData, function (response) {
 
                         if (response == "success") {
+
+                            console.log("STATUS");
 
                             var taskChangeObject = {
                                 Task_Status: "Completed",

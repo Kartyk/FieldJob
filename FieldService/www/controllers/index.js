@@ -604,7 +604,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                     } else if (item.Sync_Status == "PS") {
 
-                        valueService.uploadAttachment(item, item.Task_Number, function (result) {
+                        valueService.updateStatus(item, item.Task_Number, function (result) {
 
                             deferred.resolve("success");
 
