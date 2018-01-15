@@ -74,6 +74,7 @@
         service.getInstallBaseList = getInstallBaseList;
         service.getContactList = getContactList;
         service.getNoteList = getNoteList;
+        service.getSRNoteList = getSRNoteList;
         service.getAttachmentList = getAttachmentList;
         service.getOverTimeList = getOverTimeList;
         service.getShiftCodeList = getShiftCodeList;
@@ -830,7 +831,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Task VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Task VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Task_Number);
                 insertValues.push(responseList.Job_Description);
@@ -864,6 +865,7 @@
                 insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.Charge_Type);
                 insertValues.push(responseList.Project_Number);
+                insertValues.push("I");
 
                 // console.log("TASK INSERT VALUES =====> " + insertValues);
 
@@ -4923,14 +4925,48 @@
                 callback(value);
             });
         };
-
+     
         function getNoteList(taskId, callback) {
 
             var value = [];
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM Note WHERE Service_Request = ? AND ResourceId = ?", [taskId, constantService.getResourceId()], function (tx, res) {
+                transaction.executeSql("SELECT * FROM Note WHERE Task_Number = ? AND ResourceId = ?", [taskId, constantService.getResourceId()], function (tx, res) {
+
+                    var rowLength = res.rows.length;
+
+                    for (var i = 0; i < rowLength; i++) {
+
+                        value.push(res.rows.item(i));
+                    }
+
+                    // console.log("GET NOTE DB ==========> " + JSON.stringify(value));
+
+                    callback(value);
+
+                }, function (tx, error) {
+
+                    // console.log("GET NOTE SELECT ERROR: " + error.message);
+
+                    callback(value);
+                });
+
+            }, function (error) {
+
+                // console.log("GET NOTE TRANSACTION ERROR: " + error.message);
+
+                callback(value);
+            });
+        };
+
+        function getSRNoteList(taskId, callback) {
+
+            var value = [];
+
+            return db.transaction(function (transaction) {
+
+                transaction.executeSql("SELECT * FROM Note WHERE Incident = ? AND ResourceId = ?", [taskId, constantService.getResourceId()], function (tx, res) {
 
                     var rowLength = res.rows.length;
 

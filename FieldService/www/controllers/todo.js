@@ -246,8 +246,9 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
                 var taskObject = {
                     Task_Status: "Accepted",
                     Task_Number: valueService.getTask().Task_Number,
-                    Submit_Status: "A",
-                    Date: new Date()
+                    Submit_Status: "P",
+                    Date: new Date(),
+                    Sync_Status: "PA"
                 };
               //  valueService.showDialog("Accept");
                 localService.updateTaskSubmitStatus(taskObject, function (result) {

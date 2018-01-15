@@ -2864,8 +2864,8 @@
                     var statusData = {
                         "TaskId": $scope.taskId,
                         "Activity_Id": $scope.taskObject.Activity_Id,
-                        "XA_TASK_STATUS": "3",
-                        //"XA_TASK_STATUS": "2",
+                        //"XA_TASK_STATUS": "3",
+                        "XA_TASK_STATUS": "2",
                         "taskstatus": "Completed-Awaiting Review",
                         "email": constantService.getCCEmailID(),
                         "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
@@ -2917,7 +2917,8 @@
                         Task_Status: "Completed",
                         Task_Number: valueService.getTask().Task_Number,
                         Date: new Date(),
-                        Submit_Status: "P"
+                        Submit_Status: "P",
+                        Sync_Status: "PD"
                     };
 
                     localService.updateTaskSubmitStatus(taskObject, function (result) {

@@ -950,13 +950,13 @@
 
                 console.log("RESPONSE DEBRIEF " + JSON.stringify(response));
 
-                callback(response);
+                callback("success");
 
             }).error(function (error) {
 
                 console.log("END DEBRIEF ERROR " + new Date());
 
-                callback(error);
+                callback("failure");
 
                 console.log("ERROR DEBRIEF " + JSON.stringify(error));
             });
@@ -1006,13 +1006,13 @@
 
                 console.log("RESPONSE OFSC " + JSON.stringify(response));
 
-                callback(response);
+                callback("success");
 
             }).error(function (error) {
 
                 console.log("END OFSC ERROR " + new Date());
 
-                callback(error);
+                callback("failure");
 
                 console.log("ERROR OFSC " + JSON.stringify(error));
             });
@@ -1039,13 +1039,13 @@
 
                 console.log("RESPONSE CREATE ATTACHMENT " + JSON.stringify(response));
 
-                callback(response);
+                callback("success");
 
             }).error(function (error) {
 
                 console.log("END CREATE ATTACHMENT ERROR " + new Date());
 
-                callback(error);
+                callback("failure");
 
                 console.log("CREATE ATTACHMENT ERROR " + JSON.stringify(error));
             });

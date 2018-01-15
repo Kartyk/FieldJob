@@ -451,8 +451,9 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                 var taskObject = {
                     Task_Status: "Accepted",
                     Task_Number: valueService.getTask().Task_Number,
-                    Submit_Status: "A",
-                    Date: new Date()
+                    Submit_Status: "P",
+                    Date: new Date(),
+                    Sync_Status: "PA"
                 };
 
                 localService.updateTaskSubmitStatus(taskObject, function (result) {
