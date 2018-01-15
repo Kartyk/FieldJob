@@ -41,10 +41,18 @@
         } else {
 
             $scope.isDateError = false;
-            var time = new moment(item.endTime - item.startTime).format("HH:mm");
-            var hour = time.getHours();
-            var min = time.getMinutes();
-            item.Duration = hour + ":" + min;
+            //var time= moment.subtract(item.endTime, item.startTime)
+            var difference_ms = Math.abs(item.endTime - item.startTime);
+            difference_ms = difference_ms / 1000;
+            var seconds = Math.floor(difference_ms % 60);
+            difference_ms = difference_ms / 60;
+            var minutes = Math.floor(difference_ms % 60);
+            difference_ms = difference_ms / 60;
+            var hours = Math.floor(difference_ms % 24);  
+            //var time = new moment(item.endTime - item.startTime).format("HH:mm");
+            //var hour = time.getHours();
+            //var min = time.getMinutes();
+            item.Duration = hours + ":" + minutes;
         }
 
         item.Duration = formatDuration(item.Duration);
