@@ -1,0 +1,113 @@
+
+<section layout="row" style="margin-bottom:-20px">
+    <span flex></span>
+    <button class="time-font time-add summary-report-donebtn rounded-border" translate="BACK" ng-click="goPreviousTab('Attachments')" style="margin-top:15px;float:right;margin-right:10px"></button>
+    <button class="time-font time-add summary-report-donebtn rounded-border" translate="NEXT" ng-click="Next('Attachments')" style="margin-top:15px;float:right;margin-right:50px;"></button>
+</section>
+<div class="card-parentContainer margintop40 visible-sm" >
+    <div class="card-childContainer marginbottom30" >
+        <form name="form" form-on-change="formChange()">
+            <div>
+                <div class="attachlabel">
+                    <label>ADD PICTURE</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="button col-sm-2" ngf-select="uploadImage($file)" ngf-multiple="true" ng-model="file"
+                     name="image" ngf-pattern="'image/*'" ngf-size="{width: 20, height: 20, quality: 0.9}"
+                     ngf-accept="'image/*'" ngf-max-size="7MB" ngf-min-height="100"
+                     ngf-resize="{width: 100, height: 100}" style="margin-right:30px;">
+                    <md-button>UPLOAD</md-button>
+                </div>
+
+                <div ng-repeat="file1 in image" class="col-sm-2">
+                    <div class="button col-sm-2 attachplaceholder" ngf-select="uploadImage($file)" ngf-multiple="true"
+                         ng-model="file" name="image" ngf-pattern="'image/*'"
+                         ngf-size="{width: 20, height: 20, quality: 0.9}"
+                         ngf-accept="'image/*'" ngf-max-size="7MB" ngf-min-height="100"
+                         ngf-resize="{width: 100, height: 100}"><img src="images/Layer 17.png" alt=""></div>
+
+                    <div ng-repeat="file1 in image" class="col-sm-2 attachmentDiv">
+
+                        <img ngf-thumbnail="file1 || '/thumb.jpg'">
+                    </div>
+                </div>
+
+
+            </div>
+            <!--<div class="layout-row">
+                <div class="col-sm-6 padding0">
+                    <md-button class="time-font time-add summary-report-donebtn prevbtn" style="margin-left:-1px" translate="BACK" ng-click="goPreviousTab('Attachments')"></md-button>
+                </div>
+                <div class="col-sm-6 padding0">
+                    <md-button class="time-font time-add summary-report-donebtn nextbtn" translate="NEXT" ng-click="Next('Attachments')"></md-button>
+                </div>
+            </div>-->
+        </form>
+        </div>
+    </div> 
+
+
+    <div class="card-parentContainer margintop40 ">
+
+         <div class="card-childContainer marginbottom30" >
+         
+        <form name="attachmentfrm" form-on-change="formChange()">
+           
+                    <label class="mylabel marginbottom30"  translate="Add Attachments"></label>
+               
+                <div class="row" style="margin:0px;">
+                    <div class="col-sm-2 nopadding width110" style="margin-right: 30px;"> 
+                    <div class="button  attachplaceholder" ngf-select="uploadFiles($file)"
+                         ngf-multiple="true" ng-model="file" name="file"
+                         ngf-size="{width: 20, height: 20, quality: 0.9}"
+                         ngf-max-size="20MB" ngf-min-height="100"
+                         ngf-resize="{width: 100, height: 100}">
+
+
+                        <img src="images/Layer 18.png" alt="">
+                         
+                    </div>
+                    <div class="max-size">(<span translate="Max"></span> 7MB)</div>
+                    </div>
+                    <div ng-repeat="file1 in files" class="col-sm-2 width110 attachment-spacing">
+                        <div class="attachmentDiv" ng-if="file1.contentType.indexOf('image') > -1">
+                        <img data-ng-src="data:{{file1.contentType}};base64,{{file1.base64}}"
+                              class="img-responsive"/></div>
+
+                        <div class="attachmentDiv" ng-if="file1.filetype.indexOf('pdf') > -1">
+                        <img src="images/pdf.png" 
+                             class="img-responsive"/></div>
+
+                        <div class="attachmentDiv" ng-if="file1.filetype.indexOf('doc') > -1 || file1.filetype.indexOf('docx') > -1">
+                        <img src="images/Word_1x.png" class="img-responsive"/></div>
+
+                        <div class="attachmentDiv" ng-if="file1.filetype.indexOf('xlsx') > -1 || file1.filetype.indexOf('xls') > -1">
+                        <img src="images/Excel_1x.png" class="img-responsive"/></div>
+
+                        <div class="attachmentDiv" ng-if="file1.filetype.indexOf('pptx') > -1 || file1.filetype.indexOf('ppt') > -1">
+                        <img src="images/PowerPoint_1x.png"  class="img-responsive"/></div>
+
+                        <div class="attachmentDiv" ng-if="file1.filetype.indexOf('txt') > -1 ">
+                        <img src="images/Notepad_1x.png"  class="img-responsive"/></div>
+                        <!-- <div>{{file1.name}}</div> -->
+                        <input class="form-control attachment-input"  ng-model="file1.fileDisc"
+                               value="{{file1.fileDisc}}"/>
+
+                        <label class="attachment-label" ng-click="deleteAttachment()"  translate="delete"></label>
+                </div>
+               
+            </div>
+            <!--<div class="layout-row">
+                <div class="col-sm-6 padding0">
+                    <md-button class="time-font time-add summary-report-donebtn prevbtn" style="margin-left:-1px" translate="BACK" ng-click="goPreviousTab('Attachments')"></md-button>
+                </div>
+                <div class="col-sm-6 padding0">
+                    <md-button class="time-font time-add summary-report-donebtn nextbtn" translate="NEXT" ng-click="Next('Attachments')"></md-button>
+                </div>
+            </div>-->
+           
+            
+        </form>
+    </div>
+
