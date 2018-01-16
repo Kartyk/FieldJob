@@ -94,8 +94,12 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
             } else {
 
                 $scope.isChina = false;
-
-                $scope.first = true;
+                if ($rootScope.first == undefined)
+                    $rootScope.first = true;
+                else
+                {
+                    googleMap();
+                }
             }
         }
     }
@@ -129,11 +133,11 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
         } else {
 
-            if ($scope.first) {
+            if ($rootScope.first) {
 
                 googleMap();
 
-                $scope.first = false;
+                $rootScope.first = false;
             }
         }
     }

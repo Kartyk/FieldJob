@@ -306,7 +306,8 @@ app.controller('myTaskController', function ($translate, $scope, $compile, $time
                         Activity_Id: item.Activity_Id,
                         SR_ID: item.SR_ID,
                         Country: item.Country,
-                        Project_Number: item.Project_Number
+                        Project_Number: item.Project_Number,
+                        Charge_Type: item.Charge_Type
                     });
 
                 } else {

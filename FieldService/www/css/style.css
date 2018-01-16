@@ -2503,8 +2503,28 @@ md-select.md-default-theme ._md-select-value, md-select ._md-select-value {
 {
     cursor:pointer;
 }
-
-
+.passwordDialog
+{
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0px;
+    background-color:gray;
+    opacity:0.96;
+    z-index:1000;
+}
+.passwordContainer
+{
+    width:30%;
+    height:30%;
+    left:30%;
+    top:40%;
+    position:absolute;
+    background-color:white;
+    border:1px solid gray;
+    padding:20px;
+    padding-top:0px;
+}
 .summary-description {
     /*width: 110px;*/
     overflow: hidden;
