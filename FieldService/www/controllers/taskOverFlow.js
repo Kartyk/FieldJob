@@ -88,7 +88,13 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                 } else {
 
-                    $scope.isBaidu = false;
+                    //$scope.isBaidu = false;
+                    $scope.isChina = false;
+                    if ($rootScope.first == undefined)
+                        $rootScope.first = true;
+                    else {
+                        googleMap();
+                    }
                 }
 
             } else {
@@ -200,27 +206,42 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
         if (L != undefined) {
 
             L.mapquest.key = 'E1jRKUfN0osMSzrInmuAH2glsmHmneU3';
+           // L.mapquest.geocoding().geocode(customerAddress, createMap);
+            geoCoder = new google.maps.Geocoder();
+            var latLng = location.displayLatLng;
+            geoCoder.geocode({
+                'address': $scope.taskDetails.Zip_Code
+            }, function (results, status) {
 
-            L.mapquest.geocoding().geocode(customerAddress, createMap);
+                if (status == google.maps.GeocoderStatus.OK) {
 
-            function createMap(error, response) {
+                    var latitude = results[0].geometry.location.lat();
 
-                var location = response.results[0].locations[0];
+                    var longitude = results[0].geometry.location.lng();
 
-                var latLng = location.displayLatLng;
+                    var latlng = new google.maps.LatLng(latitude, longitude);
 
-                map = L.mapquest.map('map', {
-                    center: latLng,
-                    layers: L.mapquest.tileLayer('map'),
-                    zoom: 14
-                });
 
-                var customIcon = L.mapquest.icons.circle({
-                    primaryColor: '#3b5998'
-                });
+                    map = L.mapquest.map('map', {
+                        center: [latitude, longitude],
+                        layers: L.mapquest.tileLayer('map'),
+                        zoom: 14
+                    });
 
-                L.marker(latLng, { icon: customIcon }).addTo(map);
-            }
+                    var customIcon = L.mapquest.icons.circle({
+                        primaryColor: '#3b5998'
+                    });
+
+                    L.marker([latitude, longitude], { icon: customIcon }).addTo(map);
+                }
+            });
+       //L.mapquest.geocoding().geocode(customerAddress, createMap);
+
+       //     function createMap(error, response) {
+
+       //         var location = response.results[0].locations[8];
+               
+       //     }
         }
     }
 

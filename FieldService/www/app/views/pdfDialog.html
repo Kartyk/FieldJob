@@ -12,17 +12,25 @@
                     <label style="margin-left:12px">Select the language to generate the Field Service Report</label>
                 </div>
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
                         <select class="form-control select-debrief" ng-model="selectedLang" style="height:40px"   ng-options="x as x.Value for x in languages  track by x.ID">
                             <option value="" disabled selected>Select Language</option>
                             <!--<option value="">English</option>
                             <option value="">Chinese</option>-->
                         </select>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-1"></div>
+                   
+                </div>
+                <div class="row" style="margin-top:15px;">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4" style="padding:0px;padding-right:10px">
                         <button class="engSign-Next" ng-click="selectLang()" translate="OK" ng-disabled="selectedLang=='' || selectedLang==null"></button>
                     </div>
-                   
+                    <div class="col-md-4">
+                        <button class="engSign-Next" ng-click="cancel()" translate="Cancel" ></button>
+                    </div>
                 </div>
                
             </div>

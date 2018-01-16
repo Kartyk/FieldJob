@@ -3102,6 +3102,10 @@
 
             $mdDialog.hide($scope.selectedLang);
         }
+        $scope.cancel = function ()
+        {
+            $mdDialog.hide();
+        }
     }
 
     $scope.SaveSign = function () {
@@ -3279,60 +3283,64 @@
                 targetEvent: event,
                 clickOutsideToClose: false
             }).then(function (selected) {
+                if (selected)
+                {
+                    if (!isemail) {
 
-                if (!isemail) {
+                        if (selected != undefined) {
 
-                    if (selected != undefined) {
+                            if (selected.ID == 'ch') {
 
-                        if (selected.ID == 'ch') {
+                                $scope.openPdf("Report_" + $scope.summary.taskObject.Task_Number + "_ch.pdf");
 
-                            $scope.openPdf("Report_" + $scope.summary.taskObject.Task_Number + "_ch.pdf");
+                            } else {
+
+                                $scope.openPdf("Report_" + $scope.summary.taskObject.Task_Number + "_en.pdf");
+                            }
 
                         } else {
 
                             $scope.openPdf("Report_" + $scope.summary.taskObject.Task_Number + "_en.pdf");
                         }
 
-                    } else {
-
-                        $scope.openPdf("Report_" + $scope.summary.taskObject.Task_Number + "_en.pdf");
                     }
+                    else {
 
-                } else {
+                        var filename;
 
-                    var filename;
+                        if (selected.ID == 'ch') {
 
-                    if (selected.ID == 'ch') {
+                            filename = "Report_" + $scope.summary.taskObject.Task_Number + "_ch.pdf";
 
-                        filename = "Report_" + $scope.summary.taskObject.Task_Number + "_ch.pdf";
+                        } else {
 
-                    } else {
+                            filename = "Report_" + $scope.summary.taskObject.Task_Number + "_en.pdf";
+                        }
 
-                        filename = "Report_" + $scope.summary.taskObject.Task_Number + "_en.pdf";
-                    }
+                        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 
-                    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+                            fs.root.getFile(filename, {
+                                create: true,
+                                exclusive: false
+                            }, function (fileEntry) {
 
-                        fs.root.getFile(filename, {
-                            create: true,
-                            exclusive: false
-                        }, function (fileEntry) {
+                                fileEntry.file(function (file) {
 
-                            fileEntry.file(function (file) {
+                                    var reader = new FileReader();
 
-                                var reader = new FileReader();
+                                    reader.onloadend = function () {
 
-                                reader.onloadend = function () {
+                                        console.log("READ REPORT FILE " + this.result);
 
-                                    console.log("READ REPORT FILE " + this.result);
-
-                                    openMailClent(this.result.split(",")[1], filename)
-                                }
-                                reader.readAsDataURL(file);
+                                        openMailClent(this.result.split(",")[1], filename)
+                                    }
+                                    reader.readAsDataURL(file);
+                                });
                             });
                         });
-                    });
+                    }
                 }
+               
             }, function () {
 
             });
