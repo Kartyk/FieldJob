@@ -2806,7 +2806,12 @@
                         if (timeArray[i].Time_Code != undefined) {
                             timecode = timeArray[i].Time_Code.Overtimeshiftcode;
                         }
-
+                        var finalDate = new Date(timeArray[i].Date);
+                        finalDate.setHours(timeArray[i].startTime.getHours());
+                        finalDate.setMinutes(timeArray[i].startTime.getMinutes());
+                        var finalendDate = new Date(timeArray[i].Date);
+                        finalendDate.setHours(timeArray[i].endTime.getHours());
+                        finalendDate.setMinutes(timeArray[i].endTime.getMinutes());
                         var timeData = {
                             "task_id": timeArray[i].Task_Number,
                             "shift_code": timeArray[i].Shift_Code_Id,
@@ -2819,8 +2824,8 @@
                             "labor_item": timeArray[i].Item_Id,
                             "labor_description": timeArray[i].Description,
                             "work_type": timeArray[i].Work_Type_Id,
-                            "start_date": moment.utc(timeArray[i].startTime).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                            "end_date": moment.utc(timeArray[i].endTime).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                            "start_date": moment.utc(finalDate).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                            "end_date": moment.utc(finalendDate).format("YYYY-MM-DDTHH:mm:ss.000Z"),
                             "charge_method": chargemethod,
                             "JobName": timeArray[i].Field_Job_Name_Id
                         }
