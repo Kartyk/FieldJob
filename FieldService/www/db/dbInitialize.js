@@ -42,7 +42,7 @@
 
         var sqlNoteType = "CREATE TABLE IF NOT EXISTS NoteType ('ID' INTEGER PRIMARY KEY  NOT NULL, 'Value' TEXT, 'ResourceId' TEXT)";
 
-        var sqlWorkType = "CREATE TABLE IF NOT EXISTS WorkType ('ID' INTEGER PRIMARY KEY  NOT NULL, 'Value' TEXT, 'ResourceId' TEXT)";
+        var sqlWorkType = "CREATE TABLE IF NOT EXISTS WorkType ('ID' INTEGER PRIMARY KEY  NOT NULL, 'Value' TEXT, 'NC' TEXT, 'C' TEXT, 'ResourceId' TEXT)";
 
         var sqlItem = "CREATE TABLE IF NOT EXISTS Item ('ID' INTEGER PRIMARY KEY  NOT NULL, 'Value' TEXT, 'Type' TEXT, 'ResourceId' TEXT)";
 
