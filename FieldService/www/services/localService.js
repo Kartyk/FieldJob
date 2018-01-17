@@ -3200,7 +3200,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Time SET timeDefault = ?, Field_Job_Name = ?, Field_Job_Name_Id = ?, Charge_Type = ?, Charge_Type_Id = ?, Charge_Method = ?, Charge_Method_Id = ?, Work_Type = ?, Work_Type_Id = ?, Item = ?, Item_Id = ?, Description = ?, Time_Code = ?, Time_Code_Id = ?, Time_Code_Value=?,Shift_Code = ?, Shift_Code_Id = ?,Shift_Code_Value=?, Date = ?, Duration = ?, Comments = ?, ResourceId = ?,Start_Time=?,End_Time=?  WHERE Time_Id = ? AND Task_Number = ?";
+                var sqlUpdate = "UPDATE Time SET timeDefault = ?, Field_Job_Name = ?, Field_Job_Name_Id = ?, Charge_Type = ?, Charge_Type_Id = ?, Charge_Method = ?, Charge_Method_Id = ?, Work_Type = ?, Work_Type_Id = ?, Item = ?, Item_Id = ?, Description = ?, Time_Code = ?, Time_Code_Id = ?, Time_Code_Value = ?, Shift_Code = ?, Shift_Code_Id = ?, Shift_Code_Value = ?, Date = ?, Duration = ?, Comments = ?, ResourceId = ?, Start_Time = ?, End_Time = ?  WHERE Time_Id = ? AND Task_Number = ?";
 
                 insertValues.push(responseList.timeDefault);
                 insertValues.push(responseList.Field_Job_Name);
@@ -3256,7 +3256,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Time VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?)";
+                var sqlInsert = "INSERT INTO Time VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Time_Id);
                 insertValues.push(responseList.timeDefault);
