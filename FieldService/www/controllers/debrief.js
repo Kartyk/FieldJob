@@ -290,18 +290,22 @@
 
                 $scope.itemTravel.push(item);
 
-            } else if (item.Type == "Deputation") {
+            } else if (item.Type == "Others") {
 
                 $scope.itemDeputation.push(item);
-
-            } else if (item.Type == "Normal") {
-
                 $scope.itemNormal.push(item);
-
-            } else if (item.Type == "Nightshift") {
-
                 $scope.itemNightShift.push(item);
+
             }
+
+            //else if (item.Type == "Normal") {
+
+            //    $scope.itemNormal.push(item);
+
+            //} else if (item.Type == "Nightshift") {
+
+            //    $scope.itemNightShift.push(item);
+            //}
         });
 
         $scope.setDropDownValues();

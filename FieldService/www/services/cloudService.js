@@ -1171,6 +1171,10 @@
                             } else if (object.Record_Type == "Notes") {
 
                                 noteArray.push(object);
+
+                            } else if (object.Record_Type == "ContactDisassociation") {
+
+                                contactArray.push(object);
                             }
                         });
                     }

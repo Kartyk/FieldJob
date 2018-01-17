@@ -208,9 +208,13 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
         if (L != undefined) {
 
             L.mapquest.key = 'E1jRKUfN0osMSzrInmuAH2glsmHmneU3';
+
             // L.mapquest.geocoding().geocode(customerAddress, createMap);
+
             geoCoder = new google.maps.Geocoder();
+
             var latLng = location.displayLatLng;
+
             geoCoder.geocode({
                 'address': $scope.taskDetails.Zip_Code
             }, function (results, status) {
@@ -222,7 +226,6 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                     var longitude = results[0].geometry.location.lng();
 
                     var latlng = new google.maps.LatLng(latitude, longitude);
-
 
                     map = L.mapquest.map('map', {
                         center: [latitude, longitude],
@@ -237,6 +240,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                     L.marker([latitude, longitude], { icon: customIcon }).addTo(map);
                 }
             });
+
             //L.mapquest.geocoding().geocode(customerAddress, createMap);
 
             //     function createMap(error, response) {

@@ -1134,6 +1134,14 @@
                         shiftcode = timeArray[i].Shift_Code_Value;
                     }
 
+                    var startDate = new Date(timeArray[i].Date);
+                    startDate.setHours(new Date(timeArray[i].Start_Time).getHours());
+                    startDate.setMinutes(new Date(timeArray[i].Start_Time).getMinutes());
+
+                    var endDate = new Date(timeArray[i].Date);
+                    endDate.setHours(new Date(timeArray[i].End_Time).getHours());
+                    endDate.setMinutes(new Date(timeArray[i].End_Time).getMinutes());
+
                     var timeData = {
                         "task_id": timeArray[i].Task_Number,
                         "shift_code": timeArray[i].Shift_Code_Id,
@@ -1146,8 +1154,8 @@
                         "labor_item": timeArray[i].Item_Id,
                         "labor_description": timeArray[i].Description,
                         "work_type": timeArray[i].Work_Type_Id,
-                        "start_date": moment.utc(new Date(timeArray[i].Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                        "end_date": moment.utc(new Date(timeArray[i].Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                        "start_date": moment.utc(startDate).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                        "end_date": moment.utc(endDate).format("YYYY-MM-DDTHH:mm:ss.000Z"),
                         "charge_method": chargeMethod,
                         "JobName": timeArray[i].Field_Job_Name_Id
                     };

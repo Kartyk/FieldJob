@@ -4662,8 +4662,17 @@
 
                             db.transaction(function (transaction) {
 
-                                var sqlDelete = "DELETE FROM Contact WHERE Contact_ID = " + item.Record_ID;
+                                var sqlDelete = "";
 
+                                if (item.TaskID != undefined && item.TaskID != null && item.TaskID != "") {
+
+                                    sqlDelete = "DELETE FROM Contact WHERE Contact_ID = " + item.Record_ID + " AND Task_Number = " + item.TaskID;
+
+                                } else {
+
+                                    sqlDelete = "DELETE FROM Contact WHERE Contact_ID = " + item.Record_ID;
+                                }
+                              
                                 transaction.executeSql(sqlDelete, [], function (tx, res) {
 
                                     deferred.resolve(res);
