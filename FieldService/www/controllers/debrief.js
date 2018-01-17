@@ -2727,10 +2727,14 @@
         if (authorizationValue == constantService.getUser().encrypt) {
 
             $scope.showPassWord = false;
+            $scope.password = "";
+            $scope.isPasswordError = false;
 
         } else {
 
             $scope.showPassWord = true;
+            $scope.password = "";
+            $scope.isPasswordError = true;
         }       
     };
 

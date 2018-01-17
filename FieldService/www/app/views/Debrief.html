@@ -25,7 +25,7 @@
             <form style="margin-top:20px;">
                 <!--<input type="field" placeholder="Username" id="user" ng-model="userName" required />-->
 
-                <input type="password" placeholder="Password" id="pass" ng-model='password' required />
+                <input type="password" placeholder="Password" id="pass" ng-model='password' required ng-class="{'error': isPasswordError == true}" />
                 <button class="margintop30" type="button" id="loginButton" ng-click="checkPassword()" style="width:48%;margin-right:10px">OK</button>
                 <button class="margintop30" type="button" id="loginButton" ng-click="cancelPassword()" style="width:48%">Cancel</button>
             </form>
