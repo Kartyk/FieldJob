@@ -522,6 +522,10 @@
 
         if (item.Date != undefined && item.Date != "")
             item.Date = new Date(item.Date);
+        if (item.Start_Time != undefined && item.Start_Time != "")
+            item.startTime = new Date(item.Start_Time);
+        if (item.End_Time != undefined && item.End_Time != "")
+            item.endTime = new Date(item.End_Time);
 
         item.DurationHours = moment.duration(item.Duration).hours();
 
@@ -2147,6 +2151,7 @@
 
             valueService.setEngineer($scope.engineerObject);
         }
+        valueService.setDebriefChanged(false);
     };
 
     $scope.goPreviousTab = function (stage) {
@@ -2803,8 +2808,8 @@
                             "labor_item": timeArray[i].Item_Id,
                             "labor_description": timeArray[i].Description,
                             "work_type": timeArray[i].Work_Type_Id,
-                            "start_date": moment.utc(timeArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                            "end_date": moment.utc(timeArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                            "start_date": moment.utc(timeArray[i].startTime).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                            "end_date": moment.utc(timeArray[i].endTime).format("YYYY-MM-DDTHH:mm:ss.000Z"),
                             "charge_method": chargemethod,
                             "JobName": timeArray[i].Field_Job_Name_Id
                         }
