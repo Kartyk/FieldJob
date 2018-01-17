@@ -539,7 +539,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO User VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO User VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(userObject.ID);
                 insertValues.push(userObject.ClarityID);
@@ -568,6 +568,7 @@
                 insertValues.push(userObject.Last_Updated_SR);
                 insertValues.push(userObject.Last_Updated_Delete);
                 insertValues.push(userObject.encrypt);
+                insertValues.push(userObject.userName);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
@@ -598,7 +599,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE User SET ClarityID = ?, Currency = ?, Default_View = ?, Email = ?, Language = ?, Name = ?, OFSCId = ?, Password = ?, Time_Zone = ?, Type = ?, User_Name = ?, Work_Day = ?, Work_Hour = ?, Login_Status = ?, Sync_Status = ?, Last_Updated = ?, Last_Updated_Task = ?, Last_Updated_Internal = ?, Last_Updated_Task_Detail = ?, Last_Updated_Project = ?, Last_Updated_LOV = ?, Last_Updated_SR = ?, Last_Updated_Delete = ?, encrypt = ?  WHERE ID = ?";
+                var sqlUpdate = "UPDATE User SET ClarityID = ?, Currency = ?, Default_View = ?, Email = ?, Language = ?, Name = ?, OFSCId = ?, Password = ?, Time_Zone = ?, Type = ?, User_Name = ?, Work_Day = ?, Work_Hour = ?, Login_Status = ?, Sync_Status = ?, Last_Updated = ?, Last_Updated_Task = ?, Last_Updated_Internal = ?, Last_Updated_Task_Detail = ?, Last_Updated_Project = ?, Last_Updated_LOV = ?, Last_Updated_SR = ?, Last_Updated_Delete = ?, encrypt = ?, userName = ?  WHERE ID = ?";
 
                 insertValues.push(userObject.ClarityID);
                 insertValues.push(userObject.Currency);
@@ -626,6 +627,7 @@
                 insertValues.push(userObject.Last_Updated_SR);
                 insertValues.push(userObject.Last_Updated_Delete);
                 insertValues.push(userObject.encrypt);
+                insertValues.push(userObject.userName);
 
                 insertValues.push(userObject.ID);
 

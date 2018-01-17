@@ -48,7 +48,7 @@
             difference_ms = difference_ms / 60;
             var minutes = Math.floor(difference_ms % 60);
             difference_ms = difference_ms / 60;
-            var hours = Math.floor(difference_ms % 24);  
+            var hours = Math.floor(difference_ms % 24);
             //var time = new moment(item.endTime - item.startTime).format("HH:mm");
             //var hour = time.getHours();
             //var min = time.getMinutes();
@@ -72,7 +72,7 @@
 
     $scope.customerName;
 
-    $scope.userType =  valueService.getUserType().clarityType;
+    $scope.userType = valueService.getUserType().clarityType;
 
     $scope.engineerName = valueService.getUserType().name;
 
@@ -2231,13 +2231,11 @@
 
         $scope.saveValues();
 
-        if (($scope.currentTab == "summary" || $scope.currentTab == "customer signature") && stage.title.toLowerCase() != "summary" && stage.title.toLowerCase()!="customer signature")
-        {
+        if (($scope.currentTab == "summary" || $scope.currentTab == "customer signature") && stage.title.toLowerCase() != "summary" && stage.title.toLowerCase() != "customer signature") {
             $scope.showPassWord = true;
             $scope.savedTab = $scope.currentTab;
         }
-        else
-        {
+        else {
             $scope.showPassWord = false;
         }
         if ($scope.currentTab == "time") {
@@ -2353,7 +2351,7 @@
                 });
             }
         }
-        
+
 
         //valueService.saveValues();
 
@@ -2715,19 +2713,32 @@
     }
 
     $scope.customersubmit = false;
-    $scope.checkPassword = function ()
-    {
+
+    $scope.checkPassword = function () {
+
+        var baseData = constantService.getUser().userName.toLowerCase() + ":" + $scope.password;
+
+        var authorizationValue = window.btoa(baseData);
+
+        if (authorizationValue == constantService.getUser().encrypt) {
+
+            $scope.showPassWord = false;
+
+        } else {
+
+            $scope.showPassWord = true;
+        }       
+    };
+
+    $scope.cancelPassword = function () {
+
         $scope.showPassWord = false;
-    }
-    $scope.cancelPassword = function ()
-    {
-        $scope.showPassWord = false;
-        $scope.selectedIndex = $scope.stages.findIndex(x => x.title.toLowerCase() == $scope.savedTab) ;
+        $scope.selectedIndex = $scope.stages.findIndex(x => x.title.toLowerCase() == $scope.savedTab);
         $scope.showPassWord = false;
         setTimeout(function () {
             $scope.currentTab = $scope.savedTab;
         }, 500);
-      
+
     }
     $scope.customerSubmit = function () {
 
@@ -3107,8 +3118,7 @@
 
             $mdDialog.hide($scope.selectedLang);
         }
-        $scope.cancel = function ()
-        {
+        $scope.cancel = function () {
             $mdDialog.hide();
         }
     }
@@ -3288,8 +3298,7 @@
                 targetEvent: event,
                 clickOutsideToClose: false
             }).then(function (selected) {
-                if (selected)
-                {
+                if (selected) {
                     if (!isemail) {
 
                         if (selected != undefined) {
@@ -3345,7 +3354,7 @@
                         });
                     }
                 }
-               
+
             }, function () {
 
             });
@@ -4346,7 +4355,7 @@
                     }
                     else
                         columns = 6;
-                    var timeWidth = (800 / columns)+30;
+                    var timeWidth = (800 / columns) + 30;
                     if (yTimeFieldName > canvas.height) {
                         if (isPageAdded) {
                             doc1.addPage();
@@ -4368,13 +4377,13 @@
                     var columno = 0;
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
-                    ctx.fillText($filter('translate')('Service Date'), 30+timeWidth * columno++, yTimeFieldName);
+                    ctx.fillText($filter('translate')('Service Date'), 30 + timeWidth * columno++, yTimeFieldName);
 
                     if ($scope.userType == 'C') {
 
                         ctx.fillStyle = "#000";
                         ctx.font = 'bold 13px sans-serif ';
-                        ctx.fillText('结算类型', 10+timeWidth * columno++, yTimeFieldName);
+                        ctx.fillText('结算类型', 10 + timeWidth * columno++, yTimeFieldName);
 
                         ctx.fillStyle = "#000";
                         ctx.font = 'bold 13px sans-serif ';
@@ -4434,8 +4443,7 @@
                         }
                         if ($scope.summary.timeArray[j - 1].Date)
                             ctx.fillText($scope.summary.timeArray[j - 1].Date, 30 + timeWidth * columno++, yTimeFieldValue);
-                        else
-                        {
+                        else {
                             columno++;
                         }
                         doc1.setFontSize(22)
@@ -4447,7 +4455,7 @@
                             ctx.font = '13px sans-serif ';
 
                             if ($scope.summary.timeArray[j - 1].Charge_Type)
-                                ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Charge_Type), 10+timeWidth * columno++, yTimeFieldValue);
+                                ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Charge_Type), 10 + timeWidth * columno++, yTimeFieldValue);
                             else
                                 columno++;
                             ctx.fillStyle = "#000";
@@ -4489,7 +4497,7 @@
                         ctx.font = '13px sans-serif ';
 
                         if ($scope.summary.timeArray[j - 1].Work_Type) {
-                            
+
                             ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Work_Type), timeWidth * columno++, yTimeFieldValue);
                         }
                         else
@@ -4520,8 +4528,7 @@
 
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
-                        if ($scope.summary.timeArray[j - 1].startTime != undefined && $scope.summary.timeArray[j - 1].startTime!="")
-                        {
+                        if ($scope.summary.timeArray[j - 1].startTime != undefined && $scope.summary.timeArray[j - 1].startTime != "") {
                             var time = moment($scope.summary.timeArray[j - 1].startTime).format("HH:mm");
                             ctx.fillText(moment($scope.summary.timeArray[j - 1].startTime).format("HH:mm"), timeWidth * columno++, yTimeFieldValue);
                         }
@@ -4886,7 +4893,7 @@
                 var splitTitle;
 
                 //年乗米動有済声是子実八協選電治権円玉先川題計民考満勇朝特銅援読合丹行案短毎容前慎博予暮制総男練変界定説
-    
+
                 if (!$scope.summary.taskObject.Customer_Name.match(/[\u3400-\u9FBF]/))
                     splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.taskObject.Customer_Name), 150);
                 else
@@ -5215,7 +5222,7 @@
                         yTimeFieldValue = yTimeField;
                     var columns;
                     if ($scope.userType == "C") {
-                        columns =10
+                        columns = 10
                     }
                     else
                         columns = 6;
@@ -5272,7 +5279,7 @@
                     doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldName, $filter('translate')('Start Time'))
                     doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldName, $filter('translate')('End Time'))
                     doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldName, $filter('translate')('Duration'))
-                   
+
                     doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldName, $filter('translate')('Item'))
                     //doc1.text(xTimeField+(timeWidth * (7)), yTimeFieldName, 'Description')
                     var indexTime = 0

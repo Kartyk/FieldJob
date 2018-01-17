@@ -393,7 +393,8 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                             Last_Updated: new Date(),
                             Last_Updated_Internal: new Date(),
                             Last_Updated_Delete: new Date(),
-                            encrypt: authorizationValue
+                            encrypt: authorizationValue,
+                            userName: $scope.userName
                         };
 
                         localService.insertUserList(userObject, function (response) {

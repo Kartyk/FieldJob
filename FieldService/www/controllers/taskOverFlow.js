@@ -89,10 +89,12 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                 } else {
 
                     //$scope.isBaidu = false;
+
                     $scope.isChina = false;
-                    if ($rootScope.first == undefined)
+
+                    if ($rootScope.first == undefined) {
                         $rootScope.first = true;
-                    else {
+                    } else {
                         googleMap();
                     }
                 }
@@ -100,10 +102,10 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
             } else {
 
                 $scope.isChina = false;
-                if ($rootScope.first == undefined)
+
+                if ($rootScope.first == undefined) {
                     $rootScope.first = true;
-                else
-                {
+                } else {
                     googleMap();
                 }
             }
@@ -163,7 +165,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
             var latitude = 32.065315;
 
             var contextMenu = new BMap.ContextMenu();
-           
+
             map.enableScrollWheelZoom();
 
             map.enableKeyboard();
@@ -187,7 +189,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                     longitude = point.lng;
 
-                    latitude = point.lat;                
+                    latitude = point.lat;
                 }
 
                 var pointer = new BMap.Point(longitude, latitude);
@@ -206,7 +208,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
         if (L != undefined) {
 
             L.mapquest.key = 'E1jRKUfN0osMSzrInmuAH2glsmHmneU3';
-           // L.mapquest.geocoding().geocode(customerAddress, createMap);
+            // L.mapquest.geocoding().geocode(customerAddress, createMap);
             geoCoder = new google.maps.Geocoder();
             var latLng = location.displayLatLng;
             geoCoder.geocode({
@@ -235,13 +237,13 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                     L.marker([latitude, longitude], { icon: customIcon }).addTo(map);
                 }
             });
-       //L.mapquest.geocoding().geocode(customerAddress, createMap);
+            //L.mapquest.geocoding().geocode(customerAddress, createMap);
 
-       //     function createMap(error, response) {
+            //     function createMap(error, response) {
 
-       //         var location = response.results[0].locations[8];
-               
-       //     }
+            //         var location = response.results[0].locations[8];
+
+            //     }
         }
     }
 
@@ -513,7 +515,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                         });
                     });
                 });
-               // valueService.showDialog("Accept");
+                // valueService.showDialog("Accept");
             }
         }
     };
