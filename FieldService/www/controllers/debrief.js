@@ -178,6 +178,7 @@
     $scope.itemDeputation = [];
     $scope.itemNormal = [];
     $scope.itemNightShift = [];
+    $scope.itemLabor = [];
 
     $scope.timeArray = [];
     $scope.timeArraySummary = [];
@@ -221,7 +222,19 @@
         $scope.chargeTypeArray = valueService.getChargeType();
         $scope.expenseTypeArray = valueService.getExpenseType();
         $scope.noteTypeArray = valueService.getNoteType();
-        $scope.workTypeArray = valueService.getWorkType();
+
+        angular.forEach(valueService.getWorkType(), function (item) {
+
+            if ($scope.userType == "C" && item.C == "1") {
+
+                $scope.workTypeArray.push(item);
+
+            } else if ($scope.userType == "NC" && item.NC == "1") {
+
+                $scope.workTypeArray.push(item);
+            }
+        });
+
         $scope.itemArray = valueService.getItem();
         $scope.currencyArray = valueService.getCurrency();
         $scope.UOMArray = valueService.getUOM();
@@ -295,7 +308,7 @@
                 $scope.itemDeputation.push(item);
                 $scope.itemNormal.push(item);
                 $scope.itemNightShift.push(item);
-
+                $scope.itemLabor.push(item);
             }
 
             //else if (item.Type == "Normal") {
@@ -579,6 +592,8 @@
                     item.timeDefault.item.values = $scope.itemNormal;
                 } else if (type.Value == "Nightshift") {
                     item.timeDefault.item.values = $scope.itemNightShift;
+                } else if (type.Value == "Labor") {
+                    item.timeDefault.item.values = $scope.itemLabor;
                 }
             }
         });
@@ -1984,6 +1999,10 @@
         } else if (workType.Value == "Night Shift" || workType.Value == "Nightshift" || workType.ID == 4) {
 
             timeObject.timeDefault.item.values = $scope.itemNightShift;
+
+        } else if (workType.Value == "Labor" || workType.Value == "Labor" || workType.ID == 5) {
+
+            timeObject.timeDefault.item.values = $scope.itemLabor;
         }
 
         timeObject.Work_Type_Id = timeObject.Work_Type.ID;

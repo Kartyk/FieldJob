@@ -2676,9 +2676,11 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE WorkType SET Value = ?, ResourceId = ? WHERE ID = ?";
+                var sqlUpdate = "UPDATE WorkType SET Value = ?, NC = ?, C = ?, ResourceId = ? WHERE ID = ?";
 
                 insertValues.push(responseList.Value);
+                insertValues.push(responseList.NC);
+                insertValues.push(responseList.C);
                 insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.ID);
 
@@ -2709,10 +2711,12 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO WorkType VALUES (?, ?, ?)";
+                var sqlInsert = "INSERT INTO WorkType VALUES (?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.ID);
                 insertValues.push(responseList.Value);
+                insertValues.push(responseList.NC);
+                insertValues.push(responseList.C);
                 insertValues.push(constantService.getResourceId());
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
