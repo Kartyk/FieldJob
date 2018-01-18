@@ -117,7 +117,7 @@
             
 
             <div style="height: 220px;width:100%" ng-if="!engineerObject.isCustomerSignChecked">
-                <signature-pad accept="accept" clear="clear" height="220" width="1050" dataurl="dataurl" ng-mouseup="updateTime('cust')" disabled="isSubmitted || $root.completedTask"></signature-pad>
+                <signature-pad accept="accept" clear="clear" height="220" width="1050" dataurl="dataurl" ng-touchend="updateTime('cust')" disabled="isSubmitted || $root.completedTask"></signature-pad>
                  <label ng-bind="custTime"></label>
             </div>
             <hr>

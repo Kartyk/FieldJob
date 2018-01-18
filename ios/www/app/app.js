@@ -6,7 +6,7 @@ var conf = {
       apiUrl: 'https://emersonmobiletestenv-a472144.mobileenv.us2.oraclecloud.com:443/mobile/custom/'
 };
 
-var app = angular.module('emerson', ['ngMaterial', 'ngLoadingSpinner', 'md.data.table', 'ui.router', 'ui.bootstrap', 'ui.calendar', 'pascalprecht.translate', 'ngFileUpload']);
+var app = angular.module('emerson', ['ngMaterial', 'ngLoadingSpinner', 'md.data.table', 'ui.router', 'ui.bootstrap', 'ui.calendar', 'pascalprecht.translate', 'ngFileUpload','ngTouch']);
 
 app.run(function ($rootScope, $location, $http, $state, localService, valueService, constantService) {
 
@@ -366,7 +366,7 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
     return {
         restrict: 'EA',
         replace: true,
-        template: '<div class="signature" style="width: 100%; max-width:{{width}}px; height: 100%; max-height:{{height}}px;"><canvas style="display: block; margin: 0 auto;" ng-mouseup="onMouseup()" ng-mousedown="notifyDrawing({ drawing: true })"></canvas></div>',
+        template: '<div class="signature" style="width: 100%; max-width:{{width}}px; height: 100%; max-height:{{height}}px;"><canvas style="display: block; margin: 0 auto;"  ng-touchend="onMouseup()"></canvas></div>',
         scope: {
             accept: '=?',
             clear: '=?',
