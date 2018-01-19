@@ -206,7 +206,13 @@
   "Item Namematerial": "Item Name",
   "End Time": "End Time",
   "Start Time": "Start Time",
-  "Service Date": "Service Date"
+  "Service Date": "Service Date",
+  "Unable to obtain signature": "Unable to obtain signature",
+  "ok": "OK",
+  "Select Language": "Select Language",
+  "Select the language to generate the Field Service Report": "Select the language to generate the Field Service Report",
+  "Emerson Signature": "Emerson Signature",
+  "Please complete Service Representative signature on the 'Emerson Signature' tab.": "Please complete Service Representative signature on the 'Emerson Signature' tab."
 
 
 }

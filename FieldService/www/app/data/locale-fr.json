@@ -241,5 +241,10 @@
   "Item Namematerial": "Nom de l'élément",
   "End Time": "End Time",
   "Start Time": "Start Time",
-  "Service Date": "Service Date"
+  "Service Date": "Service Date",
+  "ok": "OK",
+  "Select Language": "Select Language",
+  "Select the language to generate the Field Service Report": "Select the language to generate the Field Service Report",
+  "Emerson Signature": "Emerson Signature",
+  "Please complete Service Representative signature on the 'Emerson Signature' tab.": "Please complete Service Representative signature on the 'Emerson Signature' tab."
 }
