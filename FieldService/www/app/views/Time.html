@@ -18,7 +18,7 @@
                                     ng-model="item.Field_Job_Name"
                                     ng-options="x as x.JobName for x in item.timeDefault.fieldJobName.values track by x.TaskCode"
                                     ng-change="setFieldName(item)">
-                                <option value="" disabled selected>Select Clarity Task Name</option>
+                                <option value="" disabled selected translate="Select Clarity Task Name"></option>
                             </select>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                             <select class="form-control " ng-model="item.Charge_Type"
                                     ng-options="x as x.Value | translate for x in item.timeDefault.chargeType.values track by x.ID"
                                     ng-change="setChargeType(item)">
-                                <option value="" disabled selected>Select Charge Type</option>
+                                <option value="" disabled selected translate="Select Charge Type"></option>
                             </select>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                             <select class="form-control" ng-model="item.Work_Type" name="worktype" ng-required="true"
                                     ng-options="x as x.Value | translate for x in item.timeDefault.workType.values track by x.ID"
                                     ng-change="setWorkType(item.Work_Type, item)">
-                                <option value="" disabled selected>Select Work Type</option>
+                                <option value="" disabled selected translate="Select Work Type"></option>
                             </select>
                         </div>
                         <!--<span style="color:red" ng-show="timeform.worktype.$error.required">
@@ -57,7 +57,7 @@
                             <select class="form-control" ng-model="item.Charge_Method"
                                     ng-options="x as x.Value | translate for x in item.timeDefault.chargeMethod.values track by x.ID"
                                     ng-change="setChargeMethod(item)">
-                                <option value="" disabled selected>Select Charge Method</option>
+                                <option value="" disabled selected translate="Select Charge Method"></option>
                             </select>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                             <select class="form-control" ng-model="item.Item" name="itemtype" ng-required="true"
                                     ng-options="x as x.Value | translate for x in item.timeDefault.item.values track by x.ID"
                                     ng-change="setItem(item)">
-                                <option value="" disabled selected>Select Item</option>
+                                <option value="" disabled selected translate="Select Item"></option>
                             </select>
                         </div>
                         <!--<span style="color:red" ng-show="timeform.itemtype.$error.required">
@@ -113,7 +113,7 @@
                             <select class="form-control" ng-model="item.Time_Code"
                                     ng-options="x as x.Overtimeshiftcode | translate for x in item.timeDefault.timeCode.values track by x.OverTime_Shift_Code_ID"
                                     ng-change="setTimeCode(item)">
-                                <option value="" disabled selected>Select Time Code</option>
+                                <option value="" disabled selected translate="Select Time Code"></option>
                             </select>
                         </div>
                     </div>
@@ -124,7 +124,7 @@
                             <select class="form-control" ng-change="setShiftCode(item)"
                                     ng-options="x as x.ShiftCodeName | translate for x in item.timeDefault.shiftCode.values track by x.Shift_Code_ID"
                                     ng-model="item.Shift_Code">
-                                <option value="" disabled selected>Select Shift Code</option>
+                                <option value="" disabled selected translate="Select Shift Code"></option>
                             </select>
                         </div>
                     </div>

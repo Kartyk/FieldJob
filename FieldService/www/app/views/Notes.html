@@ -21,7 +21,7 @@
                         <select class="form-control select-debrief" ng-model="item.Note_Type"
                                 ng-options="x as x.Value | translate for x  in item.noteDefault.noteType.values track by x.ID"
                                 name='noteType' ng-required="true" ng-change="setNoteType(item)">
-                            <option value="" disabled selected>Select Note Type</option>
+                            <option value="" disabled selected translate="Select Note Type"></option>
                         </select>
                         <!--<span style="color:red" ng-show="notesForm.noteType.$error.required">
                                 Please select Notes Type

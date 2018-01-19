@@ -212,7 +212,19 @@
   "Select Language": "Select Language",
   "Select the language to generate the Field Service Report": "Select the language to generate the Field Service Report",
   "Emerson Signature": "Emerson Signature",
-  "Please complete Service Representative signature on the 'Emerson Signature' tab.": "Please complete Service Representative signature on the 'Emerson Signature' tab."
+  "Please complete Service Representative signature on the 'Emerson Signature' tab.": "Please complete Service Representative signature on the 'Emerson Signature' tab.",
+  "Select Clarity Task Name": "Select Clarity Task Name",
+  "Select Note Type": "Select Note Type",
+  "Select Charge Type": "Select Charge Type",
+  "Select Charge Method": "Select Charge Method",
+  "Select Work Type": "Select Work Type",
+  "Select Item": "Select Item",
+  "Select Time Code": "Select Time Code",
+  "Select Shift Code": "Select Shift Code",
+  "Select Expense Type": "Select Expense Type"
+
+
+
 
 
 }

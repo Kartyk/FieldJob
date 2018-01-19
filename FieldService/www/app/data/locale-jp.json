@@ -5,7 +5,7 @@
   "Job Description": "工作描述",
   "Start Date": "服务日期",
   "End Date": "结束日期",
-  "Duration (HH:MM)": "服务持续时间 (HH:MM)",
+  "Duration (HH:MM)": "服务持续时间(小时：分钟)",
   "Product Line": "产品系列",
   "System ID / Serial": "系统序列号/产品序列号",
   "Customer Site": "客户现场",
@@ -207,8 +207,8 @@
   "Please complete Service Representative signature on the 'Emerson Signature' tab.": "服务人员请在“艾默生签字栏”内签字",
   "Customer Comments": "客户意见及建议",
   "I acknowledge that services have been performed as indicated.": "我确认此项服务已经按照要求执行操作。",
-  "Clarity OT Code": "Clarity OT Code",
-  "Clarity Shift Code": "Clarity Shift Code",
+  "Clarity OT Code": "Clarity加班代码",
+  "Clarity Shift Code": "Clarity轮班代码",
   "Service Representative": "服务代表 Name",
   "emerson": "EMERSON",
   "Conatct Name": "Contact Name",
@@ -236,13 +236,27 @@
   "BACK": "返回",
   "Please add Action Taken note in Notes tab": "请在备注栏中填写现场服务内容",
   "Item Namematerial": "产品名称",
-  "End Time": "End Time",
-  "Start Time": "Start Time",
+  "End Time": "完成时间",
+  "Start Time": "开始时间",
   "Service Date": "Service Date",
   "Add Tools/Equipment": "添加工具/装备",
   "ok": "确认",
   "Select Language": "选择您的语言",
   "Select the language to generate the Field Service Report": "请选择生产报告时所需的语言",
-  "Emerson Signature": "艾默生代表签字"
+  "Emerson Signature": "艾默生代表签字",
+  "Select Clarity Task Name": "选择Clarity任务名称",
+  "Select Note Type": "选择备注类型",
+  "Select Charge Type": "选择结算类型",
+  "Select Charge Method": "选择结算方式",
+  "Select Work Type": "选择服务类型",
+  "Select Item": "选项",
+  "Select Time Code": "选择时间代码",
+  "Select Shift Code": "选择轮班代码",
+  "Select Expense Type": "选择费用类别",
+  "Duration": "服务持续时间"
+
+
+
+
 
 }

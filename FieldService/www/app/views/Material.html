@@ -102,7 +102,7 @@
                                         ng-model="item.Charge_Type"
                                         ng-options="x as x.Value | translate for x in item.materialDefault.chargeType.values track by x.ID"
                                         ng-change="setChargeTypeMaterial(item)">
-                                    <option value="" disabled selected>Select Charge Method</option>
+                                    <option value="" disabled selected translate="Select Charge Method"></option>
                                 </select>
                                 <!--</div>-->
                             </div>

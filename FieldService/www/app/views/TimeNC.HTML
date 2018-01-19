@@ -37,7 +37,7 @@
                                     name="worktype"
                                     ng-options="x as x.Value | translate for x in item.timeDefault.workType.values track by x.ID"
                                     ng-change="setWorkType(item.Work_Type, item)">
-                                <option value="" disabled selected>Select Work Type</option>
+                                <option value="" disabled selected translate="Select Work Type"></option>
                             </select>
                         </div>
                         <!--<span style="color:red" ng-show="timeform.worktype.$error.required">
@@ -53,7 +53,7 @@
                                     ng-required="true"
                                     ng-options="x as x.Value | translate for x in item.timeDefault.item.values track by x.ID"
                                     ng-change="setItem(item)">
-                                <option value="" disabled selected>Select Item</option>
+                                <option value="" disabled selected translate="Select Item"></option>
                             </select>
                         </div>
                         <!--<span style="color:red" ng-show="timeform.itemtype.$error.required">
