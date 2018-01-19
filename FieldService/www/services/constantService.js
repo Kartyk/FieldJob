@@ -98,7 +98,8 @@
 
         var endDate = new Date();
 
-        endDate.setDate(endDate.getDate() + 15);
+        //endDate.setDate(endDate.getDate() + 15);
+        endDate.setMonth(endDate.getMonth() + 3);
 
         var endDateISOFormat = endDate.toISOString();
 
