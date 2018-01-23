@@ -1142,6 +1142,7 @@
                 var installArray = [];
                 var noteArray = [];
                 var contactArray = [];
+                var attachmentArray = [];
 
                 angular.forEach(response.DeletedRecords, function (item) {
 
@@ -1164,6 +1165,10 @@
                             } else if (object.Record_Type == "ContactDisassociation") {
 
                                 contactArray.push(object);
+
+                            } else if (object.Record_Type == "JobAttachment" || object.Record_Type == "SRAttachment") {
+
+                                attachmentArray.push(object);
                             }
                         });
                     }
@@ -1240,6 +1245,20 @@
                     promises.push(deferNote.promise);
                 }
 
+                if (attachmentArray.length > 0) {
+
+                    var deferAttachment = $q.defer();
+
+                    localService.deleteAttachmentRecord(attachmentArray, function (result) {
+
+                        deferAttachment.resolve("success");
+
+                        console.log("DELETE ATTACHMENT");
+                    });
+
+                    promises.push(deferAttachment.promise);
+                }
+
                 console.log("TASK " + taskArray.length);
 
                 console.log("CONTACT " + contactArray.length);
@@ -1247,6 +1266,8 @@
                 console.log("INSTALL " + installArray.length);
 
                 console.log("NOTE " + noteArray.length);
+
+                console.log("ATTACHMENT " + attachmentArray.length);
 
                 console.log("LENGTH " + promises.length);
 
