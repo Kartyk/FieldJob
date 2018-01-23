@@ -137,6 +137,7 @@
         service.deleteInstallRecord = deleteInstallRecord;
         service.deleteContactRecord = deleteContactRecord;
         service.deleteNoteRecord = deleteNoteRecord;
+        service.deleteAttachmentRecord = deleteAttachmentRecord;
 
         service.updateTaskSubmitStatus = updateTaskSubmitStatus;
         service.updateTaskEmail = updateTaskEmail;
@@ -4676,7 +4677,7 @@
 
                                     sqlDelete = "DELETE FROM Contact WHERE Contact_ID = " + item.Record_ID;
                                 }
-                              
+
                                 transaction.executeSql(sqlDelete, [], function (tx, res) {
 
                                     deferred.resolve(res);
@@ -4807,6 +4808,93 @@
                     callback("ERROR NOTE");
                 }
             );
+        };
+
+        function deleteAttachmentRecord(response, callback) {
+
+            var responseList = response;
+
+            var promises = [];
+
+            angular.forEach(responseList, function (item) {
+
+                var deferred = $q.defer();
+
+                db.transaction(function (transaction) {
+
+                    var sqlSelect = "SELECT * FROM Attachment WHERE Attachment_Id = " + item.Record_ID;
+
+                    transaction.executeSql(sqlSelect, [], function (tx, res) {
+
+                        var rowLength = res.rows.length;
+
+                        // console.log("ATTACHMENT ROW LENGTH " + rowLength);
+
+                        if (rowLength > 0) {
+
+                            db.transaction(function (transaction) {
+
+                                var sqlDelete = "";
+
+                                if (item.SRID != undefined && item.SRID != null && item.SRID != "") {
+
+                                    sqlDelete = "DELETE FROM Attachment WHERE Attachment_Id = " + item.Record_ID + " AND SRID = " + item.SRID;
+
+                                } else {
+
+                                    sqlDelete = "DELETE FROM Attachment WHERE Attachment_Id = " + item.Record_ID;
+                                }
+
+                                transaction.executeSql(sqlDelete, [], function (tx, res) {
+
+                                    deferred.resolve(res);
+
+                                }, function (error) {
+
+                                    // console.log("ATTACHMENT DELETE TRANSACTION ERROR: " + error.message);
+
+                                    deferred.reject(error);
+                                });
+
+                            }, function (error) {
+
+                                // console.log("ATTACHMENT DELETE TRANSACTION ERROR: " + error.message);
+
+                                deferred.reject(error);
+                            });
+
+                        } else {
+
+                            deferred.resolve("success");
+                        }
+
+                    }, function (tx, error) {
+
+                        // console.log("ATTACHMENT SELECT ERROR: " + error.message);
+
+                        deferred.reject(error);
+                    });
+
+                }, function (error) {
+
+                    // console.log("ATTACHMENT SELECT TRANSACTION ERROR: " + error.message);
+
+                    deferred.reject(error);
+                });
+
+                // console.log("ATTACHMENT OBJECT =====> " + JSON.stringify(item));
+
+                promises.push(deferred.promise);
+            });
+
+            $q.all(promises).then(function (response) {
+
+                callback("SUCCESS ATTACHMENT");
+
+            }, function (error) {
+
+                callback("ERROR ATTACHMENT");
+            });
         };
 
         function getTaskList(callback) {
