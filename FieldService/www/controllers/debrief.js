@@ -2567,7 +2567,7 @@
 
                 });
 
-                var grandtimeObject = $scope.getTimenewObj("GRAND \n TOTAL", "", "", "", "", "", "", 0, "", "", "", "", true);
+                var grandtimeObject = $scope.getTimenewObj("GRAND TOTAL", "", "", "", "", "", "", 0, "", "", "", "", true);
 
                 var subtotalObject = $scope.getTimenewObj("", "SUB TOTAL", "", "", "", "", "", 0);
 
@@ -2762,6 +2762,7 @@
     $scope.cancelPassword = function () {
 
         $scope.showPassWord = false;
+        $scope.password = "";
         $scope.selectedIndex = $scope.stages.findIndex(x => x.title.toLowerCase() == $scope.savedTab);
         $scope.showPassWord = false;
         setTimeout(function () {

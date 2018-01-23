@@ -211,8 +211,8 @@
   "Clarity Shift Code": "Clarity轮班代码",
   "Service Representative": "现场服务代表",
   "emerson": "EMERSON",
-  "Conatct Name": "Contact Name",
-  "Distance": "Distance",
+  "Conatct Name": "联系人",
+  "Distance": "距离",
   "Item Name": "产品编码",
   "Before proceeding , Please save the record.": "若要继续，请先保存记录",
   "Deputation-Standard": "委派-标准费率",
@@ -230,8 +230,8 @@
   "cancel": "取消",
   "DISCLAIMER": "免责声明",
   "Service engineer": "服务代表姓名",
-  "Grand\nTotal": "总计",
-  "Sub Total": "小计",
+  "GRAND TOTAL": "总计",
+  "SUB TOTAL": "小计",
   "NEXT": "下一项",
   "BACK": "返回",
   "Please add Action Taken note in Notes tab": "请在备注栏中填写现场服务内容",
@@ -258,7 +258,7 @@
   "Sign in using your Emerson Log in Credentials": "请使用您艾默生账号进行登录",
   "Password": "密码",
   "Before proceeding,please save the record": "若要继续，请先保存记录"
-  
+
 
 
 
