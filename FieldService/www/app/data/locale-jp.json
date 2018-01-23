@@ -108,10 +108,10 @@
   "Labor": "人工",
   "Travel- Standard": "路途-标准",
   "Travel- Overtime": "路途-1.5倍费率",
-  "Travel- Double Time": "路途-2倍费率",
+  "Travel- Double time": "路途-2倍费率",
   "Labor- Standard": "人工-标准",
   "Labor- Overtime": "人工-1.5倍费率",
-  "Labor- Double Time": "人工-2倍费率",
+  "Labor- Double time": "人工-2倍费率",
   "OT1": "OT1",
   "OT2": "OT2",
   "OT3": "OT3",
@@ -230,7 +230,7 @@
   "cancel": "取消",
   "DISCLAIMER": "免责声明",
   "Service engineer": "服务代表姓名",
-  "Grand Total": "总计",
+  "Grand\nTotal": "总计",
   "Sub Total": "小计",
   "NEXT": "下一项",
   "BACK": "返回",
@@ -256,7 +256,11 @@
   "Duration": "服务持续时间",
   "Contact Preference": "优先联系方式",
   "Sign in using your Emerson Log in Credentials": "请使用您艾默生账号进行登录",
-  "Password": "密码"
+  "Password": "密码",
+  "Before proceeding,please save the record": "若要继续，请先保存记录"
+  
+
+
 
 
 

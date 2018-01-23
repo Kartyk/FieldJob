@@ -110,10 +110,10 @@
   "Labor": "Labor",
   "Travel- Standard": "Travel- Standard",
   "Travel- Overtime": "Travel- Overtime",
-  "Travel- DoubleTime": "Travel- Double Time",
+  "Travel- Double time": "Travel- Double Time",
   "Labor- Standard": "Labor- Standard",
   "Labor- Overtime": "Labor- Overtime",
-  "Labor- Double Time": "Labor- Double Time",
+  "Labor- Double time": "Labor- Double Time",
   "OT1": "OT1",
   "OT2": "OT2",
   "OT3": "OT3",
@@ -224,7 +224,11 @@
   "Select Expense Type": "Select Expense Type",
   "Contact Preference": "Contact Preference",
   "Sign in using your Emerson Log in Credentials": "Sign in using your Emerson Log in Credentials",
-  "Password": "Password"
+  "Password": "Password",
+  "Before proceeding,please save the record": "Before proceeding,please save the record",
+  "Select": "Select",
+  "Grand Total": "Grand Total"
+
 
 
 

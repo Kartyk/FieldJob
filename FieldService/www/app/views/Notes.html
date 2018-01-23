@@ -90,7 +90,7 @@
             <button ng-if="isEditNote==0" class="add-button" ng-click="addObject('Notes',true,item)"
                     translate="Add" ng-disabled="$root.completedTask || !notesForm.$valid "></button>
             <button ng-if="isEditNote==1" class="add-button" ng-click="saveObject('Notes',true,item)"
-                    translate="Save"></button>
+                    translate="save"></button>
             <!--<md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Notes')" translate="delete"></md-button>-->
             <button class="copy-button" ng-click="copyObject(item,'Notes')" translate="copy" ng-disabled="$root.completedTask || !notesForm.$valid "></button>
             <span flex></span>

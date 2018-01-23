@@ -40,10 +40,10 @@
   "Labor": "Main d'œuvre",
   "Travel- Standard": "Voyage - Standard",
   "Travel- Overtime": "Voyage - Heures supplémentaires",
-  "Travel- Double Time": "Voyage - Temps double",
+  "Travel- Double time": "Voyage - Temps double",
   "Labor- Standard": "Main d'œuvre - Standard",
   "Labor- Overtime": "Main d'œuvre - Heures supplémentaires",
-  "Labor- Double Time": "Main d'œuvre - Temps double",
+  "Labor- Double time": "Main d'œuvre - Temps double",
   "OT1": "OT1",
   "OT2": "OT2",
   "OT3": "OT3",
@@ -246,7 +246,6 @@
   "Select Language": "Select Language",
   "Select the language to generate the Field Service Report": "Select the language to generate the Field Service Report",
   "Emerson Signature": "Emerson Signature",
-  "Please complete Service Representative signature on the 'Emerson Signature' tab.": "Please complete Service Representative signature on the 'Emerson Signature' tab.",
   "Select Clarity Task Name": "Select Clarity Task Name",
   "Select Note Type": "Select Note Type",
   "Select Charge Type": "Select Charge Type",
@@ -259,6 +258,8 @@
   "Contact Preference": "Contact Preference",
   "Sign in using your Emerson Log in Credentials": "Sign in using your Emerson Log in Credentials",
   "Password": "Password"
+
+
 
 
 }
