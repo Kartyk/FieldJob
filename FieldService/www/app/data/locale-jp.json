@@ -203,13 +203,13 @@
   "References": "参考",
   "Quantity": "数量",
   "Add List": "添加列表",
-  "Field Service Summary Report": "现场服务总结报告",
+  "Field Service Summary Report": "现场服务报告",
   "Please complete Service Representative signature on the 'Emerson Signature' tab.": "服务人员请在“艾默生签字栏”内签字",
   "Customer Comments": "客户意见及建议",
   "I acknowledge that services have been performed as indicated.": "我确认此项服务已经按照要求执行操作。",
   "Clarity OT Code": "Clarity加班代码",
   "Clarity Shift Code": "Clarity轮班代码",
-  "Service Representative": "服务代表 Name",
+  "Service Representative": "现场服务代表",
   "emerson": "EMERSON",
   "Conatct Name": "Contact Name",
   "Distance": "Distance",
@@ -253,7 +253,10 @@
   "Select Time Code": "选择时间代码",
   "Select Shift Code": "选择轮班代码",
   "Select Expense Type": "选择费用类别",
-  "Duration": "服务持续时间"
+  "Duration": "服务持续时间",
+  "Contact Preference": "优先联系方式",
+  "Sign in using your Emerson Log in Credentials": "请使用您艾默生账号进行登录",
+  "Password": "密码"
 
 
 
