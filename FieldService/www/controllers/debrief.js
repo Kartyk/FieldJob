@@ -2069,6 +2069,14 @@
     };
 
     $scope.setExpenseItem = function (expenseObject) {
+
+        if (expenseObject.Expense_Type.Value.toLowerCase() != "mileage") {
+
+            expenseObject.UOM_Id = "";
+            expenseObject.Distance = ""
+            expenseObject.UOM = "";
+        }
+
         expenseObject.Expense_Type_Id = expenseObject.Expense_Type.ID;
     };
 
@@ -2770,6 +2778,7 @@
         }, 500);
 
     }
+
     $scope.customerSubmit = function () {
 
         var promise;
@@ -2836,12 +2845,15 @@
                         if (timeArray[i].Time_Code != undefined) {
                             timecode = timeArray[i].Time_Code.Overtimeshiftcode;
                         }
+
                         var finalDate = new Date(timeArray[i].Date);
                         finalDate.setHours(timeArray[i].startTime.getHours());
                         finalDate.setMinutes(timeArray[i].startTime.getMinutes());
+
                         var finalendDate = new Date(timeArray[i].Date);
                         finalendDate.setHours(timeArray[i].endTime.getHours());
                         finalendDate.setMinutes(timeArray[i].endTime.getMinutes());
+
                         var timeData = {
                             "task_id": timeArray[i].Task_Number,
                             "shift_code": timeArray[i].Shift_Code_Id,
@@ -2937,8 +2949,8 @@
                     var statusData = {
                         "TaskId": $scope.taskId,
                         "Activity_Id": $scope.taskObject.Activity_Id,
-                        "XA_TASK_STATUS": "3",
-                        //"XA_TASK_STATUS": "2",
+                        //"XA_TASK_STATUS": "3",
+                        "XA_TASK_STATUS": "2",
                         "taskstatus": "Completed-Awaiting Review",
                         "email": constantService.getCCEmailID(),
                         "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
