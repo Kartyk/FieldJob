@@ -3154,10 +3154,11 @@
 
                     localService.updateTaskSubmitStatus(taskObject, function (result) {
 
-                        cloudService.getTaskInternalList("0", function (response) {
+                        $rootScope.dbCall = false;
+                        //cloudService.getTaskInternalList("0", function (response) {
 
-                            $rootScope.dbCall = false;
-                        });
+                        //    $rootScope.dbCall = false;
+                        //});
                     });
                 });
             });
