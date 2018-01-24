@@ -4959,11 +4959,11 @@
 
         setTimeout(function () {
             if (valueService.getLanguage() != 'en') {
-                changeLanguage("en", function () { englishPdf(isChineese, resolve)})
+                changeLanguage("en", function () { englishPdf(isChineese, resolve, defer)})
             }
             else
             {
-                englishPdf(isChineese, resolve);
+                englishPdf(isChineese, resolve, defer);
             }
             
 
@@ -4971,7 +4971,7 @@
 
         return defer.promise;
     }
-    function englishPdf(isChineese, resolve)
+    function englishPdf(isChineese, resolve, defer)
     {
         var doc1 = jsPDF('p', 'mm', [700, 850], true);
 
