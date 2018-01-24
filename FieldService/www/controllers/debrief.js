@@ -3900,7 +3900,24 @@
             } else {
 
                 promiseArray.push($scope.generateEnglishPDF(false));
-               
+                Promise.all(promiseArray).then(function (response) {
+                    var englishDocRsponse = response[0];
+                    var filePath = cordova.file.dataDirectory;
+                    var fsrPromiseArray = [];
+                    fsrPromiseArray.push(new Promise(function (resolve) {
+
+                        $rootScope.reposrtpath = filePath + "Report_" + $scope.summary.taskObject.Task_Number + "_en.pdf";
+
+                        console.log("FILE PATH  " + filePath);
+
+                        $scope.value = englishDocRsponse.output("datauri");
+
+                        valueService.saveBase64File(filePath, "Report_" + $scope.summary.taskObject.Task_Number + "_en.pdf", $scope.value, "application/pdf", resolve());
+                    }));
+                    Promise.all(fsrPromiseArray).then(function () {
+                        defer.resolve();
+                    });
+                })
             }
 
          
