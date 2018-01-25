@@ -4561,7 +4561,7 @@
 
                     }
                     if ($scope.summary.timeArray[j - 1].Date)
-                        ctx.fillText($scope.summary.timeArray[j - 1].Date, 30 + timeWidth * columno++, yTimeFieldValue);
+                        ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Date), 30 + timeWidth * columno++, yTimeFieldValue);
                     else {
                         columno++;
                     }
