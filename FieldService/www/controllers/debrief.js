@@ -2801,7 +2801,7 @@
             $scope.languageUsed="en"
 
         promise = generatePDF();
-
+       
         submit(promise);
     };
 
@@ -4767,10 +4767,11 @@
                 ctx.fillText('具体描述', 750, yMaterialFieldName);
 
                 yMaterialFieldValue = yMaterialFieldName + 15;
-
+                index = 0;
                 while (l < $scope.summary.materialArray.length) {
                     var m = 0, n = 0, o = 0;
                     ++l;
+                    index++;
                     var yMaterialSerialNo = yMaterialSerialIn = yMaterialSerialOut = yItemVal = 0;
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
@@ -4786,6 +4787,12 @@
                         yMaterialFieldValue = 15;
                         yMaterialFieldName = 0
                         yMaterialField = -20;
+                        index = 0;
+                        //rectTimeHeight = 29 * ($scope.summary.timeArray.length - j);
+                        //if (l == $scope.summary.materialArray.length)
+                        //    rectTimeHeight = 29;
+                        //ctx.strokeRect(20, -1, 1090, rectTimeHeight);
+                        isPageAdded = true;
                         //yTimeFieldName = 0;
                         //yTimeField = 0;
                         //index = 0;
@@ -4811,6 +4818,27 @@
                             // yMaterialSerialNo = yMaterialFieldValue + 15 * m;
                             splitserialno = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialNumber[m++], 50)
                             angular.forEach(splitserialno, function (key) {
+                                if (yMaterialSerialNo + 15 > canvas.height) {
+                                    ctx.strokeRect(20, yMaterialField + 10, 1090, yMaterialFieldValue - yMaterialField);
+                                    if (isPageAdded)
+                                        doc1.addPage();
+                                    var count = doc1.internal.pages.length - 1
+                                    var imgData = canvas.toDataURL("image/png", 1.0);
+                                    new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve(); });
+                                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                                    yMaterialFieldValue = 15;
+                                    yMaterialSerialNo = 15;
+                                    yMaterialFieldName = 0
+                                    yMaterialField = -20;
+                                    isPageAdded = true;
+                                    //yTimeFieldName = 0;
+                                    //yTimeField = 0;
+                                    //index = 0;
+                                    //rectSignHeight = 29 * ($scope.summary.timeArray.length - j);
+
+
+                                }
                                 ctx.fillText(key, 280, yMaterialSerialNo);
                                 yMaterialSerialNo += 15;
                             })
@@ -4828,6 +4856,27 @@
                             // yMaterialSerialIn = yMaterialFieldValue + 15 * n;
                             splitserialin = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialIn[n++], 50)
                             angular.forEach(splitserialin, function (key) {
+                                if (yMaterialSerialIn + 15 > canvas.height) {
+                                    ctx.strokeRect(20, yMaterialField + 10, 1090, yMaterialFieldValue - yMaterialField);
+                                    if (isPageAdded)
+                                        doc1.addPage();
+                                    var count = doc1.internal.pages.length - 1
+                                    var imgData = canvas.toDataURL("image/png", 1.0);
+                                    new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve(); });
+                                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                                    yMaterialFieldValue = 15;
+                                    yMaterialSerialIn = 15;
+                                    yMaterialFieldName = 0
+                                    yMaterialField = -20;
+                                    isPageAdded = true;
+                                    //yTimeFieldName = 0;
+                                    //yTimeField = 0;
+                                    //index = 0;
+                                    //rectSignHeight = 29 * ($scope.summary.timeArray.length - j);
+
+
+                                }
                                 ctx.fillText(key, 350, yMaterialSerialIn);
                                 yMaterialSerialIn += 15;
                             })
@@ -4844,6 +4893,27 @@
                             //yMaterialSerialOut = yMaterialFieldValue + 15 * o;
                             splitserialout = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialOut[o++], 50)
                             angular.forEach(splitserialout, function (key) {
+                                if (yMaterialSerialOut + 15 > canvas.height) {
+                                    ctx.strokeRect(20, yMaterialField + 10, 1090, yMaterialFieldValue - yMaterialField);
+                                    if (isPageAdded)
+                                        doc1.addPage();
+                                    var count = doc1.internal.pages.length - 1
+                                    var imgData = canvas.toDataURL("image/png", 1.0);
+                                    new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve(); });
+                                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                                    yMaterialFieldValue = 15;
+                                    yMaterialSerialOut = 15;
+                                    yMaterialFieldName = 0
+                                    yMaterialField = -20;
+                                    isPageAdded = true;
+                                    //yTimeFieldName = 0;
+                                    //yTimeField = 0;
+                                    //index = 0;
+                                    //rectSignHeight = 29 * ($scope.summary.timeArray.length - j);
+
+
+                                }
                                 ctx.fillText(key, 500, yMaterialSerialOut);
                                 yMaterialSerialOut += 15;
                             })
@@ -4857,6 +4927,27 @@
                         var itemname = doc1.splitTextToSize($filter('translate')($scope.summary.materialArray[l - 1].ItemName), 50)
                         yItemVal = yMaterialFieldValue;
                         angular.forEach(itemname, function (key) {
+                            if (yItemVal + 15 > canvas.height) {
+                                ctx.strokeRect(20, yMaterialField + 10, 1090, yMaterialFieldValue - yMaterialField);
+                                if (isPageAdded)
+                                    doc1.addPage();
+                                var count = doc1.internal.pages.length - 1
+                                var imgData = canvas.toDataURL("image/png", 1.0);
+                                new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve(); });
+                                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                                yMaterialFieldValue = 15;
+                                yItemVal = 15;
+                                yMaterialFieldName = 0
+                                yMaterialField = -20;
+                                isPageAdded = true;
+                                //yTimeFieldName = 0;
+                                //yTimeField = 0;
+                                //index = 0;
+                                //rectSignHeight = 29 * ($scope.summary.timeArray.length - j);
+
+
+                            }
                             ctx.fillText(key, 630, yItemVal);
                             yItemVal += 15;
                         })
@@ -4867,6 +4958,26 @@
                     if ($scope.summary.materialArray[l - 1].Description) {
                         splitTitle = doc1.splitTextToSize($scope.summary.materialArray[l - 1].Description, 250);
                         angular.forEach(splitTitle, function (key) {
+                            if (yMaterialFieldValue + 15 > canvas.height) {
+                                ctx.strokeRect(20, yMaterialField + 10, 1090, yMaterialFieldValue - yMaterialField);
+                                if (isPageAdded)
+                                    doc1.addPage();
+                                var count = doc1.internal.pages.length - 1
+                                var imgData = canvas.toDataURL("image/png", 1.0);
+                                new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve(); });
+                                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                                yMaterialFieldValue = 15;
+                                yMaterialFieldName = 0
+                                yMaterialField = -20;
+                                isPageAdded = true;
+                                //yTimeFieldName = 0;
+                                //yTimeField = 0;
+                                //index = 0;
+                                //rectSignHeight = 29 * ($scope.summary.timeArray.length - j);
+
+
+                            }
                             ctx.fillText(key, 750, yMaterialFieldValue);
                             yMaterialFieldValue = yMaterialFieldValue + 15;
                         });
@@ -5685,41 +5796,96 @@
                     var splitserialin = splitserialout = splitTitle = splitItemname = splitserialno = "";
                     if ($scope.summary.materialArray[l - 1].serialNumber) {
                         splitserialno = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialNumber, 290 - 202)
-                        doc1.text(202, yMaterialFieldValue, splitserialno)
+                        var serialNoYvalue = yMaterialFieldValue
+                        angular.forEach(splitserialno, function (key) {
+                            var isAdded = checkPdfHeight(doc1, serialNoYvalue, pageHeight, yMaterialField, rectMaterialWidth);
+                            if (isAdded) {
+                                yMaterialFieldValue = 10;
+                                yMaterialField = -10;
+                                serialNoYvalue = 10;
+                            }
+                            doc1.text(202, serialNoYvalue, key)
+                            serialNoYvalue += 10;
+                        });
+                       
                     }
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.materialArray[l - 1].serialIn) {
                         splitserialin = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialIn, 388 - 298)
-                        doc1.text(298, yMaterialFieldValue, splitserialin)
-
+                        var serialinYvalue = yMaterialFieldValue;
+                        angular.forEach(splitserialin, function (key) {
+                            var isAdded = checkPdfHeight(doc1, serialinYvalue, pageHeight, yMaterialField, rectMaterialWidth);
+                            if (isAdded) {
+                                yMaterialFieldValue = 10;
+                                yMaterialField = -10;
+                                serialinYvalue = 10;
+                            }
+                            doc1.text(298, serialinYvalue, key)
+                            serialinYvalue += 10;
+                        });
+                       
                     }
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.materialArray[l - 1].serialOut) {
                         splitserialout = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialOut, 484 - 394)
-                        doc1.text(394, yMaterialFieldValue, splitserialout)
-
+                        var srialoutYvalue = yMaterialFieldValue;
+                        angular.forEach(splitserialout, function (key) {
+                            var isAdded = checkPdfHeight(doc1, srialoutYvalue, pageHeight, yMaterialField, rectMaterialWidth);
+                            if (isAdded) {
+                                yMaterialFieldValue = 10;
+                                yMaterialField = -10;
+                                srialoutYvalue = 10;
+                            }
+                            doc1.text(394, srialoutYvalue, key)
+                            srialoutYvalue += 10;
+                        });
+                       
                     }
                     // doc1.text(320, yMaterialFieldValue, $scope.summary.materialArray[l-1].Charge_Type)
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.materialArray[l - 1].ItemName) {
                         splitItemname = doc1.splitTextToSize($scope.summary.materialArray[l - 1].ItemName, 590 - 490)
-                        doc1.text(490, yMaterialFieldValue, splitItemname)
+                        var itemYvalue = yMaterialFieldValue;
+                        angular.forEach(splitItemname, function (key) {
+                            var isAdded = checkPdfHeight(doc1, itemYvalue, pageHeight, yMaterialField, rectMaterialWidth);
+                            if (isAdded) {
+                                yMaterialFieldValue = 10;
+                                yMaterialField = -10;
+                                itemYvalue = 10;
+                            }
+                            doc1.text(490, itemYvalue, key)
+                            itemYvalue += 10;
+                        });
+                      
                     }
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.materialArray[l - 1].Description) {
                         splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.materialArray[l - 1].Description), rectMaterialWidth - 595);
-                        doc1.text(595, yMaterialFieldValue, splitTitle)
+                        var decYvalue = yMaterialFieldValue
+                        angular.forEach(splitTitle, function (key) {
+                            var isAdded = checkPdfHeight(doc1, decYvalue, pageHeight, yMaterialField, rectMaterialWidth);
+                            if (isAdded) {
+                                yMaterialFieldValue = 10;
+                                yMaterialField = -10;
+                                decYvalue = 10;
+                            }
+                            doc1.text(595, decYvalue, key)
+                            decYvalue += 10;
+                        });
+                       
+                        
 
                     }
                     length = Math.max(splitTitle.length, splitserialin.length, splitserialout.length, splitItemname.length, splitserialno.length)
                     yMaterialFieldValue = yMaterialFieldValue + 8 * length;
+
                     //if ((splitTitle != undefined && splitTitle.length > 1) || (splitserialin != undefined && splitserialin.length > 1) || (splitserialout != undefined && splitserialout.length > 1) || (splitItemname != undefined && splitItemname.length > 1)) {
                     //    length = 0;
                     //    if (splitTitle != undefined && splitTitle.length > 1)
