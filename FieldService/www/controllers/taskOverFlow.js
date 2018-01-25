@@ -265,7 +265,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                 geoCoder = new google.maps.Geocoder();
 
                 geoCoder.geocode({
-                    'address': $scope.taskDetails.Street_Address + "," + $scope.taskDetails.City + "," + $scope.taskDetails.Zip_Code
+                    'address':  $scope.taskDetails.City + "," + $scope.taskDetails.Zip_Code
                 }, function (results, status) {
 
                     if (status == google.maps.GeocoderStatus.OK) {
