@@ -3018,12 +3018,28 @@
                     };
 
                     localService.updateTaskSubmitStatus(taskObject, function (result) {
-
+                      
                         localService.getTaskList(function (response) {
 
-                            constantService.setTaskList(response);
+                            localService.getInternalList(function (internalresponse) {
 
-                            $rootScope.dbCall = false;
+                                angular.forEach(internalresponse, function (item) {
+
+                                    var internalOFSCJSONObject = {};
+
+                                    internalOFSCJSONObject.Start_Date = item.Start_time;
+                                    internalOFSCJSONObject.End_Date = item.End_time;
+                                    internalOFSCJSONObject.Type = "INTERNAL";
+                                    internalOFSCJSONObject.Customer_Name = item.Activity_type;
+                                    internalOFSCJSONObject.Task_Number = item.Activity_Id;
+
+                                    response.push(internalOFSCJSONObject);
+                                });
+
+                                constantService.setTaskList(response);
+
+                                $rootScope.dbCall = false;
+                            });
                         });
                     });
                 }
@@ -3155,6 +3171,7 @@
                     localService.updateTaskSubmitStatus(taskObject, function (result) {
 
                         $rootScope.dbCall = false;
+
                         localService.getTaskList(function (response) {
 
                             localService.getInternalList(function (internalresponse) {
@@ -3171,10 +3188,11 @@
 
                                     response.push(internalOFSCJSONObject);
                                 });
-                                constantService.setTaskList(response);
-                                //$state.go($state.current, {}, { reload: true });
+
+                                constantService.setTaskList(response);                             
                             });
                         });
+
                         //cloudService.getTaskInternalList("0", function (response) {
 
                         //    $rootScope.dbCall = false;
@@ -3196,10 +3214,11 @@
             console.log($scope.selectedLang);
 
             $mdDialog.hide($scope.selectedLang);
-        }
+        };
+
         $scope.cancel = function () {
             $mdDialog.hide();
-        }
+        };
     }
 
     $scope.SaveSign = function () {
