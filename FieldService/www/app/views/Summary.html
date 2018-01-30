@@ -225,7 +225,7 @@
                                 </tr>
                             </thead>
                             <tbody >
-                                <tr class="summary-tr" ng-repeat="time in  summary.timeArray">
+                                <tr class="summary-tr" ng-repeat="time in  summary.timeArray ">
                                     <td class="noborder bg-white padding-right"><span>{{time.Date|translate }}</span></td>
                                     <td class="noborder bg-white padding-right" ng-if="userType=='C'">{{time.Charge_Type| translate}}</td>
                                     <td class="noborder bg-white padding-right" ng-if="userType=='C'">{{time.Charge_Method| translate}}</td>
@@ -243,6 +243,7 @@
                                     </tr>
                                 </tbody>
                             </table>
+                         
 
 </div>
 

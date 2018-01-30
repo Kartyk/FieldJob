@@ -2688,7 +2688,7 @@
 
                         if (newTimecode) {
 
-                            var timeObject = $scope.getTimenewObj(key.Work_Type.Value, moment(key.Date).format('DD-MMM-YYYY'), key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration, key.Time_Code.Overtimeshiftcode, key.Shift_Code.ShiftCodeName, key.startTime, key.endTime);
+                            var timeObject = $scope.getTimenewObj(key.Work_Type.Value, key.Date, key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration, key.Time_Code.Overtimeshiftcode, key.Shift_Code.ShiftCodeName, key.startTime, key.endTime);
 
                             timeObject.Duration = $scope.calculateDuration(timeObject, key);
                             timeObject.Duration = formatDuration(timeObject.Duration);
@@ -2697,7 +2697,7 @@
 
                     } else {
 
-                        var timeObject = $scope.getTimenewObj(key.Work_Type.Value, moment(key.Date).format('DD-MMM-YYYY'), key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration, key.Time_Code.Overtimeshiftcode, key.Shift_Code.ShiftCodeName, key.startTime, key.endTime);
+                        var timeObject = $scope.getTimenewObj(key.Work_Type.Value, key.Date, key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration, key.Time_Code.Overtimeshiftcode, key.Shift_Code.ShiftCodeName, key.startTime, key.endTime);
 
                         timeObject.Duration = $scope.calculateDuration(timeObject, key);
                         timeObject.Duration = formatDuration(timeObject.Duration)
@@ -2727,12 +2727,14 @@
                 });
 
                 grandtimeObject.timecode = grandTotalTimeArray;
-
+              //  $scope.summary.subTotalArray = subTotalArray;
                 angular.forEach(subTotalArray, function (obj, value) {
                     $scope.summary.timeArray.push(obj);
                 });
 
                 $scope.summary.timeArray.push(grandtimeObject)
+                // $scope.summary.subTotalArray.push(grandtimeObject);
+                $scope.summary.timeArray = $filter("dateOrderByFilter")($scope.summary.timeArray,'startDateTime')
             }
         }
 
@@ -2801,7 +2803,7 @@
             $scope.languageUsed="en"
 
         promise = generatePDF();
-       
+       // $rootScope.dbCall = false;
         submit(promise);
     };
 
@@ -3310,14 +3312,25 @@
     $scope.getTimenewObj = function (worktype, date, chargetype, chargemethod, item, desc, commets, duration, timecode, shiftcode, startTime, endTime, isGrandtotal = false) {
 
         var weight;
-
-        if (isGrandtotal)
+       if (isGrandtotal)
             weight = "bold";
         else
             weight = "normal";
-
+        var startDateTime = new Date(date);
+        var time = new Date(startTime);
+        startDateTime.setHours(time.getHours());
+        startDateTime.setMinutes(time.getMinutes());
+        var serviceDate=""
+        if (date != "" && date != "SUB TOTAL")
+        {
+            serviceDate = moment(date).format('DD-MMM-YYYY');
+        }
+        if (date == "SUB TOTAL")
+        {
+            serviceDate = date;
+        }
         var timeObj = {
-            "Date": date,
+            "Date": serviceDate,
             "Charge_Type": chargetype,
             "Charge_Method": chargemethod,
             "Work_Type": worktype,
@@ -3331,7 +3344,8 @@
             "Shift_Code": shiftcode,
             "grandTotal": weight,
             "startTime": startTime,
-            "endTime": endTime
+            "endTime": endTime,
+            "startDateTime": startDateTime
         };
 
         return timeObj;
@@ -4482,7 +4496,7 @@
 
                 var j = 0, xTimeField = 25, yTimeField = yAttachField + rectAttachHeight + 25, rectTimeWidth = 660,
                     rectTimeHeight = 29 * $scope.summary.timeArray.length, yTimeFieldName = yTimeField + 20,
-                    yTimeFieldValue = yTimeField;
+                    yTimeFieldValue = yTimeFieldName+20;
                 if (rectTimeHeight == 0)
                 {
                     rectTimeHeight = 30;
@@ -4550,17 +4564,30 @@
 
 
                 ctx.fillStyle = "#000";
-                ctx.strokeRect(20, yTimeFieldName - 20 + 5, 1090, rectTimeHeight);
+              
                 var index = 0;
+                var yShiftValue = 0;
                 while (j < $scope.summary.timeArray.length) {
                     var columno = 0;
                     ++j;
-                    yTimeFieldName = yTimeField + 20 * ++index;
-                    yTimeFieldValue = yTimeFieldName + 15;
+                    yShiftValue = 0;
+                    //if (yShiftValue > 0)
+                    //{
+                    //    yTimeFieldValue = yShiftValue + 1 * ++index ;
+                    //    //yTimeField = yShiftValue-20;
+                    //    yShiftValue = 0;
+                    //}
+                    //else
+                    //{
+                    //    yTimeFieldValue = yTimeFieldValue + 20 * ++index;
+                    //}
+                    yTimeFieldValue = yTimeFieldValue + 5 * ++index;
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
-                    if (yTimeFieldValue > canvas.height) {
+                    if (yTimeFieldValue + 20 > canvas.height) {
+                        rectTimeHeight = yTimeFieldValue - (yTimeFieldName - 20 + 5);
+                        ctx.strokeRect(20, yTimeFieldName - 20 + 5, 1090, rectTimeHeight);
                         if (isPageAdded) {
                             doc1.addPage();
                         }
@@ -4572,10 +4599,7 @@
                         yTimeFieldName = 0;
                         yTimeField = 0;
                         index = 0;
-                        rectTimeHeight = 29 * ($scope.summary.timeArray.length - j);
-                        if (j == $scope.summary.timeArray.length)
-                            rectTimeHeight = 29;
-                        ctx.strokeRect(20, -1, 1090, rectTimeHeight);
+                      
                         isPageAdded = true;
 
                     }
@@ -4604,32 +4628,7 @@
                         else
                             columno++;
                     }
-                    //else {
-                    //    ctx.fillStyle = "#000";
-                    //    ctx.font = '13px sans-serif ';
-                    //    if ($scope.summary.timeArray[j - 1].Date != "SUB TOTAL" && $scope.summary.timeArray[j - 1].grandTotal != "bold") {
-                    //        if ($scope.taskObject.Charge_Type != undefined && $scope.taskObject.Charge_Type != "") {
-                    //            ctx.fillText($filter('translate')($scope.taskObject.Charge_Type), 160, yTimeFieldValue);
-                    //        }
-                    //        ctx.fillStyle = "#000";
-                    //        ctx.font = '13px sans-serif ';
-
-                    //        if ($scope.summary.timeArray[j - 1].Work_Type != undefined && $scope.summary.timeArray[j - 1].Work_Type != "") {
-                    //            if ($scope.summary.timeArray[j - 1].Work_Type == "Travel") {
-                    //                if ($scope.taskObject.Travel_Method != undefined && $scope.taskObject.Travel_Method != "") {
-                    //                    ctx.fillText($filter('translate')($scope.taskObject.Travel_Method), 310, yTimeFieldValue);
-                    //                }
-                    //            }
-                    //            else {
-                    //                if ($scope.taskObject.Labor_Method != undefined && $scope.taskObject.Labor_Method != "") {
-                    //                    ctx.fillText($filter('translate')($scope.taskObject.Labor_Method), 310, yTimeFieldValue);
-                    //                }
-                    //            }
-                    //        }
-                    //    }
-
-
-                    //}
+                    
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
@@ -4656,8 +4655,41 @@
                         }
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
+                        
                         if ($scope.summary.timeArray[j - 1].Shift_Code != undefined)
-                            ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Shift_Code), timeWidth * columno++, yTimeFieldValue);
+                        {
+                            var splitShiftCode;
+                            splitShiftCode = doc1.splitTextToSize($filter('translate')($scope.summary.timeArray[j - 1].Shift_Code), 65);
+                             yShiftValue = yTimeFieldValue;
+                            var xShiftValue = timeWidth * columno++;
+                            angular.forEach(splitShiftCode, function (key)
+                            {
+                                if (yShiftValue+10 > canvas.height) {
+                                    if (isPageAdded) {
+                                        doc1.addPage();
+                                    }
+                                    var count = doc1.internal.pages.length - 1
+                                    var imgData = canvas.toDataURL("image/png", 1.0);
+                                    new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve(); });
+                                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                                    yTimeFieldValue = 15;
+                                    yTimeFieldName = 0;
+                                    yTimeField = 0;
+                                    yShiftValue = 15;
+                                    index = 0;
+                                    rectTimeHeight = 29 * ($scope.summary.timeArray.length - j);
+                                    if (j == $scope.summary.timeArray.length)
+                                        rectTimeHeight = 29;
+                                    ctx.strokeRect(20, -1, 1090, rectTimeHeight);
+                                    isPageAdded = true;
+
+                                }
+                                ctx.fillText(key, xShiftValue, yShiftValue);
+                                yShiftValue += 15;
+                            })
+
+                          
+                        }
                         else {
                             ctx.fillText("", xTimeField1 - 50, yTimeFieldValue);
                             columno++;
@@ -4682,8 +4714,10 @@
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
                     ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Item), timeWidth * columno++, yTimeFieldValue);
-
-
+                    if (yShiftValue>0)
+                    yTimeFieldValue = yTimeFieldValue + (yShiftValue - yTimeFieldValue);
+                    //if (yShiftValue > 0)
+                    //    yTimeFieldValue = yShiftValue;
                     //ctx.fillStyle = "#000";
                     //ctx.font = '13px sans-serif ';
                     //ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Description), 965, yTimeFieldValue);
@@ -4691,8 +4725,8 @@
 
                 //Expenses heading
 
-
-
+                rectTimeHeight = yTimeFieldValue - (yTimeFieldName - 20 + 5);
+                ctx.strokeRect(20, yTimeFieldName - 20 + 5, 1090, rectTimeHeight);
                 var k = 0, xExpenseField = 25, yExpenseField = yTimeField + rectTimeHeight + 25, rectExpenseWidth = 660,
                     rectExpenseHeight = 22 * $scope.summary.expenseArray.length, yExpenseFieldName = yExpenseField + 25,
                     yExpenseFieldValue;
@@ -4757,7 +4791,20 @@
                 ctx.fillStyle = "#000";
                 ctx.font = '15px sans-serif ';
                 ctx.fillText('物料', 20, yMaterialField + 5);
+                if (yMaterialFieldName + 30 > canvas.height) {
+                    if (isPageAdded)
+                        doc1.addPage();
+                    var count = doc1.internal.pages.length - 1
+                    var imgData = canvas.toDataURL("image/png", 1.0);
+                    new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve(); });
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+                    yMaterialField = 15;
+                    yMaterialFieldName = yMaterialField + 25
+                    
+                    isPageAdded = true;
+
+                }
                 ctx.fillStyle = "#000";
                 ctx.font = 'bold 13px sans-serif ';
                 ctx.fillText('结算类型', 30, yMaterialFieldName);
@@ -5030,15 +5077,7 @@
                 var xSignField = 25, ySignField = yMaterialFieldValue + 20, rectSignWidth = 660,
                     rectSignHeight = 110;
 
-
-                ctx.fillStyle = "#000";
-                ctx.font = '15px sans-serif ';
-                ctx.fillText('签字', 20, ySignField + 5);
-
-                ctx.fillStyle = "#000";
-                ctx.strokeRect(20, ySignField + 10, 1090, rectSignHeight);
-
-                if (ySignField + 30 > canvas.height) {
+                if (ySignField + 20 > canvas.height) {
                     if (isPageAdded)
                         doc1.addPage();
                     var count = doc1.internal.pages.length - 1
@@ -5051,8 +5090,32 @@
                     //index = 0;
                     //rectSignHeight = 29 * ($scope.summary.timeArray.length - j);
                     ctx.strokeRect(20, -1, 1090, rectSignHeight);
-
+                    isPageAdded = true;
                 }
+                ctx.fillStyle = "#000";
+                ctx.font = '15px sans-serif ';
+                ctx.fillText('签字', 20, ySignField + 5);
+
+                ctx.fillStyle = "#000";
+               
+
+                if (ySignField + rectSignHeight > canvas.height) {
+                    if (isPageAdded)
+                        doc1.addPage();
+                    var count = doc1.internal.pages.length - 1
+                    var imgData = canvas.toDataURL("image/png", 1.0);
+                    new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve(); });
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ySignField = 0;
+                    //yTimeFieldName = 0;
+                    //yTimeField = 0;
+                    //index = 0;
+                    //rectSignHeight = 29 * ($scope.summary.timeArray.length - j);
+                    ctx.strokeRect(20, ySignField + 10, 1090, rectSignHeight);
+                    isPageAdded = true;
+                }
+                else
+                    ctx.strokeRect(20, ySignField + 10, 1090, rectSignHeight);
                 ctx.fillStyle = "#000";
                 ctx.font = 'bold 13px sans-serif ';
                 ctx.fillText($filter('translate')('emerson'), 70, ySignField + 25);
@@ -5578,41 +5641,7 @@
                         else
                             coloumnNo++
                     }
-                    //else {
-                    //    if ($scope.summary.timeArray[j - 1].Date != "SUB TOTAL" && $scope.summary.timeArray[j - 1].grandTotal != "bold") {
-                    //        if ($scope.taskObject.Charge_Type != undefined && $scope.taskObject.Charge_Type != "") {
-                    //            doc1.text(xTimeField + timeWidth, yTimeFieldValue, $filter('translate')($scope.taskObject.Charge_Type));
-                    //            coloumnNo++
-                    //        }
-                    //        else
-                    //            coloumnNo++
-                    //        if ($scope.summary.timeArray[j - 1].Work_Type != undefined && $scope.summary.timeArray[j - 1].Work_Type != "") {
-                    //            if ($scope.summary.timeArray[j - 1].Work_Type == "Travel") {
-                    //                if ($scope.taskObject.Travel_Method != undefined && $scope.taskObject.Travel_Method != "") {
-                    //                    doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, $filter('translate')($scope.taskObject.Travel_Method));
-
-                    //                }
-                    //                else
-                    //                    coloumnNo++
-                    //            }
-                    //            else {
-                    //                if ($scope.taskObject.Labor_Method != undefined && $scope.taskObject.Labor_Method != "") {
-                    //                    doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, $filter('translate')($scope.taskObject.Labor_Method));
-
-                    //                }
-                    //                else
-                    //                    coloumnNo++
-                    //            }
-                    //        }
-                    //        else {
-                    //            coloumnNo++
-                    //        }
-                    //    }
-                    //    else {
-                    //        coloumnNo++
-                    //    }
-                    //    //$scope.taskObject.Charge_Type
-                    //}
+                   
                     doc1.setFontSize(22)
 
                     doc1.setFontType('normal');
@@ -5634,7 +5663,25 @@
                         doc1.setFontSize(22)
                         doc1.setFontType('normal')
                         if ($scope.summary.timeArray[j - 1].Shift_Code != undefined)
-                            doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, $filter('translate')($scope.summary.timeArray[j - 1].Shift_Code));
+                        {
+                            var splitShiftCode = doc1.splitTextToSize($filter('translate')($scope.summary.timeArray[j - 1].Shift_Code), (xTimeField + (timeWidth * coloumnNo)) - (xTimeField + (timeWidth * --coloumnNo)));
+                            //coloumnNo++;
+                            //doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, splitShiftCode);
+                            var xShiftcode = xTimeField + (timeWidth * coloumnNo++);
+                            var yShiftCode = yTimeFieldValue;
+                            angular.forEach(splitShiftCode, function (key) {
+                                var isAdded = checkPdfHeight(doc1, yShiftCode, pageHeight, yTimeField, rectTimeWidth);
+                                if (isAdded) {
+                                    yTimeFieldValue = 10;
+                                    yTimeField = -10;
+                                    indexTime = 0;
+                                    yShiftCode = 10;
+                                }
+                                doc1.text(xShiftcode, yShiftCode, key)
+                                yShiftCode+=10;
+                                
+                            })
+                        }
                         else
                             doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, "");
                     }

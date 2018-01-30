@@ -712,6 +712,22 @@ app.directive('maxInput', function ($parse) {
         }
     }
 });
+app.filter('dateOrderByFilter', function ($filter) {
+    return function (inputArray, orderBy) {
+        var outputArray = [];
+
+       
+        if (inputArray != undefined && inputArray.length > 0)
+        {
+            inputArray.sort(function (a, b) {
+                return new Date(a.startDateTime) - new Date(b.startDateTime);
+            });
+            outputArray = inputArray;
+        }
+       
+        return outputArray;
+    };
+});
 app.config(['$httpProvider', function ($httpProvider) {
 
     if (!$httpProvider.defaults.headers.get) {
