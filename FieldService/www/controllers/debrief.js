@@ -2803,8 +2803,8 @@
             $scope.languageUsed="en"
 
         promise = generatePDF();
-       // $rootScope.dbCall = false;
-        submit(promise);
+        $rootScope.dbCall = false;
+      //submit(promise);
     };
 
     function submit(promise) {
@@ -3172,7 +3172,7 @@
 
                     localService.updateTaskSubmitStatus(taskObject, function (result) {
 
-                        
+                        $rootScope.dbCall = false;
 
                         localService.getTaskList(function (response) {
 
@@ -3191,9 +3191,7 @@
                                     response.push(internalOFSCJSONObject);
                                 });
 
-                                constantService.setTaskList(response);   
-
-                                $rootScope.dbCall = false;
+                                constantService.setTaskList(response);                             
                             });
                         });
 
@@ -4304,7 +4302,7 @@
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
-                    var splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.notesArray[i - 1].Notes), rectNotesWidth - 420);
+                    var splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.notesArray[i - 1].Notes), rectNotesWidth - 530);
 
                     //doc1.text(xNotesField2, yNotesField1_val, splitTitle)
                     var lineheight = 15, lineno = 0;
@@ -5185,23 +5183,1211 @@
             defer.resolve(response[0]);
         })
     }
+    function englishCanvasPdf(resolve) {
+        var canvas = document.getElementById('englishcanvas');
+
+        var doc1 = jsPDF('p', 'mm', [700, 850], true);
+
+        Promise.all([new Promise(function (resolve) {
+
+            if (canvas.getContext) {
+
+                var ctx = canvas.getContext('2d');
+
+                var pdfimg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAABACAYAAABY1SR7AAABS2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxMzggNzkuMTU5ODI0LCAyMDE2LzA5LzE0LTAxOjA5OjAxICAgICAgICAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIi8+CiA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo8P3hwYWNrZXQgZW5kPSJyIj8+IEmuOgAABTJJREFUaIHd2lusnUUVB/DfOd0RaJWGSwOpFQitlAAFisUcDNpghFBIsFxLApbKJbGBxCgNhlskog8GE+UFw4NcNCkxNqUESqEtJVBIIKBCkxZ8IJS0GkJVqDXQ0nPAh/Xt7tn7O/vs2+zuE/8vZ82cmVnrv2e+WWvWzNC8kYUKVPB9XIszMN3Bwce4EJt7GaRS/J2FtTi9R6O6wVQ8hUvwQreDDBcDbTQYElUcjiewoNsBKliOuUV5DL/EH7ETn/doYCs8jZFCno5n8W282elAFVyelH+KX/RqXQcYbSgfiQ04D1s7GWgYpyXlR3uzKwtmiKV+UiedhvGlpPz3nBZ1iN/gk0I+Fs9hdrudhxvK/f4mJsJGscw/LcqzBJnj2uncSGTQWIclamSOF2Rmteo42YjAGuGUx4ryHDFbx0zUaTISgT9hqRqZuYLMjGYdJisRWImb1L7b07BebNElTGYi8LBw2FUyZwqnWYoDB03kw0Se1qTNg/hRUl4gNoXUbQycSOq9F0/Q7n7clpTPEYHm1GrFoIk8nshX41Yc0qTtfSKEquJbItA8DIbmjSxMneBQRiPbxVpclJT34X21HasRJ6ifgHVYPBmIzMBLOoytGrCmX0vrfOHYHsOpLdruEmv+1/hnl/r6MiOL8CSmFOVdwgd80EbfivDkzXawRryedsyJL+C3aiSIpfND3NlG/1G83Y3i3EtrsQj0qP9YF2XWU0JuIhcm8spE/mpmPSXkJnJyIq9J5C9m1lNCbiKpwel5fE9mPSXkJrI7kecn8s7MekrITWR7Ii9N5Dcy6ykhN5E/J/KJifxqZj0l5CbyTJP6pzLrKSE3kbfxVkPdFryTWU8J/Yi1HmwoP9IHHSX0g0jjh72/DzpK6AeRaxvK9+CoPuipQz8c4pKGuqNwb2Y9JeQmcqVaUuCTpP4H6k+B2ZGbyPWJ/DOR7iTOOStxSmZ9B5CTyFycW8hj+IO4k9xV1E0XFztzMuo8gJwHq2WJvF7timKJWurmeHFP+F21092XRcb9yKLNfhGbbVW/PCdELiJT8L2k/PtEfh5XYbU4Qc4UN7ib8TVNUqDYKzIk9+KvrQzItbQuEL8skT1MzyKzxbXA9qTuUJGgaEai2uZSMXP3aZFPyDUjNybyOlwsyF0g8lDtYJ9wpoeKgLO6+w1jhTgi/LxZ5xxZlONELNXuj/JfbMPZ4+gbxWvFeKeqP9PsUL69OmB7rzPydXELPNE4n+Ev4rZ2A14WN1IjYsmcm7StiBzXOeOM8+E4dXUdu8F8/ErciY+H7SL9vxGb8O9x2ryCbwqjbxAZmGahzHtFm6bodGlNEw8KlitvFP/CA1glQvdOUVFbTjPFa4iPxI61yfjBZ1dL6ySRPW/mne8WybluMSpePHT86oH2iZwtlsoRTf6/Ew91Y0AutONHZovQokpiTLxVSdM994jtc2Boh8jvcHQh78EVYnlVZ/MVcdc3ULQi8g1UX6Z9JuKmGzCvqNuPm4v/DRStvpGzEvkdEZqnb6ruED5i4GhFZEciNyaiHxC+ZFKg1dJaq5xcG8PtuKUvFnWJVjMyKqLUu0Q4sl3MxGv9NatztONH9uAn/TakVwz6nj0b/m+JTBm31eREXYA7rD7EPuGgmtIb0ld1u4fV32ksO7i29ITrEnlbRbxOOL+ouF34iVX4h8E+1hwPQ/gKrsGPk/rVQ/NGFlaEXzhzEJZlwN9w1rBwepfp8sXBgLEF38HH1V3rXREgrhB5pL0DMqwd/AcvisT4AsWN8f8AwL/n0d58nyYAAAAASUVORK5CYII=';
+
+                var excelimg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAADdcAAA3XAUIom3gAAAAHdElNRQfhCwEGLDTCqNdaAAADfklEQVRo3u2ZTUhUURTHf8+vUsuK7MNKKCenCT/HohKkoo2gtQyiqCiCqDZFCxcVfRBRrqJFUARZUAS1aBGhrSQNIiiDEMrACKkIE1TKonJeC193zvsanZk7MxvP29zzce/5v3PvPee++wySI4MAdYSpYwXBRAbISchtDqsttzUUWbKRxN4gHgD5VBMmTB1VzEgianECmEPYchsiW5fbyQEsskIcpky/U38Ay5XbktS6lQCyWWWFuJZ56XIrAYxSoHG8AzRM2daki7tganqGAWiLs9e1rPQH3UY7Mg2gKNMAmAaQWDHypzd0CK6QBqCX7y67tdG0rncb2imEickGD83w/34Zn4JpAM5F+JGHgltHvUP/lB7VDrDVNV4VSwW3DICNLHbZ5Uab9qX0m5AwCzFu0/6wlelODbXAdO+CdhvSBzbdBaHZpaUYmV7bcJtws0bIh5ij5EV8SR2A9+QJCB1KflxIL2sqx6aB6bE0W2hV7U10AjBAkF+WrJpXrgPqCHNxHkgW0AQ8ZtDlYWd0GXrhGrWt22eYmOxTvEH3FDPhhskzoV8qbhPGWzHpFW+8d8qpOAkAEdaJN+7noOLm8lUnAL9MaHAFQ03STe4rzXkWopH8y/F69nDLal/kj9Wq41DM8ZqpElwpALvZ7LITn3b+W+Qzs11xee5rPTEFcW/DWMWohBMOyX7W+1qbJESxq6Fzrw/FsDVIkPzD0+/xzfRI9xQYMULXyBOrVcCY1VpBL/me1hOZ0LkIDwNXGXBZn2bmZBG4Lcwvi/bJmBGwUxKJaJBiZRxgXNz/5PEuHYnoGN9U+xxZnFXcb46glbzeRp7ta4lgEqFWyO7pi4DXIhyjkg+Ka6cRgMc0K9kS3rqSlMZyLA8eW4RcDn1U1zZ0A3hpSz8vhKZLyLN5nRoAfwkLN9sd2iahqyeSCgCtwkUOfQ5tjy3h3tABwF6OTeCM4soodyydWq7zSXE/PVb3FduHTZBLQAt9Lrs70TQfb8j8nmEPOEkkorTRNADdVzSnRL6EWQDc8LiimZUqAAGPQ1tFrA4Zn4JpAJkGMJppAPdy+CMvjJKm7jhsTbq4a5BHhfWfqIbCJFxPnIjiJllesyhXf4+K4x5JAwBJpepvYWlmAERpvgUlTDDmnkkZgCgVUmNBqbTdo6UNQJRyqbCg1KjjeVoByP4rrT2U4O/7f0/9ov/AQQ2NAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTExLTAxVDA2OjQ0OjUyKzAxOjAwfVk/DQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0xMS0wMVQwNjo0NDo1MiswMTowMAwEh7EAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwaAAAAAElFTkSuQmCC'
+
+                var imgSign = document.getElementById('logo');
+
+                var callback = function (image) {
+
+                    if (!image) image = this;
+
+                    ctx.drawImage(image, 30, 5, 140, 40);
+                }
+
+                if (imgSign.complete) {
+                    callback(imgSign);
+                } else {
+                    imgSign.onload = callback;
+                }
+
+                ctx.fillStyle = "#000";
+
+                ctx.font = 'bold 18px sans-serif ';
+
+                ctx.fillText('Field Service Summary Report', 400, 25);//现场服务号
+
+                ctx.fillStyle = "#000";
+
+                ctx.font = 'bold 13px sans-serif ';
+
+                if ($scope.summary.taskObject.Task_Number)
+                    ctx.fillText('Field Job' + $scope.summary.taskObject.Task_Number, 400, 40)
+
+                ctx.fillStyle = "#000";
+
+                ctx.font = '11px sans-serif ';
+
+                ctx.fillText('EMERSON PROCESS MANAGEMENT CO. LTD.', 720, 12);
+
+                ctx.fillText('No. 1277Xin Jingqiao Rd. Pudong,Shanghai, 201206', 720, 24);
+
+                ctx.fillText('T: 86-21-2892 9000', 720, 36);
+
+                ctx.fillText('F:  86-21-2892 9001', 720, 46);
+
+                //ctx.fillText('服务热线：400-820-1996', 720, 56);
+
+                ctx.fillStyle = "#000";
+
+                ctx.strokeRect(20, 0, 1090, 70);
+
+                //Customer Call heading
+                ctx.fillStyle = "#000";
+
+                ctx.font = '15px sans-serif';
+
+                ctx.fillText('Customer Call Details', 20, 90);
+
+                //Customer Call Labels and fields
+                ctx.fillStyle = "#000";
+
+                ctx.font = 'bold 13px sans-serif ';
+
+                ctx.fillText('Customer Name', 30, 118);
+
+                ctx.fillStyle = "#000";
+
+                ctx.font = '13px sans-serif ';
+
+                var c = 0, isCustBig = false;
+
+                var name = $scope.summary.taskObject.Customer_Name.match(/(.{1,25})/g);
+
+                if (name.length == 1)
+                    ctx.fillText(name[0], 30, 132);
+                else {
+                    isCustBig = true;
+                    for (c = 0; c < name.length; c++) {
+                        ctx.fillText(name[c], 30, 132 + c * 13);
+                    }
+                }
+
+                ctx.fillStyle = "#000";
+                ctx.font = 'bold 13px sans-serif ';
+                ctx.fillText('Start Date', 280, 118);
+
+                ctx.fillStyle = "#000";
+                ctx.font = '13px sans-serif ';
+                var start = moment.utc($scope.summary.taskObject.times[0].Start_Date).utcOffset(constantService.getTimeZone()).format("DD-MMM-YYYY")
+                if (start)
+                    ctx.fillText(start, 280, 132);
+
+                ctx.fillStyle = "#000";
+                ctx.font = 'bold 13px sans-serif ';
+                ctx.fillText('End Date', 530, 118);
+
+                ctx.fillStyle = "#000";
+                ctx.font = '13px sans-serif ';
+
+                var enddate = " ";
+
+                if ($scope.summary.taskObject.times[0].End_Date != "" && $scope.summary.taskObject.times[0].End_Date != undefined) {
+                    enddate = moment.utc($scope.summary.taskObject.times[0].End_Date).utcOffset(constantService.getTimeZone()).format("DD-MMM-YYYY");
+                }
+                ctx.fillText(enddate, 530, 132);
+
+                ctx.fillStyle = "#000";
+                ctx.font = 'bold 13px sans-serif ';
+                ctx.fillText('Duration', 810, 118);
+
+                ctx.fillStyle = "#000";
+                ctx.font = '13px sans-serif ';
+
+                if ($scope.summary.taskObject.times[0].Duration)
+                    ctx.fillText($scope.summary.taskObject.times[0].Duration, 810, 132);
+                var custBigYvalue = 0;
+                if (isCustBig)
+                    custBigYvalue = 10;
+                ctx.fillStyle = "#000";
+                ctx.font = 'bold 13px sans-serif ';
+                ctx.fillText('Service Request', 30, 158 + custBigYvalue);
+
+                ctx.fillStyle = "#000";
+                ctx.font = '13px sans-serif ';
+
+                if ($scope.summary.taskObject.Service_Request)
+                    ctx.fillText($scope.summary.taskObject.Service_Request, 30, 172 + custBigYvalue);
+
+                ctx.fillStyle = "#000";
+                ctx.font = 'bold 13px sans-serif ';
+                ctx.fillText('Field Job Request', 280, 158 + custBigYvalue);
+
+                ctx.fillStyle = "#000";
+                ctx.font = '13px sans-serif ';
+
+                if ($scope.summary.taskObject.Task_Number)
+                    ctx.fillText($scope.summary.taskObject.Task_Number, 280, 172 + custBigYvalue);
+
+                ctx.fillStyle = "#000";
+                ctx.font = 'bold 13px sans-serif ';
+                ctx.fillText('Job Description', 530, 158 + custBigYvalue);
+
+                ctx.fillStyle = "#000";
+                ctx.font = '13px sans-serif ';
+                ctx.fillText($scope.summary.taskObject.Job_Description, 530, 172 + custBigYvalue);
+
+                ctx.fillStyle = "#000";
+                ctx.font = 'bold 13px sans-serif ';
+                ctx.fillText('Item Name', 30, 202 + custBigYvalue);
+                ctx.fillText('Item Description', 250, 202 + custBigYvalue);
+
+                ctx.fillStyle = "#000";
+                ctx.font = 'bold 13px sans-serif ';
+                ctx.fillText('System ID / Serial#', 460, 202 + custBigYvalue);
+
+                ctx.fillStyle = "#000";
+                ctx.font = 'bold 13px sans-serif ';
+                ctx.fillText('Tag #', 680, 202 + custBigYvalue);
+
+                ctx.fillStyle = "#000";
+                ctx.font = 'bold 13px sans-serif ';
+                ctx.fillText('Original PO#', 890, 202 + custBigYvalue);
+
+                var ibyvalue = 216 + custBigYvalue;
+
+                if ($scope.summary.taskObject.InstallBase) {
+
+                    angular.forEach($scope.summary.taskObject.InstallBase, function (key) {
+                        var splitIN = splitPL = splitSL = splitTN = splitOPO = ""
+                        var ibIN = ibID = ibSL = ibTN = ibOPO = ibyvalue;
+                        ctx.fillStyle = "#000";
+                        ctx.font = '13px sans-serif ';
+
+                        if (key.Item_Number) {
+                            splitIN = doc1.splitTextToSize(key.Item_Number, 90);
+                            angular.forEach(splitIN, function (key) {
+                                ctx.fillText(key, 30, ibIN);
+                                ibIN += 15;
+                            })
+
+                        }
+                        else
+                            ctx.fillText('NO VALUE', 30, ibyvalue);
+                        if (key.Item_Number) {
+                            splitPL = doc1.splitTextToSize(key.Description, 90);
+                            angular.forEach(splitPL, function (key) {
+                                ctx.fillText(key, 250, ibID);
+                                ibID += 15;
+                            })
+                            //ctx.fillText(key.Description, 180, ibyvalue);
+                        }
+                        else
+                            ctx.fillText('NO VALUE', 250, ibyvalue);
+
+                        ctx.fillStyle = "#000";
+                        ctx.font = '13px sans-serif ';
+
+                        if (key.Serial_Number) {
+                            splitSL = doc1.splitTextToSize(key.Serial_Number, 90);
+                            angular.forEach(splitSL, function (key) {
+                                ctx.fillText(key, 460, ibSL);
+                                ibSL += 15;
+                            })
+                            //ctx.fillText(key.Serial_Number, 380, ibyvalue);
+                        }
+                        else
+                            ctx.fillText('NO VALUE', 460, ibyvalue);
+
+                        ctx.fillStyle = "#000";
+                        ctx.font = '13px sans-serif ';
+
+                        if (key.TagNumber) {
+                            splitTN = doc1.splitTextToSize(key.TagNumber, 90);
+                            angular.forEach(splitTN, function (key) {
+                                ctx.fillText(key, 680, ibTN);
+                                ibTN += 15;
+                            })
+                            // ctx.fillText(key.TagNumber, 530, ibyvalue);
+                        }
+                        else
+                            ctx.fillText('NO VALUE', 680, ibyvalue);
+
+                        ctx.fillStyle = "#000";
+                        ctx.font = '13px sans-serif ';
+
+                        if (key.Original_PO_Number) {
+                            splitOPO = doc1.splitTextToSize(key.Original_PO_Number, 90);
+                            angular.forEach(splitOPO, function (key) {
+                                ctx.fillText(key, 890, ibOPO);
+                                ibOPO += 15;
+                            })
+                            //ctx.fillText(key.Original_PO_Number, 810, ibyvalue);
+                        }
+                        else
+                            ctx.fillText('NO VALUE', 890, ibyvalue);
+
+                        ibyvalue = Math.max(ibIN, ibID, ibSL, ibTN, ibOPO);
+                    });
+                }
+                ctx.fillStyle = "#000";
+                ctx.strokeRect(20, 100, 1090, ibyvalue - 60);
+
+
+
+
+                var i = 0, xNotesField = 20, yNotesField = ibyvalue + 55, rectNotesWidth = 660,
+                    rectNotesHeight = 22 * $scope.summary.notesArray.length,
+                    rectNotesX = 20, rectNotesY = 170;
+
+                var xNotesField1 = xNotesField, xNotesField2 = xNotesField1 + 150, yNotesField1 = yNotesField + 22,
+                    yNotesField2, yNotesField1_val, yNotesField2_val;
+
+                ctx.fillStyle = "#000";
+                ctx.font = 'bold 13px sans-serif ';
+                ctx.fillText('Note Type', 30, yNotesField1);
+
+                ctx.fillStyle = "#000";
+                ctx.font = 'bold 13px sans-serif ';
+                ctx.fillText('Note Description', 530, yNotesField1);
+
+                ctx.fillStyle = "#000";
+                ctx.font = '15px sans-serif ';
+                ctx.fillText('Notes', 20, yNotesField);
+                yNotesField1_val = yNotesField1;
+                var isPageAdded = false;
+                while (i < $scope.summary.notesArray.length) {
+
+                    xNotesField1 = xNotesField;
+
+                    yNotesField1_val = yNotesField1 + 14 * ++i;
+                    xNotesField2 = xNotesField1 + 150;
+
+                    if (yNotesField1_val > canvas.height) {
+                        rectNotesHeight = yNotesField1_val - yNotesField + 10;
+                        ctx.strokeRect(20, yNotesField + 5, 1090, rectNotesHeight)
+                        if (isPageAdded) {
+                            doc1.addPage();
+                        }
+                        var count = doc1.internal.pages.length - 1
+                        var imgData = canvas.toDataURL("image/png", 1.0);
+                        new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve() });
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        yNotesField1_val = 10;
+                        yNotesField = 0;
+                        isPageAdded = true;
+
+                    }
+                    ctx.fillStyle = "#000";
+                    ctx.font = '13px sans-serif ';
+                    ctx.fillText($filter('translate')($scope.summary.notesArray[i - 1].Note_Type), 30, yNotesField1_val);
+
+                    ctx.fillStyle = "#000";
+                    ctx.font = '13px sans-serif ';
+                    var splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.notesArray[i - 1].Notes), rectNotesWidth - 530);
+
+                    //doc1.text(xNotesField2, yNotesField1_val, splitTitle)
+                    var lineheight = 15, lineno = 0;
+                    if (splitTitle.length > 1) {
+                        for (var l = 0; l < splitTitle.length; l++) {
+                            if (yNotesField1_val + (lineno * lineheight) > canvas.height) {
+                                rectNotesHeight = yNotesField1_val + (l * lineheight) - yNotesField + 10;
+                                ctx.strokeRect(20, yNotesField + 5, 1090, rectNotesHeight)
+                                if (isPageAdded) {
+                                    doc1.addPage();
+                                }
+                                var count = doc1.internal.pages.length - 1
+                                var imgData = canvas.toDataURL("image/png", 1.0);
+                                new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve(); });
+                                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                                yNotesField1_val = 0;
+                                yNotesField = -10;
+                                isPageAdded = true;
+                                lineno = 1;
+                            }
+                            ctx.fillText(splitTitle[l], 530, yNotesField1_val + (lineno++ * lineheight));
+                        }
+                        yNotesField1_val = yNotesField1_val + lineheight * (lineno);
+                        yNotesField1 = yNotesField1_val;
+                    }
+                    else {
+                        ctx.fillText($filter('translate')($scope.summary.notesArray[i - 1].Notes), 530, yNotesField1_val);
+                    }
+
+                }
+
+                rectNotesHeight = yNotesField1_val - yNotesField + 10;
+                ctx.fillStyle = "#000";
+                ctx.strokeRect(20, yNotesField + 5, 1090, rectNotesHeight)
+                var xAttachField = 30, yAttachField = yNotesField1_val + 30, rectAttachWidth = 660,
+                    rectAttachHeight = 140, xAttachField1 = 30;
+
+
+                if (rectAttachHeight + yAttachField + 10 > canvas.height) {
+                    if (isPageAdded) {
+                        doc1.addPage();
+                    }
+                    var count = doc1.internal.pages.length - 1
+                    var imgData = canvas.toDataURL("image/png", 1.0);
+                    new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve(); });
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    yAttachField = 10;
+                    isPageAdded = true;
+                    ctx.strokeRect(20, yAttachField + 10, 1090, rectAttachHeight);
+                }
+                ctx.fillStyle = "#000";
+                ctx.font = '15px sans-serif ';
+                ctx.fillText('Attachments', 20, yAttachField);
+
+                ctx.fillStyle = "#000";
+                if (rectAttachHeight + yAttachField + 10 > canvas.height) {
+                    if (isPageAdded) {
+                        doc1.addPage();
+                    }
+                    var count = doc1.internal.pages.length - 1
+                    var imgData = canvas.toDataURL("image/png", 1.0);
+                    new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve(); });
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    yAttachField = 0;
+                    isPageAdded = true;
+                    ctx.strokeRect(20, yAttachField + 10, 1090, rectAttachHeight);
+                }
+                else
+                    ctx.strokeRect(20, yAttachField + 10, 1090, rectAttachHeight);
+
+
+
+                var index = 0;
+                angular.forEach($scope.files, function (file, value) {
+                    var yfilename = yAttachField;
+                    var attachfile = document.getElementById(index++);
+
+                    var callback = function (image) {
+
+                        if (!image) image = this;
+
+                        ctx.drawImage(attachfile, xAttachField1, yAttachField + 15);
+
+                        if (file.fileDisc.length >= 18) {
+
+                            ctx.fillStyle = "#000";
+                            ctx.font = '15px sans-serif ';
+                            var splitAttchname = doc1.splitTextToSize($filter('translate')(file.fileDisc.substr(0, 16)) + '..', 45);
+                            angular.forEach(splitAttchname, function (key) {
+                                ctx.fillText(key, xAttachField1, yfilename + 130);
+                                yfilename += 15;
+                            })
+
+                        } else {
+
+                            ctx.fillStyle = "#000";
+                            ctx.font = '15px sans-serif ';
+                            var splitAttchname = doc1.splitTextToSize($filter('translate')(file.fileDisc), 45);
+                            angular.forEach(splitAttchname, function (key) {
+                                ctx.fillText(key, xAttachField1, yfilename + 130);
+                                yfilename += 15;
+                            })
+                            //ctx.fillText($filter('translate')(file.fileDisc), xAttachField1, yAttachField + 125);
+                        }
+
+                        xAttachField1 += 120;
+                    };
+
+                    if (attachfile.complete) {
+                        callback(attachfile);
+                    } else {
+                        attachfile.onload = callback;
+                    }
+
+                    //     if(file.filetype!="pdf" && file.filetype!="xlsx" ){
+                    //
+                    //         var attachfile = document.getElementById(file.filename);
+                    //         var callback = function(image) {
+                    //  if(!image) image = this;
+                    //           ctx.drawImage(attachfile, xAttachField1, yAttachField+15);
+                    //           if(file.filename.length>=20){
+                    //             ctx.fillStyle ="#000" ;
+                    //             ctx.font = '15px sans-serif ';
+                    //             ctx.fillText(file.filename.substr(0,18)+'..', xAttachField1,yAttachField+125);
+                    //           }
+                    //
+                    //           else {
+                    //             ctx.fillStyle ="#000" ;
+                    //             ctx.font = '15px sans-serif ';
+                    //             ctx.fillText(file.filename, xAttachField1,yAttachField+125);
+                    //           }
+                    //           xAttachField1+=100;
+                    //         };
+                    //
+                    //         if(attachfile.complete) {
+                    //            callback(attachfile);
+                    //         }else {
+                    //            attachfile.onload = callback;
+                    //         }
+                    //       }
+                    //     else if(file.filetype=="pdf"){
+                    //
+                    //     var imgpdf = document.getElementById('pdf');
+                    //             var callback = function(image) {
+                    //      if(!image) image = this;
+                    //
+                    //      ctx.drawImage(image, xAttachField1, yAttachField+15);
+                    //      if(file.filename.length>=20){
+                    //        ctx.fillStyle ="#000" ;
+                    //        ctx.font = '15px sans-serif ';
+                    //        ctx.fillText(file.filename.substr(0,18)+'..', xAttachField1,yAttachField+125);
+                    //      }
+                    //
+                    //      else {
+                    //        ctx.fillStyle ="#000" ;
+                    //        ctx.font = '15px sans-serif ';
+                    //        ctx.fillText(file.filename, xAttachField1,yAttachField+125);
+                    //      }
+                    //     xAttachField1+=75;
+                    //   }
+                    //   if(imgpdf.complete) {
+                    //      callback(imgpdf);
+                    //   }else {
+                    //      imgpdf.onload = callback;
+                    //   }
+                    //   }
+                    //
+                    //     else if(file.filetype=="xlsx"){
+                    //     var attachfileexcel = new Image();
+                    //     attachfileexcel.onload = function() {
+                    //       ctx.drawImage(attachfileexcel, xAttachField1, yAttachField+15);
+                    //       if(file.filename.length>=20){
+                    //         ctx.fillStyle ="#000" ;
+                    //         ctx.font = '15px sans-serif ';
+                    //         ctx.fillText(file.filename.substr(0,18)+'..', xAttachField1,yAttachField+125);
+                    //       }
+                    //
+                    //       else {
+                    //         ctx.fillStyle ="#000" ;
+                    //         ctx.font = '15px sans-serif ';
+                    //         ctx.fillText(file.filename, xAttachField1,yAttachField+125);
+                    //       }
+                    //       xAttachField1+=75;
+                    //     };
+                    //     attachfileexcel.src = excelimg;
+                    //     attachfileexcel.width="50";
+                    //     attachfileexcel.height="40";
+                    //   }
+
+                });
+
+                var j = 0, xTimeField = 25, yTimeField = yAttachField + rectAttachHeight + 25, rectTimeWidth = 660,
+                    rectTimeHeight = 29 * $scope.summary.timeArray.length, yTimeFieldName = yTimeField + 20,
+                    yTimeFieldValue = yTimeFieldName;
+                if (rectTimeHeight == 0) {
+                    rectTimeHeight = 30;
+                }
+                var columns;
+                if ($scope.userType == "C") {
+                    columns = 10
+                }
+                else
+                    columns = 6;
+                var timeWidth = (800 / columns) + 30;
+                if (yTimeFieldName > canvas.height) {
+                    if (isPageAdded) {
+                        doc1.addPage();
+                    }
+                    var count = doc1.internal.pages.length - 1
+                    var imgData = canvas.toDataURL("image/png", 1.0);
+                    new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve(); });
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    yTimeFieldName = 40;
+                    yTimeField = 20;
+                    index = 0;
+                    // rectTimeHeight = 29 * ($scope.summary.timeArray.length - j);
+                    //ctx.strokeRect(20, -1, 1090, rectTimeHeight);
+                    isPageAdded = true;
+                }
+                ctx.fillStyle = "#000";
+                ctx.font = '15px sans-serif ';
+                ctx.fillText('Time', 20, yTimeField);
+                var columno = 0;
+                ctx.fillStyle = "#000";
+                ctx.font = 'bold 13px sans-serif ';
+                ctx.fillText($filter('translate')('Service Date'), 30 + timeWidth * columno++, yTimeFieldName);
+
+                if ($scope.userType == 'C') {
+
+                    ctx.fillStyle = "#000";
+                    ctx.font = 'bold 13px sans-serif ';
+                    ctx.fillText($filter('translate')('Charge\nType'), 10 + timeWidth * columno++, yTimeFieldName);
+
+                    ctx.fillStyle = "#000";
+                    ctx.font = 'bold 13px sans-serif ';
+                    ctx.fillText($filter('translate')('Charge\nMethod'), timeWidth * columno++, yTimeFieldName);
+                }
+
+                ctx.fillStyle = "#000";
+                ctx.font = 'bold 13px sans-serif ';
+                ctx.fillText($filter('translate')('Work Type'), timeWidth * columno++, yTimeFieldName);
+
+                var xTimeField1 = 580;
+
+                if ($scope.userType == 'C') {
+
+                    ctx.fillText($filter('translate')('Time Code'), timeWidth * columno++, yTimeFieldName);
+                }
+                if ($scope.userType == 'C') {
+                    ctx.fillText($filter('translate')('Shift Code'), timeWidth * columno++, yTimeFieldName);
+                }
+                ctx.fillText($filter('translate')('Start Time'), timeWidth * columno++, yTimeFieldName);
+                ctx.fillText($filter('translate')('End Time'), timeWidth * columno++, yTimeFieldName);
+                ctx.fillText($filter('translate')('Duration'), timeWidth * columno++, yTimeFieldName);
+
+                ctx.fillText($filter('translate')('Item'), timeWidth * columno++, yTimeFieldName);
+
+
+
+                ctx.fillStyle = "#000";
+
+                var index = 0;
+                var yShiftValue = 0;
+                while (j < $scope.summary.timeArray.length) {
+                    var columno = 0;
+                    ++j;
+                    yShiftValue = 0;
+                    //if (yShiftValue > 0)
+                    //{
+                    //    yTimeFieldValue = yShiftValue + 1 * ++index ;
+                    //    //yTimeField = yShiftValue-20;
+                    //    yShiftValue = 0;
+                    //}
+                    //else
+                    //{
+                    //    yTimeFieldValue = yTimeFieldValue + 20 * ++index;
+                    //}
+                    yTimeFieldValue = yTimeFieldValue + 20;
+                    ++index;
+                    ctx.fillStyle = "#000";
+                    ctx.font = '13px sans-serif ';
+                    if (yTimeFieldValue + 20 > canvas.height) {
+                        rectTimeHeight = yTimeFieldValue - (yTimeFieldName - 20 + 5);
+                        ctx.strokeRect(20, yTimeFieldName - 20 + 5, 1090, rectTimeHeight);
+                        if (isPageAdded) {
+                            doc1.addPage();
+                        }
+                        var count = doc1.internal.pages.length - 1
+                        var imgData = canvas.toDataURL("image/png", 1.0);
+                        new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve(); });
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        yTimeFieldValue = 15;
+                        yTimeFieldName = 0;
+                        yTimeField = 0;
+                        index = 0;
+
+                        isPageAdded = true;
+
+                    }
+                    if ($scope.summary.timeArray[j - 1].Date)
+                        ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Date), 30 + timeWidth * columno++, yTimeFieldValue);
+                    else {
+                        columno++;
+                    }
+                    doc1.setFontSize(22)
+                    doc1.setFontType('normal')
+
+                    if ($scope.userType == 'C') {
+
+                        ctx.fillStyle = "#000";
+                        ctx.font = '13px sans-serif ';
+
+                        if ($scope.summary.timeArray[j - 1].Charge_Type)
+                            ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Charge_Type), 10 + timeWidth * columno++, yTimeFieldValue);
+                        else
+                            columno++;
+                        ctx.fillStyle = "#000";
+                        ctx.font = '13px sans-serif ';
+
+                        if ($scope.summary.timeArray[j - 1].Charge_Method)
+                            ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Charge_Method), timeWidth * columno++, yTimeFieldValue);
+                        else
+                            columno++;
+                    }
+
+
+                    ctx.fillStyle = "#000";
+                    ctx.font = '13px sans-serif ';
+
+                    if ($scope.summary.timeArray[j - 1].Work_Type) {
+
+                        ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Work_Type), timeWidth * columno++, yTimeFieldValue);
+                    }
+                    else
+                        columno++;
+
+                    var a = 2;
+
+                    if ($scope.userType == 'C') {
+
+
+                        ctx.fillStyle = "#000";
+                        ctx.font = '13px sans-serif ';
+                        if (($scope.summary.timeArray[j - 1].Time_Code) != undefined)
+                            ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Time_Code), timeWidth * columno++, yTimeFieldValue);
+                        else {
+                            doc1.text("", xTimeField1 - 50, yTimeFieldValue);
+                            columno++;
+                        }
+                        ctx.fillStyle = "#000";
+                        ctx.font = '13px sans-serif ';
+
+                        if ($scope.summary.timeArray[j - 1].Shift_Code != undefined) {
+                            var splitShiftCode;
+                            splitShiftCode = doc1.splitTextToSize($filter('translate')($scope.summary.timeArray[j - 1].Shift_Code), 65);
+                            yShiftValue = yTimeFieldValue;
+                            var xShiftValue = timeWidth * columno++;
+                            angular.forEach(splitShiftCode, function (key) {
+                                if (yShiftValue + 10 > canvas.height) {
+                                    if (isPageAdded) {
+                                        doc1.addPage();
+                                    }
+                                    var count = doc1.internal.pages.length - 1
+                                    var imgData = canvas.toDataURL("image/png", 1.0);
+                                    new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve(); });
+                                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                                    yTimeFieldValue = 15;
+                                    yTimeFieldName = 0;
+                                    yTimeField = 0;
+                                    yShiftValue = 15;
+                                    index = 0;
+                                    rectTimeHeight = 29 * ($scope.summary.timeArray.length - j);
+                                    if (j == $scope.summary.timeArray.length)
+                                        rectTimeHeight = 29;
+                                    ctx.strokeRect(20, -1, 1090, rectTimeHeight);
+                                    isPageAdded = true;
+
+                                }
+                                ctx.fillText(key, xShiftValue, yShiftValue);
+                                yShiftValue += 15;
+                            })
+
+
+                        }
+                        else {
+                            ctx.fillText("", xTimeField1 - 50, yTimeFieldValue);
+                            columno++;
+                        }
+                    }
+
+                    ctx.fillStyle = "#000";
+                    ctx.font = '13px sans-serif ';
+                    if ($scope.summary.timeArray[j - 1].startTime != undefined && $scope.summary.timeArray[j - 1].startTime != "") {
+                        var time = moment($scope.summary.timeArray[j - 1].startTime).format("HH:mm");
+                        ctx.fillText(moment($scope.summary.timeArray[j - 1].startTime).format("HH:mm"), timeWidth * columno++, yTimeFieldValue);
+                    }
+                    else
+                        columno++;
+                    if ($scope.summary.timeArray[j - 1].endTime != undefined && $scope.summary.timeArray[j - 1].endTime != "")
+                        ctx.fillText(moment($scope.summary.timeArray[j - 1].endTime).format("HH:mm"), timeWidth * columno++, yTimeFieldValue);
+                    else
+                        columno++;
+                    ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Duration.toString()), timeWidth * columno++, yTimeFieldValue);
+
+
+                    ctx.fillStyle = "#000";
+                    ctx.font = '13px sans-serif ';
+                    ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Item), timeWidth * columno++, yTimeFieldValue);
+                    if (yShiftValue > 0)
+                        yTimeFieldValue = yTimeFieldValue + (yShiftValue - yTimeFieldValue);
+                    //if (yShiftValue > 0)
+                    //    yTimeFieldValue = yShiftValue;
+                    //ctx.fillStyle = "#000";
+                    //ctx.font = '13px sans-serif ';
+                    //ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Description), 965, yTimeFieldValue);
+                }
+
+                //Expenses heading
+
+                rectTimeHeight = yTimeFieldValue - (yTimeFieldName - 30 + 5);
+                ctx.strokeRect(20, yTimeFieldName - 20 + 5, 1090, rectTimeHeight);
+                var k = 0, xExpenseField = 25, yExpenseField = yTimeField + rectTimeHeight + 25, rectExpenseWidth = 660,
+                    rectExpenseHeight = 22 * $scope.summary.expenseArray.length, yExpenseFieldName = yExpenseField + 25,
+                    yExpenseFieldValue;
+
+                //ctx.fillStyle = "#000";
+                //ctx.font = '15px sans-serif ';
+                //ctx.fillText('费用', 20, yExpenseField + 5);
+
+                //ctx.fillStyle = "#000";
+                //ctx.font = 'bold 12px sans-serif ';
+                //ctx.fillText('日期', 30, yExpenseFieldName);
+
+                //ctx.fillStyle = "#000";
+                //ctx.font = 'bold 12px sans-serif ';
+                //ctx.fillText('费用种类', 280, yExpenseFieldName);
+
+                //ctx.fillStyle = "#000";
+                //ctx.font = 'bold 12px sans-serif ';
+                //ctx.fillText('结算方式', 530, yExpenseFieldName);
+
+                //ctx.fillStyle = "#000";
+                //ctx.font = 'bold 12px sans-serif ';
+                //ctx.fillText('阐述', 780, yExpenseFieldName);
+
+                //while (k < $scope.summary.expenseArray.length) {
+
+                //    yExpenseFieldValue = yExpenseFieldName + 15 * ++k;
+
+
+                //    ctx.fillStyle = "#000";
+                //    ctx.font = '13px sans-serif ';
+                //    if ($scope.summary.expenseArray[k - 1].Date)
+                //        ctx.fillText($scope.summary.expenseArray[k - 1].Date, 30, yExpenseFieldValue);
+
+                //    ctx.fillStyle = "#000";
+                //    ctx.font = '13px sans-serif ';
+                //    if ($scope.summary.expenseArray[k - 1].Expense_Type)
+                //        ctx.fillText($filter('translate')($scope.summary.expenseArray[k - 1].Expense_Type), 280, yExpenseFieldValue);
+
+
+                //    ctx.fillStyle = "#000";
+                //    ctx.font = '13px sans-serif ';
+                //    if ($scope.summary.expenseArray[k - 1].Charge_Method)
+                //        ctx.fillText($filter('translate')($scope.summary.expenseArray[k - 1].Charge_Method), 530, yExpenseFieldValue);
+
+
+                //    ctx.fillStyle = "#000";
+                //    ctx.font = '13px sans-serif ';
+                //    if ($scope.summary.expenseArray[k - 1].Justification)
+                //        ctx.fillText($filter('translate')($scope.summary.expenseArray[k - 1].Justification), 780, yExpenseFieldValue);
+                //}
+                //rectExpenseHeight = yExpenseFieldValue - yExpenseFieldName + 20;
+
+                //ctx.fillStyle = "#000";
+                //ctx.strokeRect(20, yExpenseField + 10, 1090, rectExpenseHeight);
+
+
+                var l = 0, xMaterialField = 25, yMaterialField = yTimeField + rectTimeHeight + 25,
+                    rectMaterialWidth = 660, rectMaterialHeight = 25 * $scope.summary.materialArray.length,
+                    yMaterialFieldName = yMaterialField + 25, yMaterialFieldValue;
+
+                ctx.fillStyle = "#000";
+                ctx.font = '15px sans-serif ';
+                ctx.fillText($filter('translate')('Materials'), 20, yMaterialField + 5);
+                if (yMaterialFieldName + 30 > canvas.height) {
+                    if (isPageAdded)
+                        doc1.addPage();
+                    var count = doc1.internal.pages.length - 1
+                    var imgData = canvas.toDataURL("image/png", 1.0);
+                    new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve(); });
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    yMaterialField = 15;
+                    yMaterialFieldName = yMaterialField + 25
+
+                    isPageAdded = true;
+
+                }
+                ctx.fillStyle = "#000";
+                ctx.font = 'bold 13px sans-serif ';
+                ctx.fillText($filter('translate')('Charge\nType'), 30, yMaterialFieldName);
+
+                ctx.fillStyle = "#000";
+                ctx.font = 'bold 13px sans-serif ';
+                ctx.fillText($filter('translate')('Quantity'), 160, yMaterialFieldName);
+
+                ctx.fillStyle = "#000";
+                ctx.font = 'bold 13px sans-serif ';
+                ctx.fillText($filter('translate')('Serial number'), 280, yMaterialFieldName);
+
+                ctx.fillStyle = "#000";
+                ctx.font = 'bold 13px sans-serif ';
+                ctx.fillText($filter('translate')('Serial in'), 400, yMaterialFieldName);
+
+                ctx.fillStyle = "#000";
+                ctx.font = 'bold 13px sans-serif ';
+                ctx.fillText($filter('translate')('Serial out'), 550, yMaterialFieldName);
+
+                ctx.fillStyle = "#000";
+                ctx.font = 'bold 13px sans-serif ';
+                ctx.fillText($filter('translate')('Item Namematerial'), 680, yMaterialFieldName);
+                ctx.fillStyle = "#000";
+                ctx.font = 'bold 13px sans-serif ';
+                ctx.fillText('Description', 800, yMaterialFieldName);
+
+                yMaterialFieldValue = yMaterialFieldName + 15;
+                index = 0;
+                while (l < $scope.summary.materialArray.length) {
+                    var m = 0, n = 0, o = 0;
+                    ++l;
+                    index++;
+                    var yMaterialSerialNo = yMaterialSerialIn = yMaterialSerialOut = yItemVal = 0;
+                    ctx.fillStyle = "#000";
+                    ctx.font = '13px sans-serif ';
+                    if (yMaterialFieldValue + 30 > canvas.height) {
+                        ctx.strokeRect(20, yMaterialField + 10, 1090, yMaterialFieldValue - yMaterialField);
+                        if (isPageAdded)
+                            doc1.addPage();
+                        var count = doc1.internal.pages.length - 1
+                        var imgData = canvas.toDataURL("image/png", 1.0);
+                        new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve(); });
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                        yMaterialFieldValue = 15;
+                        yMaterialFieldName = 0
+                        yMaterialField = -20;
+                        index = 0;
+                        //rectTimeHeight = 29 * ($scope.summary.timeArray.length - j);
+                        //if (l == $scope.summary.materialArray.length)
+                        //    rectTimeHeight = 29;
+                        //ctx.strokeRect(20, -1, 1090, rectTimeHeight);
+                        isPageAdded = true;
+                        //yTimeFieldName = 0;
+                        //yTimeField = 0;
+                        //index = 0;
+                        //rectSignHeight = 29 * ($scope.summary.timeArray.length - j);
+
+
+                    }
+                    if ($scope.summary.materialArray[l - 1].Charge_Type)
+                        ctx.fillText($filter('translate')($scope.summary.materialArray[l - 1].Charge_Type), 30, yMaterialFieldValue);
+
+
+                    ctx.fillStyle = "#000";
+                    ctx.font = ' 13px sans-serif ';
+                    if ($scope.summary.materialArray[l - 1].Product_Quantity)
+                        ctx.fillText($scope.summary.materialArray[l - 1].Product_Quantity.toString(), 160, yMaterialFieldValue);
+                    var splitserialin, splitserialout, splitTitle;
+                    ctx.fillStyle = "#000";
+                    ctx.font = ' 13px sans-serif ';
+                    if ($scope.summary.materialArray[l - 1].serialNumber[m] != "") {
+                        yMaterialSerialNo = yMaterialFieldValue;
+                        while (m < $scope.summary.materialArray[l - 1].serialNumber.length) {
+                            ctx.textAlign = "start";
+                            // yMaterialSerialNo = yMaterialFieldValue + 15 * m;
+                            splitserialno = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialNumber[m++], 50)
+                            angular.forEach(splitserialno, function (key) {
+                                if (yMaterialSerialNo + 15 > canvas.height) {
+                                    ctx.strokeRect(20, yMaterialField + 10, 1090, yMaterialFieldValue - yMaterialField);
+                                    if (isPageAdded)
+                                        doc1.addPage();
+                                    var count = doc1.internal.pages.length - 1
+                                    var imgData = canvas.toDataURL("image/png", 1.0);
+                                    new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve(); });
+                                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                                    yMaterialFieldValue = 15;
+                                    yMaterialSerialNo = 15;
+                                    yMaterialFieldName = 0
+                                    yMaterialField = -20;
+                                    isPageAdded = true;
+                                    //yTimeFieldName = 0;
+                                    //yTimeField = 0;
+                                    //index = 0;
+                                    //rectSignHeight = 29 * ($scope.summary.timeArray.length - j);
+
+
+                                }
+                                ctx.fillText(key, 280, yMaterialSerialNo);
+                                yMaterialSerialNo += 15;
+                            })
+                            //ctx.fillText($scope.summary.materialArray[l - 1].serialNumber[m++], 280, yMaterialSerialNo);
+                        }
+                    }
+
+
+                    ctx.fillStyle = "#000";
+                    ctx.font = ' 13px sans-serif ';
+                    if ($scope.summary.materialArray[l - 1].serialIn[n] != "") {
+                        yMaterialSerialIn = yMaterialFieldValue
+                        while (n < $scope.summary.materialArray[l - 1].serialIn.length) {
+                            ctx.textAlign = "start";
+                            // yMaterialSerialIn = yMaterialFieldValue + 15 * n;
+                            splitserialin = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialIn[n++], 50)
+                            angular.forEach(splitserialin, function (key) {
+                                if (yMaterialSerialIn + 15 > canvas.height) {
+                                    ctx.strokeRect(20, yMaterialField + 10, 1090, yMaterialFieldValue - yMaterialField);
+                                    if (isPageAdded)
+                                        doc1.addPage();
+                                    var count = doc1.internal.pages.length - 1
+                                    var imgData = canvas.toDataURL("image/png", 1.0);
+                                    new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve(); });
+                                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                                    yMaterialFieldValue = 15;
+                                    yMaterialSerialIn = 15;
+                                    yMaterialFieldName = 0
+                                    yMaterialField = -20;
+                                    isPageAdded = true;
+                                    //yTimeFieldName = 0;
+                                    //yTimeField = 0;
+                                    //index = 0;
+                                    //rectSignHeight = 29 * ($scope.summary.timeArray.length - j);
+
+
+                                }
+                                ctx.fillText(key, 400, yMaterialSerialIn);
+                                yMaterialSerialIn += 15;
+                            })
+                            // ctx.fillText($scope.summary.materialArray[l - 1].serialIn[n++], 350, yMaterialSerialIn);
+                        }
+                    }
+
+                    ctx.fillStyle = "#000";
+                    ctx.font = ' 13px sans-serif ';
+                    if ($scope.summary.materialArray[l - 1].serialOut[o] != "") {
+                        yMaterialSerialOut = yMaterialFieldValue
+                        while (o < $scope.summary.materialArray[l - 1].serialOut.length) {
+                            ctx.textAlign = "start";
+                            //yMaterialSerialOut = yMaterialFieldValue + 15 * o;
+                            splitserialout = doc1.splitTextToSize($scope.summary.materialArray[l - 1].serialOut[o++], 50)
+                            angular.forEach(splitserialout, function (key) {
+                                if (yMaterialSerialOut + 15 > canvas.height) {
+                                    ctx.strokeRect(20, yMaterialField + 10, 1090, yMaterialFieldValue - yMaterialField);
+                                    if (isPageAdded)
+                                        doc1.addPage();
+                                    var count = doc1.internal.pages.length - 1
+                                    var imgData = canvas.toDataURL("image/png", 1.0);
+                                    new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve(); });
+                                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                                    yMaterialFieldValue = 15;
+                                    yMaterialSerialOut = 15;
+                                    yMaterialFieldName = 0
+                                    yMaterialField = -20;
+                                    isPageAdded = true;
+                                    //yTimeFieldName = 0;
+                                    //yTimeField = 0;
+                                    //index = 0;
+                                    //rectSignHeight = 29 * ($scope.summary.timeArray.length - j);
+
+
+                                }
+                                ctx.fillText(key, 550, yMaterialSerialOut);
+                                yMaterialSerialOut += 15;
+                            })
+                            // ctx.fillText($scope.summary.materialArray[l - 1].serialOut[o++], 450, yMaterialSerialOut);
+                        }
+                    }
+
+                    ctx.fillStyle = "#000";
+                    ctx.font = ' 13px sans-serif ';
+                    if ($scope.summary.materialArray[l - 1].ItemName) {
+                        var itemname = doc1.splitTextToSize($filter('translate')($scope.summary.materialArray[l - 1].ItemName), 50)
+                        yItemVal = yMaterialFieldValue;
+                        angular.forEach(itemname, function (key) {
+                            if (yItemVal + 15 > canvas.height) {
+                                ctx.strokeRect(20, yMaterialField + 10, 1090, yMaterialFieldValue - yMaterialField);
+                                if (isPageAdded)
+                                    doc1.addPage();
+                                var count = doc1.internal.pages.length - 1
+                                var imgData = canvas.toDataURL("image/png", 1.0);
+                                new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve(); });
+                                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                                yMaterialFieldValue = 15;
+                                yItemVal = 15;
+                                yMaterialFieldName = 0
+                                yMaterialField = -20;
+                                isPageAdded = true;
+                                //yTimeFieldName = 0;
+                                //yTimeField = 0;
+                                //index = 0;
+                                //rectSignHeight = 29 * ($scope.summary.timeArray.length - j);
+
+
+                            }
+                            ctx.fillText(key, 680, yItemVal);
+                            yItemVal += 15;
+                        })
+                        //ctx.fillText($filter('translate')($scope.summary.materialArray[l - 1].ItemName), 600, yMaterialFieldValue);
+                    }
+                    ctx.fillStyle = "#000";
+                    ctx.font = ' 13px sans-serif ';
+                    if ($scope.summary.materialArray[l - 1].Description) {
+                        splitTitle = doc1.splitTextToSize($scope.summary.materialArray[l - 1].Description, 200);
+                        angular.forEach(splitTitle, function (key) {
+                            if (yMaterialFieldValue + 15 > canvas.height) {
+                                ctx.strokeRect(20, yMaterialField + 10, 1090, yMaterialFieldValue - yMaterialField);
+                                if (isPageAdded)
+                                    doc1.addPage();
+                                var count = doc1.internal.pages.length - 1
+                                var imgData = canvas.toDataURL("image/png", 1.0);
+                                new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve(); });
+                                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                                yMaterialFieldValue = 15;
+                                yMaterialFieldName = 0
+                                yMaterialField = -20;
+                                isPageAdded = true;
+                                //yTimeFieldName = 0;
+                                //yTimeField = 0;
+                                //index = 0;
+                                //rectSignHeight = 29 * ($scope.summary.timeArray.length - j);
+
+
+                            }
+                            ctx.fillText(key, 800, yMaterialFieldValue);
+                            yMaterialFieldValue = yMaterialFieldValue + 15;
+                        });
+
+
+                    }
+                    yMaterialFieldValue = Math.max(yMaterialFieldValue, yItemVal, yMaterialSerialOut, yMaterialSerialIn, yMaterialSerialNo)
+                    if ((splitTitle != undefined && splitTitle.length > 1) || (splitserialin != undefined && splitserialin.length > 1) || (splitserialout != undefined && splitserialout.length > 1)) {
+                        length = 0;
+                        if (splitTitle != undefined && splitTitle.length > 1)
+                            length += splitTitle.length;
+                        if (splitserialin != undefined && splitserialin.length > 1 && splitserialin.length > splitTitle.length)
+                            length += (splitserialin.length - length);
+                        if (splitserialout != undefined && splitserialin.length > 1 && splitserialin.length < splitserialout.length)
+                            length += (splitserialout.length - splitserialin.length);
+
+                        //yMaterialFieldValue = yMaterialFieldValue + 8 * length;
+                        //yNotesField1 = yNotesField1_val;
+                    }
+
+                    yMaterialFieldValue = yMaterialFieldValue + 15 * $scope.summary.materialArray[l - 1].Product_Quantity;
+                }
+                rectMaterialHeight = yMaterialFieldValue - yMaterialFieldName + 10;
+
+                ctx.fillStyle = "#000";
+                ctx.strokeRect(20, yMaterialField + 10, 1090, rectMaterialHeight);
+
+
+
+
+                var xSignField = 25, ySignField = yMaterialFieldValue + 20, rectSignWidth = 660,
+                    rectSignHeight = 110;
+
+                if (ySignField + 20 > canvas.height) {
+                    if (isPageAdded)
+                        doc1.addPage();
+                    var count = doc1.internal.pages.length - 1
+                    var imgData = canvas.toDataURL("image/png", 1.0);
+                    new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve(); });
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ySignField = 0;
+                    //yTimeFieldName = 0;
+                    //yTimeField = 0;
+                    //index = 0;
+                    //rectSignHeight = 29 * ($scope.summary.timeArray.length - j);
+                    ctx.strokeRect(20, -1, 1090, rectSignHeight);
+                    isPageAdded = true;
+                }
+                ctx.fillStyle = "#000";
+                ctx.font = '15px sans-serif ';
+                ctx.fillText($filter('translate')('Signature'), 20, ySignField + 5);
+
+                ctx.fillStyle = "#000";
+
+
+                if (ySignField + rectSignHeight > canvas.height) {
+                    if (isPageAdded)
+                        doc1.addPage();
+                    var count = doc1.internal.pages.length - 1
+                    var imgData = canvas.toDataURL("image/png", 1.0);
+                    new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve(); });
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ySignField = 0;
+                    //yTimeFieldName = 0;
+                    //yTimeField = 0;
+                    //index = 0;
+                    //rectSignHeight = 29 * ($scope.summary.timeArray.length - j);
+                    ctx.strokeRect(20, ySignField + 10, 1090, rectSignHeight);
+                    isPageAdded = true;
+                }
+                else
+                    ctx.strokeRect(20, ySignField + 10, 1090, rectSignHeight);
+                ctx.fillStyle = "#000";
+                ctx.font = 'bold 13px sans-serif ';
+                ctx.fillText($filter('translate')('emerson'), 70, ySignField + 25);
+
+                ctx.fillStyle = "#000";
+                ctx.font = 'bold 13px sans-serif ';
+                ctx.fillText($filter('translate')('Conatct Name') + ": " + $scope.contactorCustname, 400, ySignField + 40);
+                // ctx.fillText($scope.contactorCustname, 450, ySignField + 25);
+
+                //ctx.fillStyle = "#000";
+                //ctx.font = 'bold 13px sans-serif ';
+                //ctx.fillText('工程师名字', 70, ySignField + 40);
+
+                ctx.fillStyle = "#000";
+                ctx.font = 'bold 13px sans-serif ';
+                ctx.fillText($scope.summary.taskObject.Customer_Name, 400, ySignField + 25);
+
+                ctx.fillStyle = "#000";
+                ctx.font = 'bold 13px sans-serif ';
+                ctx.fillText($filter('translate')('Service Representative') + ": " + $scope.engineerName, 70, ySignField + 40);
+
+                ctx.fillText($scope.engTime, 70, ySignField + 60 + 40);
+                if ($scope.engineerObject == undefined || $scope.engineerObject.isCustomerSignChecked == false) {
+                    if ($scope.custTime != undefined)
+                        ctx.fillText($scope.custTime, 400, ySignField + 60 + 40);
+                }
+                var engineerSignature = document.getElementById('engineerSignature');
+
+                var callback1 = function (image) {
+                    if (!image) image = this;
+                    ctx.drawImage(image, 70, ySignField + 60, 75, 40);
+                }
+                if (engineerSignature.complete) {
+                    callback1(engineerSignature);
+                } else {
+                    engineerSignature.onload = callback1;
+                }
+                if ($scope.engineerObject == undefined || $scope.engineerObject.isCustomerSignChecked == false) {
+                    var customerSignature = document.getElementById('customerSignature');
+
+                    var callback1 = function (image) {
+                        if (!image) image = this;
+                        ctx.drawImage(image, 400, ySignField + 60, 75, 40);
+                    }
+                    if (customerSignature.complete) {
+                        callback1(customerSignature);
+                    } else {
+                        customerSignature.onload = callback1;
+                    }
+                }
+
+
+
+                var imgData = canvas.toDataURL("image/png", 1.0);
+                if (isPageAdded)
+                    doc1.addPage();
+                var count = doc1.internal.pages.length - 1;
+                new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve(); });
+
+                //  doc1.save("Report_" + $scope.summary.taskObject.Task_Number + ".pdf");
+            }
+            resolve(doc1);
+        })]).then(function (response) {
+            resolve(response[0]);
+            defer.resolve(response[0]);
+        })
+    }
     $scope.generateEnglishPDF = function (isChineese, resolve) {
+        if (isChineese)
+        {
+            englishCanvasPdf(resolve);
 
-        var defer = $q.defer();
+        }
+        else
+        {
+            var defer = $q.defer();
 
-        setTimeout(function () {
-            if (valueService.getLanguage() != 'en') {
-                changeLanguage("en", function () { englishPdf(isChineese, resolve, defer)})
-            }
-            else
-            {
-                englishPdf(isChineese, resolve, defer);
-            }
-            
+            setTimeout(function () {
+                if (valueService.getLanguage() != 'en') {
+                    changeLanguage("en", function () { englishPdf(isChineese, resolve, defer) })
+                }
+                else {
+                    englishPdf(isChineese, resolve, defer);
+                }
 
-        }, 100);
 
-        return defer.promise;
+            }, 100);
+
+            return defer.promise;
+        }
+       
     }
     function englishPdf(isChineese, resolve, defer)
     {
