@@ -72,7 +72,7 @@
 
     $scope.customerName;
 
-    $scope.userType = valueService.getUserType().clarityType;
+    $scope.userType =valueService.getUserType().clarityType;
 
     $scope.engineerName = valueService.getUserType().name;
 
@@ -4496,7 +4496,7 @@
 
                 var j = 0, xTimeField = 25, yTimeField = yAttachField + rectAttachHeight + 25, rectTimeWidth = 660,
                     rectTimeHeight = 29 * $scope.summary.timeArray.length, yTimeFieldName = yTimeField + 20,
-                    yTimeFieldValue = yTimeFieldName+20;
+                    yTimeFieldValue = yTimeFieldName;
                 if (rectTimeHeight == 0)
                 {
                     rectTimeHeight = 30;
@@ -4581,8 +4581,8 @@
                     //{
                     //    yTimeFieldValue = yTimeFieldValue + 20 * ++index;
                     //}
-                    yTimeFieldValue = yTimeFieldValue + 5 * ++index;
-
+                    yTimeFieldValue = yTimeFieldValue + 20;
+                    ++index;
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
                     if (yTimeFieldValue + 20 > canvas.height) {
@@ -4725,7 +4725,7 @@
 
                 //Expenses heading
 
-                rectTimeHeight = yTimeFieldValue - (yTimeFieldName - 20 + 5);
+                rectTimeHeight = yTimeFieldValue - (yTimeFieldName - 30 + 5);
                 ctx.strokeRect(20, yTimeFieldName - 20 + 5, 1090, rectTimeHeight);
                 var k = 0, xExpenseField = 25, yExpenseField = yTimeField + rectTimeHeight + 25, rectExpenseWidth = 660,
                     rectExpenseHeight = 22 * $scope.summary.expenseArray.length, yExpenseFieldName = yExpenseField + 25,
@@ -5665,7 +5665,7 @@
                         if ($scope.summary.timeArray[j - 1].Shift_Code != undefined)
                         {
                             var splitShiftCode = doc1.splitTextToSize($filter('translate')($scope.summary.timeArray[j - 1].Shift_Code), (xTimeField + (timeWidth * coloumnNo)) - (xTimeField + (timeWidth * --coloumnNo)));
-                            //coloumnNo++;
+                            coloumnNo++;
                             //doc1.text(xTimeField + (timeWidth * coloumnNo++), yTimeFieldValue, splitShiftCode);
                             var xShiftcode = xTimeField + (timeWidth * coloumnNo++);
                             var yShiftCode = yTimeFieldValue;
