@@ -3172,7 +3172,7 @@
 
                     localService.updateTaskSubmitStatus(taskObject, function (result) {
 
-                        $rootScope.dbCall = false;
+                        
 
                         localService.getTaskList(function (response) {
 
@@ -3191,7 +3191,9 @@
                                     response.push(internalOFSCJSONObject);
                                 });
 
-                                constantService.setTaskList(response);                             
+                                constantService.setTaskList(response);   
+
+                                $rootScope.dbCall = false;
                             });
                         });
 
