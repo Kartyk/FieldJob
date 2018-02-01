@@ -4,6 +4,7 @@
   "Task Number": "任务单号",
   "Job Description": "工作描述",
   "Start Date": "Estimated 服务日期",
+  "StartDate": "服务日期",
   "End Date": "Estimated 结束日期",
   "Duration (HH:MM)": "服务持续时间(小时：分钟)",
   "Product Line": "产品系列",
