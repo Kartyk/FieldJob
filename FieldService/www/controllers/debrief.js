@@ -2803,8 +2803,8 @@
             $scope.languageUsed="en"
 
         promise = generatePDF();
-        $rootScope.dbCall = false;
-      //submit(promise);
+        //$rootScope.dbCall = false;
+        submit(promise);
     };
 
     function submit(promise) {
@@ -3172,7 +3172,6 @@
 
                     localService.updateTaskSubmitStatus(taskObject, function (result) {
 
-                        $rootScope.dbCall = false;
 
                         localService.getTaskList(function (response) {
 
@@ -3191,7 +3190,9 @@
                                     response.push(internalOFSCJSONObject);
                                 });
 
-                                constantService.setTaskList(response);                             
+                                constantService.setTaskList(response);   
+
+                                $rootScope.dbCall = false;
                             });
                         });
 
@@ -4093,7 +4094,7 @@
 
                 ctx.fillStyle = "#000";
                 ctx.font = 'bold 13px sans-serif ';
-                ctx.fillText('服务日期', 280, 118);
+                ctx.fillText('Estimated 服务日期', 280, 118);
 
                 ctx.fillStyle = "#000";
                 ctx.font = '13px sans-serif ';
@@ -4103,7 +4104,7 @@
 
                 ctx.fillStyle = "#000";
                 ctx.font = 'bold 13px sans-serif ';
-                ctx.fillText('结束日期', 530, 118);
+                ctx.fillText('Estimated 结束日期', 530, 118);
 
                 ctx.fillStyle = "#000";
                 ctx.font = '13px sans-serif ';
@@ -4117,7 +4118,7 @@
 
                 ctx.fillStyle = "#000";
                 ctx.font = 'bold 13px sans-serif ';
-                ctx.fillText('服务持续时间', 810, 118);
+                ctx.fillText('Estimated 服务持续时间', 810, 118);
 
                 ctx.fillStyle = "#000";
                 ctx.font = '13px sans-serif ';
@@ -5277,7 +5278,7 @@
 
                 ctx.fillStyle = "#000";
                 ctx.font = 'bold 13px sans-serif ';
-                ctx.fillText('Start Date', 280, 118);
+                ctx.fillText('Estimated Start Date', 280, 118);
 
                 ctx.fillStyle = "#000";
                 ctx.font = '13px sans-serif ';
@@ -5287,7 +5288,7 @@
 
                 ctx.fillStyle = "#000";
                 ctx.font = 'bold 13px sans-serif ';
-                ctx.fillText('End Date', 530, 118);
+                ctx.fillText('Estimated End Date', 530, 118);
 
                 ctx.fillStyle = "#000";
                 ctx.font = '13px sans-serif ';
@@ -5301,7 +5302,7 @@
 
                 ctx.fillStyle = "#000";
                 ctx.font = 'bold 13px sans-serif ';
-                ctx.fillText('Duration', 810, 118);
+                ctx.fillText('Estimated Duration', 810, 118);
 
                 ctx.fillStyle = "#000";
                 ctx.font = '13px sans-serif ';
@@ -6527,7 +6528,7 @@
                 doc1.text(345, 110, enddate);
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(510, 100, $filter('translate')('Duration'))
+                doc1.text(510, 100, $filter('translate')('Estimated Duration'))
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
                 console.log($scope.summary.taskObject.times[0].Duration)
