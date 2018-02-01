@@ -173,8 +173,8 @@
   "Contact Name": "Nom du contact ",
   "Phone Number": "Numéro de téléphone",
   "Job Description": "Description du poste",
-  "Start Date": "Date de début",
-  "End Date": "Date de fin",
+  "Start Date": "Estimated Date de début",
+  "End Date": "Estimated Date de fin",
   "Product Line": "Gamme de produits",
   "System ID / Serial": "ID système / N° de série ",
   "Customer Site": "Site du client",
@@ -258,9 +258,8 @@
   "Contact Preference": "Contact Preference",
   "Sign in using your Emerson Log in Credentials": "Sign in using your Emerson Log in Credentials",
   "Password": "Password",
-  "CUSTOMER REPRESENTATIVE": "CUSTOMER REPRESENTATIVE"
-
-
-
+  "CUSTOMER REPRESENTATIVE": "CUSTOMER REPRESENTATIVE",
+  "Duration": "Duration",
+  "Estimated Duration": "Estimated Duration"
 
 }

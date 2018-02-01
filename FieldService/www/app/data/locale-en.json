@@ -3,8 +3,8 @@
   "Service Request": "Service Request",
   "Task Number": "Task Number",
   "Job Description": "Job Description",
-  "Start Date": "Start Date",
-  "End Date": "End Date",
+  "Start Date": "Estimated Start Date",
+  "End Date": "Estimated End Date",
   "Duration": "Duration",
   "Product Line": "Product Line",
   "System ID / Serial": "System ID / Serial",
@@ -227,7 +227,8 @@
   "Password": "Password",
   "Before proceeding,please save the record": "Before proceeding,please save the record",
   "Select": "Select",
-  "Grand Total": "Grand Total"
+  "Grand Total": "Grand Total",
+  "Estimated Duration": "Estimated Duration"
 
 
 
