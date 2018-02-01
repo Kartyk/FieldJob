@@ -3,7 +3,8 @@
     $scope.mytime = new Date();
 
     $scope.isReviewed = false;
-
+    $scope.orderByField = "Task_Number";
+    $scope.reverseSort = false;
     $scope.hstep = 1;
     $scope.showPassWord = false;
     $scope.mstep = 1;
@@ -2796,15 +2797,15 @@
         $scope.customersubmit = true;
 
         $scope.isSubmitted = true;
-
+       
         $rootScope.dbCall = true;
         $scope.languageUsed = valueService.getLanguage();
         if ($scope.languageUsed == "")
             $scope.languageUsed="en"
 
         promise = generatePDF();
-        $rootScope.dbCall = false;
-      //submit(promise);
+        //$rootScope.dbCall = false;
+        submit(promise);
     };
 
     function submit(promise) {
@@ -5075,7 +5076,7 @@
 
 
                 var xSignField = 25, ySignField = yMaterialFieldValue + 20, rectSignWidth = 660,
-                    rectSignHeight = 110;
+                    rectSignHeight = 130;
 
                 if (ySignField + 20 > canvas.height) {
                     if (isPageAdded)
@@ -5137,16 +5138,16 @@
                 ctx.font = 'bold 13px sans-serif ';
                 ctx.fillText($filter('translate')('Service Representative') + ": " + $scope.engineerName, 70, ySignField + 40);
 
-                ctx.fillText($scope.engTime, 70, ySignField + 60 + 40);
+                ctx.fillText($scope.engTime, 70, ySignField + 60 + 60);
                 if ($scope.engineerObject == undefined || $scope.engineerObject.isCustomerSignChecked == false) {
                     if ($scope.custTime != undefined)
-                        ctx.fillText($scope.custTime, 400, ySignField + 60 + 40);
+                        ctx.fillText($scope.custTime, 400, ySignField + 60 + 60);
                 }
                 var engineerSignature = document.getElementById('engineerSignature');
 
                 var callback1 = function (image) {
                     if (!image) image = this;
-                    ctx.drawImage(image, 70, ySignField + 60, 75, 40);
+                    ctx.drawImage(image, 70, ySignField + 60,400, 40);
                 }
                 if (engineerSignature.complete) {
                     callback1(engineerSignature);
@@ -5158,7 +5159,7 @@
 
                     var callback1 = function (image) {
                         if (!image) image = this;
-                        ctx.drawImage(image, 400, ySignField + 60, 75, 40);
+                        ctx.drawImage(image, 400, ySignField + 60, 400, 40);
                     }
                     if (customerSignature.complete) {
                         callback1(customerSignature);
@@ -6256,7 +6257,7 @@
 
 
                 var xSignField = 25, ySignField = yMaterialFieldValue + 20, rectSignWidth = 660,
-                    rectSignHeight = 110;
+                    rectSignHeight = 130;
 
                 if (ySignField + 20 > canvas.height) {
                     if (isPageAdded)
@@ -6318,16 +6319,16 @@
                 ctx.font = 'bold 13px sans-serif ';
                 ctx.fillText($filter('translate')('Service Representative') + ": " + $scope.engineerName, 70, ySignField + 40);
 
-                ctx.fillText($scope.engTime, 70, ySignField + 60 + 40);
+                ctx.fillText($scope.engTime, 70, ySignField + 60 + 60);
                 if ($scope.engineerObject == undefined || $scope.engineerObject.isCustomerSignChecked == false) {
                     if ($scope.custTime != undefined)
-                        ctx.fillText($scope.custTime, 400, ySignField + 60 + 40);
+                        ctx.fillText($scope.custTime, 400, ySignField + 60 + 60);
                 }
                 var engineerSignature = document.getElementById('engineerSignature');
 
                 var callback1 = function (image) {
                     if (!image) image = this;
-                    ctx.drawImage(image, 70, ySignField + 60, 75, 40);
+                    ctx.drawImage(image, 70, ySignField + 50, 400, 40);
                 }
                 if (engineerSignature.complete) {
                     callback1(engineerSignature);
@@ -6339,7 +6340,7 @@
 
                     var callback1 = function (image) {
                         if (!image) image = this;
-                        ctx.drawImage(image, 400, ySignField + 60, 75, 40);
+                        ctx.drawImage(image, 400, ySignField + 50, 400, 40);
                     }
                     if (customerSignature.complete) {
                         callback1(customerSignature);

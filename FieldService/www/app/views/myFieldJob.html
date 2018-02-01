@@ -1,3 +1,13 @@
+<style>
+    .glyphicon {
+        font-family: "Glyphicons Halflings" !important;
+        font-size:11px;
+    }
+    .sortanchor:hover{
+        text-decoration:none !important;
+        cursor:pointer !important;
+    }
+</style>
 <div class="showTaskList">
     <!-- <md-toolbar>
         <div class="md-toolbar-tools toolbar">
@@ -88,53 +98,78 @@
                 <table class="table">
                     <thead>
                         <tr class="fieldjob-headRow">
-                            <th style="width:10%;" class="text-left"><span translate="Field Job"> #</span></th>
-                            <!-- <th md-column><span>Field Job Details</span></th> -->
-                            <th style="width:24%;" class="text-left middle paddingleft10"><span translate="Customer"></span></th>
-                            <th style="width:40%;" class="text-left paddingleft10"><span translate="Location"></span></th>
-                            <th style="width:15%;" class="text-left paddingleft10" style="width: 10%;"><span translate="Start Date"></span></th>
-                            <th style="width:10%;">
-                                <div class="dropdown">
-                                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                                        <label translate="Status" ng-show="selectedTaskStatus==undefined"></label>
-                                        <label translate="{{selectedTaskStatus}}" ng-show="selectedTaskStatus!=undefined"></label>
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu taskStatusList" >
-                                        <li ng-repeat="status in getStatus" ng-model="selectedTaskStatus" translate="{{status}}" ng-click="changeTaskStatus(status)"></li>
-                                        <!--<li><a href="#">HTML</a></li>
-                                        <li><a href="#">CSS</a></li>
-                                        <li><a href="#">JavaScript</a></li>
-                                        <li class="divider"></li>
-                                        <li class="dropdown-header">Dropdown header 2</li>
-                                        <li><a href="#">About Us</a></li>-->
-                                    </ul>
-                                </div>
+                               
+                                <th style="width:15%;" class="text-left" >
+                                    <a class="sortanchor"  ng-click="orderByField='Task_Number'; reverseSort = !reverseSort">
+                                        <span translate="Field Job">
+                                        <!--<span ng-show="orderByField == 'Task_Number'">-->
+                                               <!--</span><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>-->
+                                        <!--</span>-->
+                                           
+                                        </span>
+                                        <span  ng-if="orderByField == 'Task_Number' && reverseSort"  class="glyphicon glyphicon-triangle-bottom"></span>
+                                        <span   ng-if="orderByField == 'Task_Number' && !reverseSort" class="glyphicon glyphicon-triangle-top"></span>
+                                    </a>
+                                </th>
+                                
+                                <!-- <th md-column><span>Field Job Details</span></th> -->
+                                <th style="width:24%;" class="text-left middle paddingleft10"><span translate="Customer"></span></th>
+                                <th style="width:40%;" class="text-left paddingleft10"><span translate="Location"></span></th>
+                                <th style="width:15%;" class="text-left paddingleft10" style="width: 10%;">
+                               
+                                    <a class="sortanchor" ng-click="orderByField='Start_Date'; reverseSort = !reverseSort">
+                                        <span translate="Start Date">
+                                            #
+                                            <span ng-show="orderByField == 'Start_Date'">
+                                            </span><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
+                                        </span>
+                                        <span ng-if="orderByField == 'Start_Date' && !reverseSort" class="glyphicon glyphicon-triangle-bottom"></span>
+                                        <span ng-if="orderByField == 'Start_Date' && reverseSort" class="glyphicon glyphicon-triangle-top"></span>
+                                    </a>
+                                </th>
+                                <th style="width:10%;">
+                                    <div class="dropdown">
+                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                            <label translate="Status" ng-show="selectedTaskStatus==undefined"></label>
+                                            <label translate="{{selectedTaskStatus}}" ng-show="selectedTaskStatus!=undefined"></label>
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu taskStatusList">
+                                            <li ng-repeat="status in getStatus" ng-model="selectedTaskStatus" translate="{{status}}" ng-click="changeTaskStatus(status)"></li>
+                                            <!--<li><a href="#">HTML</a></li>
+                    <li><a href="#">CSS</a></li>
+                    <li><a href="#">JavaScript</a></li>
+                    <li class="divider"></li>
+                    <li class="dropdown-header">Dropdown header 2</li>
+                    <li><a href="#">About Us</a></li>-->
+                                        </ul>
+                                    </div>
+
                                 <!--<md-select ng-model="selectedTaskStatus" ng-change="changeTaskStatus(selectedTaskStatus)" placeholder="Status" >
                                     <md-option class="status-options" ng-value="status" ng-repeat="status in getStatus" translate="{{status}}"></md-option>
                                 </md-select>-->
-                               
-                                   
-                                        
-                                    
+
+
+
+
                                     <!--<div>-->
                                         <!--<md-input-container>-->
 
                                             <!-- <md-select-label>{{ 'Status' | translate }}</md-select-label>-->
                                             <!--<label>{{ 'Status' | translate }}</label>-->
-                                            
+
                                             <!--<md-select id="mySelect" ng-model="selectedTaskStatus" ng-change="changeTaskStatus(selectedTaskStatus)">
                                                 <md-option class="status-options" ng-value="status" ng-repeat="status in getStatus" translate="{{status}}"></md-option>
                                             </md-select>-->
                                         <!--</md-input-container>-->
                                 <!--<label translate="Status" ng-show="selectedTaskStatus==undefined"></label>-->
                                     <!--</div>-->
-                               
-                            </th>
 
-                        </tr>
+                                </th>
+
+</tr>
                     </thead>
-                    <tbody ng-repeat="task in myTaskDetails | filter: taskInput| filter: selectedTaskStatus" ng-class="{'rowSelected' : selectedTask == task}">
+                    <tbody ng-repeat="task in myTaskDetails | filter: taskInput| filter: selectedTaskStatus|orderBy:orderByField:reverseSort" ng-class="{'rowSelected' : selectedTask == task}">
 
                         <tr ng-if="task.Task_Status=='Assigned' || task.Task_Status=='Accepted' ||task.Task_Status=='Working' || task.Task_Status=='Field Job Completed' || task.Task_Status=='Completed'"
                             ng-click="onclickOfTask(task)"  class="fieldjob-body">

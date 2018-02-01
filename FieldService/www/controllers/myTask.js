@@ -161,6 +161,14 @@ app.controller('myTaskController', function ($translate, $scope, $compile, $time
                     element.addClass("assignedEvent");
                 }
             }
+            ,
+            navLinkDayClick: function (date, jsEvent) {
+                console.log('day', date.format()); // date is a moment
+                console.log('coords', jsEvent.pageX, jsEvent.pageY);
+                //$('#calendar').fullCalendar('triggerDayClick');
+                $("#calendar").fullCalendar('changeView', 'agendaDay');
+                $("#calendar").fullCalendar('gotoDate', date);
+            }
         });
     }
 
