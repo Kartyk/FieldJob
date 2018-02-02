@@ -2807,7 +2807,10 @@
         //$rootScope.dbCall = false;
         submit(promise);
     };
-
+    $scope.openResource = function (item) {
+        window.open("data:application/pdf," + encodeURI(item.data)); 
+        valueService.openFile(item.data , item.filetype);
+    };
     function submit(promise) {
 
         if (promise != undefined) {
@@ -4054,7 +4057,7 @@
 
                 ctx.fillText('T: 86-21-2892 9000', 720, 36);
 
-                ctx.fillText('F:  86-21-2892 9001', 720, 46);
+                ctx.fillText('F: 86-21-2892 9001', 720, 46);
 
                 ctx.fillText('服务热线：400-820-1996', 720, 56);
 
@@ -4269,7 +4272,7 @@
 
                 ctx.fillStyle = "#000";
                 ctx.font = 'bold 13px sans-serif ';
-                ctx.fillText('备注', 530, yNotesField1);
+                ctx.fillText('备注', 250, yNotesField1);
 
                 ctx.fillStyle = "#000";
                 ctx.font = '15px sans-serif ';
@@ -4304,7 +4307,11 @@
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
-                    var splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.notesArray[i - 1].Notes), rectNotesWidth - 530);
+                    var splitTitle
+                    if ($scope.summary.notesArray[i - 1].Notes.match(/[\u3400-\u9FBF]/))
+                        splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.notesArray[i - 1].Notes), rectNotesWidth - 430);
+                    else
+                        splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.notesArray[i - 1].Notes), rectNotesWidth - 320);
 
                     //doc1.text(xNotesField2, yNotesField1_val, splitTitle)
                     var lineheight = 15, lineno = 0;
@@ -4325,13 +4332,13 @@
                                 isPageAdded = true;
                                 lineno = 1;
                             }
-                            ctx.fillText(splitTitle[l], 530, yNotesField1_val + (lineno++ * lineheight));
+                            ctx.fillText(splitTitle[l], 250, yNotesField1_val + (lineno++ * lineheight));
                         }
                         yNotesField1_val = yNotesField1_val + lineheight * (lineno);
                         yNotesField1 = yNotesField1_val;
                     }
                     else {
-                        ctx.fillText($filter('translate')($scope.summary.notesArray[i - 1].Notes), 530, yNotesField1_val);
+                        ctx.fillText($filter('translate')($scope.summary.notesArray[i - 1].Notes), 250, yNotesField1_val);
                     }
 
                 }
@@ -4834,7 +4841,7 @@
                 ctx.font = 'bold 13px sans-serif ';
                 ctx.fillText('具体描述', 750, yMaterialFieldName);
 
-                yMaterialFieldValue = yMaterialFieldName + 15;
+                yMaterialFieldValue = yMaterialFieldName + 25;
                 index = 0;
                 while (l < $scope.summary.materialArray.length) {
                     var m = 0, n = 0, o = 0;
@@ -5120,11 +5127,11 @@
                     ctx.strokeRect(20, ySignField + 10, 1090, rectSignHeight);
                 ctx.fillStyle = "#000";
                 ctx.font = 'bold 13px sans-serif ';
-                ctx.fillText($filter('translate')('emerson'), 70, ySignField + 25);
+                ctx.fillText($filter('translate')('emerson'), 30, ySignField + 25);
 
                 ctx.fillStyle = "#000";
                 ctx.font = 'bold 13px sans-serif ';
-                ctx.fillText($filter('translate')('Conatct Name') + ": " + $scope.contactorCustname, 400, ySignField + 40);
+                ctx.fillText($filter('translate')('Conatct Name') + ": " + $scope.contactorCustname, 500, ySignField + 40);
                 // ctx.fillText($scope.contactorCustname, 450, ySignField + 25);
 
                 //ctx.fillStyle = "#000";
@@ -5133,22 +5140,22 @@
 
                 ctx.fillStyle = "#000";
                 ctx.font = 'bold 13px sans-serif ';
-                ctx.fillText($scope.summary.taskObject.Customer_Name, 400, ySignField + 25);
+                ctx.fillText($scope.summary.taskObject.Customer_Name, 500, ySignField + 25);
 
                 ctx.fillStyle = "#000";
                 ctx.font = 'bold 13px sans-serif ';
-                ctx.fillText($filter('translate')('Service Representative') + ": " + $scope.engineerName, 70, ySignField + 40);
+                ctx.fillText($filter('translate')('Service Representative') + ": " + $scope.engineerName, 30, ySignField + 40);
 
-                ctx.fillText($scope.engTime, 70, ySignField + 60 + 60);
+                ctx.fillText($scope.engTime, 30, ySignField + 60 + 60);
                 if ($scope.engineerObject == undefined || $scope.engineerObject.isCustomerSignChecked == false) {
                     if ($scope.custTime != undefined)
-                        ctx.fillText($scope.custTime, 400, ySignField + 60 + 60);
+                        ctx.fillText($scope.custTime, 500, ySignField + 60 + 60);
                 }
                 var engineerSignature = document.getElementById('engineerSignature');
 
                 var callback1 = function (image) {
                     if (!image) image = this;
-                    ctx.drawImage(image, 70, ySignField + 60,400, 40);
+                    ctx.drawImage(image, 30, ySignField + 60,400, 40);
                 }
                 if (engineerSignature.complete) {
                     callback1(engineerSignature);
@@ -5160,7 +5167,7 @@
 
                     var callback1 = function (image) {
                         if (!image) image = this;
-                        ctx.drawImage(image, 400, ySignField + 60, 400, 40);
+                        ctx.drawImage(image, 500, ySignField + 60, 400, 40);
                     }
                     if (customerSignature.complete) {
                         callback1(customerSignature);
@@ -5238,7 +5245,7 @@
 
                 ctx.fillText('T: 86-21-2892 9000', 720, 36);
 
-                ctx.fillText('F:  86-21-2892 9001', 720, 46);
+                ctx.fillText('F: 86-21-2892 9001', 720, 46);
 
                 //ctx.fillText('服务热线：400-820-1996', 720, 56);
 
@@ -5453,7 +5460,7 @@
 
                 ctx.fillStyle = "#000";
                 ctx.font = 'bold 13px sans-serif ';
-                ctx.fillText('Note Description', 530, yNotesField1);
+                ctx.fillText('Note Description', 250, yNotesField1);
 
                 ctx.fillStyle = "#000";
                 ctx.font = '15px sans-serif ';
@@ -5488,8 +5495,11 @@
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
-                    var splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.notesArray[i - 1].Notes), rectNotesWidth - 530);
-
+                    var splitTitle
+                    if ($scope.summary.notesArray[i - 1].Notes.match(/[\u3400-\u9FBF]/))
+                        splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.notesArray[i - 1].Notes), rectNotesWidth - 430);
+                    else
+                        splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.notesArray[i - 1].Notes), rectNotesWidth - 320);
                     //doc1.text(xNotesField2, yNotesField1_val, splitTitle)
                     var lineheight = 15, lineno = 0;
                     if (splitTitle.length > 1) {
@@ -5509,13 +5519,13 @@
                                 isPageAdded = true;
                                 lineno = 1;
                             }
-                            ctx.fillText(splitTitle[l], 530, yNotesField1_val + (lineno++ * lineheight));
+                            ctx.fillText(splitTitle[l], 250, yNotesField1_val + (lineno++ * lineheight));
                         }
                         yNotesField1_val = yNotesField1_val + lineheight * (lineno);
                         yNotesField1 = yNotesField1_val;
                     }
                     else {
-                        ctx.fillText($filter('translate')($scope.summary.notesArray[i - 1].Notes), 530, yNotesField1_val);
+                        ctx.fillText($filter('translate')($scope.summary.notesArray[i - 1].Notes), 250, yNotesField1_val);
                     }
 
                 }
@@ -6015,7 +6025,7 @@
                 ctx.font = 'bold 13px sans-serif ';
                 ctx.fillText('Description', 800, yMaterialFieldName);
 
-                yMaterialFieldValue = yMaterialFieldName + 15;
+                yMaterialFieldValue = yMaterialFieldName + 25;
                 index = 0;
                 while (l < $scope.summary.materialArray.length) {
                     var m = 0, n = 0, o = 0;
@@ -6301,11 +6311,11 @@
                     ctx.strokeRect(20, ySignField + 10, 1090, rectSignHeight);
                 ctx.fillStyle = "#000";
                 ctx.font = 'bold 13px sans-serif ';
-                ctx.fillText($filter('translate')('emerson'), 70, ySignField + 25);
+                ctx.fillText($filter('translate')('emerson'), 30, ySignField + 25);
 
                 ctx.fillStyle = "#000";
                 ctx.font = 'bold 13px sans-serif ';
-                ctx.fillText($filter('translate')('Conatct Name') + ": " + $scope.contactorCustname, 400, ySignField + 40);
+                ctx.fillText($filter('translate')('Conatct Name') + ": " + $scope.contactorCustname, 550, ySignField + 40);
                 // ctx.fillText($scope.contactorCustname, 450, ySignField + 25);
 
                 //ctx.fillStyle = "#000";
@@ -6314,22 +6324,22 @@
 
                 ctx.fillStyle = "#000";
                 ctx.font = 'bold 13px sans-serif ';
-                ctx.fillText($scope.summary.taskObject.Customer_Name, 400, ySignField + 25);
+                ctx.fillText($scope.summary.taskObject.Customer_Name, 550, ySignField + 25);
 
                 ctx.fillStyle = "#000";
                 ctx.font = 'bold 13px sans-serif ';
-                ctx.fillText($filter('translate')('Service Representative') + ": " + $scope.engineerName, 70, ySignField + 40);
+                ctx.fillText($filter('translate')('Service Representative') + ": " + $scope.engineerName, 30, ySignField + 40);
 
-                ctx.fillText($scope.engTime, 70, ySignField + 60 + 60);
+                ctx.fillText($scope.engTime, 30, ySignField + 60 + 60);
                 if ($scope.engineerObject == undefined || $scope.engineerObject.isCustomerSignChecked == false) {
                     if ($scope.custTime != undefined)
-                        ctx.fillText($scope.custTime, 400, ySignField + 60 + 60);
+                        ctx.fillText($scope.custTime, 550, ySignField + 60 + 60);
                 }
                 var engineerSignature = document.getElementById('engineerSignature');
 
                 var callback1 = function (image) {
                     if (!image) image = this;
-                    ctx.drawImage(image, 70, ySignField + 50, 400, 40);
+                    ctx.drawImage(image, 30, ySignField + 50, 400, 40);
                 }
                 if (engineerSignature.complete) {
                     callback1(engineerSignature);
@@ -6341,7 +6351,7 @@
 
                     var callback1 = function (image) {
                         if (!image) image = this;
-                        ctx.drawImage(image, 400, ySignField + 50, 400, 40);
+                        ctx.drawImage(image, 550, ySignField + 50, 400, 40);
                     }
                     if (customerSignature.complete) {
                         callback1(customerSignature);
@@ -6641,7 +6651,7 @@
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
 
-                doc1.text(xNotesField2, yNotesField1, $filter('translate')('Note Description'));
+                doc1.text(130, yNotesField1, $filter('translate')('Note Description'));
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 doc1.text(xNotesField, yNotesField, $filter('translate')('Notes'))
@@ -6652,7 +6662,7 @@
                     //yNotesField1 = yNotesField + 22;
                     ++i;
                     yNotesField1_val = yNotesField1_val + 20;
-                    xNotesField2 = xNotesField1 + 325;
+                    xNotesField2 = 130;
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
@@ -7179,7 +7189,7 @@
                 }
 
 
-                doc1.text(50, ySignField + 25, $filter('translate')('emerson'))
+                doc1.text(25, ySignField + 25, $filter('translate')('emerson'))
 
 
 
@@ -7187,14 +7197,14 @@
                 if (isAdded) {
                     ySignField = 0;
                 }
-                doc1.text(50, ySignField + 35, $filter('translate')('Service Representative') + ": " + $scope.engineerName)
+                doc1.text(25, ySignField + 35, $filter('translate')('Service Representative') + ": " + $scope.engineerName)
                 var isAdded = checkPdfHeight(doc1, ySignField + 55, pageHeight, ySignField, rectSignWidth, rectSignHeight);
                 if (isAdded) {
                     ySignField = -10;
                 }
 
                 if ($scope.summary.engineer != undefined && $scope.summary.engineer.signature)
-                    new Promise(function () { doc1.addImage($scope.summary.engineer.signature, 'JPEG', 50, ySignField + 45, 75, 40, 'engsign', 'FAST'); });
+                    new Promise(function () { doc1.addImage($scope.summary.engineer.signature, 'JPEG', 25, ySignField + 45, 75, 40, 'engsign', 'FAST'); });
 
 
                 var isAdded = checkPdfHeight(doc1, ySignField + 55 + 40, pageHeight, ySignField, rectSignWidth, rectSignHeight);
@@ -7203,7 +7213,7 @@
                 }
                 doc1.setFontType('normal')
                 if (valueService.getEnggSignTime() != undefined)
-                    doc1.text(50, ySignField + 55 + 40, valueService.getEnggSignTime());
+                    doc1.text(25, ySignField + 55 + 40, valueService.getEnggSignTime());
                 if (valueService.getCustSignTime() != undefined)
                     doc1.text(300, ySignField + 55 + 40, valueService.getCustSignTime());
 
