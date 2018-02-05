@@ -80,7 +80,13 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                 $scope.isChina = true;
 
-                customerAddress = $scope.taskDetails.City + "," + $scope.taskDetails.Zip_Code
+                if ($scope.taskDetails.Street_Address != "")
+
+                    customerAddress = $scope.taskDetails.Street_Address + "," + $scope.taskDetails.City;
+
+                else
+
+                    customerAddress = $scope.taskDetails.City;
 
                 if (customerAddress.match(/[\u3400-\u9FBF]/)) {
 
