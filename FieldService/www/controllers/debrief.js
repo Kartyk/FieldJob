@@ -5247,7 +5247,7 @@
 
                 ctx.fillText('F: 86-21-2892 9001', 720, 46);
 
-                //ctx.fillText('服务热线：400-820-1996', 720, 56);
+                ctx.fillText('Service Hotline：400-820-1996', 720, 56);
 
                 ctx.fillStyle = "#000";
 
