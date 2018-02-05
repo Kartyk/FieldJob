@@ -3,8 +3,8 @@
   "Service Request": "服务请求",
   "Task Number": "任务单号",
   "Job Description": "工作描述",
-  "Start Date": "Estimated 服务日期",
-  "End Date": "Estimated 结束日期",
+  "Start Date": "预计的服务日期",
+  "End Date": "预计结束日期",
   "Duration (HH:MM)": "服务持续时间(小时：分钟)",
   "Product Line": "产品系列",
   "System ID / Serial": "系统序列号/产品序列号",
@@ -258,7 +258,7 @@
   "Sign in using your Emerson Log in Credentials": "请使用您艾默生账号进行登录",
   "Password": "密码",
   "Before proceeding,please save the record": "若要继续，请先保存记录",
-  "CUSTOMER REPRESENTATIVE": "CUSTOMER REPRESENTATIVE",
-  "Estimated Duration": "Estimated 服务持续时间",
+  "CUSTOMER REPRESENTATIVE": "客户代表",
+  "Estimated Duration": "预计的服务时间",
   "Start date": "服务日期"
 }
