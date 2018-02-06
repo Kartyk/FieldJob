@@ -4098,7 +4098,7 @@
 
                 ctx.fillStyle = "#000";
                 ctx.font = 'bold 13px sans-serif ';
-                ctx.fillText('Estimated 服务日期', 280, 118);
+                ctx.fillText('预计的服务日期', 280, 118);
 
                 ctx.fillStyle = "#000";
                 ctx.font = '13px sans-serif ';
@@ -4108,7 +4108,7 @@
 
                 ctx.fillStyle = "#000";
                 ctx.font = 'bold 13px sans-serif ';
-                ctx.fillText('Estimated 结束日期', 530, 118);
+                ctx.fillText('预计结束日期', 530, 118);
 
                 ctx.fillStyle = "#000";
                 ctx.font = '13px sans-serif ';
@@ -4122,7 +4122,7 @@
 
                 ctx.fillStyle = "#000";
                 ctx.font = 'bold 13px sans-serif ';
-                ctx.fillText('Estimated 服务持续时间', 810, 118);
+                ctx.fillText('预计的服务时间', 810, 118);
 
                 ctx.fillStyle = "#000";
                 ctx.font = '13px sans-serif ';
