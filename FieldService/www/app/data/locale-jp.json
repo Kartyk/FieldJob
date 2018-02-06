@@ -260,5 +260,6 @@
   "Before proceeding,please save the record": "若要继续，请先保存记录",
   "CUSTOMER REPRESENTATIVE": "客户代表",
   "Estimated Duration": "预计的服务时间",
-  "Start date": "服务日期"
+  "Start date": "服务日期",
+  "UOM": "测量单位"
 }
