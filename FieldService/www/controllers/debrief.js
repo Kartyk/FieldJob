@@ -6379,7 +6379,13 @@
     $scope.generateEnglishPDF = function (isChineese, resolve) {
         if (isChineese)
         {
-            englishCanvasPdf(resolve);
+            if (valueService.getLanguage() != 'en') {
+                changeLanguage("en", function () { englishCanvasPdf(resolve) })
+            }
+            else {
+                englishCanvasPdf(resolve);
+            }
+           
 
         }
         else
