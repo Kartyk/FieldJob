@@ -5093,12 +5093,12 @@
                     var imgData = canvas.toDataURL("image/png", 1.0);
                     new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve(); });
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    ySignField = 0;
+                    ySignField = 10;
                     //yTimeFieldName = 0;
                     //yTimeField = 0;
                     //index = 0;
                     //rectSignHeight = 29 * ($scope.summary.timeArray.length - j);
-                    ctx.strokeRect(20, -1, 1090, rectSignHeight);
+                   // ctx.strokeRect(20, -1, 1090, rectSignHeight);
                     isPageAdded = true;
                 }
                 ctx.fillStyle = "#000";
@@ -6277,12 +6277,12 @@
                     var imgData = canvas.toDataURL("image/png", 1.0);
                     new Promise(function (resolve) { doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850, 'chpdf' + count, 'FAST'); resolve(); });
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    ySignField = 0;
+                    ySignField = 10;
                     //yTimeFieldName = 0;
                     //yTimeField = 0;
                     //index = 0;
                     //rectSignHeight = 29 * ($scope.summary.timeArray.length - j);
-                    ctx.strokeRect(20, -1, 1090, rectSignHeight);
+                   // ctx.strokeRect(20, -1, 1090, rectSignHeight);
                     isPageAdded = true;
                 }
                 ctx.fillStyle = "#000";
