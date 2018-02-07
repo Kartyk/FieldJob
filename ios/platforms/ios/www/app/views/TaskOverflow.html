@@ -1,0 +1,271 @@
+<!-- <md-toolbar class="category-title" layout="row">
+    <div class="md-toolbar-tools toolbar">
+
+        <md-button class="subheader-btns btn-chng" aria-label="Learn More"  ui-sref="taskOverFlow">
+            FIELD JOB DETAILS
+        </md-button>
+        <md-button class="subheader-btns btn-chng" aria-label="Learn More"  ui-sref="todo" translate="Onsite Requirement">
+        </md-button>
+        <span flex></span>
+        <md-button class="back-btn md-raised" ng-click="goToBack()">BACK</md-button>
+        <md-button class="accept-btn md-raised" ui-sref="todo" ng-click="accept()" ng-show="$root.showAccept">ACCEPT</md-button>
+        <md-button class="accept-btn md-raised"  ng-click="$root.showTaskOrDebrief(4)" ng-show="!$root.showAccept" translate="Debrief" ng-disabled="isFutureDate"></md-button>
+
+    </div>
+</md-toolbar> -->
+<style>
+    .instalbase tr,
+    .instalbase th,
+    .instalbase td {
+        border: 0px;
+        text-align: left;
+    }
+</style>
+<nav class="navbar navbar-default navbar-fixed-top nav-noLeft sub-navbar" ng-class="{'nav-left' : hideNavLeft}">
+
+    <div class="navbar-header">
+
+        <md-button class="subheader-btns selectedTabColor" aria-label="Learn More" ui-sref="taskOverFlow" translate="Field Job Details">
+        </md-button>
+        <!--<md-button class="subheader-btns" aria-label="Learn More" ng-disabled="!$root.accepted" ng-click="goToOnsiteReq()" translate="Onsite Requirement" style="margin-left: 34px !important;position:relative;bottom:11px;">
+        </md-button>-->
+        <md-button class="subheader-btns" aria-label="Learn More" ng-click="goToOnsiteReq()" translate="Onsite Requirement" style="margin-left: 34px !important;position:relative">
+        </md-button>
+    </div>
+
+    <div class="collapse navbar-collapse" style="text-align: center;">
+
+        <div class="nav navbar-nav pull-right">
+            <button type="button" class="btn btn-default back-btn" ng-click="goToBack()" translate="Back"></button>
+            <button type="button" class="btn btn-default accept-btn" ui-sref="todo" ng-click="accept()" ng-show="$root.showAccept" style="margin-left: 20px;" translate="Accept"></button>
+            <!--<button type="button" class="btn btn-default accept-btn" ng-click="startWork()" ng-show="$root.showWorkingBtn" translate="Start Work" ng-disabled="isFutureDate" style="margin-left: 20px;"></button>-->
+            <button type="button" class="btn btn-default accept-btn" ng-click="$root.showTaskOrDebrief(4)" ng-show="!$root.showAccept " translate="Debrief" ng-disabled="isFutureDate" style="margin-left: 20px;"></button>
+
+            <!-- <a class="accept-btn md-button md-ink-ripple" ng-click="$root.showTaskOrDebrief(4)" ng-show="!$root.showAccept"  ng-disabled="isFutureDate"><span translate="Debrief"></span></a> -->
+        </div>
+
+
+    </div>
+
+</nav>
+<div class="card-parentContainer martop-106">
+    <div class="card-childContainer">
+        <div class="taskOverFlow-div">
+            <div layout="row">
+
+                <div flex="25" class="padding-right15">
+                    <div class="mylabel" translate="Service Request"></div>
+                    <div class="myvalue">{{taskDetails.Service_Request}}</div>
+                </div>
+
+                <div flex="25" class="padding-right15">
+                    <div class="mylabel" translate="Field Job Number"></div>
+                    <div class="myvalue">{{taskDetails.Task_Number}}</div>
+                </div>
+
+                <div flex="50">
+
+                    <div class="mylabel" translate="Job Description"></div>
+                    <div class="myvalue">{{taskDetails.Job_Description}}
+                    </div>
+
+                    <table class="table no-marbottom" style="margin-top: 12px;">
+                        <thead>
+                            <tr style="border-top: solid 1px #c0c0c0;">
+                                <th class="taskoverflow-tableTh" translate="Start Date"></th>
+                                <th class="taskoverflow-tableTh" translate="End Date"></th>
+                                <th class="taskoverflow-tableTh" translate="Duration"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="taskoverflow-tableTd">{{taskDetails.Start_Date| timezonefilter}}</td>
+                                <td class="taskoverflow-tableTd">{{taskDetails.End_Date| timezonefilter}}</td>
+                                <td class="taskoverflow-tableTd">{{taskDetails.Duration}}</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+
+
+
+                </div>
+            </div>
+
+
+            <!-- <div class="table margintop30 no-marbottom">
+                <table class="instalbase">
+                    <thead >
+                    <tr >
+                        <th class="mylabel" translate="Product Line"></th>
+                        <th class="mylabel">
+                            <span translate="System ID / Serial"></span>
+                            <span> #</span>
+                        </th>
+                        <th class="mylabel" >
+                         <span translate="TAG"></span>
+                         <span> #</span>
+                         </th>
+                        <th class="mylabel" >
+                            <span translate="ORGINAL PO"></span>
+                            <span>#</span>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="install in taskDetails.InstallBase" >
+                        <td class="myvalue">{{install.Product_Line|| "NO VALUE"}}</td>
+                        <td class="myvalue"> {{install.Serial_Number|| "NO VALUE"}}</td>
+                        <td class="myvalue">{{install.tagNo|| "NO VALUE"}}</td>
+                        <td class="myvalue">{{install.orginalNo|| "NO VALUE"}}</td>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div> -->
+            <div class="margintop30 no-marbottom">
+
+                <div layout="row">
+                    <!--<div flex="25" class="mylabel padding-right15">
+                        <span translate="Product Line"></span>
+                            <span> #</span>
+                    </div>-->
+                    <div flex="20" class="mylabel padding-right15">
+                        <span translate="Item Name"></span>
+
+                    </div>
+                    <div flex="20" class="mylabel padding-right15">
+                        <span translate="Item Description"></span>
+
+                    </div>
+                    <div flex="20" class="mylabel padding-right15">
+                        <span translate="System ID / Serial"></span>
+                        <span> #</span>
+                    </div>
+                    <div flex="20" class="mylabel">
+                        <span translate="TAG"></span>
+                        <span> #</span>
+                    </div>
+                    <div flex="20" class="mylabel">
+                        <span translate="ORIGINAL PO"></span>
+                        <span>#</span>
+                    </div>
+                </div>
+
+                <div layout="row" ng-repeat="install in taskDetails.InstallBase">
+                    <div flex="20" class="myvalue" style="word-wrap:break-word;margin-right:5px;">
+                        <div>{{install.Item_Number|| "NO VALUE"}}</div>
+                    </div>
+                    <div flex="20" class="myvalue" style="word-wrap:break-word;margin-right:5px;">
+                        <div>{{install.Description|| "NO VALUE"}}</div>
+                    </div>
+                    <div flex="20" class="myvalue" style="word-wrap:break-word;margin-right:5px;">
+                        <div>{{install.Serial_Number|| "NO VALUE"}}</div>
+                    </div>
+                    <div flex="20" class="myvalue" style="word-wrap:break-word;margin-right:5px;">
+                        <div>{{install.tagNo|| "NO VALUE"}}</div>
+                    </div>
+                    <div flex="20" class="myvalue" style="word-wrap:break-word">
+                        <div>{{install.orginalNo|| "NO VALUE"}}</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="margintop30">
+                <hr style="margin:0;">
+            </div>
+
+
+            <div layout="row" class="margintop30">
+                <label class="customer-site" translate="Customer Site"></label>
+            </div>
+
+            <div layout="row" class="margintop30">
+
+                <div flex="100">
+                    <div class="mylabel" translate="Customer Name"></div>
+                    <div class="myvalue">{{taskDetails.Customer_Name}}</div>
+                </div>
+            </div>
+
+
+            <div class="margintop30">
+                <table>
+                    <thead>
+                        <tr class="customer-thead">
+                            <th translate="Contact Name"></th>
+                            <th translate="Phone Number"></th>
+                            <th style="border: none;" translate="Email"></th>
+                            <th style="border: none;" translate="Contact Preference"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr class="customer-tbody" ng-repeat="contact in taskDetails.Contacts">
+                            <td>{{contact.Contact_Name}}</td>
+                            <td>
+                                <!-- <input ng-model="contact.Mobile_Phone" type="tel"/> -->
+                                WORK:{{contact.Office_Phone || "NA"}}<br/> MOBILE :{{contact.Mobile_Phone || "NA"}}</td>
+                            <td>{{contact.Email}}</td>
+                            <td>{{contact.Contacts_Preferences}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="ng-scope layout-row margintop40">
+                <div class="flex-33" style="padding-right:15px;">
+                    <div class="mylabel" translate="Street Address"></div>
+                    <div class="myvalue">{{taskDetails.Street_Address}}</div>
+                </div>
+
+                <div class="flex-20">
+                    <div class="mylabel" translate="City"></div>
+                    <div class="myvalue">{{taskDetails.City}}</div>
+                </div>
+
+                <div class="flex-20">
+                    <div class="mylabel" translate="State/Province"></div>
+                    <div class="myvalue">{{taskDetails.State}}</div>
+                </div>
+
+                <div class="flex-20">
+                    <div class="mylabel" translate="Zip Code"></div>
+                    <div class="myvalue" id="zipcode">{{taskDetails.Zip_Code}}</div>
+                </div>
+
+                <!-- <div class="flex-10">
+                    <md-button id="mapToggle" class="map-image md-primary" value="Click here"></md-button>
+                </div> -->
+                <div id="mapToggle" class="map-image md-primary" ng-click="mapClicked()" ng-class="{'mapBgImage' : mapIsClicked}"></div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-sm-12 col-md-12">
+
+                    <!--<div class="ng-scope layout-row position" id="map" style="height:300px;display: none;" ng-hide="chinaUser">
+                    </div>
+
+                    <div id="allmap" style="height:300px;display: none;" ng-show="chinaUser"></div>-->
+
+                    <div style="width:100%;height:340px;border:1px solid gray" id="googleMap" ng-show="!isChina && isVisible">
+                    </div>
+
+                    <div style="width:100%;height:340px;border:1px solid gray" id="baiduMap" ng-show="isChina && isVisible && isBaidu"></div>
+
+                    <div style="width:100%;height:340px;border:1px solid gray" id="map" ng-show="isChina && isVisible && !isBaidu"></div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+    <!--
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjsFMJ41fB77qvY_kbf0Jk1_5uSpHzQqk&callback=initMap"
+        async defer></script> -->

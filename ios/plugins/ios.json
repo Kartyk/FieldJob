@@ -1,0 +1,36 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-compat": {
+      "PACKAGE_NAME": "com.wipro"
+    },
+    "cordova-plugin-email-composer": {
+      "PACKAGE_NAME": "com.wipro"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.wipro"
+    },
+    "cordova-plugin-file-opener2": {
+      "PACKAGE_NAME": "com.wipro"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "com.wipro"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.wipro"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.wipro"
+    },
+    "cordova-sqlite-storage": {
+      "PACKAGE_NAME": "com.wipro"
+    }
+  },
+  "dependent_plugins": {}
+}

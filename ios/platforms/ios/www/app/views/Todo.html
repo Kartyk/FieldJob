@@ -1,0 +1,187 @@
+<style>
+    button[disabled]
+    {
+        opacity:0.6;
+    }
+</style>
+<nav class="navbar navbar-default navbar-fixed-top nav-noLeft sub-navbar" ng-class="{'nav-left' : hideNavLeft}">
+
+    <div class="navbar-header">
+
+        <md-button class="subheader-btns" aria-label="Learn More" ui-sref="taskOverFlow" translate="Field Job Details">
+        </md-button>
+        <md-button class="subheader-btns selectedTabColor" aria-label="Learn More" ui-sref="todo"
+                   translate="Onsite Requirement" style="margin-left: 34px !important;">
+        </md-button>
+    </div>
+
+    <div class="collapse navbar-collapse" style="text-align: center;">
+
+        <div class="nav navbar-nav pull-right">
+
+            <!-- <a class="startwork-btn md-button md-ink-ripple" ng-click="$root.showTaskOrDebrief(4)" ng-disabled="isFutureDate"><span translate="Debrief"></span></a> -->
+            <button type="button" class="btn btn-default accept-btn" ui-sref="todo" ng-click="accept()" ng-show="$root.showAccept" style="margin-left: 20px;" translate="Accept"></button>
+            <!--<button type="button" class="btn btn-default accept-btn" ng-click="startWork()" ng-show="$root.showWorkingBtn" translate="Start Work" ng-disabled="isFutureDate" style="margin-left: 20px;"></button>-->
+            <button type="button" class="btn btn-default accept-btn" ng-click="$root.showTaskOrDebrief(4)" ng-show="!$root.showAccept " translate="Debrief" ng-disabled="isFutureDate" style="margin-left: 20px;"></button>
+        </div>
+
+
+    </div>
+
+</nav>
+
+<div class="card-parentContainer martop-106">
+
+    <!-- Notes -->
+    <label class="header-labeles" translate="Notes"></label>
+    <div class="card-childContainer marginbottom30" ng-if="noteArray == undefined || noteArray.length==0">
+        <label class="note-type-label">NO DATA</label>
+    </div>
+    <div class="card-childContainer marginbottom30" ng-repeat="note in noteArray">
+
+        <div class="">
+
+            <div class="created-by">{{note.Created_By}}</div>
+            <div class="created-date">{{note.Start_Date| timezonefilter}}</div>
+            <div class="margintop10">
+                <label class="note-type-label" translate="Note Type"></label>
+                <span class="note-type-value">-{{note.Notes_type}}</span>
+            </div>
+            <div>
+                <label class="note-type-label" translate="Note Description"></label>
+                <span class="note-type-value">-{{note.Notes}}</span>
+            </div>
+
+
+        </div>
+    </div>
+    <!-- End of Notes -->
+
+    <!-- References -->
+    <label class="header-labeles" translate="References"></label>
+    <div class="card-childContainer marginbottom30" ng-if="attachmentArray == undefined || attachmentArray.length==0">
+        <label class="note-type-label">NO DATA</label>
+    </div>
+
+    <div class="card-childContainer marginbottom30" ng-if="attachmentArray != undefined && attachmentArray.length>0">
+
+        <div class="row">
+
+            <!--<div ng-repeat="res in Attachments " class="col-sm-4 text-center">
+
+                        <a ng-href="data:{{res.Content_type}};base64,{{res.base64Code}}" target="_blank" download>
+
+                                <img class="imgPad" src="images/pdf.png" alt=""
+                                     ng-if="res.User_File_Name.indexOf('.pdf')>-1"/>
+
+                                <img class="imgPad" src="images/Word_1x.png" alt=""
+                                     ng-if="res.User_File_Name.indexOf('.docx')>-1 || res.User_File_Name.indexOf('.doc')>-1"/>
+
+                                <img class="imgPad" src="images/Excel_1x.png" alt=""
+                                     ng-if="res.User_File_Name.indexOf('.xls')>-1 || res.User_File_Name.indexOf('.xlsx')>-1"/>
+
+                                <img class="imgPad" style="width:100px;height:100px"
+                                     data-ng-src="data:{{res.Content_type}};base64,{{res.base64Code}}" alt=""
+                                     ng-if="res.Content_type.indexOf('image')>-1 "/>
+
+                                <div class="margintop10">{{res.User_File_Name}}</div>
+
+                                 <div class="margintop10">
+                                    <label class="note-type-label display-block">Created by</label>
+                                    <span class="note-type-value">{{$root.uName}}</span>
+                                </div>
+                                <div class="margintop10">
+                                    <label class="note-type-label display-block">Date</label>
+                                    <span class="note-type-value">{{res.Date_Created.substr(1,19)| timezonefilter }}</span>
+                                </div>
+
+                        </a>
+
+
+                </div>-->
+
+            <div ng-repeat="item in attachmentArray " class="col-sm-4 text-center">
+
+                <a ng-click="openResource(item)" target="_blank" download>
+
+
+                    <img class="imgPad" src="images/pdf.png" alt=""
+                         ng-if="item.File_Name.indexOf('.pdf')>-1"/>
+                    <img class="imgPad" src="images/Word_1x.png" alt=""
+                         ng-if="item.File_Name.indexOf('.docx')>-1 || item.File_Name.indexOf('.doc')>-1"/>
+                    <img class="imgPad" src="images/Excel_1x.png" alt=""
+                         ng-if="item.File_Name.indexOf('.xls')>-1 || item.File_Name.indexOf('.xlsx')>-1"/>
+                    <img class="imgPad" src="images/Notepad_1x.png" alt=""
+                         ng-if="item.File_Name.indexOf('.txt')>-1"/>
+                    <img class="imgPad" src="images/PowerPoint_1x.png" alt=""
+                         ng-if="item.File_Name.indexOf('.ppt')>-1 || item.File_Name.indexOf('.pptx')>-1"/>
+                    <img class="imgPad" style="width:100px;height:100px"
+                         data-ng-src="data:{{item.contentType}};base64,{{item.base64}}" alt=""
+                         ng-if="item.contentType.indexOf('image')>-1"/>
+
+                    <div class="margintop10">{{item.File_Name}}</div>
+
+
+                    <!--<div class="margintop10">
+                       <label class="note-type-label display-block" translate="Created By"></label>
+                       <span class="note-type-value">{{$root.uName}}</span>
+                   </div>-->
+                    <div class="margintop10">
+                        <label class="note-type-label display-block" translate="Date"></label>
+                        <span class="note-type-value">{{item.Date_Created| timezonefilter }}</span>
+                    </div>
+
+                </a>
+
+            </div>
+
+
+        </div>
+    </div>
+    <!-- End of References -->
+
+    <!-- Tools and Equipments -->
+    <label class="header-labeles" translate="Tools and Equipment"></label>
+
+    <div class="marginbottom30">
+
+        <div ng-repeat="t in defaultTasks track by $index" class="tool-items">
+            <label>
+                {{t}}
+            </label>
+        </div>
+
+        <div ng-repeat="t in toolList track by $index" class="tool-items">
+            <label>
+                {{t.Tool_Name}}</label>
+            <img src="images/cancel.png" class="cancelInEquip" ng-click="delete()"/>
+
+        </div>
+
+
+    </div>
+    <!-- End of Tools and Equipments -->
+
+    <!-- Add Equipmets/Tools -->
+
+    <div class="marginbottom30" >
+        <div class="patternImg" style="height: 147px;">
+            <form name="TodoForm" class="addEquip">
+                <label class="note-type-label" translate="Add Tools/Equipment"></label>
+                <div>
+                    <div class="input-group">
+
+                        <input class="form-control" style="border-radius: 0px;" id="fieldTool"
+                               ng-model="title" name="title" type="text" required input-max-length='50' max-input/>
+                        <button class="input-group-addon addlist-btn summary-report-donebtn" ng-click="add()" ng-disabled="$root.showAccept" translate="Add List"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+    <!-- End of Add Equipmets/Tools -->
+
+</div>
