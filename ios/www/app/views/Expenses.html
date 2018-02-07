@@ -41,7 +41,7 @@
                                     id="expense-type"
                                     ng-model="item.Expense_Type"
                                     ng-options="x as x.Value | translate for x  in item.expenseDefault.expenseType.values track by x.ID" ng-change="setExpenseItem(item)">
-                                <option value="" disabled selected>Select Expense Type</option>
+                                <option value="" disabled selected translate="Select Expense Type"></option>
                             </select>
                         </div>
                         <!--<span style="color:red" ng-show="expeseform.expensetype.$error.required">
@@ -76,7 +76,7 @@
                         <div flex="100">
                             <select class="form-control select-debrief" ng-model="item.Charge_Method"
                                     ng-options="x as x.Value | translate for x in item.expenseDefault.chargeMethod.values  track by x.ID" ng-change="setChargeMethodForExpense(item)">
-                                <option value="" disabled selected>Select Charge Method</option>
+                                <option value="" disabled selected translate="Select Charge Method"></option>
                             </select>
                         </div>
                     </div>
@@ -91,7 +91,7 @@
                 <div layout="row" layout-wrap>
                     <div flex="60" style="margin-left:36%">
                         <div flex="20" class="debrief-items-NC" style="display:inline-block;padding-right:0px !important" ng-show="item.Expense_Type.Value=='Mileage'">
-                            <label flex="100" class="label-my" translate="{{item.expenseDefault.distance.title}}"></label>
+                            <label flex="100" class="label-my" translate="Distance"></label>
                             <div flex="70">
                                 <input type="text" class="form-control" ng-model="item.Distance" valid-amount />
 
@@ -102,7 +102,7 @@
                             <div flex="100">
                                 <select class="form-control select-debrief" ng-model="item.UOM"
                                         ng-options="x as x.Value for x in item.expenseDefault.uom.values track by x.ID" ng-change="setUOM(item)">
-                                    <option value="" disabled selected>Select</option>
+                                    <option value="" disabled selected translate="Select"></option>
                                 </select>
 
                             </div>
@@ -125,19 +125,19 @@
             <span flex></span>
             <span style="visibility:hidden">{{ $root.expenseformValid = expeseform.$valid}}</span>
           
-            <button ng-if="isEditExpense==0" style="margin-top:5px;"  class="add-button" ng-click="addObject('Expenses',true,item)" ng-disabled="$root.completedTask || !expeseform.$valid ||isReviewed" translate="Add"></button>
-            <button ng-if="isEditExpense==1" style="margin-top:5px;" class="add-button" ng-click="saveObject('Expenses',true,item)" ng-disabled="$root.completedTask || !expeseform.$valid ||isReviewed" translate="Save"></button>
+            <button ng-if="isEditExpense==0" style="margin-top:5px;"  class="add-button" ng-click="addObject('Expenses',true,item)" ng-disabled="$root.completedTask || !expeseform.$valid " translate="Add"></button>
+            <button ng-if="isEditExpense==1" style="margin-top:5px;" class="add-button" ng-click="saveObject('Expenses',true,item)" ng-disabled="$root.completedTask || !expeseform.$valid" translate="save"></button>
 
             <!--<md-button class="time-font  time-delete" ng-click="deleteObject($index,item,'Expenses')" translate="delete">
             </md-button>-->
-            <button  class="copy-button" style="margin-top:5px;" ng-click="copyObject(item,'Expenses')" translate="copy" ng-disabled="$root.completedTask || !expeseform.$valid ||isReviewed"></button>
+            <button  class="copy-button" style="margin-top:5px;" ng-click="copyObject(item,'Expenses')" translate="copy" ng-disabled="$root.completedTask || !expeseform.$valid"></button>
             <span flex></span>
             <!--<md-button class="time-font time-add summary-report-donebtn" translate="NEXT" ng-click="Next('Expenses')"></md-button>-->
         </section>
 
 
     </div>
-    <div class="card-childContainer marginbottom30" ng-show="!isReviewed" style="margin-top:20px" ng-if="expenseArraySummary!=undefined && expenseArraySummary.length>0">
+    <div class="card-childContainer marginbottom30"  style="margin-top:20px" ng-if="expenseArraySummary!=undefined && expenseArraySummary.length>0">
 
 
         <table class="table no-marbottom noborder">

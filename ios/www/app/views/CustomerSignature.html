@@ -4,20 +4,19 @@
         float: left;
         width: 100px;
     }
-
-        div.resources:hover {
-        }
-
-        div.resources img {
-            width: 75px;
-            height: 100px;
-        }
-
+    
+    div.resources:hover {}
+    
+    div.resources img {
+        width: 75px;
+        height: 100px;
+    }
+    
     div.desc {
         padding: 15px;
         text-align: center;
     }
-
+    
     #tasksdone {
         margin: auto;
         top: 0;
@@ -25,6 +24,7 @@
         right: 0;
         bottom: 0;
     }
+    
     button[disabled].summary-report-donebtn {
         opacity: 0.5 !important;
     }
@@ -85,7 +85,7 @@
                 <div class="col-md-12">
                     <div class="col-md-4 col-lg-4">
                         <div class="mylabel font-size" translate="ENTER CUSTOMER PRINT NAME"></div>
-                        <input class="inputFieldsMaterial" id="customerName" ng-model="customerName" name="customerName" ng-disabled="isSubmitted" ng-change="custName(customerName)"/>
+                        <input class="inputFieldsMaterial" id="customerName" ng-model="customerName" name="customerName" ng-disabled="isSubmitted" ng-change="custName(customerName)" />
                     </div>
 
                     <div class="col-md-4 col-lg-4">
@@ -95,7 +95,7 @@
 
                     <div class="col-md-4 col-lg-4">
                         <div class="mylabel font-size" translate="Email"></div>
-                        <input type="text" class="inputFieldsMaterial" id="customerMail" name="customerMail" ng-disabled="isSubmitted" ng-model="customerEMail" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"  />
+                        <input type="text" class="inputFieldsMaterial" id="customerMail" name="customerMail" ng-disabled="isSubmitted" ng-model="customerEMail" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" />
                         <!--  <span style="color:Red" ng-show="signatureForm.customerMail.$error.required"> Required! </span> -->
                         <span style="color:Red" ng-show="signatureForm.customerMail.$dirty&&signatureForm.customerMail.$error.pattern" translate="Please Enter Valid Email"></span>
                     </div>
@@ -106,51 +106,51 @@
             <div>
                 <label class="mylabel font-size" translate="{{customerText}}" ng-if="!engineerObject.isCustomerSignChecked"></label>
                 <label class="mylabel font-size" translate="{{customerCommentText}}" ng-if="engineerObject.isCustomerSignChecked"></label>
-               
+
             </div>
-            
-           
-                
-                <textarea ng-if="engineerObject.isCustomerSignChecked" class="form-control text-area margintop25" rows="5" id="customerSign" max-input
-                          ng-model="engineerObject.customerComments" input-max-length='4000'></textarea>
-            
-            
+
+
+
+            <textarea ng-if="engineerObject.isCustomerSignChecked" class="form-control text-area margintop25" rows="5" id="customerSign" max-input ng-model="engineerObject.customerComments" input-max-length='4000'></textarea>
+
+
 
             <div style="height: 220px;width:100%" ng-if="!engineerObject.isCustomerSignChecked">
                 <signature-pad accept="accept" clear="clear" height="220" width="1050" dataurl="dataurl" ng-touchend="updateTime('cust')" disabled="isSubmitted || $root.completedTask"></signature-pad>
-                 <label ng-bind="custTime"></label>
+                <label ng-bind="custTime"></label>
             </div>
             <hr>
             <div class="layout-row">
                 <!--             <div class="flex-30" ng-click="clear()" style="width:100px" ng-disabled="isSubmitted">Clear</div> -->
                 <div class="flex-15">
-                    
+
                     <md-button class="time-font time-add summary-report-donebtn " style="margin:0px" translate="BACK" ng-click="goPreviousTab('Customer Signature')"></md-button>
-                   
+
                 </div>
                 <!-- <div class="flex-15">
                   <button  id="addBtn" ng-click="signature = accept()" style="width:100px">Save Sign</button>
                 </div> -->
-                <div class="flex-55 smmary-report-confirm" style="margin-top: 0px">
+                <div class="flex-55 smmary-report-confirm">
                     <label translate="I acknowledge that services have been performed as indicated."></label>
-                    <div ng-show="summary.engineer.signature=='' || summary.engineer.signature==undefined"> <label style="font-weight:normal;color:red" translate="Please complete Service Representative Signature on the 'Emerson Signature' tab."></label></div>
-                    <div ng-show="!summary.noteType" > <label style="font-weight:normal;color:red" translate="Please add Action Taken note in Notes tab"></label></div>
+                    <div ng-show="summary.engineer.signature=='' || summary.engineer.signature==undefined"> <label style="font-weight:normal;color:red" translate="Please complete Service Representative signature on the 'Emerson Signature' tab."></label></div>
+                    <div ng-show="!summary.noteType"> <label style="font-weight:normal;color:red" translate="Please add Action Taken note in Notes tab"></label></div>
                 </div>
-                <div  class="flex-15">
+                <div class="flex-15">
                     <button class="serbtn" ng-click="$root.clearcustomerSign();debriefClear()" ng-disabled="isSubmitted || $root.completedTask" translate="Clear"></button>
                 </div>
                 <div class="flex-15">
-                    <button type="submit" class="summary-report-donebtn" ng-click="custsignature = accept();customerSubmit()" style="float:right;" ng-disabled="isSubmitted || $root.completedTask || summary.engineer.signature=='' || summary.engineer.signature==undefined || !summary.noteType " translate="Submit"></button>
+                    <button type="submit" class="summary-report-donebtn" ng-click="custsignature = accept();customerSubmit()" style="float:right;" ng-disabled="isSubmitted || $root.completedTask || summary.engineer.signature=='' || summary.engineer.signature==undefined || !summary.noteType "
+                        translate="Submit"></button>
                 </div>
             </div>
             <div class="layout-row">
-                
-                <label class="mylabel font-size deny-sign">Unable to obtain signature :</label>
+
+                <label class="mylabel font-size deny-sign" translate="Unable to obtain signature"> :</label>
                 <input type="checkbox" class="checkboxRow" ng-change="ChangeText()" ng-model="engineerObject.isCustomerSignChecked">
             </div>
         </div>
     </form>
 </div>
-          <div class="result" style="display:none">
-            <img style="" id="customerSignature" ng-src="{{ $root.customersignature }}">
-        </div> 
+<div class="result" style="display:none">
+    <img style="" id="customerSignature" ng-src="{{ $root.customersignature }}">
+</div>

@@ -1,101 +1,91 @@
 <style>
-    button[disabled].engSign-Next
-    {
-        opacity:0.5 !important;
+    button[disabled].engSign-Next {
+        opacity: 0.5 !important;
     }
 </style>
 <form form-on-change="formChange()">
-<div class="card-parentContainer martop-40"> 
-    <div class="card-childContainer marginbottom30">
-      
-        <div class="row">
+    <div class="card-parentContainer martop-40">
+        <div class="card-childContainer marginbottom30">
 
-            <div class="col-md-3">
-                <div class="checkbox">
-                    <label class="checkbox-inline"><input type="checkbox" ng-model="engineerObject.followUp"
+            <div class="row">
+
+                <div class="col-md-3">
+                    <div class="checkbox">
+                        <label class="checkbox-inline"><input type="checkbox" ng-model="engineerObject.followUp"
                     ><span translate="Follow-up"
                            class="mylabel fontsize14"></span></label>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-md-3">
-                <div class="checkbox">
-                    <label class="checkbox-inline"><input type="checkbox" ng-model="engineerObject.salesQuote"
+                <div class="col-md-3">
+                    <div class="checkbox">
+                        <label class="checkbox-inline"><input type="checkbox" ng-model="engineerObject.salesQuote"
                     ><span translate="Spare Quote"
                            class="mylabel fontsize14"></span></label>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-md-3">
-                <div class="checkbox">
-                    <label class=" checkbox-inline"><input type="checkbox" ng-model="engineerObject.salesVisit"
+                <div class="col-md-3">
+                    <div class="checkbox">
+                        <label class=" checkbox-inline"><input type="checkbox" ng-model="engineerObject.salesVisit"
                     ><span translate="Sales Visit"
                            class="mylabel fontsize14"></span></label>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-md-3">
-                <div class="checkbox">
-                    <label class=" checkbox-inline"><input type="checkbox" ng-model="engineerObject.salesLead"
+                <div class="col-md-3">
+                    <div class="checkbox">
+                        <label class=" checkbox-inline"><input type="checkbox" ng-model="engineerObject.salesLead"
                     ><span translate="Sales Lead"
                            class="mylabel fontsize14"></span></label>
+                    </div>
                 </div>
+
+
             </div>
-
-
-        </div>
-        <div class="margintop30" ng-show="engineerObject.followUp">
+            <div class="margintop30" ng-show="engineerObject.followUp">
                 <label class="engSign-label" translate="Additional Information on Follow-Up"></label>
-                <textarea class="engSign-textarea" id="followUpInfo"
-                          ng-model="engineerObject.Follow_Up" max-input
-                          name="followUpInfo" input-max-length='4000'></textarea></div>
+                <textarea class="engSign-textarea" id="followUpInfo" ng-model="engineerObject.Follow_Up" max-input name="followUpInfo" input-max-length='4000'></textarea></div>
             <div class="margintop30" ng-show="engineerObject.salesQuote">
                 <label class="engSign-label" translate="Additional Information on Spare Quote"></label>
-                <textarea class="engSign-textarea" id="spareQuoteInfo"
-                          ng-model="engineerObject.Spare_Quote" max-input
-                          name="spareQuoteInfo" input-max-length='4000'></textarea></div>
+                <textarea class="engSign-textarea" id="spareQuoteInfo" ng-model="engineerObject.Spare_Quote" max-input name="spareQuoteInfo" input-max-length='4000'></textarea></div>
             <div class="margintop30" ng-show="engineerObject.salesVisit">
                 <label class="engSign-label" translate="Additional Information on Sales Visit"></label>
-                <textarea class="engSign-textarea" id="salesVisitInfo"
-                          ng-model="engineerObject.Sales_Visit" max-input
-                          name="salesVisitInfo" input-max-length='4000'></textarea></div>
+                <textarea class="engSign-textarea" id="salesVisitInfo" ng-model="engineerObject.Sales_Visit" max-input name="salesVisitInfo" input-max-length='4000'></textarea></div>
             <div class="margintop30" ng-show="engineerObject.salesLead">
                 <label class="engSign-label" translate="Additional Information on Sales Lead"></label>
-                <textarea class="engSign-textarea" id="salesLeadInfo"
-                          ng-model="engineerObject.Sales_Head" max-input
-                          name="salesLeadInfo" input-max-length='4000'></textarea></div>
-    
-    </div>
+                <textarea class="engSign-textarea" id="salesLeadInfo" ng-model="engineerObject.Sales_Head" max-input name="salesLeadInfo" input-max-length='4000'></textarea></div>
 
-<div class="card-childContainer marginbottom30">
-<label class="engSign-label no-marbottom" translate="Service Representative Signature">:*</label>
+        </div>
+
+        <div class="card-childContainer marginbottom30">
+            <label class="engSign-label no-marbottom" translate="Service Representative Signature">:*</label>
             <div class="layout-row">
                 <signature-pad accept="accept" clear="clear" height="220" width="1050" ng-touchend="updateTime('engg');updateEngSignature()" dataurl="dataurl"></signature-pad>
                 <br>
-                
+
             </div>
             <div class="layout-row marginbottom30">
                 <label ng-bind="engTime"></label>
             </div>
-           
+
             <div class="layout-row">
                 <div class="col-sm-4 padding0">
                     <md-button class="time-font time-add summary-report-donebtn " style="margin:0px" translate="BACK" ng-click="goPreviousTab('Emerson Signature')"></md-button>
                 </div>
-                <div class="col-sm-6 padding0" style="width:50% !important">
+                <div class="col-sm-6 padding0">
                     <button class="serbtn" ng-click="clear();debriefEnggClear()" translate="Clear" style="float:right"></button>
                 </div>
                 <div class="col-sm-2 padding0">
                     <button class="engSign-Next" ng-click="signature = accept(); SaveSign()" ng-disabled="summary.engineer==undefined || summary.engineer.signature=='' || summary.engineer.signature==undefined " translate="Next"></button>
                 </div>
-                
-                 
+
+
                 <!--<div>Please add signature</div>-->
-                 
+
             </div>
-   
-</div>
 
-</div>
+        </div>
+
+    </div>
 </form>
-

@@ -21,7 +21,7 @@
                         <select class="form-control select-debrief" ng-model="item.Note_Type"
                                 ng-options="x as x.Value | translate for x  in item.noteDefault.noteType.values track by x.ID"
                                 name='noteType' ng-required="true" ng-change="setNoteType(item)">
-                            <option value="" disabled selected>Select Note Type</option>
+                            <option value="" disabled selected translate="Select Note Type"></option>
                         </select>
                         <!--<span style="color:red" ng-show="notesForm.noteType.$error.required">
                                 Please select Notes Type
@@ -56,7 +56,7 @@
                         <label class="control-label label-my"
                                translate="{{item.noteDefault.noteCreator.title}}"></label>
 
-                        <input type="text" class="form-control" id="sel1" ng-model="item.Created_By" />
+                        <input type="text" class="form-control" id="sel1" ng-model="item.Created_By" ng-disabled="true" />
 
                     </div>
 
@@ -90,7 +90,7 @@
             <button ng-if="isEditNote==0" class="add-button" ng-click="addObject('Notes',true,item)"
                     translate="Add" ng-disabled="$root.completedTask || !notesForm.$valid "></button>
             <button ng-if="isEditNote==1" class="add-button" ng-click="saveObject('Notes',true,item)"
-                    translate="Save"></button>
+                    translate="save"></button>
             <!--<md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Notes')" translate="delete"></md-button>-->
             <button class="copy-button" ng-click="copyObject(item,'Notes')" translate="copy" ng-disabled="$root.completedTask || !notesForm.$valid "></button>
             <span flex></span>

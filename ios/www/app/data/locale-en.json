@@ -110,10 +110,10 @@
   "Labor": "Labor",
   "Travel- Standard": "Travel- Standard",
   "Travel- Overtime": "Travel- Overtime",
-  "Travel- DoubleTime": "Travel- Double Time",
+  "Travel- Double time": "Travel- Double Time",
   "Labor- Standard": "Labor- Standard",
   "Labor- Overtime": "Labor- Overtime",
-  "Labor- Double Time": "Labor- Double Time",
+  "Labor- Double time": "Labor- Double Time",
   "OT1": "OT1",
   "OT2": "OT2",
   "OT3": "OT3",
@@ -159,7 +159,7 @@
   "continue": "continue",
   "Serial Number": "serial number",
   "item name": "item name",
-  "Max": "Max",
+  "Max": "Max- 7MB/File and 20MB Total",
   "Service Representative Signature": "Service Representative Signature",
   "Clear": "Clear",
   "Next": "Next",
@@ -206,7 +206,32 @@
   "Item Namematerial": "Item Name",
   "End Time": "End Time",
   "Start Time": "Start Time",
-  "Service Date": "Service Date"
+  "Service Date": "Service Date",
+  "Unable to obtain signature": "Unable to obtain signature",
+  "ok": "OK",
+  "Select Language": "Select Language",
+  "Select the language to generate the Field Service Report": "Select the language to generate the Field Service Report",
+  "Emerson Signature": "Emerson Signature",
+  "Please complete Service Representative signature on the 'Emerson Signature' tab.": "Please complete Service Representative signature on the 'Emerson Signature' tab.",
+  "Select Clarity Task Name": "Select Clarity Task Name",
+  "Select Note Type": "Select Note Type",
+  "Select Charge Type": "Select Charge Type",
+  "Select Charge Method": "Select Charge Method",
+  "Select Work Type": "Select Work Type",
+  "Select Item": "Select Item",
+  "Select Time Code": "Select Time Code",
+  "Select Shift Code": "Select Shift Code",
+  "Select Expense Type": "Select Expense Type",
+  "Contact Preference": "Contact Preference",
+  "Sign in using your Emerson Log in Credentials": "Sign in using your Emerson Log in Credentials",
+  "Password": "Password",
+  "Before proceeding,please save the record": "Before proceeding,please save the record",
+  "Select": "Select",
+  "Grand Total": "Grand Total"
+
+
+
+
 
 
 }

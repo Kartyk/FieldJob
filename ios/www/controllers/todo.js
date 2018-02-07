@@ -25,74 +25,40 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
     $scope.attachmentArray = valueService.getTaskAttachment();
 
     $scope.attachments = [];
-    function convertImageToBase64(url,callback,outputFormat)
-    {
-        var attachmentObject = {};
-        var img=new Image();
-        // img.crossOrigin='Anonymous';
-        console.log(url);
-        img.onload=function()
-        {
-            var canvas=document.createElement("CANVAS");
-            var ctx=canvas.getContext('2d'),dataUrl;
-            canvas.height=this.height;
-            canvas.width=this.width;
-            ctx.drawImage(this,0,0);
-            dataUrl=canvas.toDataURL(outputFormat);
-            callback(dataUrl);
-        }
-        img.src=url;
-    }
 
     angular.forEach($scope.attachmentArray, function (attachment) {
 
-
         var attachmentObject = {};
-        var url=cordova.file.dataDirectory+attachment.File_Name;
-        attachment.contentType = attachment.File_Type;
 
-        attachment.filename = attachment.File_Name.split(".")[0];
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 
-        attachment.Date_Created = attachment.Created_Date;
-        attachment.filetype = attachment.File_Name.split(".")[1];
-        convertImageToBase64(url,function(dataUrl){
-            attachment.base64 = dataUrl.split(",")[1];
-            attachment.dataurl="data:"+attachment.contentType+";base64,"+attachment.base64
+            fs.root.getFile(attachment.File_Name, { create: true, exclusive: false }, function (fileEntry) {
 
-            $scope.$apply();
-        }.bind(attachment),attachment.File_Type)
-        
-                    console.log("LocalFileSystem.PERSISTENT"+LocalFileSystem.PERSISTENT);
-        // window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+                fileEntry.file(function (file) {
 
-        //                          fs.root.getFile(attachment.File_Name, {}, function (fileEntry) {
+                    var reader = new FileReader();
 
-        //         fileEntry.file(function (file) {
+                    reader.onloadend = function () {
 
-        //             var reader = new FileReader();
+                        console.log("Successful file read: " + this.result);
 
-        //             reader.onloadend = function (e) {
+                        attachment.base64 = this.result.split(",")[1];
 
-        //                 console.log("Successful file read: " + this.result);
+                        attachment.contentType = attachment.File_Type;
 
-        //                 //attachment.base64 = this.result.split(",")[1];
+                        attachment.filename = attachment.File_Name.split(".")[0];
 
-        //                 attachment.contentType = attachment.File_Type;
+                        attachment.Date_Created = attachment.Created_Date;
 
-        //                 attachment.filename = attachment.File_Name.split(".")[0];
+                        attachment.filetype = attachment.File_Name.split(".")[1];
 
-        //                 attachment.Date_Created = attachment.Created_Date;
+                        $scope.$apply();
+                    };
 
-        //                 attachment.filetype = attachment.File_Name.split(".")[1];
-        //                        attachment.dataurl="data:"+attachment.contentType+";base64,"+attachment.base64
-
-        //                 $scope.$apply();
-        //             };
-
-        //             reader.readAsDataURL(file);
-        //         });
-        //     });
-        // });
+                    reader.readAsDataURL(file);
+                });
+            });
+        });
     });
 
     $scope.openResource = function (item) {
@@ -280,8 +246,9 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
                 var taskObject = {
                     Task_Status: "Accepted",
                     Task_Number: valueService.getTask().Task_Number,
-                    Submit_Status: "A",
-                    Date: new Date()
+                    Submit_Status: "P",
+                    Date: new Date(),
+                    Sync_Status: "PA"
                 };
               //  valueService.showDialog("Accept");
                 localService.updateTaskSubmitStatus(taskObject, function (result) {

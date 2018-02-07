@@ -1,5 +1,7 @@
   <!-- <md-toolbar class="md-hue-2"> -->
-   
+   <style>
+      
+   </style>
           <md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect  class="tab-height">
               <md-tab ng-repeat="stage in stages" md-on-select=tabChange(stage) data-ng-if="stage.showTab">
                   <md-tab-label>
@@ -10,5 +12,37 @@
                 </md-tab-body>
               </md-tab>
           </md-tabs>
-      
-  <!--  </md-toolbar> -->
+<div class="passwordDialog" ng-show="showPassWord">
+    <div class="passwordContainer">
+        <div style="margin-top:40px;">
+            <div class="errorDiv" ng-show="loginError">
+                <img src="images/Group 5.png" /> <span >Please verify Password</span>
+            </div>
+            <div class="loginTitle" translate="Sign in using your Emerson Log in Credentials"></div>
+        </div>
+
+        <div class="form-back">
+            <form style="margin-top:20px;">
+                <!--<input type="field" placeholder="Username" id="user" ng-model="userName" required />-->
+
+                <input type="password" placeholder="Password" id="pass" ng-model='password' required ng-class="{'error': isPasswordError == true}" />
+                <div class="col-md-12">
+                    <div class="col-md-6" style="padding:5px">
+                        <button type="button" id="loginButton" ng-click="checkPassword()" style="margin-top:10px;margin-right:10px" translate="ok"></button>
+                    </div>
+                    <div class="col-md-6" style="padding:5px">
+                        <button  type="button" id="loginButton" ng-click="cancelPassword()" style="margin-top:10px;" translate="cancel"></button>
+                    </div>
+                </div>
+               
+                
+            </form>
+        </div>
+        
+    </div>
+   
+
+</div>
+
+
+    <!--  </md-toolbar> -->

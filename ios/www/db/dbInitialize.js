@@ -11,10 +11,10 @@
             location: 'default'
         });
 
-        var sqlUser = "CREATE TABLE IF NOT EXISTS User ('ID' INTEGER PRIMARY KEY  NOT NULL, 'ClarityID' TEXT, 'Currency' TEXT, 'Default_View' TEXT, 'Email' TEXT, 'Language' TEXT, 'Name' TEXT, 'OFSCId' TEXT, 'Password' TEXT, 'Time_Zone' TEXT, 'Type' TEXT, 'User_Name' TEXT, 'Work_Day' TEXT, 'Work_Hour' TEXT, 'Login_Status' TEXT, 'Sync_Status' TEXT, 'Last_Updated' TEXT, 'Last_Updated_Task' TEXT, 'Last_Updated_Internal' TEXT, 'Last_Updated_Task_Detail' TEXT, 'Last_Updated_Project' TEXT, 'Last_Updated_LOV' TEXT, 'Last_Updated_SR' TEXT, 'Last_Updated_Delete' TEXT, 'encrypt' TEXT)";
+        var sqlUser = "CREATE TABLE IF NOT EXISTS User ('ID' INTEGER PRIMARY KEY  NOT NULL, 'ClarityID' TEXT, 'Currency' TEXT, 'Default_View' TEXT, 'Email' TEXT, 'Language' TEXT, 'Name' TEXT, 'OFSCId' TEXT, 'Password' TEXT, 'Time_Zone' TEXT, 'Type' TEXT, 'User_Name' TEXT, 'Work_Day' TEXT, 'Work_Hour' TEXT, 'Login_Status' TEXT, 'Sync_Status' TEXT, 'Last_Updated' TEXT, 'Last_Updated_Task' TEXT, 'Last_Updated_Internal' TEXT, 'Last_Updated_Task_Detail' TEXT, 'Last_Updated_Project' TEXT, 'Last_Updated_LOV' TEXT, 'Last_Updated_SR' TEXT, 'Last_Updated_Delete' TEXT, 'encrypt' TEXT, 'userName' TEXT)";
 
 
-        var sqlTask = "CREATE TABLE IF NOT EXISTS Task ('Task_Number' INTEGER PRIMARY KEY  NOT NULL, 'Job_Description' TEXT, 'Duration' TEXT, 'Task_Status' TEXT, 'Customer_Name' TEXT, 'Street_Address' TEXT, 'City' TEXT, 'State' TEXT, 'Country' TEXT, 'Zip_Code' TEXT, 'Expense_Method' TEXT, 'Labor_Method' TEXT, 'Travel_Method' TEXT, 'Material_Method' TEXT, 'Service_Request' TEXT, 'Assigned' TEXT, 'Start_Date' TEXT, 'End_Date' TEXT, 'Submit_Status' TEXT, 'Email' TEXT, 'Date' TEXT, 'Type' TEXT, 'Activity_Id' TEXT, 'Work_Phone_Number' TEXT, 'Mobile_Phone_Number' TEXT, 'Address1' TEXT, 'SR_ID' TEXT, 'Name' TEXT, 'Contact_Name' TEXT, 'ResourceId' TEXT, 'Charge_Type' TEXT, 'Project_Number' TEXT)";
+        var sqlTask = "CREATE TABLE IF NOT EXISTS Task ('Task_Number' INTEGER PRIMARY KEY  NOT NULL, 'Job_Description' TEXT, 'Duration' TEXT, 'Task_Status' TEXT, 'Customer_Name' TEXT, 'Street_Address' TEXT, 'City' TEXT, 'State' TEXT, 'Country' TEXT, 'Zip_Code' TEXT, 'Expense_Method' TEXT, 'Labor_Method' TEXT, 'Travel_Method' TEXT, 'Material_Method' TEXT, 'Service_Request' TEXT, 'Assigned' TEXT, 'Start_Date' TEXT, 'End_Date' TEXT, 'Submit_Status' TEXT, 'Email' TEXT, 'Date' TEXT, 'Type' TEXT, 'Activity_Id' TEXT, 'Work_Phone_Number' TEXT, 'Mobile_Phone_Number' TEXT, 'Address1' TEXT, 'SR_ID' TEXT, 'Name' TEXT, 'Contact_Name' TEXT, 'ResourceId' TEXT, 'Charge_Type' TEXT, 'Project_Number' TEXT, 'Sync_Status' TEXT)";
 
         var sqlInternal = "CREATE TABLE IF NOT EXISTS Internal ('Activity_Id' INTEGER PRIMARY KEY  NOT NULL, 'Start_time' TEXT, 'End_time' TEXT, 'Activity_type' TEXT, 'ResourceId' TEXT)";
 
@@ -42,7 +42,7 @@
 
         var sqlNoteType = "CREATE TABLE IF NOT EXISTS NoteType ('ID' INTEGER PRIMARY KEY  NOT NULL, 'Value' TEXT, 'ResourceId' TEXT)";
 
-        var sqlWorkType = "CREATE TABLE IF NOT EXISTS WorkType ('ID' INTEGER PRIMARY KEY  NOT NULL, 'Value' TEXT, 'ResourceId' TEXT)";
+        var sqlWorkType = "CREATE TABLE IF NOT EXISTS WorkType ('ID' INTEGER PRIMARY KEY  NOT NULL, 'Value' TEXT, 'NC' TEXT, 'C' TEXT, 'ResourceId' TEXT)";
 
         var sqlItem = "CREATE TABLE IF NOT EXISTS Item ('ID' INTEGER PRIMARY KEY  NOT NULL, 'Value' TEXT, 'Type' TEXT, 'ResourceId' TEXT)";
 
@@ -51,7 +51,7 @@
         var sqlUOM = "CREATE TABLE IF NOT EXISTS UOM ('ID' INTEGER PRIMARY KEY  NOT NULL, 'Value' TEXT, 'ResourceId' TEXT)";
 
 
-        var sqlTime = "CREATE TABLE IF NOT EXISTS Time ('Time_Id' INTEGER PRIMARY KEY  NOT NULL, 'timeDefault' TEXT, 'Field_Job_Name' TEXT, 'Field_Job_Name_Id' TEXT, 'Charge_Type' TEXT, 'Charge_Type_Id' TEXT, 'Charge_Method' TEXT, 'Charge_Method_Id' TEXT, 'Work_Type' TEXT, 'Work_Type_Id' TEXT, 'Item' TEXT, 'Item_Id' TEXT, 'Description' TEXT, 'Time_Code' TEXT, 'Time_Code_Id' TEXT,'Time_Code_Value' TEXT, 'Shift_Code' TEXT, 'Shift_Code_Id' TEXT,'Shift_Code_Value' TEXT, 'Date' TEXT, 'Duration' TEXT, 'Comments' TEXT, 'Task_Number' TEXT, 'ResourceId' TEXT)";
+        var sqlTime = "CREATE TABLE IF NOT EXISTS Time ('Time_Id' INTEGER PRIMARY KEY  NOT NULL, 'timeDefault' TEXT, 'Field_Job_Name' TEXT, 'Field_Job_Name_Id' TEXT, 'Charge_Type' TEXT, 'Charge_Type_Id' TEXT, 'Charge_Method' TEXT, 'Charge_Method_Id' TEXT, 'Work_Type' TEXT, 'Work_Type_Id' TEXT, 'Item' TEXT, 'Item_Id' TEXT, 'Description' TEXT, 'Time_Code' TEXT, 'Time_Code_Id' TEXT,'Time_Code_Value' TEXT, 'Shift_Code' TEXT, 'Shift_Code_Id' TEXT, 'Shift_Code_Value' TEXT, 'Date' TEXT, 'Duration' TEXT, 'Comments' TEXT, 'Task_Number' TEXT, 'ResourceId' TEXT, 'Start_Time' TEXT, 'End_Time' TEXT)";
 
         var sqlExpense = "CREATE TABLE IF NOT EXISTS Expense ('Expense_Id' INTEGER PRIMARY KEY  NOT NULL, 'expenseDefault' TEXT, 'Date' TEXT, 'Expense_Type' TEXT, 'Expense_Type_Id' TEXT, 'Amount' TEXT, 'Currency' TEXT, 'Currency_Id' TEXT, 'Distance' TEXT, 'UOM' TEXT, 'UOM_Id' TEXT, 'Charge_Method' TEXT, 'Charge_Method_Id' TEXT, 'Justification' TEXT, 'Task_Number' TEXT, 'ResourceId' TEXT)";
 

@@ -88,14 +88,26 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                 } else {
 
-                    $scope.isBaidu = false;
+                    //$scope.isBaidu = false;
+
+                    $scope.isChina = false;
+
+                    if ($rootScope.first == undefined) {
+                        $rootScope.first = true;
+                    } else {
+                        googleMap();
+                    }
                 }
 
             } else {
 
                 $scope.isChina = false;
 
-                $scope.first = true;
+                if ($rootScope.first == undefined) {
+                    $rootScope.first = true;
+                } else {
+                    googleMap();
+                }
             }
         }
     }
@@ -129,11 +141,11 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
         } else {
 
-            if ($scope.first) {
+            if ($rootScope.first) {
 
                 googleMap();
 
-                $scope.first = false;
+                $rootScope.first = false;
             }
         }
     }
@@ -153,7 +165,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
             var latitude = 32.065315;
 
             var contextMenu = new BMap.ContextMenu();
-           
+
             map.enableScrollWheelZoom();
 
             map.enableKeyboard();
@@ -177,7 +189,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
                     longitude = point.lng;
 
-                    latitude = point.lat;                
+                    latitude = point.lat;
                 }
 
                 var pointer = new BMap.Point(longitude, latitude);
@@ -197,26 +209,45 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
             L.mapquest.key = 'E1jRKUfN0osMSzrInmuAH2glsmHmneU3';
 
-            L.mapquest.geocoding().geocode(customerAddress, createMap);
+            // L.mapquest.geocoding().geocode(customerAddress, createMap);
 
-            function createMap(error, response) {
+            geoCoder = new google.maps.Geocoder();
 
-                var location = response.results[0].locations[0];
+            var latLng = location.displayLatLng;
 
-                var latLng = location.displayLatLng;
+            geoCoder.geocode({
+                'address': $scope.taskDetails.Street_Address + "," + $scope.taskDetails.City+","+$scope.taskDetails.Zip_Code
+            }, function (results, status) {
 
-                map = L.mapquest.map('map', {
-                    center: latLng,
-                    layers: L.mapquest.tileLayer('map'),
-                    zoom: 14
-                });
+                if (status == google.maps.GeocoderStatus.OK) {
 
-                var customIcon = L.mapquest.icons.circle({
-                    primaryColor: '#3b5998'
-                });
+                    var latitude = results[0].geometry.location.lat();
 
-                L.marker(latLng, { icon: customIcon }).addTo(map);
-            }
+                    var longitude = results[0].geometry.location.lng();
+
+                    var latlng = new google.maps.LatLng(latitude, longitude);
+
+                    map = L.mapquest.map('map', {
+                        center: [latitude, longitude],
+                        layers: L.mapquest.tileLayer('map'),
+                        zoom: 14
+                    });
+
+                    var customIcon = L.mapquest.icons.circle({
+                        primaryColor: '#3b5998'
+                    });
+
+                    L.marker([latitude, longitude], { icon: customIcon }).addTo(map);
+                }
+            });
+
+            //L.mapquest.geocoding().geocode(customerAddress, createMap);
+
+            //     function createMap(error, response) {
+
+            //         var location = response.results[0].locations[8];
+
+            //     }
         }
     }
 
@@ -234,7 +265,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                 geoCoder = new google.maps.Geocoder();
 
                 geoCoder.geocode({
-                    'address': $scope.taskDetails.Zip_Code
+                    'address':  $scope.taskDetails.City + "," + $scope.taskDetails.Zip_Code
                 }, function (results, status) {
 
                     if (status == google.maps.GeocoderStatus.OK) {
@@ -451,8 +482,9 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                 var taskObject = {
                     Task_Status: "Accepted",
                     Task_Number: valueService.getTask().Task_Number,
-                    Submit_Status: "A",
-                    Date: new Date()
+                    Submit_Status: "P",
+                    Date: new Date(),
+                    Sync_Status: "PA"
                 };
 
                 localService.updateTaskSubmitStatus(taskObject, function (result) {
@@ -487,7 +519,7 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                         });
                     });
                 });
-               // valueService.showDialog("Accept");
+                // valueService.showDialog("Accept");
             }
         }
     };

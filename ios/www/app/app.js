@@ -2,13 +2,13 @@
 
 var conf = {
 
-   // apiUrl: 'https://emersonmobilecloud-a472144.mobileenv.us2.oraclecloud.com:443/mobile/custom/'
-      apiUrl: 'https://emersonmobiletestenv-a472144.mobileenv.us2.oraclecloud.com:443/mobile/custom/'
+    //apiUrl: 'https://emersonmobilecloud-a472144.mobileenv.us2.oraclecloud.com:443/mobile/custom/'
+    apiUrl: 'https://emersonmobiletestenv-a472144.mobileenv.us2.oraclecloud.com:443/mobile/custom/'
 };
 
-var app = angular.module('emerson', ['ngMaterial', 'ngLoadingSpinner', 'md.data.table', 'ui.router', 'ui.bootstrap', 'ui.calendar', 'pascalprecht.translate', 'ngFileUpload','ngTouch']);
+var app = angular.module('emerson', ['ngMaterial', 'ngLoadingSpinner', 'md.data.table', 'ui.router', 'ui.bootstrap', 'ui.calendar', 'pascalprecht.translate', 'ngFileUpload', 'ngTouch']);
 
-app.run(function ($rootScope, $location, $http, $state, localService, valueService, constantService) {
+app.run(function($rootScope, $location, $http, $state, localService, valueService, constantService) {
 
     $rootScope.local = true;
 
@@ -75,13 +75,13 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
 
         checkConnection();
 
-        localService.getUser(function (response) {
+        localService.getUser(function(response) {
 
             console.log("USER =====> " + JSON.stringify(response));
 
             if (response.length > 0) {
 
-                angular.forEach(response, function (item) {
+                angular.forEach(response, function(item) {
 
                     if (item.Login_Status == "1") {
 
@@ -101,13 +101,13 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
 
                     if (constantService.getUser().Login_Status == "1") {
 
-                        localService.getTaskList(function (response) {
+                        localService.getTaskList(function(response) {
 
                             console.log("TASKLIST " + JSON.stringify(response));
 
-                            localService.getInternalList(function (internalresponse) {
+                            localService.getInternalList(function(internalresponse) {
 
-                                angular.forEach(internalresponse, function (item) {
+                                angular.forEach(internalresponse, function(item) {
 
                                     var internalOFSCJSONObject = {};
 
@@ -159,7 +159,7 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
     }
 });
 
-app.config(function ($stateProvider, $urlRouterProvider) {
+app.config(function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.when('/dashBoard', '/dashBoard/myTask');
 
@@ -220,7 +220,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     });
 });
 
-app.config(function ($translateProvider) {
+app.config(function($translateProvider) {
 
     $translateProvider.useStaticFilesLoader({
         prefix: 'app/data/locale-',
@@ -230,9 +230,9 @@ app.config(function ($translateProvider) {
     $translateProvider.preferredLanguage('en');
 });
 
-app.filter('timezonefilter', function (constantService) {
+app.filter('timezonefilter', function(constantService) {
 
-    return function (date) {
+    return function(date) {
 
         if (date === "" || date === undefined)
             return date;
@@ -240,17 +240,17 @@ app.filter('timezonefilter', function (constantService) {
         return moment(date).format("DD-MMM-YYYY");
     }
 });
-app.directive('charRestrict', function ($filter) {
+app.directive('charRestrict', function($filter) {
 
     return {
 
         require: '?ngModel',
-        link: function (scope, elem, attrs, ctrl) {
+        link: function(scope, elem, attrs, ctrl) {
 
             if (!ctrl)
                 return;
 
-            ctrl.$parsers.unshift(function (viewValue) {
+            ctrl.$parsers.unshift(function(viewValue) {
 
                 // var transformedInput = viewValue.replace(/(\:{1,3}[^0-9])/g, '');
 
@@ -276,17 +276,17 @@ app.directive('charRestrict', function ($filter) {
         }
     };
 });
-app.directive('dateFormat', function ($filter) {
+app.directive('dateFormat', function($filter) {
 
     return {
 
         require: '?ngModel',
-        link: function (scope, elem, attrs, ctrl) {
+        link: function(scope, elem, attrs, ctrl) {
 
             if (!ctrl)
                 return;
 
-            ctrl.$parsers.unshift(function (viewValue) {
+            ctrl.$parsers.unshift(function(viewValue) {
 
                 // var transformedInput = viewValue.replace(/(\:{1,3}[^0-9])/g, '');
 
@@ -356,7 +356,7 @@ app.directive('dateFormat', function ($filter) {
     };
 });
 
-app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope', 'constantService', 'valueService', function ($interval, $timeout, $window, $rootScope, constantService, valueService) {
+app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope', 'constantService', 'valueService', function($interval, $timeout, $window, $rootScope, constantService, valueService) {
 
     'use strict';
 
@@ -366,7 +366,7 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
     return {
         restrict: 'EA',
         replace: true,
-        template: '<div class="signature" style="width: 100%; max-width:{{width}}px; height: 100%; max-height:{{height}}px;"><canvas style="display: block; margin: 0 auto;"  ng-touchend="onMouseup()"></canvas></div>',
+        template: '<div class="signature" style="width: 100%; max-width:{{width}}px; height: 100%; max-height:{{height}}px;"><canvas style="display: block; margin: 0 auto;" ng-touchend="onMouseup()" ng-mousedown="notifyDrawing({ drawing: true })"></canvas></div>',
         scope: {
             accept: '=?',
             clear: '=?',
@@ -377,9 +377,9 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
 
             notifyDrawing: '&onDrawing',
         },
-        controller: ['$scope', function ($scope) {
+        controller: ['$scope', function($scope) {
 
-            $scope.accept = function () {
+            $scope.accept = function() {
 
                 $rootScope.signature = $scope.dataurl;
 
@@ -404,7 +404,7 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
                 };
             };
 
-            $scope.onMouseup = function () {
+            $scope.onMouseup = function() {
 
                 $scope.updateModel();
 
@@ -429,9 +429,9 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
                 }
             };
 
-            $scope.updateModel = function () {
+            $scope.updateModel = function() {
 
-                $timeout().then(function () {
+                $timeout().then(function() {
 
                     $scope.dataurl = $scope.signaturePad.isEmpty() ? EMPTY_IMAGE : $scope.signaturePad.toDataURL();
 
@@ -452,7 +452,7 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
                     }
                 });
             };
-            $rootScope.clearcustomerSign = function () {
+            $rootScope.clearcustomerSign = function() {
 
                 $scope.signaturePad.clear();
 
@@ -476,7 +476,7 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
                         break;
                 }
             };
-            $scope.clear = function () {
+            $scope.clear = function() {
 
                 $scope.signaturePad.clear();
 
@@ -501,7 +501,7 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
                 }
             };
 
-            $scope.$watch("dataurl", function (dataUrl) {
+            $scope.$watch("dataurl", function(dataUrl) {
 
                 if (!dataUrl || $scope.signaturePad.toDataURL() === dataUrl) {
                     return;
@@ -510,7 +510,7 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
 
             });
         }],
-        link: function (scope, element, attrs) {
+        link: function(scope, element, attrs) {
 
             var canvas = element.find('canvas')[0];
 
@@ -528,7 +528,7 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
 
             scope.signaturePad = new SignaturePad(canvas);
 
-            scope.setDataUrl = function (dataUrl) {
+            scope.setDataUrl = function(dataUrl) {
 
                 var ratio = Math.max(window.devicePixelRatio || 1, 1);
 
@@ -540,17 +540,17 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
 
                 scope.signaturePad.fromDataURL(dataUrl);
 
-                $timeout().then(function () {
+                $timeout().then(function() {
                     ctx.setTransform(1, 0, 0, 1, 0, 0);
                     ctx.scale(1 / scale, 1 / scale);
                 });
             };
 
-            scope.$watch('disabled', function (val) {
+            scope.$watch('disabled', function(val) {
                 val ? scope.signaturePad.off() : scope.signaturePad.on();
             });
 
-            var calculateScale = function () {
+            var calculateScale = function() {
 
                 var scaleWidth = Math.min(parent.clientWidth / width, 1);
 
@@ -579,14 +579,14 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
 
             var resizeIH = $interval(calculateScale, 200);
 
-            scope.$on('$destroy', function () {
+            scope.$on('$destroy', function() {
                 $interval.cancel(resizeIH);
                 resizeIH = null;
             });
 
             angular.element($window).bind('resize', calculateScale);
 
-            scope.$on('$destroy', function () {
+            scope.$on('$destroy', function() {
                 angular.element($window).unbind('resize', calculateScale);
             });
 
@@ -598,7 +598,7 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
 
             function onTouchstart(event) {
 
-                scope.$apply(function () {
+                scope.$apply(function() {
 
                     scope.notifyDrawing({
                         drawing: true
@@ -610,7 +610,7 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
 
             function onTouchend(event) {
 
-                scope.$apply(function () {
+                scope.$apply(function() {
 
                     scope.updateModel();
 
@@ -625,25 +625,25 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
     };
 }]);
 
-app.directive("formOnChange", function ($parse) {
+app.directive("formOnChange", function($parse) {
 
     return {
         require: "form",
-        link: function (scope, element, attrs) {
+        link: function(scope, element, attrs) {
 
             var cb = $parse(attrs.formOnChange);
 
-            element.on("change", function () {
+            element.on("change", function() {
                 cb(scope);
             });
         }
     }
 });
 
-app.directive('numbersOnly', function () {
+app.directive('numbersOnly', function() {
     return {
         require: 'ngModel',
-        link: function (scope, element, attr, ngModelCtrl) {
+        link: function(scope, element, attr, ngModelCtrl) {
             function fromUser(text) {
                 if (text) {
                     var transformedInput = text.replace(/[^0-9]/g, '');
@@ -660,15 +660,15 @@ app.directive('numbersOnly', function () {
         }
     };
 });
-app.directive('validAmount', function () {
+app.directive('validAmount', function() {
     return {
         require: '?ngModel',
-        link: function (scope, element, attrs, ngModelCtrl) {
+        link: function(scope, element, attrs, ngModelCtrl) {
             if (!ngModelCtrl) {
                 return;
             }
 
-            ngModelCtrl.$parsers.push(function (val) {
+            ngModelCtrl.$parsers.push(function(val) {
                 if (angular.isUndefined(val)) {
                     var val = '';
                 }
@@ -687,7 +687,7 @@ app.directive('validAmount', function () {
                 return clean;
             });
 
-            element.bind('keypress', function (event) {
+            element.bind('keypress', function(event) {
                 if (event.keyCode === 32) {
                     event.preventDefault();
                 }
@@ -695,14 +695,14 @@ app.directive('validAmount', function () {
         }
     };
 });
-app.directive('maxInput', function ($parse) {
+app.directive('maxInput', function($parse) {
     return {
         scope: {
             inputMaxLength: '='
         },
-        link: function (scope, elm, attrs) {
+        link: function(scope, elm, attrs) {
 
-            elm.bind('keypress', function (e) {
+            elm.bind('keypress', function(e) {
 
                 if (elm[0].value.length >= scope.inputMaxLength) {
                     e.preventDefault();
@@ -712,7 +712,7 @@ app.directive('maxInput', function ($parse) {
         }
     }
 });
-app.config(['$httpProvider', function ($httpProvider) {
+app.config(['$httpProvider', function($httpProvider) {
 
     if (!$httpProvider.defaults.headers.get) {
         $httpProvider.defaults.headers.get = {};
