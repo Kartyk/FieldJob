@@ -4278,6 +4278,7 @@
                 ctx.font = '15px sans-serif ';
                 ctx.fillText('备注', 20, yNotesField);
                 yNotesField1_val = yNotesField1;
+                yNotesField1 += 10;
                 var isPageAdded = false;
                 while (i < $scope.summary.notesArray.length) {
 
@@ -4309,7 +4310,7 @@
                     ctx.font = '13px sans-serif ';
                     var splitTitle
                     if ($scope.summary.notesArray[i - 1].Notes.match(/[\u3400-\u9FBF]/))
-                        splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.notesArray[i - 1].Notes), rectNotesWidth - 430);
+                        splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.notesArray[i - 1].Notes), rectNotesWidth - 500);
                     else
                         splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.notesArray[i - 1].Notes), rectNotesWidth - 320);
 
@@ -5466,6 +5467,7 @@
                 ctx.font = '15px sans-serif ';
                 ctx.fillText('Notes', 20, yNotesField);
                 yNotesField1_val = yNotesField1;
+                yNotesField1 += 10;
                 var isPageAdded = false;
                 while (i < $scope.summary.notesArray.length) {
 
@@ -5497,7 +5499,7 @@
                     ctx.font = '13px sans-serif ';
                     var splitTitle
                     if ($scope.summary.notesArray[i - 1].Notes.match(/[\u3400-\u9FBF]/))
-                        splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.notesArray[i - 1].Notes), rectNotesWidth - 430);
+                        splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.notesArray[i - 1].Notes), rectNotesWidth - 500);
                     else
                         splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.notesArray[i - 1].Notes), rectNotesWidth - 320);
                     //doc1.text(xNotesField2, yNotesField1_val, splitTitle)
