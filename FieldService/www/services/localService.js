@@ -964,11 +964,12 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Internal SET Start_time = ?, End_time = ?, Activity_type = ?, ResourceId = ? WHERE Activity_Id = ?";
+                var sqlUpdate = "UPDATE Internal SET Start_time = ?, End_time = ?, Activity_type = ?, Status = ?, ResourceId = ? WHERE Activity_Id = ?";
 
                 insertValues.push(responseList.Start_time);
                 insertValues.push(responseList.End_time);
                 insertValues.push(responseList.Activity_type);
+                insertValues.push(responseList.Status);
                 insertValues.push(constantService.getResourceId());
                 insertValues.push(responseList.Activity_Id);
 
@@ -1001,12 +1002,13 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Internal VALUES (?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Internal VALUES (?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Activity_Id);
                 insertValues.push(responseList.Start_time);
                 insertValues.push(responseList.End_time);
                 insertValues.push(responseList.Activity_type);
+                insertValues.push(responseList.Status);
                 insertValues.push(constantService.getResourceId());
 
                 // console.log("INTERNAL INSERT VALUES =====> " + insertValues);
@@ -4937,7 +4939,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM Internal WHERE ResourceId = ?", [constantService.getResourceId()], function (tx, res) {
+                transaction.executeSql("SELECT * FROM Internal WHERE ResourceId = ? AND Status = ?", [constantService.getResourceId(), "pending"], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
