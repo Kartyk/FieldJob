@@ -88,6 +88,35 @@
         //var deleteBackEndId = "4548d523-e5cb-419f-98a1-020a7de64f86";
 
 
+        //var authKey = "Basic QTQ3MjE0NF9FTUVSU09OTU9CSUxFVEVTVEVOVl9NT0JJTEVfQU5PTllNT1VTX0FQUElEOm9ma3U1ZG4xUHZscS5t";
+
+        //var loginBackEndId = "5e54d908-048e-4353-9b85-c67569333f3b";
+
+        //var techBackEndId = "5e54d908-048e-4353-9b85-c67569333f3b";
+
+        //var taskListBackEndId = "5e54d908-048e-4353-9b85-c67569333f3b";
+
+        //var internalBackEndId = "5e54d908-048e-4353-9b85-c67569333f3b";
+
+        //var taskDetailBackEndId = "5e54d908-048e-4353-9b85-c67569333f3b";
+
+        //var projectBackEndId = "5e54d908-048e-4353-9b85-c67569333f3b";
+
+        //var lovBackEndId = "5e54d908-048e-4353-9b85-c67569333f3b";
+
+        //var srBackEndId = "5e54d908-048e-4353-9b85-c67569333f3b";
+
+        //var debriefBackEndId = "5e54d908-048e-4353-9b85-c67569333f3b";
+
+        //var statusBackEndId = "5e54d908-048e-4353-9b85-c67569333f3b";
+
+        //var createBackEndId = "5e54d908-048e-4353-9b85-c67569333f3b";
+
+        //var downloadBackEndId = "5e54d908-048e-4353-9b85-c67569333f3b";
+
+        var deleteBackEndId = "5e54d908-048e-4353-9b85-c67569333f3b";
+
+
         var stagesArray = {};
 
         var startDate = new Date();

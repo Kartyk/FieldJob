@@ -4097,8 +4097,12 @@
                 }
 
                 ctx.fillStyle = "#000";
+
                 ctx.font = 'bold 13px Times New Roman ';
-                ctx.fillText('预计的服务日期', 280, 118);
+               
+
+                ctx.fillText('服务日期', 280, 118);
+
 
                 ctx.fillStyle = "#000";
                 ctx.font = '13px Times New Roman ';
@@ -4107,8 +4111,11 @@
                     ctx.fillText(start, 280, 132);
 
                 ctx.fillStyle = "#000";
+
                 ctx.font = 'bold 13px Times New Roman ';
-                ctx.fillText('预计结束日期', 530, 118);
+
+                ctx.fillText('结束日期', 530, 118);
+
 
                 ctx.fillStyle = "#000";
                 ctx.font = '13px Times New Roman ';
@@ -4121,8 +4128,11 @@
                 ctx.fillText(enddate, 530, 132);
 
                 ctx.fillStyle = "#000";
+
                 ctx.font = 'bold 13px Times New Roman ';
-                ctx.fillText('预计的服务时间', 810, 118);
+
+                ctx.fillText('服务持续时间', 810, 118);
+
 
                 ctx.fillStyle = "#000";
                 ctx.font = '13px Times New Roman ';
@@ -5286,8 +5296,11 @@
                 }
 
                 ctx.fillStyle = "#000";
+
                 ctx.font = 'bold 13px Times New Roman ';
-                ctx.fillText('Estimated Start Date', 280, 118);
+
+                ctx.fillText('Start Date', 280, 118);
+
 
                 ctx.fillStyle = "#000";
                 ctx.font = '13px Times New Roman ';
@@ -5296,8 +5309,11 @@
                     ctx.fillText(start, 280, 132);
 
                 ctx.fillStyle = "#000";
+
                 ctx.font = 'bold 13px Times New Roman ';
-                ctx.fillText('Estimated End Date', 530, 118);
+
+                ctx.fillText('End Date', 530, 118);
+
 
                 ctx.fillStyle = "#000";
                 ctx.font = '13px Times New Roman ';
@@ -5310,8 +5326,11 @@
                 ctx.fillText(enddate, 530, 132);
 
                 ctx.fillStyle = "#000";
+
                 ctx.font = 'bold 13px Times New Roman ';
-                ctx.fillText('Estimated Duration', 810, 118);
+
+                ctx.fillText('Duration', 810, 118);
+
 
                 ctx.fillStyle = "#000";
                 ctx.font = '13px Times New Roman ';
@@ -6547,7 +6566,7 @@
                 doc1.text(345, 110, enddate);
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(510, 100, $filter('translate')('Estimated Duration'))
+                doc1.text(510, 100, $filter('translate')('Duration'))
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
                 console.log($scope.summary.taskObject.times[0].Duration)
