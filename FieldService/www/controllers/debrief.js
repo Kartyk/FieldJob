@@ -4036,20 +4036,20 @@
 
                 ctx.fillStyle = "#000";
 
-                ctx.font = 'bold 18px sans-serif ';
+                ctx.font = 'bold 18px Times New Roman ';
 
                 ctx.fillText('现场服务报告', 400, 25);//现场服务号
 
                 ctx.fillStyle = "#000";
 
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
 
                 if ($scope.summary.taskObject.Task_Number)
                     ctx.fillText('现场服务号' + $scope.summary.taskObject.Task_Number, 400, 40)
 
                 ctx.fillStyle = "#000";
 
-                ctx.font = '11px sans-serif ';
+                ctx.font = '11px Times New Roman ';
 
                 ctx.fillText('艾默生过程控制有限公司', 720, 12);
 
@@ -4068,20 +4068,20 @@
                 //Customer Call heading
                 ctx.fillStyle = "#000";
 
-                ctx.font = '15px sans-serif';
+                ctx.font = '15px Times New Roman';
 
                 ctx.fillText('客户具体服务需求', 20, 90);
 
                 //Customer Call Labels and fields
                 ctx.fillStyle = "#000";
 
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
 
                 ctx.fillText('客户名', 30, 118);
 
                 ctx.fillStyle = "#000";
 
-                ctx.font = '13px sans-serif ';
+                ctx.font = '13px Times New Roman ';
 
                 var c = 0, isCustBig = false;
 
@@ -4097,21 +4097,21 @@
                 }
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('预计的服务日期', 280, 118);
 
                 ctx.fillStyle = "#000";
-                ctx.font = '13px sans-serif ';
+                ctx.font = '13px Times New Roman ';
                 var start = moment.utc($scope.summary.taskObject.times[0].Start_Date).utcOffset(constantService.getTimeZone()).format("DD-MMM-YYYY")
                 if (start)
                     ctx.fillText(start, 280, 132);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('预计结束日期', 530, 118);
 
                 ctx.fillStyle = "#000";
-                ctx.font = '13px sans-serif ';
+                ctx.font = '13px Times New Roman ';
 
                 var enddate = " ";
 
@@ -4121,11 +4121,11 @@
                 ctx.fillText(enddate, 530, 132);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('预计的服务时间', 810, 118);
 
                 ctx.fillStyle = "#000";
-                ctx.font = '13px sans-serif ';
+                ctx.font = '13px Times New Roman ';
 
                 if ($scope.summary.taskObject.times[0].Duration)
                     ctx.fillText($scope.summary.taskObject.times[0].Duration, 810, 132);
@@ -4133,48 +4133,48 @@
                 if (isCustBig)
                     custBigYvalue = 10;
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('服务请求', 30, 158 + custBigYvalue);
 
                 ctx.fillStyle = "#000";
-                ctx.font = '13px sans-serif ';
+                ctx.font = '13px Times New Roman ';
 
                 if ($scope.summary.taskObject.Service_Request)
                     ctx.fillText($scope.summary.taskObject.Service_Request, 30, 172 + custBigYvalue);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('现场服务号', 280, 158 + custBigYvalue);
 
                 ctx.fillStyle = "#000";
-                ctx.font = '13px sans-serif ';
+                ctx.font = '13px Times New Roman ';
 
                 if ($scope.summary.taskObject.Task_Number)
                     ctx.fillText($scope.summary.taskObject.Task_Number, 280, 172 + custBigYvalue);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('工作描述', 530, 158 + custBigYvalue);
 
                 ctx.fillStyle = "#000";
-                ctx.font = '13px sans-serif ';
+                ctx.font = '13px Times New Roman ';
                 ctx.fillText($scope.summary.taskObject.Job_Description, 530, 172 + custBigYvalue);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('产品编码', 30, 202 + custBigYvalue);
                 ctx.fillText('具体描述', 250, 202 + custBigYvalue);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('系统序列号/产品序列号', 460, 202 + custBigYvalue);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('标签#', 680, 202 + custBigYvalue);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('原始订单号#', 890, 202 + custBigYvalue);
 
                 var ibyvalue = 216 + custBigYvalue;
@@ -4185,7 +4185,7 @@
                         var splitIN = splitPL = splitSL = splitTN = splitOPO = ""
                         var ibIN = ibID = ibSL = ibTN = ibOPO = ibyvalue;
                         ctx.fillStyle = "#000";
-                        ctx.font = '13px sans-serif ';
+                        ctx.font = '13px Times New Roman ';
 
                         if (key.Item_Number) {
                             splitIN = doc1.splitTextToSize(key.Item_Number, 90);
@@ -4209,7 +4209,7 @@
                             ctx.fillText('NO VALUE', 250, ibyvalue);
 
                         ctx.fillStyle = "#000";
-                        ctx.font = '13px sans-serif ';
+                        ctx.font = '13px Times New Roman ';
 
                         if (key.Serial_Number) {
                             splitSL = doc1.splitTextToSize(key.Serial_Number, 90);
@@ -4223,7 +4223,7 @@
                             ctx.fillText('NO VALUE', 460, ibyvalue);
 
                         ctx.fillStyle = "#000";
-                        ctx.font = '13px sans-serif ';
+                        ctx.font = '13px Times New Roman ';
 
                         if (key.TagNumber) {
                             splitTN = doc1.splitTextToSize(key.TagNumber, 90);
@@ -4237,7 +4237,7 @@
                             ctx.fillText('NO VALUE', 680, ibyvalue);
 
                         ctx.fillStyle = "#000";
-                        ctx.font = '13px sans-serif ';
+                        ctx.font = '13px Times New Roman ';
 
                         if (key.Original_PO_Number) {
                             splitOPO = doc1.splitTextToSize(key.Original_PO_Number, 90);
@@ -4267,15 +4267,15 @@
                     yNotesField2, yNotesField1_val, yNotesField2_val;
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('备注类型', 30, yNotesField1);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('备注', 250, yNotesField1);
 
                 ctx.fillStyle = "#000";
-                ctx.font = '15px sans-serif ';
+                ctx.font = '15px Times New Roman ';
                 ctx.fillText('备注', 20, yNotesField);
                 yNotesField1_val = yNotesField1;
                 yNotesField1 += 10;
@@ -4303,11 +4303,11 @@
 
                     }
                     ctx.fillStyle = "#000";
-                    ctx.font = '13px sans-serif ';
+                    ctx.font = '13px Times New Roman ';
                     ctx.fillText($filter('translate')($scope.summary.notesArray[i - 1].Note_Type), 30, yNotesField1_val);
 
                     ctx.fillStyle = "#000";
-                    ctx.font = '13px sans-serif ';
+                    ctx.font = '13px Times New Roman ';
                     var splitTitle
                     if ($scope.summary.notesArray[i - 1].Notes.match(/[\u3400-\u9FBF]/))
                         splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.notesArray[i - 1].Notes), rectNotesWidth - 500);
@@ -4364,7 +4364,7 @@
                     ctx.strokeRect(20, yAttachField + 10, 1090, rectAttachHeight);
                 }
                 ctx.fillStyle = "#000";
-                ctx.font = '15px sans-serif ';
+                ctx.font = '15px Times New Roman ';
                 ctx.fillText('附件', 20, yAttachField);
 
                 ctx.fillStyle = "#000";
@@ -4399,7 +4399,7 @@
                         if (file.fileDisc.length >= 18) {
 
                             ctx.fillStyle = "#000";
-                            ctx.font = '15px sans-serif ';
+                            ctx.font = '15px Times New Roman ';
                             var splitAttchname = doc1.splitTextToSize($filter('translate')(file.fileDisc.substr(0, 16)) + '..', 45);
                             angular.forEach(splitAttchname, function (key) {
                                 ctx.fillText(key, xAttachField1, yfilename + 130);
@@ -4409,7 +4409,7 @@
                         } else {
 
                             ctx.fillStyle = "#000";
-                            ctx.font = '15px sans-serif ';
+                            ctx.font = '15px Times New Roman ';
                             var splitAttchname = doc1.splitTextToSize($filter('translate')(file.fileDisc), 45);
                             angular.forEach(splitAttchname, function (key) {
                                 ctx.fillText(key, xAttachField1, yfilename + 130);
@@ -4435,13 +4435,13 @@
                     //           ctx.drawImage(attachfile, xAttachField1, yAttachField+15);
                     //           if(file.filename.length>=20){
                     //             ctx.fillStyle ="#000" ;
-                    //             ctx.font = '15px sans-serif ';
+                    //             ctx.font = '15px Times New Roman ';
                     //             ctx.fillText(file.filename.substr(0,18)+'..', xAttachField1,yAttachField+125);
                     //           }
                     //
                     //           else {
                     //             ctx.fillStyle ="#000" ;
-                    //             ctx.font = '15px sans-serif ';
+                    //             ctx.font = '15px Times New Roman ';
                     //             ctx.fillText(file.filename, xAttachField1,yAttachField+125);
                     //           }
                     //           xAttachField1+=100;
@@ -4462,13 +4462,13 @@
                     //      ctx.drawImage(image, xAttachField1, yAttachField+15);
                     //      if(file.filename.length>=20){
                     //        ctx.fillStyle ="#000" ;
-                    //        ctx.font = '15px sans-serif ';
+                    //        ctx.font = '15px Times New Roman ';
                     //        ctx.fillText(file.filename.substr(0,18)+'..', xAttachField1,yAttachField+125);
                     //      }
                     //
                     //      else {
                     //        ctx.fillStyle ="#000" ;
-                    //        ctx.font = '15px sans-serif ';
+                    //        ctx.font = '15px Times New Roman ';
                     //        ctx.fillText(file.filename, xAttachField1,yAttachField+125);
                     //      }
                     //     xAttachField1+=75;
@@ -4486,13 +4486,13 @@
                     //       ctx.drawImage(attachfileexcel, xAttachField1, yAttachField+15);
                     //       if(file.filename.length>=20){
                     //         ctx.fillStyle ="#000" ;
-                    //         ctx.font = '15px sans-serif ';
+                    //         ctx.font = '15px Times New Roman ';
                     //         ctx.fillText(file.filename.substr(0,18)+'..', xAttachField1,yAttachField+125);
                     //       }
                     //
                     //       else {
                     //         ctx.fillStyle ="#000" ;
-                    //         ctx.font = '15px sans-serif ';
+                    //         ctx.font = '15px Times New Roman ';
                     //         ctx.fillText(file.filename, xAttachField1,yAttachField+125);
                     //       }
                     //       xAttachField1+=75;
@@ -4534,26 +4534,26 @@
                     isPageAdded = true;
                 }
                 ctx.fillStyle = "#000";
-                ctx.font = '15px sans-serif ';
+                ctx.font = '15px Times New Roman ';
                 ctx.fillText('时间', 20, yTimeField);
                 var columno = 0;
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText($filter('translate')('Service Date'), 30 + timeWidth * columno++, yTimeFieldName);
 
                 if ($scope.userType == 'C') {
 
                     ctx.fillStyle = "#000";
-                    ctx.font = 'bold 13px sans-serif ';
+                    ctx.font = 'bold 13px Times New Roman ';
                     ctx.fillText('结算类型', 10 + timeWidth * columno++, yTimeFieldName);
 
                     ctx.fillStyle = "#000";
-                    ctx.font = 'bold 13px sans-serif ';
+                    ctx.font = 'bold 13px Times New Roman ';
                     ctx.fillText('结算方式', timeWidth * columno++, yTimeFieldName);
                 }
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('收费与否', timeWidth * columno++, yTimeFieldName);
 
                 var xTimeField1 = 580;
@@ -4594,7 +4594,7 @@
                     yTimeFieldValue = yTimeFieldValue + 20;
                     ++index;
                     ctx.fillStyle = "#000";
-                    ctx.font = '13px sans-serif ';
+                    ctx.font = '13px Times New Roman ';
                     if (yTimeFieldValue + 20 > canvas.height) {
                         rectTimeHeight = yTimeFieldValue - (yTimeFieldName - 20 + 5);
                         ctx.strokeRect(20, yTimeFieldName - 20 + 5, 1090, rectTimeHeight);
@@ -4624,14 +4624,14 @@
                     if ($scope.userType == 'C') {
 
                         ctx.fillStyle = "#000";
-                        ctx.font = '13px sans-serif ';
+                        ctx.font = '13px Times New Roman ';
 
                         if ($scope.summary.timeArray[j - 1].Charge_Type)
                             ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Charge_Type), 10 + timeWidth * columno++, yTimeFieldValue);
                         else
                             columno++;
                         ctx.fillStyle = "#000";
-                        ctx.font = '13px sans-serif ';
+                        ctx.font = '13px Times New Roman ';
 
                         if ($scope.summary.timeArray[j - 1].Charge_Method)
                             ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Charge_Method), timeWidth * columno++, yTimeFieldValue);
@@ -4641,7 +4641,7 @@
                     
 
                     ctx.fillStyle = "#000";
-                    ctx.font = '13px sans-serif ';
+                    ctx.font = '13px Times New Roman ';
 
                     if ($scope.summary.timeArray[j - 1].Work_Type) {
 
@@ -4656,7 +4656,7 @@
 
 
                         ctx.fillStyle = "#000";
-                        ctx.font = '13px sans-serif ';
+                        ctx.font = '13px Times New Roman ';
                         if (($scope.summary.timeArray[j - 1].Time_Code) != undefined)
                             ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Time_Code), timeWidth * columno++, yTimeFieldValue);
                         else {
@@ -4664,7 +4664,7 @@
                             columno++;
                         }
                         ctx.fillStyle = "#000";
-                        ctx.font = '13px sans-serif ';
+                        ctx.font = '13px Times New Roman ';
                         
                         if ($scope.summary.timeArray[j - 1].Shift_Code != undefined)
                         {
@@ -4707,7 +4707,7 @@
                     }
 
                     ctx.fillStyle = "#000";
-                    ctx.font = '13px sans-serif ';
+                    ctx.font = '13px Times New Roman ';
                     if ($scope.summary.timeArray[j - 1].startTime != undefined && $scope.summary.timeArray[j - 1].startTime != "") {
                         var time = moment($scope.summary.timeArray[j - 1].startTime).format("HH:mm");
                         ctx.fillText(moment($scope.summary.timeArray[j - 1].startTime).format("HH:mm"), timeWidth * columno++, yTimeFieldValue);
@@ -4722,14 +4722,14 @@
 
 
                     ctx.fillStyle = "#000";
-                    ctx.font = '13px sans-serif ';
+                    ctx.font = '13px Times New Roman ';
                     ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Item), timeWidth * columno++, yTimeFieldValue);
                     if (yShiftValue>0)
                     yTimeFieldValue = yTimeFieldValue + (yShiftValue - yTimeFieldValue);
                     //if (yShiftValue > 0)
                     //    yTimeFieldValue = yShiftValue;
                     //ctx.fillStyle = "#000";
-                    //ctx.font = '13px sans-serif ';
+                    //ctx.font = '13px Times New Roman ';
                     //ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Description), 965, yTimeFieldValue);
                 }
 
@@ -4742,23 +4742,23 @@
                     yExpenseFieldValue;
 
                 //ctx.fillStyle = "#000";
-                //ctx.font = '15px sans-serif ';
+                //ctx.font = '15px Times New Roman ';
                 //ctx.fillText('费用', 20, yExpenseField + 5);
 
                 //ctx.fillStyle = "#000";
-                //ctx.font = 'bold 12px sans-serif ';
+                //ctx.font = 'bold 12px Times New Roman ';
                 //ctx.fillText('日期', 30, yExpenseFieldName);
 
                 //ctx.fillStyle = "#000";
-                //ctx.font = 'bold 12px sans-serif ';
+                //ctx.font = 'bold 12px Times New Roman ';
                 //ctx.fillText('费用种类', 280, yExpenseFieldName);
 
                 //ctx.fillStyle = "#000";
-                //ctx.font = 'bold 12px sans-serif ';
+                //ctx.font = 'bold 12px Times New Roman ';
                 //ctx.fillText('结算方式', 530, yExpenseFieldName);
 
                 //ctx.fillStyle = "#000";
-                //ctx.font = 'bold 12px sans-serif ';
+                //ctx.font = 'bold 12px Times New Roman ';
                 //ctx.fillText('阐述', 780, yExpenseFieldName);
 
                 //while (k < $scope.summary.expenseArray.length) {
@@ -4767,24 +4767,24 @@
 
 
                 //    ctx.fillStyle = "#000";
-                //    ctx.font = '13px sans-serif ';
+                //    ctx.font = '13px Times New Roman ';
                 //    if ($scope.summary.expenseArray[k - 1].Date)
                 //        ctx.fillText($scope.summary.expenseArray[k - 1].Date, 30, yExpenseFieldValue);
 
                 //    ctx.fillStyle = "#000";
-                //    ctx.font = '13px sans-serif ';
+                //    ctx.font = '13px Times New Roman ';
                 //    if ($scope.summary.expenseArray[k - 1].Expense_Type)
                 //        ctx.fillText($filter('translate')($scope.summary.expenseArray[k - 1].Expense_Type), 280, yExpenseFieldValue);
 
 
                 //    ctx.fillStyle = "#000";
-                //    ctx.font = '13px sans-serif ';
+                //    ctx.font = '13px Times New Roman ';
                 //    if ($scope.summary.expenseArray[k - 1].Charge_Method)
                 //        ctx.fillText($filter('translate')($scope.summary.expenseArray[k - 1].Charge_Method), 530, yExpenseFieldValue);
 
 
                 //    ctx.fillStyle = "#000";
-                //    ctx.font = '13px sans-serif ';
+                //    ctx.font = '13px Times New Roman ';
                 //    if ($scope.summary.expenseArray[k - 1].Justification)
                 //        ctx.fillText($filter('translate')($scope.summary.expenseArray[k - 1].Justification), 780, yExpenseFieldValue);
                 //}
@@ -4799,7 +4799,7 @@
                     yMaterialFieldName = yMaterialField + 25, yMaterialFieldValue;
 
                 ctx.fillStyle = "#000";
-                ctx.font = '15px sans-serif ';
+                ctx.font = '15px Times New Roman ';
                 ctx.fillText('物料', 20, yMaterialField + 5);
                 if (yMaterialFieldName + 30 > canvas.height) {
                     if (isPageAdded)
@@ -4816,30 +4816,30 @@
 
                 }
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('结算类型', 30, yMaterialFieldName);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('产品数量', 160, yMaterialFieldName);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('序列号#', 280, yMaterialFieldName);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('已更换产品序列号#', 350, yMaterialFieldName);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('原产品序列号#', 500, yMaterialFieldName);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('产品名称', 630, yMaterialFieldName);
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('具体描述', 750, yMaterialFieldName);
 
                 yMaterialFieldValue = yMaterialFieldName + 25;
@@ -4850,7 +4850,7 @@
                     index++;
                     var yMaterialSerialNo = yMaterialSerialIn = yMaterialSerialOut = yItemVal = 0;
                     ctx.fillStyle = "#000";
-                    ctx.font = '13px sans-serif ';
+                    ctx.font = '13px Times New Roman ';
                     if (yMaterialFieldValue + 30 > canvas.height) {
                         ctx.strokeRect(20, yMaterialField + 10, 1090, yMaterialFieldValue - yMaterialField);
                         if (isPageAdded)
@@ -4881,12 +4881,12 @@
 
 
                     ctx.fillStyle = "#000";
-                    ctx.font = ' 13px sans-serif ';
+                    ctx.font = ' 13px Times New Roman ';
                     if ($scope.summary.materialArray[l - 1].Product_Quantity)
                         ctx.fillText($scope.summary.materialArray[l - 1].Product_Quantity.toString(), 160, yMaterialFieldValue);
                     var splitserialin, splitserialout, splitTitle;
                     ctx.fillStyle = "#000";
-                    ctx.font = ' 13px sans-serif ';
+                    ctx.font = ' 13px Times New Roman ';
                     if ($scope.summary.materialArray[l - 1].serialNumber[m] != "") {
                         yMaterialSerialNo = yMaterialFieldValue;
                         while (m < $scope.summary.materialArray[l - 1].serialNumber.length) {
@@ -4924,7 +4924,7 @@
 
 
                     ctx.fillStyle = "#000";
-                    ctx.font = ' 13px sans-serif ';
+                    ctx.font = ' 13px Times New Roman ';
                     if ($scope.summary.materialArray[l - 1].serialIn[n] != "") {
                         yMaterialSerialIn = yMaterialFieldValue
                         while (n < $scope.summary.materialArray[l - 1].serialIn.length) {
@@ -4961,7 +4961,7 @@
                     }
 
                     ctx.fillStyle = "#000";
-                    ctx.font = ' 13px sans-serif ';
+                    ctx.font = ' 13px Times New Roman ';
                     if ($scope.summary.materialArray[l - 1].serialOut[o] != "") {
                         yMaterialSerialOut = yMaterialFieldValue
                         while (o < $scope.summary.materialArray[l - 1].serialOut.length) {
@@ -4998,7 +4998,7 @@
                     }
 
                     ctx.fillStyle = "#000";
-                    ctx.font = ' 13px sans-serif ';
+                    ctx.font = ' 13px Times New Roman ';
                     if ($scope.summary.materialArray[l - 1].ItemName) {
                         var itemname = doc1.splitTextToSize($filter('translate')($scope.summary.materialArray[l - 1].ItemName), 50)
                         yItemVal = yMaterialFieldValue;
@@ -5030,7 +5030,7 @@
                         //ctx.fillText($filter('translate')($scope.summary.materialArray[l - 1].ItemName), 600, yMaterialFieldValue);
                     }
                     ctx.fillStyle = "#000";
-                    ctx.font = ' 13px sans-serif ';
+                    ctx.font = ' 13px Times New Roman ';
                     if ($scope.summary.materialArray[l - 1].Description) {
                         splitTitle = doc1.splitTextToSize($scope.summary.materialArray[l - 1].Description, 250);
                         angular.forEach(splitTitle, function (key) {
@@ -5103,7 +5103,7 @@
                     isPageAdded = true;
                 }
                 ctx.fillStyle = "#000";
-                ctx.font = '15px sans-serif ';
+                ctx.font = '15px Times New Roman ';
                 ctx.fillText('签字', 20, ySignField + 5);
 
                 ctx.fillStyle = "#000";
@@ -5127,24 +5127,24 @@
                 else
                     ctx.strokeRect(20, ySignField + 10, 1090, rectSignHeight);
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText($filter('translate')('emerson'), 30, ySignField + 25);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText($filter('translate')('Conatct Name') + ": " + $scope.contactorCustname, 500, ySignField + 40);
                 // ctx.fillText($scope.contactorCustname, 450, ySignField + 25);
 
                 //ctx.fillStyle = "#000";
-                //ctx.font = 'bold 13px sans-serif ';
+                //ctx.font = 'bold 13px Times New Roman ';
                 //ctx.fillText('工程师名字', 70, ySignField + 40);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText($scope.summary.taskObject.Customer_Name, 500, ySignField + 25);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText($filter('translate')('Service Representative') + ": " + $scope.engineerName, 30, ySignField + 40);
 
                 ctx.fillText($scope.engTime, 30, ySignField + 60 + 60);
@@ -5225,20 +5225,20 @@
 
                 ctx.fillStyle = "#000";
 
-                ctx.font = 'bold 18px sans-serif ';
+                ctx.font = 'bold 18px Times New Roman ';
 
                 ctx.fillText('Field Service Summary Report', 400, 25);//现场服务号
 
                 ctx.fillStyle = "#000";
 
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
 
                 if ($scope.summary.taskObject.Task_Number)
                     ctx.fillText('Field Job' + $scope.summary.taskObject.Task_Number, 400, 40)
 
                 ctx.fillStyle = "#000";
 
-                ctx.font = '11px sans-serif ';
+                ctx.font = '11px Times New Roman ';
 
                 ctx.fillText('EMERSON PROCESS MANAGEMENT CO. LTD.', 720, 12);
 
@@ -5257,20 +5257,20 @@
                 //Customer Call heading
                 ctx.fillStyle = "#000";
 
-                ctx.font = '15px sans-serif';
+                ctx.font = '15px Times New Roman';
 
                 ctx.fillText('Customer Call Details', 20, 90);
 
                 //Customer Call Labels and fields
                 ctx.fillStyle = "#000";
 
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
 
                 ctx.fillText('Customer Name', 30, 118);
 
                 ctx.fillStyle = "#000";
 
-                ctx.font = '13px sans-serif ';
+                ctx.font = '13px Times New Roman ';
 
                 var c = 0, isCustBig = false;
 
@@ -5286,21 +5286,21 @@
                 }
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('Estimated Start Date', 280, 118);
 
                 ctx.fillStyle = "#000";
-                ctx.font = '13px sans-serif ';
+                ctx.font = '13px Times New Roman ';
                 var start = moment.utc($scope.summary.taskObject.times[0].Start_Date).utcOffset(constantService.getTimeZone()).format("DD-MMM-YYYY")
                 if (start)
                     ctx.fillText(start, 280, 132);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('Estimated End Date', 530, 118);
 
                 ctx.fillStyle = "#000";
-                ctx.font = '13px sans-serif ';
+                ctx.font = '13px Times New Roman ';
 
                 var enddate = " ";
 
@@ -5310,11 +5310,11 @@
                 ctx.fillText(enddate, 530, 132);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('Estimated Duration', 810, 118);
 
                 ctx.fillStyle = "#000";
-                ctx.font = '13px sans-serif ';
+                ctx.font = '13px Times New Roman ';
 
                 if ($scope.summary.taskObject.times[0].Duration)
                     ctx.fillText($scope.summary.taskObject.times[0].Duration, 810, 132);
@@ -5322,48 +5322,48 @@
                 if (isCustBig)
                     custBigYvalue = 10;
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('Service Request', 30, 158 + custBigYvalue);
 
                 ctx.fillStyle = "#000";
-                ctx.font = '13px sans-serif ';
+                ctx.font = '13px Times New Roman ';
 
                 if ($scope.summary.taskObject.Service_Request)
                     ctx.fillText($scope.summary.taskObject.Service_Request, 30, 172 + custBigYvalue);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('Field Job Request', 280, 158 + custBigYvalue);
 
                 ctx.fillStyle = "#000";
-                ctx.font = '13px sans-serif ';
+                ctx.font = '13px Times New Roman ';
 
                 if ($scope.summary.taskObject.Task_Number)
                     ctx.fillText($scope.summary.taskObject.Task_Number, 280, 172 + custBigYvalue);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('Job Description', 530, 158 + custBigYvalue);
 
                 ctx.fillStyle = "#000";
-                ctx.font = '13px sans-serif ';
+                ctx.font = '13px Times New Roman ';
                 ctx.fillText($scope.summary.taskObject.Job_Description, 530, 172 + custBigYvalue);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('Item Name', 30, 202 + custBigYvalue);
                 ctx.fillText('Item Description', 250, 202 + custBigYvalue);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('System ID / Serial#', 460, 202 + custBigYvalue);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('Tag #', 680, 202 + custBigYvalue);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('Original PO#', 890, 202 + custBigYvalue);
 
                 var ibyvalue = 216 + custBigYvalue;
@@ -5374,7 +5374,7 @@
                         var splitIN = splitPL = splitSL = splitTN = splitOPO = ""
                         var ibIN = ibID = ibSL = ibTN = ibOPO = ibyvalue;
                         ctx.fillStyle = "#000";
-                        ctx.font = '13px sans-serif ';
+                        ctx.font = '13px Times New Roman ';
 
                         if (key.Item_Number) {
                             splitIN = doc1.splitTextToSize(key.Item_Number, 90);
@@ -5398,7 +5398,7 @@
                             ctx.fillText('NO VALUE', 250, ibyvalue);
 
                         ctx.fillStyle = "#000";
-                        ctx.font = '13px sans-serif ';
+                        ctx.font = '13px Times New Roman ';
 
                         if (key.Serial_Number) {
                             splitSL = doc1.splitTextToSize(key.Serial_Number, 90);
@@ -5412,7 +5412,7 @@
                             ctx.fillText('NO VALUE', 460, ibyvalue);
 
                         ctx.fillStyle = "#000";
-                        ctx.font = '13px sans-serif ';
+                        ctx.font = '13px Times New Roman ';
 
                         if (key.TagNumber) {
                             splitTN = doc1.splitTextToSize(key.TagNumber, 90);
@@ -5426,7 +5426,7 @@
                             ctx.fillText('NO VALUE', 680, ibyvalue);
 
                         ctx.fillStyle = "#000";
-                        ctx.font = '13px sans-serif ';
+                        ctx.font = '13px Times New Roman ';
 
                         if (key.Original_PO_Number) {
                             splitOPO = doc1.splitTextToSize(key.Original_PO_Number, 90);
@@ -5456,15 +5456,15 @@
                     yNotesField2, yNotesField1_val, yNotesField2_val;
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('Note Type', 30, yNotesField1);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('Note Description', 250, yNotesField1);
 
                 ctx.fillStyle = "#000";
-                ctx.font = '15px sans-serif ';
+                ctx.font = '15px Times New Roman ';
                 ctx.fillText('Notes', 20, yNotesField);
                 yNotesField1_val = yNotesField1;
                 yNotesField1 += 10;
@@ -5492,11 +5492,11 @@
 
                     }
                     ctx.fillStyle = "#000";
-                    ctx.font = '13px sans-serif ';
+                    ctx.font = '13px Times New Roman ';
                     ctx.fillText($filter('translate')($scope.summary.notesArray[i - 1].Note_Type), 30, yNotesField1_val);
 
                     ctx.fillStyle = "#000";
-                    ctx.font = '13px sans-serif ';
+                    ctx.font = '13px Times New Roman ';
                     var splitTitle
                     if ($scope.summary.notesArray[i - 1].Notes.match(/[\u3400-\u9FBF]/))
                         splitTitle = doc1.splitTextToSize($filter('translate')($scope.summary.notesArray[i - 1].Notes), rectNotesWidth - 500);
@@ -5552,7 +5552,7 @@
                     ctx.strokeRect(20, yAttachField + 10, 1090, rectAttachHeight);
                 }
                 ctx.fillStyle = "#000";
-                ctx.font = '15px sans-serif ';
+                ctx.font = '15px Times New Roman ';
                 ctx.fillText('Attachments', 20, yAttachField);
 
                 ctx.fillStyle = "#000";
@@ -5587,7 +5587,7 @@
                         if (file.fileDisc.length >= 18) {
 
                             ctx.fillStyle = "#000";
-                            ctx.font = '15px sans-serif ';
+                            ctx.font = '15px Times New Roman ';
                             var splitAttchname = doc1.splitTextToSize($filter('translate')(file.fileDisc.substr(0, 16)) + '..', 45);
                             angular.forEach(splitAttchname, function (key) {
                                 ctx.fillText(key, xAttachField1, yfilename + 130);
@@ -5597,7 +5597,7 @@
                         } else {
 
                             ctx.fillStyle = "#000";
-                            ctx.font = '15px sans-serif ';
+                            ctx.font = '15px Times New Roman ';
                             var splitAttchname = doc1.splitTextToSize($filter('translate')(file.fileDisc), 45);
                             angular.forEach(splitAttchname, function (key) {
                                 ctx.fillText(key, xAttachField1, yfilename + 130);
@@ -5623,13 +5623,13 @@
                     //           ctx.drawImage(attachfile, xAttachField1, yAttachField+15);
                     //           if(file.filename.length>=20){
                     //             ctx.fillStyle ="#000" ;
-                    //             ctx.font = '15px sans-serif ';
+                    //             ctx.font = '15px Times New Roman ';
                     //             ctx.fillText(file.filename.substr(0,18)+'..', xAttachField1,yAttachField+125);
                     //           }
                     //
                     //           else {
                     //             ctx.fillStyle ="#000" ;
-                    //             ctx.font = '15px sans-serif ';
+                    //             ctx.font = '15px Times New Roman ';
                     //             ctx.fillText(file.filename, xAttachField1,yAttachField+125);
                     //           }
                     //           xAttachField1+=100;
@@ -5650,13 +5650,13 @@
                     //      ctx.drawImage(image, xAttachField1, yAttachField+15);
                     //      if(file.filename.length>=20){
                     //        ctx.fillStyle ="#000" ;
-                    //        ctx.font = '15px sans-serif ';
+                    //        ctx.font = '15px Times New Roman ';
                     //        ctx.fillText(file.filename.substr(0,18)+'..', xAttachField1,yAttachField+125);
                     //      }
                     //
                     //      else {
                     //        ctx.fillStyle ="#000" ;
-                    //        ctx.font = '15px sans-serif ';
+                    //        ctx.font = '15px Times New Roman ';
                     //        ctx.fillText(file.filename, xAttachField1,yAttachField+125);
                     //      }
                     //     xAttachField1+=75;
@@ -5674,13 +5674,13 @@
                     //       ctx.drawImage(attachfileexcel, xAttachField1, yAttachField+15);
                     //       if(file.filename.length>=20){
                     //         ctx.fillStyle ="#000" ;
-                    //         ctx.font = '15px sans-serif ';
+                    //         ctx.font = '15px Times New Roman ';
                     //         ctx.fillText(file.filename.substr(0,18)+'..', xAttachField1,yAttachField+125);
                     //       }
                     //
                     //       else {
                     //         ctx.fillStyle ="#000" ;
-                    //         ctx.font = '15px sans-serif ';
+                    //         ctx.font = '15px Times New Roman ';
                     //         ctx.fillText(file.filename, xAttachField1,yAttachField+125);
                     //       }
                     //       xAttachField1+=75;
@@ -5721,26 +5721,26 @@
                     isPageAdded = true;
                 }
                 ctx.fillStyle = "#000";
-                ctx.font = '15px sans-serif ';
+                ctx.font = '15px Times New Roman ';
                 ctx.fillText('Time', 20, yTimeField);
                 var columno = 0;
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText($filter('translate')('Service Date'), 30 + timeWidth * columno++, yTimeFieldName);
 
                 if ($scope.userType == 'C') {
 
                     ctx.fillStyle = "#000";
-                    ctx.font = 'bold 13px sans-serif ';
+                    ctx.font = 'bold 13px Times New Roman ';
                     ctx.fillText($filter('translate')('Charge\nType'), 10 + timeWidth * columno++, yTimeFieldName);
 
                     ctx.fillStyle = "#000";
-                    ctx.font = 'bold 13px sans-serif ';
+                    ctx.font = 'bold 13px Times New Roman ';
                     ctx.fillText($filter('translate')('Charge\nMethod'), timeWidth * columno++, yTimeFieldName);
                 }
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText($filter('translate')('Work Type'), timeWidth * columno++, yTimeFieldName);
 
                 var xTimeField1 = 580;
@@ -5781,7 +5781,7 @@
                     yTimeFieldValue = yTimeFieldValue + 20;
                     ++index;
                     ctx.fillStyle = "#000";
-                    ctx.font = '13px sans-serif ';
+                    ctx.font = '13px Times New Roman ';
                     if (yTimeFieldValue + 20 > canvas.height) {
                         rectTimeHeight = yTimeFieldValue - (yTimeFieldName - 20 + 5);
                         ctx.strokeRect(20, yTimeFieldName - 20 + 5, 1090, rectTimeHeight);
@@ -5811,14 +5811,14 @@
                     if ($scope.userType == 'C') {
 
                         ctx.fillStyle = "#000";
-                        ctx.font = '13px sans-serif ';
+                        ctx.font = '13px Times New Roman ';
 
                         if ($scope.summary.timeArray[j - 1].Charge_Type)
                             ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Charge_Type), 10 + timeWidth * columno++, yTimeFieldValue);
                         else
                             columno++;
                         ctx.fillStyle = "#000";
-                        ctx.font = '13px sans-serif ';
+                        ctx.font = '13px Times New Roman ';
 
                         if ($scope.summary.timeArray[j - 1].Charge_Method)
                             ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Charge_Method), timeWidth * columno++, yTimeFieldValue);
@@ -5828,7 +5828,7 @@
 
 
                     ctx.fillStyle = "#000";
-                    ctx.font = '13px sans-serif ';
+                    ctx.font = '13px Times New Roman ';
 
                     if ($scope.summary.timeArray[j - 1].Work_Type) {
 
@@ -5843,7 +5843,7 @@
 
 
                         ctx.fillStyle = "#000";
-                        ctx.font = '13px sans-serif ';
+                        ctx.font = '13px Times New Roman ';
                         if (($scope.summary.timeArray[j - 1].Time_Code) != undefined)
                             ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Time_Code), timeWidth * columno++, yTimeFieldValue);
                         else {
@@ -5851,7 +5851,7 @@
                             columno++;
                         }
                         ctx.fillStyle = "#000";
-                        ctx.font = '13px sans-serif ';
+                        ctx.font = '13px Times New Roman ';
 
                         if ($scope.summary.timeArray[j - 1].Shift_Code != undefined) {
                             var splitShiftCode;
@@ -5892,7 +5892,7 @@
                     }
 
                     ctx.fillStyle = "#000";
-                    ctx.font = '13px sans-serif ';
+                    ctx.font = '13px Times New Roman ';
                     if ($scope.summary.timeArray[j - 1].startTime != undefined && $scope.summary.timeArray[j - 1].startTime != "") {
                         var time = moment($scope.summary.timeArray[j - 1].startTime).format("HH:mm");
                         ctx.fillText(moment($scope.summary.timeArray[j - 1].startTime).format("HH:mm"), timeWidth * columno++, yTimeFieldValue);
@@ -5907,14 +5907,14 @@
 
 
                     ctx.fillStyle = "#000";
-                    ctx.font = '13px sans-serif ';
+                    ctx.font = '13px Times New Roman ';
                     ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Item), timeWidth * columno++, yTimeFieldValue);
                     if (yShiftValue > 0)
                         yTimeFieldValue = yTimeFieldValue + (yShiftValue - yTimeFieldValue);
                     //if (yShiftValue > 0)
                     //    yTimeFieldValue = yShiftValue;
                     //ctx.fillStyle = "#000";
-                    //ctx.font = '13px sans-serif ';
+                    //ctx.font = '13px Times New Roman ';
                     //ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Description), 965, yTimeFieldValue);
                 }
 
@@ -5927,23 +5927,23 @@
                     yExpenseFieldValue;
 
                 //ctx.fillStyle = "#000";
-                //ctx.font = '15px sans-serif ';
+                //ctx.font = '15px Times New Roman ';
                 //ctx.fillText('费用', 20, yExpenseField + 5);
 
                 //ctx.fillStyle = "#000";
-                //ctx.font = 'bold 12px sans-serif ';
+                //ctx.font = 'bold 12px Times New Roman ';
                 //ctx.fillText('日期', 30, yExpenseFieldName);
 
                 //ctx.fillStyle = "#000";
-                //ctx.font = 'bold 12px sans-serif ';
+                //ctx.font = 'bold 12px Times New Roman ';
                 //ctx.fillText('费用种类', 280, yExpenseFieldName);
 
                 //ctx.fillStyle = "#000";
-                //ctx.font = 'bold 12px sans-serif ';
+                //ctx.font = 'bold 12px Times New Roman ';
                 //ctx.fillText('结算方式', 530, yExpenseFieldName);
 
                 //ctx.fillStyle = "#000";
-                //ctx.font = 'bold 12px sans-serif ';
+                //ctx.font = 'bold 12px Times New Roman ';
                 //ctx.fillText('阐述', 780, yExpenseFieldName);
 
                 //while (k < $scope.summary.expenseArray.length) {
@@ -5952,24 +5952,24 @@
 
 
                 //    ctx.fillStyle = "#000";
-                //    ctx.font = '13px sans-serif ';
+                //    ctx.font = '13px Times New Roman ';
                 //    if ($scope.summary.expenseArray[k - 1].Date)
                 //        ctx.fillText($scope.summary.expenseArray[k - 1].Date, 30, yExpenseFieldValue);
 
                 //    ctx.fillStyle = "#000";
-                //    ctx.font = '13px sans-serif ';
+                //    ctx.font = '13px Times New Roman ';
                 //    if ($scope.summary.expenseArray[k - 1].Expense_Type)
                 //        ctx.fillText($filter('translate')($scope.summary.expenseArray[k - 1].Expense_Type), 280, yExpenseFieldValue);
 
 
                 //    ctx.fillStyle = "#000";
-                //    ctx.font = '13px sans-serif ';
+                //    ctx.font = '13px Times New Roman ';
                 //    if ($scope.summary.expenseArray[k - 1].Charge_Method)
                 //        ctx.fillText($filter('translate')($scope.summary.expenseArray[k - 1].Charge_Method), 530, yExpenseFieldValue);
 
 
                 //    ctx.fillStyle = "#000";
-                //    ctx.font = '13px sans-serif ';
+                //    ctx.font = '13px Times New Roman ';
                 //    if ($scope.summary.expenseArray[k - 1].Justification)
                 //        ctx.fillText($filter('translate')($scope.summary.expenseArray[k - 1].Justification), 780, yExpenseFieldValue);
                 //}
@@ -5984,7 +5984,7 @@
                     yMaterialFieldName = yMaterialField + 25, yMaterialFieldValue;
 
                 ctx.fillStyle = "#000";
-                ctx.font = '15px sans-serif ';
+                ctx.font = '15px Times New Roman ';
                 ctx.fillText($filter('translate')('Materials'), 20, yMaterialField + 5);
                 if (yMaterialFieldName + 30 > canvas.height) {
                     if (isPageAdded)
@@ -6001,30 +6001,30 @@
 
                 }
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText($filter('translate')('Charge\nType'), 30, yMaterialFieldName);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText($filter('translate')('Quantity'), 160, yMaterialFieldName);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText($filter('translate')('Serial number'), 280, yMaterialFieldName);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText($filter('translate')('Serial in'), 400, yMaterialFieldName);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText($filter('translate')('Serial out'), 550, yMaterialFieldName);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText($filter('translate')('Item Namematerial'), 680, yMaterialFieldName);
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText('Description', 800, yMaterialFieldName);
 
                 yMaterialFieldValue = yMaterialFieldName + 25;
@@ -6035,7 +6035,7 @@
                     index++;
                     var yMaterialSerialNo = yMaterialSerialIn = yMaterialSerialOut = yItemVal = 0;
                     ctx.fillStyle = "#000";
-                    ctx.font = '13px sans-serif ';
+                    ctx.font = '13px Times New Roman ';
                     if (yMaterialFieldValue + 30 > canvas.height) {
                         ctx.strokeRect(20, yMaterialField + 10, 1090, yMaterialFieldValue - yMaterialField);
                         if (isPageAdded)
@@ -6066,12 +6066,12 @@
 
 
                     ctx.fillStyle = "#000";
-                    ctx.font = ' 13px sans-serif ';
+                    ctx.font = ' 13px Times New Roman ';
                     if ($scope.summary.materialArray[l - 1].Product_Quantity)
                         ctx.fillText($scope.summary.materialArray[l - 1].Product_Quantity.toString(), 160, yMaterialFieldValue);
                     var splitserialin, splitserialout, splitTitle;
                     ctx.fillStyle = "#000";
-                    ctx.font = ' 13px sans-serif ';
+                    ctx.font = ' 13px Times New Roman ';
                     if ($scope.summary.materialArray[l - 1].serialNumber[m] != "") {
                         yMaterialSerialNo = yMaterialFieldValue;
                         while (m < $scope.summary.materialArray[l - 1].serialNumber.length) {
@@ -6109,7 +6109,7 @@
 
 
                     ctx.fillStyle = "#000";
-                    ctx.font = ' 13px sans-serif ';
+                    ctx.font = ' 13px Times New Roman ';
                     if ($scope.summary.materialArray[l - 1].serialIn[n] != "") {
                         yMaterialSerialIn = yMaterialFieldValue
                         while (n < $scope.summary.materialArray[l - 1].serialIn.length) {
@@ -6146,7 +6146,7 @@
                     }
 
                     ctx.fillStyle = "#000";
-                    ctx.font = ' 13px sans-serif ';
+                    ctx.font = ' 13px Times New Roman ';
                     if ($scope.summary.materialArray[l - 1].serialOut[o] != "") {
                         yMaterialSerialOut = yMaterialFieldValue
                         while (o < $scope.summary.materialArray[l - 1].serialOut.length) {
@@ -6183,7 +6183,7 @@
                     }
 
                     ctx.fillStyle = "#000";
-                    ctx.font = ' 13px sans-serif ';
+                    ctx.font = ' 13px Times New Roman ';
                     if ($scope.summary.materialArray[l - 1].ItemName) {
                         var itemname = doc1.splitTextToSize($filter('translate')($scope.summary.materialArray[l - 1].ItemName), 50)
                         yItemVal = yMaterialFieldValue;
@@ -6215,7 +6215,7 @@
                         //ctx.fillText($filter('translate')($scope.summary.materialArray[l - 1].ItemName), 600, yMaterialFieldValue);
                     }
                     ctx.fillStyle = "#000";
-                    ctx.font = ' 13px sans-serif ';
+                    ctx.font = ' 13px Times New Roman ';
                     if ($scope.summary.materialArray[l - 1].Description) {
                         splitTitle = doc1.splitTextToSize($scope.summary.materialArray[l - 1].Description, 200);
                         angular.forEach(splitTitle, function (key) {
@@ -6288,7 +6288,7 @@
                     isPageAdded = true;
                 }
                 ctx.fillStyle = "#000";
-                ctx.font = '15px sans-serif ';
+                ctx.font = '15px Times New Roman ';
                 ctx.fillText($filter('translate')('Signature'), 20, ySignField + 5);
 
                 ctx.fillStyle = "#000";
@@ -6312,24 +6312,24 @@
                 else
                     ctx.strokeRect(20, ySignField + 10, 1090, rectSignHeight);
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText($filter('translate')('emerson'), 30, ySignField + 25);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText($filter('translate')('Conatct Name') + ": " + $scope.contactorCustname, 550, ySignField + 40);
                 // ctx.fillText($scope.contactorCustname, 450, ySignField + 25);
 
                 //ctx.fillStyle = "#000";
-                //ctx.font = 'bold 13px sans-serif ';
+                //ctx.font = 'bold 13px Times New Roman ';
                 //ctx.fillText('工程师名字', 70, ySignField + 40);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText($scope.summary.taskObject.Customer_Name, 550, ySignField + 25);
 
                 ctx.fillStyle = "#000";
-                ctx.font = 'bold 13px sans-serif ';
+                ctx.font = 'bold 13px Times New Roman ';
                 ctx.fillText($filter('translate')('Service Representative') + ": " + $scope.engineerName, 30, ySignField + 40);
 
                 ctx.fillText($scope.engTime, 30, ySignField + 60 + 60);
