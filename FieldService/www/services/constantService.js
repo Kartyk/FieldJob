@@ -114,7 +114,7 @@
 
         //var downloadBackEndId = "5e54d908-048e-4353-9b85-c67569333f3b";
 
-        var deleteBackEndId = "5e54d908-048e-4353-9b85-c67569333f3b";
+        //var deleteBackEndId = "5e54d908-048e-4353-9b85-c67569333f3b";
 
 
         var stagesArray = {};
