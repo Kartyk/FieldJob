@@ -24,11 +24,11 @@
                     </div>
 
                     <div ng-if="userType=='C'" flex="15" class="debrief-items" style="max-width:17%">
-                        <label flex="100" class="label-my" translate="{{item.timeDefault.chargeType.title}}"></label>
+                        <label flex="100" class="label-my" translate="{{item.timeDefault.chargeType.title}}"></label><span style="color:red">*</span>
                         <div flex="100">
                             <select class="form-control " ng-model="item.Charge_Type"
                                     ng-options="x as x.Value | translate for x in item.timeDefault.chargeType.values track by x.ID"
-                                    ng-change="setChargeType(item)">
+                                    ng-change="setChargeType(item)" ng-required="true">
                                 <option value="" disabled selected translate="Select Charge Type"></option>
                             </select>
                         </div>
