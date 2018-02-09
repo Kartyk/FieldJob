@@ -4905,7 +4905,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM Task WHERE ResourceId = ?", [constantService.getResourceId()], function (tx, res) {
+                transaction.executeSql("SELECT * FROM Task WHERE ResourceId = ? AND Task_Status != ?", [constantService.getResourceId(), "Cancelled"], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
