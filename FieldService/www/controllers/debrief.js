@@ -4096,49 +4096,49 @@
                     }
                 }
 
-                ctx.fillStyle = "#000";
+                //ctx.fillStyle = "#000";
 
-                ctx.font = 'bold 13px Times New Roman ';
+                //ctx.font = 'bold 13px Times New Roman ';
                
 
-                ctx.fillText('服务日期', 280, 118);
+                //ctx.fillText('服务日期', 280, 118);
 
 
-                ctx.fillStyle = "#000";
-                ctx.font = '13px Times New Roman ';
-                var start = moment.utc($scope.summary.taskObject.times[0].Start_Date).utcOffset(constantService.getTimeZone()).format("DD-MMM-YYYY")
-                if (start)
-                    ctx.fillText(start, 280, 132);
+                //ctx.fillStyle = "#000";
+                //ctx.font = '13px Times New Roman ';
+                //var start = moment.utc($scope.summary.taskObject.times[0].Start_Date).utcOffset(constantService.getTimeZone()).format("DD-MMM-YYYY")
+                //if (start)
+                //    ctx.fillText(start, 280, 132);
 
-                ctx.fillStyle = "#000";
+                //ctx.fillStyle = "#000";
 
-                ctx.font = 'bold 13px Times New Roman ';
+                //ctx.font = 'bold 13px Times New Roman ';
 
-                ctx.fillText('结束日期', 530, 118);
-
-
-                ctx.fillStyle = "#000";
-                ctx.font = '13px Times New Roman ';
-
-                var enddate = " ";
-
-                if ($scope.summary.taskObject.times[0].End_Date != "" && $scope.summary.taskObject.times[0].End_Date != undefined) {
-                    enddate = moment.utc($scope.summary.taskObject.times[0].End_Date).utcOffset(constantService.getTimeZone()).format("DD-MMM-YYYY");
-                }
-                ctx.fillText(enddate, 530, 132);
-
-                ctx.fillStyle = "#000";
-
-                ctx.font = 'bold 13px Times New Roman ';
-
-                ctx.fillText('服务持续时间', 810, 118);
+                //ctx.fillText('结束日期', 530, 118);
 
 
-                ctx.fillStyle = "#000";
-                ctx.font = '13px Times New Roman ';
+                //ctx.fillStyle = "#000";
+                //ctx.font = '13px Times New Roman ';
 
-                if ($scope.summary.taskObject.times[0].Duration)
-                    ctx.fillText($scope.summary.taskObject.times[0].Duration, 810, 132);
+                //var enddate = " ";
+
+                //if ($scope.summary.taskObject.times[0].End_Date != "" && $scope.summary.taskObject.times[0].End_Date != undefined) {
+                //    enddate = moment.utc($scope.summary.taskObject.times[0].End_Date).utcOffset(constantService.getTimeZone()).format("DD-MMM-YYYY");
+                //}
+                //ctx.fillText(enddate, 530, 132);
+
+                //ctx.fillStyle = "#000";
+
+                //ctx.font = 'bold 13px Times New Roman ';
+
+                //ctx.fillText('服务持续时间', 810, 118);
+
+
+                //ctx.fillStyle = "#000";
+                //ctx.font = '13px Times New Roman ';
+
+                //if ($scope.summary.taskObject.times[0].Duration)
+                //    ctx.fillText($scope.summary.taskObject.times[0].Duration, 810, 132);
                 var custBigYvalue = 0;
                 if (isCustBig)
                     custBigYvalue = 10;
@@ -5295,48 +5295,48 @@
                     }
                 }
 
-                ctx.fillStyle = "#000";
+                //ctx.fillStyle = "#000";
 
-                ctx.font = 'bold 13px Times New Roman ';
+                //ctx.font = 'bold 13px Times New Roman ';
 
-                ctx.fillText('Start Date', 280, 118);
-
-
-                ctx.fillStyle = "#000";
-                ctx.font = '13px Times New Roman ';
-                var start = moment.utc($scope.summary.taskObject.times[0].Start_Date).utcOffset(constantService.getTimeZone()).format("DD-MMM-YYYY")
-                if (start)
-                    ctx.fillText(start, 280, 132);
-
-                ctx.fillStyle = "#000";
-
-                ctx.font = 'bold 13px Times New Roman ';
-
-                ctx.fillText('End Date', 530, 118);
+                //ctx.fillText('Start Date', 280, 118);
 
 
-                ctx.fillStyle = "#000";
-                ctx.font = '13px Times New Roman ';
+                //ctx.fillStyle = "#000";
+                //ctx.font = '13px Times New Roman ';
+                //var start = moment.utc($scope.summary.taskObject.times[0].Start_Date).utcOffset(constantService.getTimeZone()).format("DD-MMM-YYYY")
+                //if (start)
+                //    ctx.fillText(start, 280, 132);
 
-                var enddate = " ";
+                //ctx.fillStyle = "#000";
 
-                if ($scope.summary.taskObject.times[0].End_Date != "" && $scope.summary.taskObject.times[0].End_Date != undefined) {
-                    enddate = moment.utc($scope.summary.taskObject.times[0].End_Date).utcOffset(constantService.getTimeZone()).format("DD-MMM-YYYY");
-                }
-                ctx.fillText(enddate, 530, 132);
+                //ctx.font = 'bold 13px Times New Roman ';
 
-                ctx.fillStyle = "#000";
-
-                ctx.font = 'bold 13px Times New Roman ';
-
-                ctx.fillText('Duration', 810, 118);
+                //ctx.fillText('End Date', 530, 118);
 
 
-                ctx.fillStyle = "#000";
-                ctx.font = '13px Times New Roman ';
+                //ctx.fillStyle = "#000";
+                //ctx.font = '13px Times New Roman ';
 
-                if ($scope.summary.taskObject.times[0].Duration)
-                    ctx.fillText($scope.summary.taskObject.times[0].Duration, 810, 132);
+                //var enddate = " ";
+
+                //if ($scope.summary.taskObject.times[0].End_Date != "" && $scope.summary.taskObject.times[0].End_Date != undefined) {
+                //    enddate = moment.utc($scope.summary.taskObject.times[0].End_Date).utcOffset(constantService.getTimeZone()).format("DD-MMM-YYYY");
+                //}
+                //ctx.fillText(enddate, 530, 132);
+
+                //ctx.fillStyle = "#000";
+
+                //ctx.font = 'bold 13px Times New Roman ';
+
+                //ctx.fillText('Duration', 810, 118);
+
+
+                //ctx.fillStyle = "#000";
+                //ctx.font = '13px Times New Roman ';
+
+                //if ($scope.summary.taskObject.times[0].Duration)
+                //    ctx.fillText($scope.summary.taskObject.times[0].Duration, 810, 132);
                 var custBigYvalue = 0;
                 if (isCustBig)
                     custBigYvalue = 10;
@@ -6546,32 +6546,32 @@
                 doc1.text(25, 100, $filter('translate')('Customer Name'))
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
-                doc1.setFontSize(22)
-                doc1.setFontType('bold')
-                doc1.text(180, 100, $filter('translate')('Start Date'))
-                doc1.setFontSize(22)
-                doc1.setFontType('normal')
-                var start = moment.utc($scope.summary.taskObject.times[0].Start_Date).utcOffset(constantService.getTimeZone()).format("DD-MMM-YYYY")
-                if (start)
-                    doc1.text(180, 110, start)
-                doc1.setFontSize(22)
-                doc1.setFontType('bold')
-                doc1.text(345, 100, $filter('translate')('End Date'))
-                doc1.setFontSize(22)
-                doc1.setFontType('normal')
-                var enddate = " ";
-                if ($scope.summary.taskObject.times[0].End_Date != "" && $scope.summary.taskObject.times[0].End_Date != undefined) {
-                    enddate = moment.utc($scope.summary.taskObject.times[0].End_Date).utcOffset(constantService.getTimeZone()).format("DD-MMM-YYYY");
-                }
-                doc1.text(345, 110, enddate);
-                doc1.setFontSize(22)
-                doc1.setFontType('bold')
-                doc1.text(510, 100, $filter('translate')('Duration'))
-                doc1.setFontSize(22)
-                doc1.setFontType('normal')
-                console.log($scope.summary.taskObject.times[0].Duration)
-                if ($scope.summary.taskObject.times[0].Duration)
-                    doc1.text(510, 110, $scope.summary.taskObject.times[0].Duration)
+                //doc1.setFontSize(22)
+                //doc1.setFontType('bold')
+                //doc1.text(180, 100, $filter('translate')('Start Date'))
+                //doc1.setFontSize(22)
+                //doc1.setFontType('normal')
+                //var start = moment.utc($scope.summary.taskObject.times[0].Start_Date).utcOffset(constantService.getTimeZone()).format("DD-MMM-YYYY")
+                //if (start)
+                //    doc1.text(180, 110, start)
+                //doc1.setFontSize(22)
+                //doc1.setFontType('bold')
+                //doc1.text(345, 100, $filter('translate')('End Date'))
+                //doc1.setFontSize(22)
+                //doc1.setFontType('normal')
+                //var enddate = " ";
+                //if ($scope.summary.taskObject.times[0].End_Date != "" && $scope.summary.taskObject.times[0].End_Date != undefined) {
+                //    enddate = moment.utc($scope.summary.taskObject.times[0].End_Date).utcOffset(constantService.getTimeZone()).format("DD-MMM-YYYY");
+                //}
+                //doc1.text(345, 110, enddate);
+                //doc1.setFontSize(22)
+                //doc1.setFontType('bold')
+                //doc1.text(510, 100, $filter('translate')('Duration'))
+                //doc1.setFontSize(22)
+                //doc1.setFontType('normal')
+                //console.log($scope.summary.taskObject.times[0].Duration)
+                //if ($scope.summary.taskObject.times[0].Duration)
+                //    doc1.text(510, 110, $scope.summary.taskObject.times[0].Duration)
 
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
